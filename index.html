@@ -36,8 +36,6 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
     --purple: #534AB7;
     --purple-bg: #EEEDFE;
     --purple-text: #3C3489;
-    --teal-bg: #E1F5EE;
-    --teal-text: #085041;
     --gate-bg: #0d1117;
     --gate-surface: #161b22;
     --gate-accent: #c9a84c;
@@ -62,8 +60,6 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
       --red-text: #F09595;
       --purple-bg: #26215C;
       --purple-text: #AFA9EC;
-      --teal-bg: #04342c;
-      --teal-text: #9FE1CB;
     }
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -75,7 +71,7 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
     line-height: 1.6;
   }
 
-  /* ── GATE ── */
+  /* GATE */
   #gate {
     position: fixed; inset: 0;
     background: radial-gradient(ellipse at center, #1a1f2e 0%, #0d1117 100%);
@@ -142,7 +138,6 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
     font-size: 13px;
   }
 
-  /* ── MAIN APP ── */
   #app { display: none; }
 
   .page-header {
@@ -175,7 +170,7 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
   .nav-btn:hover { background: var(--bg2); }
   .nav-btn.active { background: var(--blue-bg); color: var(--blue-text); border-color: var(--blue); }
 
-  .container { max-width: 1400px; margin: 0 auto; padding: 1.5rem; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
   .dash-section { display: none; }
   .dash-section.active { display: block; }
   .section-lbl {
@@ -334,48 +329,44 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
   .inv-sub { font-size: 11px; color: var(--text2); margin-bottom: 8px; }
   .risk-row { display: flex; gap: 6px; align-items: center; margin-bottom: 4px; font-size: 12px; color: var(--text2); }
   .update-note { font-size: 11px; color: var(--text3); text-align: left; margin-top: 8px; }
-  .info-box { background: var(--bg2); border-radius: var(--rad); padding: .75rem 1rem; font-size: 12px; color: var(--text2); line-height: 1.6; }
-  .hidden { display: none !important; }
-  svg text { font-family: 'Vazirmatn', Tahoma, 'Segoe UI', Arial, sans-serif; }
-
-  /* نقشه لایه */
+  
+  /* نقشه */
   .map-section {
     background: var(--bg);
     border: 0.5px solid var(--border);
     border-radius: var(--rad-lg);
     overflow: hidden;
-    margin-bottom: 24px;
+    margin-bottom: 12px;
   }
   .map-toolbar {
-    padding: 12px 20px;
+    padding: 10px 16px;
     border-bottom: 0.5px solid var(--border);
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     flex-wrap: wrap;
     background: var(--bg2);
   }
-  .map-toolbar span { font-size: 13px; color: var(--text2); }
+  .map-toolbar span { font-size: 12px; color: var(--text2); }
   .map-btn {
-    padding: 6px 14px;
+    padding: 4px 12px;
     border-radius: 6px;
     border: 0.5px solid var(--border2);
     background: transparent;
     color: var(--text2);
     font-family: inherit;
-    font-size: 12px;
+    font-size: 11px;
     cursor: pointer;
     transition: all .2s;
   }
   .map-btn:hover { border-color: var(--blue); color: var(--blue-text); }
   .map-btn.active { background: var(--blue-bg); border-color: var(--blue); color: var(--blue-text); }
-  #map { height: 380px; border-radius: 0 0 var(--rad-lg) var(--rad-lg); }
-  .leaflet-popup-content { direction: rtl; font-family: 'Vazirmatn', Tahoma, sans-serif; }
+  #map { height: 320px; border-radius: 0 0 var(--rad-lg) var(--rad-lg); }
+  .leaflet-popup-content { direction: rtl; font-family: 'Vazirmatn', Tahoma, sans-serif; font-size: 12px; }
 </style>
 </head>
 <body>
 
-<!-- GATE -->
 <div id="gate">
   <div class="gate-box">
     <div class="gate-logo">Dana Energy</div>
@@ -386,7 +377,6 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
   </div>
 </div>
 
-<!-- APP -->
 <div id="app">
 <div class="page-header">
   <div>
@@ -412,15 +402,23 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
     <div class="met"><div class="met-n ok">۳</div><div class="met-l">فرصت سرمایه‌گذاری</div></div>
   </div>
 
-  <div class="section-lbl">نقشه تعاملی — کریدورهای چین به ایران</div>
+  <div class="section-lbl">نقشه کریدورها — چین به ایران</div>
   <div class="map-section">
     <div class="map-toolbar">
-      <span>🌍 نمایش نقشه</span>
+      <span>🗺️ نقشه تعاملی</span>
       <button class="map-btn active" onclick="resetMapFilter()">همه مسیرها</button>
       <button class="map-btn" onclick="toggleMeasure()">📏 اندازه‌گیری فاصله</button>
-      <span id="measure-info" style="color:var(--blue-text);font-size:12px"></span>
+      <span id="measure-info" style="color:var(--blue-text);font-size:11px"></span>
     </div>
     <div id="map"></div>
+  </div>
+
+  <div class="routes-bar">
+    <button class="route-btn blocked" onclick="selectRoute('dubai')">دبی (مسدود)</button>
+    <button class="route-btn" onclick="selectRoute('oman')">عمان</button>
+    <button class="route-btn" onclick="selectRoute('turkey')">ترکیه</button>
+    <button class="route-btn" onclick="selectRoute('iraq')">عراق زمینی</button>
+    <button class="route-btn" onclick="selectRoute('central')">آسیای مرکزی</button>
   </div>
 
   <div id="route-detail" class="detail-panel">
@@ -704,152 +702,124 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
 </div>
 
 <script>
-// ==================== GATE FUNCTION ====================
+// ==================== GATE ====================
 function checkPwd() {
   const v = document.getElementById('pwd').value;
   if (v === 'DanaEnergy_2026') {
     document.getElementById('gate').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     initMapAndRoutes();
+    // set default active route button
+    document.querySelector('.route-btn.blocked').classList.add('active');
   } else {
     document.getElementById('gate-err').style.display = 'block';
     document.getElementById('pwd').value = '';
   }
 }
 
-// ==================== ROUTE DATA FOR MAP ====================
-const mapRoutes = [
-  {
-    id: 'dubai', name: 'دبی (مسدود)', type: 'sea', status: 'blocked',
-    coords: [[31.23,121.47], [25.27,55.30], [27.18,56.27]],
-    detail: { type: 'دریایی + ترانشیپ', time: '۱۸–۲۵ روز', cost: 'پایین', risk: 'بسیار بالا — جنگ منطقه', goods: 'همه اقلام سبک', forward: 'غیرفعال' }
+// ==================== ROUTE DATA ====================
+const routesData = {
+  dubai: {
+    name: 'دبی', title: 'مسیر دبی — وضعیت: مسدود',
+    type: 'دریایی + ترانشیپ', time: '۱۸–۲۵ روز', cost: 'پایین', risk: 'بسیار بالا — جنگ منطقه', goods: 'همه اقلام سبک', forward: 'غیرفعال',
+    coords: [[31.23, 121.47], [25.27, 55.30], [27.18, 56.27]], color: '#E24B4A', isBlocked: true
   },
-  {
-    id: 'oman', name: 'عمان (توصیه‌شده)', type: 'sea', status: 'active',
-    coords: [[31.23,121.47], [22.57,59.53], [23.61,58.59], [27.18,56.27]],
-    detail: { type: 'دریایی (بندر صحار → بندر امام)', time: '۲۵–۳۵ روز', cost: 'متوسط', risk: 'پایین', goods: 'شیمیایی، تجهیزات متوسط', forward: 'بله — نیاز به agent عمانی' }
+  oman: {
+    name: 'عمان', title: 'مسیر عمان — وضعیت: فعال',
+    type: 'دریایی (بندر صحار → بندر امام)', time: '۲۵–۳۵ روز', cost: 'متوسط', risk: 'پایین', goods: 'شیمیایی، تجهیزات متوسط', forward: 'بله — نیاز به agent عمانی',
+    coords: [[31.23, 121.47], [22.57, 59.53], [23.61, 58.59], [27.18, 56.27]], color: '#1D9E75', isBlocked: false
   },
-  {
-    id: 'turkey', name: 'ترکیه (پیچیده)', type: 'multi', status: 'active',
-    coords: [[31.23,121.47], [39.92,32.85], [39.51,44.04], [36.54,61.21]],
-    detail: { type: 'دریایی + TIR زمینی', time: '۳۰–۴۵ روز', cost: 'بالاتر', risk: 'متوسط — پیچیدگی گمرکی', goods: 'ماشین‌آلات سنگین، Coil', forward: 'بله — نیاز به فورواردر ترکیه‌ای' }
+  turkey: {
+    name: 'ترکیه', title: 'مسیر ترکیه — وضعیت: فعال',
+    type: 'دریایی + TIR زمینی', time: '۳۰–۴۵ روز', cost: 'بالاتر', risk: 'متوسط — پیچیدگی گمرکی', goods: 'ماشین‌آلات سنگین، Coil', forward: 'بله — نیاز به فورواردر ترکیه‌ای',
+    coords: [[31.23, 121.47], [39.92, 32.85], [39.51, 44.04], [36.54, 61.21]], color: '#534AB7', isBlocked: false
   },
-  {
-    id: 'iraq', name: 'عراق زمینی', type: 'land', status: 'active',
-    coords: [[31.23,121.47], [25.27,55.30], [29.37,47.98], [32.99,45.15], [30.42,48.18]],
-    detail: { type: 'زمینی مستقیم (خاک عراق)', time: '۱۰–۱۸ روز', cost: 'متوسط', risk: 'متوسط — بی‌ثباتی سیاسی', goods: 'قطعات، مواد شیمیایی', forward: 'بله — شریک عراقی لازم' }
+  iraq: {
+    name: 'عراق زمینی', title: 'مسیر عراق — وضعیت: فعال',
+    type: 'زمینی مستقیم (خاک عراق)', time: '۱۰–۱۸ روز', cost: 'متوسط', risk: 'متوسط — بی‌ثباتی سیاسی', goods: 'قطعات، مواد شیمیایی', forward: 'بله — شریک عراقی لازم',
+    coords: [[31.23, 121.47], [25.27, 55.30], [29.37, 47.98], [32.99, 45.15], [30.42, 48.18]], color: '#BA7517', isBlocked: false
   },
-  {
-    id: 'central', name: 'آسیای مرکزی (ریلی)', type: 'rail', status: 'active',
-    coords: [[31.23,121.47], [43.65,87.32], [51.18,71.45], [37.93,60.35], [36.54,61.21]],
-    detail: { type: 'ریلی + INSTC', time: '۳۵–۵۰ روز', cost: 'متوسط', risk: 'پایین', goods: 'تجهیزات سنگین، bulk', forward: 'در حال توسعه' }
+  central: {
+    name: 'آسیای مرکزی', title: 'مسیر آسیای مرکزی — وضعیت: فعال',
+    type: 'ریلی + INSTC', time: '۳۵–۵۰ روز', cost: 'متوسط', risk: 'پایین', goods: 'تجهیزات سنگین، bulk', forward: 'در حال توسعه',
+    coords: [[31.23, 121.47], [43.65, 87.32], [51.18, 71.45], [37.93, 60.35], [36.54, 61.21]], color: '#185FA5', isBlocked: false
   }
-];
+};
 
-const typeColors = { sea: '#1D9E75', land: '#BA7517', rail: '#185FA5', multi: '#534AB7' };
-
-let map, routeLayers = [];
+let map, currentLine = null, currentMarker = null;
 let measureMode = false;
-let measurePoints = [];
-let measureMarkers = [];
-let measureLine = null;
+let measurePoints = [], measureMarkers = [], measureLine = null;
 
-// ==================== MAP FUNCTIONS ====================
+// ==================== MAP ====================
 function initMapAndRoutes() {
   map = L.map('map').setView([35, 65], 4);
   L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
     attribution: '© OpenStreetMap © CARTO', maxZoom: 18
   }).addTo(map);
-  drawAllRoutes();
   map.on('click', onMapClick);
-  
-  // Select default route
   selectRoute('dubai');
 }
 
-function drawAllRoutes() {
-  routeLayers.forEach(l => map.removeLayer(l));
-  routeLayers = [];
+function selectRoute(routeId) {
+  const r = routesData[routeId];
+  if (!r) return;
   
-  mapRoutes.forEach(route => {
-    const color = typeColors[route.type] || '#888';
-    const dashArray = route.type === 'sea' ? '8,6' : null;
-    const line = L.polyline(route.coords, {
-      color: route.status === 'blocked' ? '#E24B4A' : color,
-      weight: 3,
-      opacity: 0.8,
-      dashArray: dashArray
-    }).addTo(map);
-    
-    line.bindPopup(`<b>${route.name}</b><br>نوع: ${route.detail.type}<br>زمان: ${route.detail.time}<br>هزینه: ${route.detail.cost}`);
-    line.on('click', () => selectRoute(route.id));
-    routeLayers.push(line);
-    
-    // endpoint marker
-    const last = route.coords[route.coords.length - 1];
-    const marker = L.circleMarker(last, {
-      radius: 5,
-      color: color,
-      fillColor: color,
-      fillOpacity: 1,
-      weight: 2
-    }).addTo(map);
-    routeLayers.push(marker);
+  // update buttons
+  document.querySelectorAll('.route-btn').forEach(btn => {
+    btn.classList.remove('active');
   });
+  event.target?.classList?.add('active');
+  
+  // update detail panel
+  document.getElementById('detail-title').textContent = r.title;
+  document.getElementById('d-type').textContent = r.type;
+  document.getElementById('d-time').textContent = r.time;
+  document.getElementById('d-cost').textContent = r.cost;
+  document.getElementById('d-risk').textContent = r.risk;
+  document.getElementById('d-goods').textContent = r.goods;
+  document.getElementById('d-forward').textContent = r.forward;
+  
+  // draw route on map
+  if (currentLine) map.removeLayer(currentLine);
+  if (currentMarker) map.removeLayer(currentMarker);
+  
+  const dashArray = (r.name === 'عمان' || r.name === 'دبی') ? '8,6' : null;
+  currentLine = L.polyline(r.coords, {
+    color: r.color,
+    weight: 3,
+    opacity: 0.9,
+    dashArray: dashArray
+  }).addTo(map);
+  
+  const lastPoint = r.coords[r.coords.length - 1];
+  currentMarker = L.circleMarker(lastPoint, {
+    radius: 6,
+    color: r.color,
+    fillColor: r.color,
+    fillOpacity: 1
+  }).addTo(map);
+  
+  map.fitBounds(currentLine.getBounds());
 }
 
 function resetMapFilter() {
-  drawAllRoutes();
-  if (measureMode) toggleMeasure();
-}
-
-function selectRoute(id) {
-  const route = mapRoutes.find(r => r.id === id);
-  if (!route) return;
-  
-  // Update UI buttons
-  document.querySelectorAll('.route-btn').forEach(btn => {
-    btn.classList.remove('active');
-    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(id)) {
-      btn.classList.add('active');
-    }
+  if (currentLine) map.removeLayer(currentLine);
+  if (currentMarker) map.removeLayer(currentMarker);
+  // draw all routes
+  Object.values(routesData).forEach(r => {
+    const line = L.polyline(r.coords, {
+      color: r.color,
+      weight: 2,
+      opacity: 0.5,
+      dashArray: (r.name === 'عمان' || r.name === 'دبی') ? '8,6' : null
+    }).addTo(map);
+    const last = r.coords[r.coords.length - 1];
+    L.circleMarker(last, { radius: 4, color: r.color, fillColor: r.color, fillOpacity: 0.7 }).addTo(map);
   });
-  
-  // Update detail panel
-  const d = route.detail;
-  document.getElementById('detail-title').textContent = `مسیر ${route.name} — وضعیت: ${route.status === 'blocked' ? 'مسدود' : 'فعال'}`;
-  document.getElementById('d-type').textContent = d.type;
-  document.getElementById('d-time').textContent = d.time;
-  document.getElementById('d-cost').textContent = d.cost;
-  document.getElementById('d-risk').textContent = d.risk;
-  document.getElementById('d-goods').textContent = d.goods;
-  document.getElementById('d-forward').textContent = d.forward;
-  
-  // Highlight route on map
-  routeLayers.forEach(l => map.removeLayer(l));
-  routeLayers = [];
-  
-  const color = typeColors[route.type] || '#888';
-  const line = L.polyline(route.coords, {
-    color: route.status === 'blocked' ? '#E24B4A' : color,
-    weight: 4,
-    opacity: 1
-  }).addTo(map);
-  routeLayers.push(line);
-  
-  const last = route.coords[route.coords.length - 1];
-  const marker = L.circleMarker(last, {
-    radius: 6,
-    color: color,
-    fillColor: color,
-    fillOpacity: 1
-  }).addTo(map);
-  routeLayers.push(marker);
-  
-  map.fitBounds(line.getBounds());
+  map.setView([35, 65], 4);
 }
 
-// ==================== MEASUREMENT ====================
+// ==================== MEASURE ====================
 function toggleMeasure() {
   measureMode = !measureMode;
   const btn = document.querySelector('.map-btn:nth-child(3)');
@@ -858,7 +828,7 @@ function toggleMeasure() {
     btn.classList.add('active');
     measurePoints = [];
     clearMeasure();
-    info.textContent = 'روی نقطه اول کلیک کنید';
+    info.textContent = 'نقطه اول را روی نقشه کلیک کنید';
     map.getContainer().style.cursor = 'crosshair';
   } else {
     btn.classList.remove('active');
@@ -883,7 +853,7 @@ function onMapClick(e) {
   measureMarkers.push(m);
 
   if (measurePoints.length === 1) {
-    document.getElementById('measure-info').textContent = 'روی نقطه دوم کلیک کنید';
+    document.getElementById('measure-info').textContent = 'نقطه دوم را کلیک کنید';
   } else if (measurePoints.length === 2) {
     const dist = measurePoints[0].distanceTo(measurePoints[1]);
     const km = (dist / 1000).toFixed(0);
@@ -894,22 +864,18 @@ function onMapClick(e) {
     setTimeout(() => {
       measurePoints = [];
       clearMeasure();
-      if (measureMode) document.getElementById('measure-info').textContent = 'روی نقطه اول کلیک کنید';
+      if (measureMode) document.getElementById('measure-info').textContent = 'نقطه اول را کلیک کنید';
     }, 4000);
   }
 }
 
-// ==================== DASHBOARD NAVIGATION ====================
+// ==================== DASHBOARD FUNCTIONS ====================
 function showDash(id) {
   document.querySelectorAll('.dash-section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('dash-' + id).classList.add('active');
   event.target.classList.add('active');
-  
-  // Re-center map when showing main dash
-  if (id === 'main' && map) {
-    setTimeout(() => map.invalidateSize(), 100);
-  }
+  if (id === 'main' && map) setTimeout(() => map.invalidateSize(), 100);
 }
 
 function filterCarec(tag, btn) {
@@ -929,10 +895,10 @@ function showTab(btn, id) {
   document.getElementById('cre-' + id).classList.add('on');
 }
 
-// Legacy route selection for buttons
+// make functions global for onclick
 window.selectRoute = selectRoute;
-window.toggleMeasure = toggleMeasure;
 window.resetMapFilter = resetMapFilter;
+window.toggleMeasure = toggleMeasure;
 window.showDash = showDash;
 window.filterCarec = filterCarec;
 window.showTab = showTab;
