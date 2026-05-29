@@ -297,24 +297,58 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
   }
   .filt:hover { background: var(--bg2); }
   .filt.on { background: var(--blue-bg); color: var(--blue-text); border-color: var(--blue); }
-  .routes-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+  .routes-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
   .route-btn {
-    font-size: 11px;
+    font-size: 12px;
     background: transparent;
     border: 0.5px solid var(--border2);
-    border-radius: var(--rad);
-    padding: 4px 10px;
+    border-radius: 24px;
+    padding: 6px 16px;
     cursor: pointer;
     color: var(--text2);
     font-family: inherit;
     transition: all .15s;
   }
   .route-btn:hover { background: var(--bg2); }
-  .route-btn.active { background: var(--blue-bg); color: var(--blue-text); border-color: var(--blue); }
-  .route-btn.blocked { background: var(--red-bg); color: var(--red-text); border-color: var(--red); text-decoration: line-through; }
-  .detail-panel { background: var(--bg2); border-radius: var(--rad); padding: .875rem 1rem; margin-bottom: 12px; }
-  .detail-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
-  .detail-row { display: flex; justify-content: space-between; font-size: 13px; color: var(--text2); padding: 4px 0; border-bottom: 0.5px solid var(--border); }
+  .route-btn.active {
+    background: var(--blue-bg);
+    color: var(--blue-text);
+    border-color: var(--blue);
+  }
+  .route-btn.blocked {
+    background: var(--red-bg);
+    color: var(--red-text);
+    border-color: var(--red);
+    text-decoration: line-through;
+  }
+  .detail-panel {
+    background: var(--bg2);
+    border-radius: var(--rad-lg);
+    padding: 1rem 1.25rem;
+    margin-bottom: 16px;
+  }
+  .detail-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--blue);
+    display: inline-block;
+  }
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--text2);
+    padding: 8px 0;
+    border-bottom: 0.5px solid var(--border);
+  }
   .detail-row:last-child { border-bottom: none; }
   .detail-row span:last-child { color: var(--text); font-weight: 600; }
   .cat-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 6px; margin-bottom: 12px; }
@@ -336,7 +370,7 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
     border: 0.5px solid var(--border);
     border-radius: var(--rad-lg);
     overflow: hidden;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
   }
   .map-toolbar {
     padding: 10px 16px;
@@ -363,37 +397,6 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
   .map-btn.active { background: var(--blue-bg); border-color: var(--blue); color: var(--blue-text); }
   #map { height: 320px; border-radius: 0 0 var(--rad-lg) var(--rad-lg); }
   .leaflet-popup-content { direction: rtl; font-family: 'Vazirmatn', Tahoma, sans-serif; font-size: 12px; }
-
-  /* کارت‌های کشورها */
-  .country-mini-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 8px;
-    margin-bottom: 16px;
-  }
-  .country-mini-card {
-    background: var(--bg2);
-    border-radius: var(--rad);
-    padding: 8px 12px;
-    cursor: pointer;
-    transition: all 0.2s;
-    border: 0.5px solid var(--border);
-    text-align: center;
-  }
-  .country-mini-card:hover {
-    border-color: var(--blue);
-    background: var(--blue-bg);
-    transform: translateY(-2px);
-  }
-  .country-mini-name {
-    font-size: 13px;
-    font-weight: 600;
-  }
-  .country-mini-info {
-    font-size: 10px;
-    color: var(--text3);
-    margin-top: 4px;
-  }
 </style>
 </head>
 <body>
@@ -452,6 +455,11 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
     <button class="route-btn" onclick="selectRoute('central')">آسیای مرکزی</button>
   </div>
 
+  <!-- ========== کشورهای مسیر ========== -->
+  <div class="routes-bar" id="countries-bar">
+    <!-- کشورها توسط جاوااسکریپت پر می‌شوند -->
+  </div>
+
   <div id="route-detail" class="detail-panel">
     <div class="detail-title" id="detail-title">مسیر دبی — وضعیت: مسدود</div>
     <div class="detail-row"><span>نوع حمل</span><span id="d-type">دریایی + ترانشیپ</span></div>
@@ -460,12 +468,6 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
     <div class="detail-row"><span>ریسک فعلی</span><span id="d-risk">بسیار بالا — جنگ منطقه</span></div>
     <div class="detail-row"><span>مناسب برای</span><span id="d-goods">همه اقلام سبک</span></div>
     <div class="detail-row"><span>وضعیت فورواردر</span><span id="d-forward">غیرفعال</span></div>
-  </div>
-
-  <!-- ========== کشورهای مسیر ========== -->
-  <div class="section-lbl">🌍 کشورهای مسیر (کلیک کنید)</div>
-  <div class="country-mini-grid" id="countries-mini-grid">
-    <!-- کشورها توسط جاوااسکریپت پر می‌شوند -->
   </div>
 
   <div class="section-lbl">دسته‌بندی کالا و مسیر پیشنهادی</div>
@@ -746,7 +748,7 @@ function checkPwd() {
     document.getElementById('gate').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     initMapAndRoutes();
-    renderCountriesMini();
+    renderCountriesBar();
     // set default active route button
     document.querySelector('.route-btn.blocked').classList.add('active');
   } else {
@@ -755,39 +757,111 @@ function checkPwd() {
   }
 }
 
-// ==================== کشورهای مسیر ====================
+// ==================== اطلاعات کشورها ====================
+const countriesInfo = {
+  china: { name: 'چین', title: '🇨🇳 چین — قطب تولید و صادرات',
+    type: 'ریلی + دریایی', time: '۱۵–۲۵ روز', cost: 'متوسط', risk: 'پایین', goods: 'همه انواع کالا', forward: 'فعال',
+    color: '#185FA5' },
+  kazakhstan: { name: 'قزاقستان', title: '🇰🇿 قزاقستان — کریدور ریلی شمالی',
+    type: 'ریلی + ترانزیت', time: '۱۰–۱۵ روز تا مرز ایران', cost: 'متوسط', risk: 'پایین', goods: 'کالای عمومی، ترانزیت', forward: 'فعال',
+    color: '#1D9E75' },
+  turkmenistan: { name: 'ترکمنستان', title: '🇹🇲 ترکمنستان — مرز سرخس',
+    type: 'ریلی + جاده‌ای', time: '۵–۷ روز تا مرز ایران', cost: 'پایین', risk: 'پایین', goods: 'انرژی، کالای عمومی', forward: 'فعال',
+    color: '#BA7517' },
+  turkey: { name: 'ترکیه', title: '🇹🇷 ترکیه — مسیر غربی',
+    type: 'دریایی + زمینی', time: '۳۰–۴۵ روز', cost: 'بالاتر', risk: 'متوسط', goods: 'ماشین‌آلات سنگین، Coil', forward: 'فعال',
+    color: '#534AB7' },
+  oman: { name: 'عمان', title: '🇴🇲 عمان — کریدور دریایی جایگزین',
+    type: 'دریایی (بندر صحار → بندر امام)', time: '۲۵–۳۵ روز', cost: 'متوسط', risk: 'پایین', goods: 'شیمیایی، تجهیزات متوسط', forward: 'نیاز به agent',
+    color: '#1D9E75' },
+  uae: { name: 'امارات', title: '🇦🇪 امارات — بندر جبل علی',
+    type: 'دریایی + ترانشیپ', time: '۲۰–۳۰ روز', cost: 'متوسط', risk: 'متوسط', goods: 'کالای وارداتی، لوکس', forward: 'فعال',
+    color: '#E24B4A' },
+  iraq: { name: 'عراق', title: '🇮🇶 عراق — مسیر زمینی غرب',
+    type: 'زمینی مستقیم', time: '۱۰–۱۸ روز', cost: 'متوسط', risk: 'متوسط - بی‌ثباتی', goods: 'قطعات، مواد شیمیایی', forward: 'نیاز به شریک عراقی',
+    color: '#BA7517' },
+  pakistan: { name: 'پاکستان', title: '🇵🇰 پاکستان — کریدور CPEC',
+    type: 'زمینی + ریلی', time: '۱۵–۲۵ روز', cost: 'متوسط', risk: 'متوسط', goods: 'کالای عمومی، ترانزیت', forward: 'در حال توسعه',
+    color: '#185FA5' },
+  afghanistan: { name: 'افغانستان', title: '🇦🇫 افغانستان — مسیر ترانزیتی',
+    type: 'زمینی', time: '۱۰–۱۵ روز', cost: 'پایین', risk: 'بالا', goods: 'میوه خشک، ترانزیت', forward: 'محدود',
+    color: '#88877f' },
+  azerbaijan: { name: 'آذربایجان', title: '🇦🇿 آذربایجان — کریدور میانی',
+    type: 'ریلی + دریایی', time: '۱۲–۱۸ روز', cost: 'متوسط', risk: 'پایین', goods: 'کالای عمومی، نفت', forward: 'فعال',
+    color: '#534AB7' },
+  georgia: { name: 'گرجستان', title: '🇬🇪 گرجستان — بندر پوتی',
+    type: 'دریایی + ریلی', time: '۲۰–۳۰ روز', cost: 'بالاتر', risk: 'پایین', goods: 'ترانزیت اروپا', forward: 'فعال',
+    color: '#1D9E75' },
+  india: { name: 'هند', title: '🇮🇳 هند — کریدور شمال-جنوب',
+    type: 'دریایی + زمینی', time: '۲۰–۳۵ روز', cost: 'متوسط', risk: 'پایین', goods: 'دارو، منسوجات، ماشین‌آلات', forward: 'فعال',
+    color: '#185FA5' }
+};
+
 const countriesList = [
-  { name: 'چین', code: 'cn', desc: 'بزرگترین شریک تجاری' },
-  { name: 'قزاقستان', code: 'kz', desc: 'کریدور ریلی شمالی' },
-  { name: 'قرقیزستان', code: 'kg', desc: 'مسیر جایگزین' },
-  { name: 'ترکمنستان', code: 'tm', desc: 'مرز سرخس' },
-  { name: 'ازبکستان', code: 'uz', desc: 'کریدور فرغانه' },
-  { name: 'تاجیکستان', code: 'tj', desc: 'مسیر پامیر' },
-  { name: 'پاکستان', code: 'pk', desc: 'کریدور CPEC' },
-  { name: 'افغانستان', code: 'af', desc: 'مسیر هرات' },
-  { name: 'آذربایجان', code: 'az', desc: 'کریدور میانی' },
-  { name: 'ارمنستان', code: 'am', desc: 'مسیر قفقاز' },
-  { name: 'گرجستان', code: 'ge', desc: 'بندر پوتی' },
-  { name: 'ترکیه', code: 'tr', desc: 'مسیر غربی' },
-  { name: 'عمان', code: 'om', desc: 'دریایی جایگزین' },
-  { name: 'امارات', code: 'ae', desc: 'بندر جبل علی' },
-  { name: 'قطر', code: 'qa', desc: 'بندر حمد' },
-  { name: 'عربستان', code: 'sa', desc: 'کریدور جنوبی' },
-  { name: 'کویت', code: 'kw', desc: 'مسیر عراق' },
-  { name: 'عراق', code: 'iq', desc: 'مرز شلمچه' },
-  { name: 'هند', code: 'in', desc: 'کریدور شمال-جنوب' }
+  { id: 'china', name: 'چین' },
+  { id: 'kazakhstan', name: 'قزاقستان' },
+  { id: 'turkmenistan', name: 'ترکمنستان' },
+  { id: 'turkey', name: 'ترکیه' },
+  { id: 'oman', name: 'عمان' },
+  { id: 'uae', name: 'امارات' },
+  { id: 'iraq', name: 'عراق' },
+  { id: 'pakistan', name: 'پاکستان' },
+  { id: 'afghanistan', name: 'افغانستان' },
+  { id: 'azerbaijan', name: 'آذربایجان' },
+  { id: 'georgia', name: 'گرجستان' },
+  { id: 'india', name: 'هند' }
 ];
 
-function renderCountriesMini() {
-  const container = document.getElementById('countries-mini-grid');
+function renderCountriesBar() {
+  const container = document.getElementById('countries-bar');
   if (!container) return;
   
-  container.innerHTML = countriesList.map(country => `
-    <div class="country-mini-card" onclick="alert('${country.name}\n${country.desc}\nاطلاعات تکمیلی در تب کریدورهای CAREC موجود است')">
-      <div class="country-mini-name">${country.name}</div>
-      <div class="country-mini-info">${country.desc}</div>
-    </div>
-  `).join('');
+  container.innerHTML = countriesList.map(country => {
+    const info = countriesInfo[country.id];
+    const isBlocked = info?.risk === 'بالا' ? 'blocked' : '';
+    return `<button class="route-btn ${isBlocked}" onclick="selectCountry('${country.id}')">${country.name}</button>`;
+  }).join('');
+}
+
+function selectCountry(countryId) {
+  const c = countriesInfo[countryId];
+  if (!c) return;
+  
+  // update active state on buttons
+  document.querySelectorAll('#countries-bar .route-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  if (event && event.target) event.target.classList.add('active');
+  
+  // update detail panel
+  document.getElementById('detail-title').textContent = c.title;
+  document.getElementById('d-type').textContent = c.type;
+  document.getElementById('d-time').textContent = c.time;
+  document.getElementById('d-cost').textContent = c.cost;
+  document.getElementById('d-risk').textContent = c.risk;
+  document.getElementById('d-goods').textContent = c.goods;
+  document.getElementById('d-forward').textContent = c.forward;
+  
+  // update map to show country location (center map on country)
+  // approximate coordinates for each country
+  const countryCoords = {
+    china: [35, 105],
+    kazakhstan: [48, 68],
+    turkmenistan: [40, 58],
+    turkey: [39, 35],
+    oman: [21, 57],
+    uae: [24, 54],
+    iraq: [33, 43],
+    pakistan: [30, 70],
+    afghanistan: [33, 65],
+    azerbaijan: [40, 47],
+    georgia: [42, 43],
+    india: [20, 78]
+  };
+  const coords = countryCoords[countryId] || [35, 65];
+  if (map) {
+    map.setView(coords, 5);
+  }
 }
 
 // ==================== ROUTE DATA ====================
@@ -838,7 +912,7 @@ function selectRoute(routeId) {
   if (!r) return;
   
   // update buttons
-  document.querySelectorAll('.route-btn').forEach(btn => {
+  document.querySelectorAll('.routes-bar:first-of-type .route-btn').forEach(btn => {
     btn.classList.remove('active');
   });
   if (event && event.target) event.target.classList.add('active');
@@ -970,13 +1044,13 @@ function showTab(btn, id) {
 
 // make functions global for onclick
 window.selectRoute = selectRoute;
+window.selectCountry = selectCountry;
 window.resetMapFilter = resetMapFilter;
 window.toggleMeasure = toggleMeasure;
 window.showDash = showDash;
 window.filterCarec = filterCarec;
 window.showTab = showTab;
 window.checkPwd = checkPwd;
-window.renderCountriesMini = renderCountriesMini;
 </script>
 </body>
 </html>
