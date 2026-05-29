@@ -1,117 +1,539 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>داشبورد مسیرهای کمربند-راه به ایران</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <style>
-        body { font-family: Tahoma, sans-serif; margin: 0; padding: 20px; background: #f4f7fa; }
-        #map { height: 500px; margin-bottom: 20px; border-radius: 12px; }
-        table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: right; vertical-align: top; }
-        th { background: #2c3e50; color: white; }
-        .add-form { margin-top: 20px; background: white; padding: 20px; border-radius: 12px; }
-        input, select, textarea { width: 100%; padding: 8px; margin: 5px 0 15px; border-radius: 8px; border: 1px solid #ccc; }
-        button { background: #27ae60; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; }
-        .iran-badge { background: #e67e22; color: white; padding: 2px 8px; border-radius: 20px; font-size: 12px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eurasia Logistics Routes — Iran Entry Dashboard</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #22263a;
+    --border: #2e3350;
+    --accent: #4f8ef7;
+    --accent2: #f7a94f;
+    --green: #3ecf8e;
+    --red: #f76f6f;
+    --yellow: #f7d94f;
+    --text: #e8eaf6;
+    --muted: #8892b0;
+    --font: 'Inter', 'Segoe UI', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font); min-height: 100vh; }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #0d1b3e 0%, #1a1d27 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  header h1 { font-size: 1.3rem; font-weight: 700; letter-spacing: 0.02em; }
+  header h1 span { color: var(--accent); }
+  header p { font-size: 0.78rem; color: var(--muted); margin-top: 3px; }
+  .header-badge {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 16px; font-size: 0.75rem; color: var(--muted);
+    text-align: right;
+  }
+  .header-badge strong { color: var(--accent2); display: block; font-size: 0.85rem; }
+
+  /* NAV TABS */
+  .tabs {
+    display: flex; gap: 4px; padding: 16px 32px 0;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .tab {
+    padding: 10px 22px; border-radius: 8px 8px 0 0; cursor: pointer;
+    font-size: 0.85rem; font-weight: 600; border: 1px solid transparent;
+    border-bottom: none; transition: all 0.2s; color: var(--muted);
+    background: transparent;
+  }
+  .tab.active {
+    background: var(--bg); color: var(--accent);
+    border-color: var(--border); border-bottom-color: var(--bg);
+  }
+  .tab:hover:not(.active) { color: var(--text); background: var(--surface2); }
+
+  /* MAIN */
+  main { padding: 28px 32px; max-width: 1400px; margin: 0 auto; }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-size: 1rem; font-weight: 700; color: var(--text);
+    margin-bottom: 6px; display: flex; align-items: center; gap: 10px;
+  }
+  .section-title::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+  .section-sub { font-size: 0.78rem; color: var(--muted); margin-bottom: 20px; }
+
+  /* ROUTE CARDS GRID */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px; margin-bottom: 36px;
+  }
+  .route-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 18px 20px; cursor: pointer;
+    transition: all 0.2s; position: relative; overflow: hidden;
+  }
+  .route-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 4px; height: 100%; background: var(--accent);
+    border-radius: 12px 0 0 12px;
+  }
+  .route-card.sea::before { background: #4fc3f7; }
+  .route-card.polar::before { background: #b39ddb; }
+  .route-card.land::before { background: var(--green); }
+  .route-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(79,142,247,0.12); }
+  .route-card:hover.sea { border-color: #4fc3f7; }
+  .route-card:hover.polar { border-color: #b39ddb; }
+  .route-card:hover.land { border-color: var(--green); }
+
+  .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+  .card-title { font-size: 0.92rem; font-weight: 700; line-height: 1.3; }
+  .card-type {
+    font-size: 0.68rem; font-weight: 700; padding: 3px 8px;
+    border-radius: 20px; white-space: nowrap; margin-left: 8px;
+  }
+  .type-land { background: rgba(62,207,142,0.15); color: var(--green); }
+  .type-sea { background: rgba(79,195,247,0.15); color: #4fc3f7; }
+  .type-polar { background: rgba(179,157,219,0.15); color: #b39ddb; }
+
+  .card-route { font-size: 0.75rem; color: var(--muted); margin-bottom: 12px; line-height: 1.5; }
+  .card-stats { display: flex; gap: 12px; flex-wrap: wrap; }
+  .stat { display: flex; flex-direction: column; }
+  .stat-label { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .stat-value { font-size: 0.88rem; font-weight: 700; color: var(--text); }
+  .stat-value.green { color: var(--green); }
+  .stat-value.yellow { color: var(--yellow); }
+  .stat-value.red { color: var(--red); }
+
+  .card-status {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 0.72rem; font-weight: 600; margin-top: 12px;
+    padding: 4px 10px; border-radius: 20px;
+  }
+  .status-active { background: rgba(62,207,142,0.12); color: var(--green); }
+  .status-partial { background: rgba(247,217,79,0.12); color: var(--yellow); }
+  .status-limited { background: rgba(247,111,111,0.12); color: var(--red); }
+  .status-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+  /* IRAN ENTRY SECTION */
+  .filter-bar {
+    display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; align-items: center;
+  }
+  .filter-label { font-size: 0.78rem; color: var(--muted); margin-right: 4px; }
+  .filter-btn {
+    padding: 7px 16px; border-radius: 20px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--muted); font-size: 0.78rem;
+    font-weight: 600; cursor: pointer; transition: all 0.2s;
+  }
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--accent); color: #fff; border-color: var(--accent);
+  }
+
+  /* ENTRY ROUTES TABLE */
+  .entry-table-wrap {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden; margin-bottom: 28px;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  thead tr { background: var(--surface2); }
+  th {
+    padding: 12px 16px; text-align: left; font-size: 0.72rem;
+    font-weight: 700; color: var(--muted); text-transform: uppercase;
+    letter-spacing: 0.06em; border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 13px 16px; font-size: 0.82rem; border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--surface2); }
+
+  .mode-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 3px 9px; border-radius: 20px; font-size: 0.7rem; font-weight: 700;
+  }
+  .mode-sea { background: rgba(79,195,247,0.12); color: #4fc3f7; }
+  .mode-road { background: rgba(247,169,79,0.12); color: var(--accent2); }
+  .mode-rail { background: rgba(62,207,142,0.12); color: var(--green); }
+  .mode-multimodal { background: rgba(179,157,219,0.12); color: #b39ddb; }
+
+  .risk-badge {
+    padding: 3px 9px; border-radius: 20px; font-size: 0.7rem; font-weight: 700;
+  }
+  .risk-low { background: rgba(62,207,142,0.12); color: var(--green); }
+  .risk-medium { background: rgba(247,217,79,0.12); color: var(--yellow); }
+  .risk-high { background: rgba(247,111,111,0.12); color: var(--red); }
+
+  .route-name-cell { font-weight: 600; color: var(--text); }
+  .route-via { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+
+  /* ADD ROUTE BUTTON */
+  .add-route-btn {
+    display: flex; align-items: center; gap: 8px;
+    background: transparent; border: 1px dashed var(--border);
+    color: var(--muted); padding: 12px 20px; border-radius: 10px;
+    cursor: pointer; font-size: 0.82rem; font-weight: 600;
+    transition: all 0.2s; width: 100%; justify-content: center;
+    margin-bottom: 28px;
+  }
+  .add-route-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(79,142,247,0.05); }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.7); z-index: 100;
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 28px; width: 560px; max-width: 95vw;
+    max-height: 90vh; overflow-y: auto;
+  }
+  .modal h3 { font-size: 1rem; font-weight: 700; margin-bottom: 20px; color: var(--accent); }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group.full { grid-column: 1 / -1; }
+  label { font-size: 0.75rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+  input, select, textarea {
+    background: var(--surface2); border: 1px solid var(--border);
+    color: var(--text); padding: 9px 12px; border-radius: 8px;
+    font-size: 0.83rem; font-family: var(--font); outline: none;
+    transition: border-color 0.2s;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+  textarea { resize: vertical; min-height: 70px; }
+  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+  .btn-primary {
+    background: var(--accent); color: #fff; border: none;
+    padding: 9px 22px; border-radius: 8px; font-size: 0.83rem;
+    font-weight: 700; cursor: pointer; transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-secondary {
+    background: var(--surface2); color: var(--muted); border: 1px solid var(--border);
+    padding: 9px 22px; border-radius: 8px; font-size: 0.83rem;
+    font-weight: 600; cursor: pointer;
+  }
+
+  /* DETAIL PANEL */
+  .detail-panel {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px 24px; margin-bottom: 24px;
+    display: none;
+  }
+  .detail-panel.open { display: block; }
+  .detail-panel h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 14px; color: var(--accent2); }
+  .detail-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
+  .detail-stat { background: var(--surface2); border-radius: 8px; padding: 12px 14px; }
+  .detail-stat .ds-label { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .detail-stat .ds-value { font-size: 1rem; font-weight: 700; }
+
+  /* SUMMARY STATS */
+  .summary-bar {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 14px; margin-bottom: 28px;
+  }
+  .summary-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px 18px;
+  }
+  .summary-card .sc-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+  .summary-card .sc-value { font-size: 1.4rem; font-weight: 800; color: var(--accent); }
+  .summary-card .sc-sub { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+
+  /* HIDDEN */
+  .hidden { display: none !important; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    header { flex-direction: column; gap: 12px; padding: 16px; }
+    main { padding: 16px; }
+    .tabs { padding: 12px 16px 0; overflow-x: auto; }
+    .form-grid { grid-template-columns: 1fr; }
+    th, td { padding: 10px 10px; }
+  }
+</style>
 </head>
 <body>
-    <h1>🚛 مسیرهای کمربند-راه و ورود به ایران</h1>
-    <div id="map"></div>
 
-    <h2>📊 جدول مسیرها (زمینی، دریایی، ریلی به ایران)</h2>
-    <table id="routesTable">
-        <thead>
-            <tr><th>نام مسیر</th><th>نوع کالا</th><th>وضعیت</th><th>هزینه تخمینی (دلار/TEU)</th><th>زمان (روز)</th><th>توضیحات</th></tr>
-        </thead>
-        <tbody id="routesBody"></tbody>
-    </table>
+<header>
+  <div>
+    <h1>Eurasia Logistics <span>Route Intelligence</span></h1>
+    <p>Iran Entry Dashboard — Shipping & Trade Route Analysis</p>
+  </div>
+  <div class="header-badge">
+    <strong>Sample Data</strong>
+    Last updated: May 2026
+  </div>
+</header>
 
-    <div class="add-form">
-        <h3>➕ اضافه کردن مسیر جدید</h3>
-        <input type="text" id="routeName" placeholder="نام مسیر (مثلاً بندرعباس از صحار)">
-        <input type="text" id="cargoType" placeholder="نوع کالا (کانتینری/فله/نفتی)">
-        <input type="text" id="status" placeholder="وضعیت (فعال/در دست بررسی)">
-        <input type="number" id="cost" placeholder="هزینه به دلار">
-        <input type="number" id="days" placeholder="زمان به روز">
-        <textarea id="desc" placeholder="توضیحات مسیر"></textarea>
-        <button onclick="addRoute()">➕ ذخیره مسیر جدید</button>
+<div class="tabs">
+  <div class="tab active" onclick="showTab('china')">🇨🇳 China Origin Routes</div>
+  <div class="tab" onclick="showTab('iran')">🇮🇷 Iran Entry Routes</div>
+</div>
+
+<main>
+
+  <!-- ===== TAB 1: CHINA ROUTES ===== -->
+  <div id="tab-china">
+    <div class="section-title">10 Major Routes from China to Iran</div>
+    <p class="section-sub">Click any route to view Iran entry details and sub-routes.</p>
+
+    <div class="summary-bar">
+      <div class="summary-card">
+        <div class="sc-label">Total Routes</div>
+        <div class="sc-value">10</div>
+        <div class="sc-sub">BRI Land · Sea · Polar</div>
+      </div>
+      <div class="summary-card">
+        <div class="sc-label">Active Routes</div>
+        <div class="sc-value" style="color:var(--green)">7</div>
+        <div class="sc-sub">Fully operational</div>
+      </div>
+      <div class="summary-card">
+        <div class="sc-label">Fastest Transit</div>
+        <div class="sc-value" style="color:var(--accent2)">12d</div>
+        <div class="sc-sub">China–Iran Rail (Northern)</div>
+      </div>
+      <div class="summary-card">
+        <div class="sc-label">Most Cost-Effective</div>
+        <div class="sc-value" style="color:var(--accent)">$850</div>
+        <div class="sc-sub">Per TEU (Maritime Silk)</div>
+      </div>
     </div>
 
-    <script>
-        // داده اولیه شامل مسیرهای کمربند-راه + ورود به ایران
-        let routes = [
-            { name: "کریپور میانی (TITR) به ایران از آستارا", type: "کانتینری", status: "فعال", cost: 1850, days: 18, desc: "قزاقستان-آذربایجان-ترکمنستان، سپس ریلی به ایران" },
-            { name: "راه‌آهن چین-قزاقستان-ازبکستان به ایران (سرخس)", type: "فله", status: "برنامه‌ریزی", cost: 1650, days: 22, desc: "اتصال به شبکه ریلی ایران از مرز سرخس" },
-            { name: "گوادر - مرز زمینی (سیستان)", type: "کانتینری/نفتی", status: "فعال", cost: 2200, days: 12, desc: "پاکستان به ایران از طریق مرز میرجاوه" },
-            { name: "بندر صحار (عمان) به بندرعباس", type: "دریایی", status: "فعال", cost: 950, days: 4, desc: "ارسال دریایی کوتاه به جنوب ایران" },
-            { name: "دبی - بندر لنگه - زمینی به خوزستان", type: "کانتینری", status: "فعال", cost: 1300, days: 7, desc: "از طریق مرزهای کویت و عراق" },
-            { name: "مرسین (ترکیه) - مرز بازرگان", type: "ریلی/جاده‌ای", status: "فعال", cost: 1850, days: 10, desc: "ورود از شمال غرب ایران" },
-            { name: "مسیر قطبی (آبهای شمال روسیه)", type: "کانتینری/نفتی", status: "آزمایشی", cost: 2900, days: 35, desc: "مسیر جایگزین کمربند-راه" },
-            { name: "جاده ابریشم دریایی (بندر چین به بوشهر)", type: "دریایی", status: "فعال", cost: 2100, days: 21, desc: "از طریق آبهای جنوب چین و اقیانوس هند" }
-        ];
+    <div class="cards-grid" id="china-cards"></div>
+  </div>
 
-        function renderTable() {
-            let body = document.getElementById("routesBody");
-            body.innerHTML = "";
-            routes.forEach(r => {
-                let row = `<tr>
-                    <td>${r.name}</td>
-                    <td>${r.type}</td>
-                    <td>${r.status}</td>
-                    <td>${r.cost}</td>
-                    <td>${r.days}</td>
-                    <td>${r.desc}</td>
-                </tr>`;
-                body.innerHTML += row;
-            });
-            // ذخیره در localStorage برای ماندگاری
-            localStorage.setItem("routes", JSON.stringify(routes));
-        }
+  <!-- ===== TAB 2: IRAN ENTRY ===== -->
+  <div id="tab-iran" class="hidden">
+    <div class="section-title">Iran Entry Routes</div>
+    <p class="section-sub">All modes of entry: sea, road, rail, and multimodal. Filter by cargo type.</p>
 
-        function addRoute() {
-            let newRoute = {
-                name: document.getElementById("routeName").value,
-                type: document.getElementById("cargoType").value,
-                status: document.getElementById("status").value,
-                cost: parseInt(document.getElementById("cost").value) || 0,
-                days: parseInt(document.getElementById("days").value) || 0,
-                desc: document.getElementById("desc").value
-            };
-            if (newRoute.name) {
-                routes.push(newRoute);
-                renderTable();
-                document.getElementById("routeName").value = "";
-                document.getElementById("cargoType").value = "";
-                document.getElementById("status").value = "";
-                document.getElementById("cost").value = "";
-                document.getElementById("days").value = "";
-                document.getElementById("desc").value = "";
-                alert("مسیر با موفقیت اضافه شد!");
-            } else {
-                alert("لطفاً نام مسیر را وارد کنید");
-            }
-        }
+    <div class="summary-bar" id="iran-summary"></div>
 
-        // بارگذاری داده‌های ذخیره شده
-        let saved = localStorage.getItem("routes");
-        if (saved) {
-            routes = JSON.parse(saved);
-        }
-        renderTable();
+    <div class="filter-bar">
+      <span class="filter-label">Cargo Type:</span>
+      <button class="filter-btn active" onclick="filterCargo('all', this)">All</button>
+      <button class="filter-btn" onclick="filterCargo('container', this)">Container</button>
+      <button class="filter-btn" onclick="filterCargo('bulk', this)">Bulk</button>
+      <button class="filter-btn" onclick="filterCargo('oil', this)">Oil & Petroleum</button>
+    </div>
 
-        // نقشه (نمونه: روی ایران و کریدورها)
-        var map = L.map('map').setView([32.5, 53.0], 5);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
-        }).addTo(map);
-        L.marker([27.18, 56.27]).addTo(map).bindPopup("بندرعباس");
-        L.marker([25.28, 55.31]).addTo(map).bindPopup("دبی");
-        L.marker([36.27, 59.57]).addTo(map).bindPopup("مرز دوغارون (ورودی ریلی از افغانستان)");
-        L.marker([39.46, 44.98]).addTo(map).bindPopup("بازرگان (مرز ترکیه)");
-        L.polyline([[30.0, 50.0], [27.0, 56.0], [25.0, 55.0]], { color: 'red' }).addTo(map).bindPopup("مسیر دریایی عمان به ایران");
-    </script>
-</body>
-</html>
+    <div class="entry-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Route / Entry Point</th>
+            <th>Mode</th>
+            <th>Via</th>
+            <th>Distance</th>
+            <th>Transit Time</th>
+            <th>Est. Cost (TEU)</th>
+            <th>Customs Risk</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="iran-table-body"></tbody>
+      </table>
+    </div>
+
+    <button class="add-route-btn" onclick="openModal()">
+      <span style="font-size:1.2rem">＋</span> Add New Route
+    </button>
+  </div>
+
+</main>
+
+<!-- MODAL: Add Route -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <h3>Add New Iran Entry Route</h3>
+    <div class="form-grid">
+      <div class="form-group full">
+        <label>Route Name</label>
+        <input type="text" id="f-name" placeholder="e.g. Oman (Sohar) → Bandar Abbas">
+      </div>
+      <div class="form-group">
+        <label>Transport Mode</label>
+        <select id="f-mode">
+          <option value="sea">Sea</option>
+          <option value="road">Road</option>
+          <option value="rail">Rail</option>
+          <option value="multimodal">Multimodal</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Cargo Type</label>
+        <select id="f-cargo">
+          <option value="container">Container</option>
+          <option value="bulk">Bulk</option>
+          <option value="oil">Oil & Petroleum</option>
+          <option value="all">All Types</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Via (Transit Points)</label>
+        <input type="text" id="f-via" placeholder="e.g. Sohar, Strait of Hormuz">
+      </div>
+      <div class="form-group">
+        <label>Entry Port / Border</label>
+        <input type="text" id="f-entry" placeholder="e.g. Bandar Abbas">
+      </div>
+      <div class="form-group">
+        <label>Distance (km)</label>
+        <input type="number" id="f-dist" placeholder="e.g. 1200">
+      </div>
+      <div class="form-group">
+        <label>Transit Time (days)</label>
+        <input type="text" id="f-time" placeholder="e.g. 3–5">
+      </div>
+      <div class="form-group">
+        <label>Est. Cost / TEU (USD)</label>
+        <input type="text" id="f-cost" placeholder="e.g. $1,200">
+      </div>
+      <div class="form-group">
+        <label>Customs Risk</label>
+        <select id="f-risk">
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Status</label>
+        <select id="f-status">
+          <option value="active">Active</option>
+          <option value="partial">Partial</option>
+          <option value="limited">Limited</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label>Notes</label>
+        <textarea id="f-notes" placeholder="Additional details, restrictions, or remarks..."></textarea>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn-primary" onclick="addRoute()">Add Route</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+
+const chinaRoutes = [
+  {
+    id: 1, type: 'land', name: 'Northern Corridor (Trans-Siberian + Central Asia)',
+    route: 'Shanghai → Urumqi → Almaty → Tashkent → Tehran',
+    transit: '14–18 days', cost: '$1,800', status: 'active',
+    distance: '7,200 km', notes: 'Main BRI rail corridor via Kazakhstan and Uzbekistan.'
+  },
+  {
+    id: 2, type: 'land', name: 'China–Kyrgyzstan–Tajikistan–Afghanistan',
+    route: 'Kashgar → Osh → Dushanbe → Kabul → Mashhad',
+    transit: '18–24 days', cost: '$2,100', status: 'limited',
+    distance: '5,800 km', notes: 'High-risk segment through Afghanistan. Limited commercial use.'
+  },
+  {
+    id: 3, type: 'land', name: 'China–Pakistan (CPEC) → Iran Border',
+    route: 'Kashgar → Islamabad → Karachi/Gwadar → Zahedan',
+    transit: '16–22 days', cost: '$1,950', status: 'partial',
+    distance: '6,100 km', notes: 'CPEC corridor. Road transfer at Taftan/Mirjaveh border.'
+  },
+  {
+    id: 4, type: 'land', name: 'China–Kazakhstan–Caspian (Trans-Caspian)',
+    route: 'Lianyungang → Almaty → Aktau → Caspian Sea → Anzali/Amirabad',
+    transit: '15–20 days', cost: '$2,000', status: 'active',
+    distance: '6,500 km', notes: 'Multimodal: rail + Caspian ferry. Growing capacity.'
+  },
+  {
+    id: 5, type: 'land', name: 'China–Russia–Azerbaijan (North–South)',
+    route: 'Beijing → Moscow → Baku → Astara → Tehran',
+    transit: '16–21 days', cost: '$2,200', status: 'partial',
+    distance: '8,100 km', notes: 'INSTC corridor. Sanctions on Russia create complications.'
+  },
+  {
+    id: 6, type: 'land', name: 'China–Turkey (BTK Rail) → Iran West',
+    route: 'Xi\'an → Istanbul (BTK) → Ankara → Tabriz/Bazargan',
+    transit: '18–25 days', cost: '$2,400', status: 'active',
+    distance: '8,700 km', notes: 'Baku–Tbilisi–Kars rail. Western Iran entry via Bazargan.'
+  },
+  {
+    id: 7, type: 'land', name: 'China–Turkmenistan–Iran (Sarakhs)',
+    route: 'Urumqi → Ashgabat → Sarakhs → Mashhad',
+    transit: '12–16 days', cost: '$1,600', status: 'active',
+    distance: '4,900 km', notes: 'Shortest land route. Direct rail link to Mashhad.'
+  },
+  {
+    id: 8, type: 'land', name: 'China–Mongolia–Russia–Central Asia',
+    route: 'Beijing → Ulaanbaatar → Novosibirsk → Tashkent → Tehran',
+    transit: '20–28 days', cost: '$2,300', status: 'partial',
+    distance: '9,200 km', notes: 'Longer northern detour. Used when southern routes are congested.'
+  },
+  {
+    id: 9, type: 'sea', name: 'Maritime Silk Road (Indian Ocean)',
+    route: 'Shanghai → Strait of Malacca → Indian Ocean → Gulf of Oman → Bandar Abbas',
+    transit: '22–28 days', cost: '$850', status: 'active',
+    distance: '14,500 km', notes: 'Lowest cost per TEU. Main sea route for bulk and containers.'
+  },
+  {
+    id: 10, type: 'polar', name: 'Arctic Polar Route (NSR)',
+    route: 'Shanghai → Bering Strait → Arctic Ocean → Suez → Bandar Abbas',
+    transit: '18–22 days', cost: '$1,400', status: 'partial',
+    distance: '12,800 km', notes: 'Seasonal (Jul–Oct). Shorter than Suez but ice-dependent.'
+  }
+];
+
+const iranEntryRoutes = [
+  {
+    id: 1, name: 'Bandar Abbas (Sea)', via: 'Gulf of Oman, Strait of Hormuz',
+    entry: 'Bandar Abbas Port', mode: 'sea', cargo: ['container','bulk','oil'],
+    distance: '—', transit: '1–2 days (anchorage)', cost: '$950',
+    risk: 'medium', status: 'active',
+    notes: 'Main Iranian port. High congestion. Suitable for all cargo types.'
+  },
+  {
+    id: 2, name: 'Bushehr (Sea)', via: 'Persian Gulf',
+    entry: 'Bushehr Port', mode: 'sea', cargo: ['container','bulk','oil'],
+    distance: '—', transit: '1–2 days', cost: '$1,050',
+    risk: 'medium', status: 'active',
+    notes: 'Secondary port. Less congested than Bandar Abbas.'
+  },
+  {
+    id: 3, name: 'Oman (Sohar) → Bandar Abbas', via: 'Sohar Port, Strait of Hormuz',
+    entry: 'Bandar Abbas', mode: 'sea', cargo: ['container','bulk'],
+    distance: '320 km', transit: '2–3 days', cost: '$1,200',
+    risk: 'medium', status: 'active',
+    notes: 'Transshipment via Sohar. Avoids direct China–Iran shipping scrutiny.'
+  },
+  {
+    id: 4, name: 'Oman (Duqm) → Bandar Abbas', via: 'Duqm Port, Gulf of Oman',
+    entry: 'Bandar Abbas', mode: 'sea', cargo: ['container','oil'],
+    distance: '680 km', transit: '3–4 days', cost: '$1,350',
+    risk: 'low', status: 'active',
+    notes: 'Duqm SEZ offers bonded warehousing. Growing transshipment hub.'
+  },
+  {
+    id: 5, name: 'Oman (Salalah) → Bandar Abbas', via: 'Salalah Port, Arabian Sea',
+    entry: 'Bandar Abbas / Bushehr', mode: 'sea', cargo: ['container','bulk'],
+    distance: '1,100 km', transit: '4–5 days', cost: '$1,150',
+    risk: 'low', status: 'active',
+    notes: 'Salalah is a major transshipment hub. Good feeder connections.'
+  },
+  {
+    id: 6, name: 'Oman (Khasab) → Minab / Bandar Abbas', via: 'Khasab, Strait of Hormuz',
+    entry: 'Minab / Bandar Abbas', mode: 'sea', cargo: ['container','bulk'],
+    distance: '120 km', transit: '1 day', cost: '$900',
