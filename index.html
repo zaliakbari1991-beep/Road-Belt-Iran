@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>داشبورد مسیرهای کمربند-راه به ایران</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        body { font-family: Tahoma, sans-serif; margin: 0; padding: 20px; background: #f4f7fa; }
+        #map { height: 500px; margin-bottom: 20px; border-radius: 12px; }
+        table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: right; vertical-align: top; }
+        th { background: #2c3e50; color: white; }
+        .add-form { margin-top: 20px; background: white; padding: 20px; border-radius: 12px; }
+        input, select, textarea { width: 100%; padding: 8px; margin: 5px 0 15px; border-radius: 8px; border: 1px solid #ccc; }
+        button { background: #27ae60; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; }
+        .iran-badge { background: #e67e22; color: white; padding: 2px 8px; border-radius: 20px; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <h1>🚛 مسیرهای کمربند-راه و ورود به ایران</h1>
+    <div id="map"></div>
+
+    <h2>📊 جدول مسیرها (زمینی، دریایی، ریلی به ایران)</h2>
+    <table id="routesTable">
+        <thead>
+            <tr><th>نام مسیر</th><th>نوع کالا</th><th>وضعیت</th><th>هزینه تخمینی (دلار/TEU)</th><th>زمان (روز)</th><th>توضیحات</th></tr>
+        </thead>
+        <tbody id="routesBody"></tbody>
+    </table>
+
+    <div class="add-form">
+        <h3>➕ اضافه کردن مسیر جدید</h3>
+        <input type="text" id="routeName" placeholder="نام مسیر (مثلاً بندرعباس از صحار)">
+        <input type="text" id="cargoType" placeholder="نوع کالا (کانتینری/فله/نفتی)">
+        <input type="text" id="status" placeholder="وضعیت (فعال/در دست بررسی)">
+        <input type="number" id="cost" placeholder="هزینه به دلار">
+        <input type="number" id="days" placeholder="زمان به روز">
+        <textarea id="desc" placeholder="توضیحات مسیر"></textarea>
+        <button onclick="addRoute()">➕ ذخیره مسیر جدید</button>
+    </div>
+
+    <script>
+        // داده اولیه شامل مسیرهای کمربند-راه + ورود به ایران
+        let routes = [
+            { name: "کریپور میانی (TITR) به ایران از آستارا", type: "کانتینری", status: "فعال", cost: 1850, days: 18, desc: "قزاقستان-آذربایجان-ترکمنستان، سپس ریلی به ایران" },
+            { name: "راه‌آهن چین-قزاقستان-ازبکستان به ایران (سرخس)", type: "فله", status: "برنامه‌ریزی", cost: 1650, days: 22, desc: "اتصال به شبکه ریلی ایران از مرز سرخس" },
+            { name: "گوادر - مرز زمینی (سیستان)", type: "کانتینری/نفتی", status: "فعال", cost: 2200, days: 12, desc: "پاکستان به ایران از طریق مرز میرجاوه" },
+            { name: "بندر صحار (عمان) به بندرعباس", type: "دریایی", status: "فعال", cost: 950, days: 4, desc: "ارسال دریایی کوتاه به جنوب ایران" },
+            { name: "دبی - بندر لنگه - زمینی به خوزستان", type: "کانتینری", status: "فعال", cost: 1300, days: 7, desc: "از طریق مرزهای کویت و عراق" },
+            { name: "مرسین (ترکیه) - مرز بازرگان", type: "ریلی/جاده‌ای", status: "فعال", cost: 1850, days: 10, desc: "ورود از شمال غرب ایران" },
+            { name: "مسیر قطبی (آبهای شمال روسیه)", type: "کانتینری/نفتی", status: "آزمایشی", cost: 2900, days: 35, desc: "مسیر جایگزین کمربند-راه" },
+            { name: "جاده ابریشم دریایی (بندر چین به بوشهر)", type: "دریایی", status: "فعال", cost: 2100, days: 21, desc: "از طریق آبهای جنوب چین و اقیانوس هند" }
+        ];
+
+        function renderTable() {
+            let body = document.getElementById("routesBody");
+            body.innerHTML = "";
+            routes.forEach(r => {
+                let row = `<tr>
+                    <td>${r.name}</td>
+                    <td>${r.type}</td>
+                    <td>${r.status}</td>
+                    <td>${r.cost}</td>
+                    <td>${r.days}</td>
+                    <td>${r.desc}</td>
+                </tr>`;
+                body.innerHTML += row;
+            });
+            // ذخیره در localStorage برای ماندگاری
+            localStorage.setItem("routes", JSON.stringify(routes));
+        }
+
+        function addRoute() {
+            let newRoute = {
+                name: document.getElementById("routeName").value,
+                type: document.getElementById("cargoType").value,
+                status: document.getElementById("status").value,
+                cost: parseInt(document.getElementById("cost").value) || 0,
+                days: parseInt(document.getElementById("days").value) || 0,
+                desc: document.getElementById("desc").value
+            };
+            if (newRoute.name) {
+                routes.push(newRoute);
+                renderTable();
+                document.getElementById("routeName").value = "";
+                document.getElementById("cargoType").value = "";
+                document.getElementById("status").value = "";
+                document.getElementById("cost").value = "";
+                document.getElementById("days").value = "";
+                document.getElementById("desc").value = "";
+                alert("مسیر با موفقیت اضافه شد!");
+            } else {
+                alert("لطفاً نام مسیر را وارد کنید");
+            }
+        }
+
+        // بارگذاری داده‌های ذخیره شده
+        let saved = localStorage.getItem("routes");
+        if (saved) {
+            routes = JSON.parse(saved);
+        }
+        renderTable();
+
+        // نقشه (نمونه: روی ایران و کریدورها)
+        var map = L.map('map').setView([32.5, 53.0], 5);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
+        }).addTo(map);
+        L.marker([27.18, 56.27]).addTo(map).bindPopup("بندرعباس");
+        L.marker([25.28, 55.31]).addTo(map).bindPopup("دبی");
+        L.marker([36.27, 59.57]).addTo(map).bindPopup("مرز دوغارون (ورودی ریلی از افغانستان)");
+        L.marker([39.46, 44.98]).addTo(map).bindPopup("بازرگان (مرز ترکیه)");
+        L.polyline([[30.0, 50.0], [27.0, 56.0], [25.0, 55.0]], { color: 'red' }).addTo(map).bindPopup("مسیر دریایی عمان به ایران");
+    </script>
+</body>
+</html>
