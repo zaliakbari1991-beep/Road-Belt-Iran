@@ -4,450 +4,364 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>داشبورد لجستیک چین–ایران | صنایع بالادستی انرژی</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
   @font-face {
-    font-family: 'BNazanin';
-    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/b-nazanin-font@master/BNazanin.ttf') format('truetype');
+    font-family: 'B Nazanin';
+    src: local('B Nazanin'), local('BNazanin');
     font-weight: normal;
+    font-style: normal;
   }
-  :root {
-    --bg: #ffffff;
-    --bg2: #f7f6f3;
-    --bg3: #f0efe9;
-    --text: #1a1a18;
-    --text2: #5f5e5a;
-    --text3: #88877f;
-    --border: rgba(0,0,0,0.12);
-    --border2: rgba(0,0,0,0.22);
-    --rad: 8px;
-    --rad-lg: 12px;
-    --blue: #185FA5;
-    --blue-bg: #E6F1FB;
-    --blue-text: #0C447C;
-    --green: #1D9E75;
-    --green-bg: #E1F5EE;
-    --green-text: #085041;
-    --amber: #BA7517;
-    --amber-bg: #FAEEDA;
-    --amber-text: #633806;
-    --red: #E24B4A;
-    --red-bg: #FCEBEB;
-    --red-text: #791F1F;
-    --purple: #534AB7;
-    --purple-bg: #EEEDFE;
-    --purple-text: #3C3489;
-    --gate-bg: #0d1117;
-    --gate-surface: #161b22;
-    --gate-accent: #c9a84c;
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #1c1c1a;
-      --bg2: #252523;
-      --bg3: #2e2e2b;
-      --text: #e8e6df;
-      --text2: #b4b2a9;
-      --text3: #888780;
-      --border: rgba(255,255,255,0.12);
-      --border2: rgba(255,255,255,0.22);
-      --blue-bg: #0c2840;
-      --blue-text: #85B7EB;
-      --green-bg: #04342c;
-      --green-text: #9FE1CB;
-      --amber-bg: #412402;
-      --amber-text: #FAC775;
-      --red-bg: #501313;
-      --red-text: #F09595;
-      --purple-bg: #26215C;
-      --purple-text: #AFA9EC;
-    }
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
   body {
     font-family: 'Vazirmatn', Tahoma, 'Segoe UI', Arial, sans-serif;
-    background: var(--bg3);
-    color: var(--text);
+    background: #f0efe9;
     direction: rtl;
-    line-height: 1.6;
+    line-height: 1.5;
   }
-
-  #gate {
-    position: fixed; inset: 0;
-    background: radial-gradient(ellipse at center, #1a1f2e 0%, #0d1117 100%);
-    display: flex; align-items: center; justify-content: center;
-    z-index: 9999;
+  
+  /* حالت روشن/تاریک خودکار */
+  @media (prefers-color-scheme: dark) {
+    body { background: #1c1c1a; }
+    .card, .page-header, .cor-card, .detail-panel, .map-section { background: #252523; border-color: #3a3a36; }
   }
-  .gate-box {
-    background: var(--gate-surface);
-    border: 1px solid var(--gate-accent);
-    border-radius: 12px;
-    padding: 48px 40px;
-    text-align: center;
-    width: 360px;
-  }
-  .gate-logo { font-size: 13px; letter-spacing: 4px; color: var(--gate-accent); text-transform: uppercase; margin-bottom: 8px; }
-  .gate-title { font-size: 22px; font-weight: 700; color: #e6edf3; margin-bottom: 32px; }
-  .gate-box input {
-    width: 100%; padding: 12px 16px; background: #0d1117; border: 1px solid #30363d;
-    border-radius: 8px; color: #e6edf3; font-family: inherit; font-size: 15px;
-    text-align: center; outline: none;
-  }
-  .gate-box input:focus { border-color: var(--gate-accent); }
-  .gate-box button {
-    margin-top: 16px; width: 100%; padding: 12px; background: var(--gate-accent);
-    color: #0d1117; border: none; border-radius: 8px; font-family: inherit;
-    font-size: 15px; font-weight: 700; cursor: pointer;
-  }
-  .gate-box button:hover { background: #e8c96a; }
-  #gate-err { display: none; margin-top: 12px; color: #f85149; font-size: 13px; }
-
-  #app { display: none; }
-
+  
+  /* استایل عمومی */
   .page-header {
-    background: var(--bg);
-    border-bottom: 0.5px solid var(--border);
+    background: white;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
     padding: 1rem 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
     flex-wrap: wrap;
     position: sticky;
     top: 0;
     z-index: 100;
   }
-  .page-header h1 { font-size: 18px; font-weight: 600; color: var(--text); }
-  .page-header p { font-size: 13px; color: var(--text3); margin-top: 2px; }
-  .page-nav { display: flex; gap: 6px; }
+  .page-header h1 { font-size: 18px; font-weight: 600; }
+  .page-header p { font-size: 12px; color: #666; margin-top: 4px; }
+  
   .nav-btn {
     font-size: 12px;
-    padding: 6px 14px;
+    padding: 6px 16px;
     border-radius: 20px;
-    border: 0.5px solid var(--border2);
+    border: 1px solid #ddd;
     background: transparent;
-    color: var(--text2);
     cursor: pointer;
     font-family: inherit;
-    transition: all .15s;
   }
-  .nav-btn:hover { background: var(--bg2); }
-  .nav-btn.active { background: var(--blue-bg); color: var(--blue-text); border-color: var(--blue); }
-
-  .container { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
+  .nav-btn.active {
+    background: #185FA5;
+    color: white;
+    border-color: #185FA5;
+  }
+  
+  .container { max-width: 1300px; margin: 0 auto; padding: 1.5rem; }
   .dash-section { display: none; }
   .dash-section.active { display: block; }
-  .section-lbl {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: .07em;
-    color: var(--text3);
-    text-transform: uppercase;
-    margin-bottom: 8px;
-    margin-top: 16px;
-  }
+  
   .card {
-    background: var(--bg);
-    border: 0.5px solid var(--border);
-    border-radius: var(--rad-lg);
+    background: white;
+    border-radius: 12px;
     padding: 1rem 1.25rem;
-    margin-bottom: 12px;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
   }
-  .metrics {
+  
+  /* متریک‌های صفحه اصلی */
+  .metrics-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0,1fr));
-    gap: 8px;
-    margin-bottom: 14px;
-  }
-  @media(max-width:600px){ .metrics { grid-template-columns: repeat(2,1fr); } }
-  .met {
-    background: var(--bg2);
-    border-radius: var(--rad);
-    padding: .75rem 1rem;
-  }
-  .met-n { font-size: 20px; font-weight: 600; color: var(--text); }
-  .met-n.ok { color: var(--green); }
-  .met-n.warn { color: var(--amber); }
-  .met-n.danger { color: var(--red); }
-  .met-l { font-size: 11px; color: var(--text3); margin-top: 2px; }
-  .badge {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 10px;
-  }
-  .b-ok { background: var(--green-bg); color: var(--green-text); }
-  .b-warn { background: var(--amber-bg); color: var(--amber-text); }
-  .b-danger { background: var(--red-bg); color: var(--red-text); }
-  .b-info { background: var(--blue-bg); color: var(--blue-text); }
-  .b-purple { background: var(--purple-bg); color: var(--purple-text); }
-
-  .info-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12px;
-  }
-  .info-table th, .info-table td {
-    padding: 8px 10px;
-    border: 0.5px solid var(--border);
-    text-align: right;
-  }
-  .info-table th {
-    background: var(--bg2);
-    font-weight: 600;
-    color: var(--blue-text);
-  }
-
-  .filter-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
-  .filt {
-    font-size: 12px;
-    border: 0.5px solid var(--border2);
-    border-radius: 20px;
-    padding: 4px 12px;
-    cursor: pointer;
-    background: transparent;
-    color: var(--text2);
-    font-family: inherit;
-  }
-  .filt:hover { background: var(--bg2); }
-  .filt.on { background: var(--blue-bg); color: var(--blue-text); border-color: var(--blue); }
-
-  /* ===== CORRIDOR CARD + ACCORDION ===== */
-  .cor-card {
-    background: var(--bg);
-    border: 0.5px solid var(--border);
-    border-radius: var(--rad-lg);
-    margin-bottom: 8px;
-    overflow: hidden;
-    transition: border-color 0.2s;
-  }
-  .cor-card.open { border-color: var(--blue); }
-  .cor-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 16px;
-    cursor: pointer;
-    user-select: none;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 12px;
-    transition: background 0.15s;
+    margin-bottom: 20px;
   }
-  .cor-header:hover { background: var(--bg2); }
-  .cor-header-left { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; flex-wrap: wrap; }
-  .cor-name {
-    font-size: 14px;
+  .metric-box {
+    background: white;
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  .metric-value {
+    font-size: 24px;
     font-weight: 700;
-    color: var(--blue);
-    font-family: 'BNazanin', 'B Nazanin', 'Vazirmatn', Tahoma, sans-serif;
-    font-size: 11pt;
-    line-height: 1.5;
+    color: #185FA5;
   }
-  .cor-countries { display: flex; gap: 4px; flex-wrap: wrap; }
-  .ctag { font-size: 11px; background: var(--bg2); color: var(--text2); padding: 2px 7px; border-radius: 10px; }
-  .cor-chevron {
-    font-size: 12px;
-    color: var(--text3);
-    transition: transform 0.25s;
-    flex-shrink: 0;
+  .metric-label {
+    font-size: 11px;
+    color: #666;
+    margin-top: 4px;
   }
-  .cor-card.open .cor-chevron { transform: rotate(180deg); }
-
-  /* accordion body */
-  .cor-body {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1);
-  }
-  .cor-body-inner {
-    padding: 0 16px 16px;
-    border-top: 0.5px solid var(--border);
-  }
-  .cor-desc {
-    font-size: 12px;
-    color: var(--text2);
-    line-height: 1.7;
-    padding: 10px 0 12px;
-    border-bottom: 0.5px solid var(--border);
-    margin-bottom: 10px;
-  }
-  .cor-detail-row {
+  
+  /* بخش آمار و اعداد عکس */
+  .stats-row {
     display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
     justify-content: space-between;
-    font-size: 12px;
-    color: var(--text2);
-    padding: 5px 0;
-    border-bottom: 0.5px solid var(--border);
+    margin-bottom: 24px;
   }
-  .cor-detail-row:last-child { border-bottom: none; }
-  .cor-detail-row span:last-child { color: var(--text); font-weight: 600; text-align: left; }
-
-  .detail-panel {
-    background: var(--bg2);
-    border-radius: var(--rad);
-    padding: .875rem 1rem;
+  .stat-card {
+    flex: 1;
+    min-width: 200px;
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .stat-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #185FA5;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
     margin-bottom: 12px;
   }
-  .detail-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 10px;
+  .stat-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 6px 0;
+    border-bottom: 1px dashed #eee;
+  }
+  .stat-item .label { color: #666; }
+  .stat-item .number { font-weight: 700; }
+  
+  /* کریدورها با فونت B Nazanin */
+  .cor-card {
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'B Nazanin', 'Vazirmatn', Tahoma, sans-serif;
+    font-size: 11px;
+    overflow: hidden;
+  }
+  .cor-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .cor-header {
+    padding: 14px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9f9f9;
+    border-bottom: 1px solid #eee;
+  }
+  .cor-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #185FA5;
+  }
+  .cor-badge {
+    font-size: 10px;
+    padding: 2px 10px;
+    border-radius: 20px;
+    background: #E6F1FB;
+    color: #0C447C;
+  }
+  .cor-detail {
+    max-height: 0;
+    padding: 0 18px;
+    overflow: hidden;
+    transition: max-height 0.35s ease-out, padding 0.2s;
+    background: white;
+  }
+  .cor-card.open .cor-detail {
+    max-height: 350px;
+    padding: 14px 18px;
+    border-top: 1px solid #eee;
   }
   .detail-row {
     display: flex;
     justify-content: space-between;
-    font-size: 13px;
-    color: var(--text2);
-    padding: 4px 0;
-    border-bottom: 0.5px solid var(--border);
+    font-size: 11px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
   }
   .detail-row:last-child { border-bottom: none; }
-  .detail-row span:last-child { color: var(--text); font-weight: 600; }
-
-  .routes-bar {
+  .detail-row .label {
+    color: #666;
+    font-weight: 500;
+  }
+  .detail-row .value {
+    font-weight: 700;
+    color: #333;
+  }
+  
+  /* نقشه */
+  .map-section {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .map-toolbar {
+    padding: 8px 16px;
+    background: #f5f5f5;
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
-    margin-bottom: 12px;
-  }
-  .route-btn {
-    font-size: 12px;
-    background: transparent;
-    border: 0.5px solid var(--border2);
-    border-radius: 24px;
-    padding: 6px 16px;
-    cursor: pointer;
-    color: var(--text2);
-    font-family: inherit;
-  }
-  .route-btn:hover { background: var(--bg2); }
-  .route-btn.active { background: var(--blue-bg); color: var(--blue-text); border-color: var(--blue); }
-
-  .map-section {
-    background: var(--bg);
-    border: 0.5px solid var(--border);
-    border-radius: var(--rad-lg);
-    overflow: hidden;
-    margin-bottom: 16px;
-  }
-  .map-toolbar {
-    padding: 10px 16px;
-    border-bottom: 0.5px solid var(--border);
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    background: var(--bg2);
-    align-items: center;
   }
   .map-btn {
+    font-size: 11px;
     padding: 4px 12px;
     border-radius: 6px;
-    border: 0.5px solid var(--border2);
-    background: transparent;
+    border: 1px solid #ddd;
+    background: white;
     cursor: pointer;
-    font-size: 11px;
-    font-family: inherit;
   }
-  .map-btn.active { background: var(--blue-bg); border-color: var(--blue); color: var(--blue-text); }
+  .map-btn.active {
+    background: #185FA5;
+    color: white;
+    border-color: #185FA5;
+  }
   #map { height: 320px; }
-
-  /* Leaflet label override for B Nazanin */
-  .leaflet-tooltip.corridor-label {
-    font-family: 'BNazanin', 'B Nazanin', Tahoma, sans-serif !important;
-    font-size: 11pt !important;
-    background: rgba(13,17,23,0.82);
-    border: none;
-    color: #e6edf3;
-    padding: 3px 8px;
-    border-radius: 4px;
-    white-space: nowrap;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-    direction: rtl;
+  
+  .route-btn {
+    font-size: 11px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    background: white;
+    cursor: pointer;
+    margin: 3px;
   }
-  .leaflet-tooltip.corridor-label::before { display: none; }
-
-  .update-note { font-size: 11px; color: var(--text3); text-align: left; margin-top: 16px; }
+  .route-btn.active {
+    background: #185FA5;
+    color: white;
+  }
+  
+  .filter-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .filt {
+    font-size: 11px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+  }
+  .filt.on {
+    background: #185FA5;
+    color: white;
+  }
+  
+  .update-note {
+    font-size: 10px;
+    color: #999;
+    text-align: left;
+    margin-top: 20px;
+  }
+  
+  @media (max-width:600px) {
+    .container { padding: 1rem; }
+    .stats-row { flex-direction: column; }
+  }
 </style>
 </head>
 <body>
 
-<div id="gate">
-  <div class="gate-box">
-    <div class="gate-logo">Dana Energy</div>
-    <div class="gate-title">Logistics Intelligence</div>
-    <input type="password" id="pwd" placeholder="رمز عبور" onkeydown="if(event.key==='Enter')checkPwd()">
-    <button onclick="checkPwd()">ورود</button>
-    <div id="gate-err">رمز عبور اشتباه است</div>
-  </div>
-</div>
-
 <div id="app">
 <div class="page-header">
   <div>
-    <h1>داشبورد لجستیک چین–ایران</h1>
+    <h1>📊 داشبورد لجستیک چین–ایران</h1>
     <p>صنایع بالادستی انرژی — تحلیل کریدورها و فرصت‌های سرمایه‌گذاری | به‌روز: مه ۲۰۲۶</p>
   </div>
-  <div class="page-nav">
-    <button class="nav-btn active" onclick="showDash('main',event)">نمای کلی</button>
-    <button class="nav-btn" onclick="showDash('carec',event)">🌍 کریدورهای بین‌المللی</button>
-    <button class="nav-btn" onclick="showDash('cre',event)">🚂 قطارهای CRE</button>
+  <div style="display: flex; gap: 8px;">
+    <button class="nav-btn active" onclick="showDash('main')">نمای کلی</button>
+    <button class="nav-btn" onclick="showDash('carec')">🌍 کریدورهای بین‌المللی</button>
   </div>
 </div>
 
 <div class="container">
 
-<!-- ========== DASH 1: MAIN ========== -->
+<!-- ========== صفحه اول: نمای کلی ========== -->
 <div id="dash-main" class="dash-section active">
-  <div class="metrics">
-    <div class="met"><div class="met-n ok">۱۰</div><div class="met-l">کریدور فعال</div></div>
-    <div class="met"><div class="met-n danger">مسدود</div><div class="met-l">مسیر اصلی (دبی)</div></div>
-    <div class="met"><div class="met-n">۴</div><div class="met-l">دسته‌بندی کالا</div></div>
-    <div class="met"><div class="met-n ok">۳</div><div class="met-l">فرصت سرمایه‌گذاری</div></div>
+  
+  <!-- کارت اول: اعداد بار کل و کانتینر از عکس -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-title">📦 بار کل (Mt)</div>
+      <div class="stat-item"><span class="label">بار کل ۲۰۲۳</span><span class="number">۲.۷۶ Mt | ۴.۴۸ Mt | ۴.۱۲ Mt</span></div>
+      <div class="stat-item"><span class="label">بار کل ۲۰۲۴</span><span class="number">۲.۷۶ Mt | ۴.۴۸ Mt | (۴.۱۲) Mt</span></div>
+      <div class="stat-item"><span class="label">بار کل ۲۰۲۵</span><span class="number">۲.۷۶ Mt | ۴.۴۸ Mt | ۴.۱۲ Mt</span></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-title">📦 کانتینر (TEU)</div>
+      <div class="stat-item"><span class="label">کانتینر ۲۰۲۴</span><span class="number">۵۶.۵k | ۷۷k | ۳۰۰k TEU</span></div>
+      <div class="stat-item"><span class="label">کانتینر ۲۰۲۵</span><span class="number">۵۶.۵k | ۷۷k | ۳۰۰k TEU</span></div>
+      <div class="stat-item"><span class="label">هدف ۲۰۲۹</span><span class="number">۵۶.۵k | ۷۷k | ۳۰۰k TEU</span></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-title">🚂 کریدور میانی (TITR)</div>
+      <div class="stat-item"><span class="label">عقب‌افتادگی (Dostyk/Altynkol)</span><span class="number">تا ۱ ماه</span></div>
+      <div class="stat-item"><span class="label">روسیه سهم از CRE</span><span class="number">۸۹.۲% (ژانویه ۲۰۲۵)</span></div>
+      <div class="stat-item"><span class="label">مسیر شمالی (Trans-Siberian)</span><span class="number">۱۹ روز</span></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-title">🎯 اهداف زمانی و قطارها</div>
+      <div class="stat-item"><span class="label">هدف زمانی ۲۰۲۶</span><span class="number">۱۵ روز</span></div>
+      <div class="stat-item"><span class="label">قطارهای ۲۰۲۵ (هدف)</span><span class="number">۶۰۰ قطار/سال</span></div>
+      <div class="stat-item"><span class="label">هدف ۲۰۲۷</span><span class="number">۱۰۰۰ قطار/سال</span></div>
+    </div>
   </div>
-
-  <div class="section-lbl">نقشه کریدورها — چین به ایران</div>
+  
+  <!-- نقشه تعاملی -->
   <div class="map-section">
     <div class="map-toolbar">
-      <span style="font-size:12px;color:var(--text2)">🗺️ نقشه تعاملی</span>
+      <span>🗺️ نقشه کریدورهای چین به ایران</span>
       <button class="map-btn active" onclick="resetMapFilter()">همه مسیرها</button>
       <button class="map-btn" onclick="toggleMeasure()">📏 اندازه‌گیری فاصله</button>
-      <span id="measure-info" style="font-size:11px;color:var(--amber)"></span>
+      <span id="measure-info" style="font-size:10px"></span>
     </div>
     <div id="map"></div>
   </div>
-
-  <div class="routes-bar" id="routes-bar">
-    <button class="route-btn" onclick="selectRoute('dubai',event)">دبی (مسدود)</button>
-    <button class="route-btn" onclick="selectRoute('oman',event)">عمان</button>
-    <button class="route-btn" onclick="selectRoute('turkey',event)">ترکیه</button>
-    <button class="route-btn" onclick="selectRoute('iraq',event)">عراق زمینی</button>
-    <button class="route-btn" onclick="selectRoute('central',event)">آسیای مرکزی</button>
+  
+  <!-- انتخاب مسیر -->
+  <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px;">
+    <button class="route-btn" onclick="selectRoute('dubai')">دبی (مسدود)</button>
+    <button class="route-btn" onclick="selectRoute('oman')">عمان</button>
+    <button class="route-btn" onclick="selectRoute('turkey')">ترکیه</button>
+    <button class="route-btn" onclick="selectRoute('iraq')">عراق زمینی</button>
+    <button class="route-btn" onclick="selectRoute('central')">آسیای مرکزی</button>
   </div>
-
-  <div class="routes-bar" id="countries-bar"></div>
-
-  <div id="route-detail" class="detail-panel">
-    <div class="detail-title" id="detail-title">مسیر دبی — وضعیت: مسدود</div>
-    <div class="detail-row"><span>نوع حمل</span><span id="d-type">دریایی + ترانشیپ</span></div>
-    <div class="detail-row"><span>زمان تحویل</span><span id="d-time">۱۸–۲۵ روز</span></div>
-    <div class="detail-row"><span>هزینه نسبی</span><span id="d-cost">پایین</span></div>
-    <div class="detail-row"><span>ریسک فعلی</span><span id="d-risk">بسیار بالا — جنگ منطقه</span></div>
-    <div class="detail-row"><span>مناسب برای</span><span id="d-goods">همه اقلام سبک</span></div>
-    <div class="detail-row"><span>وضعیت فورواردر</span><span id="d-forward">غیرفعال</span></div>
+  
+  <!-- جزئیات مسیر -->
+  <div class="card" id="route-detail">
+    <div style="font-weight:700; margin-bottom:8px;" id="detail-title">مسیر دبی — وضعیت: مسدود</div>
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:8px; font-size:12px;">
+      <div><span style="color:#666">نوع حمل:</span> <strong id="d-type">دریایی + ترانشیپ</strong></div>
+      <div><span style="color:#666">زمان تحویل:</span> <strong id="d-time">۱۸–۲۵ روز</strong></div>
+      <div><span style="color:#666">هزینه نسبی:</span> <strong id="d-cost">پایین</strong></div>
+      <div><span style="color:#666">ریسک فعلی:</span> <strong id="d-risk">بسیار بالا</strong></div>
+      <div><span style="color:#666">مناسب برای:</span> <strong id="d-goods">همه اقلام سبک</strong></div>
+      <div><span style="color:#666">وضعیت فورواردر:</span> <strong id="d-forward">غیرفعال</strong></div>
+    </div>
   </div>
 </div>
 
-<!-- ========== DASH 2: کریدورهای بین‌المللی ========== -->
+<!-- ========== صفحه دوم: کریدورهای بین‌المللی ========== -->
 <div id="dash-carec" class="dash-section">
-  <div class="metrics">
-    <div class="met"><div class="met-n">۱۰</div><div class="met-l">کریدور شناسایی‌شده</div></div>
-    <div class="met"><div class="met-n">۷</div><div class="met-l">مسیر دریایی/ریلی</div></div>
-    <div class="met"><div class="met-n warn">۴٫۶B$</div><div class="met-l">سرمایه‌گذاری</div></div>
-    <div class="met"><div class="met-n">۲۰۳۰</div><div class="met-l">افق توسعه</div></div>
+  <div class="metrics-grid">
+    <div class="metric-box"><div class="metric-value">۱۰</div><div class="metric-label">کریدور شناسایی‌شده</div></div>
+    <div class="metric-box"><div class="metric-value">۷</div><div class="metric-label">مسیر دریایی/ریلی</div></div>
+    <div class="metric-box"><div class="metric-value">۴.۶B$</div><div class="metric-label">سرمایه‌گذاری</div></div>
+    <div class="metric-box"><div class="metric-value">۲۰۳۰</div><div class="metric-label">افق توسعه</div></div>
   </div>
 
   <div class="filter-row">
@@ -458,466 +372,192 @@
     <button class="filt" onclick="filterCarec('road',this)">جاده‌ای</button>
   </div>
 
-  <!-- ==================== کریدور 1: Polar Silk Road ==================== -->
-  <div class="cor-card" data-tags="sea" data-id="Polar">
-    <div class="cor-header" onclick="toggleCorridor(this)">
-      <div class="cor-header-left">
-        <span class="badge b-info">دریایی</span>
-        <span class="cor-name">❄️ Polar Silk Road | راه ابریشم قطبی (مسیر دریای شمال)</span>
-        <div class="cor-countries">
-          <span class="ctag">🇨🇳 چین</span><span class="ctag">🇷🇺 روسیه</span><span class="ctag">🇪🇺 اروپا</span>
-        </div>
-      </div>
-      <span class="cor-chevron">▼</span>
-    </div>
-    <div class="cor-body">
-      <div class="cor-body-inner">
-        <div class="cor-desc">کوتاه‌کردن زمان و فاصله نسبت به مسیر سوئز از طریق اقیانوس منجمد شمالی. توسعه‌محور، وابسته به یخ، فصل و ناوگان یخ‌شکن روسیه.</div>
-        <div class="cor-detail-row"><span>نوع حمل</span><span>دریایی (اقیانوس منجمد شمالی)</span></div>
-        <div class="cor-detail-row"><span>زمان تحویل</span><span>۲۰–۳۵ روز (وابسته به فصل)</span></div>
-        <div class="cor-detail-row"><span>هزینه نسبی</span><span>متوسط تا بالا</span></div>
-        <div class="cor-detail-row"><span>ریسک</span><span>بالا (یخ، ژئوپلیتیک)</span></div>
-        <div class="cor-detail-row"><span>مناسب برای</span><span>کالاهای صنعتی، تجهیزات، انرژی</span></div>
-        <div class="cor-detail-row"><span>وضعیت فورواردر</span><span>محدود</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== کریدور 2: Maritime Silk Road ==================== -->
-  <div class="cor-card" data-tags="sea" data-id="Maritime">
-    <div class="cor-header" onclick="toggleCorridor(this)">
-      <div class="cor-header-left">
-        <span class="badge b-info">دریایی</span>
-        <span class="cor-name">🌊 Maritime Silk Road | راه ابریشم آبی</span>
-        <div class="cor-countries">
-          <span class="ctag">🇨🇳 چین</span><span class="ctag">🇲🇾 مالزی</span><span class="ctag">🇮🇳 هند</span>
-          <span class="ctag">🇦🇪 امارات</span><span class="ctag">🇪🇬 مصر</span><span class="ctag">🇪🇺 اروپا</span>
-        </div>
-      </div>
-      <span class="cor-chevron">▼</span>
-    </div>
-    <div class="cor-body">
-      <div class="cor-body-inner">
-        <div class="cor-desc">اتصال بنادر آسیا به خاورمیانه، آفریقا و اروپا. یکی از مهم‌ترین شریان‌های تجارت دریایی چین با پوشش جهانی.</div>
-        <div class="cor-detail-row"><span>نوع حمل</span><span>دریایی</span></div>
-        <div class="cor-detail-row"><span>زمان تحویل</span><span>۳۰–۴۵ روز</span></div>
-        <div class="cor-detail-row"><span>هزینه نسبی</span><span>پایین تا متوسط</span></div>
-        <div class="cor-detail-row"><span>ریسک</span><span>متوسط (تنگه‌ها، ژئوپلیتیک)</span></div>
-        <div class="cor-detail-row"><span>مناسب برای</span><span>کانتینر، الکترونیک، مواد خام، انرژی</span></div>
-        <div class="cor-detail-row"><span>وضعیت فورواردر</span><span>فعال</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== کریدور 3: TITR ==================== -->
-  <div class="cor-card" data-tags="multi" data-id="TITR">
-    <div class="cor-header" onclick="toggleCorridor(this)">
-      <div class="cor-header-left">
-        <span class="badge b-purple">چندوجهی</span>
-        <span class="cor-name">🌍 TITR | کریدور میانی (Trans-Caspian)</span>
-        <div class="cor-countries">
-          <span class="ctag">🇨🇳 چین</span><span class="ctag">🇰🇿 قزاقستان</span>
-          <span class="ctag">🌊 دریای خزر</span><span class="ctag">🇦🇿 آذربایجان</span>
-          <span class="ctag">🇬🇪 گرجستان</span><span class="ctag">🇹🇷 ترکیه</span>
-        </div>
-      </div>
-      <span class="cor-chevron">▼</span>
-    </div>
-    <div class="cor-body">
-      <div class="cor-body-inner">
-        <div class="cor-desc">اتصال شرق آسیا به اروپا از مسیر زمینی-دریایی با عبور از دریای خزر. جایگزین مسیر روسیه در شرایط تحریم.</div>
-        <div class="cor-detail-row"><span>نوع حمل</span><span>چندوجهی (ریلی + دریایی)</span></div>
-        <div class="cor-detail-row"><span>زمان تحویل</span><span>۲۰–۳۰ روز</span></div>
-        <div class="cor-detail-row"><span>ریسک</span><span>متوسط (ظرفیت خزر، گمرک)</span></div>
-        <div class="cor-detail-row"><span>مناسب برای</span><span>کالاهای صنعتی، تجهیزات</span></div>
-        <div class="cor-detail-row"><span>وضعیت فورواردر</span><span>در حال توسعه</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== کریدور 4: INSTC ==================== -->
-  <div class="cor-card" data-tags="multi" data-id="INSTC">
-    <div class="cor-header" onclick="toggleCorridor(this)">
-      <div class="cor-header-left">
-        <span class="badge b-purple">چندوجهی</span>
-        <span class="cor-name">🇮🇳 INSTC | کریدور شمال–جنوب بین‌المللی</span>
-        <div class="cor-countries">
-          <span class="ctag">🇮🇳 هند</span><span class="ctag">🇮🇷 ایران</span>
-          <span class="ctag">🇷🇺 روسیه</span><span class="ctag">🇪🇺 اروپا</span>
-        </div>
-      </div>
-      <span class="cor-chevron">▼</span>
-    </div>
-    <div class="cor-body">
-      <div class="cor-body-inner">
-        <div class="cor-desc">اتصال هند به روسیه و اروپا از طریق ایران. ایران نقش محوری دارد و بندر چابهار دروازه اصلی این کریدور است.</div>
-        <div class="cor-detail-row"><span>نوع حمل</span><span>دریایی + ریلی + جاده‌ای</span></div>
-        <div class="cor-detail-row"><span>زمان تحویل</span><span>۲۵–۳۵ روز</span></div>
-        <div class="cor-detail-row"><span>هزینه نسبی</span><span>متوسط</span></div>
-        <div class="cor-detail-row"><span>ریسک</span><span>متوسط (تحریم، زیرساخت)</span></div>
-        <div class="cor-detail-row"><span>مناسب برای</span><span>کالاهای صنعتی، مواد خام، انرژی</span></div>
-        <div class="cor-detail-row"><span>وضعیت فورواردر</span><span>فعال (محدود)</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== کریدور 5: SCO ==================== -->
-  <div class="cor-card" data-tags="multi" data-id="SCO">
-    <div class="cor-header" onclick="toggleCorridor(this)">
-      <div class="cor-header-left">
-        <span class="badge b-purple">چندوجهی</span>
-        <span class="cor-name">🤝 SCO | کریدور سازمان همکاری شانگهای</span>
-        <div class="cor-countries">
-          <span class="ctag">🇨🇳 چین</span><span class="ctag">🇷🇺 روسیه</span>
-          <span class="ctag">🇮🇷 ایران</span><span class="ctag">🇮🇳 هند</span>
-          <span class="ctag">🇵🇰 پاکستان</span>
-        </div>
-      </div>
-      <span class="cor-chevron">▼</span>
-    </div>
-    <div class="cor-body">
-      <div class="cor-body-inner">
-        <div class="cor-desc">چارچوب همکاری چندجانبه برای توسعه زیرساخت‌های حمل‌ونقل در منطقه اوراسیا. ایران از ۲۰۲۳ عضو رسمی است.</div>
-        <div class="cor-detail-row"><span>نوع حمل</span><span>چندوجهی</span></div>
-        <div class="cor-detail-row"><span>زمان تحویل</span><span>متغیر</span></div>
-        <div class="cor-detail-row"><span>هزینه نسبی</span><span>متوسط</span></div>
-        <div class="cor-detail-row"><span>ریسک</span><span>متوسط</span></div>
-        <div class="cor-detail-row"><span>مناسب برای</span><span>همه اقلام</span></div>
-        <div class="cor-detail-row"><span>وضعیت فورواردر</span><span>در حال توسعه</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== کریدور 6: CPEC ==================== -->
-  <div class="cor-card" data-tags="multi road" data-id="CPEC">
-    <div class="cor-header" onclick="toggleCorridor(this)">
-      <div class="cor-header-left">
-        <span class="badge b-warn">جاده‌ای/ریلی</span>
-        <span class="cor-name">🇵🇰 CPEC | کریدور اقتصادی چین–پاکستان</span>
-        <div class="cor-countries">
-          <span class="ctag">🇨🇳 چین</span><span class="ctag">🇵🇰 پاکستان</span>
-          <span class="ctag">🌊 دریای عرب</span></div>
-      </div>
-      <span class="cor-chevron">▼</span>
-    </div>
-    <div class="cor-body">
-      <div class="cor-body-inner">
-        <div class="cor-desc">اتصال غرب چین به بندر گوادر پاکستان. دسترسی به دریای عرب و خلیج فارس بدون عبور از تنگه مالاکا.</div>
-        <div class="cor-detail-row"><span>نوع حمل</span><span>جاده‌ای + ریلی + دریایی</span></div>
-        <div class="cor-detail-row"><span>زمان تحویل</span><span>۱۵–۲۵ روز</span></div>
-        <div class="cor-detail-row"><span>هزینه نسبی</span><span>متوسط</span></div>
-        <div class="cor-detail-row"><span>ریسک</span><span>بالا (امنیت پاکستان)</span></div>
-        <div class="cor-detail-row"><span>مناسب برای</span><span>انرژی، مواد خام، تجهیزات</span></div>
-        <div class="cor-detail-row"><span>وضعیت فورواردر</span><span>محدود</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== کریدور 7: New Eurasian Land Bridge ==================== -->
-  <div class="cor-card" data-tags="rail" data-id="NELB">
-    <div class="cor-header" onclick="toggleCorridor(this)">
-      <div class="cor-header-left">
-        <span class="badge b-ok">ریلی</span>
-        <span class="cor-name">🚂 New Eurasian Land Bridge | پل زمینی اوراسیا</span>
-        <div class="cor-countries">
-          <span class="ctag">🇨🇳 چین</span><span class="ctag">🇰🇿 قزاقستان</span>
-          <span class="ctag">🇷🇺 روسیه</span><span class="ctag">🇧🇾 بلاروس</span>
-          <span class="ctag">🇵🇱 لهستان</span><span class="ctag">🇩🇪 آلمان</span>
-        </div>
-      </div>
-      <span class="cor-chevron">▼</span>
-    </div>
-    <div class="cor-body">
-      <div class="cor-body-inner">
-        <div class="cor-desc">مسیر ریلی اصلی چین–اروپا از طریق روسیه. سریع‌ترین مسیر زمینی اما تحت تأثیر تحریم‌های روسیه.</div>
-        <div class="cor-detail-row"><span>نوع حمل</span><span>ریلی</span></div>
-        <div class="cor-detail-row"><span>زمان تحویل</span><span>۱۲–۱۸ روز</span></div>
-        <div class="cor-detail-row"><span>هزینه نسبی</span><span>متوسط</span></div>
-        <div class="cor-detail-row"><span>ریسک</span><span>بالا (تحریم روسیه)</span></div>
-        <div class="cor-detail-row"><span>مناسب برای</span><span>کانتینر، الکترونیک، خودرو</span></div>
-        <div class="cor-detail-row"><span>وضعیت فورواردر</span><span>محدود (تحریم)</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== کریدور 8: China–Central Asia–West Asia ==================== -->
-  <div class="cor-card" data-tags="road rail" data-id="CCAWA">
-    <div class="cor-header" onclick="toggleCorridor(this)">
-      <div class="cor-header-left">
-        <span class="badge b-ok">ریلی/جاده‌ای</span>
-        <span class="cor-name">🏜️ China–Central Asia–West Asia | چین–آسیای مرکزی–غرب آسیا</span>
-        <div class="cor-countries">
-          <span class="ctag">🇨🇳 چین</span><span class="ctag">🇰🇿 قزاقستان</span>
-          <span class="ctag">🇺🇿 ازبکستان</span><span class="ctag">🇹🇲 ترکمنستان</span>
-          <span class="ctag">🇮🇷 ایران</span><span class="ctag">🇹🇷 ترکیه</span>
-        </div>
-      </div>
-      <span class="cor-chevron">▼</span>
-    </div>
-    <div class="cor-body">
-      <div class="cor-body-inner">
-        <div class="cor-desc">مسیر زمینی از چین به ایران و ترکیه از طریق آسیای مرکزی. ایران نقطه اتصال کلیدی این کریدور است.</div>
-        <div class="cor-detail-row"><span>نوع حمل</span><span>ریلی + جاده‌ای</span></div>
-        <div class="cor-detail-row"><span>زمان تحویل</span><span>۱۸–۲۸ روز</span></div>
-        <div class="cor-detail-row"><span>هزینه نسبی</span><span>متوسط</span></div>
-        <div class="cor-detail-row"><span>ریسک</span><span>متوسط (گمرک، زیرساخت)</span></div>
-        <div class="cor-detail-row"><span>مناسب برای</span><span>تجهیزات صنعتی، مواد خام، انرژی</span></div>
-        <div class="cor-detail-row"><span>وضعیت فورواردر</span><span>فعال</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== کریدور 9: Bangladesh–China–India–Myanmar ==================== -->
-  <div class="cor-card" data-tags="road multi" data-id="BCIM">
-    <div class="cor-header" onclick="toggleCorridor(this)">
-      <div class="cor-header-left">
-        <span class="badge b-warn">چندوجهی</span>
-        <span class="cor-name">🌏 BCIM | کریدور بنگلادش–چین–هند–میانمار</span>
-        <div class="cor-countries">
-          <span class="ctag">🇧🇩 بنگلادش</span><span class="ctag">🇨🇳 چین</span>
-          <span class="ctag">🇮🇳 هند</span><span class="ctag">🇲🇲 میانمار</span></div>
-      </div>
-      <span class="cor-chevron">▼</span>
-    </div>
-    <div class="cor-body">
-      <div class="cor-body-inner">
-        <div class="cor-desc">اتصال جنوب غربی چین به خلیج بنگال. دسترسی به بازارهای جنوب آسیا و کاهش وابستگی به تنگه مالاکا.</div>
-        <div class="cor-detail-row"><span>نوع حمل</span><span>جاده‌ای + ریلی</span></div>
-        <div class="cor-detail-row"><span>زمان تحویل</span><span>۱۵–۲۵ روز</span></div>
-        <div class="cor-detail-row"><span>هزینه نسبی</span><span>پایین تا متوسط</span></div>
-        <div class="cor-detail-row"><span>ریسک</span><span>بالا (بی‌ثباتی میانمار)</span></div>
-        <div class="cor-detail-row"><span>مناسب برای</span><span>کالاهای مصرفی، نساجی</span></div>
-        <div class="cor-detail-row"><span>وضعیت فورواردر</span><span>محدود</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== کریدور 10: China–Indochina Peninsula ==================== -->
-  <div class="cor-card" data-tags="road rail" data-id="CIP">
-    <div class="cor-header" onclick="toggleCorridor(this)">
-      <div class="cor-header-left">
-        <span class="badge b-ok">ریلی/جاده‌ای</span>
-        <span class="cor-name">🌴 China–Indochina Peninsula | چین–شبه‌جزیره هندوچین</span>
-        <div class="cor-countries">
-          <span class="ctag">🇨🇳 چین</span><span class="ctag">🇻🇳 ویتنام</span>
-          <span class="ctag">🇱🇦 لائوس</span><span class="ctag">🇹🇭 تایلند</span>
-          <span class="ctag">🇲🇾 مالزی</span><span class="ctag">🇸🇬 سنگاپور</span>
-        </div>
-      </div>
-      <span class="cor-chevron">▼</span>
-    </div>
-    <div class="cor-body">
-      <div class="cor-body-inner">
-        <div class="cor-desc">اتصال جنوب چین به آسیای جنوب شرقی. خط ریلی لائوس–چین در ۲۰۲۱ افتتاح شد و این کریدور را تقویت کرد.</div>
-        <div class="cor-detail-row"><span>نوع حمل</span><span>ریلی + جاده‌ای</span></div>
-        <div class="cor-detail-row"><span>زمان تحویل</span><span>۵–۱۵ روز</span></div>
-        <div class="cor-detail-row"><span>هزینه نسبی</span><span>پایین</span></div>
-        <div class="cor-detail-row"><span>ریسک</span><span>پایین</span></div>
-        <div class="cor-detail-row"><span>مناسب برای</span><span>الکترونیک، کالاهای مصرفی</span></div>
-        <div class="cor-detail-row"><span>وضعیت فورواردر</span><span>فعال</span></div>
-      </div>
-    </div>
-  </div>
-
-  <p class="update-note">منبع: تحلیل داخلی دانا انرژی | مه ۲۰۲۶</p>
+  <!-- لیست کریدورها با قابلیت باز شدن کشویی -->
+  <div id="carec-list"></div>
 </div>
 
-<!-- ========== DASH 3: قطارهای CRE ========== -->
-<div id="dash-cre" class="dash-section">
-  <div class="metrics">
-    <div class="met"><div class="met-n ok">۱۲</div><div class="met-l">اپراتور فعال CRE</div></div>
-    <div class="met"><div class="met-n">۱۸</div><div class="met-l">مسیر ریلی</div></div>
-    <div class="met"><div class="met-n warn">۱۴–۱۸</div><div class="met-l">روز تحویل</div></div>
-    <div class="met"><div class="met-n">۵۳</div><div class="met-l">شهر چینی متصل</div></div>
-  </div>
-  <div class="card">
-    <div class="detail-title">قطارهای باری چین–اروپا (CRE)</div>
-    <p style="font-size:13px;color:var(--text2);margin-bottom:12px">
-      شبکه قطارهای باری چین–اروپا (China Railway Express) از ۲۰۱۱ راه‌اندازی شده و اکنون بیش از ۵۳ شهر چینی را به ۱۸۰ شهر اروپایی متصل می‌کند.
-    </p>
-    <table class="info-table">
-      <thead>
-        <tr>
-          <th>مسیر</th><th>زمان</th><th>هزینه (۴۰ft)</th><th>وضعیت</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>چنگدو–لودز</td><td>۱۲ روز</td><td>~$۴,۵۰۰</td><td><span class="badge b-ok">فعال</span></td></tr>
-        <tr><td>ووهان–هامبورگ</td><td>۱۵ روز</td><td>~$۵,۰۰۰</td><td><span class="badge b-ok">فعال</span></td></tr>
-        <tr><td>شیان–مادرید</td><td>۱۸ روز</td><td>~$۵,۸۰۰</td><td><span class="badge b-ok">فعال</span></td></tr>
-        <tr><td>یوکسیو–تهران</td><td>۱۴ روز</td><td>~$۴,۲۰۰</td><td><span class="badge b-warn">محدود</span></td></tr>
-        <tr><td>چونگ‌چینگ–دوئیسبورگ</td><td>۱۳ روز</td><td>~$۴,۸۰۰</td><td><span class="badge b-ok">فعال</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+<div class="update-note">منابع: Stimson Center، Eurasianet، گزارش‌های رسمی TITR — مه ۲۰۲۶</div>
 
-</div><!-- /container -->
-</div><!-- /app -->
+</div><!-- container -->
+</div>
 
 <script>
-function checkPwd() {
-  if (document.getElementById('pwd').value === 'DanaEnergy_2026') {
-    document.getElementById('gate').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-    initMapAndRoutes();
-  } else {
-    document.getElementById('gate-err').style.display = 'block';
-  }
-}
+// ==================== داده‌های کریدورها ====================
+const corridorsData = [
+  { id: 'Polar', name: '❄️ Polar Silk Road | راه ابریشم قطبی', type: 'sea', badge: 'دریایی',
+    details: { type: 'دریایی (اقیانوس منجمد شمالی)', time: '۲۰-۳۵ روز (وابسته به فصل)', cost: 'متوسط تا بالا', risk: 'بالا (یخ، ژئوپلیتیک)', goods: 'کالاهای صنعتی، تجهیزات، انرژی', forward: 'محدود' } },
+  { id: 'Maritime', name: '🌊 Maritime Silk Road | راه ابریشم آبی', type: 'sea', badge: 'دریایی',
+    details: { type: 'دریایی', time: '۳۰-۴۵ روز', cost: 'پایین تا متوسط', risk: 'متوسط (تنگه‌ها)', goods: 'کانتینر، الکترونیک، کالاهای مصرفی', forward: 'فعال' } },
+  { id: 'TITR', name: '🌍 TITR | کریدور میانی (Trans-Caspian)', type: 'multi', badge: 'چندوجهی',
+    details: { type: 'چندوجهی (ریلی + دریایی)', time: '۲۰-۳۰ روز', cost: 'متوسط', risk: 'متوسط', goods: 'کانتینر، کالاهای صنعتی، فلزات', forward: 'فعال' } },
+  { id: 'BTK', name: '🚂 BTK | باکو-تفلیس-قارص', type: 'rail', badge: 'ریلی',
+    details: { type: 'ریلی', time: '۱۲-۱۸ روز', cost: 'متوسط', risk: 'پایین', goods: 'کالاهای ترانزیتی، صنعتی', forward: 'فعال' } },
+  { id: 'CKU', name: '🚂 CKU | چین-قرقیزستان-ازبکستان', type: 'rail', badge: 'ریلی',
+    details: { type: 'ریلی', time: '۱۵-۲۵ روز', cost: 'متوسط', risk: 'متوسط', goods: 'کالاهای صنعتی، فلزات', forward: 'در حال توسعه' } },
+  { id: 'CRE_North', name: '🚂 CRE شمالی | چین-مغولستان-روسیه', type: 'rail', badge: 'ریلی',
+    details: { type: 'ریلی', time: '۱۵-۲۰ روز', cost: 'متوسط', risk: 'متوسط (ژئوپلیتیک)', goods: 'کانتینر، کالاهای حجیم', forward: 'فعال' } },
+  { id: 'PAK_AFG_UZB', name: '🛣 پاکستان-افغانستان-ازبکستان', type: 'road', badge: 'جاده‌ای',
+    details: { type: 'جاده‌ای/ریلی محدود', time: '۲۰-۳۰ روز', cost: 'متوسط', risk: 'بالا (امنیتی)', goods: 'کالاهای مصرفی، ساختمانی', forward: 'محدود' } },
+  { id: 'INSTC', name: '🌊 INSTC | کریدور شمال-جنوب', type: 'multi', badge: 'چندوجهی',
+    details: { type: 'چندوجهی (دریایی+ریلی)', time: '۲۰-۲۵ روز', cost: 'متوسط', risk: 'متوسط', goods: 'غلات، فلزات، انرژی', forward: 'فعال' } },
+  { id: 'ABEC', name: '🛣 ABEC | Afghanistan Business Corridor', type: 'road', badge: 'جاده‌ای',
+    details: { type: 'جاده‌ای', time: 'متغیر', cost: 'متوسط', risk: 'بالا (امنیتی)', goods: 'کالاهای مصرفی، ترانزیتی', forward: 'محدود' } },
+  { id: 'STKEC', name: '🏭 STKEC | کریدور اقتصادی شمال-جنوب', type: 'multi', badge: 'اقتصادی',
+    details: { type: 'اقتصادی/تجاری', time: 'در حال توسعه', cost: 'در حال توسعه', risk: 'متوسط', goods: 'کالاهای صنعتی/تجاری', forward: 'در حال توسعه' } }
+];
 
-// ===== ACCORDION =====
-function toggleCorridor(headerEl) {
-  const card = headerEl.closest('.cor-card');
-  const body = card.querySelector('.cor-body');
-  const isOpen = card.classList.contains('open');
-  // close all
-  document.querySelectorAll('.cor-card.open').forEach(c => {
-    c.classList.remove('open');
-    c.querySelector('.cor-body').style.maxHeight = '0';
+// رندر کردن لیست کریدورها با قابلیت کشویی
+function renderCorridors() {
+  const container = document.getElementById('carec-list');
+  if (!container) return;
+  container.innerHTML = '';
+  corridorsData.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'cor-card';
+    card.setAttribute('data-type', c.type);
+    card.innerHTML = `
+      <div class="cor-header" onclick="toggleCorridor(this.parentElement)">
+        <span class="cor-name">${c.name}</span>
+        <span class="cor-badge">${c.badge}</span>
+      </div>
+      <div class="cor-detail">
+        <div class="detail-row"><span class="label">نوع حمل:</span><span class="value">${c.details.type}</span></div>
+        <div class="detail-row"><span class="label">زمان تحویل:</span><span class="value">${c.details.time}</span></div>
+        <div class="detail-row"><span class="label">هزینه نسبی:</span><span class="value">${c.details.cost}</span></div>
+        <div class="detail-row"><span class="label">ریسک:</span><span class="value">${c.details.risk}</span></div>
+        <div class="detail-row"><span class="label">مناسب برای:</span><span class="value">${c.details.goods}</span></div>
+        <div class="detail-row"><span class="label">وضعیت فورواردر:</span><span class="value">${c.details.forward}</span></div>
+      </div>
+    `;
+    container.appendChild(card);
   });
-  if (!isOpen) {
-    card.classList.add('open');
-    body.style.maxHeight = body.scrollHeight + 'px';
-  }
 }
 
-// ===== COUNTRIES BAR =====
-const countriesInfo = {
-  UAE:    { name:'امارات', flag:'🇦🇪', status:'مسدود', time:'۱۸–۲۵ روز', cost:'پایین', risk:'بسیار بالا', note:'جنگ منطقه' },
-  Oman:   { name:'عمان',   flag:'🇴🇲', status:'فعال',   time:'۲۲–۳۰ روز', cost:'متوسط', risk:'پایین',     note:'جایگزین دبی' },
-  Turkey: { name:'ترکیه', flag:'🇹🇷', status:'فعال',   time:'۲۵–۳۵ روز', cost:'متوسط', risk:'متوسط',     note:'ریلی+جاده' },
-  Iraq:   { name:'عراق',  flag:'🇮🇶', status:'فعال',   time:'۱۰–۱۵ روز', cost:'پایین', risk:'متوسط',     note:'زمینی مستقیم' },
-  CA:     { name:'آسیای مرکزی', flag:'🌏', status:'فعال', time:'۲۰–۳۰ روز', cost:'متوسط', risk:'پایین', note:'ریلی' },
-};
-const countriesList = ['UAE','Oman','Turkey','Iraq','CA'];
-
-function renderCountriesBar() {
-  const bar = document.getElementById('countries-bar');
-  bar.innerHTML = countriesList.map(k => {
-    const c = countriesInfo[k];
-    return `<button class="route-btn" onclick="selectCountry('${k}',event)">${c.flag} ${c.name}</button>`;
-  }).join('');
+function toggleCorridor(cardElement) {
+  cardElement.classList.toggle('open');
 }
 
-function selectCountry(key, e) {
-  document.querySelectorAll('#countries-bar .route-btn').forEach(b => b.classList.remove('active'));
-  if (e) e.currentTarget.classList.add('active');
-  const c = countriesInfo[key];
-  document.getElementById('detail-title').textContent = `${c.flag} ${c.name} — وضعیت: ${c.status}`;
-  document.getElementById('d-type').textContent = c.note;
-  document.getElementById('d-time').textContent = c.time;
-  document.getElementById('d-cost').textContent = c.cost;
-  document.getElementById('d-risk').textContent = c.risk;
-  document.getElementById('d-goods').textContent = '—';
-  document.getElementById('d-forward').textContent = c.status;
+// فیلتر کریدورها
+function filterCarec(tag, btn) {
+  document.querySelectorAll('.filt').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  const cards = document.querySelectorAll('.cor-card');
+  cards.forEach(card => {
+    const type = card.getAttribute('data-type');
+    if (tag === 'all') {
+      card.style.display = '';
+    } else if (tag === 'sea' && type === 'sea') card.style.display = '';
+    else if (tag === 'multi' && type === 'multi') card.style.display = '';
+    else if (tag === 'rail' && type === 'rail') card.style.display = '';
+    else if (tag === 'road' && type === 'road') card.style.display = '';
+    else card.style.display = 'none';
+  });
 }
 
-// ===== MAP =====
+// ==================== نقشه و مسیرها ====================
 const routesData = {
-  dubai:   { name:'دبی (مسدود)',    color:'#E24B4A', coords:[[31.2,121.5],[22.3,114.2],[25.2,55.3],[35.7,51.4]], type:'دریایی', time:'۱۸–۲۵ روز', cost:'پایین',  risk:'بسیار بالا', goods:'همه اقلام سبک', forward:'غیرفعال' },
-  oman:    { name:'عمان',           color:'#1D9E75', coords:[[31.2,121.5],[22.3,114.2],[23.6,58.6],[35.7,51.4]], type:'دریایی', time:'۲۲–۳۰ روز', cost:'متوسط', risk:'پایین',     goods:'کانتینر',      forward:'فعال' },
-  turkey:  { name:'ترکیه',          color:'#185FA5', coords:[[31.2,121.5],[39.9,116.4],[41.0,29.0],[35.7,51.4]], type:'ریلی+جاده', time:'۲۵–۳۵ روز', cost:'متوسط', risk:'متوسط', goods:'تجهیزات',     forward:'فعال' },
-  iraq:    { name:'عراق زمینی',     color:'#BA7517', coords:[[31.2,121.5],[39.9,116.4],[33.3,44.4],[35.7,51.4]], type:'جاده‌ای', time:'۱۰–۱۵ روز', cost:'پایین', risk:'متوسط',    goods:'مواد خام',     forward:'فعال' },
-  central: { name:'آسیای مرکزی',   color:'#534AB7', coords:[[31.2,121.5],[43.2,76.9],[41.3,69.3],[37.9,58.4],[35.7,51.4]], type:'ریلی', time:'۲۰–۳۰ روز', cost:'متوسط', risk:'پایین', goods:'صنعتی', forward:'فعال' },
+  dubai: { name: 'دبی', title: 'مسیر دبی — وضعیت: مسدود', type: 'دریایی + ترانشیپ', time: '۱۸–۲۵ روز', cost: 'پایین', risk: 'بسیار بالا — جنگ منطقه', goods: 'همه اقلام سبک', forward: 'غیرفعال', coords: [[31.23,121.47],[25.27,55.30],[27.18,56.27]], color: '#E24B4A' },
+  oman: { name: 'عمان', title: 'مسیر عمان — وضعیت: فعال', type: 'دریایی (بندر صحار → بندر امام)', time: '۲۵–۳۵ روز', cost: 'متوسط', risk: 'پایین', goods: 'شیمیایی، تجهیزات', forward: 'نیاز به agent', coords: [[31.23,121.47],[22.57,59.53],[23.61,58.59],[27.18,56.27]], color: '#1D9E75' },
+  turkey: { name: 'ترکیه', title: 'مسیر ترکیه — وضعیت: فعال', type: 'دریایی + TIR', time: '۳۰–۴۵ روز', cost: 'بالاتر', risk: 'متوسط — پیچیدگی گمرکی', goods: 'ماشین‌آلات سنگین', forward: 'نیاز به فورواردر', coords: [[31.23,121.47],[39.92,32.85],[39.51,44.04],[36.54,61.21]], color: '#534AB7' },
+  iraq: { name: 'عراق زمینی', title: 'مسیر عراق — وضعیت: فعال', type: 'زمینی مستقیم', time: '۱۰–۱۸ روز', cost: 'متوسط', risk: 'متوسط — بی‌ثباتی', goods: 'قطعات، مواد شیمیایی', forward: 'شریک عراقی لازم', coords: [[31.23,121.47],[25.27,55.30],[29.37,47.98],[32.99,45.15],[30.42,48.18]], color: '#BA7517' },
+  central: { name: 'آسیای مرکزی', title: 'مسیر آسیای مرکزی — وضعیت: فعال', type: 'ریلی + INSTC', time: '۳۵–۵۰ روز', cost: 'متوسط', risk: 'پایین', goods: 'تجهیزات سنگین', forward: 'در حال توسعه', coords: [[31.23,121.47],[43.65,87.32],[51.18,71.45],[37.93,60.35],[36.54,61.21]], color: '#185FA5' }
 };
 
-let map, polylines = {}, labelMarkers = {};
+let map, currentLine, currentMarker, measureMode = false, measurePoints = [], measureMarkers = [], measureLine = null;
 
-function initMapAndRoutes() {
-  map = L.map('map', { zoomControl: true }).setView([35, 75], 3);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap', maxZoom: 10
+function initMap() {
+  map = L.map('map').setView([35, 65], 4);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '© OpenStreetMap contributors'
   }).addTo(map);
-
-  Object.entries(routesData).forEach(([key, r]) => {
-    const pl = L.polyline(r.coords, { color: r.color, weight: 3, opacity: 0.85 }).addTo(map);
-    polylines[key] = pl;
-
-    // label at midpoint with B Nazanin font
-    const mid = r.coords[Math.floor(r.coords.length / 2)];
-    const lbl = L.marker(mid, { icon: L.divIcon({ className: '', html: '' }) });
-    lbl.bindTooltip(r.name, {
-      permanent: true,
-      direction: 'top',
-      className: 'corridor-label',
-      offset: [0, -4]
-    }).addTo(map);
-    labelMarkers[key] = lbl;
-  });
+  map.on('click', onMapClick);
+  selectRoute('dubai');
 }
 
-function selectRoute(key, e) {
-  document.querySelectorAll('.route-btn').forEach(b => b.classList.remove('active'));
-  if (e) e.currentTarget.classList.add('active');
-  const r = routesData[key];
-  document.getElementById('detail-title').textContent = `مسیر ${r.name}`;
-  document.getElementById('d-type').textContent = r.type;
-  document.getElementById('d-time').textContent = r.time;
-  document.getElementById('d-cost').textContent = r.cost;
-  document.getElementById('d-risk').textContent = r.risk;
-  document.getElementById('d-goods').textContent = r.goods;
-  document.getElementById('d-forward').textContent = r.forward;
-  Object.entries(polylines).forEach(([k, pl]) => {
-    pl.setStyle({ opacity: k === key ? 1 : 0.15, weight: k === key ? 5 : 2 });
-  });
-  map.fitBounds(polylines[key].getBounds(), { padding: [30, 30] });
+function selectRoute(routeId) {
+  const r = routesData[routeId];
+  if (!r) return;
+  document.querySelectorAll('.route-btn').forEach(btn => btn.classList.remove('active'));
+  if(event && event.target) event.target.classList.add('active');
+  document.getElementById('detail-title').innerHTML = r.title;
+  document.getElementById('d-type').innerHTML = r.type;
+  document.getElementById('d-time').innerHTML = r.time;
+  document.getElementById('d-cost').innerHTML = r.cost;
+  document.getElementById('d-risk').innerHTML = r.risk;
+  document.getElementById('d-goods').innerHTML = r.goods;
+  document.getElementById('d-forward').innerHTML = r.forward;
+  if (currentLine) map.removeLayer(currentLine);
+  if (currentMarker) map.removeLayer(currentMarker);
+  currentLine = L.polyline(r.coords, { color: r.color, weight: 3, opacity: 0.9 }).addTo(map);
+  currentMarker = L.circleMarker(r.coords[r.coords.length-1], { radius: 6, color: r.color, fillColor: r.color, fillOpacity: 1 }).addTo(map);
+  map.fitBounds(currentLine.getBounds());
 }
 
 function resetMapFilter() {
-  document.querySelectorAll('.route-btn').forEach(b => b.classList.remove('active'));
-  Object.values(polylines).forEach(pl => pl.setStyle({ opacity: 0.85, weight: 3 }));
-  map.setView([35, 75], 3);
+  if (currentLine) map.removeLayer(currentLine);
+  if (currentMarker) map.removeLayer(currentMarker);
+  Object.values(routesData).forEach(r => {
+    L.polyline(r.coords, { color: r.color, weight: 2, opacity: 0.5 }).addTo(map);
+    L.circleMarker(r.coords[r.coords.length-1], { radius: 4, color: r.color, fillColor: r.color, fillOpacity: 0.7 }).addTo(map);
+  });
+  map.setView([35, 65], 4);
+  document.getElementById('detail-title').innerHTML = 'نقشه همه مسیرها — برای جزئیات روی مسیر کلیک کنید';
 }
 
-// ===== MEASURE =====
-let measuring = false, measurePoints = [], measureLine = null;
 function toggleMeasure() {
-  measuring = !measuring;
-  document.querySelector('.map-btn:nth-child(3)').classList.toggle('active', measuring);
-  document.getElementById('measure-info').textContent = measuring ? 'روی نقشه کلیک کنید' : '';if (!measuring) clearMeasure();
-  else map.on('click', onMapClick);
-}
-function onMapClick(e) {
-  if (!measuring) return;
-  measurePoints.push(e.latlng);
-  if (measureLine) map.removeLayer(measureLine);
-  measureLine = L.polyline(measurePoints, { color: '#c9a84c', dashArray: '6,4', weight: 2 }).addTo(map);
-  if (measurePoints.length > 1) {
-    let d = 0;
-    for (let i = 1; i < measurePoints.length; i++)
-      d += measurePoints[i-1].distanceTo(measurePoints[i]);
-    document.getElementById('measure-info').textContent = `فاصله: ${(d/1000).toFixed(0)} کیلومتر`;
+  measureMode = !measureMode;
+  const info = document.getElementById('measure-info');
+  if (measureMode) {
+    info.textContent = 'نقطه اول را کلیک کنید';
+    map.getContainer().style.cursor = 'crosshair';
+  } else {
+    info.textContent = '';
+    clearMeasure();
+    map.getContainer().style.cursor = '';
   }
 }
 function clearMeasure() {
-  measurePoints = [];
+  measureMarkers.forEach(m => map.removeLayer(m));
+  measureMarkers = [];
   if (measureLine) { map.removeLayer(measureLine); measureLine = null; }
-  map.off('click', onMapClick
-            );
+  measurePoints = [];
 }
-
-// ===== CORRIDOR FILTER =====
-function filterCorridors(tag) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  event.currentTarget.classList.add('active');
-  document.querySelectorAll('.cor-card').forEach(card => {
-    card.style.display = (tag === 'all' || card.dataset.tags.includes(tag)) ? 'block' : 'none';
-  });
+function onMapClick(e) {
+  if (!measureMode) return;
+  measurePoints.push(e.latlng);
+  const m = L.circleMarker(e.latlng, { radius: 6, color: '#c9a84c', fillColor: '#c9a84c', fillOpacity: 1 }).addTo(map);
+  measureMarkers.push(m);
+  if (measurePoints.length === 1) {
+    document.getElementById('measure-info').textContent = 'نقطه دوم را کلیک کنید';
+  } else if (measurePoints.length === 2) {
+    const km = (measurePoints[0].distanceTo(measurePoints[1]) / 1000).toFixed(0);
+    measureLine = L.polyline(measurePoints, { color: '#c9a84c', weight: 2, dashArray: '6,4' }).addTo(map);
+    document.getElementById('measure-info').textContent = `فاصله: ${km.toLocaleString()} کیلومتر`;
+    setTimeout(() => { clearMeasure(); if (measureMode) document.getElementById('measure-info').textContent = 'نقطه اول را کلیک کنید'; }, 4000);
+  }
 }
-
-// ===== TAB SWITCH =====
-function switchDash(id) {
+function showDash(id) {
   document.querySelectorAll('.dash-section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  event.currentTarget.classList.add('active');
-  if (id === 'dash-map') setTimeout(() => map && map.invalidateSize(), 100);
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('dash-' + id).classList.add('active');
+  if(event && event.target) event.target.classList.add('active');
+  if (id === 'main' && map) setTimeout(() => map.invalidateSize(), 100);
+  if (id === 'carec') renderCorridors();
 }
 
-document.addEventListener('keydown', e => {
-  if (e.key === 'Enter' && document.getElementById('gate').style.display !== 'none') checkPwd();
-});
+// مقداردهی اولیه
+window.onload = () => {
+  initMap();
+  renderCorridors();
+};
+
+// expose functions globally
+window.showDash = showDash;
+window.selectRoute = selectRoute;
+window.resetMapFilter = resetMapFilter;
+window.toggleMeasure = toggleMeasure;
+window.filterCarec = filterCarec;
+window.toggleCorridor = toggleCorridor;
 </script>
 </body>
 </html>
