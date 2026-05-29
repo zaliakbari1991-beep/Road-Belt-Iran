@@ -1,539 +1,418 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eurasia Logistics Routes — Iran Entry Dashboard</title>
-<style>
-  :root {
-    --bg: #0f1117;
-    --surface: #1a1d27;
-    --surface2: #22263a;
-    --border: #2e3350;
-    --accent: #4f8ef7;
-    --accent2: #f7a94f;
-    --green: #3ecf8e;
-    --red: #f76f6f;
-    --yellow: #f7d94f;
-    --text: #e8eaf6;
-    --muted: #8892b0;
-    --font: 'Inter', 'Segoe UI', sans-serif;
+<title>داشبورد مسیرهای لجستیکی اوراسیا</title>
+<style>/* ===== PASSWORD GATE ===== */
+  #gate {
+    position: fixed; inset: 0;
+    background: #0a0e1a;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--text); font-family: var(--font); min-height: 100vh; }
+  #gate-box {
+    background: #111827;
+    border: 1px solid #1e3a5f;
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    width: 320px;
+  }
+  #gate-box h2 { color: #60a5fa; margin: 0 0 8px; font-size: 1.2rem; }
+  #gate-box p  { color: #6b7280; font-size: 0.85rem; margin: 0 0 24px; }
+  #gate-box input {
+    width: 100%; padding: 10px 14px;
+    background: #1f2937; border: 1px solid #374151;
+    border-radius: 8px; color: #f9fafb;
+    font-size: 1rem; text-align: center;
+    box-sizing: border-box; margin-bottom: 12px;
+    outline: none;
+  }
+  #gate-box input:focus { border-color: #3b82f6; }
+  #gate-btn {
+    width: 100%; padding: 10px;
+    background: #2563eb; color: #fff;
+    border: none; border-radius: 8px;
+    font-size: 1rem; cursor: pointer;
+  }
+  #gate-btn:hover { background: #1d4ed8; }
+  #gate-error { color: #ef4444; font-size: 0.85rem; margin-top: 10px; display: none; }
 
-  /* HEADER */
+  /* ===== MAIN DASHBOARD ===== */
+  #app { display: none; }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #0a0e1a; color: #e2e8f0; }
+
   header {
-    background: linear-gradient(135deg, #0d1b3e 0%, #1a1d27 100%);
-    border-bottom: 1px solid var(--border);
-    padding: 20px 32px;
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  header h1 { font-size: 1.3rem; font-weight: 700; letter-spacing: 0.02em; }
-  header h1 span { color: var(--accent); }
-  header p { font-size: 0.78rem; color: var(--muted); margin-top: 3px; }
-  .header-badge {
-    background: var(--surface2); border: 1px solid var(--border);
-    border-radius: 8px; padding: 8px 16px; font-size: 0.75rem; color: var(--muted);
-    text-align: right;
-  }
-  .header-badge strong { color: var(--accent2); display: block; font-size: 0.85rem; }
+    background: linear-gradient(135deg, #0f172a, #1e3a5f);
+    padding: 20px 30px;
+    border-bottom: 1px solid #1e40af;
+    display: flex; align-items: center; justify-content: space-between;}
+  header h1 { font-size: 1.4rem; color: #60a5fa; }
+  header span { font-size: 0.8rem; color: #6b7280; }
 
-  /* NAV TABS */
-  .tabs {
-    display: flex; gap: 4px; padding: 16px 32px 0;
-    border-bottom: 1px solid var(--border);
-    background: var(--surface);
-  }
-  .tab {
-    padding: 10px 22px; border-radius: 8px 8px 0 0; cursor: pointer;
-    font-size: 0.85rem; font-weight: 600; border: 1px solid transparent;
-    border-bottom: none; transition: all 0.2s; color: var(--muted);
-    background: transparent;
-  }
-  .tab.active {
-    background: var(--bg); color: var(--accent);
-    border-color: var(--border); border-bottom-color: var(--bg);
-  }
-  .tab:hover:not(.active) { color: var(--text); background: var(--surface2); }
+  .container { max-width: 1400px; margin: 0 auto; padding: 24px; }
 
-  /* MAIN */
-  main { padding: 28px 32px; max-width: 1400px; margin: 0 auto; }
-
-  /* SECTION TITLE */
-  .section-title {
-    font-size: 1rem; font-weight: 700; color: var(--text);
-    margin-bottom: 6px; display: flex; align-items: center; gap: 10px;
-  }
-  .section-title::after {
-    content: ''; flex: 1; height: 1px; background: var(--border);
-  }
-  .section-sub { font-size: 0.78rem; color: var(--muted); margin-bottom: 20px; }
-
-  /* ROUTE CARDS GRID */
-  .cards-grid {
+  /* KPI Cards */
+  .kpi-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 16px; margin-bottom: 36px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px; margin-bottom: 28px;
   }
-  .route-card {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 12px; padding: 18px 20px; cursor: pointer;
-    transition: all 0.2s; position: relative; overflow: hidden;
+  .kpi-card {
+    background: #111827; border: 1px solid #1e3a5f;
+    border-radius: 10px; padding: 18px;
   }
-  .route-card::before {
-    content: ''; position: absolute; top: 0; left: 0;
-    width: 4px; height: 100%; background: var(--accent);
-    border-radius: 12px 0 0 12px;
-  }
-  .route-card.sea::before { background: #4fc3f7; }
-  .route-card.polar::before { background: #b39ddb; }
-  .route-card.land::before { background: var(--green); }
-  .route-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(79,142,247,0.12); }
-  .route-card:hover.sea { border-color: #4fc3f7; }
-  .route-card:hover.polar { border-color: #b39ddb; }
-  .route-card:hover.land { border-color: var(--green); }
+  .kpi-card .label { font-size: 0.75rem; color: #6b7280; margin-bottom: 6px; }
+  .kpi-card .value { font-size: 1.6rem; font-weight: 700; color: #60a5fa; }
+  .kpi-card .sub   { font-size: 0.75rem; color: #9ca3af; margin-top: 4px; }
 
-  .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
-  .card-title { font-size: 0.92rem; font-weight: 700; line-height: 1.3; }
-  .card-type {
-    font-size: 0.68rem; font-weight: 700; padding: 3px 8px;
-    border-radius: 20px; white-space: nowrap; margin-left: 8px;
+  /* Filters */
+  .filters {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin-bottom: 24px;
   }
-  .type-land { background: rgba(62,207,142,0.15); color: var(--green); }
-  .type-sea { background: rgba(79,195,247,0.15); color: #4fc3f7; }
-  .type-polar { background: rgba(179,157,219,0.15); color: #b39ddb; }
-
-  .card-route { font-size: 0.75rem; color: var(--muted); margin-bottom: 12px; line-height: 1.5; }
-  .card-stats { display: flex; gap: 12px; flex-wrap: wrap; }
-  .stat { display: flex; flex-direction: column; }
-  .stat-label { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
-  .stat-value { font-size: 0.88rem; font-weight: 700; color: var(--text); }
-  .stat-value.green { color: var(--green); }
-  .stat-value.yellow { color: var(--yellow); }
-  .stat-value.red { color: var(--red); }
-
-  .card-status {
-    display: inline-flex; align-items: center; gap: 5px;
-    font-size: 0.72rem; font-weight: 600; margin-top: 12px;
-    padding: 4px 10px; border-radius: 20px;
-  }
-  .status-active { background: rgba(62,207,142,0.12); color: var(--green); }
-  .status-partial { background: rgba(247,217,79,0.12); color: var(--yellow); }
-  .status-limited { background: rgba(247,111,111,0.12); color: var(--red); }
-  .status-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
-
-  /* IRAN ENTRY SECTION */
-  .filter-bar {
-    display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; align-items: center;
-  }
-  .filter-label { font-size: 0.78rem; color: var(--muted); margin-right: 4px; }
   .filter-btn {
-    padding: 7px 16px; border-radius: 20px; border: 1px solid var(--border);
-    background: var(--surface); color: var(--muted); font-size: 0.78rem;
-    font-weight: 600; cursor: pointer; transition: all 0.2s;
+    padding: 7px 16px; border-radius: 20px;
+    border: 1px solid #374151; background: #1f2937;
+    color: #9ca3af; cursor: pointer; font-size: 0.82rem;
+    transition: all 0.2s;
   }
-  .filter-btn.active, .filter-btn:hover {
-    background: var(--accent); color: #fff; border-color: var(--accent);
+  .filter-btn:hover, .filter-btn.active {
+    background: #2563eb; border-color: #2563eb; color: #fff;
   }
 
-  /* ENTRY ROUTES TABLE */
-  .entry-table-wrap {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 12px; overflow: hidden; margin-bottom: 28px;
+  /* Table */
+  .table-wrap {
+    background: #111827; border: 1px solid #1e3a5f;
+    border-radius: 10px; overflow: hidden;
   }
   table { width: 100%; border-collapse: collapse; }
-  thead tr { background: var(--surface2); }
-  th {
-    padding: 12px 16px; text-align: left; font-size: 0.72rem;
-    font-weight: 700; color: var(--muted); text-transform: uppercase;
-    letter-spacing: 0.06em; border-bottom: 1px solid var(--border);
+  thead th {
+    background: #0f172a; padding: 12px 16px;
+    text-align: right; font-size: 0.78rem;
+    color: #6b7280; font-weight: 600;
+    border-bottom: 1px solid #1e3a5f;
   }
-  td {
-    padding: 13px 16px; font-size: 0.82rem; border-bottom: 1px solid var(--border);
-    vertical-align: middle;
+  tbody tr { border-bottom: 1px solid #1e2d40; transition: background 0.15s; }
+  tbody tr:hover { background: #1a2744; }
+  tbody td { padding: 12px 16px; font-size: 0.83rem; }
+
+  .badge {
+    display: inline-block; padding: 3px 10px;
+    border-radius: 12px; font-size: 0.72rem; font-weight: 600;
   }
-  tr:last-child td { border-bottom: none; }
-  tr:hover td { background: var(--surface2); }
+  .badge-sea   { background: #0c4a6e; color: #38bdf8; }
+  .badge-land  { background: #14532d; color: #4ade80; }
+  .badge-rail  { background: #3b0764; color: #c084fc; }
+  .badge-multi { background: #431407; color: #fb923c; }
 
-  .mode-badge {
-    display: inline-flex; align-items: center; gap: 5px;
-    padding: 3px 9px; border-radius: 20px; font-size: 0.7rem; font-weight: 700;
+  .risk-bar { display: flex; align-items: center; gap: 8px; }
+  .risk-track {
+    flex: 1; height: 6px; background: #1f2937;
+    border-radius: 3px; overflow: hidden;
   }
-  .mode-sea { background: rgba(79,195,247,0.12); color: #4fc3f7; }
-  .mode-road { background: rgba(247,169,79,0.12); color: var(--accent2); }
-  .mode-rail { background: rgba(62,207,142,0.12); color: var(--green); }
-  .mode-multimodal { background: rgba(179,157,219,0.12); color: #b39ddb; }
+  .risk-fill { height: 100%; border-radius: 3px; }
+  .risk-low  { background: #22c55e; }
+  .risk-mid  { background: #f59e0b; }
+  .risk-high { background: #ef4444; }
 
-  .risk-badge {
-    padding: 3px 9px; border-radius: 20px; font-size: 0.7rem; font-weight: 700;
+  .status-dot {
+    display: inline-block; width: 8px; height: 8px;
+    border-radius: 50%; margin-left: 6px;
   }
-  .risk-low { background: rgba(62,207,142,0.12); color: var(--green); }
-  .risk-medium { background: rgba(247,217,79,0.12); color: var(--yellow); }
-  .risk-high { background: rgba(247,111,111,0.12); color: var(--red); }
+  .dot-green  { background: #22c55e; }
+  .dot-yellow { background: #f59e0b; }
+  .dot-red    { background: #ef4444; }
 
-  .route-name-cell { font-weight: 600; color: var(--text); }
-  .route-via { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
-
-  /* ADD ROUTE BUTTON */
-  .add-route-btn {
-    display: flex; align-items: center; gap: 8px;
-    background: transparent; border: 1px dashed var(--border);
-    color: var(--muted); padding: 12px 20px; border-radius: 10px;
-    cursor: pointer; font-size: 0.82rem; font-weight: 600;
-    transition: all 0.2s; width: 100%; justify-content: center;
-    margin-bottom: 28px;
+  /* Add Route Modal */
+  .add-btn {
+    margin-bottom: 20px; padding: 9px 20px;
+    background: #2563eb; color: #fff;
+    border: none; border-radius: 8px;
+    cursor: pointer; font-size: 0.85rem;
   }
-  .add-route-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(79,142,247,0.05); }
+  .add-btn:hover { background: #1d4ed8; }
 
-  /* MODAL */
-  .modal-overlay {
+  #modal-overlay {
     display: none; position: fixed; inset: 0;
-    background: rgba(0,0,0,0.7); z-index: 100;
+    background: rgba(0,0,0,0.7);
     align-items: center; justify-content: center;
+    z-index: 1000;
   }
-  .modal-overlay.open { display: flex; }
-  .modal {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 16px; padding: 28px; width: 560px; max-width: 95vw;
-    max-height: 90vh; overflow-y: auto;
+  #modal-overlay.open { display: flex; }
+  #modal {
+    background: #111827; border: 1px solid #1e3a5f;
+    border-radius: 12px; padding: 28px;
+    width: 480px; max-width: 95vw;
   }
-  .modal h3 { font-size: 1rem; font-weight: 700; margin-bottom: 20px; color: var(--accent); }
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .form-group { display: flex; flex-direction: column; gap: 6px; }
-  .form-group.full { grid-column: 1 / -1; }
-  label { font-size: 0.75rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
-  input, select, textarea {
-    background: var(--surface2); border: 1px solid var(--border);
-    color: var(--text); padding: 9px 12px; border-radius: 8px;
-    font-size: 0.83rem; font-family: var(--font); outline: none;
-    transition: border-color 0.2s;
+  #modal h3 { color: #60a5fa; margin-bottom: 20px; }
+  .form-row { margin-bottom: 14px; }
+  .form-row label { display: block; font-size: 0.78rem; color: #9ca3af; margin-bottom: 5px; }
+  .form-row input, .form-row select {
+    width: 100%; padding: 8px 12px;
+    background: #1f2937; border: 1px solid #374151;
+    border-radius: 6px; color: #f9fafb; font-size: 0.85rem;
   }
-  input:focus, select:focus, textarea:focus { border-color: var(--accent); }
-  textarea { resize: vertical; min-height: 70px; }
-  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
-  .btn-primary {
-    background: var(--accent); color: #fff; border: none;
-    padding: 9px 22px; border-radius: 8px; font-size: 0.83rem;
-    font-weight: 700; cursor: pointer; transition: opacity 0.2s;
+  .form-row input:focus, .form-row select:focus { outline: none; border-color: #3b82f6; }
+  .form-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+  .btn-cancel {
+    padding: 8px 18px; background: #374151; color: #9ca3af;
+    border: none; border-radius: 6px; cursor: pointer;
   }
-  .btn-primary:hover { opacity: 0.85; }
-  .btn-secondary {
-    background: var(--surface2); color: var(--muted); border: 1px solid var(--border);
-    padding: 9px 22px; border-radius: 8px; font-size: 0.83rem;
-    font-weight: 600; cursor: pointer;
-  }
-
-  /* DETAIL PANEL */
-  .detail-panel {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 12px; padding: 20px 24px; margin-bottom: 24px;
-    display: none;
-  }
-  .detail-panel.open { display: block; }
-  .detail-panel h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 14px; color: var(--accent2); }
-  .detail-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
-  .detail-stat { background: var(--surface2); border-radius: 8px; padding: 12px 14px; }
-  .detail-stat .ds-label { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
-  .detail-stat .ds-value { font-size: 1rem; font-weight: 700; }
-
-  /* SUMMARY STATS */
-  .summary-bar {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 14px; margin-bottom: 28px;
-  }
-  .summary-card {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 10px; padding: 16px 18px;
-  }
-  .summary-card .sc-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
-  .summary-card .sc-value { font-size: 1.4rem; font-weight: 800; color: var(--accent); }
-  .summary-card .sc-sub { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
-
-  /* HIDDEN */
-  .hidden { display: none !important; }
-
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    header { flex-direction: column; gap: 12px; padding: 16px; }
-    main { padding: 16px; }
-    .tabs { padding: 12px 16px 0; overflow-x: auto; }
-    .form-grid { grid-template-columns: 1fr; }
-    th, td { padding: 10px 10px; }
+  .btn-save {
+    padding: 8px 18px; background: #2563eb; color: #fff;
+    border: none; border-radius: 6px; cursor: pointer;
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div>
-    <h1>Eurasia Logistics <span>Route Intelligence</span></h1>
-    <p>Iran Entry Dashboard — Shipping & Trade Route Analysis</p>
+<!-- PASSWORD GATE -->
+<div id="gate">
+  <div id="gate-box">
+    <h2>🔒 دسترسی محدود</h2>
+    <p>داشبورد مسیرهای لجستیکی اوراسیا</p>
+    <input type="password" id="pwd-input" placeholder="رمز عبور را وارد کنید" />
+    <button id="gate-btn" onclick="checkPassword()">ورود</button>
+    <div id="gate-error">رمز عبور اشتباه است</div>
   </div>
-  <div class="header-badge">
-    <strong>Sample Data</strong>
-    Last updated: May 2026
-  </div>
-</header>
-
-<div class="tabs">
-  <div class="tab active" onclick="showTab('china')">🇨🇳 China Origin Routes</div>
-  <div class="tab" onclick="showTab('iran')">🇮🇷 Iran Entry Routes</div>
 </div>
 
-<main>
+<!-- MAIN APP -->
+<div id="app">
+  <header>
+    <h1>🌐 داشبورد مسیرهای لجستیکی اوراسیا — ورود به ایران</h1>
+    <span id="last-update"></span>
+  </header>
 
-  <!-- ===== TAB 1: CHINA ROUTES ===== -->
-  <div id="tab-china">
-    <div class="section-title">10 Major Routes from China to Iran</div>
-    <p class="section-sub">Click any route to view Iran entry details and sub-routes.</p>
+  <div class="container">
 
-    <div class="summary-bar">
-      <div class="summary-card">
-        <div class="sc-label">Total Routes</div>
-        <div class="sc-value">10</div>
-        <div class="sc-sub">BRI Land · Sea · Polar</div>
-      </div>
-      <div class="summary-card">
-        <div class="sc-label">Active Routes</div>
-        <div class="sc-value" style="color:var(--green)">7</div>
-        <div class="sc-sub">Fully operational</div>
-      </div>
-      <div class="summary-card">
-        <div class="sc-label">Fastest Transit</div>
-        <div class="sc-value" style="color:var(--accent2)">12d</div>
-        <div class="sc-sub">China–Iran Rail (Northern)</div>
-      </div>
-      <div class="summary-card">
-        <div class="sc-label">Most Cost-Effective</div>
-        <div class="sc-value" style="color:var(--accent)">$850</div>
-        <div class="sc-sub">Per TEU (Maritime Silk)</div>
-      </div>
-    </div>
+    <!-- KPIs -->
+    <div class="kpi-grid" id="kpi-grid"></div>
 
-    <div class="cards-grid" id="china-cards"></div>
-  </div>
+    <!-- Filters -->
+    <div class="filters" id="filters"></div>
 
-  <!-- ===== TAB 2: IRAN ENTRY ===== -->
-  <div id="tab-iran" class="hidden">
-    <div class="section-title">Iran Entry Routes</div>
-    <p class="section-sub">All modes of entry: sea, road, rail, and multimodal. Filter by cargo type.</p>
+    <!-- Add Route -->
+    <button class="add-btn" onclick="openModal()">+ افزودن مسیر جدید</button>
 
-    <div class="summary-bar" id="iran-summary"></div>
-
-    <div class="filter-bar">
-      <span class="filter-label">Cargo Type:</span>
-      <button class="filter-btn active" onclick="filterCargo('all', this)">All</button>
-      <button class="filter-btn" onclick="filterCargo('container', this)">Container</button>
-      <button class="filter-btn" onclick="filterCargo('bulk', this)">Bulk</button>
-      <button class="filter-btn" onclick="filterCargo('oil', this)">Oil & Petroleum</button>
-    </div>
-
-    <div class="entry-table-wrap">
+    <!-- Table -->
+    <div class="table-wrap">
       <table>
         <thead>
           <tr>
-            <th>Route / Entry Point</th>
-            <th>Mode</th>
-            <th>Via</th>
-            <th>Distance</th>
-            <th>Transit Time</th>
-            <th>Est. Cost (TEU)</th>
-            <th>Customs Risk</th>
-            <th>Status</th>
+            <th>مسیر</th>
+            <th>نوع حمل</th>
+            <th>مدت (روز)</th>
+            <th>هزینه تقریبی ($/TEU)</th>
+            <th>ریسک گمرکی</th>
+            <th>وضعیت</th><th>یادداشت</th>
           </tr>
         </thead>
-        <tbody id="iran-table-body"></tbody>
+        <tbody id="route-table"></tbody>
       </table>
     </div>
+</div>
 
-    <button class="add-route-btn" onclick="openModal()">
-      <span style="font-size:1.2rem">＋</span> Add New Route
-    </button>
-  </div>
-
-</main>
-
-<!-- MODAL: Add Route -->
-<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
-  <div class="modal">
-    <h3>Add New Iran Entry Route</h3>
-    <div class="form-grid">
-      <div class="form-group full">
-        <label>Route Name</label>
-        <input type="text" id="f-name" placeholder="e.g. Oman (Sohar) → Bandar Abbas">
-      </div>
-      <div class="form-group">
-        <label>Transport Mode</label>
-        <select id="f-mode">
-          <option value="sea">Sea</option>
-          <option value="road">Road</option>
-          <option value="rail">Rail</option>
-          <option value="multimodal">Multimodal</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Cargo Type</label>
-        <select id="f-cargo">
-          <option value="container">Container</option>
-          <option value="bulk">Bulk</option>
-          <option value="oil">Oil & Petroleum</option>
-          <option value="all">All Types</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Via (Transit Points)</label>
-        <input type="text" id="f-via" placeholder="e.g. Sohar, Strait of Hormuz">
-      </div>
-      <div class="form-group">
-        <label>Entry Port / Border</label>
-        <input type="text" id="f-entry" placeholder="e.g. Bandar Abbas">
-      </div>
-      <div class="form-group">
-        <label>Distance (km)</label>
-        <input type="number" id="f-dist" placeholder="e.g. 1200">
-      </div>
-      <div class="form-group">
-        <label>Transit Time (days)</label>
-        <input type="text" id="f-time" placeholder="e.g. 3–5">
-      </div>
-      <div class="form-group">
-        <label>Est. Cost / TEU (USD)</label>
-        <input type="text" id="f-cost" placeholder="e.g. $1,200">
-      </div>
-      <div class="form-group">
-        <label>Customs Risk</label>
-        <select id="f-risk">
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Status</label>
-        <select id="f-status">
-          <option value="active">Active</option>
-          <option value="partial">Partial</option>
-          <option value="limited">Limited</option>
-        </select>
-      </div>
-      <div class="form-group full">
-        <label>Notes</label>
-        <textarea id="f-notes" placeholder="Additional details, restrictions, or remarks..."></textarea>
-      </div>
+<!-- ADD ROUTE MODAL -->
+<div id="modal-overlay">
+  <div id="modal">
+    <h3>افزودن مسیر جدید</h3>
+    <div class="form-row">
+      <label>نام مسیر</label>
+      <input type="text" id="f-name" placeholder="مثال: چین ← بندرعباس" />
     </div>
-    <div class="modal-actions">
-      <button class="btn-secondary" onclick="closeModal()">Cancel</button>
-      <button class="btn-primary" onclick="addRoute()">Add Route</button>
+    <div class="form-row">
+      <label>نوع حمل</label>
+      <select id="f-type">
+        <option value="sea">دریایی</option>
+        <option value="land">زمینی</option>
+        <option value="rail">ریلی</option>
+        <option value="multi">ترکیبی</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label>مدت حمل (روز)</label>
+      <input type="number" id="f-days" placeholder="25" />
+    </div>
+    <div class="form-row">
+      <label>هزینه تقریبی ($/TEU)</label>
+      <input type="number" id="f-cost" placeholder="1200" />
+    </div>
+    <div class="form-row">
+      <label>ریسک گمرکی (۱–۱۰)</label>
+      <input type="number" id="f-risk" min="1" max="10" placeholder="5" />
+    </div>
+    <div class="form-row">
+      <label>وضعیت</label>
+      <select id="f-status">
+        <option value="active">فعال</option>
+        <option value="slow">کند</option>
+        <option value="blocked">مسدود</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label>یادداشت</label>
+      <input type="text" id="f-note" placeholder="توضیح کوتاه..." />
+    </div>
+    <div class="form-actions">
+      <button class="btn-cancel" onclick="closeModal()">انصراف</button>
+      <button class="btn-save" onclick="saveRoute()">ذخیره</button>
     </div>
   </div>
 </div>
 
 <script>
-// ============================================================
-// DATA
-// ============================================================
+// ─── PASSWORD ───────────────────────────────────────────────
+const PASSWORD = "DanaEnergy_2026"; //
 
-const chinaRoutes = [
-  {
-    id: 1, type: 'land', name: 'Northern Corridor (Trans-Siberian + Central Asia)',
-    route: 'Shanghai → Urumqi → Almaty → Tashkent → Tehran',
-    transit: '14–18 days', cost: '$1,800', status: 'active',
-    distance: '7,200 km', notes: 'Main BRI rail corridor via Kazakhstan and Uzbekistan.'
-  },
-  {
-    id: 2, type: 'land', name: 'China–Kyrgyzstan–Tajikistan–Afghanistan',
-    route: 'Kashgar → Osh → Dushanbe → Kabul → Mashhad',
-    transit: '18–24 days', cost: '$2,100', status: 'limited',
-    distance: '5,800 km', notes: 'High-risk segment through Afghanistan. Limited commercial use.'
-  },
-  {
-    id: 3, type: 'land', name: 'China–Pakistan (CPEC) → Iran Border',
-    route: 'Kashgar → Islamabad → Karachi/Gwadar → Zahedan',
-    transit: '16–22 days', cost: '$1,950', status: 'partial',
-    distance: '6,100 km', notes: 'CPEC corridor. Road transfer at Taftan/Mirjaveh border.'
-  },
-  {
-    id: 4, type: 'land', name: 'China–Kazakhstan–Caspian (Trans-Caspian)',
-    route: 'Lianyungang → Almaty → Aktau → Caspian Sea → Anzali/Amirabad',
-    transit: '15–20 days', cost: '$2,000', status: 'active',
-    distance: '6,500 km', notes: 'Multimodal: rail + Caspian ferry. Growing capacity.'
-  },
-  {
-    id: 5, type: 'land', name: 'China–Russia–Azerbaijan (North–South)',
-    route: 'Beijing → Moscow → Baku → Astara → Tehran',
-    transit: '16–21 days', cost: '$2,200', status: 'partial',
-    distance: '8,100 km', notes: 'INSTC corridor. Sanctions on Russia create complications.'
-  },
-  {
-    id: 6, type: 'land', name: 'China–Turkey (BTK Rail) → Iran West',
-    route: 'Xi\'an → Istanbul (BTK) → Ankara → Tabriz/Bazargan',
-    transit: '18–25 days', cost: '$2,400', status: 'active',
-    distance: '8,700 km', notes: 'Baku–Tbilisi–Kars rail. Western Iran entry via Bazargan.'
-  },
-  {
-    id: 7, type: 'land', name: 'China–Turkmenistan–Iran (Sarakhs)',
-    route: 'Urumqi → Ashgabat → Sarakhs → Mashhad',
-    transit: '12–16 days', cost: '$1,600', status: 'active',
-    distance: '4,900 km', notes: 'Shortest land route. Direct rail link to Mashhad.'
-  },
-  {
-    id: 8, type: 'land', name: 'China–Mongolia–Russia–Central Asia',
-    route: 'Beijing → Ulaanbaatar → Novosibirsk → Tashkent → Tehran',
-    transit: '20–28 days', cost: '$2,300', status: 'partial',
-    distance: '9,200 km', notes: 'Longer northern detour. Used when southern routes are congested.'
-  },
-  {
-    id: 9, type: 'sea', name: 'Maritime Silk Road (Indian Ocean)',
-    route: 'Shanghai → Strait of Malacca → Indian Ocean → Gulf of Oman → Bandar Abbas',
-    transit: '22–28 days', cost: '$850', status: 'active',
-    distance: '14,500 km', notes: 'Lowest cost per TEU. Main sea route for bulk and containers.'
-  },
-  {
-    id: 10, type: 'polar', name: 'Arctic Polar Route (NSR)',
-    route: 'Shanghai → Bering Strait → Arctic Ocean → Suez → Bandar Abbas',
-    transit: '18–22 days', cost: '$1,400', status: 'partial',
-    distance: '12,800 km', notes: 'Seasonal (Jul–Oct). Shorter than Suez but ice-dependent.'
+function checkPassword() {
+  const val = document.getElementById('pwd-input').value;
+  if (val === PASSWORD) {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    initDashboard();
+  } else {
+    document.getElementById('gate-error').style.display = 'block';document.getElementById('pwd-input').value = '';
   }
+}
+document.getElementById('pwd-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') checkPassword();
+});
+
+// ─── DATA ────────────────────────────────────────────────────
+const defaultRoutes = [
+  { name: "چین ← قزاقستان ← مرز شمالی ایران", type: "rail", days: 18, cost: 1100, risk: 4, status: "active", note: "مسیر ریلی INSTC" },
+  { name: "چین ← کراچی ← زاهدان", type: "multi", days: 28, cost: 950, risk: 7, status: "slow", note: "مرز سیستان و بلوچستان" },
+  { name: "چین ← صحار/دقم ← بندرعباس", type: "multi", days: 22, cost: 1050, risk: 5, status: "active", note: "ترانشیپ عمان" },
+  { name: "چین ← دبی ← خوزستان (عراق/کویت)", type: "multi", days: 30, cost: 1300, risk: 8, status: "slow", note: "مرز زمینی عراق" },
+  { name: "چین ← مرسین ← مرز ترکیه ← ایران", type: "multi", days: 25, cost: 1200, risk: 6, status: "active", note: "گذر از ترکیه" },
+  { name: "چین ← بندرعباس (مستقیم)", type: "sea", days: 20, cost: 900, risk: 3, status: "active", note: "مستقیم‌ترین مسیر دریایی" },
 ];
 
-const iranEntryRoutes = [
-  {
-    id: 1, name: 'Bandar Abbas (Sea)', via: 'Gulf of Oman, Strait of Hormuz',
-    entry: 'Bandar Abbas Port', mode: 'sea', cargo: ['container','bulk','oil'],
-    distance: '—', transit: '1–2 days (anchorage)', cost: '$950',
-    risk: 'medium', status: 'active',
-    notes: 'Main Iranian port. High congestion. Suitable for all cargo types.'
-  },
-  {
-    id: 2, name: 'Bushehr (Sea)', via: 'Persian Gulf',
-    entry: 'Bushehr Port', mode: 'sea', cargo: ['container','bulk','oil'],
-    distance: '—', transit: '1–2 days', cost: '$1,050',
-    risk: 'medium', status: 'active',
-    notes: 'Secondary port. Less congested than Bandar Abbas.'
-  },
-  {
-    id: 3, name: 'Oman (Sohar) → Bandar Abbas', via: 'Sohar Port, Strait of Hormuz',
-    entry: 'Bandar Abbas', mode: 'sea', cargo: ['container','bulk'],
-    distance: '320 km', transit: '2–3 days', cost: '$1,200',
-    risk: 'medium', status: 'active',
-    notes: 'Transshipment via Sohar. Avoids direct China–Iran shipping scrutiny.'
-  },
-  {
-    id: 4, name: 'Oman (Duqm) → Bandar Abbas', via: 'Duqm Port, Gulf of Oman',
-    entry: 'Bandar Abbas', mode: 'sea', cargo: ['container','oil'],
-    distance: '680 km', transit: '3–4 days', cost: '$1,350',
-    risk: 'low', status: 'active',
-    notes: 'Duqm SEZ offers bonded warehousing. Growing transshipment hub.'
-  },
-  {
-    id: 5, name: 'Oman (Salalah) → Bandar Abbas', via: 'Salalah Port, Arabian Sea',
-    entry: 'Bandar Abbas / Bushehr', mode: 'sea', cargo: ['container','bulk'],
-    distance: '1,100 km', transit: '4–5 days', cost: '$1,150',
-    risk: 'low', status: 'active',
-    notes: 'Salalah is a major transshipment hub. Good feeder connections.'
-  },
-  {
-    id: 6, name: 'Oman (Khasab) → Minab / Bandar Abbas', via: 'Khasab, Strait of Hormuz',
-    entry: 'Minab / Bandar Abbas', mode: 'sea', cargo: ['container','bulk'],
-    distance: '120 km', transit: '1 day', cost: '$900',
+function loadRoutes() {
+  const saved = localStorage.getItem('eurasiaRoutes');
+  return saved ? JSON.parse(saved) : defaultRoutes;
+}
+function saveRoutes(routes) {
+  localStorage.setItem('eurasiaRoutes', JSON.stringify(routes));
+}
+
+// ─── DASHBOARD ───────────────────────────────────────────────
+let routes = [];
+let activeFilter = 'all';
+
+function initDashboard() {
+  routes = loadRoutes();
+  document.getElementById('last-update').textContent =
+    'آخرین بروزرسانی: ' + new Date().toLocaleDateString('fa-IR');
+  renderKPIs();
+  renderFilters();
+  renderTable();
+}
+
+function renderKPIs() {
+  const active = routes.filter(r => r.status === 'active').length;
+  const avgCost = Math.round(routes.reduce((s,r) => s+r.cost, 0) / routes.length);
+  const avgDays = Math.round(routes.reduce((s,r) => s+r.days, 0) / routes.length);
+  const highRisk = routes.filter(r => r.risk >= 7).length;
+
+  document.getElementById('kpi-grid').innerHTML = `
+    <div class="kpi-card"><div class="label">کل مسیرها</div><div class="value">${routes.length}</div><div class="sub">مسیر ثبت‌شده</div></div>
+    <div class="kpi-card"><div class="label">مسیرهای فعال</div><div class="value">${active}</div><div class="sub">در حال عملیات</div></div>
+    <div class="kpi-card"><div class="label">میانگین هزینه</div><div class="value">$${avgCost}</div><div class="sub">به ازای هر TEU</div></div>
+    <div class="kpi-card"><div class="label">میانگین زمان</div><div class="value">${avgDays}</div><div class="sub">روز</div></div>
+    <div class="kpi-card"><div class="label">ریسک بالا</div><div class="value">${highRisk}</div><div class="sub">مسیر با ریسک ≥ ۷</div></div>
+  `;
+}
+
+function renderFilters() {
+  const types = [
+    { key: 'all', label: 'همه' },
+    { key: 'sea',   label: '🚢 دریایی' },
+    { key: 'land',  label: '🚛 زمینی' },
+    { key: 'rail',  label: '🚂 ریلی' },
+    { key: 'multi', label: '🔀 ترکیبی' },
+  ];
+  document.getElementById('filters').innerHTML = types.map(t =>
+    `<button class="filter-btn ${activeFilter===t.key?'active':''}"
+      onclick="setFilter('${t.key}')">${t.label}</button>`
+  ).join('');
+}
+
+function setFilter(f) {
+  activeFilter = f;
+  renderFilters();renderTable();
+}
+
+const typeLabel = { sea:'دریایی', land:'زمینی', rail:'ریلی', multi:'ترکیبی' };
+const typeBadge = { sea:'badge-sea', land:'badge-land', rail:'badge-rail', multi:'badge-multi' };
+const statusMap = {
+  active: ['dot-green',  'فعال'],
+  slow:   ['dot-yellow', 'کند'],
+  blocked:['dot-red',    'مسدود'],
+};
+
+function renderTable() {
+  const filtered = activeFilter === 'all' ? routes : routes.filter(r => r.type === activeFilter);
+  const tbody = document.getElementById('route-table');
+  if (!filtered.length) {
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#6b7280;padding:30px">مسیری یافت نشد</td></tr>';
+    return;
+  }
+  tbody.innerHTML = filtered.map((r, i) => {
+    const riskPct = r.risk * 10;
+    const riskClass = r.risk <= 3 ? 'risk-low' : r.risk <= 6 ? 'risk-mid' : 'risk-high';
+    const [dotClass, statusText] = statusMap[r.status] || ['dot-yellow','نامشخص'];
+    return `<tr>
+      <td>${r.name}</td>
+      <td><span class="badge ${typeBadge[r.type]}">${typeLabel[r.type]}</span></td>
+      <td>${r.days}</td>
+      <td>$${r.cost.toLocaleString()}</td>
+      <td>
+        <div class="risk-bar">
+          <div class="risk-track"><div class="risk-fill ${riskClass}" style="width:${riskPct}%"></div></div>
+          <span style="font-size:0.75rem;color:#9ca3af">${r.risk}/10</span>
+        </div>
+      </td>
+      <td><span class="status-dot ${dotClass}"></span>${statusText}</td>
+      <td style="color:#6b7280;font-size:0.78rem">${r.note}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ─── MODAL ───────────────────────────────────────────────────
+function openModal() {
+  document.getElementById('modal-overlay').classList.add('open');
+}
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  ['f-name','f-days','f-cost','f-risk','f-note'].forEach(id =>
+    document.getElementById(id).value = '');
+}
+function saveRoute() {
+  const name = document.getElementById('f-name').value.trim();
+  const days = parseInt(document.getElementById('f-days').value);
+  const cost = parseInt(document.getElementById('f-cost').value);
+  const risk = parseInt(document.getElementById('f-risk').value);
+  if (!name || isNaN(days) || isNaN(cost) || isNaN(risk)) {
+    alert('لطفاً همه فیلدها را پر کنید'); return;
+  }
+  routes.push({
+    name,
+    type:   document.getElementById('f-type').value,
+    days, cost, risk,
+    status: document.getElementById('f-status').value,
+    note:   document.getElementById('f-note').value.trim(),
+  });
+  saveRoutes(routes);
+  renderKPIs();
+  renderTable();
+  closeModal();
+}
+</script>
+</body>
+</html>
