@@ -8,13 +8,6 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
-  @font-face {
-    font-family: 'B Nazanin';
-    src: local('B Nazanin'), local('BNazanin');
-    font-weight: normal;
-    font-style: normal;
-  }
-  
   * {
     box-sizing: border-box;
     margin: 0;
@@ -28,13 +21,13 @@
     line-height: 1.5;
   }
   
-  /* حالت روشن/تاریک خودکار */
   @media (prefers-color-scheme: dark) {
     body { background: #1c1c1a; }
-    .card, .page-header, .cor-card, .detail-panel, .map-section { background: #252523; border-color: #3a3a36; }
+    .card, .page-header, .cor-card, .detail-panel, .map-section, .shipping-card, .country-card, .investment-card { background: #252523; border-color: #3a3a36; color: #e0e0e0; }
+    .stat-card { background: #252523; }
+    .stat-item { border-bottom-color: #3a3a36; }
   }
   
-  /* استایل عمومی */
   .page-header {
     background: white;
     border-bottom: 1px solid rgba(0,0,0,0.1);
@@ -65,7 +58,7 @@
     border-color: #185FA5;
   }
   
-  .container { max-width: 1300px; margin: 0 auto; padding: 1.5rem; }
+  .container { max-width: 1400px; margin: 0 auto; padding: 1.5rem; }
   .dash-section { display: none; }
   .dash-section.active { display: block; }
   
@@ -77,7 +70,6 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.08);
   }
   
-  /* متریک‌های صفحه اصلی */
   .metrics-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -102,7 +94,6 @@
     margin-top: 4px;
   }
   
-  /* بخش آمار و اعداد عکس */
   .stats-row {
     display: flex;
     flex-wrap: wrap;
@@ -135,20 +126,141 @@
   .stat-item .label { color: #666; }
   .stat-item .number { font-weight: 700; }
   
-  /* کریدورها با فونت B Nazanin */
+  /* بخش کشتیرانی */
+  .shipping-section {
+    margin-bottom: 24px;
+  }
+  .shipping-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #185FA5;
+    margin-bottom: 12px;
+    padding-right: 8px;
+    border-right: 3px solid #185FA5;
+  }
+  .shipping-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
+  }
+  .shipping-card {
+    background: white;
+    border-radius: 12px;
+    padding: 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  .shipping-card h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #185FA5;
+  }
+  .shipping-stat {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+  }
+  
+  /* بخش کشورها - دو ستونه */
+  .countries-container {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  .countries-list {
+    width: 280px;
+    flex-shrink: 0;
+    background: white;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  .countries-list h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #185FA5;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+  }
+  .country-item {
+    padding: 8px 12px;
+    margin: 4px 0;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 13px;
+    transition: all 0.2s;
+  }
+  .country-item:hover {
+    background: #e8f0fe;
+  }
+  .country-item.active {
+    background: #185FA5;
+    color: white;
+  }
+  .country-detail {
+    flex: 1;
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    min-height: 300px;
+  }
+  .country-detail h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #185FA5;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+  }
+  .country-info-row {
+    display: flex;
+    margin-bottom: 12px;
+    font-size: 13px;
+  }
+  .country-info-label {
+    width: 120px;
+    font-weight: 600;
+    color: #666;
+  }
+  .country-info-value {
+    flex: 1;
+    color: #333;
+  }
+  
+  /* بخش سرمایه‌گذاری */
+  .investment-section {
+    margin-top: 24px;
+  }
+  .investment-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #185FA5;
+    margin-bottom: 12px;
+    padding-right: 8px;
+    border-right: 3px solid #185FA5;
+  }
+  .investment-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  .investment-placeholder {
+    color: #999;
+    font-size: 13px;
+  }
+  
   .cor-card {
     background: white;
     border-radius: 12px;
     margin-bottom: 8px;
     cursor: pointer;
-    transition: all 0.2s;
-    font-family: 'B Nazanin', 'Vazirmatn', Tahoma, sans-serif;
-    font-size: 11px;
     overflow: hidden;
-  }
-  .cor-card:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
   .cor-header {
     padding: 14px 18px;
@@ -174,7 +286,7 @@
     max-height: 0;
     padding: 0 18px;
     overflow: hidden;
-    transition: max-height 0.35s ease-out, padding 0.2s;
+    transition: max-height 0.35s ease-out;
     background: white;
   }
   .cor-card.open .cor-detail {
@@ -189,17 +301,7 @@
     padding: 8px 0;
     border-bottom: 1px solid #f0f0f0;
   }
-  .detail-row:last-child { border-bottom: none; }
-  .detail-row .label {
-    color: #666;
-    font-weight: 500;
-  }
-  .detail-row .value {
-    font-weight: 700;
-    color: #333;
-  }
   
-  /* نقشه */
   .map-section {
     background: white;
     border-radius: 12px;
@@ -224,7 +326,6 @@
   .map-btn.active {
     background: #185FA5;
     color: white;
-    border-color: #185FA5;
   }
   #map { height: 320px; }
   
@@ -268,9 +369,9 @@
     margin-top: 20px;
   }
   
-  @media (max-width:600px) {
-    .container { padding: 1rem; }
-    .stats-row { flex-direction: column; }
+  @media (max-width: 768px) {
+    .countries-container { flex-direction: column; }
+    .countries-list { width: 100%; }
   }
 </style>
 </head>
@@ -279,12 +380,15 @@
 <div id="app">
 <div class="page-header">
   <div>
-    <h1>📊 داشبورد لجستیک چین–ایران</h1>
+    <h1>داشبورد لجستیک چین–ایران</h1>
     <p>صنایع بالادستی انرژی — تحلیل کریدورها و فرصت‌های سرمایه‌گذاری | به‌روز: مه ۲۰۲۶</p>
   </div>
-  <div style="display: flex; gap: 8px;">
+  <div style="display: flex; gap: 8px; flex-wrap: wrap;">
     <button class="nav-btn active" onclick="showDash('main')">نمای کلی</button>
-    <button class="nav-btn" onclick="showDash('carec')">🌍 کریدورهای بین‌المللی</button>
+    <button class="nav-btn" onclick="showDash('carec')">کریدورهای بین‌المللی</button>
+    <button class="nav-btn" onclick="showDash('shipping')">کشتیرانی</button>
+    <button class="nav-btn" onclick="showDash('countries')">کشورها</button>
+    <button class="nav-btn" onclick="showDash('investment')">فرصت‌های سرمایه‌گذاری</button>
   </div>
 </div>
 
@@ -293,46 +397,43 @@
 <!-- ========== صفحه اول: نمای کلی ========== -->
 <div id="dash-main" class="dash-section active">
   
-  <!-- کارت اول: اعداد بار کل و کانتینر از عکس -->
   <div class="stats-row">
     <div class="stat-card">
-      <div class="stat-title">📦 بار کل (Mt)</div>
+      <div class="stat-title">بار کل (Mt)</div>
       <div class="stat-item"><span class="label">بار کل ۲۰۲۳</span><span class="number">۲.۷۶ Mt | ۴.۴۸ Mt | ۴.۱۲ Mt</span></div>
       <div class="stat-item"><span class="label">بار کل ۲۰۲۴</span><span class="number">۲.۷۶ Mt | ۴.۴۸ Mt | (۴.۱۲) Mt</span></div>
       <div class="stat-item"><span class="label">بار کل ۲۰۲۵</span><span class="number">۲.۷۶ Mt | ۴.۴۸ Mt | ۴.۱۲ Mt</span></div>
     </div>
     <div class="stat-card">
-      <div class="stat-title">📦 کانتینر (TEU)</div>
+      <div class="stat-title">کانتینر (TEU)</div>
       <div class="stat-item"><span class="label">کانتینر ۲۰۲۴</span><span class="number">۵۶.۵k | ۷۷k | ۳۰۰k TEU</span></div>
       <div class="stat-item"><span class="label">کانتینر ۲۰۲۵</span><span class="number">۵۶.۵k | ۷۷k | ۳۰۰k TEU</span></div>
       <div class="stat-item"><span class="label">هدف ۲۰۲۹</span><span class="number">۵۶.۵k | ۷۷k | ۳۰۰k TEU</span></div>
     </div>
     <div class="stat-card">
-      <div class="stat-title">🚂 کریدور میانی (TITR)</div>
+      <div class="stat-title">کریدور میانی (TITR)</div>
       <div class="stat-item"><span class="label">عقب‌افتادگی (Dostyk/Altynkol)</span><span class="number">تا ۱ ماه</span></div>
       <div class="stat-item"><span class="label">روسیه سهم از CRE</span><span class="number">۸۹.۲% (ژانویه ۲۰۲۵)</span></div>
       <div class="stat-item"><span class="label">مسیر شمالی (Trans-Siberian)</span><span class="number">۱۹ روز</span></div>
     </div>
     <div class="stat-card">
-      <div class="stat-title">🎯 اهداف زمانی و قطارها</div>
+      <div class="stat-title">اهداف زمانی و قطارها</div>
       <div class="stat-item"><span class="label">هدف زمانی ۲۰۲۶</span><span class="number">۱۵ روز</span></div>
       <div class="stat-item"><span class="label">قطارهای ۲۰۲۵ (هدف)</span><span class="number">۶۰۰ قطار/سال</span></div>
       <div class="stat-item"><span class="label">هدف ۲۰۲۷</span><span class="number">۱۰۰۰ قطار/سال</span></div>
     </div>
   </div>
   
-  <!-- نقشه تعاملی -->
   <div class="map-section">
     <div class="map-toolbar">
-      <span>🗺️ نقشه کریدورهای چین به ایران</span>
+      <span>نقشه کریدورهای چین به ایران</span>
       <button class="map-btn active" onclick="resetMapFilter()">همه مسیرها</button>
-      <button class="map-btn" onclick="toggleMeasure()">📏 اندازه‌گیری فاصله</button>
+      <button class="map-btn" onclick="toggleMeasure()">اندازه‌گیری فاصله</button>
       <span id="measure-info" style="font-size:10px"></span>
     </div>
     <div id="map"></div>
   </div>
   
-  <!-- انتخاب مسیر -->
   <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px;">
     <button class="route-btn" onclick="selectRoute('dubai')">دبی (مسدود)</button>
     <button class="route-btn" onclick="selectRoute('oman')">عمان</button>
@@ -341,7 +442,6 @@
     <button class="route-btn" onclick="selectRoute('central')">آسیای مرکزی</button>
   </div>
   
-  <!-- جزئیات مسیر -->
   <div class="card" id="route-detail">
     <div style="font-weight:700; margin-bottom:8px;" id="detail-title">مسیر دبی — وضعیت: مسدود</div>
     <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:8px; font-size:12px;">
@@ -372,8 +472,91 @@
     <button class="filt" onclick="filterCarec('road',this)">جاده‌ای</button>
   </div>
 
-  <!-- لیست کریدورها با قابلیت باز شدن کشویی -->
   <div id="carec-list"></div>
+</div>
+
+<!-- ========== صفحه سوم: کشتیرانی ========== -->
+<div id="dash-shipping" class="dash-section">
+  <div class="shipping-section">
+    <div class="shipping-title">ناوگان تجاری و حمل و نقل دریایی</div>
+    <div class="shipping-grid">
+      <div class="shipping-card">
+        <h4>کانتینری</h4>
+        <div class="shipping-stat"><span>ظرفیت ناوگان جهانی</span><span>۲۹.۷ میلیون TEU</span></div>
+        <div class="shipping-stat"><span>کشتی‌های فعال</span><span>~۶,۵۰۰ فروند</span></div>
+        <div class="shipping-stat"><span>مسیرهای اصلی چین-خلیج فارس</span><span>۱۸-۲۲ روز</span></div>
+        <div class="shipping-stat"><span>بزرگترین اپراتور</span><span>MSC, Maersk, COSCO</span></div>
+      </div>
+      <div class="shipping-card">
+        <h4>نفتکش</h4>
+        <div class="shipping-stat"><span>ناوگان نفتکش جهانی</span><span>~۷,۵۰۰ فروند</span></div>
+        <div class="shipping-stat"><span>ظرفیت حمل نفت خام</span><span>~۶۰۰ میلیون تن/سال</span></div>
+        <div class="shipping-stat"><span>VLCC (ابر نفتکش)</span><span>۲ میلیون بشکه</span></div>
+        <div class="shipping-stat"><span>مسیر خلیج فارس-چین</span><span>۲۵-۳۰ روز</span></div>
+      </div>
+      <div class="shipping-card">
+        <h4>فله‌بر (Bulk Carrier)</h4>
+        <div class="shipping-stat"><span>ناوگان فله‌بر</span><span>~۱۲,۵۰۰ فروند</span></div>
+        <div class="shipping-stat"><span>محصولات اصلی</span><span>سنگ آهن، زغال سنگ، غلات</span></div>
+        <div class="shipping-stat"><span>Capesize</span><span>۱۸۰k+ DWT</span></div>
+        <div class="shipping-stat"><span>حجم سالانه (جهانی)</span><span>~۵.۲ میلیارد تن</span></div>
+      </div>
+      <div class="shipping-card">
+        <h4>گازبر (LNG/LPG)</h4>
+        <div class="shipping-stat"><span>ناوگان LNG</span><span>~۶۵۰ فروند</span></div>
+        <div class="shipping-stat"><span>ناوگان LPG</span><span>~۱,۶۰۰ فروند</span></div>
+        <div class="shipping-stat"><span>ظرفیت هر کشتی LNG</span><span>۱۴۵k-۲۶۶k m³</span></div>
+        <div class="shipping-stat"><span>قطر-چین (مسیر کلیدی)</span><span>~۲۰ روز</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="shipping-section">
+    <div class="shipping-title">بندرهای کلیدی مسیر چین-ایران-اروپا</div>
+    <div class="shipping-grid">
+      <div class="shipping-card">
+        <h4>چین</h4>
+        <div class="shipping-stat"><span>شانگهای</span><span>۴۷ میلیون TEU/سال</span></div>
+        <div class="shipping-stat"><span>نینگبو-ژوشان</span><span>۳۵ میلیون TEU/سال</span></div>
+        <div class="shipping-stat"><span>شنژن</span><span>۲۸ میلیون TEU/سال</span></div>
+      </div>
+      <div class="shipping-card">
+        <h4>خلیج فارس</h4>
+        <div class="shipping-stat"><span>جبل علی (دبی)</span><span>۱۴ میلیون TEU/سال</span></div>
+        <div class="shipping-stat"><span>بندرعباس (ایران)</span><span>۳.۵ میلیون TEU/سال</span></div>
+        <div class="shipping-stat"><span>دوحه (قطر)</span><span>مرکز اصلی LNG</span></div>
+      </div>
+      <div class="shipping-card">
+        <h4>دریای سیاه و مدیترانه</h4>
+        <div class="shipping-stat"><span>آمبارلی (ترکیه)</span><span>~۱۲ میلیون TEU</span></div>
+        <div class="shipping-stat"><span>پیرئوس (یونان)</span><span>~۷ میلیون TEU</span></div>
+        <div class="shipping-stat"><span>کنستانتسا (رومانی)</span><span>~۲ میلیون TEU</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== صفحه چهارم: کشورها ========== -->
+<div id="dash-countries" class="dash-section">
+  <div class="countries-container">
+    <div class="countries-list">
+      <h4>کشورهای مسیر راه ابریشم و همسایگان ایران</h4>
+      <div id="country-list-items"></div>
+    </div>
+    <div class="country-detail" id="country-detail">
+      <h4 id="country-detail-title">انتخاب کشور</h4>
+      <div id="country-detail-content" style="color:#999; text-align:center; padding:40px 0;">برای مشاهده اطلاعات روی هر کشور کلیک کنید</div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== صفحه پنجم: فرصت‌های سرمایه‌گذاری ========== -->
+<div id="dash-investment" class="dash-section">
+  <div class="investment-section">
+    <div class="investment-title">فرصت‌های سرمایه‌گذاری در لجستیک و حمل و نقل بین‌المللی</div>
+    <div class="investment-card">
+      <div class="investment-placeholder">این بخش تکمیل خواهد شد. زیرمجموعه‌های سرمایه‌گذاری شامل پروژه‌های زیرساختی، ناوگان، بنادر، کریدورهای ریلی و مناطق ویژه اقتصادی می‌شود.</div>
+    </div>
+  </div>
 </div>
 
 <div class="update-note">منابع: Stimson Center، Eurasianet، گزارش‌های رسمی TITR — مه ۲۰۲۶</div>
@@ -384,29 +567,28 @@
 <script>
 // ==================== داده‌های کریدورها ====================
 const corridorsData = [
-  { id: 'Polar', name: '❄️ Polar Silk Road | راه ابریشم قطبی', type: 'sea', badge: 'دریایی',
+  { id: 'Polar', name: 'راه ابریشم قطبی (Polar Silk Road)', type: 'sea', badge: 'دریایی',
     details: { type: 'دریایی (اقیانوس منجمد شمالی)', time: '۲۰-۳۵ روز (وابسته به فصل)', cost: 'متوسط تا بالا', risk: 'بالا (یخ، ژئوپلیتیک)', goods: 'کالاهای صنعتی، تجهیزات، انرژی', forward: 'محدود' } },
-  { id: 'Maritime', name: '🌊 Maritime Silk Road | راه ابریشم آبی', type: 'sea', badge: 'دریایی',
+  { id: 'Maritime', name: 'راه ابریشم آبی (Maritime Silk Road)', type: 'sea', badge: 'دریایی',
     details: { type: 'دریایی', time: '۳۰-۴۵ روز', cost: 'پایین تا متوسط', risk: 'متوسط (تنگه‌ها)', goods: 'کانتینر، الکترونیک، کالاهای مصرفی', forward: 'فعال' } },
-  { id: 'TITR', name: '🌍 TITR | کریدور میانی (Trans-Caspian)', type: 'multi', badge: 'چندوجهی',
+  { id: 'TITR', name: 'کریدور میانی (TITR - Trans-Caspian)', type: 'multi', badge: 'چندوجهی',
     details: { type: 'چندوجهی (ریلی + دریایی)', time: '۲۰-۳۰ روز', cost: 'متوسط', risk: 'متوسط', goods: 'کانتینر، کالاهای صنعتی، فلزات', forward: 'فعال' } },
-  { id: 'BTK', name: '🚂 BTK | باکو-تفلیس-قارص', type: 'rail', badge: 'ریلی',
+  { id: 'BTK', name: 'باکو-تفلیس-قارص (BTK)', type: 'rail', badge: 'ریلی',
     details: { type: 'ریلی', time: '۱۲-۱۸ روز', cost: 'متوسط', risk: 'پایین', goods: 'کالاهای ترانزیتی، صنعتی', forward: 'فعال' } },
-  { id: 'CKU', name: '🚂 CKU | چین-قرقیزستان-ازبکستان', type: 'rail', badge: 'ریلی',
+  { id: 'CKU', name: 'چین-قرقیزستان-ازبکستان (CKU)', type: 'rail', badge: 'ریلی',
     details: { type: 'ریلی', time: '۱۵-۲۵ روز', cost: 'متوسط', risk: 'متوسط', goods: 'کالاهای صنعتی، فلزات', forward: 'در حال توسعه' } },
-  { id: 'CRE_North', name: '🚂 CRE شمالی | چین-مغولستان-روسیه', type: 'rail', badge: 'ریلی',
+  { id: 'CRE_North', name: 'CRE شمالی (چین-مغولستان-روسیه)', type: 'rail', badge: 'ریلی',
     details: { type: 'ریلی', time: '۱۵-۲۰ روز', cost: 'متوسط', risk: 'متوسط (ژئوپلیتیک)', goods: 'کانتینر، کالاهای حجیم', forward: 'فعال' } },
-  { id: 'PAK_AFG_UZB', name: '🛣 پاکستان-افغانستان-ازبکستان', type: 'road', badge: 'جاده‌ای',
+  { id: 'PAK_AFG_UZB', name: 'پاکستان-افغانستان-ازبکستان', type: 'road', badge: 'جاده‌ای',
     details: { type: 'جاده‌ای/ریلی محدود', time: '۲۰-۳۰ روز', cost: 'متوسط', risk: 'بالا (امنیتی)', goods: 'کالاهای مصرفی، ساختمانی', forward: 'محدود' } },
-  { id: 'INSTC', name: '🌊 INSTC | کریدور شمال-جنوب', type: 'multi', badge: 'چندوجهی',
+  { id: 'INSTC', name: 'کریدور شمال-جنوب (INSTC)', type: 'multi', badge: 'چندوجهی',
     details: { type: 'چندوجهی (دریایی+ریلی)', time: '۲۰-۲۵ روز', cost: 'متوسط', risk: 'متوسط', goods: 'غلات، فلزات، انرژی', forward: 'فعال' } },
-  { id: 'ABEC', name: '🛣 ABEC | Afghanistan Business Corridor', type: 'road', badge: 'جاده‌ای',
+  { id: 'ABEC', name: 'کریدور تجاری افغانستان (ABEC)', type: 'road', badge: 'جاده‌ای',
     details: { type: 'جاده‌ای', time: 'متغیر', cost: 'متوسط', risk: 'بالا (امنیتی)', goods: 'کالاهای مصرفی، ترانزیتی', forward: 'محدود' } },
-  { id: 'STKEC', name: '🏭 STKEC | کریدور اقتصادی شمال-جنوب', type: 'multi', badge: 'اقتصادی',
+  { id: 'STKEC', name: 'کریدور اقتصادی شمال-جنوب (STKEC)', type: 'multi', badge: 'اقتصادی',
     details: { type: 'اقتصادی/تجاری', time: 'در حال توسعه', cost: 'در حال توسعه', risk: 'متوسط', goods: 'کالاهای صنعتی/تجاری', forward: 'در حال توسعه' } }
 ];
 
-// رندر کردن لیست کریدورها با قابلیت کشویی
 function renderCorridors() {
   const container = document.getElementById('carec-list');
   if (!container) return;
@@ -437,21 +619,67 @@ function toggleCorridor(cardElement) {
   cardElement.classList.toggle('open');
 }
 
-// فیلتر کریدورها
 function filterCarec(tag, btn) {
   document.querySelectorAll('.filt').forEach(b => b.classList.remove('on'));
   btn.classList.add('on');
   const cards = document.querySelectorAll('.cor-card');
   cards.forEach(card => {
     const type = card.getAttribute('data-type');
-    if (tag === 'all') {
-      card.style.display = '';
-    } else if (tag === 'sea' && type === 'sea') card.style.display = '';
+    if (tag === 'all') card.style.display = '';
+    else if (tag === 'sea' && type === 'sea') card.style.display = '';
     else if (tag === 'multi' && type === 'multi') card.style.display = '';
     else if (tag === 'rail' && type === 'rail') card.style.display = '';
     else if (tag === 'road' && type === 'road') card.style.display = '';
     else card.style.display = 'none';
   });
+}
+
+// ==================== داده‌های کشورها ====================
+const countriesData = {
+  china: { name: 'چین', capital: 'پکن', population: '۱.۴ میلیارد', keyPorts: 'شانگهای، نینگبو، شنژن', role: 'مبدأ اصلی صادرات، تولید ۳۰٪ کالاهای جهانی', corridor: 'راه ابریشم - مبدأ' },
+  kazakhstan: { name: 'قزاقستان', capital: 'نورسلطان', population: '۱۹ میلیون', keyPorts: 'بندر آکتائو (خزر)', role: 'ترانزیت ریلی، مسیر میانی چین به اروپا', corridor: 'TITR, CRE' },
+  turkmenistan: { name: 'ترکمنستان', capital: 'عشق‌آباد', population: '۶ میلیون', keyPorts: 'بندر ترکمنباشی', role: 'ترانزیت گاز و ریلی به خزر', corridor: 'مسیر شمال-جنوب' },
+  azerbaijan: { name: 'آذربایجان', capital: 'باکو', population: '۱۰ میلیون', keyPorts: 'بندر آلیات (خزر)', role: 'گلوگاه ریلی و دریایی BTK', corridor: 'TITR, BTK, INSTC' },
+  georgia: { name: 'گرجستان', capital: 'تفلیس', population: '۳.۷ میلیون', keyPorts: 'پوتی، باتومی', role: 'دسترسی به دریای سیاه', corridor: 'TITR, BTK' },
+  turkey: { name: 'ترکیه', capital: 'آنکارا', population: '۸۵ میلیون', keyPorts: 'آمبارلی، مرسین', role: 'پل ارتباطی آسیا به اروپا', corridor: 'TITR, BTK' },
+  iran: { name: 'ایران', capital: 'تهران', population: '۸۵ میلیون', keyPorts: 'بندرعباس، امام خمینی، انزلی', role: 'مرکز ترانزیت شمال-جنوب و شرق-غرب', corridor: 'INSTC, TITR' },
+  afghanistan: { name: 'افغانستان', capital: 'کابل', population: '۴۰ میلیون', keyPorts: '-', role: 'ترانزیت زمینی بین آسیای مرکزی و جنوب آسیا', corridor: 'ABEC' },
+  pakistan: { name: 'پاکستان', capital: 'اسلام‌آباد', population: '۲۴۰ میلیون', keyPorts: 'گواتر، کراچی', role: 'دسترسی به اقیانوس هند، CPEC', corridor: 'راه ابریشم جنوبی' },
+  india: { name: 'هند', capital: 'دهلی نو', population: '۱.۴ میلیارد', keyPorts: 'مومبای، نهاوا شیوا', role: 'بازار بزرگ جنوب آسیا', corridor: 'INSTC' },
+  russia: { name: 'روسیه', capital: 'مسکو', population: '۱۴۶ میلیون', keyPorts: 'نووروسیسک، سن پترزبورگ', role: 'مسیر شمالی و کریدور شمال-جنوب', corridor: 'CRE شمالی، INSTC' },
+  iraq: { name: 'عراق', capital: 'بغداد', population: '۴۳ میلیون', keyPorts: 'بندر ام قصر', role: 'ترانزیت به مدیترانه و اروپا', corridor: 'مسیر زمینی غرب ایران' },
+  oman: { name: 'عمان', capital: 'مسقط', population: '۵ میلیون', keyPorts: 'صحار، صلاله', role: 'ترانزیت جایگزین دبی', corridor: 'مسیر دریایی جنوب ایران' },
+  uae: { name: 'امارات متحده عربی', capital: 'ابوظبی', population: '۹.۵ میلیون', keyPorts: 'جبل علی، خلیفه', role: 'هاب لجستیک منطقه', corridor: 'مسیر اصلی دریایی چین-خاورمیانه' }
+};
+
+const countryList = ['china', 'kazakhstan', 'turkmenistan', 'azerbaijan', 'georgia', 'turkey', 'iran', 'afghanistan', 'pakistan', 'india', 'russia', 'iraq', 'oman', 'uae'];
+
+function renderCountries() {
+  const container = document.getElementById('country-list-items');
+  if (!container) return;
+  container.innerHTML = '';
+  countryList.forEach(id => {
+    const c = countriesData[id];
+    const div = document.createElement('div');
+    div.className = 'country-item';
+    div.textContent = c.name;
+    div.onclick = () => selectCountry(id);
+    container.appendChild(div);
+  });
+}
+
+function selectCountry(id) {
+  document.querySelectorAll('.country-item').forEach(el => el.classList.remove('active'));
+  event.target.classList.add('active');
+  const c = countriesData[id];
+  document.getElementById('country-detail-title').innerHTML = c.name;
+  document.getElementById('country-detail-content').innerHTML = `
+    <div class="country-info-row"><div class="country-info-label">پایتخت</div><div class="country-info-value">${c.capital}</div></div>
+    <div class="country-info-row"><div class="country-info-label">جمعیت</div><div class="country-info-value">${c.population}</div></div>
+    <div class="country-info-row"><div class="country-info-label">بنادر کلیدی</div><div class="country-info-value">${c.keyPorts}</div></div>
+    <div class="country-info-row"><div class="country-info-label">نقش در کریدور</div><div class="country-info-value">${c.role}</div></div>
+    <div class="country-info-row"><div class="country-info-label">کریدورهای مرتبط</div><div class="country-info-value">${c.corridor}</div></div>
+  `;
 }
 
 // ==================== نقشه و مسیرها ====================
@@ -543,21 +771,22 @@ function showDash(id) {
   if(event && event.target) event.target.classList.add('active');
   if (id === 'main' && map) setTimeout(() => map.invalidateSize(), 100);
   if (id === 'carec') renderCorridors();
+  if (id === 'countries') renderCountries();
 }
 
-// مقداردهی اولیه
 window.onload = () => {
   initMap();
   renderCorridors();
+  renderCountries();
 };
 
-// expose functions globally
 window.showDash = showDash;
 window.selectRoute = selectRoute;
 window.resetMapFilter = resetMapFilter;
 window.toggleMeasure = toggleMeasure;
 window.filterCarec = filterCarec;
 window.toggleCorridor = toggleCorridor;
+window.selectCountry = selectCountry;
 </script>
 </body>
 </html>
