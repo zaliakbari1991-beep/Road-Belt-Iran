@@ -249,7 +249,7 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
   }
   .cor-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-color: var(--blue); }
   .cor-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
-  .cor-name { font-size: 16px; font-weight: 700; color: var(--blue); }
+  .cor-name { font-size: 15px; font-weight: 700; color: var(--blue); }
   .countries { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 10px; }
   .ctag { font-size: 11px; background: var(--bg2); color: var(--text2); padding: 2px 7px; border-radius: 10px; }
   .desc { font-size: 12px; color: var(--text2); line-height: 1.6; margin-top: 8px; }
@@ -320,8 +320,23 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
     font-size: 11px;
   }
   .map-btn.active { background: var(--blue-bg); border-color: var(--blue); color: var(--blue-text); }
-  #map { height: 320px; }
+  #map { height: 350px; }
 
+  .corridor-detail-container {
+    display: none;
+    margin-top: 20px;
+  }
+  .corridor-detail-container.active {
+    display: block;
+  }
+  .detail-section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--blue);
+    margin: 20px 0 10px 0;
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--blue);
+  }
   .update-note { font-size: 11px; color: var(--text3); text-align: left; margin-top: 16px; }
 </style>
 </head>
@@ -410,128 +425,12 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
     <button class="filt" onclick="filterCarec('road',this)">جاده‌ای</button>
   </div>
 
-  <!-- ==================== کریدور 1: Polar Silk Road ==================== -->
-  <div class="cor-card" data-tags="sea" onclick="showCorridorDetail('Polar')">
-    <div class="cor-head">
-      <div class="cor-name">❄️ Polar Silk Road | راه ابریشم قطبی (مسیر دریای شمال)</div>
-      <span class="badge b-info">دریایی</span>
-    </div>
-    <div class="countries">
-      <span class="ctag">🇨🇳 چین</span><span class="ctag">🇷🇺 روسیه</span><span class="ctag">🇪🇺 اروپا</span>
-    </div>
-    <div class="desc"><strong>کارکرد:</strong> کوتاه‌کردن زمان و فاصله نسبت به مسیر سوئز | <strong>وضعیت:</strong> توسعه‌محور، وابسته به یخ، فصل و ناوگان یخ‌شکن</div>
+  <div id="carec-grid">
+    <!-- کریدورها توسط JS پر می‌شوند -->
   </div>
 
-  <!-- ==================== کریدور 2: Maritime Silk Road ==================== -->
-  <div class="cor-card" data-tags="sea" onclick="showCorridorDetail('Maritime')">
-    <div class="cor-head">
-      <div class="cor-name">🌊 Maritime Silk Road | راه ابریشم آبی</div>
-      <span class="badge b-info">دریایی</span>
-    </div>
-    <div class="countries">
-      <span class="ctag">🇨🇳 چین</span><span class="ctag">🇲🇾 مالزی</span><span class="ctag">🇮🇳 هند</span>
-      <span class="ctag">🇦🇪 امارات</span><span class="ctag">🇪🇬 مصر</span><span class="ctag">🇪🇺 اروپا</span>
-    </div>
-    <div class="desc"><strong>کارکرد:</strong> اتصال بنادر آسیا به خاورمیانه، آفریقا و اروپا | <strong>وضعیت:</strong> یکی از مهم‌ترین شریان‌های تجارت دریایی چین</div>
-  </div>
-
-  <!-- ==================== کریدور 3: TITR ==================== -->
-  <div class="cor-card" data-tags="multi" onclick="showCorridorDetail('TITR')">
-    <div class="cor-head">
-      <div class="cor-name">🌍 TITR | کریدور میانی (Trans-Caspian)</div>
-      <span class="badge b-purple">چندوجهی</span>
-    </div>
-    <div class="countries">
-      <span class="ctag">🇨🇳 چین</span><span class="ctag">🇰🇿 قزاقستان</span>
-      <span class="ctag">🌊 دریای خزر</span><span class="ctag">🇦🇿 آذربایجان</span>
-      <span class="ctag">🇬🇪 گرجستان</span><span class="ctag">🇹🇷 ترکیه</span>
-    </div>
-    <div class="desc"><strong>کارکرد:</strong> اتصال شرق آسیا به اروپا از مسیر زمینی-دریایی</div>
-  </div>
-
-  <!-- ==================== کریدور 4: BTK ==================== -->
-  <div class="cor-card" data-tags="rail" onclick="showCorridorDetail('BTK')">
-    <div class="cor-head">
-      <div class="cor-name">🚂 BTK | باکو-تفلیس-قارص</div>
-      <span class="badge b-info">ریلی</span>
-    </div>
-    <div class="countries">
-      <span class="ctag">🇦🇿 آذربایجان</span><span class="ctag">🇬🇪 گرجستان</span><span class="ctag">🇹🇷 ترکیه</span>
-    </div>
-    <div class="desc"><strong>کارکرد:</strong> اتصال قفقاز به شبکه ریل ترکیه و اروپا</div>
-  </div>
-
-  <!-- ==================== کریدور 5: CKU ==================== -->
-  <div class="cor-card" data-tags="rail" onclick="showCorridorDetail('CKU')">
-    <div class="cor-head">
-      <div class="cor-name">🚂 CKU | چین-قرقیزستان-ازبکستان</div>
-      <span class="badge b-info">ریلی</span>
-    </div>
-    <div class="countries">
-      <span class="ctag">🇨🇳 چین</span><span class="ctag">🇰🇬 قرقیزستان</span><span class="ctag">🇺🇿 ازبکستان</span>
-    </div>
-    <div class="desc"><strong>کارکرد:</strong> اتصال مستقیم چین به آسیای مرکزی</div>
-  </div>
-
-  <!-- ==================== کریدور 6: CRE North ==================== -->
-  <div class="cor-card" data-tags="rail" onclick="showCorridorDetail('CRE_North')">
-    <div class="cor-head">
-      <div class="cor-name">🚂 CRE شمالی | چین-مغولستان-روسیه-اروپا</div>
-      <span class="badge b-info">ریلی</span>
-    </div>
-    <div class="countries">
-      <span class="ctag">🇨🇳 چین</span><span class="ctag">🇲🇳 مغولستان</span><span class="ctag">🇷🇺 روسیه</span><span class="ctag">🇪🇺 اروپا</span>
-    </div>
-    <div class="desc"><strong>کارکرد:</strong> مسیر ریلی شمالی برای چین به اروپا</div>
-  </div>
-
-  <!-- ==================== کریدور 7: PAK-AFG-UZB ==================== -->
-  <div class="cor-card" data-tags="road" onclick="showCorridorDetail('PAK_AFG_UZB')">
-    <div class="cor-head">
-      <div class="cor-name">🛣 پاکستان-افغانستان-ازبکستان</div>
-      <span class="badge b-warn">جاده‌ای/ریلی محدود</span>
-    </div>
-    <div class="countries">
-      <span class="ctag">🇵🇰 پاکستان</span><span class="ctag">🇦🇫 افغانستان</span><span class="ctag">🇺🇿 ازبکستان</span>
-    </div>
-    <div class="desc"><strong>کارکرد:</strong> اتصال جنوب آسیا به آسیای مرکزی</div>
-  </div>
-
-  <!-- ==================== کریدور 8: INSTC ==================== -->
-  <div class="cor-card" data-tags="multi" onclick="showCorridorDetail('INSTC')">
-    <div class="cor-head">
-      <div class="cor-name">🌊 INSTC | کریدور شمال-جنوب</div>
-      <span class="badge b-purple">چندوجهی</span>
-    </div>
-    <div class="countries">
-      <span class="ctag">🇮🇳 هند</span><span class="ctag">🇮🇷 ایران</span><span class="ctag">🇦🇿 آذربایجان</span><span class="ctag">🇷🇺 روسیه</span>
-    </div>
-    <div class="desc"><strong>کارکرد:</strong> اتصال جنوب آسیا به روسیه و اروپا</div>
-  </div>
-
-  <!-- ==================== کریدور 9: ABEC ==================== -->
-  <div class="cor-card" data-tags="road" onclick="showCorridorDetail('ABEC')">
-    <div class="cor-head">
-      <div class="cor-name">🛣 ABEC | Afghanistan Business Corridor</div>
-      <span class="badge b-warn">جاده‌ای</span>
-    </div>
-    <div class="countries">
-      <span class="ctag">🇦🇫 افغانستان</span><span class="ctag">🇵🇰 پاکستان</span><span class="ctag">🇺🇿 ازبکستان</span>
-    </div>
-    <div class="desc"><strong>کارکرد:</strong> چارچوب اتصال اقتصادی-زیرساختی افغانستان</div>
-  </div>
-
-  <!-- ==================== کریدور 10: STKEC ==================== -->
-  <div class="cor-card" data-tags="multi" onclick="showCorridorDetail('STKEC')">
-    <div class="cor-head">
-      <div class="cor-name">🏭 STKEC | کریدور اقتصادی شمال-جنوب</div>
-      <span class="badge b-info">اقتصادی</span>
-    </div>
-    <div class="countries">
-      <span class="ctag">🇰🇿 قزاقستان</span><span class="ctag">🇺🇿 ازبکستان</span><span class="ctag">🇹🇯 تاجیکستان</span>
-    </div>
-    <div class="desc"><strong>کارکرد:</strong> کریدور اقتصادی/تجاری پیونددهنده منطقه‌ای</div>
-  </div>
+  <!-- بخش نمایش جزئیات کریدور انتخاب شده -->
+  <div id="corridor-detail-container" class="corridor-detail-container"></div>
 </div>
 
 <!-- ========== DASH 3: CRE ========== -->
@@ -571,6 +470,7 @@ function checkPwd() {
     document.getElementById('app').style.display = 'block';
     initMapAndRoutes();
     renderCountriesBar();
+    renderCorridorsList();
     document.querySelector('.route-btn')?.classList.add('active');
   } else {
     document.getElementById('gate-err').style.display = 'block';
@@ -612,30 +512,373 @@ function selectCountry(countryId) {
   document.getElementById('d-forward').textContent = c.forward;
 }
 
-// ==================== نمایش جزئیات کریدور ====================
-function showCorridorDetail(corridorId) {
-  const details = {
-    Polar: { title: '❄️ Polar Silk Road | راه ابریشم قطبی', type: 'دریایی (اقیانوس منجمد شمالی)', time: '۲۰-۳۵ روز (وابسته به فصل)', cost: 'متوسط تا بالا', risk: 'بالا (یخ، ژئوپلیتیک)', goods: 'کالاهای صنعتی، تجهیزات، کالاهای مصرفی، انرژی', forward: 'محدود' },
-    Maritime: { title: '🌊 Maritime Silk Road | راه ابریشم آبی', type: 'دریایی', time: '۳۰-۴۵ روز', cost: 'پایین تا متوسط', risk: 'متوسط (تنگه‌ها، ژئوپلیتیک)', goods: 'کانتینر، الکترونیک، کالاهای مصرفی، مواد خام، انرژی', forward: 'فعال' },
-    TITR: { title: '🌍 TITR | کریدور میانی', type: 'چندوجهی (ریلی + دریایی)', time: '۲۰-۳۰ روز', cost: 'متوسط', risk: 'متوسط', goods: 'کانتینر، کالاهای صنعتی، فلزات', forward: 'فعال' },
-    BTK: { title: '🚂 BTK | باکو-تفلیس-قارص', type: 'ریلی', time: '۱۲-۱۸ روز', cost: 'متوسط', risk: 'پایین', goods: 'کالاهای ترانزیتی، صنعتی', forward: 'فعال' },
-    CKU: { title: '🚂 CKU | چین-قرقیزستان-ازبکستان', type: 'ریلی', time: '۱۵-۲۵ روز', cost: 'متوسط', risk: 'متوسط', goods: 'کالاهای صنعتی، فلزات، مواد اولیه', forward: 'در حال توسعه' },
-    CRE_North: { title: '🚂 CRE شمالی | چین-مغولستان-روسیه-اروپا', type: 'ریلی', time: '۱۵-۲۰ روز', cost: 'متوسط', risk: 'متوسط (ژئوپلیتیک)', goods: 'کانتینر، کالاهای حجیم، صادرات صنعتی چین', forward: 'فعال' },
-    PAK_AFG_UZB: { title: '🛣 پاکستان-افغانستان-ازبکستان', type: 'جاده‌ای/ریلی محدود', time: '۲۰-۳۰ روز', cost: 'متوسط', risk: 'بالا (امنیتی)', goods: 'کالاهای مصرفی، مواد غذایی، ساختمانی', forward: 'محدود' },
-    INSTC: { title: '🌊 INSTC | کریدور شمال-جنوب', type: 'چندوجهی (دریایی + ریلی)', time: '۲۰-۲۵ روز', cost: 'متوسط', risk: 'متوسط', goods: 'غلات، فلزات، کالاهای صنعتی، انرژی', forward: 'فعال' },
-    ABEC: { title: '🛣 ABEC | Afghanistan Business Corridor', type: 'جاده‌ای', time: 'متغیر', cost: 'متوسط', risk: 'بالا (امنیتی)', goods: 'کالاهای مصرفی، ترانزیتی', forward: 'محدود' },
-    STKEC: { title: '🏭 STKEC | کریدور اقتصادی شمال-جنوب', type: 'اقتصادی/تجاری', time: 'در حال توسعه', cost: 'در حال توسعه', risk: 'متوسط', goods: 'کالاهای صنعتی/تجاری', forward: 'در حال توسعه' }
-  };
-  const d = details[corridorId];
-  if(d) {
-    document.getElementById('detail-title').textContent = d.title;
-    document.getElementById('d-type').textContent = d.type;
-    document.getElementById('d-time').textContent = d.time;
-    document.getElementById('d-cost').textContent = d.cost;
-    document.getElementById('d-risk').textContent = d.risk;
-    document.getElementById('d-goods').textContent = d.goods;
-    document.getElementById('d-forward').textContent = d.forward;
+// ==================== اطلاعات کامل کریدورها ====================
+const corridorsFullData = {
+  TITR: {
+    name: 'TITR | کریدور میانی (Trans-Caspian)',
+    type: 'چندوجهی',
+    countries: ['چین', 'قزاقستان', 'دریای خزر', 'آذربایجان', 'گرجستان', 'ترکیه', 'اروپا'],
+    color: '#534AB7',
+    coords: [[34.34, 108.94], [43.25, 76.95], [46.78, 53.08], [40.39, 49.89], [41.72, 44.78], [40.76, 39.47], [41.01, 28.96]],
+    routeSteps: [
+      { step: 1, point: 'شی‌آن / خورگوس', country: 'چین', type: 'ریلی' },
+      { step: 2, point: 'آلماتی', country: 'قزاقستان', type: 'ریلی' },
+      { step: 3, point: 'آکتائو', country: 'قزاقستان', type: 'ریلی تا بندر، سپس دریایی' },
+      { step: 4, point: 'بندر خزر / عبور خزر', country: 'دریای خزر', type: 'دریایی' },
+      { step: 5, point: 'باکو', country: 'آذربایجان', type: 'دریایی تا بندر، سپس ریلی/جاده‌ای' },
+      { step: 6, point: 'تفلیس', country: 'گرجستان', type: 'ریلی/جاده‌ای' },
+      { step: 7, point: 'قارص', country: 'ترکیه', type: 'ریلی' },
+      { step: 8, point: 'استانبول / اروپا', country: 'ترکیه / اروپا', type: 'ریلی/جاده‌ای' }
+    ],
+    borderPoints: [
+      { role: 'مرز چین-قزاقستان', countries: 'چین/قزاقستان', point: 'منطقه ورود اصلی بار ریلی از چین' },
+      { role: 'بنادر خزر', countries: 'قزاقستان/آذربایجان', point: 'انتقال دریایی میان دو ساحل خزر' },
+      { role: 'مرز آذربایجان-گرجستان', countries: 'آذربایجان/گرجستان', point: 'گلوگاه مهم زمینی' },
+      { role: 'مرز گرجستان-ترکیه', countries: 'گرجستان/ترکیه', point: 'ورود به شبکه ترکیه و اروپا' }
+    ],
+    costs: [
+      { item: 'کرایه پایه', status: 'وابسته به اپراتور ریلی، بندری و فورواردر' },
+      { item: 'هزینه‌های مرزی', status: 'بازرسی، ترخیص، اسکن، دپوی موقت' },
+      { item: 'هزینه دریای خزر', status: 'متغیر بر اساس بندر، نوع واگن/کانتینر و فصل' },
+      { item: 'توقف مرزی', status: 'در برخی نقاط به دلیل کنترل‌های تکراری بالا می‌رود' },
+      { item: 'گلوگاه اصلی', status: 'مرز چین-قزاقستان و هماهنگی چندکشوری' }
+    ],
+    documents: [
+      { doc: 'بارنامه', desc: 'برای حمل ریلی/چندوجهی' },
+      { doc: 'اظهارنامه ترانزیت', desc: 'برای عبور بدون ورود قطعی' },
+      { doc: 'مبدأ کالا', desc: 'برای تعیین تعرفه و ترجیحات' },
+      { doc: 'مانیفست', desc: 'فهرست محموله' },
+      { doc: 'TIR / eTIR', desc: 'برای تسهیل عبور' },
+      { doc: 'مجوزهای خاص', desc: 'برای کالاهای حساس، فلزات، مواد شیمیایی، تجهیزات صنعتی' }
+    ],
+    goods: ['کانتینر', 'قطعات صنعتی', 'کالاهای مصرفی', 'فلزات', 'محصولات نیمه‌ساخته'],
+    cities: ['آلماتی', 'آکتائو', 'باکو', 'تفلیس', 'قارص'],
+    steelCopper: 'قزاقستان و ازبکستان در فلزات قوی‌ترند؛ آذربایجان بیشتر ترانزیتی است',
+    mines: 'قزاقستان و ازبکستان معدنی‌ترند؛ گرجستان و آذربایجان نقش محدودتر دارند',
+    status: 'رشد تقاضا، اما گلوگاه اصلی همچنان مرزها و هماهنگی گمرکی است',
+    spec: 'مسیر کلاسیک چین به اروپا از قزاقستان، دریای خزر، آذربایجان، گرجستان و ترکیه'
+  },
+  BTK: {
+    name: 'BTK | باکو-تفلیس-قارص',
+    type: 'ریلی',
+    countries: ['آذربایجان', 'گرجستان', 'ترکیه'],
+    color: '#1D9E75',
+    coords: [[40.39, 49.89], [41.72, 44.78], [41.41, 43.29], [40.76, 39.47]],
+    routeSteps: [
+      { step: 1, point: 'باکو', country: 'آذربایجان', type: 'ریلی' },
+      { step: 2, point: 'مرز آذربایجان-گرجستان', country: 'آذربایجان/گرجستان', type: 'ریلی' },
+      { step: 3, point: 'آخالکالاکی', country: 'گرجستان', type: 'ریلی' },
+      { step: 4, point: 'قارص', country: 'ترکیه', type: 'ریلی' },
+      { step: 5, point: 'اتصال به شبکه ترکیه', country: 'ترکیه', type: 'ریلی' }
+    ],
+    borderPoints: [
+      { role: 'نقطه تجمیع و اتصال', countries: 'آذربایجان', point: 'باکو' },
+      { role: 'نقطه حساس عملیاتی/فنی', countries: 'گرجستان', point: 'آخالکالاکی' },
+      { role: 'ورودی به شبکه ترکیه', countries: 'ترکیه', point: 'قارص' }
+    ],
+    costs: [
+      { item: 'کرایه ریل', status: 'وابسته به قرارداد و نوع بار' },
+      { item: 'هزینه ترانزیت', status: 'شامل گمرک، دپو و عملیات مرزی' },
+      { item: 'توقف', status: 'در صورت ازدحام یا هماهنگی ضعیف افزایش می‌یابد' },
+      { item: 'گلوگاه اصلی', status: 'مرزها و اتصال عملیاتی بین شبکه‌های ملی' }
+    ],
+    documents: [
+      { doc: 'بارنامه', desc: 'اصلی‌ترین سند حمل' },
+      { doc: 'اظهارنامه ترانزیت', desc: 'برای عبور از سه کشور' },
+      { doc: 'مبدأ', desc: 'برای تعرفه و کنترل' },
+      { doc: 'مانیفست', desc: 'فهرست بار' },
+      { doc: 'مجوز خاص', desc: 'برای محموله‌های حساس' }
+    ],
+    goods: ['کالاهای ترانزیتی', 'کانتینری', 'کالاهای صنعتی'],
+    cities: ['باکو', 'تفلیس', 'قارص'],
+    steelCopper: 'ترکیه در فولاد قوی است؛ آذربایجان بیشتر ترانزیتی',
+    mines: 'آذربایجان محدودتر؛ گرجستان محدود؛ ترکیه متنوع‌تر',
+    status: 'مهم، فعال و در حال بهینه‌سازی در مرزها و گمرک',
+    spec: 'مسیر کاملاً ریلی - برخلاف Middle Corridor دریایی ندارد'
+  },
+  CKU: {
+    name: 'CKU | چین-قرقیزستان-ازبکستان',
+    type: 'ریلی',
+    countries: ['چین', 'قرقیزستان', 'ازبکستان'],
+    color: '#BA7517',
+    coords: [[39.47, 75.99], [41.06, 75.35], [41.05, 72.65], [41.31, 69.24]],
+    routeSteps: [
+      { step: 1, point: 'چین غربی / کاشغر', country: 'چین', type: 'ریلی' },
+      { step: 2, point: 'مرز چین-قرقیزستان', country: 'چین/قرقیزستان', type: 'ریلی' },
+      { step: 3, point: 'بخش کوهستانی قرقیزستان', country: 'قرقیزستان', type: 'ریلی' },
+      { step: 4, point: 'مرز قرقیزستان-ازبکستان', country: 'قرقیزستان/ازبکستان', type: 'ریلی' },
+      { step: 5, point: 'تاشکند', country: 'ازبکستان', type: 'ریلی' }
+    ],
+    borderPoints: [
+      { role: 'ورودی اصلی', countries: 'چین/قرقیزستان', point: 'مرز چین-قرقیزستان' },
+      { role: 'خروج به شبکه ازبکستان', countries: 'قرقیزستان/ازبکستان', point: 'مرز قرقیزستان-ازبکستان' }
+    ],
+    costs: [
+      { item: 'هزینه‌ها', status: 'نیازمند تعرفه رسمی اپراتور و مرز' },
+      { item: 'توقف', status: 'به‌دلیل کوهستانی بودن و مرزها محتمل' },
+      { item: 'گلوگاه', status: 'حمل کوهستانی، تبادل مرزی، لجستیک ناپیوسته' }
+    ],
+    documents: [
+      { doc: 'بارنامه', desc: 'الزامی' },
+      { doc: 'اظهارنامه ترانزیت', desc: 'الزامی' },
+      { doc: 'مبدأ', desc: 'الزامی' },
+      { doc: 'مجوزها', desc: 'بسته به نوع کالا' }
+    ],
+    goods: ['کالاهای صنعتی', 'فلزات', 'مواد اولیه'],
+    cities: ['بیشکک', 'اوش', 'تاشکند', 'فرغانه'],
+    steelCopper: 'ازبکستان در مس و فلزات مهم است',
+    mines: 'قرقیزستان و ازبکستان معدنی‌اند',
+    status: 'پروژه کلیدی و در حال پیشرفت',
+    spec: 'اتصال مستقیم چین به ازبکستان و شبکه آسیای مرکزی'
+  },
+  CRE_North: {
+    name: 'CRE شمالی | چین-مغولستان-روسیه-اروپا',
+    type: 'ریلی',
+    countries: ['چین', 'مغولستان', 'روسیه', 'اروپا'],
+    color: '#185FA5',
+    coords: [[39.90, 116.40], [46.86, 106.87], [55.75, 37.62], [52.52, 13.40]],
+    routeSteps: [
+      { step: 1, point: 'چین شمالی / مرزهای شرقی', country: 'چین', type: 'ریلی' },
+      { step: 2, point: 'مرز چین-مغولستان', country: 'چین/مغولستان', type: 'ریلی' },
+      { step: 3, point: 'اولان‌باتور / محورهای داخلی', country: 'مغولستان', type: 'ریلی' },
+      { step: 4, point: 'مرز مغولستان-روسیه', country: 'مغولستان/روسیه', type: 'ریلی' },
+      { step: 5, point: 'روسیه', country: 'روسیه', type: 'ریلی' },
+      { step: 6, point: 'اروپا', country: 'اروپا', type: 'ریلی' }
+    ],
+    borderPoints: [
+      { role: 'ورود به مسیر شمالی', countries: 'چین/مغولستان', point: 'مرز چین-مغولستان' },
+      { role: 'ادامه مسیر به اروپا', countries: 'مغولستان/روسیه', point: 'اتصال به روسیه' }
+    ],
+    costs: [
+      { item: 'هزینه‌ها', status: 'وابسته به توافقات ریلی و عبور مرزی' },
+      { item: 'توقف', status: 'معمولاً پایدارتر از برخی مسیرهای میانی' },
+      { item: 'گلوگاه', status: 'ظرفیت، ژئوپلیتیک، کنترل مرزی' }
+    ],
+    documents: [
+      { doc: 'بارنامه', desc: 'الزامی' },
+      { doc: 'اظهارنامه ترانزیت', desc: 'الزامی' },
+      { doc: 'مبدأ', desc: 'الزامی' },
+      { doc: 'مجوزها', desc: 'بسته به کالا' }
+    ],
+    goods: ['کانتینر', 'کالاهای حجیم', 'صادرات صنعتی چین'],
+    cities: ['ارلیان', 'اولان‌باتور', 'هاب‌های روسیه'],
+    steelCopper: 'چین و روسیه در فولاد و فلزات بسیار قوی‌اند',
+    mines: 'مغولستان معدن‌محور است',
+    status: 'فعال و مهم، اما تحت فشار ژئوپلیتیک و تراکم',
+    spec: 'مسیر ریلی شمالی - برخلاف کریدور میانی بخش دریایی ندارد'
+  },
+  PAK_AFG_UZB: {
+    name: 'پاکستان-افغانستان-ازبکستان',
+    type: 'جاده‌ای/ریلی محدود',
+    countries: ['پاکستان', 'افغانستان', 'ازبکستان'],
+    color: '#E24B4A',
+    coords: [[34.02, 71.58], [34.56, 69.21], [36.73, 67.11], [37.22, 67.28]],
+    routeSteps: [
+      { step: 1, point: 'پیشاور / مرزهای شرقی', country: 'پاکستان', type: 'جاده‌ای/ریلی' },
+      { step: 2, point: 'مرز پاکستان-افغانستان', country: 'پاکستان/افغانستان', type: 'جاده‌ای' },
+      { step: 3, point: 'کابل / مزارشریف', country: 'افغانستان', type: 'جاده‌ای' },
+      { step: 4, point: 'مرز افغانستان-ازبکستان', country: 'افغانستان/ازبکستان', type: 'جاده‌ای/ریلی' },
+      { step: 5, point: 'ترمذ / تاشکند', country: 'ازبکستان', type: 'ریلی/جاده‌ای' }
+    ],
+    goods: ['کالاهای مصرفی', 'مواد غذایی', 'ساختمانی', 'ترانزیتی'],
+    cities: ['کابل', 'مزارشریف', 'هرات'],
+    status: 'توسعه‌محور، اما نیازمند تثبیت امنیت',
+    spec: 'به دلیل وضعیت افغانستان بیشتر ترکیبی و جاده‌محور است'
+  },
+  INSTC: {
+    name: 'INSTC | کریدور شمال-جنوب',
+    type: 'چندوجهی',
+    countries: ['هند', 'ایران', 'آذربایجان', 'روسیه'],
+    color: '#1D9E75',
+    coords: [[19.08, 72.88], [27.18, 56.27], [40.39, 49.89], [46.35, 48.04]],
+    routeSteps: [
+      { step: 1, point: 'بمبئی / بنادر جنوبی', country: 'هند', type: 'دریایی' },
+      { step: 2, point: 'بنادر جنوبی ایران', country: 'ایران', type: 'دریایی' },
+      { step: 3, point: 'رشت / قزوین / تهران', country: 'ایران', type: 'ریلی/جاده‌ای' },
+      { step: 4, point: 'آستارا', country: 'ایران/آذربایجان', type: 'ریلی/جاده‌ای' },
+      { step: 5, point: 'باکو', country: 'آذربایجان', type: 'ریلی/جاده‌ای' },
+      { step: 6, point: 'آستراخان / روسیه', country: 'روسیه', type: 'ریلی/دریایی' },
+      { step: 7, point: 'سن‌پترزبورگ / اروپا', country: 'روسیه/اروپا', type: 'ریلی' }
+    ],
+    goods: ['غلات', 'فلزات', 'کالاهای صنعتی', 'انرژی'],
+    cities: ['آستارا', 'رشت', 'باکو', 'آستراخان', 'سرخس'],
+    status: 'در حال تقویت و ساده‌سازی مرزی',
+    spec: 'مسیر مکمل و کوتاه‌تر برای برخی محموله‌ها'
+  },
+  ABEC: {
+    name: 'ABEC | Afghanistan Business Corridor',
+    type: 'جاده‌ای',
+    countries: ['افغانستان', 'پاکستان', 'ازبکستان', 'ایران'],
+    color: '#BA7517',
+    goods: ['کالاهای مصرفی', 'مواد غذایی', 'ساختمانی', 'ترانزیتی'],
+    cities: ['کابل', 'مزارشریف', 'هرات'],
+    status: 'توسعه‌محور، نیازمند تثبیت و جزئیات رسمی بیشتر',
+    spec: 'چارچوب اتصال اقتصادی-زیرساختی افغانستان'
+  },
+  STKEC: {
+    name: 'STKEC | کریدور اقتصادی شمال-جنوب',
+    type: 'اقتصادی/تجاری',
+    countries: ['قزاقستان', 'ازبکستان', 'تاجیکستان'],
+    color: '#534AB7',
+    goods: ['کالاهای صنعتی', 'تجاری'],
+    status: 'نیازمند منبع رسمی برای تفکیک دقیق',
+    spec: 'کریدور اقتصادی/تجاری پیونددهنده منطقه‌ای'
   }
+};
+
+// ==================== رندر لیست کریدورها ====================
+function renderCorridorsList() {
+  const container = document.getElementById('carec-grid');
+  const corridors = [
+    { id: 'TITR', name: '🌍 TITR | کریدور میانی (Trans-Caspian)', type: 'چندوجهی', tag: 'multi' },
+    { id: 'BTK', name: '🚂 BTK | باکو-تفلیس-قارص', type: 'ریلی', tag: 'rail' },
+    { id: 'CKU', name: '🚂 CKU | چین-قرقیزستان-ازبکستان', type: 'ریلی', tag: 'rail' },
+    { id: 'CRE_North', name: '🚂 CRE شمالی | چین-مغولستان-روسیه-اروپا', type: 'ریلی', tag: 'rail' },
+    { id: 'PAK_AFG_UZB', name: '🛣 پاکستان-افغانستان-ازبکستان', type: 'جاده‌ای/ریلی محدود', tag: 'road' },
+    { id: 'INSTC', name: '🌊 INSTC | کریدور شمال-جنوب', type: 'چندوجهی', tag: 'multi' },
+    { id: 'ABEC', name: '🛣 ABEC | Afghanistan Business Corridor', type: 'جاده‌ای', tag: 'road' },
+    { id: 'STKEC', name: '🏭 STKEC | کریدور اقتصادی شمال-جنوب', type: 'اقتصادی', tag: 'multi' }
+  ];
+  
+  container.innerHTML = corridors.map(c => `
+    <div class="cor-card" data-tags="${c.tag}" onclick="showCorridorFullDetail('${c.id}')">
+      <div class="cor-head">
+        <div class="cor-name">${c.name}</div>
+        <span class="badge b-${c.type === 'چندوجهی' ? 'purple' : (c.type === 'ریلی' ? 'info' : 'warn')}">${c.type}</span>
+      </div>
+      <div class="countries">
+        ${corridorsFullData[c.id].countries.map(ct => `<span class="ctag">${ct}</span>`).join('')}
+      </div>
+      <div class="desc">${corridorsFullData[c.id].spec.substring(0, 100)}...</div>
+    </div>
+  `).join('');
+}
+
+// ==================== نمایش جزئیات کامل کریدور ====================
+let currentMapLine = null;
+let currentMapMarkers = [];
+
+function showCorridorFullDetail(corridorId) {
+  const data = corridorsFullData[corridorId];
+  if (!data) return;
+  
+  // نمایش مسیر روی نقشه
+  if (data.coords && currentMap) {
+    if (currentMapLine) currentMap.removeLayer(currentMapLine);
+    currentMapMarkers.forEach(m => currentMap.removeLayer(m));
+    currentMapMarkers = [];
+    
+    currentMapLine = L.polyline(data.coords, {
+      color: data.color,
+      weight: 4,
+      opacity: 0.9
+    }).addTo(currentMap);
+    
+    // اضافه کردن مارکرهای نقاط مهم
+    data.coords.forEach(coord => {
+      const marker = L.circleMarker(coord, {
+        radius: 5,
+        color: data.color,
+        fillColor: data.color,
+        fillOpacity: 0.8
+      }).addTo(currentMap);
+      currentMapMarkers.push(marker);
+    });
+    
+    currentMap.fitBounds(currentMapLine.getBounds());
+  }
+  
+  // ساخت HTML برای جزئیات کامل
+  let html = `
+    <div class="detail-section-title">📋 ${data.name}</div>
+    <div class="card">
+      <div class="section-lbl">مشخصات کلی</div>
+      <table class="info-table">
+        <tr><th>نوع حمل</th><td>${data.type}</td></tr>
+        <tr><th>کشورهای مسیر</th><td>${data.countries.join(' → ')}</td></tr>
+        <tr><th>وضعیت ۲۰۲۵-۲۰۲۶</th><td>${data.status}</td></tr>
+        <tr><th>توضیحات</th><td>${data.spec}</td></tr>
+      </table>
+    </div>
+  `;
+  
+  // جدول نقاط عبور
+  if (data.routeSteps) {
+    html += `
+      <div class="card">
+        <div class="section-lbl">🗺️ نقاط عبور (ترتیب مسیر)</div>
+        <div class="route-steps">
+          ${data.routeSteps.map(s => `
+            <div class="step-item">
+              <div class="step-num">${s.step}</div>
+              <div>${s.point} — <strong>${s.country}</strong> — ${s.type}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+  
+  // جدول نقاط مرزی و گمرکی
+  if (data.borderPoints) {
+    html += `
+      <div class="card">
+        <div class="section-lbl">🛃 نقاط مرزی و گمرکی</div>
+        <table class="info-table">
+          <tr><th>نقش</th><th>کشور/کشورها</th><th>نقطه</th></tr>
+          ${data.borderPoints.map(b => `
+            <tr><td>${b.role}</td><td>${b.countries}</td><td>${b.point}</td></tr>
+          `).join('')}
+        </table>
+      </div>
+    `;
+  }
+  
+  // جدول هزینه‌ها و توقف
+  if (data.costs) {
+    html += `
+      <div class="card">
+        <div class="section-lbl">💰 هزینه‌ها و توقف</div>
+        <table class="info-table">
+          <tr><th>وضعیت</th><th>مورد</th></tr>
+          ${data.costs.map(c => `
+            <tr><td>${c.item}</td><td>${c.status}</td></tr>
+          `).join('')}
+        </table>
+      </div>
+    `;
+  }
+  
+  // جدول اسناد لازم
+  if (data.documents) {
+    html += `
+      <div class="card">
+        <div class="section-lbl">📄 اسناد لازم</div>
+        <table class="info-table">
+          <tr><th>سند</th><th>توضیح</th></tr>
+          ${data.documents.map(d => `
+            <tr><td>${d.doc}</td><td>${d.desc}</td></tr>
+          `).join('')}
+        </table>
+      </div>
+    `;
+  }
+  
+  // جدول کالا، شهر، صنعت، معدن
+  html += `
+    <div class="card">
+      <div class="section-lbl">🏭 کالا، شهر، صنعت، معدن</div>
+      <table class="info-table">
+        <tr><th>کالاهای غالب</th><td>${data.goods.join('، ')}</td></tr>
+        <tr><th>شهرهای مهم</th><td>${data.cities?.join('، ') || 'در حال تکمیل'}</td></tr>
+        <tr><th>فولاد/مس</th><td>${data.steelCopper || 'در حال تکمیل'}</td></tr>
+        <tr><th>معادن</th><td>${data.mines || 'در حال تکمیل'}</td></tr>
+      </table>
+    </div>
+  `;
+  
+  document.getElementById('corridor-detail-container').innerHTML = html;
+  document.getElementById('corridor-detail-container').classList.add('active');
 }
 
 // ==================== ROUTE DATA & MAP ====================
@@ -654,6 +897,7 @@ function initMapAndRoutes() {
   L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { attribution: '© OpenStreetMap' }).addTo(map);
   map.on('click', onMapClick);
   selectRoute('dubai');
+  window.currentMap = map;
 }
 
 function selectRoute(routeId) {
@@ -726,12 +970,15 @@ function showDash(id) {
   document.getElementById('dash-' + id).classList.add('active');
   if (event?.target) event.target.classList.add('active');
   if (id === 'main' && map) setTimeout(() => map.invalidateSize(), 100);
+  if (id === 'carec') {
+    document.getElementById('corridor-detail-container').classList.remove('active');
+  }
 }
 
 function filterCarec(tag, btn) {
   document.querySelectorAll('.filt').forEach(b => b.classList.remove('on'));
   btn.classList.add('on');
-  document.querySelectorAll('.cor-card').forEach(c => {
+  document.querySelectorAll('#carec-grid .cor-card').forEach(c => {
     const tags = c.dataset.tags || '';
     if (tag === 'all') { c.style.display = ''; return; }
     c.style.display = tags.includes(tag) ? '' : 'none';
@@ -745,7 +992,7 @@ window.toggleMeasure = toggleMeasure;
 window.showDash = showDash;
 window.filterCarec = filterCarec;
 window.checkPwd = checkPwd;
-window.showCorridorDetail = showCorridorDetail;
+window.showCorridorFullDetail = showCorridorFullDetail;
 </script>
 </body>
 </html>
