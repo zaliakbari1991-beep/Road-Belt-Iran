@@ -143,7 +143,7 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
     color: var(--text3);
     text-transform: uppercase;
     margin-bottom: 8px;
-    margin-top: 16px;
+    margin-top: 12px;
   }
   .card {
     background: var(--bg);
@@ -322,20 +322,27 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
   .map-btn.active { background: var(--blue-bg); border-color: var(--blue); color: var(--blue-text); }
   #map { height: 350px; }
 
-  .corridor-detail-container {
+  .corridor-info-panel {
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    border-radius: var(--rad-lg);
+    padding: 1rem;
+    margin-top: 16px;
     display: none;
-    margin-top: 20px;
   }
-  .corridor-detail-container.active {
+  .corridor-info-panel.active {
     display: block;
   }
   .detail-section-title {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--blue);
-    margin: 20px 0 10px 0;
+    margin: 0 0 12px 0;
     padding-bottom: 5px;
     border-bottom: 2px solid var(--blue);
+  }
+  .corridor-grid-list {
+    margin-top: 20px;
   }
   .update-note { font-size: 11px; color: var(--text3); text-align: left; margin-top: 16px; }
 </style>
@@ -417,20 +424,19 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
     <div class="met"><div class="met-n">۲۰۳۰</div><div class="met-l">افق توسعه</div></div>
   </div>
 
+  <!-- نقشه برای تب کریدورها (همان نقشه بالایی استفاده می‌شود) -->
+  
+  <!-- پنل نمایش اطلاعات کریدور انتخاب شده (زیر نقشه) -->
+  <div id="corridor-info-panel" class="corridor-info-panel"></div>
+
   <div class="filter-row">
     <button class="filt on" onclick="filterCarec('all',this)">همه</button>
-    <button class="filt" onclick="filterCarec('sea',this)">دریایی</button>
     <button class="filt" onclick="filterCarec('multi',this)">چندوجهی</button>
     <button class="filt" onclick="filterCarec('rail',this)">ریلی</button>
     <button class="filt" onclick="filterCarec('road',this)">جاده‌ای</button>
   </div>
 
-  <div id="carec-grid">
-    <!-- کریدورها توسط JS پر می‌شوند -->
-  </div>
-
-  <!-- بخش نمایش جزئیات کریدور انتخاب شده -->
-  <div id="corridor-detail-container" class="corridor-detail-container"></div>
+  <div class="corridor-grid-list" id="carec-grid"></div>
 </div>
 
 <!-- ========== DASH 3: CRE ========== -->
@@ -680,8 +686,12 @@ const corridorsFullData = {
       { step: 4, point: 'مرز افغانستان-ازبکستان', country: 'افغانستان/ازبکستان', type: 'جاده‌ای/ریلی' },
       { step: 5, point: 'ترمذ / تاشکند', country: 'ازبکستان', type: 'ریلی/جاده‌ای' }
     ],
+    borderPoints: [
+      { role: 'مرز پاکستان-افغانستان', countries: 'پاکستان/افغانستان', point: 'تورخم / چمن' },
+      { role: 'مرز افغانستان-ازبکستان', countries: 'افغانستان/ازبکستان', point: 'حیرتان / ترمذ' }
+    ],
     goods: ['کالاهای مصرفی', 'مواد غذایی', 'ساختمانی', 'ترانزیتی'],
-    cities: ['کابل', 'مزارشریف', 'هرات'],
+    cities: ['کابل', 'مزارشریف', 'پیشاور'],
     status: 'توسعه‌محور، اما نیازمند تثبیت امنیت',
     spec: 'به دلیل وضعیت افغانستان بیشتر ترکیبی و جاده‌محور است'
   },
@@ -700,29 +710,17 @@ const corridorsFullData = {
       { step: 6, point: 'آستراخان / روسیه', country: 'روسیه', type: 'ریلی/دریایی' },
       { step: 7, point: 'سن‌پترزبورگ / اروپا', country: 'روسیه/اروپا', type: 'ریلی' }
     ],
+    borderPoints: [
+      { role: 'مرز ایران-آذربایجان', countries: 'ایران/آذربایجان', point: 'آستارا' },
+      { role: 'مرز ایران-ترکمنستان', countries: 'ایران/ترکمنستان', point: 'سرخس' },
+      { role: 'اتصال به روسیه', countries: 'آذربایجان/روسیه', point: 'سامور' }
+    ],
     goods: ['غلات', 'فلزات', 'کالاهای صنعتی', 'انرژی'],
     cities: ['آستارا', 'رشت', 'باکو', 'آستراخان', 'سرخس'],
+    steelCopper: 'ایران، روسیه و آذربایجان نقش مهم دارند',
+    mines: 'ایران و روسیه متنوع؛ آذربایجان محدودتر',
     status: 'در حال تقویت و ساده‌سازی مرزی',
     spec: 'مسیر مکمل و کوتاه‌تر برای برخی محموله‌ها'
-  },
-  ABEC: {
-    name: 'ABEC | Afghanistan Business Corridor',
-    type: 'جاده‌ای',
-    countries: ['افغانستان', 'پاکستان', 'ازبکستان', 'ایران'],
-    color: '#BA7517',
-    goods: ['کالاهای مصرفی', 'مواد غذایی', 'ساختمانی', 'ترانزیتی'],
-    cities: ['کابل', 'مزارشریف', 'هرات'],
-    status: 'توسعه‌محور، نیازمند تثبیت و جزئیات رسمی بیشتر',
-    spec: 'چارچوب اتصال اقتصادی-زیرساختی افغانستان'
-  },
-  STKEC: {
-    name: 'STKEC | کریدور اقتصادی شمال-جنوب',
-    type: 'اقتصادی/تجاری',
-    countries: ['قزاقستان', 'ازبکستان', 'تاجیکستان'],
-    color: '#534AB7',
-    goods: ['کالاهای صنعتی', 'تجاری'],
-    status: 'نیازمند منبع رسمی برای تفکیک دقیق',
-    spec: 'کریدور اقتصادی/تجاری پیونددهنده منطقه‌ای'
   }
 };
 
@@ -735,13 +733,11 @@ function renderCorridorsList() {
     { id: 'CKU', name: '🚂 CKU | چین-قرقیزستان-ازبکستان', type: 'ریلی', tag: 'rail' },
     { id: 'CRE_North', name: '🚂 CRE شمالی | چین-مغولستان-روسیه-اروپا', type: 'ریلی', tag: 'rail' },
     { id: 'PAK_AFG_UZB', name: '🛣 پاکستان-افغانستان-ازبکستان', type: 'جاده‌ای/ریلی محدود', tag: 'road' },
-    { id: 'INSTC', name: '🌊 INSTC | کریدور شمال-جنوب', type: 'چندوجهی', tag: 'multi' },
-    { id: 'ABEC', name: '🛣 ABEC | Afghanistan Business Corridor', type: 'جاده‌ای', tag: 'road' },
-    { id: 'STKEC', name: '🏭 STKEC | کریدور اقتصادی شمال-جنوب', type: 'اقتصادی', tag: 'multi' }
+    { id: 'INSTC', name: '🌊 INSTC | کریدور شمال-جنوب', type: 'چندوجهی', tag: 'multi' }
   ];
   
   container.innerHTML = corridors.map(c => `
-    <div class="cor-card" data-tags="${c.tag}" onclick="showCorridorFullDetail('${c.id}')">
+    <div class="cor-card" data-tags="${c.tag}" onclick="showCorridorOnMapAndInfo('${c.id}')">
       <div class="cor-head">
         <div class="cor-name">${c.name}</div>
         <span class="badge b-${c.type === 'چندوجهی' ? 'purple' : (c.type === 'ریلی' ? 'info' : 'warn')}">${c.type}</span>
@@ -754,25 +750,25 @@ function renderCorridorsList() {
   `).join('');
 }
 
-// ==================== نمایش جزئیات کامل کریدور ====================
-let currentMapLine = null;
-let currentMapMarkers = [];
+// ==================== نمایش کریدور روی نقشه و اطلاعات زیر نقشه ====================
+let currentCorridorLine = null;
+let currentCorridorMarkers = [];
 
-function showCorridorFullDetail(corridorId) {
+function showCorridorOnMapAndInfo(corridorId) {
   const data = corridorsFullData[corridorId];
   if (!data) return;
   
-  // نمایش مسیر روی نقشه
-  if (data.coords && currentMap) {
-    if (currentMapLine) currentMap.removeLayer(currentMapLine);
-    currentMapMarkers.forEach(m => currentMap.removeLayer(m));
-    currentMapMarkers = [];
+  // 1. نمایش مسیر روی نقشه
+  if (data.coords && window.mainMap) {
+    if (currentCorridorLine) window.mainMap.removeLayer(currentCorridorLine);
+    currentCorridorMarkers.forEach(m => window.mainMap.removeLayer(m));
+    currentCorridorMarkers = [];
     
-    currentMapLine = L.polyline(data.coords, {
+    currentCorridorLine = L.polyline(data.coords, {
       color: data.color,
       weight: 4,
       opacity: 0.9
-    }).addTo(currentMap);
+    }).addTo(window.mainMap);
     
     // اضافه کردن مارکرهای نقاط مهم
     data.coords.forEach(coord => {
@@ -781,14 +777,14 @@ function showCorridorFullDetail(corridorId) {
         color: data.color,
         fillColor: data.color,
         fillOpacity: 0.8
-      }).addTo(currentMap);
-      currentMapMarkers.push(marker);
+      }).addTo(window.mainMap);
+      currentCorridorMarkers.push(marker);
     });
     
-    currentMap.fitBounds(currentMapLine.getBounds());
+    window.mainMap.fitBounds(currentCorridorLine.getBounds());
   }
   
-  // ساخت HTML برای جزئیات کامل
+  // 2. نمایش اطلاعات کامل در پنل زیر نقشه
   let html = `
     <div class="detail-section-title">📋 ${data.name}</div>
     <div class="card">
@@ -869,7 +865,7 @@ function showCorridorFullDetail(corridorId) {
     <div class="card">
       <div class="section-lbl">🏭 کالا، شهر، صنعت، معدن</div>
       <table class="info-table">
-        <tr><th>کالاهای غالب</th><td>${data.goods.join('، ')}</td></tr>
+        <tr><th>کالاهای غالب</th><td>${data.goods?.join('، ') || 'در حال تکمیل'}</td></tr>
         <tr><th>شهرهای مهم</th><td>${data.cities?.join('، ') || 'در حال تکمیل'}</td></tr>
         <tr><th>فولاد/مس</th><td>${data.steelCopper || 'در حال تکمیل'}</td></tr>
         <tr><th>معادن</th><td>${data.mines || 'در حال تکمیل'}</td></tr>
@@ -877,8 +873,9 @@ function showCorridorFullDetail(corridorId) {
     </div>
   `;
   
-  document.getElementById('corridor-detail-container').innerHTML = html;
-  document.getElementById('corridor-detail-container').classList.add('active');
+  const panel = document.getElementById('corridor-info-panel');
+  panel.innerHTML = html;
+  panel.classList.add('active');
 }
 
 // ==================== ROUTE DATA & MAP ====================
@@ -890,14 +887,14 @@ const routesData = {
   central: { name: 'آسیای مرکزی', title: 'مسیر آسیای مرکزی — وضعیت: فعال', type: 'ریلی + INSTC', time: '۳۵–۵۰ روز', cost: 'متوسط', risk: 'پایین', goods: 'تجهیزات سنگین', forward: 'در حال توسعه', coords: [[31.23,121.47],[43.65,87.32],[51.18,71.45],[37.93,60.35],[36.54,61.21]], color: '#185FA5' }
 };
 
-let map, currentLine, currentMarker, measureMode = false, measurePoints = [], measureMarkers = [], measureLine = null;
+let mainMap, currentLine, currentMarker, measureMode = false, measurePoints = [], measureMarkers = [], measureLine = null;
 
 function initMapAndRoutes() {
-  map = L.map('map').setView([35, 65], 4);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { attribution: '© OpenStreetMap' }).addTo(map);
-  map.on('click', onMapClick);
+  mainMap = L.map('map').setView([35, 65], 4);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { attribution: '© OpenStreetMap' }).addTo(mainMap);
+  mainMap.on('click', onMapClick);
   selectRoute('dubai');
-  window.currentMap = map;
+  window.mainMap = mainMap;
 }
 
 function selectRoute(routeId) {
@@ -912,21 +909,24 @@ function selectRoute(routeId) {
   document.getElementById('d-risk').textContent = r.risk;
   document.getElementById('d-goods').textContent = r.goods;
   document.getElementById('d-forward').textContent = r.forward;
-  if (currentLine) map.removeLayer(currentLine);
-  if (currentMarker) map.removeLayer(currentMarker);
-  currentLine = L.polyline(r.coords, { color: r.color, weight: 3, opacity: 0.9, dashArray: (r.name === 'عمان' || r.name === 'دبی') ? '8,6' : null }).addTo(map);
-  currentMarker = L.circleMarker(r.coords[r.coords.length-1], { radius: 6, color: r.color, fillColor: r.color, fillOpacity: 1 }).addTo(map);
-  map.fitBounds(currentLine.getBounds());
+  if (currentLine) mainMap.removeLayer(currentLine);
+  if (currentMarker) mainMap.removeLayer(currentMarker);
+  currentLine = L.polyline(r.coords, { color: r.color, weight: 3, opacity: 0.9, dashArray: (r.name === 'عمان' || r.name === 'دبی') ? '8,6' : null }).addTo(mainMap);
+  currentMarker = L.circleMarker(r.coords[r.coords.length-1], { radius: 6, color: r.color, fillColor: r.color, fillOpacity: 1 }).addTo(mainMap);
+  mainMap.fitBounds(currentLine.getBounds());
 }
 
 function resetMapFilter() {
-  if (currentLine) map.removeLayer(currentLine);
-  if (currentMarker) map.removeLayer(currentMarker);
+  if (currentLine) mainMap.removeLayer(currentLine);
+  if (currentMarker) mainMap.removeLayer(currentMarker);
+  if (currentCorridorLine) mainMap.removeLayer(currentCorridorLine);
+  currentCorridorMarkers.forEach(m => mainMap.removeLayer(m));
   Object.values(routesData).forEach(r => {
-    L.polyline(r.coords, { color: r.color, weight: 2, opacity: 0.5 }).addTo(map);
-    L.circleMarker(r.coords[r.coords.length-1], { radius: 4, color: r.color, fillColor: r.color, fillOpacity: 0.7 }).addTo(map);
+    L.polyline(r.coords, { color: r.color, weight: 2, opacity: 0.5 }).addTo(mainMap);
+    L.circleMarker(r.coords[r.coords.length-1], { radius: 4, color: r.color, fillColor: r.color, fillOpacity: 0.7 }).addTo(mainMap);
   });
-  map.setView([35, 65], 4);
+  mainMap.setView([35, 65], 4);
+  document.getElementById('corridor-info-panel').classList.remove('active');
 }
 
 function toggleMeasure() {
@@ -934,31 +934,31 @@ function toggleMeasure() {
   const info = document.getElementById('measure-info');
   if (measureMode) {
     info.textContent = 'نقطه اول را کلیک کنید';
-    map.getContainer().style.cursor = 'crosshair';
+    mainMap.getContainer().style.cursor = 'crosshair';
   } else {
     info.textContent = '';
     clearMeasure();
-    map.getContainer().style.cursor = '';
+    mainMap.getContainer().style.cursor = '';
   }
 }
 
 function clearMeasure() {
-  measureMarkers.forEach(m => map.removeLayer(m));
+  measureMarkers.forEach(m => mainMap.removeLayer(m));
   measureMarkers = [];
-  if (measureLine) { map.removeLayer(measureLine); measureLine = null; }
+  if (measureLine) { mainMap.removeLayer(measureLine); measureLine = null; }
   measurePoints = [];
 }
 
 function onMapClick(e) {
   if (!measureMode) return;
   measurePoints.push(e.latlng);
-  const m = L.circleMarker(e.latlng, { radius: 6, color: '#c9a84c', fillColor: '#c9a84c', fillOpacity: 1 }).addTo(map);
+  const m = L.circleMarker(e.latlng, { radius: 6, color: '#c9a84c', fillColor: '#c9a84c', fillOpacity: 1 }).addTo(mainMap);
   measureMarkers.push(m);
   if (measurePoints.length === 1) {
     document.getElementById('measure-info').textContent = 'نقطه دوم را کلیک کنید';
   } else if (measurePoints.length === 2) {
     const km = (measurePoints[0].distanceTo(measurePoints[1]) / 1000).toFixed(0);
-    measureLine = L.polyline(measurePoints, { color: '#c9a84c', weight: 2, dashArray: '6,4' }).addTo(map);
+    measureLine = L.polyline(measurePoints, { color: '#c9a84c', weight: 2, dashArray: '6,4' }).addTo(mainMap);
     document.getElementById('measure-info').textContent = `فاصله: ${km.toLocaleString()} کیلومتر`;
     setTimeout(() => { clearMeasure(); if (measureMode) document.getElementById('measure-info').textContent = 'نقطه اول را کلیک کنید'; }, 4000);
   }
@@ -969,10 +969,7 @@ function showDash(id) {
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('dash-' + id).classList.add('active');
   if (event?.target) event.target.classList.add('active');
-  if (id === 'main' && map) setTimeout(() => map.invalidateSize(), 100);
-  if (id === 'carec') {
-    document.getElementById('corridor-detail-container').classList.remove('active');
-  }
+  if (id === 'main' && mainMap) setTimeout(() => mainMap.invalidateSize(), 100);
 }
 
 function filterCarec(tag, btn) {
@@ -992,7 +989,7 @@ window.toggleMeasure = toggleMeasure;
 window.showDash = showDash;
 window.filterCarec = filterCarec;
 window.checkPwd = checkPwd;
-window.showCorridorFullDetail = showCorridorFullDetail;
+window.showCorridorOnMapAndInfo = showCorridorOnMapAndInfo;
 </script>
 </body>
 </html>
