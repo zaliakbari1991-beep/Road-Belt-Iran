@@ -103,7 +103,6 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
 
   #app { display: none; }
 
-  /* هدر */
   .page-header {
     background: var(--bg);
     border-bottom: 0.5px solid var(--border);
@@ -119,7 +118,7 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
   }
   .page-header h1 { font-size: 18px; font-weight: 600; color: var(--text); }
   .page-header p { font-size: 13px; color: var(--text3); margin-top: 2px; }
-  .page-nav { display: flex; gap: 6px; }
+  .page-nav { display: flex; gap: 6px; flex-wrap: wrap; }
   .nav-btn {
     font-size: 12px;
     padding: 6px 14px;
@@ -144,7 +143,7 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
     min-height: calc(100vh - 80px);
   }
 
-  /* سایدبار منوی کریدورها */
+  /* سایدبار */
   .sidebar {
     width: 320px;
     flex-shrink: 0;
@@ -164,12 +163,12 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
     font-size: 14px;
     text-align: center;
   }
-  .corridor-list {
+  .sidebar-list {
     max-height: 600px;
     overflow-y: auto;
   }
-  .corridor-item {
-    padding: 1rem;
+  .sidebar-item {
+    padding: 12px 16px;
     border-bottom: 0.5px solid var(--border);
     cursor: pointer;
     transition: all 0.2s;
@@ -177,40 +176,16 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
     align-items: center;
     gap: 12px;
   }
-  .corridor-item:hover {
+  .sidebar-item:hover {
     background: var(--bg2);
   }
-  .corridor-item.active {
+  .sidebar-item.active {
     background: var(--blue-bg);
     border-right: 3px solid var(--blue);
   }
-  .corridor-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-  }
-  .corridor-info {
-    flex: 1;
-  }
-  .corridor-name {
-    font-weight: 700;
-    font-size: 13px;
-    margin-bottom: 4px;
-  }
-  .corridor-type {
-    font-size: 10px;
-    color: var(--text3);
-  }
-  .corridor-badge {
-    font-size: 10px;
-    padding: 2px 8px;
-    border-radius: 12px;
-    background: var(--bg2);
-  }
+  .sidebar-icon { font-size: 20px; }
+  .sidebar-title { font-weight: 700; font-size: 13px; }
+  .sidebar-sub { font-size: 10px; color: var(--text3); margin-top: 2px; }
 
   /* محتوای اصلی */
   .main-content {
@@ -218,7 +193,6 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
     min-width: 0;
   }
 
-  /* نقشه */
   .map-section {
     background: var(--bg);
     border: 0.5px solid var(--border);
@@ -244,16 +218,15 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
     font-family: inherit;
   }
   .map-btn.active { background: var(--blue-bg); border-color: var(--blue); color: var(--blue-text); }
-  #map { height: 350px; }
+  #map, #corridor-map { height: 350px; }
 
-  /* پنل اطلاعات کریدور */
-  .corridor-info-panel {
+  .info-panel {
     background: var(--bg);
     border: 0.5px solid var(--border);
     border-radius: var(--rad-lg);
     padding: 1.25rem;
   }
-  .info-section-title {
+  .info-title {
     font-size: 18px;
     font-weight: 700;
     color: var(--blue);
@@ -312,21 +285,26 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
     font-size: 10px;
     font-weight: 600;
   }
-  .badge-sea { background: #1D9E75; color: white; }
-  .badge-rail { background: #185FA5; color: white; }
   .badge-multi { background: #534AB7; color: white; }
+  .badge-rail { background: #185FA5; color: white; }
   .badge-road { background: #BA7517; color: white; }
+  .badge-sea { background: #1D9E75; color: white; }
 
-  .update-note { font-size: 11px; color: var(--text3); text-align: left; margin-top: 16px; }
+  .route-btn {
+    font-size: 12px;
+    background: transparent;
+    border: 0.5px solid var(--border2);
+    border-radius: 24px;
+    padding: 6px 16px;
+    cursor: pointer;
+    font-family: inherit;
+    margin: 4px;
+  }
+  .route-btn.active { background: var(--blue-bg); color: var(--blue-text); border-color: var(--blue); }
 
   @media (max-width: 900px) {
     .dashboard-layout { flex-direction: column; }
     .sidebar { width: 100%; position: static; }
-    .corridor-list { display: flex; flex-wrap: wrap; }
-    .corridor-item { width: 50%; border-bottom: none; border-left: 0.5px solid var(--border); }
-  }
-  @media (max-width: 500px) {
-    .corridor-item { width: 100%; }
   }
 </style>
 </head>
@@ -349,96 +327,98 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
     <p>صنایع بالادستی انرژی — تحلیل کریدورها و فرصت‌های سرمایه‌گذاری | به‌روز: مه ۲۰۲۶</p>
   </div>
   <div class="page-nav">
-    <button class="nav-btn active" onclick="showDash('main')">نمای کلی</button>
-    <button class="nav-btn" onclick="showDash('corridors')">🌍 کریدورهای بین‌المللی</button>
-    <button class="nav-btn" onclick="showDash('cre')">🚂 قطارهای CRE</button>
+    <button class="nav-btn active" onclick="showTab('main')">نمای کلی</button>
+    <button class="nav-btn" onclick="showTab('corridors')">کریدورها</button>
+    <button class="nav-btn" onclick="showTab('countries')">کشورها</button>
+    <button class="nav-btn" onclick="showTab('invest')">سرمایه‌گذاری</button>
   </div>
 </div>
 
-<div class="dashboard-layout" id="main-layout">
-  <!-- ========== تب نمای کلی ========== -->
-  <div id="dash-main" class="dash-section active" style="width:100%">
-    <div class="map-section">
-      <div class="map-toolbar">
-        <span>🗺️ نقشه تعاملی</span>
-        <button class="map-btn active" onclick="resetMapFilter()">همه مسیرها</button>
-        <button class="map-btn" onclick="toggleMeasure()">📏 اندازه‌گیری فاصله</button>
-        <span id="measure-info" style="font-size:11px"></span>
+<!-- ========== تب 1: نمای کلی ========== -->
+<div id="tab-main" class="tab-content" style="display: block;">
+  <div class="dashboard-layout">
+    <div class="main-content" style="width:100%">
+      <div class="map-section">
+        <div class="map-toolbar">
+          <span>🗺️ نقشه تعاملی</span>
+          <button class="map-btn active" onclick="resetMainMap()">همه مسیرها</button>
+          <button class="map-btn" onclick="toggleMainMeasure()">📏 اندازه‌گیری فاصله</button>
+          <span id="main-measure-info" style="font-size:11px"></span>
+        </div>
+        <div id="main-map"></div>
       </div>
-      <div id="map"></div>
-    </div>
-    <div class="routes-bar" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px">
-      <button class="route-btn" onclick="selectRoute('dubai')">دبی (مسدود)</button>
-      <button class="route-btn" onclick="selectRoute('oman')">عمان</button>
-      <button class="route-btn" onclick="selectRoute('turkey')">ترکیه</button>
-      <button class="route-btn" onclick="selectRoute('iraq')">عراق زمینی</button>
-      <button class="route-btn" onclick="selectRoute('central')">آسیای مرکزی</button>
-    </div>
-    <div id="route-detail" class="corridor-info-panel">
-      <div class="info-section-title" id="detail-title">مسیر دبی — وضعیت: مسدود</div>
-      <table class="info-table">
-        <tr><th>نوع حمل</th><td id="d-type">دریایی + ترانشیپ</td></tr>
-        <tr><th>زمان تحویل</th><td id="d-time">۱۸–۲۵ روز</td></tr>
-        <tr><th>هزینه نسبی</th><td id="d-cost">پایین</td></tr>
-        <tr><th>ریسک فعلی</th><td id="d-risk">بسیار بالا — جنگ منطقه</td></tr>
-        <tr><th>مناسب برای</th><td id="d-goods">همه اقلام سبک</td></tr>
-        <tr><th>وضعیت فورواردر</th><td id="d-forward">غیرفعال</td></tr>
-      </table>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px">
+        <button class="route-btn" onclick="selectMainRoute('dubai')">دبی (مسدود)</button>
+        <button class="route-btn" onclick="selectMainRoute('oman')">عمان</button>
+        <button class="route-btn" onclick="selectMainRoute('turkey')">ترکیه</button>
+        <button class="route-btn" onclick="selectMainRoute('iraq')">عراق زمینی</button>
+        <button class="route-btn" onclick="selectMainRoute('central')">آسیای مرکزی</button>
+      </div>
+      <div class="info-panel">
+        <div class="info-title" id="main-title">مسیر دبی — وضعیت: مسدود</div>
+        <table class="info-table">
+          <tr><th>نوع حمل</th><td id="main-type">دریایی + ترانشیپ</td></tr>
+          <tr><th>زمان تحویل</th><td id="main-time">۱۸–۲۵ روز</td></tr>
+          <tr><th>هزینه نسبی</th><td id="main-cost">پایین</td></tr>
+          <tr><th>ریسک فعلی</th><td id="main-risk">بسیار بالا — جنگ منطقه</td></tr>
+          <tr><th>مناسب برای</th><td id="main-goods">همه اقلام سبک</td></tr>
+          <tr><th>وضعیت فورواردر</th><td id="main-forward">غیرفعال</td></tr>
+        </table>
+      </div>
     </div>
   </div>
+</div>
 
-  <!-- ========== تب کریدورهای بین‌المللی ========== -->
-  <div id="dash-corridors" class="dash-section" style="display:flex; gap:20px; width:100%">
-    <!-- سایدبار منوی کریدورها -->
+<!-- ========== تب 2: کریدورها ========== -->
+<div id="tab-corridors" class="tab-content" style="display: none;">
+  <div class="dashboard-layout">
     <div class="sidebar">
       <div class="sidebar-header">🌍 کریدورهای بین‌المللی</div>
-      <div class="corridor-list" id="corridor-list"></div>
+      <div class="sidebar-list" id="corridors-list"></div>
     </div>
-
-    <!-- محتوای اصلی (نقشه + اطلاعات کریدور) -->
     <div class="main-content">
       <div class="map-section">
         <div class="map-toolbar">
           <span>🗺️ نقشه کریدور</span>
-          <button class="map-btn" onclick="resetCorridorMap()">🔍 تنظیم مجدد نقشه</button>
-          <button class="map-btn" onclick="toggleMeasureCorridor()">📏 اندازه‌گیری فاصله</button>
-          <span id="measure-info-corridor" style="font-size:11px"></span>
+          <button class="map-btn" onclick="resetCorridorMap()">تنظیم مجدد</button>
+          <button class="map-btn" onclick="toggleCorridorMeasure()">📏 اندازه‌گیری</button>
+          <span id="corridor-measure-info" style="font-size:11px"></span>
         </div>
         <div id="corridor-map"></div>
       </div>
-      <div class="corridor-info-panel" id="corridor-detail-panel">
-        <div class="info-section-title">📋 اطلاعات کریدور</div>
-        <div style="text-align:center; padding:40px; color:var(--text3)">
-          👈 از منوی کناری یک کریدور را انتخاب کنید
-        </div>
-      </div>
+      <div class="info-panel" id="corridor-detail"></div>
     </div>
   </div>
+</div>
 
-  <!-- ========== تب CRE ========== -->
-  <div id="dash-cre" class="dash-section" style="width:100%">
-    <div class="map-section">
-      <div class="map-toolbar">
-        <span>🗺️ مسیر ریلی چین → ایران (CRE)</span>
-      </div>
-      <svg width="100%" viewBox="0 0 640 90" xmlns="http://www.w3.org/2000/svg" style="background:var(--bg); padding:10px">
-        <defs><marker id="a2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="#185FA5" stroke-width="1.5"/></marker></defs>
-        <line x1="36" y1="45" x2="594" y2="45" stroke="#B5D4F4" stroke-width="2.5" marker-end="url(#a2)"/>
-        <circle cx="50" cy="45" r="8" fill="#E6F1FB" stroke="#185FA5"/><text x="50" y="28" text-anchor="middle" font-size="9" fill="#185FA5">شی‌آن</text>
-        <circle cx="170" cy="45" r="6" fill="#E6F1FB" stroke="#378ADD"/><text x="170" y="28" text-anchor="middle" font-size="9">خورگوس</text>
-        <circle cx="290" cy="45" r="6" fill="#E1F5EE" stroke="#1D9E75"/><text x="290" y="28" text-anchor="middle" font-size="9">آلماتی</text>
-        <circle cx="400" cy="45" r="6" fill="#E1F5EE" stroke="#1D9E75"/><text x="400" y="28" text-anchor="middle" font-size="9">سرخس</text>
-        <circle cx="510" cy="45" r="6" fill="#EEEDFE" stroke="#534AB7"/><text x="510" y="28" text-anchor="middle" font-size="9">آپرین</text>
-        <circle cx="600" cy="45" r="8" fill="#EAF3DE" stroke="#3B6D11"/><text x="600" y="28" text-anchor="middle" font-size="9">ایران</text>
-        <text x="320" y="75" text-anchor="middle" font-size="9" fill="#888780">≈ ۱۵ روز — ۱۰٬۴۰۰ کیلومتر — مسیر جنوبی BRI</text>
-      </svg>
+<!-- ========== تب 3: کشورها ========== -->
+<div id="tab-countries" class="tab-content" style="display: none;">
+  <div class="dashboard-layout">
+    <div class="sidebar">
+      <div class="sidebar-header">🇺🇳 کشورها</div>
+      <div class="sidebar-list" id="countries-list"></div>
     </div>
-    <div class="update-note">منابع: Stimson Center، Eurasianet، Seetao — مه ۲۰۲۶</div>
+    <div class="main-content">
+      <div class="info-panel" id="country-detail"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== تب 4: سرمایه‌گذاری ========== -->
+<div id="tab-invest" class="tab-content" style="display: none;">
+  <div class="dashboard-layout">
+    <div class="sidebar">
+      <div class="sidebar-header">💰 فرصت‌های سرمایه‌گذاری</div>
+      <div class="sidebar-list" id="invest-list"></div>
+    </div>
+    <div class="main-content">
+      <div class="info-panel" id="invest-detail"></div>
+    </div>
   </div>
 </div>
 
 <script>
-// ==================== GATE ====================
+// ==================== رمز ورود ====================
 function checkPwd() {
   const v = document.getElementById('pwd').value;
   if (v === 'DanaEnergy_2026') {
@@ -446,7 +426,9 @@ function checkPwd() {
     document.getElementById('app').style.display = 'block';
     initMainMap();
     initCorridorMap();
-    renderCorridorSidebar();
+    renderCorridorsSidebar();
+    renderCountriesSidebar();
+    renderInvestSidebar();
     document.querySelector('.route-btn')?.classList.add('active');
   } else {
     document.getElementById('gate-err').style.display = 'block';
@@ -454,10 +436,9 @@ function checkPwd() {
   }
 }
 
-// ==================== اطلاعات کامل کریدورها ====================
+// ==================== داده‌های کریدورها (از فایل DOCX) ====================
 const corridorsData = {
   TITR: {
-    id: 'TITR',
     name: 'کریدور میانی (TITR)',
     fullName: 'Trans-Caspian International Transport Route',
     icon: '🌍',
@@ -465,38 +446,38 @@ const corridorsData = {
     typeClass: 'multi',
     countries: ['چین', 'قزاقستان', 'دریای خزر', 'آذربایجان', 'گرجستان', 'ترکیه', 'اروپا'],
     color: '#534AB7',
-    coords: [[34.34, 108.94], [43.25, 76.95], [46.78, 53.08], [40.39, 49.89], [41.72, 44.78], [40.76, 39.47], [41.01, 28.96]],
+    coords: [[34.34,108.94], [43.25,76.95], [46.78,53.08], [40.39,49.89], [41.72,44.78], [40.76,39.47], [41.01,28.96]],
     status: 'رشد تقاضا، گلوگاه اصلی مرزها و هماهنگی گمرکی',
-    spec: 'مسیر کلاسیک چین به اروپا از قزاقستان، دریای خزر، آذربایجان، گرجستان و ترکیه',
     routeSteps: [
-      { step: 1, point: 'شی‌آن / خورگوس', country: 'چین', type: 'ریلی' },
-      { step: 2, point: 'آلماتی', country: 'قزاقستان', type: 'ریلی' },
-      { step: 3, point: 'آکتائو', country: 'قزاقستان', type: 'ریلی تا بندر، سپس دریایی' },
-      { step: 4, point: 'بندر خزر / عبور خزر', country: 'دریای خزر', type: 'دریایی' },
-      { step: 5, point: 'باکو', country: 'آذربایجان', type: 'دریایی تا بندر، سپس ریلی' },
-      { step: 6, point: 'تفلیس', country: 'گرجستان', type: 'ریلی' },
-      { step: 7, point: 'قارص', country: 'ترکیه', type: 'ریلی' },
-      { step: 8, point: 'استانبول / اروپا', country: 'ترکیه / اروپا', type: 'ریلی' }
+      {step:1, point:'شی‌آن / خورگوس', country:'چین', type:'ریلی'},
+      {step:2, point:'آلماتی', country:'قزاقستان', type:'ریلی'},
+      {step:3, point:'آکتائو', country:'قزاقستان', type:'ریلی تا بندر، سپس دریایی'},
+      {step:4, point:'بندر خزر', country:'دریای خزر', type:'دریایی'},
+      {step:5, point:'باکو', country:'آذربایجان', type:'دریایی تا بندر، سپس ریلی'},
+      {step:6, point:'تفلیس', country:'گرجستان', type:'ریلی'},
+      {step:7, point:'قارص', country:'ترکیه', type:'ریلی'},
+      {step:8, point:'استانبول/اروپا', country:'ترکیه/اروپا', type:'ریلی'}
     ],
     borderPoints: [
-      { role: 'مرز چین-قزاقستان', point: 'خورگوس / دوستی' },
-      { role: 'بنادر خزر', point: 'آکتائو (قزاقستان) ↔ باکو (آذربایجان)' },
-      { role: 'مرز آذربایجان-گرجستان', point: 'ردپل / آخالکالاکی' },
-      { role: 'مرز گرجستان-ترکیه', point: 'آخالکالاکی / قارص' }
+      {role:'مرز چین-قزاقستان', point:'خورگوس/دوستی'},
+      {role:'بنادر خزر', point:'آکتائو ↔ باکو'},
+      {role:'مرز آذربایجان-گرجستان', point:'ردپل/آخالکالاکی'},
+      {role:'مرز گرجستان-ترکیه', point:'آخالکالاکی/قارص'}
     ],
     costs: [
-      { item: 'کرایه پایه', value: 'وابسته به اپراتور ریلی و بندری' },
-      { item: 'هزینه دریای خزر', value: 'متغیر بر اساس بندر و فصل' },
-      { item: 'هزینه‌های مرزی', value: 'بازرسی، ترخیص، اسکن، دپوی موقت' }
+      {item:'کرایه پایه', value:'وابسته به اپراتور ریلی و بندری'},
+      {item:'هزینه دریای خزر', value:'متغیر بر اساس بندر و فصل'},
+      {item:'هزینه‌های مرزی', value:'بازرسی، ترخیص، اسکن، دپوی موقت'}
     ],
     documents: ['بارنامه', 'اظهارنامه ترانزیت', 'مبدأ کالا', 'مانیفست', 'TIR/eTIR', 'مجوزهای خاص'],
-    goods: ['کانتینر', 'قطعات صنعتی', 'کالاهای مصرفی', 'فلزات', 'محصولات نیمه‌ساخته'],
+    goods: ['کانتینر', 'قطعات صنعتی', 'کالاهای مصرفی', 'فلزات'],
     cities: ['آلماتی', 'آکتائو', 'باکو', 'تفلیس', 'قارص'],
     steelCopper: 'قزاقستان و ازبکستان در فلزات قوی؛ آذربایجان ترانزیتی',
-    mines: 'قزاقستان و ازبکستان معدنی؛ گرجستان و آذربایجان نقش محدود'
+    mines: 'قزاقستان و ازبکستان معدنی؛ گرجستان و آذربایجان نقش محدود',
+    time: '16-30 روز',
+    recentChanges: 'زمان Xi'an-Baku در ژانویه 2026 به 16 روز و حتی 11 روز گزارش شده'
   },
   BTK: {
-    id: 'BTK',
     name: 'باکو-تفلیس-قارص (BTK)',
     fullName: 'Baku-Tbilisi-Kars Railway',
     icon: '🚂',
@@ -504,32 +485,32 @@ const corridorsData = {
     typeClass: 'rail',
     countries: ['آذربایجان', 'گرجستان', 'ترکیه'],
     color: '#1D9E75',
-    coords: [[40.39, 49.89], [41.72, 44.78], [41.41, 43.29], [40.76, 39.47]],
-    status: 'مهم، فعال و در حال بهینه‌سازی در مرزها و گمرک',
-    spec: 'مسیر کاملاً ریلی - اتصال قفقاز به شبکه ریل ترکیه و اروپا',
+    coords: [[40.39,49.89], [41.72,44.78], [41.41,43.29], [40.76,39.47]],
+    status: 'مهم، فعال و در حال بهینه‌سازی مرزها و گمرک',
     routeSteps: [
-      { step: 1, point: 'باکو', country: 'آذربایجان', type: 'ریلی' },
-      { step: 2, point: 'مرز آذربایجان-گرجستان', country: 'آذربایجان/گرجستان', type: 'ریلی' },
-      { step: 3, point: 'آخالکالاکی', country: 'گرجستان', type: 'ریلی' },
-      { step: 4, point: 'قارص', country: 'ترکیه', type: 'ریلی' }
+      {step:1, point:'باکو', country:'آذربایجان', type:'ریلی'},
+      {step:2, point:'مرز آذربایجان-گرجستان', country:'آذربایجان/گرجستان', type:'ریلی'},
+      {step:3, point:'آخالکالاکی', country:'گرجستان', type:'ریلی'},
+      {step:4, point:'قارص', country:'ترکیه', type:'ریلی'}
     ],
     borderPoints: [
-      { role: 'نقطه تجمیع و اتصال', point: 'باکو' },
-      { role: 'نقطه حساس عملیاتی', point: 'آخالکالاکی' },
-      { role: 'ورودی به شبکه ترکیه', point: 'قارص' }
+      {role:'نقطه تجمیع', point:'باکو'},
+      {role:'نقطه حساس عملیاتی', point:'آخالکالاکی'},
+      {role:'ورودی به شبکه ترکیه', point:'قارص'}
     ],
     costs: [
-      { item: 'کرایه ریل', value: 'وابسته به قرارداد و نوع بار' },
-      { item: 'هزینه ترانزیت', value: 'شامل گمرک، دپو و عملیات مرزی' }
+      {item:'کرایه ریل', value:'وابسته به قرارداد و نوع بار'},
+      {item:'هزینه ترانزیت', value:'شامل گمرک، دپو و عملیات مرزی'}
     ],
     documents: ['بارنامه', 'اظهارنامه ترانزیت', 'مبدأ', 'مانیفست', 'مجوز خاص'],
     goods: ['کالاهای ترانزیتی', 'کانتینری', 'کالاهای صنعتی'],
     cities: ['باکو', 'تفلیس', 'قارص'],
     steelCopper: 'ترکیه در فولاد قوی؛ آذربایجان ترانزیتی',
-    mines: 'آذربایجان محدود؛ گرجستان محدود؛ ترکیه متنوع'
+    mines: 'آذربایجان محدود؛ گرجستان محدود؛ ترکیه متنوع',
+    time: '12-18 روز',
+    recentChanges: 'آذربایجان در 2025 روی پنجره واحد الکترونیکی و Digital Customs Value کار کرده'
   },
   CKU: {
-    id: 'CKU',
     name: 'چین-قرقیزستان-ازبکستان',
     fullName: 'China-Kyrgyzstan-Uzbekistan Railway',
     icon: '🚂',
@@ -537,32 +518,29 @@ const corridorsData = {
     typeClass: 'rail',
     countries: ['چین', 'قرقیزستان', 'ازبکستان'],
     color: '#BA7517',
-    coords: [[39.47, 75.99], [41.06, 75.35], [41.05, 72.65], [41.31, 69.24]],
+    coords: [[39.47,75.99], [41.06,75.35], [41.05,72.65], [41.31,69.24]],
     status: 'پروژه کلیدی و در حال پیشرفت',
-    spec: 'اتصال مستقیم چین به ازبکستان و شبکه آسیای مرکزی',
     routeSteps: [
-      { step: 1, point: 'کاشغر', country: 'چین', type: 'ریلی' },
-      { step: 2, point: 'مرز چین-قرقیزستان', country: 'چین/قرقیزستان', type: 'ریلی' },
-      { step: 3, point: 'بخش کوهستانی قرقیزستان', country: 'قرقیزستان', type: 'ریلی' },
-      { step: 4, point: 'مرز قرقیزستان-ازبکستان', country: 'قرقیزستان/ازبکستان', type: 'ریلی' },
-      { step: 5, point: 'تاشکند', country: 'ازبکستان', type: 'ریلی' }
+      {step:1, point:'کاشغر', country:'چین', type:'ریلی'},
+      {step:2, point:'مرز چین-قرقیزستان', country:'چین/قرقیزستان', type:'ریلی'},
+      {step:3, point:'بخش کوهستانی قرقیزستان', country:'قرقیزستان', type:'ریلی'},
+      {step:4, point:'مرز قرقیزستان-ازبکستان', country:'قرقیزستان/ازبکستان', type:'ریلی'},
+      {step:5, point:'تاشکند', country:'ازبکستان', type:'ریلی'}
     ],
     borderPoints: [
-      { role: 'ورودی اصلی', point: 'مرز چین-قرقیزستان' },
-      { role: 'خروج به شبکه ازبکستان', point: 'مرز قرقیزستان-ازبکستان' }
+      {role:'ورودی اصلی', point:'مرز چین-قرقیزستان'},
+      {role:'خروج به شبکه ازبکستان', point:'مرز قرقیزستان-ازبکستان'}
     ],
-    costs: [
-      { item: 'هزینه حمل', value: 'نیازمند تعرفه رسمی اپراتور' },
-      { item: 'گلوگاه', value: 'حمل کوهستانی، تبادل مرزی' }
-    ],
+    costs: [{item:'هزینه حمل', value:'نیازمند تعرفه رسمی اپراتور'}, {item:'گلوگاه', value:'حمل کوهستانی، تبادل مرزی'}],
     documents: ['بارنامه', 'اظهارنامه ترانزیت', 'مبدأ', 'مجوزها'],
     goods: ['کالاهای صنعتی', 'فلزات', 'مواد اولیه'],
     cities: ['بیشکک', 'اوش', 'تاشکند', 'فرغانه'],
     steelCopper: 'ازبکستان در مس و فلزات مهم است',
-    mines: 'قرقیزستان و ازبکستان معدنی'
+    mines: 'قرقیزستان و ازبکستان معدنی',
+    time: '15-25 روز',
+    recentChanges: 'پروژه همچنان در حال تکمیل و پیشرفت'
   },
-  CRE_North: {
-    id: 'CRE_North',
+  CRE: {
     name: 'CRE شمالی (چین-مغولستان-روسیه)',
     fullName: 'China-Mongolia-Russia-Europe Railway',
     icon: '🚂',
@@ -570,29 +548,30 @@ const corridorsData = {
     typeClass: 'rail',
     countries: ['چین', 'مغولستان', 'روسیه', 'اروپا'],
     color: '#185FA5',
-    coords: [[39.90, 116.40], [46.86, 106.87], [55.75, 37.62], [52.52, 13.40]],
+    coords: [[39.90,116.40], [46.86,106.87], [55.75,37.62], [52.52,13.40]],
     status: 'فعال و مهم، تحت فشار ژئوپلیتیک و تراکم',
-    spec: 'مسیر ریلی شمالی - برخلاف کریدور میانی بخش دریایی ندارد',
     routeSteps: [
-      { step: 1, point: 'چین شمالی', country: 'چین', type: 'ریلی' },
-      { step: 2, point: 'مرز چین-مغولستان', country: 'چین/مغولستان', type: 'ریلی' },
-      { step: 3, point: 'اولان‌باتور', country: 'مغولستان', type: 'ریلی' },
-      { step: 4, point: 'مرز مغولستان-روسیه', country: 'مغولستان/روسیه', type: 'ریلی' },
-      { step: 5, point: 'روسیه', country: 'روسیه', type: 'ریلی' },
-      { step: 6, point: 'اروپا', country: 'اروپا', type: 'ریلی' }
+      {step:1, point:'چین شمالی', country:'چین', type:'ریلی'},
+      {step:2, point:'مرز چین-مغولستان', country:'چین/مغولستان', type:'ریلی'},
+      {step:3, point:'اولان‌باتور', country:'مغولستان', type:'ریلی'},
+      {step:4, point:'مرز مغولستان-روسیه', country:'مغولستان/روسیه', type:'ریلی'},
+      {step:5, point:'روسیه', country:'روسیه', type:'ریلی'},
+      {step:6, point:'اروپا', country:'اروپا', type:'ریلی'}
     ],
     borderPoints: [
-      { role: 'ورود به مسیر شمالی', point: 'مرز چین-مغولستان' },
-      { role: 'ادامه مسیر به اروپا', point: 'مرز مغولستان-روسیه' }
+      {role:'ورود به مسیر شمالی', point:'مرز چین-مغولستان'},
+      {role:'ادامه مسیر به اروپا', point:'مرز مغولستان-روسیه'}
     ],
+    costs: [{item:'هزینه‌ها', value:'وابسته به توافقات ریلی'}, {item:'گلوگاه', value:'ظرفیت، ژئوپلیتیک، کنترل مرزی'}],
     documents: ['بارنامه', 'اظهارنامه ترانزیت', 'مبدأ', 'مجوزها'],
     goods: ['کانتینر', 'کالاهای حجیم', 'صادرات صنعتی چین'],
     cities: ['ارلیان', 'اولان‌باتور', 'هاب‌های روسیه'],
     steelCopper: 'چین و روسیه در فولاد و فلزات بسیار قوی',
-    mines: 'مغولستان معدن‌محور'
+    mines: 'مغولستان معدن‌محور',
+    time: '15-20 روز',
+    recentChanges: 'بخشی از بار چین به اروپا هنوز از مسیرهای شمالی حرکت می‌کند'
   },
   PAK_AFG_UZB: {
-    id: 'PAK_AFG_UZB',
     name: 'پاکستان-افغانستان-ازبکستان',
     fullName: 'Pakistan-Afghanistan-Uzbekistan Corridor',
     icon: '🛣',
@@ -600,21 +579,25 @@ const corridorsData = {
     typeClass: 'road',
     countries: ['پاکستان', 'افغانستان', 'ازبکستان'],
     color: '#E24B4A',
-    coords: [[34.02, 71.58], [34.56, 69.21], [36.73, 67.11], [37.22, 67.28]],
+    coords: [[34.02,71.58], [34.56,69.21], [36.73,67.11], [37.22,67.28]],
     status: 'توسعه‌محور، نیازمند تثبیت امنیت',
-    spec: 'به دلیل وضعیت افغانستان بیشتر ترکیبی و جاده‌محور است',
     routeSteps: [
-      { step: 1, point: 'پیشاور', country: 'پاکستان', type: 'جاده‌ای' },
-      { step: 2, point: 'مرز پاکستان-افغانستان', country: 'پاکستان/افغانستان', type: 'جاده‌ای' },
-      { step: 3, point: 'کابل', country: 'افغانستان', type: 'جاده‌ای' },
-      { step: 4, point: 'مرز افغانستان-ازبکستان', country: 'افغانستان/ازبکستان', type: 'جاده‌ای/ریلی' },
-      { step: 5, point: 'ترمذ / تاشکند', country: 'ازبکستان', type: 'ریلی' }
+      {step:1, point:'پیشاور', country:'پاکستان', type:'جاده‌ای'},
+      {step:2, point:'مرز پاکستان-افغانستان', country:'پاکستان/افغانستان', type:'جاده‌ای'},
+      {step:3, point:'کابل', country:'افغانستان', type:'جاده‌ای'},
+      {step:4, point:'مرز افغانستان-ازبکستان', country:'افغانستان/ازبکستان', type:'جاده‌ای/ریلی'},
+      {step:5, point:'ترمذ/تاشکند', country:'ازبکستان', type:'ریلی'}
+    ],
+    borderPoints: [
+      {role:'مرز پاکستان-افغانستان', point:'تورخم/چمن'},
+      {role:'مرز افغانستان-ازبکستان', point:'حیرتان/ترمذ'}
     ],
     goods: ['کالاهای مصرفی', 'مواد غذایی', 'ساختمانی'],
-    cities: ['کابل', 'مزارشریف', 'پیشاور']
+    cities: ['کابل', 'مزارشریف', 'پیشاور'],
+    time: '20-30 روز',
+    recentChanges: 'وضعیت مرزی و امنیتی افغانستان مهمترین عامل تعیین‌کننده است'
   },
   INSTC: {
-    id: 'INSTC',
     name: 'کریدور شمال-جنوب (INSTC)',
     fullName: 'International North-South Transport Corridor',
     icon: '🌊',
@@ -622,309 +605,291 @@ const corridorsData = {
     typeClass: 'multi',
     countries: ['هند', 'ایران', 'آذربایجان', 'روسیه'],
     color: '#1D9E75',
-    coords: [[19.08, 72.88], [27.18, 56.27], [40.39, 49.89], [46.35, 48.04]],
+    coords: [[19.08,72.88], [27.18,56.27], [40.39,49.89], [46.35,48.04]],
     status: 'در حال تقویت و ساده‌سازی مرزی',
-    spec: 'مسیر مکمل و کوتاه‌تر برای برخی محموله‌ها',
     routeSteps: [
-      { step: 1, point: 'بمبئی', country: 'هند', type: 'دریایی' },
-      { step: 2, point: 'بنادر جنوبی ایران', country: 'ایران', type: 'دریایی' },
-      { step: 3, point: 'رشت / قزوین / تهران', country: 'ایران', type: 'ریلی' },
-      { step: 4, point: 'آستارا', country: 'ایران/آذربایجان', type: 'ریلی' },
-      { step: 5, point: 'باکو', country: 'آذربایجان', type: 'ریلی' },
-      { step: 6, point: 'آستراخان', country: 'روسیه', type: 'ریلی/دریایی' }
+      {step:1, point:'بمبئی', country:'هند', type:'دریایی'},
+      {step:2, point:'بنادر جنوبی ایران', country:'ایران', type:'دریایی'},
+      {step:3, point:'رشت/قزوین/تهران', country:'ایران', type:'ریلی'},
+      {step:4, point:'آستارا', country:'ایران/آذربایجان', type:'ریلی'},
+      {step:5, point:'باکو', country:'آذربایجان', type:'ریلی'},
+      {step:6, point:'آستراخان', country:'روسیه', type:'ریلی/دریایی'}
     ],
     borderPoints: [
-      { role: 'مرز ایران-آذربایجان', point: 'آستارا' },
-      { role: 'مرز ایران-ترکمنستان', point: 'سرخس' }
+      {role:'مرز ایران-آذربایجان', point:'آستارا'},
+      {role:'مرز ایران-ترکمنستان', point:'سرخس'}
     ],
+    costs: [{item:'هزینه حمل', value:'به مسیر، بندر، ریل و گمرک وابسته است'}],
+    documents: ['بارنامه', 'اظهارنامه ترانزیت', 'مبدأ', 'مجوزهای خاص'],
     goods: ['غلات', 'فلزات', 'کالاهای صنعتی', 'انرژی'],
     cities: ['آستارا', 'رشت', 'باکو', 'آستراخان', 'سرخس'],
     steelCopper: 'ایران، روسیه و آذربایجان نقش مهم دارند',
-    mines: 'ایران و روسیه متنوع؛ آذربایجان محدودتر'
+    mines: 'ایران و روسیه متنوع؛ آذربایجان محدودتر',
+    time: '20-25 روز',
+    recentChanges: 'بخش ریلی آذربایجان 511 کیلومتر است و زمان حمل نسبت به مسیرهای دریایی کوتاه‌تر است'
   }
 };
 
-// ==================== رندر سایدبار ====================
-function renderCorridorSidebar() {
-  const container = document.getElementById('corridor-list');
-  const corridors = [
-    { id: 'TITR', name: 'کریدور میانی (TITR)' },
-    { id: 'BTK', name: 'باکو-تفلیس-قارص (BTK)' },
-    { id: 'CKU', name: 'چین-قرقیزستان-ازبکستان' },
-    { id: 'CRE_North', name: 'CRE شمالی' },
-    { id: 'PAK_AFG_UZB', name: 'پاکستان-افغانستان-ازبکستان' },
-    { id: 'INSTC', name: 'کریدور شمال-جنوب (INSTC)' }
+// ==================== داده‌های کشورها ====================
+const countriesData = [
+  {name:'چین', capital:'پکن', currency:'یوان', desc:'بزرگترین شریک تجاری و قطب تولید جهان'},
+  {name:'قزاقستان', capital:'آستانه', currency:'تنگه', desc:'کریدور ریلی شمالی، معادن غنی'},
+  {name:'قرقیزستان', capital:'بیشکک', currency:'سوم', desc:'مسیر کوهستانی به آسیای مرکزی'},
+  {name:'ترکمنستان', capital:'عشق‌آباد', currency:'منات', desc:'مرز سرخس، کریدور شرق-غرب'},
+  {name:'ازبکستان', capital:'تاشکند', currency:'سوم', desc:'مس و فلزات، صنعتی'},
+  {name:'تاجیکستان', capital:'دوشنبه', currency:'سامانی', desc:'کشور کوهستانی، ترانزیتی'},
+  {name:'هند', capital:'دهلی نو', currency:'روپیه', desc:'بازار بزرگ، کریدور شمال-جنوب'},
+  {name:'پاکستان', capital:'اسلام‌آباد', currency:'روپیه', desc:'بندر گوادر، کریدور CPEC'},
+  {name:'افغانستان', capital:'کابل', currency:'افغانی', desc:'موقعیت استراتژیک، نیازمند تثبیت'},
+  {name:'آذربایجان', capital:'باکو', currency:'منات', desc:'هسته کریدور میانی و BTK'},
+  {name:'ارمنستان', capital:'ایروان', currency:'درام', desc:'گذرگاه قفقاز'},
+  {name:'گرجستان', capital:'تفلیس', currency:'لاری', desc:'بندر پوتی، کریدور میانی'},
+  {name:'ترکیه', capital:'آنکارا', currency:'لیر', desc:'دروازه اروپا، صنعتی'},
+  {name:'عمان', capital:'مسقط', currency:'ریال عمان', desc:'بنادر صحار، دقم، صلاله'},
+  {name:'امارات', capital:'ابوظبی', currency:'درهم', desc:'بندر جبل علی، هاب لجستیک'},
+  {name:'قطر', capital:'دوحه', currency:'ریال قطر', desc:'بندر حمد'},
+  {name:'عربستان', capital:'ریاض', currency:'ریال سعودی', desc:'کریدور جنوبی'},
+  {name:'کویت', capital:'کویت', currency:'دینار کویت', desc:'مسیر عراق'},
+  {name:'عراق', capital:'بغداد', currency:'دینار عراق', desc:'مرز شلمچه و مهران'},
+  {name:'روسیه', capital:'مسکو', currency:'روبل', desc:'کریدور شمالی CRE و INSTC'},
+  {name:'مغولستان', capital:'اولان‌باتور', currency:'توگروگ', desc:'معدن‌محور، مسیر CRE شمالی'}
+];
+
+// ==================== داده‌های سرمایه‌گذاری ====================
+const investData = [
+  {name:'منطقه ویژه اقتصادی چابهار', country:'ایران', risk:'کم', desc:'دسترسی به آب‌های آزاد، کریدور شمال-جنوب', sector:'بندری، ترانزیتی'},
+  {name:'منطقه آزاد ارس', country:'ایران', risk:'کم', desc:'ریلی-جاده‌ای، نزدیک به مرز ارمنستان', sector:'صنعتی، لجستیک'},
+  {name:'منطقه ویژه اقتصادی سرخس', country:'ایران', risk:'کم', desc:'ریلی، مرز ترکمنستان، کریدور شرق', sector:'ریلی، انبارداری'},
+  {name:'بندر دقم', country:'عمان', risk:'متوسط', desc:'بندر در حال توسعه، منطقه آزاد', sector:'بندری، صنعتی'},
+  {name:'منطقه آزاد صحار', country:'عمان', risk:'کم', desc:'هاب صنعتی-لجستیکی عمان', sector:'صنعتی، لجستیک'},
+  {name:'بندر گوادر', country:'پاکستان', risk:'متوسط', desc:'کریدور CPEC، توسعه راهبردی', sector:'بندری، انرژی'},
+  {name:'منطقه آزاد جبل علی', country:'امارات', risk:'کم', desc:'بزرگترین بندر منطقه', sector:'لجستیک، ترانشیپ'},
+  {name:'بندر علیات', country:'آذربایجان', risk:'کم', desc:'هاب ترانزیتی خزر', sector:'بندری، ریلی'},
+  {name:'بندر پوتی', country:'گرجستان', risk:'کم', desc:'دریای سیاه، کریدور میانی', sector:'بندری، لجستیک'},
+  {name:'منطقه آزاد قارص', country:'ترکیه', risk:'کم', desc:'اتصال ریلی به اروپا', sector:'صنعتی، لجستیک'}
+];
+
+// ==================== رندر سایدبارها ====================
+function renderCorridorsSidebar() {
+  const container = document.getElementById('corridors-list');
+  const items = [
+    {id:'TITR', name:'کریدور میانی (TITR)', icon:'🌍'},
+    {id:'BTK', name:'باکو-تفلیس-قارص (BTK)', icon:'🚂'},
+    {id:'CKU', name:'چین-قرقیزستان-ازبکستان', icon:'🚂'},
+    {id:'CRE', name:'CRE شمالی', icon:'🚂'},
+    {id:'PAK_AFG_UZB', name:'پاکستان-افغانستان-ازبکستان', icon:'🛣'},
+    {id:'INSTC', name:'کریدور شمال-جنوب (INSTC)', icon:'🌊'}
   ];
-  
-  container.innerHTML = corridors.map(c => {
-    const data = corridorsData[c.id];
-    return `
-      <div class="corridor-item" onclick="selectCorridor('${c.id}')">
-        <div class="corridor-icon">${data.icon}</div>
-        <div class="corridor-info">
-          <div class="corridor-name">${c.name}</div>
-          <div class="corridor-type">${data.type}</div>
-        </div>
-        <span class="badge-sm badge-${data.typeClass}">${data.type}</span>
-      </div>
-    `;
-  }).join('');
+  container.innerHTML = items.map(item => `
+    <div class="sidebar-item" onclick="showCorridorDetail('${item.id}')">
+      <div class="sidebar-icon">${item.icon}</div>
+      <div><div class="sidebar-title">${item.name}</div><div class="sidebar-sub">${corridorsData[item.id]?.type || ''}</div></div>
+    </div>
+  `).join('');
 }
 
-// ==================== نقشه کریدورها ====================
-let corridorMap, currentCorridorLine = null, currentCorridorMarkers = [];
-let measureMode = false, measurePoints = [], measureMarkers = [], measureLine = null;
+function renderCountriesSidebar() {
+  const container = document.getElementById('countries-list');
+  container.innerHTML = countriesData.map(c => `
+    <div class="sidebar-item" onclick="showCountryDetail('${c.name}')">
+      <div class="sidebar-icon">🇺🇳</div>
+      <div><div class="sidebar-title">${c.name}</div><div class="sidebar-sub">${c.capital} | ${c.currency}</div></div>
+    </div>
+  `).join('');
+}
+
+function renderInvestSidebar() {
+  const container = document.getElementById('invest-list');
+  container.innerHTML = investData.map((inv, i) => `
+    <div class="sidebar-item" onclick="showInvestDetail(${i})">
+      <div class="sidebar-icon">💰</div>
+      <div><div class="sidebar-title">${inv.name}</div><div class="sidebar-sub">${inv.country} | ریسک ${inv.risk}</div></div>
+    </div>
+  `).join('');
+}
+
+// ==================== نمایش جزئیات کریدور ====================
+let corridorMap, currentCorridorLine = null, corridorMeasureMode = false, corridorMeasurePoints = [], corridorMeasureMarkers = [], corridorMeasureLine = null;
 
 function initCorridorMap() {
   corridorMap = L.map('corridor-map').setView([35, 65], 4);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-    attribution: '© OpenStreetMap © CARTO'
-  }).addTo(corridorMap);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {attribution: '© OpenStreetMap'}).addTo(corridorMap);
   corridorMap.on('click', onCorridorMapClick);
 }
 
-function selectCorridor(corridorId) {
-  const data = corridorsData[corridorId];
-  if (!data) return;
+function showCorridorDetail(id) {
+  const data = corridorsData[id];
+  if(!data) return;
+  document.querySelectorAll('#corridors-list .sidebar-item').forEach(item => item.classList.remove('active'));
+  if(event?.target?.closest('.sidebar-item')) event.target.closest('.sidebar-item').classList.add('active');
   
-  // آپدیت استایل منو
-  document.querySelectorAll('.corridor-item').forEach(item => {
-    item.classList.remove('active');
-  });
-  if (event?.target?.closest('.corridor-item')) {
-    event.target.closest('.corridor-item').classList.add('active');
-  }
-  
-  // نمایش مسیر روی نقشه
-  if (currentCorridorLine) corridorMap.removeLayer(currentCorridorLine);
-  currentCorridorMarkers.forEach(m => corridorMap.removeLayer(m));
-  currentCorridorMarkers = [];
-  
-  if (data.coords) {
-    currentCorridorLine = L.polyline(data.coords, {
-      color: data.color,
-      weight: 4,
-      opacity: 0.9
-    }).addTo(corridorMap);
-    
-    data.coords.forEach(coord => {
-      const marker = L.circleMarker(coord, {
-        radius: 6,
-        color: data.color,
-        fillColor: data.color,
-        fillOpacity: 0.8
-      }).addTo(corridorMap);
-      currentCorridorMarkers.push(marker);
-    });
-    
+  if(currentCorridorLine) corridorMap.removeLayer(currentCorridorLine);
+  if(data.coords) {
+    currentCorridorLine = L.polyline(data.coords, {color: data.color, weight: 4, opacity: 0.9}).addTo(corridorMap);
     corridorMap.fitBounds(currentCorridorLine.getBounds());
   }
   
-  // نمایش اطلاعات در پنل
-  let html = `
-    <div class="info-section-title">${data.icon} ${data.name}</div>
-    <table class="info-table">
-      <tr><th>نام کامل</th><td>${data.fullName}</td></tr>
-      <tr><th>نوع حمل</th><td>${data.type}</td></tr>
-      <tr><th>کشورهای مسیر</th><td>${data.countries.join(' → ')}</td></tr>
-      <tr><th>وضعیت</th><td>${data.status}</td></tr>
-      <tr><th>توضیحات</th><td>${data.spec}</td></tr>
-    </table>
-  `;
+  let html = `<div class="info-title">${data.icon} ${data.name}</div>
+    <table class="info-table"><tr><th>نام کامل</th><td>${data.fullName}</td></tr>
+    <tr><th>نوع حمل</th><td><span class="badge-sm badge-${data.typeClass}">${data.type}</span></td></tr>
+    <tr><th>کشورهای مسیر</th><td>${data.countries.join(' → ')}</td></tr>
+    <tr><th>وضعیت</th><td>${data.status}</td></tr>
+    <tr><th>زمان تقریبی</th><td>${data.time}</td></tr>
+    <tr><th>تغییرات اخیر</th><td>${data.recentChanges}</td></tr></table>`;
   
-  if (data.routeSteps) {
-    html += `
-      <div class="info-section-title" style="font-size:14px; margin-top:16px">🗺️ مسیر گام به گام</div>
-      <div class="route-steps">
-        ${data.routeSteps.map(s => `
-          <div class="step-item">
-            <div class="step-num">${s.step}</div>
-            <div><strong>${s.point}</strong> — ${s.country} — <span class="badge-sm badge-${s.type === 'ریلی' ? 'rail' : (s.type === 'دریایی' ? 'sea' : 'road')}">${s.type}</span></div>
-          </div>
-        `).join('')}
-      </div>
-    `;
+  if(data.routeSteps) {
+    html += `<div class="info-title" style="font-size:14px">🗺️ مسیر گام به گام</div><div class="route-steps">`;
+    data.routeSteps.forEach(s => html += `<div class="step-item"><div class="step-num">${s.step}</div><div><strong>${s.point}</strong> — ${s.country}<br><span class="badge-sm badge-${s.type.includes('ریلی')?'rail':(s.type.includes('دریایی')?'sea':'road')}">${s.type}</span></div></div>`);
+    html += `</div>`;
   }
-  
-  if (data.borderPoints) {
-    html += `
-      <div class="info-section-title" style="font-size:14px; margin-top:16px">🛃 نقاط مرزی و گمرکی</div>
-      <table class="info-table">
-        ${data.borderPoints.map(b => `<tr><th>${b.role}</th><td>${b.point}</td></tr>`).join('')}
-      </table>
-    `;
+  if(data.borderPoints) {
+    html += `<div class="info-title" style="font-size:14px">🛃 نقاط مرزی</div><table class="info-table">`;
+    data.borderPoints.forEach(b => html += `<tr><th>${b.role}</th><td>${b.point}</td></tr>`);
+    html += `</table>`;
   }
-  
-  if (data.costs) {
-    html += `
-      <div class="info-section-title" style="font-size:14px; margin-top:16px">💰 هزینه‌ها</div>
-      <table class="info-table">
-        ${data.costs.map(c => `<tr><th>${c.item}</th><td>${c.value}</td></tr>`).join('')}
-      </table>
-    `;
+  if(data.costs) {
+    html += `<div class="info-title" style="font-size:14px">💰 هزینه‌ها</div><table class="info-table">`;
+    data.costs.forEach(c => html += `<tr><th>${c.item}</th><td>${c.value}</td></tr>`);
+    html += `</table>`;
   }
-  
-  if (data.documents) {
-    html += `
-      <div class="info-section-title" style="font-size:14px; margin-top:16px">📄 اسناد لازم</div>
-      <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:8px">
-        ${data.documents.map(d => `<span class="badge-sm" style="background:var(--bg2); color:var(--text)">${d}</span>`).join('')}
-      </div>
-    `;
+  if(data.documents) {
+    html += `<div class="info-title" style="font-size:14px">📄 اسناد لازم</div><div style="display:flex; flex-wrap:wrap; gap:6px">`;
+    data.documents.forEach(d => html += `<span class="badge-sm" style="background:var(--bg2);color:var(--text)">${d}</span>`);
+    html += `</div>`;
   }
-  
-  html += `
-    <div class="info-section-title" style="font-size:14px; margin-top:16px">🏭 کالا، شهر، صنعت، معدن</div>
-    <table class="info-table">
-      <tr><th>کالاهای غالب</th><td>${data.goods?.join('، ') || 'در حال تکمیل'}</td></tr>
-      <tr><th>شهرهای مهم</th><td>${data.cities?.join('، ') || 'در حال تکمیل'}</td></tr>
-      <tr><th>فولاد/مس</th><td>${data.steelCopper || 'در حال تکمیل'}</td></tr>
-      <tr><th>معادن</th><td>${data.mines || 'در حال تکمیل'}</td></tr>
-    </table>
-  `;
-  
-  document.getElementById('corridor-detail-panel').innerHTML = html;
+  html += `<div class="info-title" style="font-size:14px; margin-top:16px">🏭 کالا، شهر، صنعت، معدن</div>
+    <table class="info-table"><tr><th>کالاهای غالب</th><td>${data.goods.join('، ')}</td></tr>
+    <tr><th>شهرهای مهم</th><td>${data.cities.join('، ')}</td></tr>
+    <tr><th>فولاد/مس</th><td>${data.steelCopper}</td></tr>
+    <tr><th>معادن</th><td>${data.mines}</td></tr></table>`;
+  document.getElementById('corridor-detail').innerHTML = html;
 }
 
-function resetCorridorMap() {
-  if (currentCorridorLine) corridorMap.removeLayer(currentCorridorLine);
-  currentCorridorMarkers.forEach(m => corridorMap.removeLayer(m));
-  corridorMap.setView([35, 65], 4);
+function resetCorridorMap() { if(currentCorridorLine) corridorMap.removeLayer(currentCorridorLine); corridorMap.setView([35,65],4); }
+function toggleCorridorMeasure() {
+  corridorMeasureMode = !corridorMeasureMode;
+  const info = document.getElementById('corridor-measure-info');
+  if(corridorMeasureMode) { info.textContent = 'نقطه اول را کلیک کنید'; corridorMap.getContainer().style.cursor = 'crosshair'; }
+  else { info.textContent = ''; clearCorridorMeasure(); corridorMap.getContainer().style.cursor = ''; }
 }
-
-function toggleMeasureCorridor() {
-  measureMode = !measureMode;
-  const info = document.getElementById('measure-info-corridor');
-  if (measureMode) {
-    info.textContent = '📍 نقطه اول را کلیک کنید';
-    corridorMap.getContainer().style.cursor = 'crosshair';
-  } else {
-    info.textContent = '';
-    clearMeasureCorridor();
-    corridorMap.getContainer().style.cursor = '';
-  }
-}
-
-function clearMeasureCorridor() {
-  measureMarkers.forEach(m => corridorMap.removeLayer(m));
-  measureMarkers = [];
-  if (measureLine) { corridorMap.removeLayer(measureLine); measureLine = null; }
-  measurePoints = [];
-}
-
+function clearCorridorMeasure() { corridorMeasureMarkers.forEach(m => corridorMap.removeLayer(m)); if(corridorMeasureLine) corridorMap.removeLayer(corridorMeasureLine); corridorMeasurePoints = []; corridorMeasureMarkers = []; corridorMeasureLine = null; }
 function onCorridorMapClick(e) {
-  if (!measureMode) return;
-  measurePoints.push(e.latlng);
-  const m = L.circleMarker(e.latlng, { radius: 6, color: '#c9a84c', fillColor: '#c9a84c', fillOpacity: 1 }).addTo(corridorMap);
-  measureMarkers.push(m);
-  if (measurePoints.length === 1) {
-    document.getElementById('measure-info-corridor').textContent = '📍 نقطه دوم را کلیک کنید';
-  } else if (measurePoints.length === 2) {
-    const km = (measurePoints[0].distanceTo(measurePoints[1]) / 1000).toFixed(0);
-    measureLine = L.polyline(measurePoints, { color: '#c9a84c', weight: 2, dashArray: '6,4' }).addTo(corridorMap);
-    document.getElementById('measure-info-corridor').textContent = `📏 فاصله: ${km.toLocaleString()} کیلومتر`;
-    setTimeout(() => { clearMeasureCorridor(); if (measureMode) document.getElementById('measure-info-corridor').textContent = '📍 نقطه اول را کلیک کنید'; }, 4000);
+  if(!corridorMeasureMode) return;
+  corridorMeasurePoints.push(e.latlng);
+  let m = L.circleMarker(e.latlng, {radius:6, color:'#c9a84c', fillColor:'#c9a84c'}).addTo(corridorMap);
+  corridorMeasureMarkers.push(m);
+  if(corridorMeasurePoints.length===1) document.getElementById('corridor-measure-info').textContent = 'نقطه دوم را کلیک کنید';
+  else if(corridorMeasurePoints.length===2) {
+    let km = (corridorMeasurePoints[0].distanceTo(corridorMeasurePoints[1])/1000).toFixed(0);
+    corridorMeasureLine = L.polyline(corridorMeasurePoints, {color:'#c9a84c', weight:2, dashArray:'6,4'}).addTo(corridorMap);
+    document.getElementById('corridor-measure-info').textContent = `فاصله: ${km.toLocaleString()} کیلومتر`;
+    setTimeout(()=>{ clearCorridorMeasure(); if(corridorMeasureMode) document.getElementById('corridor-measure-info').textContent = 'نقطه اول را کلیک کنید'; },4000);
   }
+}
+
+// ==================== نمایش جزئیات کشور ====================
+function showCountryDetail(name) {
+  const c = countriesData.find(c => c.name === name);
+  if(!c) return;
+  document.querySelectorAll('#countries-list .sidebar-item').forEach(item => item.classList.remove('active'));
+  if(event?.target?.closest('.sidebar-item')) event.target.closest('.sidebar-item').classList.add('active');
+  document.getElementById('country-detail').innerHTML = `
+    <div class="info-title">🇺🇳 ${c.name}</div>
+    <table class="info-table"><tr><th>پایتخت</th><td>${c.capital}</td></tr>
+    <tr><th>واحد پول</th><td>${c.currency}</td></tr>
+    <tr><th>توضیحات</th><td>${c.desc}</td></tr></table>
+    <div class="info-title" style="font-size:14px; margin-top:16px">📌 نقش در کریدورها</div>
+    <div style="padding:12px; background:var(--bg2); border-radius:var(--rad)">در کریدورهای ${Object.values(corridorsData).filter(cor => cor.countries.includes(c.name)).map(cor => cor.name).join('، ') || 'حضور دارد'}</div>`;
+}
+
+// ==================== نمایش جزئیات سرمایه‌گذاری ====================
+function showInvestDetail(index) {
+  const inv = investData[index];
+  document.querySelectorAll('#invest-list .sidebar-item').forEach(item => item.classList.remove('active'));
+  if(event?.target?.closest('.sidebar-item')) event.target.closest('.sidebar-item').classList.add('active');
+  document.getElementById('invest-detail').innerHTML = `
+    <div class="info-title">💰 ${inv.name}</div>
+    <table class="info-table"><tr><th>کشور</th><td>${inv.country}</td></tr>
+    <tr><th>سطح ریسک</th><td><span class="badge-sm" style="background:${inv.risk==='کم'?'#1D9E75':(inv.risk==='متوسط'?'#BA7517':'#E24B4A'); color:white">ریسک ${inv.risk}</span></td></tr>
+    <tr><th>بخش</th><td>${inv.sector}</td></tr>
+    <tr><th>توضیحات</th><td>${inv.desc}</td></tr></table>
+    <div class="info-title" style="font-size:14px; margin-top:16px">📊 فرصت‌های مرتبط</div>
+    <div style="padding:12px; background:var(--bg2); border-radius:var(--rad)">منطقه ویژه اقتصادی با پتانسیل رشد بالا در کریدورهای ترانزیتی</div>`;
 }
 
 // ==================== نقشه اصلی ====================
-const routesData = {
-  dubai: { name: 'دبی', title: 'مسیر دبی — وضعیت: مسدود', type: 'دریایی + ترانشیپ', time: '۱۸–۲۵ روز', cost: 'پایین', risk: 'بسیار بالا — جنگ منطقه', goods: 'همه اقلام سبک', forward: 'غیرفعال', coords: [[31.23,121.47],[25.27,55.30],[27.18,56.27]], color: '#E24B4A' },
-  oman: { name: 'عمان', title: 'مسیر عمان — وضعیت: فعال', type: 'دریایی (بندر صحار → بندر امام)', time: '۲۵–۳۵ روز', cost: 'متوسط', risk: 'پایین', goods: 'شیمیایی، تجهیزات', forward: 'نیاز به agent', coords: [[31.23,121.47],[22.57,59.53],[23.61,58.59],[27.18,56.27]], color: '#1D9E75' },
-  turkey: { name: 'ترکیه', title: 'مسیر ترکیه — وضعیت: فعال', type: 'دریایی + TIR', time: '۳۰–۴۵ روز', cost: 'بالاتر', risk: 'متوسط — پیچیدگی گمرکی', goods: 'ماشین‌آلات سنگین', forward: 'نیاز به فورواردر', coords: [[31.23,121.47],[39.92,32.85],[39.51,44.04],[36.54,61.21]], color: '#534AB7' },
-  iraq: { name: 'عراق زمینی', title: 'مسیر عراق — وضعیت: فعال', type: 'زمینی مستقیم', time: '۱۰–۱۸ روز', cost: 'متوسط', risk: 'متوسط — بی‌ثباتی', goods: 'قطعات، مواد شیمیایی', forward: 'شریک عراقی لازم', coords: [[31.23,121.47],[25.27,55.30],[29.37,47.98],[32.99,45.15],[30.42,48.18]], color: '#BA7517' },
-  central: { name: 'آسیای مرکزی', title: 'مسیر آسیای مرکزی — وضعیت: فعال', type: 'ریلی + INSTC', time: '۳۵–۵۰ روز', cost: 'متوسط', risk: 'پایین', goods: 'تجهیزات سنگین', forward: 'در حال توسعه', coords: [[31.23,121.47],[43.65,87.32],[51.18,71.45],[37.93,60.35],[36.54,61.21]], color: '#185FA5' }
+const mainRoutes = {
+  dubai: {name:'دبی', title:'مسیر دبی — وضعیت: مسدود', type:'دریایی + ترانشیپ', time:'۱۸–۲۵ روز', cost:'پایین', risk:'بسیار بالا — جنگ منطقه', goods:'همه اقلام سبک', forward:'غیرفعال', coords:[[31.23,121.47],[25.27,55.30],[27.18,56.27]], color:'#E24B4A'},
+  oman: {name:'عمان', title:'مسیر عمان — وضعیت: فعال', type:'دریایی (بندر صحار → بندر امام)', time:'۲۵–۳۵ روز', cost:'متوسط', risk:'پایین', goods:'شیمیایی، تجهیزات', forward:'نیاز به agent', coords:[[31.23,121.47],[22.57,59.53],[23.61,58.59],[27.18,56.27]], color:'#1D9E75'},
+  turkey: {name:'ترکیه', title:'مسیر ترکیه — وضعیت: فعال', type:'دریایی + TIR', time:'۳۰–۴۵ روز', cost:'بالاتر', risk:'متوسط — پیچیدگی گمرکی', goods:'ماشین‌آلات سنگین', forward:'نیاز به فورواردر', coords:[[31.23,121.47],[39.92,32.85],[39.51,44.04],[36.54,61.21]], color:'#534AB7'},
+  iraq: {name:'عراق زمینی', title:'مسیر عراق — وضعیت: فعال', type:'زمینی مستقیم', time:'۱۰–۱۸ روز', cost:'متوسط', risk:'متوسط — بی‌ثباتی', goods:'قطعات، مواد شیمیایی', forward:'شریک عراقی لازم', coords:[[31.23,121.47],[25.27,55.30],[29.37,47.98],[32.99,45.15],[30.42,48.18]], color:'#BA7517'},
+  central: {name:'آسیای مرکزی', title:'مسیر آسیای مرکزی — وضعیت: فعال', type:'ریلی + INSTC', time:'۳۵–۵۰ روز', cost:'متوسط', risk:'پایین', goods:'تجهیزات سنگین', forward:'در حال توسعه', coords:[[31.23,121.47],[43.65,87.32],[51.18,71.45],[37.93,60.35],[36.54,61.21]], color:'#185FA5'}
 };
-
-let mainMap, currentLine, currentMarker, measureModeMain = false, measurePointsMain = [], measureMarkersMain = [], measureLineMain = null;
-
+let mainMap, mainCurrentLine, mainMeasureMode=false, mainMeasurePoints=[], mainMeasureMarkers=[], mainMeasureLine=null;
 function initMainMap() {
-  mainMap = L.map('map').setView([35, 65], 4);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { attribution: '© OpenStreetMap' }).addTo(mainMap);
+  mainMap = L.map('main-map').setView([35,65],4);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{attribution:'© OpenStreetMap'}).addTo(mainMap);
   mainMap.on('click', onMainMapClick);
-  selectRoute('dubai');
+  selectMainRoute('dubai');
 }
-
-function selectRoute(routeId) {
-  const r = routesData[routeId];
-  if (!r) return;
-  document.querySelectorAll('.route-btn').forEach(btn => btn.classList.remove('active'));
-  if (event?.target) event.target.classList.add('active');
-  document.getElementById('detail-title').innerHTML = r.title;
-  document.getElementById('d-type').innerHTML = r.type;
-  document.getElementById('d-time').innerHTML = r.time;
-  document.getElementById('d-cost').innerHTML = r.cost;
-  document.getElementById('d-risk').innerHTML = r.risk;
-  document.getElementById('d-goods').innerHTML = r.goods;
-  document.getElementById('d-forward').innerHTML = r.forward;
-  if (currentLine) mainMap.removeLayer(currentLine);
-  if (currentMarker) mainMap.removeLayer(currentMarker);
-  currentLine = L.polyline(r.coords, { color: r.color, weight: 3, opacity: 0.9 }).addTo(mainMap);
-  currentMarker = L.circleMarker(r.coords[r.coords.length-1], { radius: 6, color: r.color, fillColor: r.color, fillOpacity: 1 }).addTo(mainMap);
-  mainMap.fitBounds(currentLine.getBounds());
+function selectMainRoute(id) {
+  let r = mainRoutes[id];
+  if(!r) return;
+  document.querySelectorAll('#tab-main .route-btn').forEach(btn=>btn.classList.remove('active'));
+  if(event?.target) event.target.classList.add('active');
+  document.getElementById('main-title').innerHTML = r.title;
+  document.getElementById('main-type').innerHTML = r.type;
+  document.getElementById('main-time').innerHTML = r.time;
+  document.getElementById('main-cost').innerHTML = r.cost;
+  document.getElementById('main-risk').innerHTML = r.risk;
+  document.getElementById('main-goods').innerHTML = r.goods;
+  document.getElementById('main-forward').innerHTML = r.forward;
+  if(mainCurrentLine) mainMap.removeLayer(mainCurrentLine);
+  mainCurrentLine = L.polyline(r.coords, {color:r.color, weight:3, opacity:0.9}).addTo(mainMap);
+  mainMap.fitBounds(mainCurrentLine.getBounds());
 }
-
-function resetMapFilter() {
-  if (currentLine) mainMap.removeLayer(currentLine);
-  if (currentMarker) mainMap.removeLayer(currentMarker);
-  Object.values(routesData).forEach(r => {
-    L.polyline(r.coords, { color: r.color, weight: 2, opacity: 0.5 }).addTo(mainMap);
-  });
-  mainMap.setView([35, 65], 4);
+function resetMainMap() { if(mainCurrentLine) mainMap.removeLayer(mainCurrentLine); mainMap.setView([35,65],4); }
+function toggleMainMeasure() {
+  mainMeasureMode = !mainMeasureMode;
+  let info = document.getElementById('main-measure-info');
+  if(mainMeasureMode) { info.textContent = 'نقطه اول را کلیک کنید'; mainMap.getContainer().style.cursor = 'crosshair'; }
+  else { info.textContent = ''; clearMainMeasure(); mainMap.getContainer().style.cursor = ''; }
 }
-
-function toggleMeasure() {
-  measureModeMain = !measureModeMain;
-  const info = document.getElementById('measure-info');
-  if (measureModeMain) {
-    info.textContent = 'نقطه اول را کلیک کنید';
-    mainMap.getContainer().style.cursor = 'crosshair';
-  } else {
-    info.textContent = '';
-    clearMeasureMain();
-    mainMap.getContainer().style.cursor = '';
-  }
-}
-
-function clearMeasureMain() {
-  measureMarkersMain.forEach(m => mainMap.removeLayer(m));
-  measureMarkersMain = [];
-  if (measureLineMain) { mainMap.removeLayer(measureLineMain); measureLineMain = null; }
-  measurePointsMain = [];
-}
-
+function clearMainMeasure() { mainMeasureMarkers.forEach(m=>mainMap.removeLayer(m)); if(mainMeasureLine) mainMap.removeLayer(mainMeasureLine); mainMeasurePoints=[]; mainMeasureMarkers=[]; mainMeasureLine=null; }
 function onMainMapClick(e) {
-  if (!measureModeMain) return;
-  measurePointsMain.push(e.latlng);
-  const m = L.circleMarker(e.latlng, { radius: 6, color: '#c9a84c', fillColor: '#c9a84c', fillOpacity: 1 }).addTo(mainMap);
-  measureMarkersMain.push(m);
-  if (measurePointsMain.length === 1) {
-    document.getElementById('measure-info').textContent = 'نقطه دوم را کلیک کنید';
-  } else if (measurePointsMain.length === 2) {
-    const km = (measurePointsMain[0].distanceTo(measurePointsMain[1]) / 1000).toFixed(0);
-    measureLineMain = L.polyline(measurePointsMain, { color: '#c9a84c', weight: 2, dashArray: '6,4' }).addTo(mainMap);
-    document.getElementById('measure-info').textContent = `فاصله: ${km.toLocaleString()} کیلومتر`;
-    setTimeout(() => { clearMeasureMain(); if (measureModeMain) document.getElementById('measure-info').textContent = 'نقطه اول را کلیک کنید'; }, 4000);
+  if(!mainMeasureMode) return;
+  mainMeasurePoints.push(e.latlng);
+  let m = L.circleMarker(e.latlng, {radius:6, color:'#c9a84c', fillColor:'#c9a84c'}).addTo(mainMap);
+  mainMeasureMarkers.push(m);
+  if(mainMeasurePoints.length===1) document.getElementById('main-measure-info').textContent = 'نقطه دوم را کلیک کنید';
+  else if(mainMeasurePoints.length===2) {
+    let km = (mainMeasurePoints[0].distanceTo(mainMeasurePoints[1])/1000).toFixed(0);
+    mainMeasureLine = L.polyline(mainMeasurePoints, {color:'#c9a84c', weight:2, dashArray:'6,4'}).addTo(mainMap);
+    document.getElementById('main-measure-info').textContent = `فاصله: ${km.toLocaleString()} کیلومتر`;
+    setTimeout(()=>{ clearMainMeasure(); if(mainMeasureMode) document.getElementById('main-measure-info').textContent = 'نقطه اول را کلیک کنید'; },4000);
   }
 }
 
-function showDash(id) {
-  document.querySelectorAll('.dash-section').forEach(s => s.style.display = 'none');
+// ==================== تب‌ها ====================
+function showTab(tab) {
+  document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById(`dash-${id}`).style.display = id === 'corridors' ? 'flex' : 'block';
-  if (event?.target) event.target.classList.add('active');
-  if (id === 'main' && mainMap) setTimeout(() => mainMap.invalidateSize(), 100);
-  if (id === 'corridors' && corridorMap) setTimeout(() => corridorMap.invalidateSize(), 100);
+  document.getElementById(`tab-${tab}`).style.display = 'block';
+  if(event?.target) event.target.classList.add('active');
+  if(tab === 'corridors' && corridorMap) setTimeout(()=>corridorMap.invalidateSize(),100);
+  if(tab === 'main' && mainMap) setTimeout(()=>mainMap.invalidateSize(),100);
 }
 
-window.selectRoute = selectRoute;
-window.resetMapFilter = resetMapFilter;
-window.toggleMeasure = toggleMeasure;
-window.showDash = showDash;
 window.checkPwd = checkPwd;
-window.selectCorridor = selectCorridor;
+window.showTab = showTab;
+window.selectMainRoute = selectMainRoute;
+window.resetMainMap = resetMainMap;
+window.toggleMainMeasure = toggleMainMeasure;
+window.showCorridorDetail = showCorridorDetail;
 window.resetCorridorMap = resetCorridorMap;
-window.toggleMeasureCorridor = toggleMeasureCorridor;
+window.toggleCorridorMeasure = toggleCorridorMeasure;
+window.showCountryDetail = showCountryDetail;
+window.showInvestDetail = showInvestDetail;
 </script>
 </body>
 </html>
