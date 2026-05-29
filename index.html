@@ -3,284 +3,488 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>داشبورد مسیرهای لجستیکی اوراسیا | Eurasia Logistics Dashboard</title>
+<title>داشبورد لجستیک اوراسیا | Eurasia Logistics</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
-  :root {
-    --primary: #1a3a5c;
-    --accent: #e8a020;
-    --bg: #f4f6f9;
-    --card: #ffffff;
-    --text: #1a1a2e;
-    --muted: #6b7280;
-    --border: #e2e8f0;
-    --green: #16a34a;
-    --yellow: #ca8a04;
-    --red: #dc2626;
-    --blue: #2563eb;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); color: var(--text); }
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap');
 
-  /* PASSWORD GATE */
-  #password-gate {
-    position: fixed; inset: 0; background: linear-gradient(135deg, #1a3a5c 0%, #0f2340 100%);
-    display: flex; align-items: center; justify-content: center; z-index: 9999;
-  }
-  .gate-box {
-    background: white; border-radius: 16px; padding: 48px 40px; width: 360px;
-    text-align: center; box-shadow: 0 25px 60px rgba(0,0,0,0.4);
-  }
-  .gate-logo { font-size: 48px; margin-bottom: 16px; }
-  .gate-title { font-size: 22px; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
-  .gate-sub { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
-  .gate-input {
-    width: 100%; padding: 12px 16px; border: 2px solid var(--border);
-    border-radius: 8px; font-size: 15px; outline: none; text-align: center;
-    letter-spacing: 2px; transition: border 0.2s;
-  }
-  .gate-input:focus { border-color: var(--primary); }
-  .gate-btn {
-    width: 100%; margin-top: 14px; padding: 13px; background: var(--primary);
-    color: white; border: none; border-radius: 8px; font-size: 15px;
-    font-weight: 600; cursor: pointer; transition: background 0.2s;
-  }
-  .gate-btn:hover { background: #0f2340; }
-  .gate-error { color: var(--red); font-size: 13px; margin-top: 10px; display: none; }
+@font-face {
+  font-family: 'BNazanin';
+  src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
+}
 
-  /* HEADER */
-  header {
-    background: linear-gradient(135deg, var(--primary) 0%, #0f2340 100%);
-    color: white; padding: 20px 32px; display: flex;
-    align-items: center; justify-content: space-between;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  }
-  .header-left h1 { font-size: 22px; font-weight: 700; }
-  .header-left p { font-size: 13px; opacity: 0.75; margin-top: 3px; }
-  .header-right { display: flex; gap: 10px; align-items: center; }
-  .lang-btn {
-    padding: 7px 16px; border-radius: 20px; border: 1.5px solid rgba(255,255,255,0.4);
-    background: transparent; color: white; cursor: pointer; font-size: 13px;
-    transition: all 0.2s;
-  }
-  .lang-btn.active { background: var(--accent); border-color: var(--accent); font-weight: 600; }
+:root {
+  --bg: #f0ede8;
+  --card: #ffffff;
+  --primary: #1a3a2a;
+  --accent-green: #2d7a4f;
+  --accent-gold: #c8a84b;
+  --text: #1a1a1a;
+  --muted: #6b7280;
+  --border: #e2ddd6;
+  --red: #c0392b;
+  --green: #2d7a4f;
+  --orange: #d97706;
+  --blue: #1e4d8c;
+  --tag-rail: #e8f4f0;
+  --tag-rail-text: #2d7a4f;
+  --tag-sea: #e8eef8;
+  --tag-sea-text: #1e4d8c;
+  --tag-multi: #fef3e2;
+  --tag-multi-text: #d97706;
+}
 
-  /* MAIN LAYOUT */
-  .container { max-width: 1400px; margin: 0 auto; padding: 24px; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* STATS BAR */
-  .stats-bar {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;
-  }
-  .stat-card {
-    background: var(--card); border-radius: 12px; padding: 20px;
-    border: 1px solid var(--border); text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  }
-  .stat-num { font-size: 32px; font-weight: 700; color: var(--primary); }
-  .stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+body {
+  font-family: 'BNazanin', 'Vazirmatn', 'B Nazanin', Tahoma, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.7;
+}
 
-  /* TABS */
-  .tabs { display: flex; gap: 4px; margin-bottom: 20px; background: var(--card);
-    padding: 6px; border-radius: 12px; border: 1px solid var(--border); width: fit-content; }
-  .tab-btn {
-    padding: 9px 20px; border-radius: 8px; border: none; background: transparent;
-    cursor: pointer; font-size: 14px; color: var(--muted); transition: all 0.2s;
-  }
-  .tab-btn.active { background: var(--primary); color: white; font-weight: 600; }
+[lang="en"] body, .en-text {
+  font-family: 'Times New Roman', Times, serif;
+}
 
-  /* ROUTE TABLE */
-  .table-wrap { background: var(--card); border-radius: 12px; border: 1px solid var(--border);
-    overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-  .table-header {
-    padding: 16px 20px; border-bottom: 1px solid var(--border);
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .table-header h3 { font-size: 16px; font-weight: 600; }
-  table { width: 100%; border-collapse: collapse; }
-  th {
-    background: #f8fafc; padding: 12px 16px; text-align: right;
-    font-size: 12px; color: var(--muted); font-weight: 600;
-    border-bottom: 1px solid var(--border); white-space: nowrap;
-  }
-  td { padding: 13px 16px; border-bottom: 1px solid #f1f5f9; font-size: 13px; }
-  tr:last-child td { border-bottom: none; }
-  tr:hover td { background: #f8fafc; }
+/* PASSWORD GATE */
+#gate {
+  position: fixed; inset: 0;
+  background: linear-gradient(160deg, #1a3a2a 0%, #0d2018 100%);
+  display: flex; align-items: center; justify-content: center; z-index: 9999;
+}
+.gate-box {
+  background: #fff; border-radius: 20px; padding: 52px 44px;
+  width: 380px; text-align: center;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+}
+.gate-icon { font-size: 52px; margin-bottom: 18px; }
+.gate-title { font-size: 24px; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+.gate-sub { font-size: 13px; color: var(--muted); margin-bottom: 30px; }
+.gate-input {
+  width: 100%; padding: 13px 18px; border: 2px solid var(--border);
+  border-radius: 10px; font-size: 16px; text-align: center;
+  letter-spacing: 3px; outline: none; transition: border 0.2s;
+  font-family: 'Times New Roman', serif;
+}
+.gate-input:focus { border-color: var(--accent-green); }
+.gate-btn {
+  width: 100%; margin-top: 14px; padding: 14px;
+  background: var(--primary); color: white; border: none;
+  border-radius: 10px; font-size: 15px; font-weight: 700;
+  cursor: pointer; transition: background 0.2s;
+  font-family: 'BNazanin', Tahoma, sans-serif;
+}
+.gate-btn:hover { background: #0d2018; }
+.gate-err { color: var(--red); font-size: 13px; margin-top: 10px; display: none; }
 
-  .badge {
-    display: inline-block; padding: 3px 10px; border-radius: 20px;
-    font-size: 11px; font-weight: 600;
-  }
-  .badge-green { background: #dcfce7; color: var(--green); }
-  .badge-yellow { background: #fef9c3; color: var(--yellow); }
-  .badge-red { background: #fee2e2; color: var(--red); }
-  .badge-blue { background: #dbeafe; color: var(--blue); }
+/* HEADER */
+header {
+  background: var(--primary);
+  color: white; padding: 18px 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+.header-brand { display: flex; align-items: center; gap: 14px; }
+.header-brand .logo { font-size: 28px; }
+.header-brand h1 { font-size: 18px; font-weight: 700; }
+.header-brand p { font-size: 12px; opacity: 0.65; margin-top: 2px; }
+.header-actions { display: flex; gap: 8px; align-items: center; }
+.lang-btn {
+  padding: 7px 18px; border-radius: 20px;
+  border: 1.5px solid rgba(255,255,255,0.35);
+  background: transparent; color: white; cursor: pointer;
+  font-size: 13px; transition: all 0.2s;
+}
+.lang-btn.active { background: var(--accent-gold); border-color: var(--accent-gold); font-weight: 700; }
 
-  .risk-bar { height: 6px; border-radius: 3px; background: #e2e8f0; width: 80px; }
-  .risk-fill { height: 100%; border-radius: 3px; }
+/* MAIN */
+.main { max-width: 1300px; margin: 0 auto; padding: 32px 24px; }
 
-  /* MAP SECTION */
-  .map-section { background: var(--card); border-radius: 12px; border: 1px solid var(--border);
-    overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 24px; }
-  .map-header { padding: 16px 20px; border-bottom: 1px solid var(--border);
-    display: flex; justify-content: space-between; align-items: center; }
-  .map-header h3 { font-size: 16px; font-weight: 600; }
-  #map { height: 480px; width: 100%; }
-  .map-controls { padding: 14px 20px; background: #f8fafc; border-top: 1px solid var(--border);
-    display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-  .map-btn {
-    padding: 8px 16px; border-radius: 8px; border: 1.5px solid var(--border);
-    background: white; cursor: pointer; font-size: 13px; transition: all 0.2s;
-  }
-  .map-btn:hover, .map-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
-  .distance-result {
-    margin-right: auto; font-size: 13px; color: var(--primary);
-    font-weight: 600; padding: 8px 14px; background: #dbeafe;
-    border-radius: 8px; display: none;
-  }
+/* SECTION HEADER */
+.section-header { margin-bottom: 28px; }
+.section-header h2 { font-size: 26px; font-weight: 700; color: var(--primary); }
+.section-header p { font-size: 14px; color: var(--muted); margin-top: 4px; }
 
-  /* DETAIL PANEL */
-  .detail-panel {
-    background: var(--card); border-radius: 12px; border: 1px solid var(--border);
-    padding: 20px; margin-bottom: 24px; display: none;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  }
-  .detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
-  .detail-item label { font-size: 11px; color: var(--muted); display: block; margin-bottom: 4px; }
-  .detail-item span { font-size: 15px; font-weight: 600; color: var(--primary); }
+/* STATS ROW */
+.stats-row {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 16px; margin-bottom: 28px;
+}
+.stat-box {
+  background: var(--card); border-radius: 14px;
+  padding: 22px 20px; text-align: center;
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.stat-num {
+  font-size: 36px; font-weight: 700; color: var(--primary);
+  font-family: 'Times New Roman', serif;
+}
+.stat-num.green { color: var(--accent-green); }
+.stat-num.gold { color: var(--accent-gold); }
+.stat-label { font-size: 12px; color: var(--muted); margin-top: 5px; }
 
-  /* ADD ROUTE FORM */
-  .form-section { background: var(--card); border-radius: 12px; border: 1px solid var(--border);
-    padding: 24px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-  .form-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
-  .form-group label { font-size: 12px; color: var(--muted); display: block; margin-bottom: 6px; font-weight: 600; }
-  .form-group input, .form-group select {
-    width: 100%; padding: 10px 12px; border: 1.5px solid var(--border);
-    border-radius: 8px; font-size: 13px; outline: none; transition: border 0.2s;
-  }
-  .form-group input:focus, .form-group select:focus { border-color: var(--primary); }
-  .add-btn {
-    margin-top: 16px; padding: 11px 28px; background: var(--primary);
-    color: white; border: none; border-radius: 8px; font-size: 14px;
-    font-weight: 600; cursor: pointer; transition: background 0.2s;
-  }
-  .add-btn:hover { background: #0f2340; }
+/* FILTER TABS */
+.filter-tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+.ftab {
+  padding: 9px 22px; border-radius: 8px;
+  border: 1.5px solid var(--border); background: var(--card);
+  cursor: pointer; font-size: 14px; color: var(--text);
+  transition: all 0.2s; font-family: inherit;
+}
+.ftab.active { background: var(--primary); color: white; border-color: var(--primary); font-weight: 600; }
+.ftab:hover:not(.active) { border-color: var(--accent-green); color: var(--accent-green); }
 
-  @media (max-width: 768px) {
-    .stats-bar { grid-template-columns: repeat(2, 1fr); }
-    .detail-grid, .form-grid { grid-template-columns: 1fr; }
-    header { flex-direction: column; gap: 12px; }
-    th, td { padding: 10px 10px; font-size: 12px; }
-  }
+/* CARDS GRID */
+.cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+/* CORRIDOR CARD */
+.corridor-card {
+  background: var(--card); border-radius: 16px;
+  border: 1px solid var(--border); padding: 24px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.corridor-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); transform: translateY(-2px); }
+
+.card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+.card-title { font-size: 17px; font-weight: 700; color: var(--primary); }
+.card-badge {
+  font-size: 11px; padding: 3px 10px; border-radius: 20px;
+  font-weight: 600; white-space: nowrap;
+}
+.badge-rail { background: var(--tag-rail); color: var(--tag-rail-text); }
+.badge-sea { background: var(--tag-sea); color: var(--tag-sea-text); }
+.badge-multi { background: var(--tag-multi); color: var(--tag-multi-text); }
+.badge-land { background: #fdf2f8; color: #9d174d; }
+.badge-active { background: #dcfce7; color: #166534; }
+.badge-caution { background: #fef9c3; color: #854d0e; }
+.badge-risk { background: #fee2e2; color: #991b1b; }
+
+.card-countries { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.country-tag {
+  font-size: 12px; padding: 3px 10px; background: #f5f3ef;
+  border-radius: 6px; color: var(--muted);
+}
+
+.card-meta { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
+.meta-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--muted); }
+.meta-item .icon { font-size: 14px; }
+
+.card-desc { font-size: 13px; color: #4b5563; line-height: 1.8; margin-bottom: 16px; }
+
+.bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.bar-label { font-size: 12px; color: var(--muted); width: 80px; text-align: right; }
+.bar-track { flex: 1; height: 7px; background: #e5e7eb; border-radius: 4px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 4px; transition: width 0.5s; }
+.bar-val { font-size: 12px; font-weight: 600; width: 40px; }
+.bar-green { background: var(--accent-green); }
+.bar-orange { background: var(--orange); }
+.bar-red { background: var(--red); }
+
+.card-action {
+  margin-top: 16px; width: 100%; padding: 11px;
+  background: transparent; border: 1.5px solid var(--border);
+  border-radius: 10px; font-size: 13px; color: var(--primary);
+  cursor: pointer; transition: all 0.2s; font-family: inherit;
+  font-weight: 600;
+}
+.card-action:hover { background: var(--primary); color: white; border-color: var(--primary); }
+
+/* TIMELINE SECTION */
+.timeline-section {
+  background: var(--card); border-radius: 16px;
+  border: 1px solid var(--border); padding: 28px 32px;
+  margin-bottom: 28px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.timeline-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
+.timeline-title { font-size: 14px; color: var(--muted); }
+.timeline-stats { display: flex; gap: 40px; }
+.tstat { text-align: center; }
+.tstat-num { font-size: 28px; font-weight: 700; font-family: 'Times New Roman', serif; }
+.tstat-num.green { color: var(--accent-green); }
+.tstat-num.gold { color: var(--accent-gold); }
+.tstat-label { font-size: 11px; color: var(--muted); }
+
+.timeline-track { position: relative; padding: 20px 0 10px; }
+.timeline-line {
+  position: absolute; top: 50%; left: 0; right: 0;
+  height: 2px; background: #c8e6d4; transform: translateY(-50%);
+}
+.timeline-nodes { display: flex; justify-content: space-between; position: relative; z-index: 1; }
+.tnode { text-align: center; }
+.tnode-dot {
+  width: 16px; height: 16px; border-radius: 50%;
+  border: 2px solid var(--accent-green); background: white;
+  margin: 0 auto 8px;
+}
+.tnode-dot.filled { background: var(--accent-green); }
+.tnode-dot.end { background: var(--accent-green); width: 20px; height: 20px; border-width: 3px; }
+.tnode-name { font-size: 12px; font-weight: 600; color: var(--primary); }
+.tnode-sub { font-size: 11px; color: var(--muted); }
+.timeline-footer { text-align: center; margin-top: 12px; font-size: 12px; color: var(--muted); }
+
+/* MAP SECTION */
+.map-section {
+  background: var(--card); border-radius: 16px;
+  border: 1px solid var(--border); overflow: hidden;
+  margin-bottom: 28px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.map-top { padding: 18px 24px; border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center; }
+.map-top h3 { font-size: 16px; font-weight: 700; }
+#map { height: 420px; }
+.map-controls { padding: 14px 20px; background: #faf9f7;
+  border-top: 1px solid var(--border); display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.mctrl-btn {
+  padding: 7px 16px; border-radius: 8px; border: 1.5px solid var(--border);
+  background: white; cursor: pointer; font-size: 13px; transition: all 0.2s;
+  font-family: inherit;
+}
+.mctrl-btn:hover, .mctrl-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+.dist-result {
+  margin-right: auto; font-size: 13px; color: var(--blue);
+  font-weight: 700; padding: 7px 14px; background: #e8eef8;
+  border-radius: 8px; display: none;
+}
+
+/* ADD FORM */
+.form-section {
+  background: var(--card); border-radius: 16px;
+  border: 1px solid var(--border); padding: 28px;
+  margin-bottom: 28px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.form-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
+.fg label { font-size: 12px; color: var(--muted); display: block; margin-bottom: 6px; font-weight: 600; }
+.fg input, .fg select {
+  width: 100%; padding: 10px 14px; border: 1.5px solid var(--border);
+  border-radius: 8px; font-size: 13px; outline: none; transition: border 0.2s;
+  font-family: inherit; background: white;
+}
+.fg input:focus, .fg select:focus { border-color: var(--accent-green); }
+.submit-btn {
+  margin-top: 20px; padding: 12px 32px;
+  background: var(--primary); color: white; border: none;
+  border-radius: 10px; font-size: 14px; font-weight: 700;
+  cursor: pointer; transition: background 0.2s; font-family: inherit;
+}
+.submit-btn:hover { background: #0d2018; }
+
+/* DETAIL MODAL */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 500; display: none;
+}
+.modal-box {
+  background: white; border-radius: 20px; padding: 32px;
+  width: 600px; max-width: 95vw; max-height: 85vh; overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.modal-close { background: none; border: none; font-size: 22px; cursor: pointer; color: var(--muted); }
+.modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.modal-item label { font-size: 11px; color: var(--muted); display: block; margin-bottom: 4px; }
+.modal-item span { font-size: 15px; font-weight: 600; color: var(--primary); }
+
+/* FOOTER */
+footer {
+  text-align: center; padding: 20px;
+  font-size: 12px; color: var(--muted);
+  border-top: 1px solid var(--border);
+  background: var(--card);
+}
+
+/* TABS NAV */
+.main-tabs { display: flex; gap: 4px; margin-bottom: 28px;
+  background: var(--card); padding: 6px; border-radius: 12px;
+  border: 1px solid var(--border); width: fit-content; }
+.mtab {
+  padding: 10px 24px; border-radius: 8px; border: none;
+  background: transparent; cursor: pointer; font-size: 14px;
+  color: var(--muted); transition: all 0.2s; font-family: inherit;
+}
+.mtab.active { background: var(--primary); color: white; font-weight: 700; }
+
+@media (max-width: 768px) {
+  .cards-grid { grid-template-columns: 1fr; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .form-grid { grid-template-columns: 1fr; }
+  .timeline-stats { gap: 20px; }
+  header { padding: 14px 16px; }
+  .main { padding: 20px 14px; }
+}
 </style>
 </head>
 <body>
 
 <!-- PASSWORD GATE -->
-<div id="password-gate">
+<div id="gate">
   <div class="gate-box">
-    <div class="gate-logo">🌐</div>
-    <div class="gate-title" id="gate-title">داشبورد لجستیک اوراسیا</div>
-    <div class="gate-sub" id="gate-sub">برای ورود رمز عبور را وارد کنید</div>
-    <input type="password" class="gate-input" id="pwd-input" placeholder="••••••••••••"
-      onkeydown="if(event.key==='Enter') checkPassword()">
-    <button class="gate-btn" onclick="checkPassword()" id="gate-btn">ورود</button>
-    <div class="gate-error" id="gate-error">رمز عبور اشتباه است</div>
+    <div class="gate-icon">🌐</div>
+    <div class="gate-title">داشبورد لجستیک اوراسیا</div>
+    <div class="gate-sub">برای ورود رمز عبور را وارد کنید</div><input type="password" class="gate-input" id="pwd" placeholder="••••••••••••"onkeydown="if(event.key==='Enter')checkPwd()">
+    <button class="gate-btn" onclick="checkPwd()">ورود به داشبورد</button><div class="gate-err" id="gate-err">رمز عبور اشتباه است</div>
   </div>
 </div>
 
-<!-- MAIN DASHBOARD -->
-<div id="dashboard" style="display:none">
+<!-- DASHBOARD -->
+<div id="app" style="display:none">
 
 <header>
-  <div class="header-left">
-    <h1 id="h-title">🌐 داشبورد مسیرهای لجستیکی اوراسیا</h1>
-    <p id="h-sub">ورود کالا به ایران — دریایی، زمینی، ریلی</p>
+  <div class="header-brand">
+    <span class="logo">🛤️</span>
+    <div>
+      <h1 id="h-title">داشبورد مسیرهای لجستیکی اوراسیا</h1>
+      <p id="h-sub">ورود کالا به ایران — دریایی · زمینی · ریلی · چندوجهی</p>
+    </div>
   </div>
-  <div class="header-right">
+  <div class="header-actions">
     <button class="lang-btn active" onclick="setLang('fa')" id="btn-fa">فارسی</button>
     <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
   </div>
 </header>
 
-<div class="container">
+<div class="main">
+
+  <!-- SECTION HEADER -->
+  <div class="section-header">
+    <h2 id="sec-title">🗺️ کریدورهای CAREC</h2>
+    <p id="sec-sub">مسیرهای لجستیکی اوراسیا — ارتباط با چین–ایران</p>
+  </div>
 
   <!-- STATS -->
-  <div class="stats-bar">
-    <div class="stat-card">
-      <div class="stat-num" id="stat-routes">12</div>
-      <div class="stat-label" id="stat-routes-label">مسیر فعال</div>
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="stat-num" id="s1">۸</div>
+      <div class="stat-label" id="sl1">کریدور شناسایی‌شده</div>
     </div>
-    <div class="stat-card">
-      <div class="stat-num" style="color:var(--green)" id="stat-active">8</div>
-      <div class="stat-label" id="stat-active-label">وضعیت عادی</div>
+    <div class="stat-box">
+      <div class="stat-num green" id="s2">۵</div>
+      <div class="stat-label" id="sl2">مسیر ریلی / چندوجهی</div>
     </div>
-    <div class="stat-card">
-      <div class="stat-num" style="color:var(--yellow)" id="stat-caution">3</div>
-      <div class="stat-label" id="stat-caution-label">نیاز به بررسی</div>
+    <div class="stat-box">
+      <div class="stat-num gold" id="s3">$۴٫۶B</div>
+      <div class="stat-label" id="sl3">سرمایه‌گذاری (CKU)</div>
     </div>
-    <div class="stat-card">
-      <div class="stat-num" style="color:var(--red)" id="stat-risk">1</div>
-      <div class="stat-label" id="stat-risk-label">ریسک بالا</div>
+    <div class="stat-box">
+      <div class="stat-num" id="s4">۲۰۳۰</div>
+      <div class="stat-label" id="sl4">افق توسعه</div>
     </div>
   </div>
 
-  <!-- TABS -->
-  <div class="tabs">
-    <button class="tab-btn active" onclick="showTab('routes')" id="tab-routes">مسیرها</button>
-    <button class="tab-btn" onclick="showTab('map')" id="tab-map">نقشه</button>
-    <button class="tab-btn" onclick="showTab('add')" id="tab-add">افزودن مسیر</button>
+  <!-- TIMELINE -->
+  <div class="timeline-section">
+    <div class="timeline-header">
+      <div>
+        <div class="timeline-title" id="tl-label">مسیر ریلی چین ← ایران</div>
+      </div>
+      <div class="timeline-stats">
+        <div class="tstat">
+          <div class="tstat-num green" id="tl-days">۱۵ روز</div>
+          <div class="tstat-label" id="tl-days-l">زمان ریلی چین ← تهران</div>
+        </div>
+        <div class="tstat">
+          <div class="tstat-num" id="tl-km">km ۱۰٬۴۰۰</div>
+          <div class="tstat-label" id="tl-km-l">طول مسیر ریلی</div>
+        </div>
+        <div class="tstat">
+          <div class="tstat-num gold" id="tl-cost">$۷٬۰۰۰</div>
+          <div class="tstat-label" id="tl-cost-l">هزینه ۴۰ft (می ۲۰۲۶)</div>
+        </div>
+        <div class="tstat">
+          <div class="tstat-num green" id="tl-status">فعال</div>
+          <div class="tstat-label" id="tl-status-l">وضعیت از مه ۲۰۲۵</div>
+        </div>
+      </div>
+    </div>
+    <div class="timeline-track">
+      <div class="timeline-line"></div>
+      <div class="timeline-nodes">
+        <div class="tnode">
+          <div class="tnode-dot filled"></div>
+          <div class="tnode-name" id="tn1">چین</div>
+          <div class="tnode-sub">شی‌آن</div>
+        </div>
+        <div class="tnode">
+          <div class="tnode-dot"></div>
+          <div class="tnode-name" id="tn2">مرز XJ</div>
+          <div class="tnode-sub">خورگوس</div>
+        </div>
+        <div class="tnode">
+          <div class="tnode-dot"></div>
+          <div class="tnode-name" id="tn3">قزاقستان</div>
+          <div class="tnode-sub">آلماتی</div>
+        </div>
+        <div class="tnode">
+          <div class="tnode-dot"></div>
+          <div class="tnode-name" id="tn4">ترکمنستان/ایران</div>
+          <div class="tnode-sub">سرخس</div>
+        </div>
+        <div class="tnode">
+          <div class="tnode-dot"></div>
+          <div class="tnode-name" id="tn5">ترانزیت تهران</div>
+          <div class="tnode-sub">آرین</div>
+        </div>
+        <div class="tnode">
+          <div class="tnode-dot end"></div>
+          <div class="tnode-name" id="tn6">بازار ایران</div>
+          <div class="tnode-sub"></div>
+        </div></div>
+    </div><div class="timeline-footer" id="tl-footer">≈ ۱۵ روز — ۱۰٬۴۰۰ کیلومتر &nbsp;|&nbsp; مسیر جوی BRI — فعال از مه ۲۰۲۵</div>
   </div>
 
-  <!-- ROUTES TAB -->
-  <div id="tab-routes-content">
-    <div class="table-wrap">
-      <div class="table-header">
-        <h3 id="tbl-title">مسیرهای ورودی به ایران</h3>
-        <span style="font-size:12px;color:var(--muted)" id="tbl-sub">کلیک روی هر ردیف برای جزئیات</span>
-      </div>
-      <div style="overflow-x:auto">
-        <table id="routes-table">
-          <thead>
-            <tr>
-              <th id="col-name">مسیر</th>
-              <th id="col-mode">نوع حمل</th>
-              <th id="col-dist">فاصله (کیلومتر)</th>
-              <th id="col-time">زمان (روز)</th>
-              <th id="col-cost">هزینه تقریبی</th>
-              <th id="col-cargo">نوع کالا</th>
-              <th id="col-customs">ریسک گمرکی</th>
-              <th id="col-status">وضعیت</th>
-            </tr>
-          </thead>
-          <tbody id="routes-tbody"></tbody>
-        </table>
-      </div>
-    </div>
+  <!-- MAIN TABS -->
+  <div class="main-tabs">
+    <button class="mtab active" onclick="showTab('corridors')" id="tab-corridors">کریدورها</button>
+    <button class="mtab" onclick="showTab('cargo')" id="tab-cargo">دسته‌بندی کالا</button>
+    <button class="mtab" onclick="showTab('map')" id="tab-map">نقشه</button>
+    <button class="mtab" onclick="showTab('add')" id="tab-add">افزودن مسیر</button>
+  </div>
 
-    <!-- DETAIL PANEL -->
-    <div class="detail-panel" id="detail-panel">
-      <h3 id="detail-title" style="font-size:16px;font-weight:700"></h3>
-      <div class="detail-grid" id="detail-grid"></div>
+  <!-- CORRIDORS TAB -->
+  <div id="tab-corridors-content">
+    <div class="filter-tabs" id="corridor-filters">
+      <button class="ftab active" onclick="filterCorridors('all')" id="cf-all">همه</button>
+      <button class="ftab" onclick="filterCorridors('rail')" id="cf-rail">ریلی</button>
+      <button class="ftab" onclick="filterCorridors('multi')" id="cf-multi">چندوجهی</button>
+      <button class="ftab" onclick="filterCorridors('china')" id="cf-china">از چین</button>
+      <button class="ftab" onclick="filterCorridors('energy')" id="cf-energy">مرتبط با انرژی</button>
     </div>
+    <div class="cards-grid" id="corridors-grid"></div>
+  </div>
+
+  <!-- CARGO TAB -->
+  <div id="tab-cargo-content" style="display:none">
+    <div class="filter-tabs">
+      <button class="ftab active" onclick="filterCargo('all')" id="cg-all">همه</button>
+      <button class="ftab" onclick="filterCargo('container')" id="cg-cont">کانتینری</button>
+      <button class="ftab" onclick="filterCargo('bulk')" id="cg-bulk">فله</button>
+      <button class="ftab" onclick="filterCargo('special')" id="cg-spec">تجهیزات خاص</button>
+    </div>
+    <div class="cards-grid" id="cargo-grid"></div>
   </div>
 
   <!-- MAP TAB -->
   <div id="tab-map-content" style="display:none">
     <div class="map-section">
-      <div class="map-header">
+      <div class="map-top">
         <h3 id="map-title">نقشه مسیرها</h3>
-        <span style="font-size:12px;color:var(--muted)" id="map-sub">برای محاسبه فاصله، دو نقطه را روی نقشه انتخاب کنید</span>
+        <span style="font-size:12px;color:var(--muted)" id="map-hint">برای محاسبه فاصله، دو نقطه را انتخاب کنید</span>
       </div>
       <div id="map"></div>
       <div class="map-controls">
-        <button class="map-btn active" onclick="filterMap('all')" id="map-all">همه مسیرها</button>
-        <button class="map-btn" onclick="filterMap('sea')" id="map-sea">دریایی</button>
-        <button class="map-btn" onclick="filterMap('land')" id="map-land">زمینی</button>
-        <button class="map-btn" onclick="filterMap('rail')" id="map-rail">ریلی</button>
-        <button class="map-btn" onclick="toggleDistanceMode()" id="map-dist">📏 محاسبه فاصله</button>
-        <div class="distance-result" id="distance-result"></div>
+        <button class="mctrl-btn active" onclick="filterMap('all')" id="mc-all">همه</button>
+        <button class="mctrl-btn" onclick="filterMap('rail')" id="mc-rail">ریلی</button>
+        <button class="mctrl-btn" onclick="filterMap('sea')" id="mc-sea">دریایی</button>
+        <button class="mctrl-btn" onclick="filterMap('land')" id="mc-land">زمینی</button>
+        <button class="mctrl-btn" onclick="toggleDist()" id="mc-dist">📏 محاسبه فاصله</button>
+        <div class="dist-result" id="dist-result"></div>
       </div>
     </div>
   </div>
@@ -288,774 +492,10 @@
   <!-- ADD ROUTE TAB -->
   <div id="tab-add-content" style="display:none">
     <div class="form-section">
-      <h3 id="form-title" style="font-size:16px;font-weight:700">افزودن مسیر جدید</h3>
+      <h3 id="form-h" style="font-size:18px;font-weight:700;color:var(--primary)">افزودن مسیر جدید</h3>
       <div class="form-grid">
-        <div class="form-group">
-          <label id="fl-name">نام مسیر</label>
-          <input type="text" id="f-name" placeholder="مثال: چین → بندرعباس">
-        </div>
-        <div class="form-group">
-          <label id="fl-mode">نوع حمل</label>
-          <select id="f-mode">
-            <option value="sea">دریایی</option>
-            <option value="land">زمینی</option>
+        <div class="fg"><label id="fl1">نام مسیر</label><input id="fn" placeholder="مثال: چین → بندرعباس"></div>
+        <div class="fg"><label id="fl2">نوع حمل</label>
+          <select id="fm">
             <option value="rail">ریلی</option>
-            <option value="multimodal">چندوجهی</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label id="fl-dist">فاصله (کیلومتر)</label>
-          <input type="number" id="f-dist" placeholder="مثال: 7500">
-        </div>
-        <div class="form-group">
-          <label id="fl-time">زمان حمل (روز)</label>
-          <input type="number" id="f-time" placeholder="مثال: 25">
-        </div>
-        <div class="form-group">
-          <label id="fl-cost">هزینه تقریبی</label>
-          <input type="text" id="f-cost" placeholder="مثال: $1,200/TEU">
-        </div>
-        <div class="form-group">
-          <label id="fl-cargo">نوع کالا</label>
-          <select id="f-cargo">
-            <option value="container">کانتینری</option>
-            <option value="bulk">فله</option>
-            <option value="oil">نفتی</option>
-            <option value="general">عمومی</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label id="fl-risk">ریسک گمرکی (۱-۱۰)</label>
-          <input type="number" id="f-risk" min="1" max="10" placeholder="مثال: 5">
-        </div>
-        <div class="form-group">
-          <label id="fl-status">وضعیت</label>
-          <select id="f-status">
-            <option value="active">فعال</option>
-            <option value="caution">نیاز به بررسی</option>
-            <option value="risk">ریسک بالا</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label id="fl-notes">یادداشت</label>
-          <input type="text" id="f-notes" placeholder="توضیحات اضافه">
-        </div>
-      </div>
-      <button class="add-btn" onclick="addRoute()" id="add-btn-label">افزودن مسیر</button>
-    </div>
-  </div>
-
-</div>
-</div>
-<script>
-// ============================================================
-// PASSWORD
-// ============================================================
-const PASSWORD = "DanaEnergy_2026";
-
-function checkPassword() {
-  const val = document.getElementById('pwd-input').value;
-  if (val === PASSWORD) {
-    document.getElementById('password-gate').style.display = 'none';
-    document.getElementById('dashboard').style.display = 'block';
-    setTimeout(initMap, 100);
-  } else {
-    const err = document.getElementById('gate-error');
-    err.style.display = 'block';
-    document.getElementById('pwd-input').value = '';
-    setTimeout(() => err.style.display = 'none', 3000);
-  }
-}
-
-// ============================================================
-// DATA
-// ============================================================
-const routes = [
-  {
-    id: 1,
-    name_fa: "چین → قزاقستان → ترکمنستان → مرز اینچه‌برون",
-    name_en: "China → Kazakhstan → Turkmenistan → Incheh Borun",
-    mode: "rail", mode_fa: "ریلی", mode_en: "Rail",
-    distance: 7200, time: "18–22", cost: "$900–1,100/TEU",
-    cargo_fa: "کانتینری / فله", cargo_en: "Container / Bulk",
-    risk: 5, status: "active",
-    notes_fa: "مسیر اصلی کریدور شمالی. گمرک ترکمنستان گاهی تأخیر ایجاد می‌کند.",
-    notes_en: "Main northern corridor. Turkmenistan customs may cause delays.",
-    coords: [[35.7, 51.4],[43.2, 76.9],[37.9, 58.4],[37.1, 54.4]]
-  },
-  {
-id: 2,
-
-name_fa: “چین → قرقیزستان → ازبکستان → ترکمنستان → مرز سرخس”,
-
-name_en: “China → Kyrgyzstan → Uzbekistan → Turkmenistan → Sarakhs”,
-
-mode: “land”, mode_fa: “زمینی”, mode_en: “Road”,
-
-distance: 6800, time: “15–20”, cost: “$1,300/TEU”,
-
-cargo_fa: “کانتینری”, cargo_en: “Container”,
-
-risk: 6, status: “caution”,
-
-notes_fa: “کمبود راننده در بخش‌های ازبکستان چالش‌برانگیز است.”,
-
-notes_en: “Driver shortage in Uzbekistan segments is a challenge.”,
-
-coords: [[35.7, 51.4],[41.2, 69.2],[37.9, 58.4],[36.5, 61.1]]
-
-},
-
-{
-
-id: 3,
-
-name_fa: “بندر چین → کراچی → مرز ریمدان/تفتان”,
-
-name_en: “China Port → Karachi → Rimdan/Taftan Border”,
-
-mode: “multimodal”, mode_fa: “چندوجهی”, mode_en: “Multimodal”,
-
-distance: 9800, time: “25–30”, cost: “$700–850/TEU”,
-
-cargo_fa: “فله / عمومی”, cargo_en: “Bulk / General”,
-
-risk: 8, status: “risk”,
-
-notes_fa: “مسائل امنیتی در ایالت بلوچستان پاکستان ریسک را افزایش می‌دهد.”,
-
-notes_en: “Security issues in Balochistan, Pakistan increase risk.”,
-
-coords: [[24.8, 67.0],[25.2, 61.7]]
-
-},
-
-{
-
-id: 4,
-
-name_fa: “بندر چین → بندر صحار (عمان) → بندرعباس”,
-
-name_en: “China Port → Sohar (Oman) → Bandar Abbas”,
-
-mode: “sea”, mode_fa: “دریایی”, mode_en: “Sea”,
-
-distance: 12000, time: “22–28”, cost: “$600–750/TEU”,
-
-cargo_fa: “کانتینری / نفتی”, cargo_en: “Container / Oil”,
-
-risk: 3, status: “active”,
-
-notes_fa: “یکی از ایمن‌ترین و اقتصادی‌ترین مسیرها برای کالاهای ورودی.”,
-
-notes_en: “One of the safest and most economical routes for imports.”,
-
-coords: [[24.3, 56.6],[27.2, 56.3]]
-
-},
-
-{
-
-id: 5,
-
-name_fa: “بندر مرسین (ترکیه) → مرز بازرگان”,
-
-name_en: “Mersin Port (Turkey) → Bazargan Border”,
-
-mode: “land”, mode_fa: “زمینی”, mode_en: “Road”,
-
-distance: 1400, time: “4–6”, cost: “$500–650/truck”,
-
-cargo_fa: “عمومی / یخچالی”, cargo_en: “General / Reefer”,
-
-risk: 4, status: “active”,
-
-notes_fa: “تراکم در مرز بازرگان ممکن است زمان را افزایش دهد.”,
-
-notes_en: “Congestion at Bazargan border may increase transit time.”,
-
-coords: [[36.8, 34.6],[39.4, 44.3]]
-
-},
-
-{
-
-id: 6,
-
-name_fa: “مسیر قطبی (Northern Sea Route) → مورمانسک → ایران”,
-
-name_en: “Northern Sea Route → Murmansk → Iran”,
-
-mode: “sea”, mode_fa: “دریایی”, mode_en: “Sea”,
-
-distance: 15500, time: “35–45”, cost: “$2,500/TEU”,
-
-cargo_fa: “تجهیزات خاص”, cargo_en: “Special Equipment”,
-
-risk: 7, status: “caution”,
-
-notes_fa: “وابسته به فصل و یخ‌شکن؛ مسیر استراتژیک در آینده.”,
-
-notes_en: “Seasonal and icebreaker dependent; strategic future route.”,
-
-coords: [[68.9, 33.1],[35.7, 51.4]]
-
-}
-
-];
-
-// ============================================================
-
-// LANGUAGE & UI
-
-// ============================================================
-
-let lang = ‘fa’;
-
-const i18n = {
-
-fa: {
-
-htitle: “🌐 داشبورد مسیرهای لجستیکی اوراسیا”, hsub: “ورود کالا به ایران — دریایی، زمینی، ریلی”,
-
-s1: “مسیر فعال”, s2: “وضعیت عادی”, s3: “نیاز به بررسی”, s4: “ریسک بالا”,
-
-t1: “مسیرها”, t2: “نقشه”, t3: “افزودن مسیر”,
-
-tbl1: “مسیرهای ورودی به ایران”, tbl2: “کلیک روی هر ردیف برای جزئیات”,
-
-c1: “مسیر”, c2: “نوع حمل”, c3: “فاصله (کیلومتر)”, c4: “زمان (روز)”, c5: “هزینه تقریبی”, c6: “نوع کالا”, c7: “ریسک گمرکی”, c8: “وضعیت”,
-
-m1: “نقشه مسیرها”, m2: “برای محاسبه فاصله، دو نقطه را روی نقشه انتخاب کنید”,
-
-mb1: “همه مسیرها”, mb2: “دریایی”, mb3: “زمینی”, mb4: “ریلی”, mb5: “📏 محاسبه فاصله”,
-
-f1: “افزودن مسیر جدید”, f2: “نام مسیر”, f3: “نوع حمل”, f4: “فاصله (کیلومتر)”, f5: “زمان حمل (روز)”, f6: “هزینه تقریبی”, f7: “نوع کالا”, f8: “ریسک گمرکی (۱-۱۰)”, f9: “وضعیت”, f10: “یادداشت”, f11: “افزودن مسیر”
-
-},
-
-en: {
-
-htitle: “🌐 Eurasia Logistics Dashboard”, hsub: “Cargo Entry to Iran — Sea, Land, Rail”,
-
-s1: “Active Routes”, s2: “Normal Status”, s3: “Investigation Needed”, s4: “High Risk”,
-
-t1: “Routes”, t2: “Map”, t3: “Add Route”,
-
-tbl1: “Inbound Routes to Iran”, tbl2: “Click rows for details”,
-
-c1: “Route”, c2: “Transport”, c3: “Dist (km)”, c4: “Time (days)”, c5: “Est. Cost”, c6: “Cargo Type”, c7: “Customs Risk”, c8: “Status”,
-
-m1: “Route Map”, m2: “Click two points on map to calculate distance”,
-
-mb1: “All Routes”, mb2: “Sea”, mb3: “Road”, mb4: “Rail”, mb5: “📏 Measure Distance”,
-
-f1: “Add New Route”, f2: “Route Name”, f3: “Transport Type”, f4: “Distance (km)”, f5: “Time (Days)”, f6: “Est. Cost”, f7: “Cargo Type”, f8: “Customs Risk (1-10)”, f9: “Status”, f10: “Notes”, f11: “Add Route”
-
-}
-
-};
-
-function setLang(l) {
-
-lang = l;
-
-document.documentElement.dir = (l === ‘fa’) ? ‘rtl’ : ‘ltr’;
-
-document.getElementById(‘btn-fa’).classList.toggle(‘active’, l === ‘fa’);
-
-document.getElementById(‘btn-en’).classList.toggle(‘active’, l === ‘en’);
-
-const text = i18n[l];
-
-document.getElementById(‘h-title’).innerText = text.htitle;
-
-document.getElementById(‘h-sub’).innerText = text.hsub;
-
-document.getElementById(‘stat-routes-label’).innerText = text.s1;
-
-document.getElementById(‘stat-active-label’).innerText = text.s2;
-
-document.getElementById(‘stat-caution-label’).innerText = text.s3;
-
-document.getElementById(‘stat-risk-label’).innerText = text.s4;
-
-document.getElementById(‘tab-routes’).innerText = text.t1;
-
-document.getElementById(‘tab-map’).innerText = text.t2;
-
-document.getElementById(‘tab-add’).innerText = text.t3;
-
-document.getElementById(‘tbl-title’).innerText = text.tbl1;
-
-document.getElementById(‘tbl-sub’).innerText = text.tbl2;
-
-document.getElementById(‘map-title’).innerText = text.m1;
-
-document.getElementById(‘map-sub’).innerText = text.m2;
-
-document.getElementById(‘map-all’).innerText = text.mb1;
-
-document.getElementById(‘map-sea’).innerText = text.mb2;
-
-document.getElementById(‘map-land’).innerText = text.mb3;
-
-document.getElementById(‘map-rail’).innerText = text.mb4;
-
-document.getElementById(‘map-dist’).innerText = text.mb5;
-
-document.getElementById(‘col-name’).innerText = text.c1;
-
-document.getElementById(‘col-mode’).innerText = text.c2;
-
-document.getElementById(‘col-dist’).innerText = text.c3;
-
-document.getElementById(‘col-time’).innerText = text.c4;
-
-document.getElementById(‘col-cost’).innerText = text.c5;
-
-document.getElementById(‘col-cargo’).innerText = text.c6;
-
-document.getElementById(‘col-customs’).innerText = text.c7;
-
-document.getElementById(‘col-status’).innerText = text.c8;
-
-document.getElementById(‘form-title’).innerText = text.f1;
-
-document.getElementById(‘fl-name’).innerText = text.f2;
-
-document.getElementById(‘fl-mode’).innerText = text.f3;
-
-document.getElementById(‘fl-dist’).innerText = text.f4;
-
-document.getElementById(‘fl-time’).innerText = text.f5;
-
-document.getElementById(‘fl-cost’).innerText = text.f6;
-
-document.getElementById(‘fl-cargo’).innerText = text.f7;
-
-document.getElementById(‘fl-risk’).innerText = text.f8;
-
-document.getElementById(‘fl-status’).innerText = text.f9;
-
-document.getElementById(‘fl-notes’).innerText = text.f10;
-
-document.getElementById(‘add-btn-label’).innerText = text.f11;
-
-renderTable();
-
-}
-
-// ============================================================
-
-// CORE LOGIC
-
-// ============================================================
-
-function renderTable() {
-
-const tbody = document.getElementById(‘routes-tbody’);
-
-tbody.innerHTML = ‘’;
-
-routes.forEach(r => {
-
-const row = document.createElement(‘tr’);
-
-row.onclick = () => showDetail(r.id);
-
-const riskPercent = r.risk * 10;
-
-const riskColor = r.risk < 4 ? ‘var(–green)’ : (r.risk < 7 ? ‘var(–yellow)’ : ‘var(–red)’);
-
-row.innerHTML = `
-
-<td style=“font-weight:600”>${lang === ‘fa’ ? r.name_fa : r.name_en}</td>
-
-<td><span class=“badge badge-blue”>${lang === ‘fa’ ? r.mode_fa : r.mode_en}</span></td>
-
-<td>${r.distance.toLocaleString()}</td>
-
-<td>${r.time}</td>
-
-<td>${r.cost}</td>
-
-<td>${lang === ‘fa’ ? r.cargo_fa : r.cargo_en}</td>
-
-<td>
-
-<div class=“risk-bar”><div class=“risk-fill” style=“width:
-𝑟
-𝑖
-𝑠
-𝑘
-𝑃
-𝑒
-𝑟
-𝑐
-𝑒
-𝑛
-𝑡
-riskPercent
-{riskColor}”></div></div>
-
-</td>
-
-<td><span class="badge badge-
-𝑟
-.
-𝑠
-𝑡
-𝑎
-𝑡
-𝑢
-𝑠
-"
->
-r.status">
-{r.status}</span></td>
-
-`;
-
-tbody.appendChild(row);
-
-});
-
-}
-
-function showDetail(id) {
-
-const r = routes.find(x => x.id === id);
-
-const panel = document.getElementById(‘detail-panel’);
-
-const grid = document.getElementById(‘detail-grid’);
-
-panel.style.display = ‘block’;
-
-document.getElementById(‘detail-title’).innerText = lang === ‘fa’ ? r.name_fa : r.name_en;
-
-grid.innerHTML = `
-
-<div class=“detail-item”><label>
-𝑙
-𝑎
-𝑛
-𝑔
-=
-=
-=
-′
-𝑓
-𝑎
-′
-?
-′
-یادداشتامنیت
-ی
-′
-:
-′
-𝑆
-𝑒
-𝑐
-𝑢
-𝑟
-𝑖
-𝑡
-𝑦
-𝑁
-𝑜
-𝑡
-𝑒
-′
-<
-/
-𝑙
-𝑎
-𝑏
-𝑒
-𝑙
->
-<
-𝑠
-𝑝
-𝑎
-𝑛
->
-lang=== 
-′
- fa 
-′
- ? 
-′
- یادداشتامنیتی 
-′
- : 
-′
- SecurityNote 
-′
- </label><span>
-{lang === ‘fa’ ? r.notes_fa : r.notes_en}</span></div>
-
-<div class=“detail-item”><label>
-𝑙
-𝑎
-𝑛
-𝑔
-=
-=
-=
-′
-𝑓
-𝑎
-′
-?
-′
-نوعکال
-ا
-′
-:
-′
-𝐶
-𝑎
-𝑟
-𝑔
-𝑜
-′
-<
-/
-𝑙
-𝑎
-𝑏
-𝑒
-𝑙
->
-<
-𝑠
-𝑝
-𝑎
-𝑛
->
-lang=== 
-′
- fa 
-′
- ? 
-′
- نوعکالا 
-′
- : 
-′
- Cargo 
-′
- </label><span>
-{lang === ‘fa’ ? r.cargo_fa : r.cargo_en}</span></div>
-
-<div class=“detail-item”><label>${lang === ‘fa’ ? ‘آخرین به‌روزرسانی’ : ‘Last Update’}</label><span>2024/05/29</span></div>
-
-`;
-
-panel.scrollIntoView({ behavior: ‘smooth’ });
-
-}
-
-function showTab(tab) {
-
-[‘routes’, ‘map’, ‘add’].forEach(t => {
-
-document.getElementById(tab-${t}-content).style.display = (t === tab) ? ‘block’ : ‘none’;
-
-document.getElementById(tab-${t}).classList.toggle(‘active’, t === tab);
-
-});
-
-if (tab === ‘map’) setTimeout(() => map.invalidateSize(), 200);
-
-}
-
-// ============================================================
-
-// MAP LOGIC (LEAFLET)
-
-// ============================================================
-
-let map, markers = [], polylines = [], distanceMarkers = [], distLine;
-
-let distMode = false;
-
-function initMap() {
-
-if (map) return;
-
-map = L.map(‘map’).setView([35, 55], 4);
-
-L.tileLayer(‘https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png’, {
-
-attribution: ‘© OpenStreetMap’
-
-}).addTo(map);
-
-map.on(‘click’, onMapClick);
-
-filterMap(‘all’);
-
-}
-
-function filterMap(mode) {
-
-markers.forEach(m => map.removeLayer(m));
-
-polylines.forEach(p => map.removeLayer(p));
-
-markers = []; polylines = [];
-
-const filtered = mode === ‘all’ ? routes : routes.filter(r => r.mode === mode);
-
-filtered.forEach(r => {
-
-if (r.coords && r.coords.length > 0) {
-
-const poly = L.polyline(r.coords, {color: modeColor(r.mode), weight: 4, opacity: 0.7}).addTo(map);
-
-poly.bindPopup(<b>${lang === 'fa' ? r.name_fa : r.name_en}</b><br>${r.time} Days);
-
-polylines.push(poly);
-
-const last = r.coords[r.coords.length - 1];
-
-const mark = L.marker(last).addTo(map);
-
-mark.bindPopup(lang === ‘fa’ ? r.name_fa : r.name_en);
-
-markers.push(mark);
-
-}
-
-});
-
-}
-
-function modeColor(m) {
-
-if (m === ‘sea’) return ‘#2563eb’;
-
-if (m === ‘rail’) return ‘#16a34a’;
-
-return ‘#e8a020’;
-
-}
-
-function toggleDistanceMode() {
-
-distMode = !distMode;
-
-document.getElementById(‘map-dist’).classList.toggle(‘active’, distMode);
-
-const res = document.getElementById(‘distance-result’);
-
-res.style.display = distMode ? ‘block’ : ‘none’;
-
-res.innerText = lang === ‘fa’ ? ‘یک نقطه را روی نقشه انتخاب کنید’ : ‘Select a point on map’;
-
-// Reset
-
-distanceMarkers.forEach(m => map.removeLayer(m));
-
-if (distLine) map.removeLayer(distLine);
-
-distanceMarkers = [];
-
-}
-
-function onMapClick(e) {
-
-if (!distMode) return;
-
-if (distanceMarkers.length >= 2) {
-
-distanceMarkers.forEach(m => map.removeLayer(m));
-
-if (distLine) map.removeLayer(distLine);
-
-distanceMarkers = [];
-
-}
-
-const m = L.marker(e.latlng).addTo(map);
-
-distanceMarkers.push(m);
-
-if (distanceMarkers.length === 2) {
-
-const p1 = distanceMarkers[0].getLatLng();
-
-const p2 = distanceMarkers[1].getLatLng();
-
-distLine = L.polyline([p1, p2], {color: ‘red’, dashArray: ‘5, 10’}).addTo(map);
-
-const dist = (p1.distanceTo(p2) / 1000).toFixed(2);
-
-document.getElementById(‘distance-result’).innerText = (lang === ‘fa’ ? 'فاصله: ’ : 'Distance: ‘) + dist + ’ KM’;
-
-}
-
-}
-
-function addRoute() {
-
-const n = document.getElementById(‘f-name’).value;
-
-if (!n) return alert(‘Please enter route name’);
-
-const newR = {
-
-id: routes.length + 1,
-
-name_fa: n, name_en: n,
-
-mode: document.getElementById(‘f-mode’).value,
-
-mode_fa: document.getElementById(‘f-mode’).value,
-
-mode_en: document.getElementById(‘f-mode’).value,
-
-distance: parseInt(document.getElementById(‘f-dist’).value) || 0,
-
-time: document.getElementById(‘f-time’).value,
-
-cost: document.getElementById(‘f-cost’).value,
-
-cargo_fa: document.getElementById(‘f-cargo’).value,
-
-cargo_en: document.getElementById(‘f-cargo’).value,
-
-risk: parseInt(document.getElementById(‘f-risk’).value) || 5,
-
-status: document.getElementById(‘f-status’).value,
-
-notes_fa: document.getElementById(‘f-notes’).value,
-
-notes_en: document.getElementById(‘f-notes’).value
-
-};
-
-routes.push(newR);
-
-renderTable();
-
-showTab(‘routes’);
-
-alert(lang === ‘fa’ ? ‘مسیر با موفقیت اضافه شد’ : ‘Route added successfully’);
-
-}
-
-// Start
-
-setLang(‘fa’);
-
-</script>
-
-</body>
-
-</html>
+            <option value="sea">دریایی
