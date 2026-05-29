@@ -248,11 +248,36 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
     transition: all 0.2s;
   }
   .cor-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-color: var(--blue); }
+  .cor-card.active {
+    border-color: var(--blue);
+    background: var(--blue-bg);
+  }
   .cor-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
   .cor-name { font-size: 15px; font-weight: 700; color: var(--blue); }
   .countries { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 10px; }
   .ctag { font-size: 11px; background: var(--bg2); color: var(--text2); padding: 2px 7px; border-radius: 10px; }
   .desc { font-size: 12px; color: var(--text2); line-height: 1.6; margin-top: 8px; }
+
+  /* جزئیات کریدور که زیر کارت نمایش داده می‌شود */
+  .corridor-detail {
+    display: none;
+    margin-top: 16px;
+    padding: 16px;
+    background: var(--bg2);
+    border-radius: var(--rad-lg);
+    border-right: 4px solid var(--blue);
+  }
+  .corridor-detail.active {
+    display: block;
+  }
+  .detail-section-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--blue);
+    margin: 0 0 12px 0;
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--blue);
+  }
 
   .detail-panel {
     background: var(--bg2);
@@ -322,25 +347,6 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
   .map-btn.active { background: var(--blue-bg); border-color: var(--blue); color: var(--blue-text); }
   #map { height: 350px; }
 
-  .corridor-info-panel {
-    background: var(--bg);
-    border: 0.5px solid var(--border);
-    border-radius: var(--rad-lg);
-    padding: 1rem;
-    margin-top: 16px;
-    display: none;
-  }
-  .corridor-info-panel.active {
-    display: block;
-  }
-  .detail-section-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--blue);
-    margin: 0 0 12px 0;
-    padding-bottom: 5px;
-    border-bottom: 2px solid var(--blue);
-  }
   .corridor-grid-list {
     margin-top: 20px;
   }
@@ -426,9 +432,6 @@ cat > /mnt/user-data/outputs/logistics_dashboard.html << 'HTMLEOF'
 
   <!-- نقشه برای تب کریدورها (همان نقشه بالایی استفاده می‌شود) -->
   
-  <!-- پنل نمایش اطلاعات کریدور انتخاب شده (زیر نقشه) -->
-  <div id="corridor-info-panel" class="corridor-info-panel"></div>
-
   <div class="filter-row">
     <button class="filt on" onclick="filterCarec('all',this)">همه</button>
     <button class="filt" onclick="filterCarec('multi',this)">چندوجهی</button>
@@ -737,7 +740,7 @@ function renderCorridorsList() {
   ];
   
   container.innerHTML = corridors.map(c => `
-    <div class="cor-card" data-tags="${c.tag}" onclick="showCorridorOnMapAndInfo('${c.id}')">
+    <div class="cor-card" data-tags="${c.tag}" data-id="${c.id}" onclick="toggleCorridorDetail('${c.id}', this)">
       <div class="cor-head">
         <div class="cor-name">${c.name}</div>
         <span class="badge b-${c.type === 'چندوجهی' ? 'purple' : (c.type === 'ریلی' ? 'info' : 'warn')}">${c.type}</span>
@@ -746,48 +749,38 @@ function renderCorridorsList() {
         ${corridorsFullData[c.id].countries.map(ct => `<span class="ctag">${ct}</span>`).join('')}
       </div>
       <div class="desc">${corridorsFullData[c.id].spec.substring(0, 100)}...</div>
+      <div id="detail-${c.id}" class="corridor-detail"></div>
     </div>
   `).join('');
 }
 
-// ==================== نمایش کریدور روی نقشه و اطلاعات زیر نقشه ====================
-let currentCorridorLine = null;
-let currentCorridorMarkers = [];
+// ==================== نمایش/مخفی کردن جزئیات کریدور زیر کارت ====================
+let currentOpenCorridor = null;
 
-function showCorridorOnMapAndInfo(corridorId) {
+function toggleCorridorDetail(corridorId, element) {
+  const detailDiv = document.getElementById(`detail-${corridorId}`);
   const data = corridorsFullData[corridorId];
-  if (!data) return;
   
-  // 1. نمایش مسیر روی نقشه
-  if (data.coords && window.mainMap) {
-    if (currentCorridorLine) window.mainMap.removeLayer(currentCorridorLine);
-    currentCorridorMarkers.forEach(m => window.mainMap.removeLayer(m));
-    currentCorridorMarkers = [];
-    
-    currentCorridorLine = L.polyline(data.coords, {
-      color: data.color,
-      weight: 4,
-      opacity: 0.9
-    }).addTo(window.mainMap);
-    
-    // اضافه کردن مارکرهای نقاط مهم
-    data.coords.forEach(coord => {
-      const marker = L.circleMarker(coord, {
-        radius: 5,
-        color: data.color,
-        fillColor: data.color,
-        fillOpacity: 0.8
-      }).addTo(window.mainMap);
-      currentCorridorMarkers.push(marker);
-    });
-    
-    window.mainMap.fitBounds(currentCorridorLine.getBounds());
+  // اگر همین کریدور باز است، ببند
+  if (currentOpenCorridor === corridorId) {
+    detailDiv.classList.remove('active');
+    currentOpenCorridor = null;
+    element.classList.remove('active');
+    return;
   }
   
-  // 2. نمایش اطلاعات کامل در پنل زیر نقشه
+  // بستن کریدور قبلی
+  if (currentOpenCorridor) {
+    const prevDetail = document.getElementById(`detail-${currentOpenCorridor}`);
+    if (prevDetail) prevDetail.classList.remove('active');
+    const prevCard = document.querySelector(`.cor-card[data-id="${currentOpenCorridor}"]`);
+    if (prevCard) prevCard.classList.remove('active');
+  }
+  
+  // ساخت HTML برای جزئیات
   let html = `
     <div class="detail-section-title">📋 ${data.name}</div>
-    <div class="card">
+    <div class="card" style="margin-bottom:0">
       <div class="section-lbl">مشخصات کلی</div>
       <table class="info-table">
         <tr><th>نوع حمل</th><td>${data.type}</td></tr>
@@ -801,7 +794,7 @@ function showCorridorOnMapAndInfo(corridorId) {
   // جدول نقاط عبور
   if (data.routeSteps) {
     html += `
-      <div class="card">
+      <div class="card" style="margin-bottom:0; margin-top:12px">
         <div class="section-lbl">🗺️ نقاط عبور (ترتیب مسیر)</div>
         <div class="route-steps">
           ${data.routeSteps.map(s => `
@@ -818,7 +811,7 @@ function showCorridorOnMapAndInfo(corridorId) {
   // جدول نقاط مرزی و گمرکی
   if (data.borderPoints) {
     html += `
-      <div class="card">
+      <div class="card" style="margin-bottom:0; margin-top:12px">
         <div class="section-lbl">🛃 نقاط مرزی و گمرکی</div>
         <table class="info-table">
           <tr><th>نقش</th><th>کشور/کشورها</th><th>نقطه</th></tr>
@@ -833,7 +826,7 @@ function showCorridorOnMapAndInfo(corridorId) {
   // جدول هزینه‌ها و توقف
   if (data.costs) {
     html += `
-      <div class="card">
+      <div class="card" style="margin-bottom:0; margin-top:12px">
         <div class="section-lbl">💰 هزینه‌ها و توقف</div>
         <table class="info-table">
           <tr><th>وضعیت</th><th>مورد</th></tr>
@@ -848,7 +841,7 @@ function showCorridorOnMapAndInfo(corridorId) {
   // جدول اسناد لازم
   if (data.documents) {
     html += `
-      <div class="card">
+      <div class="card" style="margin-bottom:0; margin-top:12px">
         <div class="section-lbl">📄 اسناد لازم</div>
         <table class="info-table">
           <tr><th>سند</th><th>توضیح</th></tr>
@@ -862,7 +855,7 @@ function showCorridorOnMapAndInfo(corridorId) {
   
   // جدول کالا، شهر، صنعت، معدن
   html += `
-    <div class="card">
+    <div class="card" style="margin-bottom:0; margin-top:12px">
       <div class="section-lbl">🏭 کالا، شهر، صنعت، معدن</div>
       <table class="info-table">
         <tr><th>کالاهای غالب</th><td>${data.goods?.join('، ') || 'در حال تکمیل'}</td></tr>
@@ -873,9 +866,37 @@ function showCorridorOnMapAndInfo(corridorId) {
     </div>
   `;
   
-  const panel = document.getElementById('corridor-info-panel');
-  panel.innerHTML = html;
-  panel.classList.add('active');
+  detailDiv.innerHTML = html;
+  detailDiv.classList.add('active');
+  currentOpenCorridor = corridorId;
+  element.classList.add('active');
+  
+  // نمایش مسیر روی نقشه
+  if (data.coords && window.mainMap) {
+    if (window.currentCorridorLine) window.mainMap.removeLayer(window.currentCorridorLine);
+    if (window.currentCorridorMarkers) {
+      window.currentCorridorMarkers.forEach(m => window.mainMap.removeLayer(m));
+    }
+    window.currentCorridorMarkers = [];
+    
+    window.currentCorridorLine = L.polyline(data.coords, {
+      color: data.color,
+      weight: 4,
+      opacity: 0.9
+    }).addTo(window.mainMap);
+    
+    data.coords.forEach(coord => {
+      const marker = L.circleMarker(coord, {
+        radius: 5,
+        color: data.color,
+        fillColor: data.color,
+        fillOpacity: 0.8
+      }).addTo(window.mainMap);
+      window.currentCorridorMarkers.push(marker);
+    });
+    
+    window.mainMap.fitBounds(window.currentCorridorLine.getBounds());
+  }
 }
 
 // ==================== ROUTE DATA & MAP ====================
@@ -888,6 +909,8 @@ const routesData = {
 };
 
 let mainMap, currentLine, currentMarker, measureMode = false, measurePoints = [], measureMarkers = [], measureLine = null;
+window.currentCorridorLine = null;
+window.currentCorridorMarkers = [];
 
 function initMapAndRoutes() {
   mainMap = L.map('map').setView([35, 65], 4);
@@ -919,14 +942,15 @@ function selectRoute(routeId) {
 function resetMapFilter() {
   if (currentLine) mainMap.removeLayer(currentLine);
   if (currentMarker) mainMap.removeLayer(currentMarker);
-  if (currentCorridorLine) mainMap.removeLayer(currentCorridorLine);
-  currentCorridorMarkers.forEach(m => mainMap.removeLayer(m));
+  if (window.currentCorridorLine) mainMap.removeLayer(window.currentCorridorLine);
+  if (window.currentCorridorMarkers) {
+    window.currentCorridorMarkers.forEach(m => mainMap.removeLayer(m));
+  }
   Object.values(routesData).forEach(r => {
     L.polyline(r.coords, { color: r.color, weight: 2, opacity: 0.5 }).addTo(mainMap);
     L.circleMarker(r.coords[r.coords.length-1], { radius: 4, color: r.color, fillColor: r.color, fillOpacity: 0.7 }).addTo(mainMap);
   });
   mainMap.setView([35, 65], 4);
-  document.getElementById('corridor-info-panel').classList.remove('active');
 }
 
 function toggleMeasure() {
@@ -989,7 +1013,7 @@ window.toggleMeasure = toggleMeasure;
 window.showDash = showDash;
 window.filterCarec = filterCarec;
 window.checkPwd = checkPwd;
-window.showCorridorOnMapAndInfo = showCorridorOnMapAndInfo;
+window.toggleCorridorDetail = toggleCorridorDetail;
 </script>
 </body>
 </html>
