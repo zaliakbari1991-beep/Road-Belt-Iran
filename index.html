@@ -3,416 +3,1059 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>داشبورد مسیرهای لجستیکی اوراسیا</title>
-<style>/* ===== PASSWORD GATE ===== */
-  #gate {
-    position: fixed; inset: 0;
-    background: #0a0e1a;
-    display: flex; align-items: center; justify-content: center;
-    z-index: 9999;
+<title>داشبورد مسیرهای لجستیکی اوراسیا | Eurasia Logistics Dashboard</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --accent: #e8a020;
+    --bg: #f4f6f9;
+    --card: #ffffff;
+    --text: #1a1a2e;
+    --muted: #6b7280;
+    --border: #e2e8f0;
+    --green: #16a34a;
+    --yellow: #ca8a04;
+    --red: #dc2626;
+    --blue: #2563eb;
   }
-  #gate-box {
-    background: #111827;
-    border: 1px solid #1e3a5f;
-    border-radius: 12px;
-    padding: 40px;
-    text-align: center;
-    width: 320px;
-  }
-  #gate-box h2 { color: #60a5fa; margin: 0 0 8px; font-size: 1.2rem; }
-  #gate-box p  { color: #6b7280; font-size: 0.85rem; margin: 0 0 24px; }
-  #gate-box input {
-    width: 100%; padding: 10px 14px;
-    background: #1f2937; border: 1px solid #374151;
-    border-radius: 8px; color: #f9fafb;
-    font-size: 1rem; text-align: center;
-    box-sizing: border-box; margin-bottom: 12px;
-    outline: none;
-  }
-  #gate-box input:focus { border-color: #3b82f6; }
-  #gate-btn {
-    width: 100%; padding: 10px;
-    background: #2563eb; color: #fff;
-    border: none; border-radius: 8px;
-    font-size: 1rem; cursor: pointer;
-  }
-  #gate-btn:hover { background: #1d4ed8; }
-  #gate-error { color: #ef4444; font-size: 0.85rem; margin-top: 10px; display: none; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); color: var(--text); }
 
-  /* ===== MAIN DASHBOARD ===== */
-  #app { display: none; }
+  /* PASSWORD GATE */
+  #password-gate {
+    position: fixed; inset: 0; background: linear-gradient(135deg, #1a3a5c 0%, #0f2340 100%);
+    display: flex; align-items: center; justify-content: center; z-index: 9999;
+  }
+  .gate-box {
+    background: white; border-radius: 16px; padding: 48px 40px; width: 360px;
+    text-align: center; box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+  }
+  .gate-logo { font-size: 48px; margin-bottom: 16px; }
+  .gate-title { font-size: 22px; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+  .gate-sub { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
+  .gate-input {
+    width: 100%; padding: 12px 16px; border: 2px solid var(--border);
+    border-radius: 8px; font-size: 15px; outline: none; text-align: center;
+    letter-spacing: 2px; transition: border 0.2s;
+  }
+  .gate-input:focus { border-color: var(--primary); }
+  .gate-btn {
+    width: 100%; margin-top: 14px; padding: 13px; background: var(--primary);
+    color: white; border: none; border-radius: 8px; font-size: 15px;
+    font-weight: 600; cursor: pointer; transition: background 0.2s;
+  }
+  .gate-btn:hover { background: #0f2340; }
+  .gate-error { color: var(--red); font-size: 13px; margin-top: 10px; display: none; }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #0a0e1a; color: #e2e8f0; }
-
+  /* HEADER */
   header {
-    background: linear-gradient(135deg, #0f172a, #1e3a5f);
-    padding: 20px 30px;
-    border-bottom: 1px solid #1e40af;
-    display: flex; align-items: center; justify-content: space-between;}
-  header h1 { font-size: 1.4rem; color: #60a5fa; }
-  header span { font-size: 0.8rem; color: #6b7280; }
-
-  .container { max-width: 1400px; margin: 0 auto; padding: 24px; }
-
-  /* KPI Cards */
-  .kpi-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 16px; margin-bottom: 28px;
+    background: linear-gradient(135deg, var(--primary) 0%, #0f2340 100%);
+    color: white; padding: 20px 32px; display: flex;
+    align-items: center; justify-content: space-between;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   }
-  .kpi-card {
-    background: #111827; border: 1px solid #1e3a5f;
-    border-radius: 10px; padding: 18px;
-  }
-  .kpi-card .label { font-size: 0.75rem; color: #6b7280; margin-bottom: 6px; }
-  .kpi-card .value { font-size: 1.6rem; font-weight: 700; color: #60a5fa; }
-  .kpi-card .sub   { font-size: 0.75rem; color: #9ca3af; margin-top: 4px; }
-
-  /* Filters */
-  .filters {
-    display: flex; flex-wrap: wrap; gap: 10px;
-    margin-bottom: 24px;
-  }
-  .filter-btn {
-    padding: 7px 16px; border-radius: 20px;
-    border: 1px solid #374151; background: #1f2937;
-    color: #9ca3af; cursor: pointer; font-size: 0.82rem;
+  .header-left h1 { font-size: 22px; font-weight: 700; }
+  .header-left p { font-size: 13px; opacity: 0.75; margin-top: 3px; }
+  .header-right { display: flex; gap: 10px; align-items: center; }
+  .lang-btn {
+    padding: 7px 16px; border-radius: 20px; border: 1.5px solid rgba(255,255,255,0.4);
+    background: transparent; color: white; cursor: pointer; font-size: 13px;
     transition: all 0.2s;
   }
-  .filter-btn:hover, .filter-btn.active {
-    background: #2563eb; border-color: #2563eb; color: #fff;
-  }
+  .lang-btn.active { background: var(--accent); border-color: var(--accent); font-weight: 600; }
 
-  /* Table */
-  .table-wrap {
-    background: #111827; border: 1px solid #1e3a5f;
-    border-radius: 10px; overflow: hidden;
+  /* MAIN LAYOUT */
+  .container { max-width: 1400px; margin: 0 auto; padding: 24px; }
+
+  /* STATS BAR */
+  .stats-bar {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;
   }
+  .stat-card {
+    background: var(--card); border-radius: 12px; padding: 20px;
+    border: 1px solid var(--border); text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .stat-num { font-size: 32px; font-weight: 700; color: var(--primary); }
+  .stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* TABS */
+  .tabs { display: flex; gap: 4px; margin-bottom: 20px; background: var(--card);
+    padding: 6px; border-radius: 12px; border: 1px solid var(--border); width: fit-content; }
+  .tab-btn {
+    padding: 9px 20px; border-radius: 8px; border: none; background: transparent;
+    cursor: pointer; font-size: 14px; color: var(--muted); transition: all 0.2s;
+  }
+  .tab-btn.active { background: var(--primary); color: white; font-weight: 600; }
+
+  /* ROUTE TABLE */
+  .table-wrap { background: var(--card); border-radius: 12px; border: 1px solid var(--border);
+    overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .table-header {
+    padding: 16px 20px; border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .table-header h3 { font-size: 16px; font-weight: 600; }
   table { width: 100%; border-collapse: collapse; }
-  thead th {
-    background: #0f172a; padding: 12px 16px;
-    text-align: right; font-size: 0.78rem;
-    color: #6b7280; font-weight: 600;
-    border-bottom: 1px solid #1e3a5f;
+  th {
+    background: #f8fafc; padding: 12px 16px; text-align: right;
+    font-size: 12px; color: var(--muted); font-weight: 600;
+    border-bottom: 1px solid var(--border); white-space: nowrap;
   }
-  tbody tr { border-bottom: 1px solid #1e2d40; transition: background 0.15s; }
-  tbody tr:hover { background: #1a2744; }
-  tbody td { padding: 12px 16px; font-size: 0.83rem; }
+  td { padding: 13px 16px; border-bottom: 1px solid #f1f5f9; font-size: 13px; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #f8fafc; }
 
   .badge {
-    display: inline-block; padding: 3px 10px;
-    border-radius: 12px; font-size: 0.72rem; font-weight: 600;
+    display: inline-block; padding: 3px 10px; border-radius: 20px;
+    font-size: 11px; font-weight: 600;
   }
-  .badge-sea   { background: #0c4a6e; color: #38bdf8; }
-  .badge-land  { background: #14532d; color: #4ade80; }
-  .badge-rail  { background: #3b0764; color: #c084fc; }
-  .badge-multi { background: #431407; color: #fb923c; }
+  .badge-green { background: #dcfce7; color: var(--green); }
+  .badge-yellow { background: #fef9c3; color: var(--yellow); }
+  .badge-red { background: #fee2e2; color: var(--red); }
+  .badge-blue { background: #dbeafe; color: var(--blue); }
 
-  .risk-bar { display: flex; align-items: center; gap: 8px; }
-  .risk-track {
-    flex: 1; height: 6px; background: #1f2937;
-    border-radius: 3px; overflow: hidden;
-  }
+  .risk-bar { height: 6px; border-radius: 3px; background: #e2e8f0; width: 80px; }
   .risk-fill { height: 100%; border-radius: 3px; }
-  .risk-low  { background: #22c55e; }
-  .risk-mid  { background: #f59e0b; }
-  .risk-high { background: #ef4444; }
 
-  .status-dot {
-    display: inline-block; width: 8px; height: 8px;
-    border-radius: 50%; margin-left: 6px;
+  /* MAP SECTION */
+  .map-section { background: var(--card); border-radius: 12px; border: 1px solid var(--border);
+    overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 24px; }
+  .map-header { padding: 16px 20px; border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center; }
+  .map-header h3 { font-size: 16px; font-weight: 600; }
+  #map { height: 480px; width: 100%; }
+  .map-controls { padding: 14px 20px; background: #f8fafc; border-top: 1px solid var(--border);
+    display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .map-btn {
+    padding: 8px 16px; border-radius: 8px; border: 1.5px solid var(--border);
+    background: white; cursor: pointer; font-size: 13px; transition: all 0.2s;
   }
-  .dot-green  { background: #22c55e; }
-  .dot-yellow { background: #f59e0b; }
-  .dot-red    { background: #ef4444; }
+  .map-btn:hover, .map-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+  .distance-result {
+    margin-right: auto; font-size: 13px; color: var(--primary);
+    font-weight: 600; padding: 8px 14px; background: #dbeafe;
+    border-radius: 8px; display: none;
+  }
 
-  /* Add Route Modal */
+  /* DETAIL PANEL */
+  .detail-panel {
+    background: var(--card); border-radius: 12px; border: 1px solid var(--border);
+    padding: 20px; margin-bottom: 24px; display: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
+  .detail-item label { font-size: 11px; color: var(--muted); display: block; margin-bottom: 4px; }
+  .detail-item span { font-size: 15px; font-weight: 600; color: var(--primary); }
+
+  /* ADD ROUTE FORM */
+  .form-section { background: var(--card); border-radius: 12px; border: 1px solid var(--border);
+    padding: 24px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .form-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
+  .form-group label { font-size: 12px; color: var(--muted); display: block; margin-bottom: 6px; font-weight: 600; }
+  .form-group input, .form-group select {
+    width: 100%; padding: 10px 12px; border: 1.5px solid var(--border);
+    border-radius: 8px; font-size: 13px; outline: none; transition: border 0.2s;
+  }
+  .form-group input:focus, .form-group select:focus { border-color: var(--primary); }
   .add-btn {
-    margin-bottom: 20px; padding: 9px 20px;
-    background: #2563eb; color: #fff;
-    border: none; border-radius: 8px;
-    cursor: pointer; font-size: 0.85rem;
+    margin-top: 16px; padding: 11px 28px; background: var(--primary);
+    color: white; border: none; border-radius: 8px; font-size: 14px;
+    font-weight: 600; cursor: pointer; transition: background 0.2s;
   }
-  .add-btn:hover { background: #1d4ed8; }
+  .add-btn:hover { background: #0f2340; }
 
-  #modal-overlay {
-    display: none; position: fixed; inset: 0;
-    background: rgba(0,0,0,0.7);
-    align-items: center; justify-content: center;
-    z-index: 1000;
-  }
-  #modal-overlay.open { display: flex; }
-  #modal {
-    background: #111827; border: 1px solid #1e3a5f;
-    border-radius: 12px; padding: 28px;
-    width: 480px; max-width: 95vw;
-  }
-  #modal h3 { color: #60a5fa; margin-bottom: 20px; }
-  .form-row { margin-bottom: 14px; }
-  .form-row label { display: block; font-size: 0.78rem; color: #9ca3af; margin-bottom: 5px; }
-  .form-row input, .form-row select {
-    width: 100%; padding: 8px 12px;
-    background: #1f2937; border: 1px solid #374151;
-    border-radius: 6px; color: #f9fafb; font-size: 0.85rem;
-  }
-  .form-row input:focus, .form-row select:focus { outline: none; border-color: #3b82f6; }
-  .form-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
-  .btn-cancel {
-    padding: 8px 18px; background: #374151; color: #9ca3af;
-    border: none; border-radius: 6px; cursor: pointer;
-  }
-  .btn-save {
-    padding: 8px 18px; background: #2563eb; color: #fff;
-    border: none; border-radius: 6px; cursor: pointer;
+  @media (max-width: 768px) {
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .detail-grid, .form-grid { grid-template-columns: 1fr; }
+    header { flex-direction: column; gap: 12px; }
+    th, td { padding: 10px 10px; font-size: 12px; }
   }
 </style>
 </head>
 <body>
 
 <!-- PASSWORD GATE -->
-<div id="gate">
-  <div id="gate-box">
-    <h2>🔒 دسترسی محدود</h2>
-    <p>داشبورد مسیرهای لجستیکی اوراسیا</p>
-    <input type="password" id="pwd-input" placeholder="رمز عبور را وارد کنید" />
-    <button id="gate-btn" onclick="checkPassword()">ورود</button>
-    <div id="gate-error">رمز عبور اشتباه است</div>
+<div id="password-gate">
+  <div class="gate-box">
+    <div class="gate-logo">🌐</div>
+    <div class="gate-title" id="gate-title">داشبورد لجستیک اوراسیا</div>
+    <div class="gate-sub" id="gate-sub">برای ورود رمز عبور را وارد کنید</div>
+    <input type="password" class="gate-input" id="pwd-input" placeholder="••••••••••••"
+      onkeydown="if(event.key==='Enter') checkPassword()">
+    <button class="gate-btn" onclick="checkPassword()" id="gate-btn">ورود</button>
+    <div class="gate-error" id="gate-error">رمز عبور اشتباه است</div>
   </div>
 </div>
 
-<!-- MAIN APP -->
-<div id="app">
-  <header>
-    <h1>🌐 داشبورد مسیرهای لجستیکی اوراسیا — ورود به ایران</h1>
-    <span id="last-update"></span>
-  </header>
+<!-- MAIN DASHBOARD -->
+<div id="dashboard" style="display:none">
 
-  <div class="container">
+<header>
+  <div class="header-left">
+    <h1 id="h-title">🌐 داشبورد مسیرهای لجستیکی اوراسیا</h1>
+    <p id="h-sub">ورود کالا به ایران — دریایی، زمینی، ریلی</p>
+  </div>
+  <div class="header-right">
+    <button class="lang-btn active" onclick="setLang('fa')" id="btn-fa">فارسی</button>
+    <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+  </div>
+</header>
 
-    <!-- KPIs -->
-    <div class="kpi-grid" id="kpi-grid"></div>
+<div class="container">
 
-    <!-- Filters -->
-    <div class="filters" id="filters"></div>
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat-card">
+      <div class="stat-num" id="stat-routes">12</div>
+      <div class="stat-label" id="stat-routes-label">مسیر فعال</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--green)" id="stat-active">8</div>
+      <div class="stat-label" id="stat-active-label">وضعیت عادی</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--yellow)" id="stat-caution">3</div>
+      <div class="stat-label" id="stat-caution-label">نیاز به بررسی</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--red)" id="stat-risk">1</div>
+      <div class="stat-label" id="stat-risk-label">ریسک بالا</div>
+    </div>
+  </div>
 
-    <!-- Add Route -->
-    <button class="add-btn" onclick="openModal()">+ افزودن مسیر جدید</button>
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('routes')" id="tab-routes">مسیرها</button>
+    <button class="tab-btn" onclick="showTab('map')" id="tab-map">نقشه</button>
+    <button class="tab-btn" onclick="showTab('add')" id="tab-add">افزودن مسیر</button>
+  </div>
 
-    <!-- Table -->
+  <!-- ROUTES TAB -->
+  <div id="tab-routes-content">
     <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>مسیر</th>
-            <th>نوع حمل</th>
-            <th>مدت (روز)</th>
-            <th>هزینه تقریبی ($/TEU)</th>
-            <th>ریسک گمرکی</th>
-            <th>وضعیت</th><th>یادداشت</th>
-          </tr>
-        </thead>
-        <tbody id="route-table"></tbody>
-      </table>
+      <div class="table-header">
+        <h3 id="tbl-title">مسیرهای ورودی به ایران</h3>
+        <span style="font-size:12px;color:var(--muted)" id="tbl-sub">کلیک روی هر ردیف برای جزئیات</span>
+      </div>
+      <div style="overflow-x:auto">
+        <table id="routes-table">
+          <thead>
+            <tr>
+              <th id="col-name">مسیر</th>
+              <th id="col-mode">نوع حمل</th>
+              <th id="col-dist">فاصله (کیلومتر)</th>
+              <th id="col-time">زمان (روز)</th>
+              <th id="col-cost">هزینه تقریبی</th>
+              <th id="col-cargo">نوع کالا</th>
+              <th id="col-customs">ریسک گمرکی</th>
+              <th id="col-status">وضعیت</th>
+            </tr>
+          </thead>
+          <tbody id="routes-tbody"></tbody>
+        </table>
+      </div>
     </div>
-</div>
 
-<!-- ADD ROUTE MODAL -->
-<div id="modal-overlay">
-  <div id="modal">
-    <h3>افزودن مسیر جدید</h3>
-    <div class="form-row">
-      <label>نام مسیر</label>
-      <input type="text" id="f-name" placeholder="مثال: چین ← بندرعباس" />
-    </div>
-    <div class="form-row">
-      <label>نوع حمل</label>
-      <select id="f-type">
-        <option value="sea">دریایی</option>
-        <option value="land">زمینی</option>
-        <option value="rail">ریلی</option>
-        <option value="multi">ترکیبی</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label>مدت حمل (روز)</label>
-      <input type="number" id="f-days" placeholder="25" />
-    </div>
-    <div class="form-row">
-      <label>هزینه تقریبی ($/TEU)</label>
-      <input type="number" id="f-cost" placeholder="1200" />
-    </div>
-    <div class="form-row">
-      <label>ریسک گمرکی (۱–۱۰)</label>
-      <input type="number" id="f-risk" min="1" max="10" placeholder="5" />
-    </div>
-    <div class="form-row">
-      <label>وضعیت</label>
-      <select id="f-status">
-        <option value="active">فعال</option>
-        <option value="slow">کند</option>
-        <option value="blocked">مسدود</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label>یادداشت</label>
-      <input type="text" id="f-note" placeholder="توضیح کوتاه..." />
-    </div>
-    <div class="form-actions">
-      <button class="btn-cancel" onclick="closeModal()">انصراف</button>
-      <button class="btn-save" onclick="saveRoute()">ذخیره</button>
+    <!-- DETAIL PANEL -->
+    <div class="detail-panel" id="detail-panel">
+      <h3 id="detail-title" style="font-size:16px;font-weight:700"></h3>
+      <div class="detail-grid" id="detail-grid"></div>
     </div>
   </div>
-</div>
 
+  <!-- MAP TAB -->
+  <div id="tab-map-content" style="display:none">
+    <div class="map-section">
+      <div class="map-header">
+        <h3 id="map-title">نقشه مسیرها</h3>
+        <span style="font-size:12px;color:var(--muted)" id="map-sub">برای محاسبه فاصله، دو نقطه را روی نقشه انتخاب کنید</span>
+      </div>
+      <div id="map"></div>
+      <div class="map-controls">
+        <button class="map-btn active" onclick="filterMap('all')" id="map-all">همه مسیرها</button>
+        <button class="map-btn" onclick="filterMap('sea')" id="map-sea">دریایی</button>
+        <button class="map-btn" onclick="filterMap('land')" id="map-land">زمینی</button>
+        <button class="map-btn" onclick="filterMap('rail')" id="map-rail">ریلی</button>
+        <button class="map-btn" onclick="toggleDistanceMode()" id="map-dist">📏 محاسبه فاصله</button>
+        <div class="distance-result" id="distance-result"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD ROUTE TAB -->
+  <div id="tab-add-content" style="display:none">
+    <div class="form-section">
+      <h3 id="form-title" style="font-size:16px;font-weight:700">افزودن مسیر جدید</h3>
+      <div class="form-grid">
+        <div class="form-group">
+          <label id="fl-name">نام مسیر</label>
+          <input type="text" id="f-name" placeholder="مثال: چین → بندرعباس">
+        </div>
+        <div class="form-group">
+          <label id="fl-mode">نوع حمل</label>
+          <select id="f-mode">
+            <option value="sea">دریایی</option>
+            <option value="land">زمینی</option>
+            <option value="rail">ریلی</option>
+            <option value="multimodal">چندوجهی</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label id="fl-dist">فاصله (کیلومتر)</label>
+          <input type="number" id="f-dist" placeholder="مثال: 7500">
+        </div>
+        <div class="form-group">
+          <label id="fl-time">زمان حمل (روز)</label>
+          <input type="number" id="f-time" placeholder="مثال: 25">
+        </div>
+        <div class="form-group">
+          <label id="fl-cost">هزینه تقریبی</label>
+          <input type="text" id="f-cost" placeholder="مثال: $1,200/TEU">
+        </div>
+        <div class="form-group">
+          <label id="fl-cargo">نوع کالا</label>
+          <select id="f-cargo">
+            <option value="container">کانتینری</option>
+            <option value="bulk">فله</option>
+            <option value="oil">نفتی</option>
+            <option value="general">عمومی</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label id="fl-risk">ریسک گمرکی (۱-۱۰)</label>
+          <input type="number" id="f-risk" min="1" max="10" placeholder="مثال: 5">
+        </div>
+        <div class="form-group">
+          <label id="fl-status">وضعیت</label>
+          <select id="f-status">
+            <option value="active">فعال</option>
+            <option value="caution">نیاز به بررسی</option>
+            <option value="risk">ریسک بالا</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label id="fl-notes">یادداشت</label>
+          <input type="text" id="f-notes" placeholder="توضیحات اضافه">
+        </div>
+      </div>
+      <button class="add-btn" onclick="addRoute()" id="add-btn-label">افزودن مسیر</button>
+    </div>
+  </div>
+
+</div>
+</div>
 <script>
-// ─── PASSWORD ───────────────────────────────────────────────
-const PASSWORD = "DanaEnergy_2026"; //
+// ============================================================
+// PASSWORD
+// ============================================================
+const PASSWORD = "DanaEnergy_2026";
 
 function checkPassword() {
   const val = document.getElementById('pwd-input').value;
   if (val === PASSWORD) {
-    document.getElementById('gate').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-    initDashboard();
+    document.getElementById('password-gate').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    setTimeout(initMap, 100);
   } else {
-    document.getElementById('gate-error').style.display = 'block';document.getElementById('pwd-input').value = '';
+    const err = document.getElementById('gate-error');
+    err.style.display = 'block';
+    document.getElementById('pwd-input').value = '';
+    setTimeout(() => err.style.display = 'none', 3000);
   }
 }
-document.getElementById('pwd-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter') checkPassword();
-});
 
-// ─── DATA ────────────────────────────────────────────────────
-const defaultRoutes = [
-  { name: "چین ← قزاقستان ← مرز شمالی ایران", type: "rail", days: 18, cost: 1100, risk: 4, status: "active", note: "مسیر ریلی INSTC" },
-  { name: "چین ← کراچی ← زاهدان", type: "multi", days: 28, cost: 950, risk: 7, status: "slow", note: "مرز سیستان و بلوچستان" },
-  { name: "چین ← صحار/دقم ← بندرعباس", type: "multi", days: 22, cost: 1050, risk: 5, status: "active", note: "ترانشیپ عمان" },
-  { name: "چین ← دبی ← خوزستان (عراق/کویت)", type: "multi", days: 30, cost: 1300, risk: 8, status: "slow", note: "مرز زمینی عراق" },
-  { name: "چین ← مرسین ← مرز ترکیه ← ایران", type: "multi", days: 25, cost: 1200, risk: 6, status: "active", note: "گذر از ترکیه" },
-  { name: "چین ← بندرعباس (مستقیم)", type: "sea", days: 20, cost: 900, risk: 3, status: "active", note: "مستقیم‌ترین مسیر دریایی" },
+// ============================================================
+// DATA
+// ============================================================
+const routes = [
+  {
+    id: 1,
+    name_fa: "چین → قزاقستان → ترکمنستان → مرز اینچه‌برون",
+    name_en: "China → Kazakhstan → Turkmenistan → Incheh Borun",
+    mode: "rail", mode_fa: "ریلی", mode_en: "Rail",
+    distance: 7200, time: "18–22", cost: "$900–1,100/TEU",
+    cargo_fa: "کانتینری / فله", cargo_en: "Container / Bulk",
+    risk: 5, status: "active",
+    notes_fa: "مسیر اصلی کریدور شمالی. گمرک ترکمنستان گاهی تأخیر ایجاد می‌کند.",
+    notes_en: "Main northern corridor. Turkmenistan customs may cause delays.",
+    coords: [[35.7, 51.4],[43.2, 76.9],[37.9, 58.4],[37.1, 54.4]]
+  },
+  {
+id: 2,
+
+name_fa: “چین → قرقیزستان → ازبکستان → ترکمنستان → مرز سرخس”,
+
+name_en: “China → Kyrgyzstan → Uzbekistan → Turkmenistan → Sarakhs”,
+
+mode: “land”, mode_fa: “زمینی”, mode_en: “Road”,
+
+distance: 6800, time: “15–20”, cost: “$1,300/TEU”,
+
+cargo_fa: “کانتینری”, cargo_en: “Container”,
+
+risk: 6, status: “caution”,
+
+notes_fa: “کمبود راننده در بخش‌های ازبکستان چالش‌برانگیز است.”,
+
+notes_en: “Driver shortage in Uzbekistan segments is a challenge.”,
+
+coords: [[35.7, 51.4],[41.2, 69.2],[37.9, 58.4],[36.5, 61.1]]
+
+},
+
+{
+
+id: 3,
+
+name_fa: “بندر چین → کراچی → مرز ریمدان/تفتان”,
+
+name_en: “China Port → Karachi → Rimdan/Taftan Border”,
+
+mode: “multimodal”, mode_fa: “چندوجهی”, mode_en: “Multimodal”,
+
+distance: 9800, time: “25–30”, cost: “$700–850/TEU”,
+
+cargo_fa: “فله / عمومی”, cargo_en: “Bulk / General”,
+
+risk: 8, status: “risk”,
+
+notes_fa: “مسائل امنیتی در ایالت بلوچستان پاکستان ریسک را افزایش می‌دهد.”,
+
+notes_en: “Security issues in Balochistan, Pakistan increase risk.”,
+
+coords: [[24.8, 67.0],[25.2, 61.7]]
+
+},
+
+{
+
+id: 4,
+
+name_fa: “بندر چین → بندر صحار (عمان) → بندرعباس”,
+
+name_en: “China Port → Sohar (Oman) → Bandar Abbas”,
+
+mode: “sea”, mode_fa: “دریایی”, mode_en: “Sea”,
+
+distance: 12000, time: “22–28”, cost: “$600–750/TEU”,
+
+cargo_fa: “کانتینری / نفتی”, cargo_en: “Container / Oil”,
+
+risk: 3, status: “active”,
+
+notes_fa: “یکی از ایمن‌ترین و اقتصادی‌ترین مسیرها برای کالاهای ورودی.”,
+
+notes_en: “One of the safest and most economical routes for imports.”,
+
+coords: [[24.3, 56.6],[27.2, 56.3]]
+
+},
+
+{
+
+id: 5,
+
+name_fa: “بندر مرسین (ترکیه) → مرز بازرگان”,
+
+name_en: “Mersin Port (Turkey) → Bazargan Border”,
+
+mode: “land”, mode_fa: “زمینی”, mode_en: “Road”,
+
+distance: 1400, time: “4–6”, cost: “$500–650/truck”,
+
+cargo_fa: “عمومی / یخچالی”, cargo_en: “General / Reefer”,
+
+risk: 4, status: “active”,
+
+notes_fa: “تراکم در مرز بازرگان ممکن است زمان را افزایش دهد.”,
+
+notes_en: “Congestion at Bazargan border may increase transit time.”,
+
+coords: [[36.8, 34.6],[39.4, 44.3]]
+
+},
+
+{
+
+id: 6,
+
+name_fa: “مسیر قطبی (Northern Sea Route) → مورمانسک → ایران”,
+
+name_en: “Northern Sea Route → Murmansk → Iran”,
+
+mode: “sea”, mode_fa: “دریایی”, mode_en: “Sea”,
+
+distance: 15500, time: “35–45”, cost: “$2,500/TEU”,
+
+cargo_fa: “تجهیزات خاص”, cargo_en: “Special Equipment”,
+
+risk: 7, status: “caution”,
+
+notes_fa: “وابسته به فصل و یخ‌شکن؛ مسیر استراتژیک در آینده.”,
+
+notes_en: “Seasonal and icebreaker dependent; strategic future route.”,
+
+coords: [[68.9, 33.1],[35.7, 51.4]]
+
+}
+
 ];
 
-function loadRoutes() {
-  const saved = localStorage.getItem('eurasiaRoutes');
-  return saved ? JSON.parse(saved) : defaultRoutes;
-}
-function saveRoutes(routes) {
-  localStorage.setItem('eurasiaRoutes', JSON.stringify(routes));
-}
+// ============================================================
 
-// ─── DASHBOARD ───────────────────────────────────────────────
-let routes = [];
-let activeFilter = 'all';
+// LANGUAGE & UI
 
-function initDashboard() {
-  routes = loadRoutes();
-  document.getElementById('last-update').textContent =
-    'آخرین بروزرسانی: ' + new Date().toLocaleDateString('fa-IR');
-  renderKPIs();
-  renderFilters();
-  renderTable();
-}
+// ============================================================
 
-function renderKPIs() {
-  const active = routes.filter(r => r.status === 'active').length;
-  const avgCost = Math.round(routes.reduce((s,r) => s+r.cost, 0) / routes.length);
-  const avgDays = Math.round(routes.reduce((s,r) => s+r.days, 0) / routes.length);
-  const highRisk = routes.filter(r => r.risk >= 7).length;
+let lang = ‘fa’;
 
-  document.getElementById('kpi-grid').innerHTML = `
-    <div class="kpi-card"><div class="label">کل مسیرها</div><div class="value">${routes.length}</div><div class="sub">مسیر ثبت‌شده</div></div>
-    <div class="kpi-card"><div class="label">مسیرهای فعال</div><div class="value">${active}</div><div class="sub">در حال عملیات</div></div>
-    <div class="kpi-card"><div class="label">میانگین هزینه</div><div class="value">$${avgCost}</div><div class="sub">به ازای هر TEU</div></div>
-    <div class="kpi-card"><div class="label">میانگین زمان</div><div class="value">${avgDays}</div><div class="sub">روز</div></div>
-    <div class="kpi-card"><div class="label">ریسک بالا</div><div class="value">${highRisk}</div><div class="sub">مسیر با ریسک ≥ ۷</div></div>
-  `;
-}
+const i18n = {
 
-function renderFilters() {
-  const types = [
-    { key: 'all', label: 'همه' },
-    { key: 'sea',   label: '🚢 دریایی' },
-    { key: 'land',  label: '🚛 زمینی' },
-    { key: 'rail',  label: '🚂 ریلی' },
-    { key: 'multi', label: '🔀 ترکیبی' },
-  ];
-  document.getElementById('filters').innerHTML = types.map(t =>
-    `<button class="filter-btn ${activeFilter===t.key?'active':''}"
-      onclick="setFilter('${t.key}')">${t.label}</button>`
-  ).join('');
-}
+fa: {
 
-function setFilter(f) {
-  activeFilter = f;
-  renderFilters();renderTable();
+htitle: “🌐 داشبورد مسیرهای لجستیکی اوراسیا”, hsub: “ورود کالا به ایران — دریایی، زمینی، ریلی”,
+
+s1: “مسیر فعال”, s2: “وضعیت عادی”, s3: “نیاز به بررسی”, s4: “ریسک بالا”,
+
+t1: “مسیرها”, t2: “نقشه”, t3: “افزودن مسیر”,
+
+tbl1: “مسیرهای ورودی به ایران”, tbl2: “کلیک روی هر ردیف برای جزئیات”,
+
+c1: “مسیر”, c2: “نوع حمل”, c3: “فاصله (کیلومتر)”, c4: “زمان (روز)”, c5: “هزینه تقریبی”, c6: “نوع کالا”, c7: “ریسک گمرکی”, c8: “وضعیت”,
+
+m1: “نقشه مسیرها”, m2: “برای محاسبه فاصله، دو نقطه را روی نقشه انتخاب کنید”,
+
+mb1: “همه مسیرها”, mb2: “دریایی”, mb3: “زمینی”, mb4: “ریلی”, mb5: “📏 محاسبه فاصله”,
+
+f1: “افزودن مسیر جدید”, f2: “نام مسیر”, f3: “نوع حمل”, f4: “فاصله (کیلومتر)”, f5: “زمان حمل (روز)”, f6: “هزینه تقریبی”, f7: “نوع کالا”, f8: “ریسک گمرکی (۱-۱۰)”, f9: “وضعیت”, f10: “یادداشت”, f11: “افزودن مسیر”
+
+},
+
+en: {
+
+htitle: “🌐 Eurasia Logistics Dashboard”, hsub: “Cargo Entry to Iran — Sea, Land, Rail”,
+
+s1: “Active Routes”, s2: “Normal Status”, s3: “Investigation Needed”, s4: “High Risk”,
+
+t1: “Routes”, t2: “Map”, t3: “Add Route”,
+
+tbl1: “Inbound Routes to Iran”, tbl2: “Click rows for details”,
+
+c1: “Route”, c2: “Transport”, c3: “Dist (km)”, c4: “Time (days)”, c5: “Est. Cost”, c6: “Cargo Type”, c7: “Customs Risk”, c8: “Status”,
+
+m1: “Route Map”, m2: “Click two points on map to calculate distance”,
+
+mb1: “All Routes”, mb2: “Sea”, mb3: “Road”, mb4: “Rail”, mb5: “📏 Measure Distance”,
+
+f1: “Add New Route”, f2: “Route Name”, f3: “Transport Type”, f4: “Distance (km)”, f5: “Time (Days)”, f6: “Est. Cost”, f7: “Cargo Type”, f8: “Customs Risk (1-10)”, f9: “Status”, f10: “Notes”, f11: “Add Route”
+
 }
 
-const typeLabel = { sea:'دریایی', land:'زمینی', rail:'ریلی', multi:'ترکیبی' };
-const typeBadge = { sea:'badge-sea', land:'badge-land', rail:'badge-rail', multi:'badge-multi' };
-const statusMap = {
-  active: ['dot-green',  'فعال'],
-  slow:   ['dot-yellow', 'کند'],
-  blocked:['dot-red',    'مسدود'],
 };
 
-function renderTable() {
-  const filtered = activeFilter === 'all' ? routes : routes.filter(r => r.type === activeFilter);
-  const tbody = document.getElementById('route-table');
-  if (!filtered.length) {
-    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#6b7280;padding:30px">مسیری یافت نشد</td></tr>';
-    return;
-  }
-  tbody.innerHTML = filtered.map((r, i) => {
-    const riskPct = r.risk * 10;
-    const riskClass = r.risk <= 3 ? 'risk-low' : r.risk <= 6 ? 'risk-mid' : 'risk-high';
-    const [dotClass, statusText] = statusMap[r.status] || ['dot-yellow','نامشخص'];
-    return `<tr>
-      <td>${r.name}</td>
-      <td><span class="badge ${typeBadge[r.type]}">${typeLabel[r.type]}</span></td>
-      <td>${r.days}</td>
-      <td>$${r.cost.toLocaleString()}</td>
-      <td>
-        <div class="risk-bar">
-          <div class="risk-track"><div class="risk-fill ${riskClass}" style="width:${riskPct}%"></div></div>
-          <span style="font-size:0.75rem;color:#9ca3af">${r.risk}/10</span>
-        </div>
-      </td>
-      <td><span class="status-dot ${dotClass}"></span>${statusText}</td>
-      <td style="color:#6b7280;font-size:0.78rem">${r.note}</td>
-    </tr>`;
-  }).join('');
+function setLang(l) {
+
+lang = l;
+
+document.documentElement.dir = (l === ‘fa’) ? ‘rtl’ : ‘ltr’;
+
+document.getElementById(‘btn-fa’).classList.toggle(‘active’, l === ‘fa’);
+
+document.getElementById(‘btn-en’).classList.toggle(‘active’, l === ‘en’);
+
+const text = i18n[l];
+
+document.getElementById(‘h-title’).innerText = text.htitle;
+
+document.getElementById(‘h-sub’).innerText = text.hsub;
+
+document.getElementById(‘stat-routes-label’).innerText = text.s1;
+
+document.getElementById(‘stat-active-label’).innerText = text.s2;
+
+document.getElementById(‘stat-caution-label’).innerText = text.s3;
+
+document.getElementById(‘stat-risk-label’).innerText = text.s4;
+
+document.getElementById(‘tab-routes’).innerText = text.t1;
+
+document.getElementById(‘tab-map’).innerText = text.t2;
+
+document.getElementById(‘tab-add’).innerText = text.t3;
+
+document.getElementById(‘tbl-title’).innerText = text.tbl1;
+
+document.getElementById(‘tbl-sub’).innerText = text.tbl2;
+
+document.getElementById(‘map-title’).innerText = text.m1;
+
+document.getElementById(‘map-sub’).innerText = text.m2;
+
+document.getElementById(‘map-all’).innerText = text.mb1;
+
+document.getElementById(‘map-sea’).innerText = text.mb2;
+
+document.getElementById(‘map-land’).innerText = text.mb3;
+
+document.getElementById(‘map-rail’).innerText = text.mb4;
+
+document.getElementById(‘map-dist’).innerText = text.mb5;
+
+document.getElementById(‘col-name’).innerText = text.c1;
+
+document.getElementById(‘col-mode’).innerText = text.c2;
+
+document.getElementById(‘col-dist’).innerText = text.c3;
+
+document.getElementById(‘col-time’).innerText = text.c4;
+
+document.getElementById(‘col-cost’).innerText = text.c5;
+
+document.getElementById(‘col-cargo’).innerText = text.c6;
+
+document.getElementById(‘col-customs’).innerText = text.c7;
+
+document.getElementById(‘col-status’).innerText = text.c8;
+
+document.getElementById(‘form-title’).innerText = text.f1;
+
+document.getElementById(‘fl-name’).innerText = text.f2;
+
+document.getElementById(‘fl-mode’).innerText = text.f3;
+
+document.getElementById(‘fl-dist’).innerText = text.f4;
+
+document.getElementById(‘fl-time’).innerText = text.f5;
+
+document.getElementById(‘fl-cost’).innerText = text.f6;
+
+document.getElementById(‘fl-cargo’).innerText = text.f7;
+
+document.getElementById(‘fl-risk’).innerText = text.f8;
+
+document.getElementById(‘fl-status’).innerText = text.f9;
+
+document.getElementById(‘fl-notes’).innerText = text.f10;
+
+document.getElementById(‘add-btn-label’).innerText = text.f11;
+
+renderTable();
+
 }
 
-// ─── MODAL ───────────────────────────────────────────────────
-function openModal() {
-  document.getElementById('modal-overlay').classList.add('open');
+// ============================================================
+
+// CORE LOGIC
+
+// ============================================================
+
+function renderTable() {
+
+const tbody = document.getElementById(‘routes-tbody’);
+
+tbody.innerHTML = ‘’;
+
+routes.forEach(r => {
+
+const row = document.createElement(‘tr’);
+
+row.onclick = () => showDetail(r.id);
+
+const riskPercent = r.risk * 10;
+
+const riskColor = r.risk < 4 ? ‘var(–green)’ : (r.risk < 7 ? ‘var(–yellow)’ : ‘var(–red)’);
+
+row.innerHTML = `
+
+<td style=“font-weight:600”>${lang === ‘fa’ ? r.name_fa : r.name_en}</td>
+
+<td><span class=“badge badge-blue”>${lang === ‘fa’ ? r.mode_fa : r.mode_en}</span></td>
+
+<td>${r.distance.toLocaleString()}</td>
+
+<td>${r.time}</td>
+
+<td>${r.cost}</td>
+
+<td>${lang === ‘fa’ ? r.cargo_fa : r.cargo_en}</td>
+
+<td>
+
+<div class=“risk-bar”><div class=“risk-fill” style=“width:
+𝑟
+𝑖
+𝑠
+𝑘
+𝑃
+𝑒
+𝑟
+𝑐
+𝑒
+𝑛
+𝑡
+riskPercent
+{riskColor}”></div></div>
+
+</td>
+
+<td><span class="badge badge-
+𝑟
+.
+𝑠
+𝑡
+𝑎
+𝑡
+𝑢
+𝑠
+"
+>
+r.status">
+{r.status}</span></td>
+
+`;
+
+tbody.appendChild(row);
+
+});
+
 }
-function closeModal() {
-  document.getElementById('modal-overlay').classList.remove('open');
-  ['f-name','f-days','f-cost','f-risk','f-note'].forEach(id =>
-    document.getElementById(id).value = '');
+
+function showDetail(id) {
+
+const r = routes.find(x => x.id === id);
+
+const panel = document.getElementById(‘detail-panel’);
+
+const grid = document.getElementById(‘detail-grid’);
+
+panel.style.display = ‘block’;
+
+document.getElementById(‘detail-title’).innerText = lang === ‘fa’ ? r.name_fa : r.name_en;
+
+grid.innerHTML = `
+
+<div class=“detail-item”><label>
+𝑙
+𝑎
+𝑛
+𝑔
+=
+=
+=
+′
+𝑓
+𝑎
+′
+?
+′
+یادداشتامنیت
+ی
+′
+:
+′
+𝑆
+𝑒
+𝑐
+𝑢
+𝑟
+𝑖
+𝑡
+𝑦
+𝑁
+𝑜
+𝑡
+𝑒
+′
+<
+/
+𝑙
+𝑎
+𝑏
+𝑒
+𝑙
+>
+<
+𝑠
+𝑝
+𝑎
+𝑛
+>
+lang=== 
+′
+ fa 
+′
+ ? 
+′
+ یادداشتامنیتی 
+′
+ : 
+′
+ SecurityNote 
+′
+ </label><span>
+{lang === ‘fa’ ? r.notes_fa : r.notes_en}</span></div>
+
+<div class=“detail-item”><label>
+𝑙
+𝑎
+𝑛
+𝑔
+=
+=
+=
+′
+𝑓
+𝑎
+′
+?
+′
+نوعکال
+ا
+′
+:
+′
+𝐶
+𝑎
+𝑟
+𝑔
+𝑜
+′
+<
+/
+𝑙
+𝑎
+𝑏
+𝑒
+𝑙
+>
+<
+𝑠
+𝑝
+𝑎
+𝑛
+>
+lang=== 
+′
+ fa 
+′
+ ? 
+′
+ نوعکالا 
+′
+ : 
+′
+ Cargo 
+′
+ </label><span>
+{lang === ‘fa’ ? r.cargo_fa : r.cargo_en}</span></div>
+
+<div class=“detail-item”><label>${lang === ‘fa’ ? ‘آخرین به‌روزرسانی’ : ‘Last Update’}</label><span>2024/05/29</span></div>
+
+`;
+
+panel.scrollIntoView({ behavior: ‘smooth’ });
+
 }
-function saveRoute() {
-  const name = document.getElementById('f-name').value.trim();
-  const days = parseInt(document.getElementById('f-days').value);
-  const cost = parseInt(document.getElementById('f-cost').value);
-  const risk = parseInt(document.getElementById('f-risk').value);
-  if (!name || isNaN(days) || isNaN(cost) || isNaN(risk)) {
-    alert('لطفاً همه فیلدها را پر کنید'); return;
-  }
-  routes.push({
-    name,
-    type:   document.getElementById('f-type').value,
-    days, cost, risk,
-    status: document.getElementById('f-status').value,
-    note:   document.getElementById('f-note').value.trim(),
-  });
-  saveRoutes(routes);
-  renderKPIs();
-  renderTable();
-  closeModal();
+
+function showTab(tab) {
+
+[‘routes’, ‘map’, ‘add’].forEach(t => {
+
+document.getElementById(tab-${t}-content).style.display = (t === tab) ? ‘block’ : ‘none’;
+
+document.getElementById(tab-${t}).classList.toggle(‘active’, t === tab);
+
+});
+
+if (tab === ‘map’) setTimeout(() => map.invalidateSize(), 200);
+
 }
+
+// ============================================================
+
+// MAP LOGIC (LEAFLET)
+
+// ============================================================
+
+let map, markers = [], polylines = [], distanceMarkers = [], distLine;
+
+let distMode = false;
+
+function initMap() {
+
+if (map) return;
+
+map = L.map(‘map’).setView([35, 55], 4);
+
+L.tileLayer(‘https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png’, {
+
+attribution: ‘© OpenStreetMap’
+
+}).addTo(map);
+
+map.on(‘click’, onMapClick);
+
+filterMap(‘all’);
+
+}
+
+function filterMap(mode) {
+
+markers.forEach(m => map.removeLayer(m));
+
+polylines.forEach(p => map.removeLayer(p));
+
+markers = []; polylines = [];
+
+const filtered = mode === ‘all’ ? routes : routes.filter(r => r.mode === mode);
+
+filtered.forEach(r => {
+
+if (r.coords && r.coords.length > 0) {
+
+const poly = L.polyline(r.coords, {color: modeColor(r.mode), weight: 4, opacity: 0.7}).addTo(map);
+
+poly.bindPopup(<b>${lang === 'fa' ? r.name_fa : r.name_en}</b><br>${r.time} Days);
+
+polylines.push(poly);
+
+const last = r.coords[r.coords.length - 1];
+
+const mark = L.marker(last).addTo(map);
+
+mark.bindPopup(lang === ‘fa’ ? r.name_fa : r.name_en);
+
+markers.push(mark);
+
+}
+
+});
+
+}
+
+function modeColor(m) {
+
+if (m === ‘sea’) return ‘#2563eb’;
+
+if (m === ‘rail’) return ‘#16a34a’;
+
+return ‘#e8a020’;
+
+}
+
+function toggleDistanceMode() {
+
+distMode = !distMode;
+
+document.getElementById(‘map-dist’).classList.toggle(‘active’, distMode);
+
+const res = document.getElementById(‘distance-result’);
+
+res.style.display = distMode ? ‘block’ : ‘none’;
+
+res.innerText = lang === ‘fa’ ? ‘یک نقطه را روی نقشه انتخاب کنید’ : ‘Select a point on map’;
+
+// Reset
+
+distanceMarkers.forEach(m => map.removeLayer(m));
+
+if (distLine) map.removeLayer(distLine);
+
+distanceMarkers = [];
+
+}
+
+function onMapClick(e) {
+
+if (!distMode) return;
+
+if (distanceMarkers.length >= 2) {
+
+distanceMarkers.forEach(m => map.removeLayer(m));
+
+if (distLine) map.removeLayer(distLine);
+
+distanceMarkers = [];
+
+}
+
+const m = L.marker(e.latlng).addTo(map);
+
+distanceMarkers.push(m);
+
+if (distanceMarkers.length === 2) {
+
+const p1 = distanceMarkers[0].getLatLng();
+
+const p2 = distanceMarkers[1].getLatLng();
+
+distLine = L.polyline([p1, p2], {color: ‘red’, dashArray: ‘5, 10’}).addTo(map);
+
+const dist = (p1.distanceTo(p2) / 1000).toFixed(2);
+
+document.getElementById(‘distance-result’).innerText = (lang === ‘fa’ ? 'فاصله: ’ : 'Distance: ‘) + dist + ’ KM’;
+
+}
+
+}
+
+function addRoute() {
+
+const n = document.getElementById(‘f-name’).value;
+
+if (!n) return alert(‘Please enter route name’);
+
+const newR = {
+
+id: routes.length + 1,
+
+name_fa: n, name_en: n,
+
+mode: document.getElementById(‘f-mode’).value,
+
+mode_fa: document.getElementById(‘f-mode’).value,
+
+mode_en: document.getElementById(‘f-mode’).value,
+
+distance: parseInt(document.getElementById(‘f-dist’).value) || 0,
+
+time: document.getElementById(‘f-time’).value,
+
+cost: document.getElementById(‘f-cost’).value,
+
+cargo_fa: document.getElementById(‘f-cargo’).value,
+
+cargo_en: document.getElementById(‘f-cargo’).value,
+
+risk: parseInt(document.getElementById(‘f-risk’).value) || 5,
+
+status: document.getElementById(‘f-status’).value,
+
+notes_fa: document.getElementById(‘f-notes’).value,
+
+notes_en: document.getElementById(‘f-notes’).value
+
+};
+
+routes.push(newR);
+
+renderTable();
+
+showTab(‘routes’);
+
+alert(lang === ‘fa’ ? ‘مسیر با موفقیت اضافه شد’ : ‘Route added successfully’);
+
+}
+
+// Start
+
+setLang(‘fa’);
+
 </script>
+
 </body>
+
 </html>
