@@ -280,7 +280,6 @@ function filterCarec(tag, btn) {
   document.querySelectorAll('.cor-card').forEach(card => { card.style.display = (tag === 'all' || card.getAttribute('data-type') === tag) ? '' : 'none'; });
 }
 
-// ==================== دیتاهای کامل مسیرها ====================
 // ==================== دیتاهای کامل مسیرها (بروزرسانی شده با اطلاعات کامل خرداد ۱۴۰۵) ====================
 const routesData = {
   dubai: {
@@ -303,8 +302,8 @@ const routesData = {
   jebel_ali: {
     name: 'جبل علی',
     title: 'مسیر جبل‌علی: چین به جبل‌علی به بندرعباس به اهواز',
-    type: 'دریایی FCL/LCL (Mainline vessel) چین به جبل‌علی به فیدر/Ro-Ro به بندرعباس و  جاده‌ای',
-    time: 'چین تا جبل‌علی: ۱۵–۲۵ روز (شانگهای  تقریبا ۱۵ روز) | جبل‌علی تا بندرعباس: ۱–۲ روز (در شرایط عادی) | کل: ۲۲–۳۰ روز',
+    type: 'دریایی FCL/LCL (Mainline vessel) چین به جبل‌علی به فیدر/Ro-Ro به بندرعباس و جاده‌ای',
+    time: 'چین تا جبل‌علی: ۱۵–۲۵ روز (شانگهای تقریبا ۱۵ روز) | جبل‌علی تا بندرعباس: ۱–۲ روز (در شرایط عادی) | کل: ۲۲–۳۰ روز',
     cost: 'چین تا جبل‌علی (40ft): ~۲,۰۰۰–۳,۵۰۰ دلار (قبل بحران) | نرخ شانگهای-خلیج فارس در هفته اول مارس ۲۰۲۶ تا ۷۲٪ جهش کرد',
     risk: 'بسیار بالا',
     riskLevel: 'high',
@@ -510,7 +509,6 @@ function updateRouteDetail(routeId) {
   } else {
     document.getElementById('route-risks').style.display = 'none';
   }
-}
 }
 
 let map, currentLine, currentMarker, measureMode = false, measurePoints = [], measureMarkers = [], measureLine = null;
