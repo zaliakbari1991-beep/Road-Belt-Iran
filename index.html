@@ -359,6 +359,10 @@
     color: white;
   }
   
+  .risk-high { color: #E24B4A; font-weight: 700; }
+  .risk-medium { color: #BA7517; font-weight: 700; }
+  .risk-low { color: #1D9E75; font-weight: 700; }
+  
   .update-note {
     font-size: 10px;
     color: #999;
@@ -434,10 +438,10 @@
   <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px;">
     <button class="route-btn" onclick="selectRoute('dubai')">دبی</button>
     <button class="route-btn" onclick="selectRoute('jebel_ali')">جبل علی</button>
-    <button class="route-btn" onclick="selectRoute('duqm')">دقم</button>
-    <button class="route-btn" onclick="selectRoute('sohar')">صحار</button>
-    <button class="route-btn" onclick="selectRoute('salalah')">صلاله</button>
-    <button class="route-btn" onclick="selectRoute('khasab')">خصب</button>
+    <button class="route-btn" onclick="selectRoute('duqm')">دقم (سه شاخه)</button>
+    <button class="route-btn" onclick="selectRoute('sohar')">صحار (سه شاخه)</button>
+    <button class="route-btn" onclick="selectRoute('salalah')">صلاله (سه شاخه)</button>
+    <button class="route-btn" onclick="selectRoute('khasab')">خصب (سه شاخه)</button>
     <button class="route-btn" onclick="selectRoute('turkmenbashi')">ترکمنباشی</button>
     <button class="route-btn" onclick="selectRoute('astrakhan')">آستاراخان</button>
     <button class="route-btn" onclick="selectRoute('mersin')">مرسین</button>
@@ -446,15 +450,12 @@
   </div>
   
   <div class="card" id="route-detail">
-    <div style="font-weight:700; margin-bottom:8px;" id="detail-title">مسیر دبی — چین به اهواز</div>
-    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:8px; font-size:12px;">
-      <div><span style="color:#666">نوع حمل:</span> <strong id="d-type">دریایی + زمینی</strong></div>
-      <div><span style="color:#666">زمان تحویل:</span> <strong id="d-time">۲۲-۳۰ روز</strong></div>
-      <div><span style="color:#666">هزینه نسبی:</span> <strong id="d-cost">متوسط</strong></div>
-      <div><span style="color:#666">ریسک فعلی:</span> <strong id="d-risk">متوسط</strong></div>
-      <div><span style="color:#666">مناسب برای:</span> <strong id="d-goods">کانتینر، کالای عمومی</strong></div>
-      <div><span style="color:#666">وضعیت فورواردر:</span> <strong id="d-forward">فعال</strong></div>
+    <div style="font-weight:700; margin-bottom:12px; font-size:15px;" id="detail-title">مسیر دبی — چین به اهواز</div>
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:10px; font-size:12px;" id="route-detail-grid">
+      <!-- دیتاهای مسیر به صورت داینامیک پر می‌شوند -->
     </div>
+    <div id="route-branches" style="margin-top:12px; padding-top:10px; border-top:1px solid #eee; font-size:11px;"></div>
+    <div id="route-risks" style="margin-top:8px; font-size:11px; background:#fef5e8; padding:8px; border-radius:8px;"></div>
   </div>
 </div>
 
@@ -483,10 +484,18 @@
   <div class="shipping-section">
     <div class="shipping-title">ناوگان تجاری و حمل و نقل دریایی</div>
     <div class="shipping-grid">
-      <div class="shipping-card"><h4>کانتینری</h4><div class="shipping-stat"><span>ظرفیت ناوگان جهانی</span><span>۲۹.۷ میلیون TEU</span></div><div class="shipping-stat"><span>کشتی‌های فعال</span><span>~۶,۵۰۰ فروند</span></div></div>
-      <div class="shipping-card"><h4>نفتکش</h4><div class="shipping-stat"><span>ناوگان نفتکش جهانی</span><span>~۷,۵۰۰ فروند</span></div><div class="shipping-stat"><span>VLCC</span><span>۲ میلیون بشکه</span></div></div>
-      <div class="shipping-card"><h4>فله‌بر</h4><div class="shipping-stat"><span>ناوگان فله‌بر</span><span>~۱۲,۵۰۰ فروند</span></div><div class="shipping-stat"><span>Capesize</span><span>۱۸۰k+ DWT</span></div></div>
-      <div class="shipping-card"><h4>گازبر</h4><div class="shipping-stat"><span>ناوگان LNG</span><span>~۶۵۰ فروند</span></div><div class="shipping-stat"><span>ناوگان LPG</span><span>~۱,۶۰۰ فروند</span></div></div>
+      <div class="shipping-card"><h4>کانتینری</h4><div class="shipping-stat"><span>ظرفیت ناوگان جهانی</span><span>۲۹.۷ میلیون TEU</span></div><div class="shipping-stat"><span>کشتی‌های فعال</span><span>~۶,۵۰۰ فروند</span></div><div class="shipping-stat"><span>مسیرهای اصلی چین-خلیج فارس</span><span>۱۸-۲۲ روز</span></div><div class="shipping-stat"><span>بزرگترین اپراتور</span><span>MSC, Maersk, COSCO</span></div></div>
+      <div class="shipping-card"><h4>نفتکش</h4><div class="shipping-stat"><span>ناوگان نفتکش جهانی</span><span>~۷,۵۰۰ فروند</span></div><div class="shipping-stat"><span>ظرفیت حمل نفت خام</span><span>~۶۰۰ میلیون تن/سال</span></div><div class="shipping-stat"><span>VLCC (ابر نفتکش)</span><span>۲ میلیون بشکه</span></div><div class="shipping-stat"><span>مسیر خلیج فارس-چین</span><span>۲۵-۳۰ روز</span></div></div>
+      <div class="shipping-card"><h4>فله‌بر (Bulk Carrier)</h4><div class="shipping-stat"><span>ناوگان فله‌بر</span><span>~۱۲,۵۰۰ فروند</span></div><div class="shipping-stat"><span>محصولات اصلی</span><span>سنگ آهن، زغال سنگ، غلات</span></div><div class="shipping-stat"><span>Capesize</span><span>۱۸۰k+ DWT</span></div><div class="shipping-stat"><span>حجم سالانه (جهانی)</span><span>~۵.۲ میلیارد تن</span></div></div>
+      <div class="shipping-card"><h4>گازبر (LNG/LPG)</h4><div class="shipping-stat"><span>ناوگان LNG</span><span>~۶۵۰ فروند</span></div><div class="shipping-stat"><span>ناوگان LPG</span><span>~۱,۶۰۰ فروند</span></div><div class="shipping-stat"><span>ظرفیت هر کشتی LNG</span><span>۱۴۵k-۲۶۶k m³</span></div><div class="shipping-stat"><span>قطر-چین (مسیر کلیدی)</span><span>~۲۰ روز</span></div></div>
+    </div>
+  </div>
+  <div class="shipping-section">
+    <div class="shipping-title">بندرهای کلیدی مسیر چین-ایران-اروپا</div>
+    <div class="shipping-grid">
+      <div class="shipping-card"><h4>چین</h4><div class="shipping-stat"><span>شانگهای</span><span>۴۷ میلیون TEU/سال</span></div><div class="shipping-stat"><span>نینگبو-ژوشان</span><span>۳۵ میلیون TEU/سال</span></div><div class="shipping-stat"><span>شنژن</span><span>۲۸ میلیون TEU/سال</span></div></div>
+      <div class="shipping-card"><h4>خلیج فارس</h4><div class="shipping-stat"><span>جبل علی (دبی)</span><span>۱۴ میلیون TEU/سال</span></div><div class="shipping-stat"><span>بندرعباس (ایران)</span><span>۳.۵ میلیون TEU/سال</span></div><div class="shipping-stat"><span>دوحه (قطر)</span><span>مرکز اصلی LNG</span></div></div>
+      <div class="shipping-card"><h4>دریای سیاه و مدیترانه</h4><div class="shipping-stat"><span>آمبارلی (ترکیه)</span><span>~۱۲ میلیون TEU</span></div><div class="shipping-stat"><span>پیرئوس (یونان)</span><span>~۷ میلیون TEU</span></div><div class="shipping-stat"><span>کنستانتسا (رومانی)</span><span>~۲ میلیون TEU</span></div></div>
     </div>
   </div>
 </div>
@@ -501,7 +510,7 @@
 
 <!-- ========== صفحه پنجم: فرصت‌های سرمایه‌گذاری ========== -->
 <div id="dash-investment" class="dash-section">
-  <div class="investment-section"><div class="investment-title">فرصت‌های سرمایه‌گذاری در لجستیک و حمل و نقل بین‌المللی</div><div class="investment-card"><div class="investment-placeholder">این بخش تکمیل خواهد شد.</div></div></div>
+  <div class="investment-section"><div class="investment-title">فرصت‌های سرمایه‌گذاری در لجستیک و حمل و نقل بین‌المللی</div><div class="investment-card"><div class="investment-placeholder">این بخش تکمیل خواهد شد. زیرمجموعه‌های سرمایه‌گذاری شامل پروژه‌های زیرساختی، ناوگان، بنادر، کریدورهای ریلی و مناطق ویژه اقتصادی می‌شود.</div></div></div>
 </div>
 
 <div class="update-note">منابع: Stimson Center، Eurasianet، گزارش‌های رسمی TITR — مه ۲۰۲۶</div>
@@ -509,11 +518,18 @@
 </div></div>
 
 <script>
-// ==================== داده‌های کریدورها ====================
+// ==================== داده‌های کریدورهای بین‌المللی (۱۰ کریدور) ====================
 const corridorsData = [
-  { id: 'Polar', name: 'راه ابریشم قطبی (Polar Silk Road)', type: 'sea', badge: 'دریایی', details: { type: 'دریایی', time: '۲۰-۳۵ روز', cost: 'متوسط تا بالا', risk: 'بالا', goods: 'کالاهای صنعتی، تجهیزات', forward: 'محدود' } },
-  { id: 'Maritime', name: 'راه ابریشم آبی (Maritime Silk Road)', type: 'sea', badge: 'دریایی', details: { type: 'دریایی', time: '۳۰-۴۵ روز', cost: 'پایین تا متوسط', risk: 'متوسط', goods: 'کانتینر، الکترونیک', forward: 'فعال' } },
-  { id: 'TITR', name: 'کریدور میانی (TITR)', type: 'multi', badge: 'چندوجهی', details: { type: 'چندوجهی', time: '۲۰-۳۰ روز', cost: 'متوسط', risk: 'متوسط', goods: 'کانتینر، فلزات', forward: 'فعال' } }
+  { id: 'Polar', name: 'راه ابریشم قطبی (Polar Silk Road)', type: 'sea', badge: 'دریایی', details: { type: 'دریایی (اقیانوس منجمد شمالی)', time: '۲۰-۳۵ روز (وابسته به فصل)', cost: 'متوسط تا بالا', risk: 'بالا (یخ، ژئوپلیتیک)', goods: 'کالاهای صنعتی، تجهیزات، انرژی', forward: 'محدود' } },
+  { id: 'Maritime', name: 'راه ابریشم آبی (Maritime Silk Road)', type: 'sea', badge: 'دریایی', details: { type: 'دریایی', time: '۳۰-۴۵ روز', cost: 'پایین تا متوسط', risk: 'متوسط (تنگه‌ها)', goods: 'کانتینر، الکترونیک، کالاهای مصرفی', forward: 'فعال' } },
+  { id: 'TITR', name: 'کریدور میانی (TITR - Trans-Caspian)', type: 'multi', badge: 'چندوجهی', details: { type: 'چندوجهی (ریلی + دریایی)', time: '۲۰-۳۰ روز', cost: 'متوسط', risk: 'متوسط', goods: 'کانتینر، کالاهای صنعتی، فلزات', forward: 'فعال' } },
+  { id: 'BTK', name: 'باکو-تفلیس-قارص (BTK)', type: 'rail', badge: 'ریلی', details: { type: 'ریلی', time: '۱۲-۱۸ روز', cost: 'متوسط', risk: 'پایین', goods: 'کالاهای ترانزیتی، صنعتی', forward: 'فعال' } },
+  { id: 'CKU', name: 'چین-قرقیزستان-ازبکستان (CKU)', type: 'rail', badge: 'ریلی', details: { type: 'ریلی', time: '۱۵-۲۵ روز', cost: 'متوسط', risk: 'متوسط', goods: 'کالاهای صنعتی، فلزات', forward: 'در حال توسعه' } },
+  { id: 'CRE_North', name: 'CRE شمالی (چین-مغولستان-روسیه)', type: 'rail', badge: 'ریلی', details: { type: 'ریلی', time: '۱۵-۲۰ روز', cost: 'متوسط', risk: 'متوسط (ژئوپلیتیک)', goods: 'کانتینر، کالاهای حجیم', forward: 'فعال' } },
+  { id: 'PAK_AFG_UZB', name: 'پاکستان-افغانستان-ازبکستان', type: 'road', badge: 'جاده‌ای', details: { type: 'جاده‌ای/ریلی محدود', time: '۲۰-۳۰ روز', cost: 'متوسط', risk: 'بالا (امنیتی)', goods: 'کالاهای مصرفی، ساختمانی', forward: 'محدود' } },
+  { id: 'INSTC', name: 'کریدور شمال-جنوب (INSTC)', type: 'multi', badge: 'چندوجهی', details: { type: 'چندوجهی (دریایی+ریلی)', time: '۲۰-۲۵ روز', cost: 'متوسط', risk: 'متوسط', goods: 'غلات، فلزات، انرژی', forward: 'فعال' } },
+  { id: 'ABEC', name: 'کریدور تجاری افغانستان (ABEC)', type: 'road', badge: 'جاده‌ای', details: { type: 'جاده‌ای', time: 'متغیر', cost: 'متوسط', risk: 'بالا (امنیتی)', goods: 'کالاهای مصرفی، ترانزیتی', forward: 'محدود' } },
+  { id: 'STKEC', name: 'کریدور اقتصادی شمال-جنوب (STKEC)', type: 'multi', badge: 'اقتصادی', details: { type: 'اقتصادی/تجاری', time: 'در حال توسعه', cost: 'در حال توسعه', risk: 'متوسط', goods: 'کالاهای صنعتی/تجاری', forward: 'در حال توسعه' } }
 ];
 
 function renderCorridors() {
@@ -536,20 +552,123 @@ function filterCarec(tag, btn) {
   document.querySelectorAll('.cor-card').forEach(card => { card.style.display = (tag === 'all' || card.getAttribute('data-type') === tag) ? '' : 'none'; });
 }
 
-// ========== مسیرهای کامل ==========
+// ==================== دیتاهای کامل مسیرها ====================
 const routesData = {
-  dubai: { name: 'دبی', title: 'مسیر دبی — چین → دبی → بندرعباس → اهواز', type: 'دریایی + زمینی', time: '۲۲-۳۰ روز', cost: 'متوسط', risk: 'متوسط', goods: 'کانتینر، کالای عمومی', forward: 'فعال', coords: [[31.23,121.47],[25.27,55.30],[27.18,56.27],[31.32,48.67]], color: '#E24B4A' },
-  jebel_ali: { name: 'جبل علی', title: 'مسیر جبل علی — چین → جبل علی → بندرعباس → اهواز', type: 'دریایی + زمینی', time: '۲۲-۳۰ روز', cost: 'متوسط', risk: 'متوسط', goods: 'کانتینر، کالای عمومی', forward: 'فعال', coords: [[31.23,121.47],[25.00,55.05],[27.18,56.27],[31.32,48.67]], color: '#1D9E75' },
-  duqm: { name: 'دقم', title: 'مسیر دقم — سه شاخه: گوادر/چابهار، خصب/بندرعباس، مستقیم بندرعباس', type: 'دریایی + زمینی', time: '۲۵-۳۵ روز', cost: 'متوسط', risk: 'متوسط', goods: 'ترانزیت، کانتینر', forward: 'نیمه فعال', coords: [[31.23,121.47],[19.66,57.70],[25.15,61.45],[27.18,56.27],[31.32,48.67]], color: '#534AB7' },
-  sohar: { name: 'صحار', title: 'مسیر صحار — سه شاخه: گوادر/چابهار، خصب/بندرعباس، مستقیم بندرعباس', type: 'دریایی + زمینی', time: '۲۵-۳۵ روز', cost: 'متوسط', risk: 'متوسط', goods: 'ترانزیت، کانتینر', forward: 'نیمه فعال', coords: [[31.23,121.47],[24.34,56.73],[25.15,61.45],[27.18,56.27],[31.32,48.67]], color: '#BA7517' },
-  salalah: { name: 'صلاله', title: 'مسیر صلاله — سه شاخه: گوادر/چابهار، خصب/بندرعباس، مستقیم بندرعباس', type: 'دریایی + زمینی', time: '۲۵-۳۵ روز', cost: 'متوسط', risk: 'متوسط', goods: 'ترانزیت، کانتینر', forward: 'نیمه فعال', coords: [[31.23,121.47],[17.00,54.00],[25.15,61.45],[27.18,56.27],[31.32,48.67]], color: '#185FA5' },
-  khasab: { name: 'خصب', title: 'مسیر خصب — سه شاخه: گوادر/چابهار، بصره/اهواز، مستقیم بندرعباس', type: 'دریایی + زمینی', time: '۲۳-۳۲ روز', cost: 'متوسط', risk: 'متوسط', goods: 'ترانزیت، کانتینر', forward: 'در حال توسعه', coords: [[31.23,121.47],[26.18,56.25],[25.15,61.45],[30.50,47.78],[31.32,48.67]], color: '#E24B4A' },
-  turkmenbashi: { name: 'ترکمنباشی', title: 'مسیر ترکمنباشی — چین → ترکمنباشی → بندر امیرآباد/انزلی → اهواز', type: 'دریایی + زمینی', time: '۳۰-۴۰ روز', cost: 'متوسط', risk: 'پایین', goods: 'کالای فله، ترانزیت', forward: 'محدود', coords: [[31.23,121.47],[40.02,52.97],[36.58,53.23],[31.32,48.67]], color: '#1D9E75' },
-  astrakhan: { name: 'آستاراخان', title: 'مسیر آستاراخان — چین → آستاراخان → بندر انزلی/امیرآباد → اهواز', type: 'دریایی + زمینی', time: '۳۵-۴۵ روز', cost: 'متوسط تا بالا', risk: 'متوسط', goods: 'کالای صنعتی، ترانزیت', forward: 'محدود', coords: [[31.23,121.47],[46.35,48.05],[37.47,49.46],[31.32,48.67]], color: '#534AB7' },
-  mersin: { name: 'مرسین', title: 'مسیر مرسین — چین → مرسین → بازرگان → اهواز', type: 'دریایی + زمینی', time: '۳۲-۴۲ روز', cost: 'بالاتر', risk: 'متوسط', goods: 'کالای صنعتی، ترانزیت', forward: 'محدود', coords: [[31.23,121.47],[36.80,34.63],[39.78,44.78],[31.32,48.67]], color: '#BA7517' },
-  cra: { name: 'CRA', title: 'مسیر CRA — چین → قزاقستان → ترکمنستان → سرخس (مرز ایران) → اهواز', type: 'ریلی + زمینی', time: '۱۸-۲۵ روز', cost: 'متوسط', risk: 'پایین', goods: 'کانتینر، کالای صنعتی، فلزات', forward: 'فعال', coords: [[31.23,121.47],[43.25,76.90],[37.93,60.35],[36.29,61.17],[31.32,48.67]], color: '#0C7B5E' },
-  kashgar: { name: 'کاشغر-گوادر-چابهار', title: 'مسیر کاشغر → گوادر → چابهار → اهواز', type: 'زمینی (جاده‌ای)', time: '۲۵-۳۵ روز', cost: 'متوسط', risk: 'متوسط (امنیتی)', goods: 'کالای صنعتی، ترانزیت', forward: 'در حال توسعه', coords: [[39.47,75.99],[25.13,62.33],[25.29,60.62],[31.32,48.67]], color: '#8B5CF6' }
+  dubai: {
+    name: 'دبی', title: 'مسیر دبی — چین → دبی → بندرعباس → اهواز',
+    type: 'دریایی (راه آبی ابریشم – عبور از تنگه مالاکا) + زمینی (داخل ایران)',
+    time: '۲۲ تا ۳۰ روز (کل مسیر) | چین تا دبی: نیاز به اعلام فرستنده',
+    cost: 'متوسط (ولی با ریسک‌های پنهان بالا مثل احتمال بسته شدن مجدد تنگه هرمز)',
+    risk: 'بسیار بالا',
+    riskLevel: 'high',
+    goods: 'همه نوع کالای عمومی (کانتینری) + محصولات حوزه انرژی',
+    forward: 'نیاز به نماینده محلی (agent) در امارات | فعال، اما مشروط به وجود همکار معتمد در دبی',
+    status: 'مسدود یا با اختلال شدید',
+    statusDesc: 'به دلیل شرایط ژئوپلیتیک پس از جنگ، هم ایران و هم امارات تمایل چندانی به همکاری ندارند و نظارت‌ها تشدید شده است.',
+    limitations: 'ریسک مالی (بلوکه شدن وجوه، تاخیر در تسویه) | ریسک کامپلاینس (تحریم‌ها، مقررات گمرکی سخت‌گیرانه) | ریسک عملیاتی (عدم همکاری مقامات محلی، افزایش بازرسی‌ها) | ریسک سیاسی (کاهش تعامل ایران و امارات)',
+    coords: [[31.23,121.47],[25.27,55.30],[27.18,56.27],[31.32,48.67]], color: '#E24B4A', dashPattern: '10, 8'
+  },
+  jebel_ali: {
+    name: 'جبل علی', title: 'مسیر جبل علی — چین → جبل علی → بندرعباس → اهواز',
+    type: 'دریایی + زمینی', time: '۲۲-۳۰ روز', cost: 'متوسط', risk: 'متوسط', riskLevel: 'medium',
+    goods: 'کانتینر، کالای عمومی', forward: 'نیاز به agent در امارات', status: 'فعال با محدودیت',
+    coords: [[31.23,121.47],[25.00,55.05],[27.18,56.27],[31.32,48.67]], color: '#1D9E75', dashPattern: '10, 8'
+  },
+  duqm: {
+    name: 'دقم', title: 'مسیر دقم — سه شاخه', type: 'دریایی + زمینی', time: '۲۵-۳۵ روز', cost: 'متوسط', risk: 'متوسط', riskLevel: 'medium',
+    goods: 'ترانزیت، کانتینر', forward: 'نیمه فعال', status: 'فعال',
+    branches: 'شاخه اول: چین → دقم → گوادر (پاکستان) → چابهار → اهواز | شاخه دوم: چین → دقم → بندر خصب (عمان) → بندرعباس (دریایی) → اهواز | شاخه سوم: چین → دقم → بندرعباس (مستقیم) → اهواز',
+    coords: [[31.23,121.47],[19.66,57.70],[25.15,61.45],[27.18,56.27],[31.32,48.67]], color: '#534AB7', dashPattern: '10, 8'
+  },
+  sohar: {
+    name: 'صحار', title: 'مسیر صحار — سه شاخه', type: 'دریایی + زمینی', time: '۲۵-۳۵ روز', cost: 'متوسط', risk: 'متوسط', riskLevel: 'medium',
+    goods: 'ترانزیت، کانتینر', forward: 'نیمه فعال', status: 'فعال',
+    branches: 'شاخه اول: چین → صحار → گوادر (پاکستان) → چابهار → اهواز | شاخه دوم: چین → صحار → بندر خصب (عمان) → بندرعباس (دریایی) → اهواز | شاخه سوم: چین → صحار → بندرعباس (مستقیم) → اهواز',
+    coords: [[31.23,121.47],[24.34,56.73],[25.15,61.45],[27.18,56.27],[31.32,48.67]], color: '#BA7517', dashPattern: '10, 8'
+  },
+  salalah: {
+    name: 'صلاله', title: 'مسیر صلاله — سه شاخه', type: 'دریایی + زمینی', time: '۲۵-۳۵ روز', cost: 'متوسط', risk: 'متوسط', riskLevel: 'medium',
+    goods: 'ترانزیت، کانتینر', forward: 'نیمه فعال', status: 'فعال',
+    branches: 'شاخه اول: چین → صلاله → گوادر (پاکستان) → چابهار → اهواز | شاخه دوم: چین → صلاله → بندر خصب (عمان) → بندرعباس (دریایی) → اهواز | شاخه سوم: چین → صلاله → بندرعباس (مستقیم) → اهواز',
+    coords: [[31.23,121.47],[17.00,54.00],[25.15,61.45],[27.18,56.27],[31.32,48.67]], color: '#185FA5', dashPattern: '10, 8'
+  },
+  khasab: {
+    name: 'خصب', title: 'مسیر خصب — سه شاخه', type: 'دریایی + زمینی', time: '۲۳-۳۲ روز', cost: 'متوسط', risk: 'متوسط', riskLevel: 'medium',
+    goods: 'ترانزیت، کانتینر', forward: 'در حال توسعه', status: 'فعال',
+    branches: 'شاخه اول: چین → خصب → گوادر (پاکستان) → چابهار → اهواز | شاخه دوم: چین → خصب → بصره (عراق) زمینی → اهواز | شاخه سوم: چین → خصب → بندرعباس (مستقیم) → اهواز',
+    coords: [[31.23,121.47],[26.18,56.25],[25.15,61.45],[30.50,47.78],[31.32,48.67]], color: '#E24B4A', dashPattern: '10, 8'
+  },
+  turkmenbashi: {
+    name: 'ترکمنباشی', title: 'مسیر ترکمنباشی — چین → ترکمنباشی → بندر امیرآباد/انزلی → اهواز',
+    type: 'دریایی + زمینی', time: '۳۰-۴۰ روز', cost: 'متوسط', risk: 'پایین', riskLevel: 'low',
+    goods: 'کالای فله، ترانزیت', forward: 'محدود', status: 'فعال',
+    coords: [[31.23,121.47],[40.02,52.97],[36.58,53.23],[31.32,48.67]], color: '#1D9E75', dashPattern: '10, 8'
+  },
+  astrakhan: {
+    name: 'آستاراخان', title: 'مسیر آستاراخان — چین → آستاراخان → بندر انزلی/امیرآباد → اهواز',
+    type: 'دریایی + زمینی', time: '۳۵-۴۵ روز', cost: 'متوسط تا بالا', risk: 'متوسط', riskLevel: 'medium',
+    goods: 'کالای صنعتی، ترانزیت', forward: 'محدود', status: 'فعال',
+    coords: [[31.23,121.47],[46.35,48.05],[37.47,49.46],[31.32,48.67]], color: '#534AB7', dashPattern: '10, 8'
+  },
+  mersin: {
+    name: 'مرسین', title: 'مسیر مرسین — چین → مرسین (ترکیه) → بازرگان → اهواز',
+    type: 'دریایی + زمینی', time: '۳۲-۴۲ روز', cost: 'بالاتر', risk: 'متوسط', riskLevel: 'medium',
+    goods: 'کالای صنعتی، ترانزیت', forward: 'محدود', status: 'فعال',
+    coords: [[31.23,121.47],[36.80,34.63],[39.78,44.78],[31.32,48.67]], color: '#BA7517', dashPattern: '10, 8'
+  },
+  cra: {
+    name: 'CRA', title: 'مسیر CRA (چین-قزاقستان-ترکمنستان-ایران) — چین → سرخس (مرز ایران) → اهواز',
+    type: 'ریلی + زمینی', time: '۱۸-۲۵ روز', cost: 'متوسط', risk: 'پایین', riskLevel: 'low',
+    goods: 'کانتینر، کالای صنعتی، فلزات', forward: 'فعال', status: 'فعال',
+    coords: [[31.23,121.47],[43.25,76.90],[37.93,60.35],[36.29,61.17],[31.32,48.67]], color: '#0C7B5E', dashPattern: '10, 8'
+  },
+  kashgar: {
+    name: 'کاشغر-گوادر-چابهار', title: 'مسیر کاشغر → گوادر → چابهار → اهواز',
+    type: 'زمینی (جاده‌ای)', time: '۲۵-۳۵ روز', cost: 'متوسط', risk: 'متوسط (امنیتی)', riskLevel: 'medium',
+    goods: 'کالای صنعتی، ترانزیت', forward: 'در حال توسعه', status: 'فعال',
+    coords: [[39.47,75.99],[25.13,62.33],[25.29,60.62],[31.32,48.67]], color: '#8B5CF6', dashPattern: '10, 8'
+  }
 };
+
+function updateRouteDetail(routeId) {
+  const r = routesData[routeId];
+  if (!r) return;
+  
+  const riskClass = r.riskLevel === 'high' ? 'risk-high' : (r.riskLevel === 'low' ? 'risk-low' : 'risk-medium');
+  
+  let html = `
+    <div><span style="color:#666">نوع حمل:</span> <strong>${r.type}</strong></div>
+    <div><span style="color:#666">وضعیت فعلی مسیر:</span> <strong class="${riskClass}">${r.status}</strong></div>
+    <div><span style="color:#666">زمان تحویل:</span> <strong>${r.time}</strong></div>
+    <div><span style="color:#666">هزینه حمل:</span> <strong>${r.cost}</strong></div>
+    <div><span style="color:#666">مناسب برای:</span> <strong>${r.goods}</strong></div>
+    <div><span style="color:#666">وضعیت فورواردر:</span> <strong>${r.forward}</strong></div>
+  `;
+  
+  if (r.statusDesc) {
+    html += `<div style="grid-column:span 2; margin-top:6px;"><span style="color:#666">توضیح وضعیت:</span> <strong>${r.statusDesc}</strong></div>`;
+  }
+  
+  document.getElementById('route-detail-grid').innerHTML = html;
+  
+  // نمایش شاخه‌ها
+  if (r.branches) {
+    document.getElementById('route-branches').innerHTML = `<strong>شاخه‌های مسیر:</strong><br>${r.branches.replace(/\|/g, '<br>')}`;
+  } else {
+    document.getElementById('route-branches').innerHTML = '';
+  }
+  
+  // نمایش محدودیت‌ها و ریسک‌ها
+  if (r.limitations) {
+    document.getElementById('route-risks').innerHTML = `<strong>محدودیت‌ها و ریسک‌ها:</strong><br>${r.limitations.replace(/\|/g, '<br>• ')}`;
+    document.getElementById('route-risks').style.display = 'block';
+  } else if (routeId === 'dubai') {
+    document.getElementById('route-risks').innerHTML = `<strong>محدودیت‌ها و ریسک‌ها (بالا):</strong><br>• ریسک مالی (بلوکه شدن وجوه، تاخیر در تسویه)<br>• ریسک کامپلاینس (تحریم‌ها، مقررات گمرکی سخت‌گیرانه)<br>• ریسک عملیاتی (عدم همکاری مقامات محلی، افزایش بازرسی‌ها)<br>• ریسک سیاسی (کاهش تعامل ایران و امارات)`;
+    document.getElementById('route-risks').style.display = 'block';
+  } else {
+    document.getElementById('route-risks').style.display = 'none';
+  }
+}
 
 let map, currentLine, currentMarker, measureMode = false, measurePoints = [], measureMarkers = [], measureLine = null;
 
@@ -566,15 +685,10 @@ function selectRoute(routeId) {
   document.querySelectorAll('.route-btn').forEach(btn => btn.classList.remove('active'));
   if(event && event.target) event.target.classList.add('active');
   document.getElementById('detail-title').innerHTML = r.title;
-  document.getElementById('d-type').innerHTML = r.type;
-  document.getElementById('d-time').innerHTML = r.time;
-  document.getElementById('d-cost').innerHTML = r.cost;
-  document.getElementById('d-risk').innerHTML = r.risk;
-  document.getElementById('d-goods').innerHTML = r.goods;
-  document.getElementById('d-forward').innerHTML = r.forward;
+  updateRouteDetail(routeId);
   if (currentLine) map.removeLayer(currentLine);
   if (currentMarker) map.removeLayer(currentMarker);
-  currentLine = L.polyline(r.coords, { color: r.color, weight: 3, opacity: 0.9 }).addTo(map);
+  currentLine = L.polyline(r.coords, { color: r.color, weight: 3, opacity: 0.9, dashArray: r.dashPattern || '10, 8' }).addTo(map);
   currentMarker = L.circleMarker(r.coords[r.coords.length-1], { radius: 6, color: r.color, fillColor: r.color, fillOpacity: 1 }).addTo(map);
   map.fitBounds(currentLine.getBounds());
 }
@@ -583,11 +697,14 @@ function resetMapFilter() {
   if (currentLine) map.removeLayer(currentLine);
   if (currentMarker) map.removeLayer(currentMarker);
   Object.values(routesData).forEach(r => {
-    L.polyline(r.coords, { color: r.color, weight: 2, opacity: 0.5 }).addTo(map);
+    L.polyline(r.coords, { color: r.color, weight: 2, opacity: 0.5, dashArray: r.dashPattern || '8, 6' }).addTo(map);
     L.circleMarker(r.coords[r.coords.length-1], { radius: 4, color: r.color, fillColor: r.color, fillOpacity: 0.7 }).addTo(map);
   });
   map.setView([30, 65], 4);
   document.getElementById('detail-title').innerHTML = 'نقشه همه مسیرها — برای جزئیات روی مسیر کلیک کنید';
+  document.getElementById('route-detail-grid').innerHTML = '<div style="grid-column:span 2; text-align:center; color:#666">یک مسیر را از دکمه‌های بالا انتخاب کنید</div>';
+  document.getElementById('route-branches').innerHTML = '';
+  document.getElementById('route-risks').style.display = 'none';
 }
 
 function toggleMeasure() {
@@ -626,17 +743,25 @@ function showDash(id) {
   if (id === 'countries') renderCountries();
 }
 
-// ========== داده‌های کشورها ==========
+// ========== داده‌های کشورها (همه همسایگان ایران + مسیر راه ابریشم) ==========
 const countriesData = {
-  china: { name: 'چین', capital: 'پکن', population: '۱.۴ میلیارد', keyPorts: 'شانگهای، نینگبو، شنژن', role: 'مبدأ اصلی صادرات', corridor: 'راه ابریشم' },
-  iran: { name: 'ایران', capital: 'تهران', population: '۸۵ میلیون', keyPorts: 'بندرعباس، امام خمینی، انزلی', role: 'مرکز ترانزیت شمال-جنوب', corridor: 'INSTC, TITR' },
+  china: { name: 'چین', capital: 'پکن', population: '۱.۴ میلیارد', keyPorts: 'شانگهای، نینگبو، شنژن', role: 'مبدأ اصلی صادرات، تولید ۳۰٪ کالاهای جهانی', corridor: 'راه ابریشم - مبدأ' },
+  iran: { name: 'ایران', capital: 'تهران', population: '۸۵ میلیون', keyPorts: 'بندرعباس، امام خمینی، انزلی', role: 'مرکز ترانزیت شمال-جنوب و شرق-غرب', corridor: 'INSTC, TITR' },
   turkey: { name: 'ترکیه', capital: 'آنکارا', population: '۸۵ میلیون', keyPorts: 'آمبارلی، مرسین', role: 'پل ارتباطی آسیا به اروپا', corridor: 'TITR, BTK' },
-  uae: { name: 'امارات متحده عربی', capital: 'ابوظبی', population: '۹.۵ میلیون', keyPorts: 'جبل علی، خلیفه', role: 'هاب لجستیک منطقه', corridor: 'مسیر اصلی دریایی' },
-  oman: { name: 'عمان', capital: 'مسقط', population: '۵ میلیون', keyPorts: 'صحار، صلاله، دقم، خصب', role: 'ترانزیت جایگزین', corridor: 'مسیر دریایی جنوب ایران' },
-  pakistan: { name: 'پاکستان', capital: 'اسلام‌آباد', population: '۲۴۰ میلیون', keyPorts: 'گواتر، کراچی', role: 'ترانزیت به چابهار و هند', corridor: 'CPEC, مسیر جنوبی' },
-  turkmenistan: { name: 'ترکمنستان', capital: 'عشق‌آباد', population: '۶ میلیون', keyPorts: 'ترکمنباشی', role: 'ترانزیت ریلی و دریایی', corridor: 'CRA, مسیر شمالی' }
+  uae: { name: 'امارات متحده عربی', capital: 'ابوظبی', population: '۹.۵ میلیون', keyPorts: 'جبل علی، خلیفه', role: 'هاب لجستیک منطقه', corridor: 'مسیر اصلی دریایی چین-خاورمیانه' },
+  oman: { name: 'عمان', capital: 'مسقط', population: '۵ میلیون', keyPorts: 'صحار، صلاله، دقم، خصب', role: 'ترانزیت جایگزین دبی', corridor: 'مسیر دریایی جنوب ایران' },
+  pakistan: { name: 'پاکستان', capital: 'اسلام‌آباد', population: '۲۴۰ میلیون', keyPorts: 'گواتر، کراچی', role: 'دسترسی به اقیانوس هند، CPEC', corridor: 'راه ابریشم جنوبی' },
+  turkmenistan: { name: 'ترکمنستان', capital: 'عشق‌آباد', population: '۶ میلیون', keyPorts: 'بندر ترکمنباشی', role: 'ترانزیت گاز و ریلی به خزر', corridor: 'مسیر شمال-جنوب، CRA' },
+  azerbaijan: { name: 'آذربایجان', capital: 'باکو', population: '۱۰ میلیون', keyPorts: 'بندر آلیات (خزر)', role: 'گلوگاه ریلی و دریایی BTK', corridor: 'TITR, BTK, INSTC' },
+  georgia: { name: 'گرجستان', capital: 'تفلیس', population: '۳.۷ میلیون', keyPorts: 'پوتی، باتومی', role: 'دسترسی به دریای سیاه', corridor: 'TITR, BTK' },
+  russia: { name: 'روسیه', capital: 'مسکو', population: '۱۴۶ میلیون', keyPorts: 'نووروسیسک، سن پترزبورگ', role: 'مسیر شمالی و کریدور شمال-جنوب', corridor: 'CRE شمالی، INSTC' },
+  india: { name: 'هند', capital: 'دهلی نو', population: '۱.۴ میلیارد', keyPorts: 'مومبای، نهاوا شیوا', role: 'بازار بزرگ جنوب آسیا', corridor: 'INSTC' },
+  iraq: { name: 'عراق', capital: 'بغداد', population: '۴۳ میلیون', keyPorts: 'بندر ام قصر', role: 'ترانزیت به مدیترانه و اروپا', corridor: 'مسیر زمینی غرب ایران' },
+  afghanistan: { name: 'افغانستان', capital: 'کابل', population: '۴۰ میلیون', keyPorts: '-', role: 'ترانزیت زمینی بین آسیای مرکزی و جنوب آسیا', corridor: 'ABEC' },
+  kazakhstan: { name: 'قزاقستان', capital: 'آستانه', population: '۱۹ میلیون', keyPorts: 'بندر آکتائو (خزر)', role: 'ترانزیت ریلی، مسیر میانی چین به اروپا', corridor: 'TITR, CRE' }
 };
-const countryList = ['china', 'iran', 'turkey', 'uae', 'oman', 'pakistan', 'turkmenistan'];
+const countryList = ['china', 'kazakhstan', 'turkmenistan', 'azerbaijan', 'georgia', 'turkey', 'iran', 'afghanistan', 'pakistan', 'india', 'russia', 'iraq', 'oman', 'uae'];
+
 function renderCountries() {
   const container = document.getElementById('country-list-items');
   if (!container) return;
