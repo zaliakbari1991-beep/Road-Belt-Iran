@@ -73,6 +73,54 @@
   .risk-low { color: #1D9E75; font-weight: 700; }
   .update-note { font-size: 10px; color: #999; text-align: left; margin-top: 20px; }
   @media (max-width: 768px) { .countries-container { flex-direction: column; } .countries-list { width: 100%; } }
+  
+  /* استایل‌های گزارش اهواز */
+  .alert-banner { margin: 20px 0; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.3); border-right: 4px solid #ef4444; border-radius: 8px; padding: 14px 18px; display: flex; gap: 12px; align-items: flex-start; }
+  .alert-icon { font-size: 20px; }
+  .alert-title { font-weight: 700; color: #b91c1c; font-size: 13px; margin-bottom: 4px; }
+  .alert-body { color: var(--text-muted, #666); font-size: 12.5px; line-height: 1.7; }
+  .ahvaz-section-title { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: #185FA5; text-transform: uppercase; margin: 36px 0 16px; display: flex; align-items: center; gap: 10px; }
+  .ahvaz-section-title::after { content: ''; flex: 1; height: 1px; background: var(--border, #eee); }
+  .route-card-ahvaz { background: var(--bg, white); border: 1px solid var(--border, #eee); border-radius: 12px; overflow: hidden; margin-bottom: 12px; }
+  .route-header-ahvaz { padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
+  .route-num-ahvaz { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; }
+  .route-name-ahvaz { font-size: 16px; font-weight: 700; color: var(--text, #1a1a18); }
+  .route-sub-ahvaz { font-size: 12px; color: var(--text2, #666); margin-top: 2px; }
+  .status-badge-ahvaz { padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+  .status-critical-ahvaz { background: rgba(239,68,68,0.15); color: #b91c1c; border: 1px solid rgba(239,68,68,0.3); }
+  .status-high-ahvaz { background: rgba(249,115,22,0.15); color: #c2410c; border: 1px solid rgba(249,115,22,0.3); }
+  .status-active-ahvaz { background: rgba(16,185,129,0.15); color: #15803d; border: 1px solid rgba(16,185,129,0.3); }
+  .route-body-ahvaz { padding: 0 20px 20px; display: none; }
+  .route-card-ahvaz.open .route-body-ahvaz { display: block; }
+  .route-card-ahvaz.open .divider-ahvaz { display: block; }
+  .divider-ahvaz { height: 1px; background: var(--border, #eee); margin: 0 20px 20px; display: none; }
+  .chevron-ahvaz { transition: transform 0.25s; font-size: 12px; color: var(--text2, #666); }
+  .route-card-ahvaz.open .chevron-ahvaz { transform: rotate(180deg); }
+  .info-grid-ahvaz { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .info-item-ahvaz { background: var(--bg2, #f5f5f5); border-radius: 8px; padding: 12px 14px; }
+  .info-label-ahvaz { font-size: 11px; color: var(--text3, #999); font-weight: 600; margin-bottom: 5px; }
+  .info-value-ahvaz { font-size: 13px; color: var(--text, #1a1a18); line-height: 1.6; }
+  .info-value-ahvaz strong { color: #185FA5; }
+  .path-visual-ahvaz { background: var(--bg2, #f5f5f5); border-radius: 8px; padding: 14px 16px; margin-bottom: 16px; overflow-x: auto; }
+  .path-flow-ahvaz { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+  .path-node-ahvaz { background: var(--bg, white); border: 1px solid var(--border, #ddd); padding: 4px 10px; border-radius: 6px; font-size: 12px; white-space: nowrap; }
+  .path-node-highlight { background: rgba(24,95,165,0.1); border-color: #185FA5; color: #185FA5; font-weight: 600; }
+  .path-arrow-ahvaz { color: var(--text2, #666); font-size: 13px; }
+  .branch-ahvaz { background: var(--bg2, #f5f5f5); border-radius: 8px; padding: 12px 14px; margin-bottom: 8px; border-right: 3px solid var(--border, #ddd); }
+  .branch.br1-ahvaz { border-color: #3b82f6; }
+  .branch.br2-ahvaz { border-color: #10b981; }
+  .branch.br3-ahvaz { border-color: #f59e0b; }
+  .branch-title-ahvaz { font-size: 12px; font-weight: 700; margin-bottom: 6px; }
+  .risk-list-ahvaz { list-style: none; margin-top: 12px; }
+  .risk-list-ahvaz li { padding: 5px 0; font-size: 12.5px; color: var(--text2, #666); display: flex; gap: 7px; }
+  .risk-list-ahvaz li::before { content: '⚠'; font-size: 11px; color: #f97316; }
+  .ref-box-ahvaz { background: rgba(24,95,165,0.05); border: 1px solid rgba(24,95,165,0.15); border-radius: 6px; padding: 8px 12px; font-size: 11.5px; color: var(--text2, #666); margin-top: 12px; }
+  .expand-all-btn-ahvaz { background: rgba(24,95,165,0.1); border: 1px solid rgba(24,95,165,0.25); color: #185FA5; padding: 7px 16px; border-radius: 7px; font-size: 12px; font-weight: 600; cursor: pointer; margin-bottom: 16px; font-family: 'Vazirmatn', sans-serif; }
+  .comparison-table-ahvaz { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .comparison-table-ahvaz th { background: var(--bg2, #f5f5f5); padding: 10px 12px; font-weight: 700; font-size: 11px; color: var(--text2, #666); text-align: right; border-bottom: 2px solid var(--border, #ddd); }
+  .comparison-table-ahvaz td { padding: 10px 12px; border-bottom: 1px solid var(--border, #ddd); vertical-align: top; }
+  .footer-note-ahvaz { background: var(--bg2, #f5f5f5); border: 1px solid var(--border, #ddd); border-radius: 10px; padding: 20px; margin-top: 32px; font-size: 12px; color: var(--text2, #666); line-height: 1.9; }
+  @media (prefers-color-scheme: dark) { .info-item-ahvaz { background: #2a2a28; } .path-visual-ahvaz { background: #2a2a28; } .branch-ahvaz { background: #2a2a28; } .comparison-table-ahvaz th { background: #2a2a28; } .footer-note-ahvaz { background: #2a2a28; } }
 </style>
 </head>
 <body>
@@ -90,12 +138,13 @@
     <button class="nav-btn" onclick="showDash('countries')">کشورها</button>
     <button class="nav-btn" onclick="showDash('investment')">فرصت‌های سرمایه‌گذاری</button>
     <button class="nav-btn" onclick="showDash('suggestions')">پیشنهادات</button>
+    <button class="nav-btn" onclick="showDash('ahvaz')">گزارش اهواز</button>
   </div>
 </div>
 
 <div class="container">
 
-<!-- ========== صفحه اول: نمای کلی ========== -->
+<!-- ========== صفحه اول: نمای کلی (دقیقاً همان کد قبلی) ========== -->
 <div id="dash-main" class="dash-section active">
   <div class="stats-row">
     <div class="stat-card">
@@ -166,7 +215,7 @@
   </div>
 </div>
 
-<!-- ========== صفحه دوم: کریدورهای بین‌المللی ========== -->
+<!-- ========== صفحه دوم: کریدورهای بین‌المللی (دقیقاً همان کد قبلی) ========== -->
 <div id="dash-carec" class="dash-section">
   <div class="metrics-grid">
     <div class="metric-box"><div class="metric-value">۱۰</div><div class="metric-label">کریدور شناسایی‌شده</div></div>
@@ -184,7 +233,7 @@
   <div id="carec-list"></div>
 </div>
 
-<!-- ========== صفحه سوم: کشتیرانی ========== -->
+<!-- ========== صفحه سوم: کشتیرانی (دقیقاً همان کد قبلی) ========== -->
 <div id="dash-shipping" class="dash-section">
   <div class="shipping-section">
     <div class="shipping-title">ناوگان تجاری و حمل و نقل دریایی</div>
@@ -205,7 +254,7 @@
   </div>
 </div>
 
-<!-- ========== صفحه چهارم: کشورها ========== -->
+<!-- ========== صفحه چهارم: کشورها (دقیقاً همان کد قبلی) ========== -->
 <div id="dash-countries" class="dash-section">
   <div class="countries-container">
     <div class="countries-list"><h4>کشورهای مسیر راه ابریشم و همسایگان ایران</h4><div id="country-list-items"></div></div>
@@ -213,7 +262,7 @@
   </div>
 </div>
 
-<!-- ========== صفحه پنجم: فرصت‌های سرمایه‌گذاری ========== -->
+<!-- ========== صفحه پنجم: فرصت‌های سرمایه‌گذاری (دقیقاً همان کد قبلی) ========== -->
 <div id="dash-investment" class="dash-section">
   <div class="investment-section">
     <div class="investment-title">فرصت‌های سرمایه‌گذاری در لجستیک و حمل و نقل بین‌المللی</div>
@@ -221,7 +270,7 @@
   </div>
 </div>
 
-<!-- ========== صفحه ششم: پیشنهادات ========== -->
+<!-- ========== صفحه ششم: پیشنهادات (دقیقاً همان کد قبلی) ========== -->
 <div id="dash-suggestions" class="dash-section">
   <div class="investment-section">
     <div class="investment-title">پیشنهادات راهبردی لجستیکی</div>
@@ -237,6 +286,367 @@
         <p>۸. سرمایه‌گذاری در ناوگان کانتینری و نفتکش برای مسیرهای جایگزین خلیج فارس</p>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- ========== صفحه هفتم: گزارش اهواز (جدید) ========== -->
+<div id="dash-ahvaz" class="dash-section">
+  <div class="alert-banner">
+    <div class="alert-icon">🚨</div>
+    <div>
+      <div class="alert-title">هشدار بحران بزرگ دریایی — فوریه ۲۰۲۶ تاکنون</div>
+      <div class="alert-body">از ۲۸ فوریه ۲۰۲۶، با آغاز عملیات نظامی آمریکا-اسرائیل علیه ایران (Operation Epic Fury)، تنگه هرمز عملاً بسته شده است. ایران با مین‌گذاری، قایق‌های گشتی سپاه و هشدارهای رادیویی، تردد کشتی‌های خارجی را به شدت محدود کرده است. ترافیک تجاری کاهش ۹۴٪ نسبت به پیش از درگیری داشته است. <strong>تمام مسیرهایی که از بندرعباس و خلیج فارس عبور می‌کنند در حالت تعلیق یا ریسک بسیار بالا قرار دارند.</strong> عمان (سالاله، صحار، دقم) به مهم‌ترین مرکز ترانزیت جایگزین تبدیل شده است.</div>
+    </div>
+  </div>
+
+  <button class="expand-all-btn-ahvaz" onclick="toggleAllAhvaz()">▼ باز/بسته کردن همه مسیرها</button>
+
+  <!-- ROUTE 1: DUBAI -->
+  <div class="route-card-ahvaz" id="ahvazCard1">
+    <div class="route-header-ahvaz" onclick="toggleAhvazCard('ahvazCard1')">
+      <div class="route-header-left">
+        <div class="route-num-ahvaz" style="background:rgba(245,158,11,0.15);color:#fcd34d;">۱</div>
+        <div>
+          <div class="route-name-ahvaz">🇦🇪 دبی (بندر راشد)</div>
+          <div class="route-sub-ahvaz">چین ← دبی (بندر راشد) ← بندرعباس ← اهواز</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="status-badge-ahvaz status-critical-ahvaz">⚠ ریسک بالا</span>
+        <span class="chevron-ahvaz">▼</span>
+      </div>
+    </div>
+    <div class="divider-ahvaz"></div>
+    <div class="route-body-ahvaz">
+      <div class="path-visual-ahvaz">
+        <div class="path-label" style="font-size:11px;color:#666;margin-bottom:10px;">📍 مسیر کامل</div>
+        <div class="path-flow-ahvaz">
+          <span class="path-node-ahvaz">🏭 بنادر چین (شانگهای/شنژن/نینگبو)</span>
+          <span class="path-arrow-ahvaz">←</span>
+          <span class="path-node-ahvaz path-node-highlight">🇦🇪 بندر راشد دبی</span>
+          <span class="path-arrow-ahvaz">←</span>
+          <span class="path-node-ahvaz">🚢 دریایی (خلیج فارس)</span>
+          <span class="path-arrow-ahvaz">←</span>
+          <span class="path-node-ahvaz path-node-highlight">🇮🇷 بندرعباس / شهید رجایی</span>
+          <span class="path-arrow-ahvaz">←</span>
+          <span class="path-node-ahvaz">🚛 جاده‌ای</span>
+          <span class="path-arrow-ahvaz">←</span>
+          <span class="path-node-ahvaz">🏙 اهواز</span>
+        </div>
+      </div>
+      <div class="info-grid-ahvaz">
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">🚢 نوع حمل</div><div class="info-value-ahvaz">دریایی (FCL/LCL) چین به دبی + دریایی مجدد به بندرعباس + جاده‌ای به اهواز</div></div>
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">⏱ زمان — چین تا دبی</div><div class="info-value-ahvaz"><strong>۱۵–۲۵ روز</strong> (دریایی FCL)</div></div>
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">⏱ زمان — دبی تا بندرعباس</div><div class="info-value-ahvaz"><strong>۱–۳ روز</strong> دریایی (در شرایط عادی)</div></div>
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">💰 هزینه — چین تا دبی (FCL 40ft)</div><div class="info-value-ahvaz"><strong>~۲,۰۰۰–۳,۵۰۰ دلار</strong></div></div>
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">💰 هزینه — دبی تا بندرعباس</div><div class="info-value-ahvaz"><strong>۵۰۰–۱,۵۰۰ دلار</strong></div></div>
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">📦 مناسب برای</div><div class="info-value-ahvaz"><div class="goods-tags"><span class="goods-tag">کالاهای مصرفی</span><span class="goods-tag">الکترونیک</span><span class="goods-tag">پوشاک</span></div></div></div>
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">⚠ وضعیت فعلی</div><div class="info-value-ahvaz" style="color:#b91c1c;">بخش دبی به بندرعباس به دلیل بحران تنگه هرمز <strong>تعلیق یا ریسک بسیار بالا</strong></div></div>
+      </div>
+      <ul class="risk-list-ahvaz">
+        <li>بحران تنگه هرمز از فوریه ۲۰۲۶: کاهش ۹۴٪ ترافیک تجاری، مین‌گذاری، حملات قایق‌های سپاه</li>
+        <li>تحریم‌های بین‌المللی علیه ایران — شرکت‌های بزرگ غربی از این مسیر استفاده نمی‌کنند</li>
+        <li>بیمه جنگی در خلیج فارس توسط گارد، اسکولد و لویدز لغو شده است</li>
+        <li>معطلی سنگین در بندر راشد و نیاز به بارگذاری مجدد روی فیدر برای ایران</li>
+      </ul>
+      <div class="ref-box-ahvaz">📚 منابع: Alliance Shipping 2024 | Windward AI — May 2026</div>
+    </div>
+  </div>
+
+  <!-- ROUTE 2: JEBEL ALI -->
+  <div class="route-card-ahvaz" id="ahvazCard2">
+    <div class="route-header-ahvaz" onclick="toggleAhvazCard('ahvazCard2')">
+      <div class="route-header-left">
+        <div class="route-num-ahvaz" style="background:rgba(59,130,246,0.15);color:#93c5fd;">۲</div>
+        <div>
+          <div class="route-name-ahvaz">🇦🇪 جبل‌علی (دبی)</div>
+          <div class="route-sub-ahvaz">چین ← جبل‌علی ← بندرعباس ← اهواز</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="status-badge-ahvaz status-critical-ahvaz">⚠ ریسک بالا</span>
+        <span class="chevron-ahvaz">▼</span>
+      </div>
+    </div>
+    <div class="divider-ahvaz"></div>
+    <div class="route-body-ahvaz">
+      <div class="path-visual-ahvaz">
+        <div class="path-label" style="font-size:11px;color:#666;margin-bottom:10px;">📍 مسیر کامل</div>
+        <div class="path-flow-ahvaz">
+          <span class="path-node-ahvaz">🏭 بنادر چین</span>
+          <span class="path-arrow-ahvaz">←</span>
+          <span class="path-node-ahvaz path-node-highlight">🇦🇪 بندر جبل‌علی (DP World)</span>
+          <span class="path-arrow-ahvaz">←</span>
+          <span class="path-node-ahvaz">🚢 دریایی / فیدر (خلیج فارس)</span>
+          <span class="path-arrow-ahvaz">←</span>
+          <span class="path-node-ahvaz path-node-highlight">🇮🇷 بندرعباس</span>
+          <span class="path-arrow-ahvaz">←</span>
+          <span class="path-node-ahvaz">🚛 جاده‌ای</span>
+          <span class="path-arrow-ahvaz">←</span>
+          <span class="path-node-ahvaz">🏙 اهواز</span>
+        </div>
+      </div>
+      <div class="info-grid-ahvaz">
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">⏱ زمان — چین تا جبل‌علی</div><div class="info-value-ahvaz"><strong>۱۵–۲۵ روز</strong> (شانگهای ~۱۵ روز)</div></div>
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">💰 هزینه — چین تا جبل‌علی (40ft)</div><div class="info-value-ahvaz"><strong>~۲,۰۰۰–۳,۵۰۰ دلار</strong></div></div>
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">🏆 ظرفیت بندر</div><div class="info-value-ahvaz"><strong>۱۵.۵ میلیون TEU</strong> در ۲۰۲۴</div></div>
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">⚠ وضعیت فعلی</div><div class="info-value-ahvaz" style="color:#b91c1c;">شرکت‌های بزرگ (Maersk، MSC) سرویس خلیج فارس را متوقف کرده‌اند</div></div>
+      </div>
+      <ul class="risk-list-ahvaz">
+        <li>مسیر جبل‌علی–بندرعباس نیازمند عبور از تنگه هرمز که در حال حاضر بسیار پرریسک است</li>
+        <li>شرکت‌های بزرگ (Maersk، MSC) سرویس خلیج فارس را متوقف کرده‌اند</li>
+        <li>بیمه جنگی لغو شده؛ هزینه insurance برای کالا بسیار بالا رفته</li>
+        <li>قرار گرفتن در لیست تحریم‌های ثانویه ریسک برای ثالث‌ها</li>
+      </ul>
+      <div class="ref-box-ahvaz">📚 منابع: Gulf News — Jebel Ali 2025 | Windward AI — Iran War Maritime</div>
+    </div>
+  </div>
+
+  <!-- ROUTE 3: DUQM (سه شاخه) -->
+  <div class="route-card-ahvaz" id="ahvazCard3">
+    <div class="route-header-ahvaz" onclick="toggleAhvazCard('ahvazCard3')">
+      <div class="route-header-left">
+        <div class="route-num-ahvaz" style="background:rgba(16,185,129,0.15);color:#6ee7b7;">۳</div>
+        <div>
+          <div class="route-name-ahvaz">🇴🇲 دقم (عمان) — سه شاخه</div>
+          <div class="route-sub-ahvaz">چین ← دقم ← [گوادر/چابهار | خصب/بندرعباس | مستقیم بندرعباس]</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="status-badge-ahvaz status-high-ahvaz">⚡ مسیر جایگزین داغ</span>
+        <span class="chevron-ahvaz">▼</span>
+      </div>
+    </div>
+    <div class="divider-ahvaz"></div>
+    <div class="route-body-ahvaz">
+      <div class="path-visual-ahvaz">
+        <div class="path-label" style="font-size:11px;color:#666;margin-bottom:10px;">📍 مسیر اصلی تا دقم</div>
+        <div class="path-flow-ahvaz">
+          <span class="path-node-ahvaz">🏭 بنادر چین</span>
+          <span class="path-arrow-ahvaz">←</span>
+          <span class="path-node-ahvaz path-node-highlight">🇴🇲 بندر دقم (عمان)</span>
+          <span class="path-arrow-ahvaz">←</span>
+          <span class="path-node-ahvaz" style="color:#f59e0b">سه شاخه ↓</span>
+        </div>
+      </div>
+      <div class="branches-ahvaz">
+        <div class="branch-ahvaz br1-ahvaz">
+          <div class="branch-title-ahvaz">🔵 شاخه ۱ — گوادر پاکستان ← چابهار ایران</div>
+          <div style="font-size:12px;color:var(--text2, #666);margin-top:6px;">دقم → دریایی → گوادر → چابهار → جاده ۱,۲۰۰ km به اهواز | زمان اضافه: ۵–۸ روز</div>
+        </div>
+        <div class="branch-ahvaz br2-ahvaz">
+          <div class="branch-title-ahvaz">🟢 شاخه ۲ — بندر خصب عمان ← بندرعباس (دریایی)</div>
+          <div style="font-size:12px;color:var(--text2, #666);margin-top:6px;">دقم → جاده عمان → خصب → فری ۲ ساعته → بندرعباس → اهواز</div>
+        </div>
+        <div class="branch-ahvaz br3-ahvaz">
+          <div class="branch-title-ahvaz">🟡 شاخه ۳ — مستقیم به بندرعباس (دریایی)</div>
+          <div style="font-size:12px;color:var(--text2, #666);margin-top:6px;">⚠ نیازمند عبور از نزدیکی تنگه هرمز — ریسک متوسط تا بالا</div>
+        </div>
+      </div>
+      <div class="info-grid-ahvaz">
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">📈 وضعیت فعلی دقم</div><div class="info-value-ahvaz" style="color:#15803d;">ترافیک <strong>دو برابر شده</strong> (مارس ۲۰۲۶)</div></div>
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">💰 نرخ شانگهای-دقم</div><div class="info-value-ahvaz"><strong>+۲۸٪</strong> افزایش در هفته اول درگیری</div></div>
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">🏗 موقعیت استراتژیک</div><div class="info-value-ahvaz">دقم خارج از تنگه هرمز — <strong>امن‌ترین بندر منطقه</strong> در شرایط کنونی</div></div>
+      </div>
+      <div class="ref-box-ahvaz">📚 منابع: Windward AI — March 2026 | DocShipper China-Oman 2025</div>
+    </div>
+  </div>
+
+  <!-- ROUTE 4: SOHAR -->
+  <div class="route-card-ahvaz" id="ahvazCard4">
+    <div class="route-header-ahvaz" onclick="toggleAhvazCard('ahvazCard4')">
+      <div class="route-header-left">
+        <div class="route-num-ahvaz" style="background:rgba(16,185,129,0.15);color:#6ee7b7;">۴</div>
+        <div>
+          <div class="route-name-ahvaz">🇴🇲 صحار (Sohar) — سه شاخه</div>
+          <div class="route-sub-ahvaz">چین ← صحار ← [گوادر/چابهار | خصب/بندرعباس | مستقیم بندرعباس]</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="status-badge-ahvaz status-high-ahvaz">⚡ مسیر جایگزین داغ</span>
+        <span class="chevron-ahvaz">▼</span>
+      </div>
+    </div>
+    <div class="divider-ahvaz"></div>
+    <div class="route-body-ahvaz">
+      <div class="path-visual-ahvaz">
+        <div class="path-flow-ahvaz">
+          <span class="path-node-ahvaz">🏭 بنادر چین</span>
+          <span class="path-arrow-ahvaz">←</span>
+          <span class="path-node-ahvaz path-node-highlight">🇴🇲 بندر صحار (عمان)</span>
+          <span class="path-arrow-ahvaz">←</span>
+          <span class="path-node-ahvaz" style="color:#f59e0b">سه شاخه ↓</span>
+        </div>
+      </div>
+      <div class="info-grid-ahvaz">
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">🏗 ظرفیت بندر صحار</div><div class="info-value-ahvaz"><strong>~۱ میلیون TEU</strong> سالانه</div></div>
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">📈 وضعیت فعلی</div><div class="info-value-ahvaz" style="color:#15803d;">ترافیک تقریباً <strong>دو برابر</strong> شده (مارس ۲۰۲۶)</div></div>
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">🔗 اتصال زمینی</div><div class="info-value-ahvaz">جاده به امارات و عربستان موجود است</div></div>
+      </div>
+      <div class="ref-box-ahvaz">📚 منابع: Med-Or — Oman Strategy 2025 | Windward AI March 2026</div>
+    </div>
+  </div>
+
+  <!-- ROUTE 5: SALALAH -->
+  <div class="route-card-ahvaz" id="ahvazCard5">
+    <div class="route-header-ahvaz" onclick="toggleAhvazCard('ahvazCard5')">
+      <div class="route-header-left">
+        <div class="route-num-ahvaz" style="background:rgba(16,185,129,0.15);color:#6ee7b7;">۵</div>
+        <div>
+          <div class="route-name-ahvaz">🇴🇲 سالاله (Salalah) — سه شاخه</div>
+          <div class="route-sub-ahvaz">چین ← سالاله ← [گوادر/چابهار | خصب/بندرعباس | مستقیم بندرعباس]</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="status-badge-ahvaz status-active-ahvaz">✅ بهترین جایگزین فعلی</span>
+        <span class="chevron-ahvaz">▼</span>
+      </div>
+    </div>
+    <div class="divider-ahvaz"></div>
+    <div class="route-body-ahvaz">
+      <div class="info-grid-ahvaz">
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">🏗 ظرفیت بندر سالاله</div><div class="info-value-ahvaz"><strong>۴–۵ میلیون TEU</strong> سالانه</div></div>
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">📈 وضعیت فعلی سالاله</div><div class="info-value-ahvaz" style="color:#15803d;">تبدیل به <strong>اصلی‌ترین مرکز ترانزیت جایگزین</strong> شد</div></div>
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">💰 نرخ چین-سالاله</div><div class="info-value-ahvaz"><strong>+۲۸٪</strong> افزایش در هفته اول درگیری</div></div>
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">🤝 شریک تجاری</div><div class="info-value-ahvaz">Asyad + Maersk (Gemini Cooperation)</div></div>
+      </div>
+      <div class="ref-box-ahvaz">📚 منابع: Windward AI — One Month Into Iran War | Med-Or — Oman Connectivity Strategy</div>
+    </div>
+  </div>
+
+  <!-- ROUTE 6: KHASAB -->
+  <div class="route-card-ahvaz" id="ahvazCard6">
+    <div class="route-header-ahvaz" onclick="toggleAhvazCard('ahvazCard6')">
+      <div class="route-header-left">
+        <div class="route-num-ahvaz" style="background:rgba(249,115,22,0.15);color:#fdba74;">۶</div>
+        <div>
+          <div class="route-name-ahvaz">🇴🇲 خصب / مسندم (Khasab)</div>
+          <div class="route-sub-ahvaz">چین ← خصب ← [گوادر/چابهار | بصره/مرز عراق | مستقیم بندرعباس]</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="status-badge-ahvaz status-critical-ahvaz">🔴 محدود</span>
+        <span class="chevron-ahvaz">▼</span>
+      </div>
+    </div>
+    <div class="divider-ahvaz"></div>
+    <div class="route-body-ahvaz">
+      <div class="branches-ahvaz">
+        <div class="branch-ahvaz br1-ahvaz"><div class="branch-title-ahvaz">🔵 شاخه ۱ — گوادر ← چابهار ← اهواز</div></div>
+        <div class="branch-ahvaz br2-ahvaz"><div class="branch-title-ahvaz">🟢 شاخه ۲ — بصره (عراق) ← مرز عراق ← اهواز</div><div style="font-size:12px;">خصب → دریایی خلیج فارس → بصره → مرز شلمچه → اهواز</div></div>
+        <div class="branch-ahvaz br3-ahvaz"><div class="branch-title-ahvaz">🟡 شاخه ۳ — فری مستقیم خصب ← بندرعباس</div><div style="font-size:12px;">فری ۲.۵ ساعته (در شرایط عادی) | ⚠ در شرایط فعلی بسته یا پرریسک</div></div>
+      </div>
+      <div class="ref-box-ahvaz">📚 منابع: Times of Oman — Oman-Iran Shipping 2024</div>
+    </div>
+  </div>
+
+  <!-- ROUTE 7: TURKMENBASHI -->
+  <div class="route-card-ahvaz" id="ahvazCard7">
+    <div class="route-header-ahvaz" onclick="toggleAhvazCard('ahvazCard7')">
+      <div class="route-header-left">
+        <div class="route-num-ahvaz" style="background:rgba(139,92,246,0.15);color:#c4b5fd;">۷</div>
+        <div>
+          <div class="route-name-ahvaz">🇹🇲 ترکمن‌باشی (ترکمنستان)</div>
+          <div class="route-sub-ahvaz">چین ← ترکمن‌باشی ← [بندر امیرآباد | بندر انزلی] ← اهواز</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="status-badge-ahvaz status-active-ahvaz">🟡 فعال — در حال رشد</span>
+        <span class="chevron-ahvaz">▼</span>
+      </div>
+    </div>
+    <div class="divider-ahvaz"></div>
+    <div class="route-body-ahvaz">
+      <div class="info-grid-ahvaz">
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">⏱ زمان کل</div><div class="info-value-ahvaz"><strong>~۲۰ روز</strong> چین تا بندر انزلی</div></div>
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">💰 صرفه‌جویی هزینه</div><div class="info-value-ahvaz"><strong>~۸۹۷ دلار</strong> به ازای هر کانتینر</div></div>
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">📈 وضعیت فعلی</div><div class="info-value-ahvaz" style="color:#15803d;">قطارها از ۱ قطار/هفته به ۱ قطار/۳-۴ روز افزایش یافته</div></div>
+      </div>
+      <div class="ref-box-ahvaz">📚 منابع: TINN News | Eurasianet — China Iran Southern Corridor (Jan 2026)</div>
+    </div>
+  </div>
+
+  <!-- ROUTE 8: ASTRAKHAN -->
+  <div class="route-card-ahvaz" id="ahvazCard8">
+    <div class="route-header-ahvaz" onclick="toggleAhvazCard('ahvazCard8')">
+      <div class="route-header-left">
+        <div class="route-num-ahvaz" style="background:rgba(139,92,246,0.15);color:#c4b5fd;">۸</div>
+        <div>
+          <div class="route-name-ahvaz">🇷🇺 استاراخان (روسیه)</div>
+          <div class="route-sub-ahvaz">چین ← استاراخان ← [بندر انزلی | بندر امیرآباد] ← اهواز (کریدور INSTC)</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="status-badge-ahvaz status-active-ahvaz">🟡 فعال — ریسک متوسط</span>
+        <span class="chevron-ahvaz">▼</span>
+      </div>
+    </div>
+    <div class="divider-ahvaz"></div>
+    <div class="route-body-ahvaz">
+      <div class="info-grid-ahvaz">
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">📈 وضعیت کریدور INSTC</div><div class="info-value-ahvaz" style="color:#15803d;">در حال تبدیل به شریان اصلی ایران-روسیه-چین</div></div>
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">🚂 آخرین پیشرفت</div><div class="info-value-ahvaz">روسیه ۵۰۰ میلیارد روبل برای کشتی‌سازی تا ۲۰۳۱ اختصاص داده</div></div>
+      </div>
+      <div class="ref-box-ahvaz">📚 منابع: Caspian Post — INSTC Nov 2025 | News.az — INSTC Nov 2025</div>
+    </div>
+  </div>
+
+  <!-- ROUTE 9: MERSIN TURKEY -->
+  <div class="route-card-ahvaz" id="ahvazCard9">
+    <div class="route-header-ahvaz" onclick="toggleAhvazCard('ahvazCard9')">
+      <div class="route-header-left">
+        <div class="route-num-ahvaz" style="background:rgba(236,72,153,0.15);color:#f9a8d4;">۹</div>
+        <div>
+          <div class="route-name-ahvaz">🇹🇷 مرسین (ترکیه)</div>
+          <div class="route-sub-ahvaz">چین ← مرسین ← بازرگان ← اهواز</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="status-badge-ahvaz status-active-ahvaz">✅ فعال — پایدار</span>
+        <span class="chevron-ahvaz">▼</span>
+      </div>
+    </div>
+    <div class="divider-ahvaz"></div>
+    <div class="route-body-ahvaz">
+      <div class="info-grid-ahvaz">
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">💰 هزینه — چین تا مرسین (40ft)</div><div class="info-value-ahvaz">مه ۲۰۲۶: <strong>$۲,۲۹۵–۲,۸۰۵</strong> (کاهش ۱۱٪ از آوریل)</div></div>
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">💰 هزینه — مرسین تا بازرگان (TIR)</div><div class="info-value-ahvaz"><strong>~۱,۵۰۰–۲,۵۰۰ دلار</strong></div></div>
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz">🚂 گزینه ریلی مرسین</div><div class="info-value-ahvaz">ریل چین-ترکیه: <strong>۶–۹ روز، ~$۷,۱۱۰–۸,۶۹۰ (40ft)</strong></div></div>
+      </div>
+      <ul class="risk-list-ahvaz">
+        <li>مسیر دریای سرخ-سوئز: تهدید حوثی‌ها — شرکت‌های بزرگ از آفریقا دور می‌زنند (+۱۵–۲۰ روز)</li>
+        <li>گمرک بازرگان یکی از شلوغ‌ترین مرزهای ایران — معطلی ۲–۷ روز</li>
+        <li>فاصله زیاد بازرگان تا اهواز (~۱,۸۰۰km) هزینه حمل داخلی را بالا می‌برد</li>
+      </ul>
+      <div class="ref-box-ahvaz">📚 منابع: Sino-Shipping — China Turkey May 2026 | Saygınlar — Iran Shipping 2026</div>
+    </div>
+  </div>
+
+  <!-- SUMMARY TABLE -->
+  <div class="ahvaz-section-title">📊 جدول مقایسه سریع مسیرها</div>
+  <div style="overflow-x:auto;border-radius:10px;border:1px solid var(--border, #ddd)">
+    <table class="comparison-table-ahvaz">
+      <thead><tr><th>مسیر</th><th>وضعیت فعلی</th><th>زمان کل تخمینی</th><th>هزینه (40ft) تخمینی</th><th>توصیه</th></tr></thead>
+      <tbody>
+        <tr><td>دبی → بندرعباس</td><td style="color:#b91c1c;">⛔ تعلیق/خطر بالا</td><td>۲۵–۴۰ روز</td><td>$3,000–$8,000+</td><td>❌ فعلاً توصیه نمی‌شود</td></tr>
+        <tr><td>جبل‌علی → بندرعباس</td><td style="color:#b91c1c;">⛔ تعلیق/خطر بالا</td><td>۲۵–۴۰ روز</td><td>$3,000–$8,000+</td><td>❌ فعلاً توصیه نمی‌شود</td></tr>
+        <tr><td>دقم → چابهار/گوادر</td><td style="color:#15803d;">✅ فعال</td><td>۳۵–۵۵ روز</td><td>$4,000–$6,500</td><td>✅ مناسب برای کالاهای معمول</td></tr>
+        <tr><td>صحار → چابهار/گوادر</td><td style="color:#15803d;">✅ فعال</td><td>۳۵–۵۵ روز</td><td>$4,000–$6,500</td><td>✅ مناسب برای فله و کانتینر</td></tr>
+        <tr style="background:rgba(16,185,129,0.05)"><td><strong>سالاله → چابهار</strong></td><td style="color:#15803d;">⭐ بهترین جایگزین</td><td>۳۵–۵۰ روز</td><td>$4,000–$6,000</td><td>⭐ بهترین گزینه کنونی</td></tr>
+        <tr><td>ترکمن‌باشی → انزلی</td><td style="color:#f59e0b;">🟡 فعال — ظرفیت محدود</td><td>۲۵–۳۵ روز</td><td>$2,500–$4,000</td><td>🟡 مناسب اما ظرفیت محدود</td></tr>
+        <tr><td>استاراخان → انزلی/امیرآباد</td><td style="color:#f59e0b;">🟡 فعال — پیچیده</td><td>۲۵–۴۰ روز</td><td>$2,500–$4,500</td><td>🟡 برای شرکت‌های تحریم‌پذیر دشوار</td></tr>
+        <tr style="background:rgba(236,72,153,0.05)"><td><strong>مرسین → بازرگان → اهواز</strong></td><td style="color:#15803d;">✅ فعال — پایدار</td><td>۳۰–۴۵ روز</td><td>$4,000–$6,500</td><td>✅ پایدارترین مسیر غیردریایی</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer-note-ahvaz">
+    <strong>⚠ یادداشت‌های مهم:</strong><br>
+    ۱. تمام قیمت‌ها تخمینی هستند و در شرایط بحران کنونی نوسان بالایی دارند.<br>
+    ۲. <strong>بحران تنگه هرمز</strong> (از ۲۸ فوریه ۲۰۲۶) بزرگترین اختلال دریایی از جنگ جهانی دوم است.<br>
+    ۳. <strong>مسیرهای جایگزین توصیه‌شده</strong> در شرایط فعلی: سالاله/دقم عمان → گوادر → چابهار، و مرسین ترکیه → بازرگان<br>
+    ۴. اطلاعات این گزارش در خرداد ۱۴۰۵ (مه ۲۰۲۶) گردآوری شده. اوضاع ممکن است روزانه تغییر کند.<br>
+    ۵. <strong>توصیه اکید:</strong> قبل از ارسال هر محموله، با فورواردر متخصص در ایران مشورت کنید و بیمه جنگی (War Risk) تهیه نمایید.
   </div>
 </div>
 
@@ -280,235 +690,32 @@ function filterCarec(tag, btn) {
   document.querySelectorAll('.cor-card').forEach(card => { card.style.display = (tag === 'all' || card.getAttribute('data-type') === tag) ? '' : 'none'; });
 }
 
-// ==================== دیتاهای کامل مسیرها (بروزرسانی شده با اطلاعات کامل خرداد ۱۴۰۵) ====================
+// ==================== دیتاهای کامل مسیرها برای نقشه ====================
 const routesData = {
-  dubai: {
-    name: 'دبی',
-    title: 'مسیر دبی: چین به دبی (بندر راشد) به بندرعباس به اهواز',
-    type: 'دریایی (FCL/LCL) چین به دبی + دریایی مجدد به بندرعباس + جاده‌ای به اهواز',
-    time: 'چین تا دبی: ۱۵–۲۵ روز | دبی تا بندرعباس: ۱–۳ روز (در شرایط عادی) | بندرعباس تا اهواز: ۱–۲ روز | کل: ۲۲–۳۰ روز',
-    cost: 'چین تا دبی (FCL 40ft): ۲,۰۰۰–۳,۵۰۰ دلار (نرمال)؛ در بحران تا ۷,۰۰۰ دلار | دبی تا بندرعباس: ۵۰۰–۱,۵۰۰ دلار',
-    risk: 'بسیار بالا',
-    riskLevel: 'high',
-    goods: 'کالاهای مصرفی، الکترونیک، پوشاک، مواد غذایی، قطعات صنعتی',
-    forward: 'فورواردرهای مستقر در دبی فعال هستند اما برای ادامه مسیر به ایران با محدودیت‌های جدی روبه‌رو هستند',
-    status: 'تعلیق یا ریسک بسیار بالا',
-    statusDesc: 'بخش دبی به بندرعباس به دلیل بحران تنگه هرمز (از فوریه ۲۰۲۶) عملاً تعلیق شده است. کاهش ۹۴٪ ترافیک تجاری، مین‌گذاری، حملات قایق‌های سپاه.',
-    limitations: 'بحران تنگه هرمز از فوریه ۲۰۲۶ | تحریم‌های بین‌المللی علیه ایران | بیمه جنگی در خلیج فارس توسط گارد، اسکولد و لویدز لغو شده است | حمله پهپادی ایران به پالایشگاه ابوظبی (Ruwais) | معطلی سنگین در بندر راشد',
-    coords: [[31.23,121.47],[25.27,55.30],[27.18,56.27],[31.32,48.67]],
-    color: '#E24B4A',
-    dashPattern: '10, 8'
-  },
-  jebel_ali: {
-    name: 'جبل علی',
-    title: 'مسیر جبل‌علی: چین به جبل‌علی به بندرعباس به اهواز',
-    type: 'دریایی FCL/LCL (Mainline vessel) چین به جبل‌علی به فیدر/Ro-Ro به بندرعباس و جاده‌ای',
-    time: 'چین تا جبل‌علی: ۱۵–۲۵ روز (شانگهای تقریبا ۱۵ روز) | جبل‌علی تا بندرعباس: ۱–۲ روز (در شرایط عادی) | کل: ۲۲–۳۰ روز',
-    cost: 'چین تا جبل‌علی (40ft): ~۲,۰۰۰–۳,۵۰۰ دلار (قبل بحران) | نرخ شانگهای-خلیج فارس در هفته اول مارس ۲۰۲۶ تا ۷۲٪ جهش کرد',
-    risk: 'بسیار بالا',
-    riskLevel: 'high',
-    goods: 'کانتینر FCL/LCL، ماشین‌آلات، مواد اولیه، کالاهای مصرفی',
-    forward: 'فورواردرهای بزرگ در جبل‌علی (DP World، MSC، Maersk) برای ادامه مسیر به ایران خدمات تعلیق کرده‌اند. فقط شرکت‌های shadow و ایرانی فعال هستند',
-    status: 'تعلیق یا ریسک بسیار بالا',
-    statusDesc: 'مسیر جبل‌علی–بندرعباس نیازمند عبور از تنگه هرمز که در حال حاضر بسیار پرریسک است. شرکت‌های بزرگ سرویس خلیج فارس را متوقف کرده‌اند.',
-    limitations: 'مسیر جبل‌علی–بندرعباس نیازمند عبور از تنگه هرمز | شرکت‌های بزرگ (Maersk، MSC) سرویس خلیج فارس را متوقف کرده‌اند | بیمه جنگی لغو شده | قرار گرفتن در لیست تحریم‌های ثانویه',
-    coords: [[31.23,121.47],[25.00,55.05],[27.18,56.27],[31.32,48.67]],
-    color: '#1D9E75',
-    dashPattern: '10, 8'
-  },
-  duqm: {
-    name: 'دقم',
-    title: 'مسیر دقم — سه شاخه (جایگزین داغ)',
-    type: 'دریایی + زمینی',
-    time: 'چین تا دقم: ۲۰–۳۵ روز | کل مسیر بسته به شاخه: ۲۵–۵۰ روز',
-    cost: 'نرخ شانگهای-دقم: +۲۸٪ افزایش در هفته اول درگیری',
-    risk: 'متوسط',
-    riskLevel: 'medium',
-    goods: 'کالای عمومی، فله خشک، تجهیزات — ظرفیت: ۲۰۰,۰۰۰ TEU',
-    forward: 'نیمه فعال — نیاز به فورواردر محلی عمانی',
-    status: 'فعال — مسیر جایگزین داغ',
-    statusDesc: 'ترافیک دو برابر شده (مارس ۲۰۲۶). دقم خارج از تنگه هرمز و باب‌المندب — امن‌ترین بندر منطقه در شرایط کنونی.',
-    branches: 'شاخه اول (🔵): چین → دقم → گوادر (پاکستان) → چابهار → اهواز | شاخه دوم (🟢): چین → دقم → بندر خصب (عمان) → بندرعباس (دریایی) → اهواز | شاخه سوم (🟡): چین → دقم → بندرعباس (مستقیم) → اهواز',
-    limitations: 'زیرساخت دقم هنوز در حال توسعه — ظرفیت محدودتر از جبل‌علی | مسیر گوادر-چابهار: هزینه اضافه و زمان بیشتر | ریسک امنیتی گوادر (ناآرامی‌های بلوچستان پاکستان)',
-    coords: [[31.23,121.47],[19.66,57.70],[25.15,61.45],[27.18,56.27],[31.32,48.67]],
-    color: '#534AB7',
-    dashPattern: '10, 8'
-  },
-  sohar: {
-    name: 'صحار',
-    title: 'مسیر صحار — سه شاخه (جایگزین داغ)',
-    type: 'دریایی + زمینی',
-    time: 'چین تا صحار: ۲۰–۳۵ روز | کل مسیر بسته به شاخه: ۲۵–۵۰ روز',
-    cost: 'متوسط — مشابه دقم',
-    risk: 'متوسط',
-    riskLevel: 'medium',
-    goods: 'فله خشک، کانتینر، مواد معدنی، مواد اولیه صنعتی',
-    forward: 'نیمه فعال',
-    status: 'فعال — مسیر جایگزین داغ',
-    statusDesc: 'ترافیک صحار تقریباً دو برابر شده (مارس ۲۰۲۶). ظرفیت ~۱ میلیون TEU سالانه + حجم عمده فله خشک.',
-    branches: 'شاخه اول (🔵): چین → صحار → گوادر (پاکستان) → چابهار → اهواز | شاخه دوم (🟢): چین → صحار → بندر خصب (عمان) → بندرعباس (دریایی) → اهواز | شاخه سوم (🟡): چین → صحار → بندرعباس (مستقیم) → اهواز',
-    limitations: 'ظرفیت کمتر از جبل‌علی — ممکن است در اوج ترافیک دچار تنگنا شود | شاخه‌های نهایی به ایران همان ریسک‌های مسیر دقم را دارند | نیاز به فورواردر محلی عمانی',
-    coords: [[31.23,121.47],[24.34,56.73],[25.15,61.45],[27.18,56.27],[31.32,48.67]],
-    color: '#BA7517',
-    dashPattern: '10, 8'
-  },
-  salalah: {
-    name: 'صلاله',
-    title: 'مسیر سالاله — سه شاخه (⭐ بهترین جایگزین فعلی)',
-    type: 'دریایی + زمینی',
-    time: 'چین تا سالاله: ۲۰–۳۵ روز | کل مسیر بسته به شاخه: ۳۰–۵۰ روز',
-    cost: 'نرخ چین-سالاله: +۲۸٪ افزایش در هفته اول درگیری. نسبت به مسیر جبل‌علی-بندرعباس مقرون‌به‌صرفه‌تر',
-    risk: 'متوسط',
-    riskLevel: 'medium',
-    goods: 'کالای عمومی FCL/LCL، محصولات چینی، کالاهای صادراتی به آفریقای شرقی و جنوب آسیا',
-    forward: 'فعال — Asyad + Maersk (Gemini Cooperation)',
-    status: '⭐ بهترین جایگزین فعلی',
-    statusDesc: 'با آغاز درگیری تبدیل به اصلی‌ترین مرکز ترانزیت جایگزین شد. سرویس چندوجهی به جده سعودی (۴–۵ روز) راه‌اندازی شده. ظرفیت ۴–۵ میلیون TEU سالانه.',
-    branches: 'شاخه اول (🔵): چین → سالاله → گوادر (پاکستان) → چابهار → اهواز | شاخه دوم (🟢): چین → سالاله → بندر خصب (عمان) → بندرعباس (دریایی) → اهواز | شاخه سوم (🟡): چین → سالاله → بندرعباس (مستقیم) → اهواز',
-    limitations: 'در ۱۱ مارس ۲۰۲۶ حمله پهپادی به سالاله انجام شد اما ترافیک پس از ۲ روز بازگشت | فاصله زیاد سالاله از ایران — هزینه ترانشیپ اضافی | شاخه‌های نهایی وارد ایران همان ریسک‌های مسیرهای دیگر',
-    coords: [[31.23,121.47],[17.00,54.00],[25.15,61.45],[27.18,56.27],[31.32,48.67]],
-    color: '#185FA5',
-    dashPattern: '10, 8'
-  },
-  khasab: {
-    name: 'خصب',
-    title: 'مسیر خصب / مسندم — سه شاخه',
-    type: 'دریایی + زمینی + فری',
-    time: 'چین تا خصب: ۲۰–۳۵ روز | خصب تا بندرعباس (فری): ۲–۲.۵ ساعت | کل مسیر: ۲۵–۴۵ روز',
-    cost: 'متوسط — فری برای کالای سنگین کانتینری مناسب نیست',
-    risk: 'بالا',
-    riskLevel: 'high',
-    goods: 'کالای سبک (شاخه فری) | کالاهای غیرتحریمی، مواد غذایی (شاخه بصره)',
-    forward: 'در حال توسعه — محدود',
-    status: 'فعال با محدودیت شدید',
-    statusDesc: 'موقعیت خصب در دهانه تنگه هرمز — در خط مستقیم درگیری نظامی. شاخه بصره به عراق در حال بررسی به عنوان جایگزین.',
-    branches: 'شاخه اول (🔵): چین → خصب → گوادر (پاکستان) → چابهار → اهواز | شاخه دوم (🟢): چین → خصب → بصره (عراق) زمینی → مرز شلمچه/چذابه → اهواز | شاخه سوم (🟡): چین → خصب → فری ۲.۵ ساعته → بندرعباس → اهواز',
-    limitations: 'موقعیت خصب در دهانه تنگه هرمز — در خط مستقیم درگیری نظامی | مسیر بصره-اهواز از مرز عراق: ریسک امنیتی متوسط، گمرک عراق پیچیده | فری خصب-بندرعباس: در شرایط فعلی تعلیق یا ریسک بالا',
-    coords: [[31.23,121.47],[26.18,56.25],[25.15,61.45],[30.50,47.78],[31.32,48.67]],
-    color: '#E24B4A',
-    dashPattern: '10, 8'
-  },
-  turkmenbashi: {
-    name: 'ترکمنباشی',
-    title: 'مسیر ترکمن‌باشی — چین → قزاقستان → ترکمن‌باشی → بندر امیرآباد/انزلی → اهواز',
-    type: 'ریلی (چین) + فری دریای خزر + جاده/ریل داخلی ایران',
-    time: 'چین تا بندر انزلی: ~۲۰ روز | کل مسیر تا اهواز: ۲۵–۳۵ روز',
-    cost: 'صرفه‌جویی ~۸۹۷ دلار به ازای هر کانتینر نسبت به مسیرهای قبلی',
-    risk: 'متوسط',
-    riskLevel: 'medium',
-    goods: 'کالای کانتینری سبک، تجهیزات الکترونیک، اقلام با ارزش بالا، کالاهای فوری',
-    forward: 'محدود — ظرفیت ریلی محدود',
-    status: 'فعال — در حال رشد',
-    statusDesc: 'با محاصره دریایی آمریکا از آوریل ۲۰۲۶، تعداد قطارها از ۱ قطار/هفته به ۱ قطار/۳-۴ روز افزایش یافته. ظرفیت ماه مه ۲۰۲۶ تماماً رزرو شده. ترمینال ریلی سرخس توسط چین در حال ساخت.',
-    limitations: 'حمله اسرائیل به بندر انزلی (اوایل ۲۰۲۶) — تأثیر بر عملیات تجاری | ظرفیت محدود راه‌آهن — یک قطار فقط ~۱۰۰ TEU | بندر انزلی هنوز به شبکه ریلی ایران متصل نیست',
-    coords: [[31.23,121.47],[40.02,52.97],[36.58,53.23],[31.32,48.67]],
-    color: '#1D9E75',
-    dashPattern: '10, 8'
-  },
-  astrakhan: {
-    name: 'آستاراخان',
-    title: 'مسیر آستاراخان — چین → روسیه → استاراخان → بندر انزلی/امیرآباد → اهواز (کریدور INSTC)',
-    type: 'ریل/جاده روسیه + فری دریای خزر (Ro-Ro / فله) + جاده/ریل داخلی ایران',
-    time: 'چین تا استاراخان: ۱۰–۱۵ روز ریلی | استاراخان تا انزلی: ۲–۳ روز دریایی | کل: ۲۵–۴۰ روز',
-    cost: 'متوسط تا بالا — $۲,۵۰۰–۴,۵۰۰',
-    risk: 'متوسط',
-    riskLevel: 'medium',
-    goods: 'کالاهای روسی، ترانزیت چین-اروپا، مواد اولیه، فله',
-    forward: 'محدود — در حال توسعه',
-    status: 'فعال — ریسک متوسط',
-    statusDesc: 'با آغاز تحریم روسیه (۲۰۲۲+) و بحران ایران (۲۰۲۶)، این کریدور در حال تبدیل به شریان اصلی ایران-روسیه-چین است. سرویس کانتینری ایران-روسیه-چین برای ۲۰۲۶ برنامه‌ریزی شده.',
-    limitations: 'هر دو ایران و روسیه تحت تحریم شدید غرب — پرداخت و بانکداری پیچیده | حمله اسرائیل به بندر انزلی | ظرفیت کم کشتی‌های خزر | کانال ولگا-خزر عمق ناکافی',
-    coords: [[31.23,121.47],[46.35,48.05],[37.47,49.46],[31.32,48.67]],
-    color: '#534AB7',
-    dashPattern: '10, 8'
-  },
-  mersin: {
-    name: 'مرسین',
-    title: 'مسیر مرسین — چین → مرسین (ترکیه) → بازرگان → اهواز',
-    type: 'دریایی چین→مرسین + جاده‌ای ترکیه→بازرگان + جاده‌ای ایران→اهواز',
-    time: 'چین تا مرسین: ۱۸–۲۵ روز | مرسین تا بازرگان: ۲–۴ روز | بازرگان تا اهواز: ۲–۳ روز | کل: ۳۰–۴۵ روز',
-    cost: 'چین تا مرسین (40ft) مه ۲۰۲۶: $۲,۲۹۵–۲,۸۰۵ (کاهش ۱۱٪ از آوریل) | مرسین تا بازرگان (TIR): ~۱,۵۰۰–۲,۵۰۰ دلار',
-    risk: 'متوسط',
-    riskLevel: 'medium',
-    goods: 'کالاهای مصرفی، پوشاک و نساجی، مواد غذایی، ماشین‌آلات، خودرو، قطعات صنعتی',
-    forward: 'فعال — فورواردرهای ترکی و ایرانی فعال هستند',
-    status: 'فعال — پایدارترین مسیر غیردریایی',
-    statusDesc: 'مه ۲۰۲۶: نرخ دریایی به ترکیه کاهش ۱۱٪ از آوریل. مسیر دریای سرخ-سوئز همچنان با تهدید حوثی‌ها مواجه است.',
-    limitations: 'مسیر دریای سرخ-سوئز: تهدید حوثی‌ها — شرکت‌های بزرگ از آفریقا دور می‌زنند (+۱۵–۲۰ روز) | گمرک بازرگان یکی از شلوغ‌ترین مرزهای ایران — معطلی ۲–۷ روز | فاصله زیاد بازرگان تا اهواز (~۱,۸۰۰km)',
-    coords: [[31.23,121.47],[36.80,34.63],[39.78,44.78],[31.32,48.67]],
-    color: '#BA7517',
-    dashPattern: '10, 8'
-  },
-  cra: {
-    name: 'CRA',
-    title: 'مسیر CRA (چین-قزاقستان-ترکمنستان-ایران) — چین → سرخس (مرز ایران) → اهواز',
-    type: 'ریلی + زمینی',
-    time: '۱۸-۲۵ روز',
-    cost: 'متوسط — صرفه‌جویی نسبت به مسیرهای دریایی',
-    risk: 'پایین',
-    riskLevel: 'low',
-    goods: 'کانتینر، کالای صنعتی، فلزات',
-    forward: 'فعال — در حال توسعه',
-    status: 'فعال',
-    statusDesc: 'ترمینال ریلی سرخس (مرز ترکمنستان-ایران) توسط چین در حال ساخت — بیش از نیمی تکمیل شده (اوت ۲۰۲۵). پس از تکمیل، ظرفیت سه‌برابر می‌شود.',
-    limitations: 'ظرفیت محدود فعلی | نیاز به هماهنگی گمرکی سه کشور',
-    coords: [[31.23,121.47],[43.25,76.90],[37.93,60.35],[36.29,61.17],[31.32,48.67]],
-    color: '#0C7B5E',
-    dashPattern: '10, 8'
-  },
-  kashgar: {
-    name: 'کاشغر-گوادر-چابهار',
-    title: 'مسیر کاشغر → گوادر → چابهار → اهواز',
-    type: 'زمینی (جاده‌ای)',
-    time: '۲۵-۳۵ روز',
-    cost: 'متوسط',
-    risk: 'متوسط (امنیتی)',
-    riskLevel: 'medium',
-    goods: 'کالای صنعتی، ترانزیت',
-    forward: 'در حال توسعه',
-    status: 'فعال',
-    statusDesc: 'مسیر زمینی از طریق پاکستان به چابهار و سپس اهواز. گوادر به عنوان هاب ترانزیتی چین-پاکستان در حال توسعه است.',
-    limitations: 'ریسک امنیتی در بلوچستان پاکستان | زیرساخت جاده‌ای نیاز به بهبود | نیاز به هماهنگی گمرکی سه کشور',
-    coords: [[39.47,75.99],[25.13,62.33],[25.29,60.62],[31.32,48.67]],
-    color: '#8B5CF6',
-    dashPattern: '10, 8'
-  }
+  dubai: { name: 'دبی', title: 'مسیر دبی: چین → دبی → بندرعباس → اهواز', type: 'دریایی + زمینی', time: '۲۲-۳۰ روز', cost: '۲,۰۰۰–۳,۵۰۰ دلار', risk: 'بسیار بالا', riskLevel: 'high', goods: 'کالاهای مصرفی، الکترونیک', forward: 'محدود', status: 'تعلیق', coords: [[31.23,121.47],[25.27,55.30],[27.18,56.27],[31.32,48.67]], color: '#E24B4A', dashPattern: '10, 8' },
+  jebel_ali: { name: 'جبل علی', title: 'مسیر جبل علی: چین → جبل علی → بندرعباس → اهواز', type: 'دریایی + زمینی', time: '۲۲-۳۰ روز', cost: '۲,۰۰۰–۳,۵۰۰ دلار', risk: 'بسیار بالا', riskLevel: 'high', goods: 'کانتینر، ماشین‌آلات', forward: 'تعلیق', status: 'تعلیق', coords: [[31.23,121.47],[25.00,55.05],[27.18,56.27],[31.32,48.67]], color: '#1D9E75', dashPattern: '10, 8' },
+  duqm: { name: 'دقم', title: 'مسیر دقم — سه شاخه', type: 'دریایی + زمینی', time: '۲۵-۳۵ روز', cost: 'متوسط', risk: 'متوسط', riskLevel: 'medium', goods: 'کالای عمومی، فله خشک', forward: 'نیمه فعال', status: 'فعال', branches: 'شاخه اول: چین → دقم → گوادر → چابهار → اهواز | شاخه دوم: چین → دقم → خصب → بندرعباس → اهواز | شاخه سوم: چین → دقم → بندرعباس مستقیم → اهواز', coords: [[31.23,121.47],[19.66,57.70],[25.15,61.45],[27.18,56.27],[31.32,48.67]], color: '#534AB7', dashPattern: '10, 8' },
+  sohar: { name: 'صحار', title: 'مسیر صحار — سه شاخه', type: 'دریایی + زمینی', time: '۲۵-۳۵ روز', cost: 'متوسط', risk: 'متوسط', riskLevel: 'medium', goods: 'فله خشک، کانتینر', forward: 'نیمه فعال', status: 'فعال', branches: 'شاخه اول: چین → صحار → گوادر → چابهار → اهواز | شاخه دوم: چین → صحار → خصب → بندرعباس → اهواز | شاخه سوم: چین → صحار → بندرعباس مستقیم → اهواز', coords: [[31.23,121.47],[24.34,56.73],[25.15,61.45],[27.18,56.27],[31.32,48.67]], color: '#BA7517', dashPattern: '10, 8' },
+  salalah: { name: 'صلاله', title: 'مسیر سالاله — سه شاخه (⭐ بهترین جایگزین)', type: 'دریایی + زمینی', time: '۳۰-۵۰ روز', cost: '۴,۰۰۰–۶,۰۰۰ دلار', risk: 'متوسط', riskLevel: 'medium', goods: 'کالای عمومی FCL/LCL', forward: 'فعال', status: '⭐ بهترین جایگزین', branches: 'شاخه اول: چین → سالاله → گوادر → چابهار → اهواز | شاخه دوم: چین → سالاله → خصب → بندرعباس → اهواز | شاخه سوم: چین → سالاله → بندرعباس مستقیم → اهواز', coords: [[31.23,121.47],[17.00,54.00],[25.15,61.45],[27.18,56.27],[31.32,48.67]], color: '#185FA5', dashPattern: '10, 8' },
+  khasab: { name: 'خصب', title: 'مسیر خصب — سه شاخه', type: 'دریایی + زمینی + فری', time: '۲۵-۴۵ روز', cost: 'متوسط', risk: 'بالا', riskLevel: 'high', goods: 'کالای سبک', forward: 'محدود', status: 'فعال با محدودیت', branches: 'شاخه اول: چین → خصب → گوادر → چابهار → اهواز | شاخه دوم: چین → خصب → بصره (عراق) → مرز شلمچه → اهواز | شاخه سوم: چین → خصب → فری → بندرعباس → اهواز', coords: [[31.23,121.47],[26.18,56.25],[25.15,61.45],[30.50,47.78],[31.32,48.67]], color: '#E24B4A', dashPattern: '10, 8' },
+  turkmenbashi: { name: 'ترکمنباشی', title: 'مسیر ترکمن‌باشی — چین → قزاقستان → ترکمن‌باشی → بندر امیرآباد/انزلی → اهواز', type: 'ریلی + فری + جاده', time: '۲۵-۳۵ روز', cost: '۲,۵۰۰–۴,۰۰۰ دلار', risk: 'متوسط', riskLevel: 'medium', goods: 'کالای کانتینری سبک', forward: 'محدود', status: 'فعال — در حال رشد', coords: [[31.23,121.47],[40.02,52.97],[36.58,53.23],[31.32,48.67]], color: '#1D9E75', dashPattern: '10, 8' },
+  astrakhan: { name: 'آستاراخان', title: 'مسیر آستاراخان — چین → روسیه → استاراخان → بندر انزلی/امیرآباد → اهواز (INSTC)', type: 'ریلی + فری + جاده', time: '۲۵-۴۰ روز', cost: '۲,۵۰۰–۴,۵۰۰ دلار', risk: 'متوسط', riskLevel: 'medium', goods: 'کالاهای روسی، ترانزیت', forward: 'محدود', status: 'فعال — ریسک متوسط', coords: [[31.23,121.47],[46.35,48.05],[37.47,49.46],[31.32,48.67]], color: '#534AB7', dashPattern: '10, 8' },
+  mersin: { name: 'مرسین', title: 'مسیر مرسین — چین → مرسین (ترکیه) → بازرگان → اهواز', type: 'دریایی + جاده', time: '۳۰-۴۵ روز', cost: '۴,۰۰۰–۶,۵۰۰ دلار', risk: 'متوسط', riskLevel: 'medium', goods: 'کالاهای مصرفی، پوشاک، ماشین‌آلات', forward: 'فعال', status: 'فعال — پایدار', coords: [[31.23,121.47],[36.80,34.63],[39.78,44.78],[31.32,48.67]], color: '#BA7517', dashPattern: '10, 8' },
+  cra: { name: 'CRA', title: 'مسیر CRA — چین → سرخس (مرز ایران) → اهواز', type: 'ریلی + زمینی', time: '۱۸-۲۵ روز', cost: 'متوسط', risk: 'پایین', riskLevel: 'low', goods: 'کانتینر، کالای صنعتی', forward: 'فعال', status: 'فعال', coords: [[31.23,121.47],[43.25,76.90],[37.93,60.35],[36.29,61.17],[31.32,48.67]], color: '#0C7B5E', dashPattern: '10, 8' },
+  kashgar: { name: 'کاشغر-گوادر-چابهار', title: 'مسیر کاشغر → گوادر → چابهار → اهواز', type: 'زمینی (جاده‌ای)', time: '۲۵-۳۵ روز', cost: 'متوسط', risk: 'متوسط', riskLevel: 'medium', goods: 'کالای صنعتی، ترانزیت', forward: 'در حال توسعه', status: 'فعال', coords: [[39.47,75.99],[25.13,62.33],[25.29,60.62],[31.32,48.67]], color: '#8B5CF6', dashPattern: '10, 8' }
 };
 
 function updateRouteDetail(routeId) {
   const r = routesData[routeId];
   if (!r) return;
   const riskClass = r.riskLevel === 'high' ? 'risk-high' : (r.riskLevel === 'low' ? 'risk-low' : 'risk-medium');
-  
-  let html = `
-    <div><span style="color:#666">نوع حمل:</span> <strong>${r.type}</strong></div>
-    <div><span style="color:#666">وضعیت فعلی مسیر:</span> <strong class="${riskClass}">${r.status}</strong></div>
-    <div><span style="color:#666">زمان تحویل:</span> <strong>${r.time}</strong></div>
-    <div><span style="color:#666">هزینه حمل:</span> <strong>${r.cost}</strong></div>
-    <div><span style="color:#666">مناسب برای:</span> <strong>${r.goods}</strong></div>
-    <div><span style="color:#666">وضعیت فورواردر:</span> <strong>${r.forward}</strong></div>
-  `;
-  
-  if (r.statusDesc) {
-    html += `<div style="grid-column:span 2; margin-top:6px;"><span style="color:#666">توضیح وضعیت:</span> <strong>${r.statusDesc}</strong></div>`;
-  }
-  
+  let html = `<div><span style="color:#666">نوع حمل:</span> <strong>${r.type}</strong></div><div><span style="color:#666">وضعیت فعلی مسیر:</span> <strong class="${riskClass}">${r.status}</strong></div><div><span style="color:#666">زمان تحویل:</span> <strong>${r.time}</strong></div><div><span style="color:#666">هزینه حمل:</span> <strong>${r.cost}</strong></div><div><span style="color:#666">مناسب برای:</span> <strong>${r.goods}</strong></div><div><span style="color:#666">وضعیت فورواردر:</span> <strong>${r.forward}</strong></div>`;
   document.getElementById('route-detail-grid').innerHTML = html;
-  
-  // نمایش شاخه‌ها
-  if (r.branches) {
-    document.getElementById('route-branches').innerHTML = `<strong>شاخه‌های مسیر:</strong><br>${r.branches.replace(/\|/g, '<br>')}`;
-  } else {
-    document.getElementById('route-branches').innerHTML = '';
-  }
-  
-  // نمایش محدودیت‌ها و ریسک‌ها
-  if (r.limitations) {
-    document.getElementById('route-risks').innerHTML = `<strong>محدودیت‌ها و ریسک‌ها:</strong><br>${r.limitations.replace(/\|/g, '<br>• ')}`;
-    document.getElementById('route-risks').style.display = 'block';
-  } else {
-    document.getElementById('route-risks').style.display = 'none';
-  }
+  if (r.branches) document.getElementById('route-branches').innerHTML = `<strong>شاخه‌های مسیر:</strong><br>${r.branches.replace(/\|/g, '<br>')}`;
+  else document.getElementById('route-branches').innerHTML = '';
+  if (r.limitations) { document.getElementById('route-risks').innerHTML = `<strong>محدودیت‌ها و ریسک‌ها:</strong><br>${r.limitations.replace(/\|/g, '<br>• ')}`; document.getElementById('route-risks').style.display = 'block'; }
+  else if (routeId === 'dubai') { document.getElementById('route-risks').innerHTML = `<strong>محدودیت‌ها و ریسک‌ها (بالا):</strong><br>• بحران تنگه هرمز | • تحریم‌های بین‌المللی | • بیمه جنگی لغو شده`; document.getElementById('route-risks').style.display = 'block'; }
+  else document.getElementById('route-risks').style.display = 'none';
 }
 
 let map, currentLine, currentMarker, measureMode = false, measurePoints = [], measureMarkers = [], measureLine = null;
@@ -576,6 +783,22 @@ function showDash(id) {
   if (id === 'countries') renderCountries();
 }
 
+// ========== توابع گزارش اهواز ==========
+function toggleAhvazCard(id) {
+  const card = document.getElementById(id);
+  if (card) card.classList.toggle('open');
+}
+function toggleAllAhvaz() {
+  const cards = document.querySelectorAll('.route-card-ahvaz');
+  const anyOpen = Array.from(cards).some(c => c.classList.contains('open'));
+  cards.forEach(c => { if (anyOpen) c.classList.remove('open'); else c.classList.add('open'); });
+}
+// باز کردن اولین کارت گزارش اهواز به صورت پیش‌فرض
+document.addEventListener('DOMContentLoaded', function() {
+  const firstCard = document.getElementById('ahvazCard1');
+  if (firstCard) firstCard.classList.add('open');
+});
+
 // ========== داده‌های کشورها ==========
 const countriesData = {
   china: { name: 'چین', capital: 'پکن', population: '۱.۴ میلیارد', keyPorts: 'شانگهای، نینگبو، شنژن', role: 'مبدأ اصلی صادرات، تولید ۳۰٪ کالاهای جهانی', corridor: 'راه ابریشم - مبدأ' },
@@ -623,6 +846,8 @@ window.resetMapFilter = resetMapFilter;
 window.toggleMeasure = toggleMeasure;
 window.filterCarec = filterCarec;
 window.toggleCorridor = toggleCorridor;
+window.toggleAhvazCard = toggleAhvazCard;
+window.toggleAllAhvaz = toggleAllAhvaz;
 </script>
 </body>
 </html>
