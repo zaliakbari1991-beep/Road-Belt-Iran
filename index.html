@@ -8,372 +8,71 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  body {
-    font-family: 'Vazirmatn', Tahoma, 'Segoe UI', Arial, sans-serif;
-    background: #f0efe9;
-    direction: rtl;
-    line-height: 1.5;
-  }
-  
-  @media (prefers-color-scheme: dark) {
-    body { background: #1c1c1a; }
-    .card, .page-header, .cor-card, .detail-panel, .map-section, .shipping-card, .country-card, .investment-card { background: #252523; border-color: #3a3a36; color: #e0e0e0; }
-    .stat-card { background: #252523; }
-    .stat-item { border-bottom-color: #3a3a36; }
-  }
-  
-  .page-header {
-    background: white;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-    padding: 1rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Vazirmatn', Tahoma, 'Segoe UI', Arial, sans-serif; background: #f0efe9; direction: rtl; line-height: 1.5; }
+  @media (prefers-color-scheme: dark) { body { background: #1c1c1a; } .card, .page-header, .cor-card, .detail-panel, .map-section, .shipping-card, .country-card, .investment-card, .stat-card { background: #252523; border-color: #3a3a36; color: #e0e0e0; } .stat-item { border-bottom-color: #3a3a36; } }
+  .page-header { background: white; border-bottom: 1px solid rgba(0,0,0,0.1); padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; position: sticky; top: 0; z-index: 100; }
   .page-header h1 { font-size: 18px; font-weight: 600; }
   .page-header p { font-size: 12px; color: #666; margin-top: 4px; }
-  
-  .nav-btn {
-    font-size: 12px;
-    padding: 6px 16px;
-    border-radius: 20px;
-    border: 1px solid #ddd;
-    background: transparent;
-    cursor: pointer;
-    font-family: inherit;
-  }
-  .nav-btn.active {
-    background: #185FA5;
-    color: white;
-    border-color: #185FA5;
-  }
-  
+  .nav-btn { font-size: 12px; padding: 6px 16px; border-radius: 20px; border: 1px solid #ddd; background: transparent; cursor: pointer; font-family: inherit; }
+  .nav-btn.active { background: #185FA5; color: white; border-color: #185FA5; }
   .container { max-width: 1400px; margin: 0 auto; padding: 1.5rem; }
   .dash-section { display: none; }
   .dash-section.active { display: block; }
-  
-  .card {
-    background: white;
-    border-radius: 12px;
-    padding: 1rem 1.25rem;
-    margin-bottom: 1rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-  }
-  
-  .metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-  .metric-box {
-    background: white;
-    border-radius: 12px;
-    padding: 12px;
-    text-align: center;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-  }
-  .metric-value {
-    font-size: 24px;
-    font-weight: 700;
-    color: #185FA5;
-  }
-  .metric-label {
-    font-size: 11px;
-    color: #666;
-    margin-top: 4px;
-  }
-  
-  .stats-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    justify-content: space-between;
-    margin-bottom: 24px;
-  }
-  .stat-card {
-    flex: 1;
-    min-width: 200px;
-    background: white;
-    border-radius: 12px;
-    padding: 16px;
-  }
-  .stat-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: #185FA5;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 8px;
-    margin-bottom: 12px;
-  }
-  .stat-item {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    padding: 6px 0;
-    border-bottom: 1px dashed #eee;
-  }
+  .card { background: white; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .metric-box { background: white; border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .metric-value { font-size: 24px; font-weight: 700; color: #185FA5; }
+  .metric-label { font-size: 11px; color: #666; margin-top: 4px; }
+  .stats-row { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; margin-bottom: 24px; }
+  .stat-card { flex: 1; min-width: 200px; background: white; border-radius: 12px; padding: 16px; }
+  .stat-title { font-size: 13px; font-weight: 600; color: #185FA5; border-bottom: 1px solid #eee; padding-bottom: 8px; margin-bottom: 12px; }
+  .stat-item { display: flex; justify-content: space-between; font-size: 12px; padding: 6px 0; border-bottom: 1px dashed #eee; }
   .stat-item .label { color: #666; }
   .stat-item .number { font-weight: 700; }
-  
-  .shipping-section {
-    margin-bottom: 24px;
-  }
-  .shipping-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: #185FA5;
-    margin-bottom: 12px;
-    padding-right: 8px;
-    border-right: 3px solid #185FA5;
-  }
-  .shipping-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 12px;
-  }
-  .shipping-card {
-    background: white;
-    border-radius: 12px;
-    padding: 14px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-  }
-  .shipping-card h4 {
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 12px;
-    color: #185FA5;
-  }
-  .shipping-stat {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-    padding: 6px 0;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .countries-container {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 24px;
-  }
-  .countries-list {
-    width: 280px;
-    flex-shrink: 0;
-    background: white;
-    border-radius: 12px;
-    padding: 12px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-  }
-  .countries-list h4 {
-    font-size: 14px;
-    font-weight: 600;
-    color: #185FA5;
-    margin-bottom: 12px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #eee;
-  }
-  .country-item {
-    padding: 8px 12px;
-    margin: 4px 0;
-    cursor: pointer;
-    border-radius: 8px;
-    font-size: 13px;
-    transition: all 0.2s;
-  }
-  .country-item:hover {
-    background: #e8f0fe;
-  }
-  .country-item.active {
-    background: #185FA5;
-    color: white;
-  }
-  .country-detail {
-    flex: 1;
-    background: white;
-    border-radius: 12px;
-    padding: 16px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-    min-height: 300px;
-  }
-  .country-detail h4 {
-    font-size: 16px;
-    font-weight: 600;
-    color: #185FA5;
-    margin-bottom: 16px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #eee;
-  }
-  .country-info-row {
-    display: flex;
-    margin-bottom: 12px;
-    font-size: 13px;
-  }
-  .country-info-label {
-    width: 120px;
-    font-weight: 600;
-    color: #666;
-  }
-  .country-info-value {
-    flex: 1;
-    color: #333;
-  }
-  
-  .investment-section {
-    margin-top: 24px;
-  }
-  .investment-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: #185FA5;
-    margin-bottom: 12px;
-    padding-right: 8px;
-    border-right: 3px solid #185FA5;
-  }
-  .investment-card {
-    background: white;
-    border-radius: 12px;
-    padding: 24px;
-    text-align: center;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-  }
-  .investment-placeholder {
-    color: #999;
-    font-size: 13px;
-  }
-  
-  .cor-card {
-    background: white;
-    border-radius: 12px;
-    margin-bottom: 8px;
-    cursor: pointer;
-    overflow: hidden;
-  }
-  .cor-header {
-    padding: 14px 18px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #f9f9f9;
-    border-bottom: 1px solid #eee;
-  }
-  .cor-name {
-    font-size: 13px;
-    font-weight: 700;
-    color: #185FA5;
-  }
-  .cor-badge {
-    font-size: 10px;
-    padding: 2px 10px;
-    border-radius: 20px;
-    background: #E6F1FB;
-    color: #0C447C;
-  }
-  .cor-detail {
-    max-height: 0;
-    padding: 0 18px;
-    overflow: hidden;
-    transition: max-height 0.35s ease-out;
-    background: white;
-  }
-  .cor-card.open .cor-detail {
-    max-height: 350px;
-    padding: 14px 18px;
-    border-top: 1px solid #eee;
-  }
-  .detail-row {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-    padding: 8px 0;
-    border-bottom: 1px solid #f0f0f0;
-  }
-  
-  .map-section {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    margin-bottom: 20px;
-  }
-  .map-toolbar {
-    padding: 8px 16px;
-    background: #f5f5f5;
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-  .map-btn {
-    font-size: 11px;
-    padding: 4px 12px;
-    border-radius: 6px;
-    border: 1px solid #ddd;
-    background: white;
-    cursor: pointer;
-  }
-  .map-btn.active {
-    background: #185FA5;
-    color: white;
-  }
+  .shipping-section { margin-bottom: 24px; }
+  .shipping-title { font-size: 16px; font-weight: 600; color: #185FA5; margin-bottom: 12px; padding-right: 8px; border-right: 3px solid #185FA5; }
+  .shipping-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .shipping-card { background: white; border-radius: 12px; padding: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .shipping-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 12px; color: #185FA5; }
+  .shipping-stat { display: flex; justify-content: space-between; font-size: 11px; padding: 6px 0; border-bottom: 1px solid #eee; }
+  .countries-container { display: flex; gap: 20px; margin-bottom: 24px; }
+  .countries-list { width: 280px; flex-shrink: 0; background: white; border-radius: 12px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .countries-list h4 { font-size: 14px; font-weight: 600; color: #185FA5; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #eee; }
+  .country-item { padding: 8px 12px; margin: 4px 0; cursor: pointer; border-radius: 8px; font-size: 13px; transition: all 0.2s; }
+  .country-item:hover { background: #e8f0fe; }
+  .country-item.active { background: #185FA5; color: white; }
+  .country-detail { flex: 1; background: white; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); min-height: 300px; }
+  .country-detail h4 { font-size: 16px; font-weight: 600; color: #185FA5; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid #eee; }
+  .country-info-row { display: flex; margin-bottom: 12px; font-size: 13px; }
+  .country-info-label { width: 120px; font-weight: 600; color: #666; }
+  .country-info-value { flex: 1; color: #333; }
+  .investment-section { margin-top: 24px; }
+  .investment-title { font-size: 16px; font-weight: 600; color: #185FA5; margin-bottom: 12px; padding-right: 8px; border-right: 3px solid #185FA5; }
+  .investment-card { background: white; border-radius: 12px; padding: 24px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .investment-placeholder { color: #999; font-size: 13px; }
+  .cor-card { background: white; border-radius: 12px; margin-bottom: 8px; cursor: pointer; overflow: hidden; }
+  .cor-header { padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; background: #f9f9f9; border-bottom: 1px solid #eee; }
+  .cor-name { font-size: 13px; font-weight: 700; color: #185FA5; }
+  .cor-badge { font-size: 10px; padding: 2px 10px; border-radius: 20px; background: #E6F1FB; color: #0C447C; }
+  .cor-detail { max-height: 0; padding: 0 18px; overflow: hidden; transition: max-height 0.35s ease-out; background: white; }
+  .cor-card.open .cor-detail { max-height: 350px; padding: 14px 18px; border-top: 1px solid #eee; }
+  .detail-row { display: flex; justify-content: space-between; font-size: 11px; padding: 8px 0; border-bottom: 1px solid #f0f0f0; }
+  .map-section { background: white; border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
+  .map-toolbar { padding: 8px 16px; background: #f5f5f5; display: flex; gap: 8px; flex-wrap: wrap; }
+  .map-btn { font-size: 11px; padding: 4px 12px; border-radius: 6px; border: 1px solid #ddd; background: white; cursor: pointer; }
+  .map-btn.active { background: #185FA5; color: white; }
   #map { height: 450px; }
-  
-  .route-btn {
-    font-size: 11px;
-    padding: 5px 14px;
-    border-radius: 20px;
-    border: 1px solid #ccc;
-    background: white;
-    cursor: pointer;
-    margin: 3px;
-  }
-  .route-btn.active {
-    background: #185FA5;
-    color: white;
-  }
-  
-  .filter-row {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-bottom: 16px;
-  }
-  .filt {
-    font-size: 11px;
-    padding: 5px 14px;
-    border-radius: 20px;
-    border: 1px solid #ddd;
-    background: white;
-    cursor: pointer;
-  }
-  .filt.on {
-    background: #185FA5;
-    color: white;
-  }
-  
+  .route-btn { font-size: 11px; padding: 5px 14px; border-radius: 20px; border: 1px solid #ccc; background: white; cursor: pointer; margin: 3px; }
+  .route-btn.active { background: #185FA5; color: white; }
+  .filter-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+  .filt { font-size: 11px; padding: 5px 14px; border-radius: 20px; border: 1px solid #ddd; background: white; cursor: pointer; }
+  .filt.on { background: #185FA5; color: white; }
   .risk-high { color: #E24B4A; font-weight: 700; }
   .risk-medium { color: #BA7517; font-weight: 700; }
   .risk-low { color: #1D9E75; font-weight: 700; }
-  
-  .update-note {
-    font-size: 10px;
-    color: #999;
-    text-align: left;
-    margin-top: 20px;
-  }
-  
-  @media (max-width: 768px) {
-    .countries-container { flex-direction: column; }
-    .countries-list { width: 100%; }
-  }
+  .update-note { font-size: 10px; color: #999; text-align: left; margin-top: 20px; }
+  @media (max-width: 768px) { .countries-container { flex-direction: column; } .countries-list { width: 100%; } }
 </style>
 </head>
 <body>
@@ -401,37 +100,38 @@
   <div class="stats-row">
     <div class="stat-card">
       <div class="stat-title">کریدور شمالی (Trans-Siberian)</div>
-      <div class="stat-item"><span class="label">کانتینری ۲۰۲۴→۲۰۲۵</span><span class="number">NA → NA TEU <span style="color:#b91c1c;">▼NA%</span></span></div>
-      <div class="stat-item"><span class="label">انرژی و فله ۲۰۲۴→۲۰۲۵</span><span class="number">NA → NA تن <span style="color:#b91c1c;">▼</span></span></div>
-      <div class="stat-item"><span class="label">پروژه‌ای (OOG) ۲۰۲۵</span><span class="number">NA تن (کاهش از NA)</span></div>
+      <div class="stat-item"><span class="label">کانتینری ۲۰۲۱→۲۰۲۴</span><span class="number">۱.۲M → ۰.۶M TEU <span style="color:#b91c1c;">▼۵۰%</span></span></div>
+      <div class="stat-item"><span class="label">انرژی و فله ۲۰۲۱→۲۰۲۴</span><span class="number">۳۰M → ۲۰M تن <span style="color:#b91c1c;">▼</span></span></div>
+      <div class="stat-item"><span class="label">پروژه‌ای (OOG) ۲۰۲۴</span><span class="number">۰.۲M تن (کاهش از ۰.۵M)</span></div>
       <div class="stat-item"><span class="label">وضعیت</span><span class="number">تحت تحریم، تغییر مسیر</span></div>
-  </div>
+    </div>
+    <div class="stat-card">
       <div class="stat-title">کریدور میانی (TITR)</div>
-      <div class="stat-item"><span class="label">کانتینری ۲۰۲۴→۲۰۲۵</span><span class="number">NA → NA TEU <span style="color:#15803d;">▲NA%</span></span></div>
-      <div class="stat-item"><span class="label">انرژی و فله ۲۰۲۴→۲۰۲۵</span><span class="number">NA → NA تن <span style="color:#15803d;">▲NA%</span></span></div>
-      <div class="stat-item"><span class="label">پروژه‌ای (OOG) ۲۰۲۵</span><span class="number">NA تن (رشد از NA)</span></div>
-      <div class="stat-item"><span class="label">زمان ترانزیت ۲۰۲۵</span><span class="number">NA روز</span></div>
+      <div class="stat-item"><span class="label">کانتینری ۲۰۲5→۲۰۲۴</span><span class="number">۰.۴M → ۱.۱M TEU <span style="color:#15803d;">▲۱۷۵%</span></span></div>
+      <div class="stat-item"><span class="label">انرژی و فله ۲۰۲۱→۲۰۲۴</span><span class="number">۵M → ۱۲M تن <span style="color:#15803d;">▲۱۴۰%</span></span></div>
+      <div class="stat-item"><span class="label">پروژه‌ای (OOG) ۲۰۲۴</span><span class="number">۰.۷M تن (رشد از ۰.۲M)</span></div>
+      <div class="stat-item"><span class="label">زمان ترانزیت ۲۰۲۴</span><span class="number">۱۸-۲۵ روز</span></div>
       <div class="stat-item"><span class="label">گلوگاه اصلی</span><span class="number">بنادر آکتاو/کوریک | مرز گرجستان</span></div>
-      <div class="stat-item"><span class="label">پیش‌بینی ۲۰۳۰</span><span class="number">NA Mt</span></div>
- </div>
-      <div class="stat-card">
+      <div class="stat-item"><span class="label">پیش‌بینی ۲۰۳۰</span><span class="number">۱۰-۱۵ Mt</span></div>
+    </div>
+    <div class="stat-card">
       <div class="stat-title">راه ابریشم دریایی</div>
-      <div class="stat-item"><span class="label">کانتینری ۲۰۲۴→۲۰۲۵</span><span class="number">NA → NA TEU <span style="color:#b45309;">▼ جزئی</span></span></div>
-      <div class="stat-item"><span class="label">انرژی و فله ۲۰۲۵</span><span class="number">NA تن (جایگزینی نفت روسیه)</span></div>
-      <div class="stat-item"><span class="label">پروژه‌ای (OOG) ۲۰۲۵</span><span class="number">NA تن (رشد از NA)</span></div>
-      <div class="stat-item"><span class="label">زمان ترانزیت</span><span class="number">NA روز</span></div>
-      <div class="stat-item"><span class="label">سهم از تجارت جهانی</span><span class="number">NA% (NA TEU)</span></div>
-</div>
-      <div class="stat-card">
+      <div class="stat-item"><span class="label">کانتینری ۲۰۲۱→۲۰۲۴</span><span class="number">۲۴M → ۲۲M TEU <span style="color:#b45309;">▼ جزئی</span></span></div>
+      <div class="stat-item"><span class="label">انرژی و فله ۲۰۲۴</span><span class="number">۲۰M تن (جایگزینی نفت روسیه)</span></div>
+      <div class="stat-item"><span class="label">پروژه‌ای (OOG) ۲۰۲۴</span><span class="number">۲.۵M تن (رشد از ۲M)</span></div>
+      <div class="stat-item"><span class="label">زمان ترانزیت</span><span class="number">۳۵-۴۵ روز</span></div>
+      <div class="stat-item"><span class="label">سهم از تجارت جهانی</span><span class="number">۳۰% (۲۲-۲۴M TEU)</span></div>
+    </div>
+    <div class="stat-card">
       <div class="stat-title">استراتژی BRI تا ۲۰۳۰</div>
-      <div class="stat-item"><span class="label">توسعه TITR (۲۰۲۵-۲۸)</span><span class="number">NA میلیارد $</span></div>
+      <div class="stat-item"><span class="label">توسعه TITR (۲۰۲۵-۲۸)</span><span class="number">۵-۷ میلیارد $</span></div>
       <div class="stat-item"><span class="label">هاب‌های لجستیکی</span><span class="number">دوستم (OOG) | چابهار | سرخس</span></div>
-      <div class="stat-item"><span class="label">مسیر برگشت نفت (دوقم)</span><span class="number">NA میلیارد $</span></div>
-      <div class="stat-item"><span class="label">دیجیتالی‌سازی (Single Window)</span><span class="number">NA میلیارد $</span></div>
-      <div class="stat-item"><span class="label">کریدور INSTC + ریلی قرقیزستان</span><span class="number">NA میلیارد $</span></div>
-      <div class="stat-item"><span class="label">هدف زمانی TITR ۲۰۲۶</span><span class="number">NA روز</span></div>
-     <div class="stat-item"><span class="label">هدف قطارها ۲۰۲۷</span><span class="number">NA قطار/سال</span></div>
-</div>
+      <div class="stat-item"><span class="label">مسیر برگشت نفت (دوقم)</span><span class="number">۴-۶ میلیارد $</span></div>
+      <div class="stat-item"><span class="label">دیجیتالی‌سازی (Single Window)</span><span class="number">۰.۵-۱ میلیارد $</span></div>
+      <div class="stat-item"><span class="label">کریدور INSTC + ریلی قرقیزستان</span><span class="number">۸-۱۰ میلیارد $</span></div>
+      <div class="stat-item"><span class="label">هدف زمانی TITR ۲۰۲۶</span><span class="number">۱۵ روز</span></div>
+      <div class="stat-item"><span class="label">هدف قطارها ۲۰۲۷</span><span class="number">۱۰۰۰ قطار/سال</span></div>
+    </div>
   </div>
   
   <div class="map-section">
@@ -474,7 +174,6 @@
     <div class="metric-box"><div class="metric-value">۴.۶B$</div><div class="metric-label">سرمایه‌گذاری</div></div>
     <div class="metric-box"><div class="metric-value">۲۰۳۰</div><div class="metric-label">افق توسعه</div></div>
   </div>
-
   <div class="filter-row">
     <button class="filt on" onclick="filterCarec('all',this)">همه</button>
     <button class="filt" onclick="filterCarec('sea',this)">دریایی</button>
@@ -482,7 +181,6 @@
     <button class="filt" onclick="filterCarec('rail',this)">ریلی</button>
     <button class="filt" onclick="filterCarec('road',this)">جاده‌ای</button>
   </div>
-
   <div id="carec-list"></div>
 </div>
 
@@ -528,13 +226,15 @@
   <div class="investment-section">
     <div class="investment-title">پیشنهادات راهبردی لجستیکی</div>
     <div class="investment-card">
-      <div class="investment-placeholder">
-        <p>۱. این بخش تکمیل خواهد شد</p>
-        <p>۲. این بخش تکمیل خواهد شد</p>
-        <p>۳. این بخش تکمیل خواهد شد</p>
-        <p>۴. این بخش تکمیل خواهد شد</p>
-        <p>۵. این بخش تکمیل خواهد شد</p>
-        <p>۶. این بخش تکمیل خواهد شد</p>
+      <div class="investment-placeholder" style="text-align: right; line-height: 2;">
+        <p>۱. توسعه کریدور میانی (TITR) با سرمایه‌گذاری در بنادر خزر (آکتاو، کوریک، آلیات)</p>
+        <p>۲. فعال‌سازی کریدور ریلی چین-قرقیزستان-ازبکستان (CKU) برای کاهش وابستگی به مسیرهای شمالی</p>
+        <p>۳. احداث هاب لجستیک در چابهار و سرخس برای ترانزیت کالاهای انرژی و صنعتی</p>
+        <p>۴. دیجیتالی‌سازی فرآیندهای گمرکی (Single Window) در کریدورهای شرق-غرب و شمال-جنوب</p>
+        <p>۵. سرمایه‌گذاری در ناوگان ریلی و نوسازی خطوط آهن ایران برای اتصال به شبکه‌های آسیای مرکزی</p>
+        <p>۶. ایجاد کنسرسیوم حمل و نقل ترکیبی (ریلی-دریایی-جاده‌ای) با مشارکت بخش خصوصی</p>
+        <p>۷. توسعه بندر چابهار به عنوان هاب ترانزیتی برای اتصال به افغانستان و کشورهای CIS</p>
+        <p>۸. سرمایه‌گذاری در ناوگان کانتینری و نفتکش برای مسیرهای جایگزین خلیج فارس</p>
       </div>
     </div>
   </div>
@@ -582,118 +282,31 @@ function filterCarec(tag, btn) {
 
 // ==================== دیتاهای کامل مسیرها ====================
 const routesData = {
-  dubai: {
-    name: 'دبی', title: 'مسیر دبی — چین → دبی → بندرعباس → اهواز',
-    type: 'دریایی (راه آبی ابریشم – عبور از تنگه مالاکا) + زمینی (داخل ایران)',
-    time: '۲۲ تا ۳۰ روز (کل مسیر) | چین تا دبی: نیاز به اعلام فرستنده',
-    cost: 'متوسط (ولی با ریسک‌های پنهان بالا مثل احتمال بسته شدن مجدد تنگه هرمز)',
-    risk: 'بسیار بالا',
-    riskLevel: 'high',
-    goods: 'همه نوع کالای عمومی (کانتینری) + محصولات حوزه انرژی',
-    forward: 'نیاز به نماینده محلی (agent) در امارات | فعال، اما مشروط به وجود همکار معتمد در دبی',
-    status: 'مسدود یا با اختلال شدید',
-    statusDesc: 'به دلیل شرایط ژئوپلیتیک پس از جنگ، هم ایران و هم امارات تمایل چندانی به همکاری ندارند و نظارت‌ها تشدید شده است.',
-    limitations: 'ریسک مالی (بلوکه شدن وجوه، تاخیر در تسویه) | ریسک کامپلاینس (تحریم‌ها، مقررات گمرکی سخت‌گیرانه) | ریسک عملیاتی (عدم همکاری مقامات محلی، افزایش بازرسی‌ها) | ریسک سیاسی (کاهش تعامل ایران و امارات)',
-    coords: [[31.23,121.47],[25.27,55.30],[27.18,56.27],[31.32,48.67]], color: '#E24B4A', dashPattern: '10, 8'
-  },
-  jebel_ali: {
-    name: 'جبل علی', title: 'مسیر جبل علی — چین → جبل علی → بندرعباس → اهواز',
-    type: 'دریایی + زمینی', time: '۲۲-۳۰ روز', cost: 'متوسط', risk: 'متوسط', riskLevel: 'medium',
-    goods: 'کانتینر، کالای عمومی', forward: 'نیاز به agent در امارات', status: 'فعال با محدودیت',
-    coords: [[31.23,121.47],[25.00,55.05],[27.18,56.27],[31.32,48.67]], color: '#1D9E75', dashPattern: '10, 8'
-  },
-  duqm: {
-    name: 'دقم', title: 'مسیر دقم — سه شاخه', type: 'دریایی + زمینی', time: '۲۵-۳۵ روز', cost: 'متوسط', risk: 'متوسط', riskLevel: 'medium',
-    goods: 'ترانزیت، کانتینر', forward: 'نیمه فعال', status: 'فعال',
-    branches: 'شاخه اول: چین → دقم → گوادر (پاکستان) → چابهار → اهواز | شاخه دوم: چین → دقم → بندر خصب (عمان) → بندرعباس (دریایی) → اهواز | شاخه سوم: چین → دقم → بندرعباس (مستقیم) → اهواز',
-    coords: [[31.23,121.47],[19.66,57.70],[25.15,61.45],[27.18,56.27],[31.32,48.67]], color: '#534AB7', dashPattern: '10, 8'
-  },
-  sohar: {
-    name: 'صحار', title: 'مسیر صحار — سه شاخه', type: 'دریایی + زمینی', time: '۲۵-۳۵ روز', cost: 'متوسط', risk: 'متوسط', riskLevel: 'medium',
-    goods: 'ترانزیت، کانتینر', forward: 'نیمه فعال', status: 'فعال',
-    branches: 'شاخه اول: چین → صحار → گوادر (پاکستان) → چابهار → اهواز | شاخه دوم: چین → صحار → بندر خصب (عمان) → بندرعباس (دریایی) → اهواز | شاخه سوم: چین → صحار → بندرعباس (مستقیم) → اهواز',
-    coords: [[31.23,121.47],[24.34,56.73],[25.15,61.45],[27.18,56.27],[31.32,48.67]], color: '#BA7517', dashPattern: '10, 8'
-  },
-  salalah: {
-    name: 'صلاله', title: 'مسیر صلاله — سه شاخه', type: 'دریایی + زمینی', time: '۲۵-۳۵ روز', cost: 'متوسط', risk: 'متوسط', riskLevel: 'medium',
-    goods: 'ترانزیت، کانتینر', forward: 'نیمه فعال', status: 'فعال',
-    branches: 'شاخه اول: چین → صلاله → گوادر (پاکستان) → چابهار → اهواز | شاخه دوم: چین → صلاله → بندر خصب (عمان) → بندرعباس (دریایی) → اهواز | شاخه سوم: چین → صلاله → بندرعباس (مستقیم) → اهواز',
-    coords: [[31.23,121.47],[17.00,54.00],[25.15,61.45],[27.18,56.27],[31.32,48.67]], color: '#185FA5', dashPattern: '10, 8'
-  },
-  khasab: {
-    name: 'خصب', title: 'مسیر خصب — سه شاخه', type: 'دریایی + زمینی', time: '۲۳-۳۲ روز', cost: 'متوسط', risk: 'متوسط', riskLevel: 'medium',
-    goods: 'ترانزیت، کانتینر', forward: 'در حال توسعه', status: 'فعال',
-    branches: 'شاخه اول: چین → خصب → گوادر (پاکستان) → چابهار → اهواز | شاخه دوم: چین → خصب → بصره (عراق) زمینی → اهواز | شاخه سوم: چین → خصب → بندرعباس (مستقیم) → اهواز',
-    coords: [[31.23,121.47],[26.18,56.25],[25.15,61.45],[30.50,47.78],[31.32,48.67]], color: '#E24B4A', dashPattern: '10, 8'
-  },
-  turkmenbashi: {
-    name: 'ترکمنباشی', title: 'مسیر ترکمنباشی — چین → ترکمنباشی → بندر امیرآباد/انزلی → اهواز',
-    type: 'دریایی + زمینی', time: '۳۰-۴۰ روز', cost: 'متوسط', risk: 'پایین', riskLevel: 'low',
-    goods: 'کالای فله، ترانزیت', forward: 'محدود', status: 'فعال',
-    coords: [[31.23,121.47],[40.02,52.97],[36.58,53.23],[31.32,48.67]], color: '#1D9E75', dashPattern: '10, 8'
-  },
-  astrakhan: {
-    name: 'آستاراخان', title: 'مسیر آستاراخان — چین → آستاراخان → بندر انزلی/امیرآباد → اهواز',
-    type: 'دریایی + زمینی', time: '۳۵-۴۵ روز', cost: 'متوسط تا بالا', risk: 'متوسط', riskLevel: 'medium',
-    goods: 'کالای صنعتی، ترانزیت', forward: 'محدود', status: 'فعال',
-    coords: [[31.23,121.47],[46.35,48.05],[37.47,49.46],[31.32,48.67]], color: '#534AB7', dashPattern: '10, 8'
-  },
-  mersin: {
-    name: 'مرسین', title: 'مسیر مرسین — چین → مرسین (ترکیه) → بازرگان → اهواز',
-    type: 'دریایی + زمینی', time: '۳۲-۴۲ روز', cost: 'بالاتر', risk: 'متوسط', riskLevel: 'medium',
-    goods: 'کالای صنعتی، ترانزیت', forward: 'محدود', status: 'فعال',
-    coords: [[31.23,121.47],[36.80,34.63],[39.78,44.78],[31.32,48.67]], color: '#BA7517', dashPattern: '10, 8'
-  },
-  cra: {
-    name: 'CRA', title: 'مسیر CRA (چین-قزاقستان-ترکمنستان-ایران) — چین → سرخس (مرز ایران) → اهواز',
-    type: 'ریلی + زمینی', time: '۱۸-۲۵ روز', cost: 'متوسط', risk: 'پایین', riskLevel: 'low',
-    goods: 'کانتینر، کالای صنعتی، فلزات', forward: 'فعال', status: 'فعال',
-    coords: [[31.23,121.47],[43.25,76.90],[37.93,60.35],[36.29,61.17],[31.32,48.67]], color: '#0C7B5E', dashPattern: '10, 8'
-  },
-  kashgar: {
-    name: 'کاشغر-گوادر-چابهار', title: 'مسیر کاشغر → گوادر → چابهار → اهواز',
-    type: 'زمینی (جاده‌ای)', time: '۲۵-۳۵ روز', cost: 'متوسط', risk: 'متوسط (امنیتی)', riskLevel: 'medium',
-    goods: 'کالای صنعتی، ترانزیت', forward: 'در حال توسعه', status: 'فعال',
-    coords: [[39.47,75.99],[25.13,62.33],[25.29,60.62],[31.32,48.67]], color: '#8B5CF6', dashPattern: '10, 8'
-  }
+  dubai: { name: 'دبی', title: 'مسیر دبی — چین → دبی → بندرعباس → اهواز', type: 'دریایی (راه آبی ابریشم – عبور از تنگه مالاکا) + زمینی (داخل ایران)', time: '۲۲ تا ۳۰ روز (کل مسیر) | چین تا دبی: نیاز به اعلام فرستنده', cost: 'متوسط (ولی با ریسک‌های پنهان بالا مثل احتمال بسته شدن مجدد تنگه هرمز)', risk: 'بسیار بالا', riskLevel: 'high', goods: 'همه نوع کالای عمومی (کانتینری) + محصولات حوزه انرژی', forward: 'نیاز به نماینده محلی (agent) در امارات | فعال، اما مشروط به وجود همکار معتمد در دبی', status: 'مسدود یا با اختلال شدید', statusDesc: 'به دلیل شرایط ژئوپلیتیک پس از جنگ، هم ایران و هم امارات تمایل چندانی به همکاری ندارند و نظارت‌ها تشدید شده است.', limitations: 'ریسک مالی (بلوکه شدن وجوه، تاخیر در تسویه) | ریسک کامپلاینس (تحریم‌ها، مقررات گمرکی سخت‌گیرانه) | ریسک عملیاتی (عدم همکاری مقامات محلی، افزایش بازرسی‌ها) | ریسک سیاسی (کاهش تعامل ایران و امارات)', coords: [[31.23,121.47],[25.27,55.30],[27.18,56.27],[31.32,48.67]], color: '#E24B4A', dashPattern: '10, 8' },
+  jebel_ali: { name: 'جبل علی', title: 'مسیر جبل علی — چین → جبل علی → بندرعباس → اهواز', type: 'دریایی + زمینی', time: '۲۲-۳۰ روز', cost: 'متوسط', risk: 'متوسط', riskLevel: 'medium', goods: 'کانتینر، کالای عمومی', forward: 'نیاز به agent در امارات', status: 'فعال با محدودیت', coords: [[31.23,121.47],[25.00,55.05],[27.18,56.27],[31.32,48.67]], color: '#1D9E75', dashPattern: '10, 8' },
+  duqm: { name: 'دقم', title: 'مسیر دقم — سه شاخه', type: 'دریایی + زمینی', time: '۲۵-۳۵ روز', cost: 'متوسط', risk: 'متوسط', riskLevel: 'medium', goods: 'ترانزیت، کانتینر', forward: 'نیمه فعال', status: 'فعال', branches: 'شاخه اول: چین → دقم → گوادر (پاکستان) → چابهار → اهواز | شاخه دوم: چین → دقم → بندر خصب (عمان) → بندرعباس (دریایی) → اهواز | شاخه سوم: چین → دقم → بندرعباس (مستقیم) → اهواز', coords: [[31.23,121.47],[19.66,57.70],[25.15,61.45],[27.18,56.27],[31.32,48.67]], color: '#534AB7', dashPattern: '10, 8' },
+  sohar: { name: 'صحار', title: 'مسیر صحار — سه شاخه', type: 'دریایی + زمینی', time: '۲۵-۳۵ روز', cost: 'متوسط', risk: 'متوسط', riskLevel: 'medium', goods: 'ترانزیت، کانتینر', forward: 'نیمه فعال', status: 'فعال', branches: 'شاخه اول: چین → صحار → گوادر (پاکستان) → چابهار → اهواز | شاخه دوم: چین → صحار → بندر خصب (عمان) → بندرعباس (دریایی) → اهواز | شاخه سوم: چین → صحار → بندرعباس (مستقیم) → اهواز', coords: [[31.23,121.47],[24.34,56.73],[25.15,61.45],[27.18,56.27],[31.32,48.67]], color: '#BA7517', dashPattern: '10, 8' },
+  salalah: { name: 'صلاله', title: 'مسیر صلاله — سه شاخه', type: 'دریایی + زمینی', time: '۲۵-۳۵ روز', cost: 'متوسط', risk: 'متوسط', riskLevel: 'medium', goods: 'ترانزیت، کانتینر', forward: 'نیمه فعال', status: 'فعال', branches: 'شاخه اول: چین → صلاله → گوادر (پاکستان) → چابهار → اهواز | شاخه دوم: چین → صلاله → بندر خصب (عمان) → بندرعباس (دریایی) → اهواز | شاخه سوم: چین → صلاله → بندرعباس (مستقیم) → اهواز', coords: [[31.23,121.47],[17.00,54.00],[25.15,61.45],[27.18,56.27],[31.32,48.67]], color: '#185FA5', dashPattern: '10, 8' },
+  khasab: { name: 'خصب', title: 'مسیر خصب — سه شاخه', type: 'دریایی + زمینی', time: '۲۳-۳۲ روز', cost: 'متوسط', risk: 'متوسط', riskLevel: 'medium', goods: 'ترانزیت، کانتینر', forward: 'در حال توسعه', status: 'فعال', branches: 'شاخه اول: چین → خصب → گوادر (پاکستان) → چابهار → اهواز | شاخه دوم: چین → خصب → بصره (عراق) زمینی → اهواز | شاخه سوم: چین → خصب → بندرعباس (مستقیم) → اهواز', coords: [[31.23,121.47],[26.18,56.25],[25.15,61.45],[30.50,47.78],[31.32,48.67]], color: '#E24B4A', dashPattern: '10, 8' },
+  turkmenbashi: { name: 'ترکمنباشی', title: 'مسیر ترکمنباشی — چین → ترکمنباشی → بندر امیرآباد/انزلی → اهواز', type: 'دریایی + زمینی', time: '۳۰-۴۰ روز', cost: 'متوسط', risk: 'پایین', riskLevel: 'low', goods: 'کالای فله، ترانزیت', forward: 'محدود', status: 'فعال', coords: [[31.23,121.47],[40.02,52.97],[36.58,53.23],[31.32,48.67]], color: '#1D9E75', dashPattern: '10, 8' },
+  astrakhan: { name: 'آستاراخان', title: 'مسیر آستاراخان — چین → آستاراخان → بندر انزلی/امیرآباد → اهواز', type: 'دریایی + زمینی', time: '۳۵-۴۵ روز', cost: 'متوسط تا بالا', risk: 'متوسط', riskLevel: 'medium', goods: 'کالای صنعتی، ترانزیت', forward: 'محدود', status: 'فعال', coords: [[31.23,121.47],[46.35,48.05],[37.47,49.46],[31.32,48.67]], color: '#534AB7', dashPattern: '10, 8' },
+  mersin: { name: 'مرسین', title: 'مسیر مرسین — چین → مرسین (ترکیه) → بازرگان → اهواز', type: 'دریایی + زمینی', time: '۳۲-۴۲ روز', cost: 'بالاتر', risk: 'متوسط', riskLevel: 'medium', goods: 'کالای صنعتی، ترانزیت', forward: 'محدود', status: 'فعال', coords: [[31.23,121.47],[36.80,34.63],[39.78,44.78],[31.32,48.67]], color: '#BA7517', dashPattern: '10, 8' },
+  cra: { name: 'CRA', title: 'مسیر CRA (چین-قزاقستان-ترکمنستان-ایران) — چین → سرخس (مرز ایران) → اهواز', type: 'ریلی + زمینی', time: '۱۸-۲۵ روز', cost: 'متوسط', risk: 'پایین', riskLevel: 'low', goods: 'کانتینر، کالای صنعتی، فلزات', forward: 'فعال', status: 'فعال', coords: [[31.23,121.47],[43.25,76.90],[37.93,60.35],[36.29,61.17],[31.32,48.67]], color: '#0C7B5E', dashPattern: '10, 8' },
+  kashgar: { name: 'کاشغر-گوادر-چابهار', title: 'مسیر کاشغر → گوادر → چابهار → اهواز', type: 'زمینی (جاده‌ای)', time: '۲۵-۳۵ روز', cost: 'متوسط', risk: 'متوسط (امنیتی)', riskLevel: 'medium', goods: 'کالای صنعتی، ترانزیت', forward: 'در حال توسعه', status: 'فعال', coords: [[39.47,75.99],[25.13,62.33],[25.29,60.62],[31.32,48.67]], color: '#8B5CF6', dashPattern: '10, 8' }
 };
 
 function updateRouteDetail(routeId) {
   const r = routesData[routeId];
   if (!r) return;
-  
   const riskClass = r.riskLevel === 'high' ? 'risk-high' : (r.riskLevel === 'low' ? 'risk-low' : 'risk-medium');
-  
-  let html = `
-    <div><span style="color:#666">نوع حمل:</span> <strong>${r.type}</strong></div>
-    <div><span style="color:#666">وضعیت فعلی مسیر:</span> <strong class="${riskClass}">${r.status}</strong></div>
-    <div><span style="color:#666">زمان تحویل:</span> <strong>${r.time}</strong></div>
-    <div><span style="color:#666">هزینه حمل:</span> <strong>${r.cost}</strong></div>
-    <div><span style="color:#666">مناسب برای:</span> <strong>${r.goods}</strong></div>
-    <div><span style="color:#666">وضعیت فورواردر:</span> <strong>${r.forward}</strong></div>
-  `;
-  
-  if (r.statusDesc) {
-    html += `<div style="grid-column:span 2; margin-top:6px;"><span style="color:#666">توضیح وضعیت:</span> <strong>${r.statusDesc}</strong></div>`;
-  }
-  
+  let html = `<div><span style="color:#666">نوع حمل:</span> <strong>${r.type}</strong></div><div><span style="color:#666">وضعیت فعلی مسیر:</span> <strong class="${riskClass}">${r.status}</strong></div><div><span style="color:#666">زمان تحویل:</span> <strong>${r.time}</strong></div><div><span style="color:#666">هزینه حمل:</span> <strong>${r.cost}</strong></div><div><span style="color:#666">مناسب برای:</span> <strong>${r.goods}</strong></div><div><span style="color:#666">وضعیت فورواردر:</span> <strong>${r.forward}</strong></div>`;
+  if (r.statusDesc) html += `<div style="grid-column:span 2; margin-top:6px;"><span style="color:#666">توضیح وضعیت:</span> <strong>${r.statusDesc}</strong></div>`;
   document.getElementById('route-detail-grid').innerHTML = html;
-  
-  if (r.branches) {
-    document.getElementById('route-branches').innerHTML = `<strong>شاخه‌های مسیر:</strong><br>${r.branches.replace(/\|/g, '<br>')}`;
-  } else {
-    document.getElementById('route-branches').innerHTML = '';
-  }
-  
-  if (r.limitations) {
-    document.getElementById('route-risks').innerHTML = `<strong>محدودیت‌ها و ریسک‌ها:</strong><br>${r.limitations.replace(/\|/g, '<br>• ')}`;
-    document.getElementById('route-risks').style.display = 'block';
-  } else if (routeId === 'dubai') {
-    document.getElementById('route-risks').innerHTML = `<strong>محدودیت‌ها و ریسک‌ها (بالا):</strong><br>• ریسک مالی (بلوکه شدن وجوه، تاخیر در تسویه)<br>• ریسک کامپلاینس (تحریم‌ها، مقررات گمرکی سخت‌گیرانه)<br>• ریسک عملیاتی (عدم همکاری مقامات محلی، افزایش بازرسی‌ها)<br>• ریسک سیاسی (کاهش تعامل ایران و امارات)`;
-    document.getElementById('route-risks').style.display = 'block';
-  } else {
-    document.getElementById('route-risks').style.display = 'none';
-  }
+  if (r.branches) document.getElementById('route-branches').innerHTML = `<strong>شاخه‌های مسیر:</strong><br>${r.branches.replace(/\|/g, '<br>')}`;
+  else document.getElementById('route-branches').innerHTML = '';
+  if (r.limitations) { document.getElementById('route-risks').innerHTML = `<strong>محدودیت‌ها و ریسک‌ها:</strong><br>${r.limitations.replace(/\|/g, '<br>• ')}`; document.getElementById('route-risks').style.display = 'block'; }
+  else if (routeId === 'dubai') { document.getElementById('route-risks').innerHTML = `<strong>محدودیت‌ها و ریسک‌ها (بالا):</strong><br>• ریسک مالی (بلوکه شدن وجوه، تاخیر در تسویه)<br>• ریسک کامپلاینس (تحریم‌ها، مقررات گمرکی سخت‌گیرانه)<br>• ریسک عملیاتی (عدم همکاری مقامات محلی، افزایش بازرسی‌ها)<br>• ریسک سیاسی (کاهش تعامل ایران و امارات)`; document.getElementById('route-risks').style.display = 'block'; }
+  else document.getElementById('route-risks').style.display = 'none';
 }
 
 let map, currentLine, currentMarker, measureMode = false, measurePoints = [], measureMarkers = [], measureLine = null;
@@ -722,10 +335,7 @@ function selectRoute(routeId) {
 function resetMapFilter() {
   if (currentLine) map.removeLayer(currentLine);
   if (currentMarker) map.removeLayer(currentMarker);
-  Object.values(routesData).forEach(r => {
-    L.polyline(r.coords, { color: r.color, weight: 2, opacity: 0.5, dashArray: r.dashPattern || '8, 6' }).addTo(map);
-    L.circleMarker(r.coords[r.coords.length-1], { radius: 4, color: r.color, fillColor: r.color, fillOpacity: 0.7 }).addTo(map);
-  });
+  Object.values(routesData).forEach(r => { L.polyline(r.coords, { color: r.color, weight: 2, opacity: 0.5, dashArray: r.dashPattern || '8, 6' }).addTo(map); L.circleMarker(r.coords[r.coords.length-1], { radius: 4, color: r.color, fillColor: r.color, fillOpacity: 0.7 }).addTo(map); });
   map.setView([30, 65], 4);
   document.getElementById('detail-title').innerHTML = 'نقشه همه مسیرها — برای جزئیات روی مسیر کلیک کنید';
   document.getElementById('route-detail-grid').innerHTML = '<div style="grid-column:span 2; text-align:center; color:#666">یک مسیر را از دکمه‌های بالا انتخاب کنید</div>';
@@ -739,14 +349,7 @@ function toggleMeasure() {
   if (measureMode) { info.textContent = 'نقطه اول را کلیک کنید'; map.getContainer().style.cursor = 'crosshair'; }
   else { info.textContent = ''; clearMeasure(); map.getContainer().style.cursor = ''; }
 }
-
-function clearMeasure() {
-  measureMarkers.forEach(m => map.removeLayer(m));
-  measureMarkers = [];
-  if (measureLine) { map.removeLayer(measureLine); measureLine = null; }
-  measurePoints = [];
-}
-
+function clearMeasure() { measureMarkers.forEach(m => map.removeLayer(m)); measureMarkers = []; if (measureLine) { map.removeLayer(measureLine); measureLine = null; } measurePoints = []; }
 function onMapClick(e) {
   if (!measureMode) return;
   measurePoints.push(e.latlng);
@@ -803,7 +406,6 @@ function renderCountries() {
     container.appendChild(div);
   });
 }
-
 function selectCountry(id) {
   document.querySelectorAll('.country-item').forEach(el => el.classList.remove('active'));
   if(event && event.target) event.target.classList.add('active');
