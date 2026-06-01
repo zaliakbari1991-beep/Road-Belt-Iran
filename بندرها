@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>داشبورد اطلاعاتی بنادر منطقه‌ای ۲۰۲۶</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0f14;
+  --bg2: #13161e;
+  --bg3: #1a1e2a;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --text: #e8eaf0;
+  --text2: #8b90a0;
+  --text3: #555b6e;
+  --accent: #4f8ef7;
+  --accent2: #2563eb;
+  --green: #22c55e;
+  --green-bg: rgba(34,197,94,0.1);
+  --amber: #f59e0b;
+  --amber-bg: rgba(245,158,11,0.1);
+  --red: #ef4444;
+  --red-bg: rgba(239,68,68,0.1);
+  --blue-bg: rgba(79,142,247,0.1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Vazirmatn',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;line-height:1.6}
+::selection{background:rgba(79,142,247,0.3)}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:3px}
+
+.header{background:var(--bg2);border-bottom:1px solid var(--border);padding:20px 32px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
+.header-logo{width:36px;height:36px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#fff;flex-shrink:0}
+.header-title{font-size:17px;font-weight:600;color:var(--text)}
+.header-sub{font-size:12px;color:var(--text2);margin-top:1px}
+.header-badge{margin-right:auto;background:var(--green-bg);color:var(--green);font-size:11px;padding:4px 12px;border-radius:20px;border:1px solid rgba(34,197,94,0.2);font-weight:500}
+
+.main{padding:24px 32px;max-width:1400px;margin:0 auto}
+
+.alert{display:flex;gap:10px;align-items:flex-start;padding:12px 16px;border-radius:10px;margin-bottom:12px;font-size:13px;line-height:1.5}
+.alert-danger{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);color:#fca5a5}
+.alert-warn{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);color:#fcd34d}
+.alert-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+
+.section-label{font-size:11px;font-weight:600;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin:28px 0 12px}
+
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.filter-btn{font-size:12px;padding:6px 16px;border-radius:20px;border:1px solid var(--border2);background:transparent;cursor:pointer;color:var(--text2);transition:all .15s;font-family:'Vazirmatn',sans-serif}
+.filter-btn:hover{border-color:var(--accent);color:var(--accent)}
+.filter-btn.on{background:var(--blue-bg);border-color:var(--accent);color:var(--accent)}
+
+.port-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-bottom:8px}
+
+.pcard{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px;cursor:pointer;transition:all .15s;position:relative;overflow:hidden}
+.pcard::before{content:'';position:absolute;top:0;right:0;width:3px;height:100%;background:var(--score-color,var(--border));border-radius:0 12px 12px 0;opacity:0;transition:opacity .15s}
+.pcard:hover{border-color:var(--border2);transform:translateY(-1px)}
+.pcard:hover::before{opacity:1}
+.pcard.active{border-color:var(--accent);background:var(--bg3)}
+.pcard.active::before{opacity:1;background:var(--accent)}
+
+.pcard-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.pcard-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.3}
+.pcard-country{font-size:11px;color:var(--text2);margin-top:2px}
+.score{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;border:2px solid}
+
+.score-green{color:var(--green);border-color:rgba(34,197,94,0.3);background:var(--green-bg)}
+.score-amber{color:var(--amber);border-color:rgba(245,158,11,0.3);background:var(--amber-bg)}
+.score-red{color:var(--red);border-color:rgba(239,68,68,0.3);background:var(--red-bg)}
+
+.pcard-rows{display:flex;flex-direction:column;gap:5px}
+.pcard-row{display:flex;justify-content:space-between;align-items:center;font-size:11px}
+.pcard-row-label{color:var(--text3)}
+.pcard-row-val{color:var(--text2);font-weight:500;text-align:left;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fatf-tag{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600}
+.fatf-clean{background:var(--green-bg);color:var(--green);border:1px solid rgba(34,197,94,0.2)}
+.fatf-grey{background:var(--amber-bg);color:var(--amber);border:1px solid rgba(245,158,11,0.2)}
+.fatf-watch{background:var(--blue-bg);color:var(--accent);border:1px solid rgba(79,142,247,0.2)}
+
+.detail{background:var(--bg2);border:1px solid var(--border2);border-radius:14px;padding:24px;margin-bottom:24px;display:none;animation:fadeIn .2s ease}
+.detail.visible{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
+.detail-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.detail-title{font-size:18px;font-weight:700;color:var(--text)}
+.detail-country-badge{font-size:12px;padding:4px 12px;border-radius:20px;background:var(--bg3);border:1px solid var(--border2);color:var(--text2)}
+
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:20px}
+.stat-box{background:var(--bg3);border-radius:10px;padding:12px 14px}
+.stat-label{font-size:11px;color:var(--text3);margin-bottom:4px}
+.stat-val{font-size:14px;font-weight:600;color:var(--text)}
+
+.detail-section{margin-bottom:16px}
+.detail-section-h{font-size:12px;font-weight:600;color:var(--text2);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.detail-section-h::after{content:'';flex:1;height:1px;background:var(--border)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:11px;padding:4px 10px;border-radius:8px;font-weight:500}
+.tag-cargo{background:rgba(34,197,94,0.08);color:#86efac;border:1px solid rgba(34,197,94,0.15)}
+.tag-doc{background:rgba(79,142,247,0.08);color:#93c5fd;border:1px solid rgba(79,142,247,0.15)}
+.tag-risk{background:rgba(239,68,68,0.08);color:#fca5a5;border:1px solid rgba(239,68,68,0.15)}
+.tag-fac{background:var(--bg3);color:var(--text2);border:1px solid var(--border)}
+
+.note-box{background:var(--bg3);border-radius:10px;padding:14px 16px;border-right:3px solid var(--accent);font-size:13px;color:var(--text2);line-height:1.7;margin-top:16px}
+
+.divider{height:1px;background:var(--border);margin:32px 0}
+
+.routes-grid{display:grid;gap:16px}
+.route-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:20px}
+.route-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:14px}
+.route-path{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:16px;padding:12px;background:var(--bg3);border-radius:10px}
+.route-node{background:var(--bg2);border:1px solid var(--border2);border-radius:6px;padding:4px 12px;font-size:12px;color:var(--text2)}
+.route-arrow{color:var(--text3);font-size:12px}
+
+.route-facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:16px}
+.rf{background:var(--bg3);border-radius:8px;padding:10px 12px}
+.rf-label{font-size:10px;color:var(--text3);margin-bottom:3px}
+.rf-val{font-size:13px;font-weight:600;color:var(--text)}
+
+.risks-list{display:flex;flex-direction:column;gap:7px}
+.risk-item{display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--text2);line-height:1.5}
+.risk-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.r-high{background:var(--red)}
+.r-med{background:var(--amber)}
+.r-low{background:var(--green)}
+
+.route-note{background:var(--bg3);border-radius:10px;padding:12px 14px;border-right:3px solid var(--amber);font-size:12px;color:var(--text2);line-height:1.7;margin-top:14px}
+
+.footer{text-align:center;padding:24px 32px;color:var(--text3);font-size:11px;border-top:1px solid var(--border);margin-top:32px;direction:ltr}
+
+.close-btn{margin-right:auto;background:transparent;border:1px solid var(--border2);color:var(--text2);border-radius:8px;padding:4px 12px;font-size:12px;cursor:pointer;font-family:'Vazirmatn',sans-serif;transition:all .15s}
+.close-btn:hover{border-color:var(--red);color:var(--red)}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-logo">⚓</div>
+  <div>
+    <div class="header-title">داشبورد اطلاعاتی بنادر منطقه‌ای</div>
+    <div class="header-sub">کامپلاینس · ریسک تحریم · مسیرهای زمینی</div>
+  </div>
+  <span class="header-badge">داده‌های ژوئن ۲۰۲۶</span>
+</div>
+
+<div class="main">
+
+  <div class="alert alert-danger">
+    <span class="alert-icon">⚠</span>
+    <span><strong>بحران هرمز:</strong> از ۲ مارس ۲۰۲۶ تنگه هرمز به روی ترافیک تجاری عملاً مسدود است. بلوکاد دریایی آمریکا از ۱۳ آوریل ۲۰۲۶ فعال است. ریسک تحریم ثانویه برای شرکت‌های طرف ثالث بسیار بالاست.</span>
+  </div>
+  <div class="alert alert-warn">
+    <span class="alert-icon">📋</span>
+    <span><strong>UAE Circular No. 7/2025:</strong> هر تراکنش با ایران نیاز به فیلترهای EDD دارد. خطر تحریم ثانویه برای شرکت‌های ثالث فعال در بنادر امارات.</span>
+  </div>
+
+  <div class="section-label">بنادر منطقه‌ای — روی کارت کلیک کنید</div>
+
+  <div class="filter-bar">
+    <button class="filter-btn on" onclick="filterPorts('all',this)">همه</button>
+    <button class="filter-btn" onclick="filterPorts('uae',this)">امارات</button>
+    <button class="filter-btn" onclick="filterPorts('oman',this)">عمان</button>
+    <button class="filter-btn" onclick="filterPorts('qatar',this)">قطر</button>
+    <button class="filter-btn" onclick="filterPorts('pakistan',this)">پاکستان</button>
+  </div>
+
+  <div class="port-grid" id="portGrid"></div>
+  <div class="detail" id="detailPanel"></div>
+
+  <div class="divider"></div>
+  <div class="section-label">مسیرهای زمینی استراتژیک</div>
+  <div class="routes-grid" id="routesGrid"></div>
+
+  <div class="footer">
+    منابع: Windward AI (May 2026) · OFAC Iran Sanctions · Defence Security Asia (Apr 2026) · Mwani Qatar / Peninsula Qatar (Jan–Apr 2026) · Khaleej Times (May 2026) · The National News (May 2026) · EnterpriseAM (May 2026) · Pakistan MOFA · Basel AML Index
+  </div>
+</div>
+
+<script>
+const ports = [
+  {
+    id:'dxb', name:'دبی – بندر راشد / جبل‌علی', country:'امارات', region:'uae', score:63, scoreClass:'score-amber',
+    fatf:'زیر نظر', fatfClass:'fatf-watch',
+    capacity:'~۲۲ میلیون TEU / سال', draft:'17m',
+    mainTraders:'چین · هند · اروپا · آمریکا',
+    goods:['کانتینر','خودرو (RORO)','الکترونیک','مواد غذایی','نفت و گاز'],
+    docs:['Bill of Lading','Certificate of Origin','Packing List','EDD Form (UAE Circ.7)','OFAC Screening','End-User Certificate دوگانه‌کاربرد'],
+    risks:['Circular 7/2025 – ریسک تحریم ثانویه با ایران','IRGC VHF Warning Zone در محور RAK','بستن مسیر هرمز از مارس ۲۰۲۶'],
+    facilities:['۶۷ اسکله جبل‌علی','منطقه آزاد JAFZA','انبار سرد','سیستم دیجیتال Trakhees','مرکز لجستیک چندوجهی'],
+    note:'DP World اپراتور؛ رتبه ۱۰ جهان. مسیر زمینی Dubai Customs Notice 04/2026 از طریق عمان فعال شد. گزینه استراتژیک در بحران هرمز.'
+  },
+  {
+    id:'jafza', name:'جبل‌علی / JAFZA', country:'امارات', region:'uae', score:70, scoreClass:'score-amber',
+    fatf:'زیر نظر', fatfClass:'fatf-watch',
+    capacity:'۲۲ میلیون TEU / سال', draft:'17m',
+    mainTraders:'چین · هند · اروپا',
+    goods:['کانتینر','پتروشیمی','خودرو','الکترونیک'],
+    docs:['Bill of Lading','JAFZA Import Declaration','OFAC/SDN Screening','EDD برای ایران-مرتبط','Free Zone Entry Permit'],
+    risks:['اجاره اجباری در JAFZA/DAFZA','Circular 7 – ریسک ثانویه','نزدیکی به منطقه هشدار IRGC'],
+    facilities:['۱۳۵+ km جاده داخلی','۷,۰۰۰+ شرکت مستقر','انبار خودکار','پل جبل‌علی-القوز','فرودگاه Al Maktoum مجاور'],
+    note:'بزرگترین منطقه آزاد خاورمیانه. الزام اجاره از شرکت در زون برای عملیات تجاری.'
+  },
+  {
+    id:'sohar', name:'صحار', country:'عمان', region:'oman', score:82, scoreClass:'score-green',
+    fatf:'پاک', fatfClass:'fatf-clean',
+    capacity:'۴ میلیون TEU (هدف ۲۰۳۰)', draft:'16m',
+    mainTraders:'هند · چین · اروپا · GCC',
+    goods:['فله خشک','پتروشیمی','آهن و فولاد','کانتینر','محصولات غذایی'],
+    docs:['Bill of Lading','Certificate of Origin (عمانی)','Customs Declaration (ASYCUDA World)','SOHAR Port Clearance','Packing List','LC یا TT بانکی'],
+    risks:['ریسک متوسط – عمان بی‌طرف','نزدیکی به ایران بالقوه حساس'],
+    facilities:['منطقه صنعتی SOHAR FZ','مرکز لجستیک یکپارچه','خط ریلی آینده به مسقط','نزدیکی به خلیج فارس'],
+    note:'بهترین تراز ژئوپلیتیکی در منطقه. عمان رابط دیپلماتیک ایران–غرب. تولید H1-2025: ۳۴ میلیون تن.'
+  },
+  {
+    id:'salalah', name:'سلاله', country:'عمان', region:'oman', score:78, scoreClass:'score-green',
+    fatf:'پاک', fatfClass:'fatf-clean',
+    capacity:'⁺۵ میلیون TEU ترانس‌شیپمنت', draft:'16.5m',
+    mainTraders:'آسیای شرقی · اروپا · آفریقای شرقی · هند',
+    goods:['ترانس‌شیپمنت کانتینر','نفت','مواد ساختمانی','محصولات کشاورزی','دام'],
+    docs:['Bill of Lading','Port Health Certificate','Phytosanitary (کشاورزی)','Oman Customs Single Window','ISPS Security Declaration'],
+    risks:['ریسک متوسط–پایین','نزدیکی به یمن و هوتی','پایگاه سوخت‌گیری مارس ۲۰۲۶ هدف قرار گرفت'],
+    facilities:['ترمینال APM','Salalah Container Terminal','انبار CFS','گمرک','اتصال جاده‌ای به GCC'],
+    note:'قطر سلاله را به عنوان جایگزین اصلی بندر حمد در بحران مارس ۲۰۲۶ تعیین کرد. بهترین گزینه ترانس‌شیپمنت منطقه.'
+  },
+  {
+    id:'khasab', name:'خصب / مسندم', country:'عمان', region:'oman', score:40, scoreClass:'score-red',
+    fatf:'ریسک بالا', fatfClass:'fatf-grey',
+    capacity:'ظرفیت محدود – فاقد FTZ تجاری', draft:'محدود',
+    mainTraders:'عمان · امارات · ایران (تاریخی)',
+    goods:['کانتینر کوچک','سوخت','تجهیزات','محموله ناوبری محدود'],
+    docs:['Customs Declaration','NOC از مسقط','Ship Clearance محلی'],
+    risks:['سابقه قاچاق بالا','ریسک بسیار بالا – نزدیکی جغرافیایی به ایران','تحت نظارت IRGC VHF Warning Zone','فاقد Free Trade Zone رسمی','حادثه کشتی آوریل ۲۰۲۶'],
+    facilities:['اسکله محلی','انبار محدود','گمرک محلی','بدون منطقه آزاد'],
+    note:'موقعیت استراتژیک در تنگه هرمز اما ریسک کامپلاینس بسیار بالا. حضور در این محدوده بدون مستندات محکم توصیه نمی‌شود.'
+  },
+  {
+    id:'hamad', name:'بندر حمد (قطر)', country:'قطر', region:'qatar', score:72, scoreClass:'score-amber',
+    fatf:'پاک', fatfClass:'fatf-clean',
+    capacity:'۷.۵ میلیون TEU / سال', draft:'17m',
+    mainTraders:'چین · هند · اروپا · آمریکای شمالی',
+    goods:['کانتینر','خودرو (RORO)','دام','مواد ساختمانی','محموله عمومی'],
+    docs:['Bill of Lading','Mwani Qatar e-Clearance','Certificate of Origin','Phytosanitary (دام)','ISPS Declaration','GCC Certificate of Conformity'],
+    risks:['ضربات موشکی ایران به راس‌لفان مارس ۲۰۲۶','حمله موشکی به Al Udeid مارس ۲۰۲۶','محدودیت ظرفیتی پس از حملات'],
+    facilities:['۱۲ اسکله','۲۸.۵ km² مساحت','ترمینال RORO','انبار یخچال‌دار','سیستم e-Gate دیجیتال','مجاورت با منطقه صنعتی'],
+    note:'۵۰٪ ترانس‌شیپمنت در ۲۰۲۵. رتبه ۱۱ جهانی CPPI. قطر Hamad را جایگزین سلاله تعیین کرد.'
+  },
+  {
+    id:'raslaffan', name:'راس لفان', country:'قطر', region:'qatar', score:65, scoreClass:'score-amber',
+    fatf:'پاک', fatfClass:'fatf-clean',
+    capacity:'بزرگترین تأسیسات LNG جهان', draft:'18m',
+    mainTraders:'ژاپن · کره · چین · اروپا',
+    goods:['LNG','NGL','پتروشیمی','اتیلن','متانول'],
+    docs:['LNG Export Certificate','QatarEnergy Authorization','Bill of Lading','ISPS Declaration','Certificate of Origin'],
+    risks:['حمله موشکی ایران ۱۸ مارس ۲۰۲۶ – "خسارت گسترده"','بستگی شدید به یک محصول (LNG)'],
+    facilities:['۱۴ خط تولید LNG','مجتمع پتروشیمی','راه‌آهن اختصاصی','کانال ورودی ۱۸m'],
+    note:'بزرگترین صادرکننده LNG جهان. پس از حمله مارس ۲۰۲۶ خسارت‌های ساختاری گزارش شد.'
+  },
+  {
+    id:'ruwais_q', name:'الروئیس (قطر)', country:'قطر', region:'qatar', score:74, scoreClass:'score-amber',
+    fatf:'پاک', fatfClass:'fatf-clean',
+    capacity:'بندر منطقه‌ای', draft:'9m',
+    mainTraders:'GCC · خاورمیانه',
+    goods:['نفت و گاز','تجهیزات ماهیگیری','محموله عمومی','دام'],
+    docs:['Bill of Lading','Mwani Qatar Clearance','Certificate of Origin'],
+    risks:['ظرفیت محدود','نزدیکی به بحران هرمز'],
+    facilities:['خدمات ناوبری','توقفگاه کشتی','انبار محلی','گمرک مستقر'],
+    note:'بندر منطقه‌ای کوچک‌تر. نفت و گاز اصلی‌ترین فعالیت. مناسب برای محموله منطقه‌ای GCC.'
+  },
+  {
+    id:'rak', name:'راس‌الخیمه / سقر', country:'امارات', region:'uae', score:65, scoreClass:'score-amber',
+    fatf:'زیر نظر', fatfClass:'fatf-watch',
+    capacity:'۱۰۰ میلیون تن / سال (فله)', draft:'14m',
+    mainTraders:'هند · بنگلادش · پاکستان · آفریقا',
+    goods:['سنگ و مصالح ساختمانی','سیمان','آهک','محموله فله','پروژه کارگو'],
+    docs:['Bill of Lading','Certificate of Origin','RAK Ports Clearance','EDD (UAE Circ.7)','RAKEZ Business License'],
+    risks:['در IRGC VHF Warning Zone (تأیید Windward مه ۲۰۲۶)','حادثه کشتی لنگرانداخته ۲۷ آوریل ۲۰۲۶','Circular 7 ریسک ثانویه'],
+    facilities:['۴۷ اسکله Saqr','منطقه آزاد RAKEZ','Al Jazeera Shipyard','Maritime City FTZ','Al Jeer Port'],
+    note:'بزرگترین بندر فله خاورمیانه و آفریقا. S&P رتبه A مارس ۲۰۲۶. Saqr 2.0 در حال توسعه.'
+  },
+  {
+    id:'karachi', name:'کراچی', country:'پاکستان', region:'pakistan', score:55, scoreClass:'score-amber',
+    fatf:'پاک', fatfClass:'fatf-clean',
+    capacity:'۸,۳۱۳ TEU در ۲۴ روز (مارس ۲۰۲۶)، ۱,۴۲۳٪ رشد', draft:'14.5m',
+    mainTraders:'چین · UAE · سعودی · آمریکا',
+    goods:['کانتینر','نساجی','برنج و مواد غذایی','ماشین‌آلات','پتروشیمی'],
+    docs:['Bill of Lading','Customs Declaration (WeBOC)','Certificate of Origin','Phytosanitary','PNSC Clearance','Bank LC / TT'],
+    risks:['ریسک تحریم ثانویه – SRO 691/2026 و کریدور ایران','۳,۰۰۰+ کانتینر ایران‌بند گیر کرده','فشار بانکی آمریکا','ریسک امنیتی محور بلوچستان'],
+    facilities:['South Asia Pakistan Terminal (SAPT)','Hutchison Port Karachi','Karachi Gateway Terminal','خط فیدر جدید فجیره–خور فکان','مرکز لجستیک'],
+    note:'رشد ۱,۴۲۳٪ در مارس ۲۰۲۶. CPEC $62B. پاکستان اصلاحات تراس‌شیپمنت را تصویب کرد. ریسک تحریم ثانویه بالاست.'
+  },
+  {
+    id:'gwadar', name:'گوادر', country:'پاکستان', region:'pakistan', score:42, scoreClass:'score-red',
+    fatf:'ریسک CPEC', fatfClass:'fatf-grey',
+    capacity:'۱۱,۰۰۰ TEU آوریل ۲۰۲۶', draft:'12.5m',
+    mainTraders:'چین (CPEC) · افغانستان · آسیای مرکزی',
+    goods:['ترانزیت ایران‌بند','محموله افغانستان','مواد CPEC','نفت','محصولات معدنی'],
+    docs:['Bill of Lading','GPA Clearance','FBR Transit Declaration (SRO 691/2026)','Certificate of Origin','CPEC Transit Permit','Customs Act 1969'],
+    risks:['ریسک تحریم اول – کریدور ایران از ۲۵ آوریل ۲۰۲۶','تهدیدات امنیتی بلوچستان','عملیات بنادر چین (COPHC)','فشار آمریکا بر کانال‌های مالی'],
+    facilities:['۴ اسکله فعال (۵۰ تا ۲۰۳۰)','منطقه آزاد ۲,۲۹۲ هکتار','Gwadar Eastbay Expressway','فرودگاه بین‌المللی جدید','برق ۳۰۰ MW'],
+    note:'تعرفه‌ها ۴۰٪ کاهش یافت (مه ۲۰۲۶). کریدور Gwadar–Gabd به ایران ~۸۹ km. ریسک تحریم بسیار بالاست.'
+  }
+];
+
+const routes = [
+  {
+    title:'مسیر زمینی سلاله ← خصب (اکسلیو مسندم)',
+    path:['سلاله','Route 47/31','مسقط','E11 شمالی','دبی (عبور)','E11 / RAK','Al Darah Border','خصب / مسندم'],
+    facts:[
+      {l:'مسافت هوایی',v:'~۱,۰۴۰ km'},
+      {l:'مسافت جاده',v:'~۱,۳۵۰ km'},
+      {l:'زمان تقریبی',v:'۱۴–۱۶ ساعت'},
+      {l:'وضعیت جاده',v:'آسفالت کامل'},
+      {l:'مرز عبوری',v:'Al Darah (RAK–Musandam)'},
+      {l:'نوع کارگو',v:'محدود به سبک'}
+    ],
+    risks:[
+      {level:'high', text:'مستقیم از سلاله به خصب مسیر زمینی یکپارچه ندارد – مسندم اکسلیو جداگانه از بدنه اصلی عمان است و از خاک امارات عبور لازم است'},
+      {level:'high', text:'جاده A13 خصب–تیبات (49km) باریک و کوهستانی است – برای کامیون سنگین غیرمناسب'},
+      {level:'med', text:'کارگو تجاری سنگین در این مسیر بسیار محدود و غیراقتصادی است'},
+      {level:'med', text:'نیاز به ویزای عبور امارات + مجوزهای دوگانه عمانی'},
+      {level:'low', text:'برای سفر سبک و پیک لجستیک گزینه‌ای ممکن اما پرهزینه'}
+    ],
+    note:'⚠️ گزینه عملی‌تر: سلاله → مسقط → سوهار → کارگو دریایی (فیدر) به خصب. مسیر زمینی مستقیم برای کارگو سنگین توصیه نمی‌شود.'
+  },
+  {
+    title:'مسیر زمینی کراچی ← گوادر (N10 / مکران ساحلی)',
+    path:['کراچی','Lyari / Zero Point','N10 ساحلی','اورمارا','پسنی','Eastbay Expressway','گوادر'],
+    facts:[
+      {l:'مسافت N10',v:'~۶۸۳ km'},
+      {l:'زمان LTV',v:'۶–۷ ساعت'},
+      {l:'زمان کامیون',v:'۸–۱۲ ساعت'},
+      {l:'عرض جاده',v:'۳۰ فوت (۲ خطه)'},
+      {l:'بالاترین نقطه',v:'۳۲۳m (Buzi Pass)'},
+      {l:'موبایل در مسیر',v:'بسیار محدود'}
+    ],
+    risks:[
+      {level:'high', text:'ریسک امنیتی بلوچستان – جاده از مناطق حساس می‌گذرد، حضور گروه‌های مسلح تأیید شده در سال‌های اخیر'},
+      {level:'high', text:'ریسک تحریم – SRO 691/2026: هر کارگو ایران‌بند از این مسیر به OFAC Screening نیاز دارد'},
+      {level:'high', text:'جاده دوخطه برای ترافیک سنگین بندری کافی نیست – موتوروی تا ۲۰۳۰ آماده نمی‌شود'},
+      {level:'med', text:'بدون شهر بزرگ در مسیر – تنها اورمارا (شهر کوچک ساحلی)'},
+      {level:'med', text:'هوا: بیابانی شدید، طوفان شن، گرمای تابستانی ۴۵+°C'},
+      {level:'low', text:'گزینه آبی بهینه: فیدر دریایی کراچی–گوادر، صرفه‌جویی ~$180,000 در هزینه حمل'}
+    ],
+    note:'گزینه بهینه فعلی: فیدر دریایی از کراچی به گوادر (۵۳۳km دریایی). سپس Gwadar–Gabd ~89km به مرز ایران. زمان کل ایران: ۲–۳ ساعت از گوادر در مقابل ۱۶–۱۸ ساعت از کراچی.'
+  }
+];
+
+let activeFilter = 'all';
+let activePort = null;
+
+function filterPorts(f, btn) {
+  activeFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  renderPorts();
+}
+
+function renderPorts() {
+  const g = document.getElementById('portGrid');
+  g.innerHTML = '';
+  const visible = activeFilter === 'all' ? ports : ports.filter(p => p.region === activeFilter);
+  visible.forEach(p => {
+    const d = document.createElement('div');
+    d.className = 'pcard' + (activePort === p.id ? ' active' : '');
+    d.style.setProperty('--score-color', p.scoreClass === 'score-green' ? 'var(--green)' : p.scoreClass === 'score-red' ? 'var(--red)' : 'var(--amber)');
+    d.onclick = () => selectPort(p.id);
+    const fatfLabel = p.fatfClass === 'fatf-clean' ? '✓ پاک' : p.fatfClass === 'fatf-grey' ? '⚠ ریسک بالا' : '◎ زیر نظر';
+    d.innerHTML = `
+      <div class="pcard-top">
+        <div>
+          <div class="pcard-name">${p.name}</div>
+          <div class="pcard-country">${p.country}</div>
+        </div>
+        <div class="score ${p.scoreClass}">${p.score}</div>
+      </div>
+      <div class="pcard-rows">
+        <div class="pcard-row"><span class="pcard-row-label">FATF</span><span class="fatf-tag ${p.fatfClass}">${fatfLabel}</span></div>
+        <div class="pcard-row"><span class="pcard-row-label">ظرفیت</span><span class="pcard-row-val">${p.capacity.split('·')[0]}</span></div>
+        <div class="pcard-row"><span class="pcard-row-label">Draft</span><span class="pcard-row-val">${p.draft}</span></div>
+      </div>`;
+    g.appendChild(d);
+  });
+}
+
+function selectPort(id) {
+  if (activePort === id) {
+    activePort = null;
+    document.getElementById('detailPanel').className = 'detail';
+    renderPorts(); return;
+  }
+  activePort = id;
+  const p = ports.find(x => x.id === id);
+  renderPorts();
+  const dp = document.getElementById('detailPanel');
+  dp.className = 'detail visible';
+  const fatfLabel = p.fatfClass === 'fatf-clean' ? '✓ پاک' : p.fatfClass === 'fatf-grey' ? '⚠ ریسک بالا' : '◎ زیر نظر';
+  dp.innerHTML = `
+    <div class="detail-header">
+      <div class="detail-title">${p.name}</div>
+      <span class="detail-country-badge">${p.country}</span>
+      <button class="close-btn" onclick="selectPort('${p.id}')">✕ بستن</button>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-box"><div class="stat-label">امتیاز ریسک (۱۰۰=کم‌ریسک)</div><div class="stat-val">${p.score} / ۱۰۰</div></div>
+      <div class="stat-box"><div class="stat-label">وضعیت FATF</div><div class="stat-val" style="font-size:12px">${p.fatf}</div></div>
+      <div class="stat-box"><div class="stat-label">ظرفیت</div><div class="stat-val" style="font-size:12px">${p.capacity}</div></div>
+      <div class="stat-box"><div class="stat-label">آبخور (Draft)</div><div class="stat-val">${p.draft}</div></div>
+    </div>
+    <div class="detail-section">
+      <div class="detail-section-h">🌐 کشورهای عمده فعال</div>
+      <div style="font-size:13px;color:var(--text2)">${p.mainTraders}</div>
+    </div>
+    <div class="detail-section">
+      <div class="detail-section-h">📦 کالاهای اصلی</div>
+      <div class="tags">${p.goods.map(g=>`<span class="tag tag-cargo">${g}</span>`).join('')}</div>
+    </div>
+    <div class="detail-section">
+      <div class="detail-section-h">📋 مدارک کامپلاینس کلیدی</div>
+      <div class="tags">${p.docs.map(d=>`<span class="tag tag-doc">${d}</span>`).join('')}</div>
+    </div>
+    <div class="detail-section">
+      <div class="detail-section-h">⚠ ریسک‌ها و هشدارها</div>
+      <div class="tags">${p.risks.map(r=>`<span class="tag tag-risk">${r}</span>`).join('')}</div>
+    </div>
+    <div class="detail-section">
+      <div class="detail-section-h">🏗 امکانات و زیرساخت</div>
+      <div class="tags">${p.facilities.map(f=>`<span class="tag tag-fac">${f}</span>`).join('')}</div>
+    </div>
+    <div class="note-box">${p.note}</div>`;
+  dp.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+function renderRoutes() {
+  const g = document.getElementById('routesGrid');
+  g.innerHTML = '';
+  routes.forEach(r => {
+    const d = document.createElement('div');
+    d.className = 'route-card';
+    const pathHtml = r.path.map((n,i)=>i<r.path.length-1?`<span class="route-node">${n}</span><span class="route-arrow">←</span>`:`<span class="route-node">${n}</span>`).join('');
+    const factsHtml = r.facts.map(f=>`<div class="rf"><div class="rf-label">${f.l}</div><div class="rf-val">${f.v}</div></div>`).join('');
+    const riskColors = {high:'r-high',med:'r-med',low:'r-low'};
+    const risksHtml = r.risks.map(ri=>`<div class="risk-item"><div class="risk-dot ${riskColors[ri.level]}"></div><div>${ri.text}</div></div>`).join('');
+    d.innerHTML = `
+      <div class="route-title">🛣 ${r.title}</div>
+      <div class="route-path">${pathHtml}</div>
+      <div class="route-facts">${factsHtml}</div>
+      <div class="detail-section-h" style="margin-bottom:8px">⚠ نکات حیاتی مسیر</div>
+      <div class="risks-list" style="margin-bottom:14px">${risksHtml}</div>
+      <div class="route-note">${r.note}</div>`;
+    g.appendChild(d);
+  });
+}
+
+renderPorts();
+renderRoutes();
+</script>
+</body>
+</html>
