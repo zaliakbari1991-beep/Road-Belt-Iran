@@ -45,29 +45,6 @@
   .dash-section.active { display: block; }
   
   /* استایل‌های صفحه اول جدید (کریدور اختصاصی) */
-  .main-header-custom {
-    background: #0a2b3e;
-    color: white;
-    padding: 0.9rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
-    border-radius: 16px;
-    margin-bottom: 1.5rem;
-  }
-  .logo-area-custom h1 {
-    font-size: 1.35rem;
-    font-weight: 700;
-    letter-spacing: -0.3px;
-  }
-  .logo-area-custom p {
-    font-size: 0.7rem;
-    opacity: 0.75;
-    margin-top: 4px;
-  }
   .project-description {
     background: linear-gradient(115deg, #ffffff 0%, #fefcf7 100%);
     border-radius: 28px;
@@ -114,20 +91,9 @@
     padding: 1rem 1.2rem;
     border: 1px solid #eef2f9;
   }
-  .desc-icon {
-    font-size: 1.6rem;
-    margin-bottom: 0.5rem;
-  }
-  .desc-card h4 {
-    font-size: 0.9rem;
-    font-weight: 800;
-    margin-bottom: 0.4rem;
-  }
-  .desc-card p {
-    font-size: 0.75rem;
-    color: #49658c;
-    line-height: 1.6;
-  }
+  .desc-icon { font-size: 1.6rem; margin-bottom: 0.5rem; }
+  .desc-card h4 { font-size: 0.9rem; font-weight: 800; margin-bottom: 0.4rem; }
+  .desc-card p { font-size: 0.75rem; color: #49658c; line-height: 1.6; }
   .desc-footer-note {
     margin-top: 1.2rem;
     background: #eef3fc;
@@ -146,12 +112,7 @@
     border: 1px solid #e9edf4;
     margin-bottom: 1.5rem;
   }
-  .google-map-frame {
-    width: 100%;
-    height: 620px;
-    border: none;
-    display: block;
-  }
+  .google-map-frame { width: 100%; height: 620px; border: none; display: block; }
   .map-footer-note {
     background: #fbfbfe;
     padding: 0.8rem 1.5rem;
@@ -164,19 +125,8 @@
     gap: 20px;
     flex-wrap: wrap;
   }
-  .legend-dot {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 10px;
-    margin-left: 6px;
-  }
-  .capabilities-section {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.2rem;
-    margin-top: 0.5rem;
-  }
+  .legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 10px; margin-left: 6px; }
+  .capabilities-section { display: flex; flex-wrap: wrap; gap: 1.2rem; margin-top: 0.5rem; }
   .cap-card {
     flex: 1;
     background: white;
@@ -186,24 +136,9 @@
     box-shadow: 0 4px 12px rgba(0,0,0,0.02);
     transition: all 0.2s;
   }
-  .cap-card:hover {
-    transform: translateY(-3px);
-    border-color: #f5a62360;
-  }
-  .cap-title {
-    font-weight: 800;
-    font-size: 0.9rem;
-    margin-bottom: 0.6rem;
-    color: #0f3b5c;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .cap-text {
-    font-size: 0.75rem;
-    color: #446688;
-    line-height: 1.65;
-  }
+  .cap-card:hover { transform: translateY(-3px); border-color: #f5a62360; }
+  .cap-title { font-weight: 800; font-size: 0.9rem; margin-bottom: 0.6rem; color: #0f3b5c; display: flex; align-items: center; gap: 10px; }
+  .cap-text { font-size: 0.75rem; color: #446688; line-height: 1.65; }
   @media (prefers-color-scheme: dark) {
     .project-description { background: #1e2a3a; border-color: #f5a62340; }
     .project-description h2 { color: #e2e8f0; }
@@ -495,7 +430,7 @@
   .corridors-tab-pane { display: none; }
   .corridors-tab-pane.active { display: block; }
   
-  /* استایل‌های کریدور ابریشم - از کد اول */
+  /* استایل‌های کریدور ابریشم */
   .corridor-card-new { background: var(--bg2); border: 0.5px solid var(--border); border-radius: 12px; margin-bottom: 1rem; overflow: hidden; }
   .corridor-header-new { display: flex; align-items: center; gap: 12px; padding: 14px 16px; cursor: pointer; border-bottom: 0.5px solid var(--border); }
   .corridor-header-new:hover { background: var(--surface); }
@@ -544,15 +479,11 @@
   .alert-danger-new { background: #FCEBEB; color: #A32D2D; border: 0.5px solid #F7C1C1; }
   .alert-warn-new { background: #FAEEDA; color: #854F0B; border: 0.5px solid #FAC775; }
   .alert-ok-new { background: #EAF3DE; color: #3B6D11; border: 0.5px solid #C0DD97; }
-  .comparison-bar-new { margin-bottom: 6px; }
-  .bar-label-new { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-bottom: 2px; }
-  .bar-track-new { height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
-  .bar-fill-new { height: 100%; border-radius: 3px; transition: width .5s; }
   .legend-row-new { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 12px; }
   .leg-item-new { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-muted); }
   .leg-dot-new { width: 10px; height: 10px; border-radius: 50%; }
   
-  /* استایل‌های جداول مقایسه - از کد دوم */
+  /* استایل‌های جداول مقایسه */
   .wrap-new { padding: 1rem 0; }
   .top-new { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 8px; }
   .top-new h1 { font-size: 17px; font-weight: 500; }
@@ -591,6 +522,116 @@
   .bri-val-new { font-size: 15px; font-weight: 500; }
   .bri-sub-new { font-size: 10px; color: var(--text-dim); margin-top: 2px; }
   .col-hi-new { background: var(--surface2); }
+
+  /* استایل صفحه کشتیرانی جدید - هماهنگ با بقیه صفحات */
+  .shipping-section-wrapper {
+    background: var(--bg);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .shipping-header {
+    background: var(--surface);
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .shipping-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #185FA5;
+  }
+  .shipping-status-badges {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .status-badge-sm {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: var(--surface2);
+  }
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  .status-dot.red { background: #E24B4A; box-shadow: 0 0 4px #E24B4A; }
+  .status-dot.green { background: #1D9E75; }
+  .status-dot.amber { background: #BA7517; }
+  
+  .shipping-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    padding: 20px;
+    background: var(--surface);
+  }
+  .shipping-kpi-card {
+    background: var(--bg);
+    border-radius: 12px;
+    padding: 12px 14px;
+    text-align: center;
+    border: 0.5px solid var(--border);
+  }
+  .shipping-kpi-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #185FA5;
+  }
+  .shipping-kpi-label {
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .shipping-kpi-change {
+    font-size: 9px;
+    margin-top: 3px;
+  }
+  .shipping-kpi-change.up { color: #1D9E75; }
+  .shipping-kpi-change.down { color: #E24B4A; }
+  
+  .shipping-tabs {
+    display: flex;
+    gap: 4px;
+    padding: 0 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .shipping-tab {
+    padding: 10px 18px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--text-muted);
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .shipping-tab:hover { color: var(--text); }
+  .shipping-tab.active {
+    color: #185FA5;
+    border-bottom-color: #185FA5;
+  }
+  
+  .shipping-pane {
+    display: none;
+    padding: 20px;
+    background: var(--bg);
+  }
+  .shipping-pane.active { display: block; }
+  
+  /* ریسپانسیو */
+  @media (max-width: 768px) {
+    .shipping-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .shipping-tabs { overflow-x: auto; white-space: nowrap; }
+  }
 </style>
 </head>
 <body>
@@ -615,9 +656,8 @@
 
 <div class="container">
 
-<!-- ========== صفحه اول: نمای کلی (جدید - کریدور اختصاصی) ========== -->
+<!-- ========== صفحه اول: نمای کلی (کریدور اختصاصی) ========== -->
 <div id="dash-main" class="dash-section active">
-  <!-- بخش توضیح پروژه: حرفه‌ای، کامل، مشاوره‌ای -->
   <div class="project-description">
     <div class="badge-title">🎯 پلتفرم اختصاصی لجستیک صنایع بالادستی</div>
     <h2>کریدور انرژی چین–ایران؛ <span class="highlight">هوشمندی مسیر، کاهش ریسک و بهینه‌سازی زنجیره تأمین</span></h2>
@@ -649,7 +689,6 @@
     </div>
   </div>
 
-  <!-- نقشه گوگل مپس با تمام نقاط و لایه‌ها -->
   <div class="google-map-card">
     <iframe class="google-map-frame" 
       src="https://www.google.com/maps/d/embed?mid=1aDX7mGtJGuRET29CW8nl9KPxfotrn3Y&ll=31.80909037503909%2C64.40907510300246&z=6" 
@@ -665,7 +704,6 @@
     </div>
   </div>
 
-  <!-- بخش قابلیت‌های حرفه‌ای در زیر نقشه -->
   <div class="capabilities-section">
     <div class="cap-card">
       <div class="cap-title"><span>🗺️</span> پوشش کامل جغرافیایی</div>
@@ -686,14 +724,13 @@
   </div>
 </div>
 
-<!-- ========== صفحه دوم: کریدورهای بین‌المللی (با دو تب جدید) ========== -->
+<!-- ========== صفحه دوم: کریدورهای بین‌المللی ========== -->
 <div id="dash-carec" class="dash-section">
   <div class="corridors-tab-bar">
     <button class="corridors-tab-btn active" onclick="switchCorridorsTab('analysis')">📊 تحلیل کوریدورهای ابریشم</button>
     <button class="corridors-tab-btn" onclick="switchCorridorsTab('comparison')">📋 جداول مقایسه جامع</button>
   </div>
   
-  <!-- تب اول: داشبورد تحلیل کوریدورهای ابریشم -->
   <div id="corridors-tab-analysis" class="corridors-tab-pane active">
     <div class="legend-row-new">
       <div class="leg-item-new"><div class="leg-dot-new" style="background:#1D9E75"></div>ریلی</div>
@@ -1142,7 +1179,6 @@
     </div>
   </div>
   
-  <!-- تب دوم: جداول مقایسه جامع -->
   <div id="corridors-tab-comparison" class="corridors-tab-pane">
     <div class="wrap-new">
       <div class="top-new">
@@ -1159,7 +1195,6 @@
         <div class="li-new"><div class="ld-new" style="background:#E24B4A"></div>ریسک بالا</div>
       </div>
 
-      <!-- TABLE 1: TRANSIT & INFRASTRUCTURE -->
       <div class="section-card-new">
         <div class="sec-header-new">
           <h2>۱ — زیرساخت، مسیر و زمان ترانزیت</h2>
@@ -1171,16 +1206,15 @@
               <tr><th>ویژگی</th><th>ترانس‌سیبری<br><span style="font-weight:400;font-size:10px;">(Northern/TSR)</span></th><th>راه ابریشم آبی<br><span style="font-weight:400;font-size:10px;">(Maritime)</span></th><th>کوریدور میانی<br><span style="font-weight:400;font-size:10px;">(TITR)</span></th><th>کریدور شمالی قطبی<br><span style="font-weight:400;font-size:10px;">(Polar/NSR)</span></th></tr>
             </thead>
             <tbody>
-              <tr><td>نوع</th><td><span class="badge-new b-rail-new">ریلی</span></td><td><span class="badge-new b-sea-new">دریایی</span></td><td><span class="badge-new b-multi-new">چندوجهی</span></td><td><span class="badge-new b-arc-new">دریایی قطبی</span></td></tr>
-              <tr><td>طول مسیر</th><td>~۹,۲۰۰ کیلومتر</th><td>~۲۱,۰۰۰ کیلومتر (Suez)<br>~۲۸,۰۰۰ کیلومتر (Cape)</th><td>~۸,۷۰۰ کیلومتر</th><td>~۱۴,۰۰۰ کیلومتر<br><span class="note-new">۷,۰۰۰km کوتاه‌تر از Suez</span></th></tr>
-              <tr><td>زمان ترانزیت ۲۰۲۵</th><td>۱۵–۲۲ روز<br><span class="note-new">کاهش سرعت به ۳۶-۴۰km/h</span></th><td>۲۸–۳۵ روز (Suez)<br>۴۰–۵۰ روز (Cape)</th><td>۱۸–۲۵ روز<br><span class="note-new">هدف: ۱۴–۱۸ روز</span></th><td>۱۸–۲۰ روز<br><span class="note-new">فقط فصل تابستان</span></th></tr>
-              <tr><td>ظرفیت واقعی ۲۰۲۴</th><td>~۵۰۰–۶۵۰ هزار TEU<br><span class="note-new">کاهش ۹.۸٪ نسبت به ۲۰۲۳</span></th><td>۱۳.۵–۱۴ میلیون TEU<br><span class="note-new">(China-Europe, 2024)</span></th><td>۴.۴۷ میلیون تن / ۵۵,۰۰۰ TEU<br><span class="note-new">رشد ۶۳٪ نسبت به ۲۰۲۳</span></th><td><span class="badge-new b-na-new">تجاری اولیه</span><br><span class="note-new">آغاز تجاری: اکتبر ۲۰۲۵</span></th></tr>
+              <tr><td>نوع</td><td><span class="badge-new b-rail-new">ریلی</span></td><td><span class="badge-new b-sea-new">دریایی</span></td><td><span class="badge-new b-multi-new">چندوجهی</span></td><td><span class="badge-new b-arc-new">دریایی قطبی</span></td></tr>
+              <tr><td>طول مسیر</td><td>~۹,۲۰۰ کیلومتر</td><td>~۲۱,۰۰۰ کیلومتر (Suez)<br>~۲۸,۰۰۰ کیلومتر (Cape)</td><td>~۸,۷۰۰ کیلومتر</td><td>~۱۴,۰۰۰ کیلومتر<br><span class="note-new">۷,۰۰۰km کوتاه‌تر از Suez</span></td></tr>
+              <tr><td>زمان ترانزیت ۲۰۲۵</td><td>۱۵–۲۲ روز<br><span class="note-new">کاهش سرعت به ۳۶-۴۰km/h</span></td><td>۲۸–۳۵ روز (Suez)<br>۴۰–۵۰ روز (Cape)</td><td>۱۸–۲۵ روز<br><span class="note-new">هدف: ۱۴–۱۸ روز</span></td><td>۱۸–۲۰ روز<br><span class="note-new">فقط فصل تابستان</span></td></tr>
+              <tr><td>ظرفیت واقعی ۲۰۲۴</td><td>~۵۰۰–۶۵۰ هزار TEU<br><span class="note-new">کاهش ۹.۸٪ نسبت به ۲۰۲۳</span></td><td>۱۳.۵–۱۴ میلیون TEU<br><span class="note-new">(China-Europe, 2024)</span></td><td>۴.۴۷ میلیون تن / ۵۵,۰۰۰ TEU<br><span class="note-new">رشد ۶۳٪ نسبت به ۲۰۲۳</span></td><td><span class="badge-new b-na-new">تجاری اولیه</span><br><span class="note-new">آغاز تجاری: اکتبر ۲۰۲۵</span></td></tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <!-- TABLE 2: COSTS -->
       <div class="section-card-new">
         <div class="sec-header-new">
           <h2>۲ — هزینه‌ها: حمل، گمرک، تأخیر و اداری</h2>
@@ -1190,15 +1224,14 @@
           <table>
             <thead><tr><th>نوع هزینه</th><th>ترانس‌سیبری</th><th>راه ابریشم آبی</th><th>کوریدور میانی (TITR)</th><th>راه ابریشم قطبی</th></tr></thead>
             <tbody>
-              <tr><td>هزینه حمل (FEU)</th><td>~$۳,۲۴۰<br><span class="note-new">ERA Index میانگین ۲۰۲۴</span></th><td>$۱,۵۰۰–۷,۹۶۱<br><span class="note-new">Drewry WCI; بحران Suez ۲۰۲۴</span></th><td>$۵,۰۰۰–۷,۰۰۰ (چین→ترکیه)<br><span class="note-new">+$۱,۰۰۰–۲,۰۰۰ تا اروپا</span></th><td>بالا — در حال تعریف<br><span class="note-new">+هزینه یخ‌شکن $۵۰K–۲۰۰K/سفر</span></th></tr>
-              <tr><td>هزینه تغییر گیج</th><td>$۸۰–۲۰۰/TEU (هر نقطه)</th><td>ندارد</th><td>$۸۰–۲۰۰/TEU (هر نقطه)</th><td>ندارد</th></tr>
-              <tr><td>هزینه بیمه اضافی</th><td>+۰.۵–۲٪ ارزش بار<br><span class="note-new">ریسک تحریم + مصادره</span></th><td>+۲–۵٪ Hull<br><span class="note-new">پریمیوم جنگی دریای سرخ</span></th><td>+۰.۲–۰.۵٪<br><span class="note-new">پایین‌ترین پریمیوم بین ریلی</span></th><td>+۲–۵٪ Hull<br><span class="note-new">ریسک یخ + قطبی</span></th></tr>
+              <tr><td>هزینه حمل (FEU)</td><td>~$۳,۲۴۰<br><span class="note-new">ERA Index میانگین ۲۰۲۴</span></td><td>$۱,۵۰۰–۷,۹۶۱<br><span class="note-new">Drewry WCI; بحران Suez ۲۰۲۴</span></td><td>$۵,۰۰۰–۷,۰۰۰ (چین→ترکیه)<br><span class="note-new">+$۱,۰۰۰–۲,۰۰۰ تا اروپا</span></td><td>بالا — در حال تعریف<br><span class="note-new">+هزینه یخ‌شکن $۵۰K–۲۰۰K/سفر</span></td></tr>
+              <tr><td>هزینه تغییر گیج</td><td>$۸۰–۲۰۰/TEU (هر نقطه)</td><td>ندارد</td><td>$۸۰–۲۰۰/TEU (هر نقطه)</td><td>ندارد</td></tr>
+              <tr><td>هزینه بیمه اضافی</td><td>+۰.۵–۲٪ ارزش بار<br><span class="note-new">ریسک تحریم + مصادره</span></td><td>+۲–۵٪ Hull<br><span class="note-new">پریمیوم جنگی دریای سرخ</span></td><td>+۰.۲–۰.۵٪<br><span class="note-new">پایین‌ترین پریمیوم بین ریلی</span></td><td>+۲–۵٪ Hull<br><span class="note-new">ریسک یخ + قطبی</span></td></tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <!-- TABLE 3: RISK & SECURITY -->
       <div class="section-card-new">
         <div class="sec-header-new">
           <h2>۳ — ریسک‌ها: امنیتی، ژئوپلیتیک، بیمه و مسیرهای پشتیبان</h2>
@@ -1208,15 +1241,14 @@
           <table>
             <thead><tr><th>ویژگی ریسک</th><th>ترانس‌سیبری</th><th>راه ابریشم آبی</th><th>کوریدور میانی (TITR)</th><th>راه ابریشم قطبی</th></tr></thead>
             <tbody>
-              <tr><td>سطح ریسک کلی</th><td><div class="risk-row-new"><div class="rdot-new r-hi-new"></div>بسیار بالا</div></th><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط</div></th><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط-پایین</div></th><td><div class="risk-row-new"><div class="rdot-new r-hi-new"></div>بسیار بالا</div></th></tr>
-              <tr><td>ریسک تحریم</th><td><span class="badge-new b-danger-new">بسیار بالا</span><br><span class="note-new">EU/US/UK تحریم کامل</span></th><td><span class="badge-new b-ok-new">پایین (Suez)</span><br><span class="badge-new b-warn-new">متوسط (Cape)</span></th><td><span class="badge-new b-ok-new">نزدیک به صفر</span><br><span class="note-new">روسیه و بلاروس را دور می‌زند</span></th><td><span class="badge-new b-danger-new">بالا</span><br><span class="note-new">کنترل روسی (Rosatom)</span></th></tr>
-              <tr><td>سطح بیمه‌پذیری</th><td><span class="badge-new b-danger-new">Lloyd's خارج شده</span><br><span class="note-new">فقط بیمه چینی/روسی</span></th><td><span class="badge-new b-ok-new">کامل</span><br><span class="note-new">+پریمیوم جنگی Suez</span></th><td><span class="badge-new b-ok-new">در دسترس</span><br><span class="note-new">پیچیده‌تر برای بخش خزر</span></th><td><span class="badge-new b-danger-new">محدود</span><br><span class="note-new">MSC، Maersk خودداری کرده‌اند</span></th></tr>
+              <tr><td>سطح ریسک کلی</td><td><div class="risk-row-new"><div class="rdot-new r-hi-new"></div>بسیار بالا</div></td><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط</div></td><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط-پایین</div></td><td><div class="risk-row-new"><div class="rdot-new r-hi-new"></div>بسیار بالا</div></td></tr>
+              <tr><td>ریسک تحریم</td><td><span class="badge-new b-danger-new">بسیار بالا</span><br><span class="note-new">EU/US/UK تحریم کامل</span></td><td><span class="badge-new b-ok-new">پایین (Suez)</span><br><span class="badge-new b-warn-new">متوسط (Cape)</span></td><td><span class="badge-new b-ok-new">نزدیک به صفر</span><br><span class="note-new">روسیه و بلاروس را دور می‌زند</span></td><td><span class="badge-new b-danger-new">بالا</span><br><span class="note-new">کنترل روسی (Rosatom)</span></td></tr>
+              <tr><td>سطح بیمه‌پذیری</td><td><span class="badge-new b-danger-new">Lloyd's خارج شده</span><br><span class="note-new">فقط بیمه چینی/روسی</span></td><td><span class="badge-new b-ok-new">کامل</span><br><span class="note-new">+پریمیوم جنگی Suez</span></td><td><span class="badge-new b-ok-new">در دسترس</span><br><span class="note-new">پیچیده‌تر برای بخش خزر</span></td><td><span class="badge-new b-danger-new">محدود</span><br><span class="note-new">MSC، Maersk خودداری کرده‌اند</span></td></tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <!-- TABLE 4: CARGO & COMPLIANCE -->
       <div class="section-card-new">
         <div class="sec-header-new">
           <h2>۴ — بار، داکیومنت‌ها، انطباق گمرکی و مجوزها</h2>
@@ -1226,14 +1258,13 @@
           <table>
             <thead><tr><th>ویژگی</th><th>ترانس‌سیبری</th><th>راه ابریشم آبی</th><th>کوریدور میانی (TITR)</th><th>راه ابریشم قطبی</th></tr></thead>
             <tbody>
-              <tr><td>توان بار حجیم (OOG)</th><td><span class="badge-new b-warn-new">محدود</span><br><span class="note-new">نیاز به مجوز ویژه RZD</span></th><td><span class="badge-new b-ok-new">کامل</span><br><span class="note-new">Flat Rack، Open Top، Platform</span></th><td><span class="badge-new b-warn-new">پیچیده در بخش خزر</span><br><span class="note-new">ریل: ممکن</span></th><td><span class="badge-new b-ok-new">مناسب</span><br><span class="note-new">بار سنگین: روی عرشه</span></th></tr>
-              <tr><td>ریسک انطباق تحریم</th><td><span class="badge-new b-danger-new">بسیار بالا</span><br><span class="note-new">OFAC/EU Secondary Sanctions</span></th><td><span class="badge-new b-ok-new">پایین (مسیرهای عادی)</span></th><td><span class="badge-new b-ok-new">پایین</span><br><span class="note-new">بدون تحریم فعلی</span></th><td><span class="badge-new b-danger-new">بالا</span><br><span class="note-new">تحریم‌های روسیه</span></th></tr>
+              <tr><td>توان بار حجیم (OOG)</td><td><span class="badge-new b-warn-new">محدود</span><br><span class="note-new">نیاز به مجوز ویژه RZD</span></td><td><span class="badge-new b-ok-new">کامل</span><br><span class="note-new">Flat Rack، Open Top، Platform</span></td><td><span class="badge-new b-warn-new">پیچیده در بخش خزر</span><br><span class="note-new">ریل: ممکن</span></td><td><span class="badge-new b-ok-new">مناسب</span><br><span class="note-new">بار سنگین: روی عرشه</span></td></tr>
+              <tr><td>ریسک انطباق تحریم</td><td><span class="badge-new b-danger-new">بسیار بالا</span><br><span class="note-new">OFAC/EU Secondary Sanctions</span></td><td><span class="badge-new b-ok-new">پایین (مسیرهای عادی)</span></td><td><span class="badge-new b-ok-new">پایین</span><br><span class="note-new">بدون تحریم فعلی</span></td><td><span class="badge-new b-danger-new">بالا</span><br><span class="note-new">تحریم‌های روسیه</span></td></tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <!-- TABLE 5: BRI STRATEGY -->
       <div class="section-card-new">
         <div class="sec-header-new">
           <h2>۵ — استراتژی BRI تا ۲۰۳۰ و سرمایه‌گذاری‌های کلیدی</h2>
@@ -1249,15 +1280,14 @@
           <table>
             <thead><tr><th>پروژه / ابتکار</th><th>وضعیت ۲۰۲۵</th><th>سرمایه‌گذاری</th><th>اثر بر کوریدور</th></tr></thead>
             <tbody>
-              <tr><td>CKU (چین-قرقیزستان-ازبکستان)</th><td><span class="badge-new b-warn-new">در حال ساخت</span><br><span class="note-new">تونل‌ها از آوریل ۲۰۲۵</span></th><td>$۴.۷ میلیارد</th><td>TITR: کوتاه‌کردن ۷ روز</th></tr>
-              <tr><td>ارتقاء BTK گرجستان</th><td><span class="badge-new b-ok-new">تکمیل شده (مه ۲۰۲۴)</span></th><td>$۲۵۰ میلیون (آذربایجان)</th><td>ظرفیت: ۱→۵ میلیون تن</th></tr>
-              <tr><td>رشت–آستارا ریل (ایران، INSTC)</th><td><span class="badge-new b-warn-new">در مرحله قرارداد ۲۰۲۵</span></th><td>روسیه: تأمین مالی متعهد</th><td>تکمیل شکاف غربی INSTC</th></tr>
+              <tr><td>CKU (چین-قرقیزستان-ازبکستان)</td><td><span class="badge-new b-warn-new">در حال ساخت</span><br><span class="note-new">تونل‌ها از آوریل ۲۰۲۵</span></td><td>$۴.۷ میلیارد</td><td>TITR: کوتاه‌کردن ۷ روز</td></tr>
+              <tr><td>ارتقاء BTK گرجستان</td><td><span class="badge-new b-ok-new">تکمیل شده (مه ۲۰۲۴)</span></td><td>$۲۵۰ میلیون (آذربایجان)</td><td>ظرفیت: ۱→۵ میلیون تن</td></tr>
+              <tr><td>رشت–آستارا ریل (ایران، INSTC)</td><td><span class="badge-new b-warn-new">در مرحله قرارداد ۲۰۲۵</span></td><td>روسیه: تأمین مالی متعهد</td><td>تکمیل شکاف غربی INSTC</td></tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <!-- SUMMARY COMPARISON TABLE -->
       <div class="section-card-new">
         <div class="sec-header-new">
           <h2>۶ — خلاصه مقایسه‌ای تمام کوریدورها</h2>
@@ -1267,12 +1297,12 @@
           <table>
             <thead><tr><th>کوریدور</th><th>نوع</th><th>TEU / حجم ۲۰۲۴</th><th>زمان ترانزیت</th><th>ریسک</th><th>وضعیت</th></tr></thead>
             <tbody>
-              <tr><td>Trans-Siberian</th><td><span class="badge-new b-rail-new">ریلی</span></th><td>~۵۰۰–۶۵۰ هزار TEU</th><td>۱۵–۲۲ روز</th><td><div class="risk-row-new"><div class="rdot-new r-hi-new"></div>بسیار بالا</div></th><td><span class="badge-new b-danger-new">تحت تحریم</span></th></tr>
-              <tr><td>Maritime Silk Road</th><td><span class="badge-new b-sea-new">دریایی</span></th><td>۱۳.۵–۱۴ میلیون TEU</th><td>۲۸–۵۰ روز</th><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط</div></th><td><span class="badge-new b-ok-new">عملیاتی</span></th></tr>
-              <tr><td>TITR</th><td><span class="badge-new b-multi-new">چندوجهی</span></th><td>۵۵,۰۰۰ TEU / ۴.۴۷M تن</th><td>۱۸–۲۵ روز</th><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط-پایین</div></th><td><span class="badge-new b-ok-new">در حال رشد</span></th></tr>
-              <tr><td>BTK</th><td><span class="badge-new b-rail-new">ریلی</span></th><td>~۶–۸ میلیون تن</th><td>جزء TITR (~۱۵ روز)</th><td><div class="risk-row-new"><div class="rdot-new r-lo-new"></div>پایین</div></th><td><span class="badge-new b-ok-new">ارتقاء ۲۰۲۴</span></th></tr>
-              <tr><td>INSTC</th><td><span class="badge-new b-multi-new">چندوجهی</span></th><td>۲۶.۹ میلیون تن</th><td>۱۹–۳۰ روز</th><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط-بالا</div></th><td><span class="badge-new b-warn-new">در حال توسعه</span></th></tr>
-              <tr><td>Polar Silk Road</th><td><span class="badge-new b-arc-new">قطبی</span></th><td><span class="badge-new b-na-new">آزمایشی/اولیه</span></th><td>۱۸–۲۰ روز (تابستان)</th><td><div class="risk-row-new"><div class="rdot-new r-hi-new"></div>بسیار بالا</div></th><td><span class="badge-new b-warn-new">محدود به فصل</span></th></tr>
+              <tr><td>Trans-Siberian</td><td><span class="badge-new b-rail-new">ریلی</span></td><td>~۵۰۰–۶۵۰ هزار TEU</td><td>۱۵–۲۲ روز</td><td><div class="risk-row-new"><div class="rdot-new r-hi-new"></div>بسیار بالا</div></td><td><span class="badge-new b-danger-new">تحت تحریم</span></td></tr>
+              <tr><td>Maritime Silk Road</td><td><span class="badge-new b-sea-new">دریایی</span></td><td>۱۳.۵–۱۴ میلیون TEU</td><td>۲۸–۵۰ روز</td><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط</div></td><td><span class="badge-new b-ok-new">عملیاتی</span></td></tr>
+              <tr><td>TITR</td><td><span class="badge-new b-multi-new">چندوجهی</span></td><td>۵۵,۰۰۰ TEU / ۴.۴۷M تن</td><td>۱۸–۲۵ روز</td><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط-پایین</div></td><td><span class="badge-new b-ok-new">در حال رشد</span></td></tr>
+              <tr><td>BTK</td><td><span class="badge-new b-rail-new">ریلی</span></td><td>~۶–۸ میلیون تن</td><td>جزء TITR (~۱۵ روز)</td><td><div class="risk-row-new"><div class="rdot-new r-lo-new"></div>پایین</div></td><td><span class="badge-new b-ok-new">ارتقاء ۲۰۲۴</span></td></tr>
+              <tr><td>INSTC</td><td><span class="badge-new b-multi-new">چندوجهی</span></td><td>۲۶.۹ میلیون تن</td><td>۱۹–۳۰ روز</td><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط-بالا</div></td><td><span class="badge-new b-warn-new">در حال توسعه</span></td></tr>
+              <tr><td>Polar Silk Road</td><td><span class="badge-new b-arc-new">قطبی</span></td><td><span class="badge-new b-na-new">آزمایشی/اولیه</span></td><td>۱۸–۲۰ روز (تابستان)</td><td><div class="risk-row-new"><div class="rdot-new r-hi-new"></div>بسیار بالا</div></td><td><span class="badge-new b-warn-new">محدود به فصل</span></td></tr>
             </tbody>
           </table>
         </div>
@@ -1285,142 +1315,305 @@
   </div>
 </div>
 
-<!-- ========== صفحه سوم: کشتیرانی ========== -->
+<!-- ========== صفحه سوم: کشتیرانی (ری‌استایل شده هماهنگ با داشبورد) ========== -->
 <div id="dash-shipping" class="dash-section">
-  <div class="dash-header">
-    <div>
-      <p class="subtitle">به‌روزرسانی: خرداد ۱۴۰۵ — مه ۲۰۲۶</p>
-      <h1>داشبورد جامع ناوگان تجاری و حمل‌ونقل دریایی جهان</h1>
+  <div class="shipping-section-wrapper">
+    <div class="shipping-header">
+      <h3>⚓ داشبورد هوشمند کشتیرانی تجاری جهان</h3>
+      <div class="shipping-status-badges">
+        <span class="status-badge-sm"><span class="status-dot red"></span>هرمز: بسته</span>
+        <span class="status-badge-sm"><span class="status-dot red"></span>دریای سرخ: خطر</span>
+        <span class="status-badge-sm"><span class="status-dot green"></span>سوئز: عادی</span>
+        <span class="status-badge-sm"><span class="status-dot amber"></span>BDI: 2,991</span>
+        <span class="status-badge-sm" style="color:var(--text-dim);">۲ ژوئن ۲۰۲۶</span>
+      </div>
     </div>
-    <div class="badges">
-      <span class="badge badge-info">Alphaliner · EIA · BIMCO · Clarkson · TRACECA</span>
-      <span class="badge badge-danger">● بحران تنگه هرمز فعال</span>
-    </div>
-  </div>
 
-  <div class="section">
-    <div class="section-title"><span class="bar" style="background:#378ADD"></span>کانتینری (Container)</div>
-    <div class="metrics-grid">
-      <div class="metric-card"><div class="metric-label">ظرفیت ناوگان جهانی</div><div class="metric-value">حدود۳۴ M TEU</div><div class="metric-sub">+۶.۴٪ نسبت به ۲۰۲۵ — Alphaliner</div></div>
-      <div class="metric-card"><div class="metric-label">کشتی‌های فعال</div><div class="metric-value">>۶,۷۰۰</div><div class="metric-sub">رکورد تاریخی — آوریل ۲۰۲۶</div></div>
-      <div class="metric-card"><div class="metric-label">مسیر اصلی چین–خلیج فارس</div><div class="metric-value">۲۲–۱۸ روز</div><div class="metric-sub">شانگهای به جبل‌علی (FCL)</div></div>
-      <div class="metric-card"><div class="metric-label">بزرگترین اپراتورها</div><div class="metric-value" style="font-size:14px;line-height:1.5">MSC · Maersk · COSCO</div><div class="metric-sub">MSC: 7M+ TEU — رهبر جهانی</div></div>
-      <div class="metric-card"><div class="metric-label">دفتر سفارش (Orderbook)</div><div class="metric-value">حدود۱۰ M TEU</div><div class="metric-sub">۳۱.۶٪ نسبت به ناوگان — Clarkson</div></div>
-      <div class="metric-card"><div class="metric-label">ناوگان بیکار (Idle)</div><div class="metric-value c-success">حدود۰.۹٪</div><div class="metric-sub">پایین‌ترین سطح تاریخی</div></div>
+    <!-- هشدار بحران -->
+    <div class="alert alert-danger" style="margin: 0 20px 20px 20px; background: rgba(239,68,68,0.1); border-right: 3px solid #ef4444;">
+      <strong>⚠ بحران تنگه هرمز – روز ۹۴:</strong> تنها ۴ فروند کشتی تجاری در ۲۴ می ۲۰۲۶ ترانزیت داشت (۴٪ نرمال) · ۱,۵۵۰+ کشتی بلاک · War-risk insurance: 8× نرخ پیش از بحران · 6 باشگاه P&I پوشش را لغو کردند
     </div>
-    <div class="card">
-      <div class="card-title">سهم بازار اپراتورهای بزرگ (درصد از ظرفیت جهانی) — ژوئیه ۲۰۲۵ · Alphaliner</div>
-      <div class="bar-row"><span class="bar-label">MSC</span><div class="bar-track"><div class="bar-fill" style="width:20.7%;background:#185FA5"></div></div><span class="bar-pct">20.7٪</span></div>
-      <div class="bar-row"><span class="bar-label">Maersk</span><div class="bar-track"><div class="bar-fill" style="width:13.5%;background:#378ADD"></div></div><span class="bar-pct">حدود۱۳.۵٪</span></div>
-      <div class="bar-row"><span class="bar-label">CMA CGM</span><div class="bar-track"><div class="bar-fill" style="width:13%;background:#85B7EB"></div></div><span class="bar-pct">حدود۱۳٪</span></div>
-      <div class="bar-row"><span class="bar-label">COSCO</span><div class="bar-track"><div class="bar-fill" style="width:10.5%;background:#B5D4F4"></div></div><span class="bar-pct">حدود۱۰.۵٪</span></div>
-      <div class="bar-row"><span class="bar-label">Hapag-Lloyd</span><div class="bar-track"><div class="bar-fill" style="width:7%;background:#D3D1C7"></div></div><span class="bar-pct">حدود۷٪</span></div>
-      <div class="bar-row"><span class="bar-label">سایرین</span><div class="bar-track"><div class="bar-fill" style="width:35.3%;background:var(--surface2);border:0.5px solid var(--border)"></div></div><span class="bar-pct c-info" style="font-size:10px">Top10 = 84.6٪</span></div>
-    </div>
-  </div>
 
-  <div class="section">
-    <div class="two-col">
+    <!-- KPI کارت‌ها -->
+    <div class="shipping-kpi-grid">
+      <div class="shipping-kpi-card">
+        <div class="shipping-kpi-value" style="color:#BA7517;">2,991</div>
+        <div class="shipping-kpi-label">BDI – Baltic Dry</div>
+        <div class="shipping-kpi-change up">↑ +27 pts (28 می)</div>
+      </div>
+      <div class="shipping-kpi-card">
+        <div class="shipping-kpi-value" style="color:#185FA5;">$2,800</div>
+        <div class="shipping-kpi-label">WCI $/FEU – Drewry</div>
+        <div class="shipping-kpi-change up">↑ +3٪ هفته چهارم</div>
+      </div>
+      <div class="shipping-kpi-card">
+        <div class="shipping-kpi-value" style="color:#1D9E75;">$2,861</div>
+        <div class="shipping-kpi-label">Shanghai→Rotterdam</div>
+        <div class="shipping-kpi-change up">↑ +15٪ ماه می</div>
+      </div>
+      <div class="shipping-kpi-card">
+        <div class="shipping-kpi-value" style="color:#E24B4A;">$94.01</div>
+        <div class="shipping-kpi-label">Brent $/bbl</div>
+        <div class="shipping-kpi-change up">↑ +1.6٪ ۲۴h</div>
+      </div>
+      <div class="shipping-kpi-card">
+        <div class="shipping-kpi-value" style="color:#534AB7;">1,300+</div>
+        <div class="shipping-kpi-label">ناوگان سایه</div>
+        <div class="shipping-kpi-change down">۲۰٪ ظرفیت جهان</div>
+      </div>
+      <div class="shipping-kpi-card">
+        <div class="shipping-kpi-value" style="color:#E24B4A;">4%</div>
+        <div class="shipping-kpi-label">ترافیک هرمز</div>
+        <div class="shipping-kpi-change down">نسبت به نرمال</div>
+      </div>
+    </div>
+
+    <!-- تب‌ها -->
+    <div class="shipping-tabs">
+      <div class="shipping-tab active" onclick="switchShippingTab(0)">بازار فعلی</div>
+      <div class="shipping-tab" onclick="switchShippingTab(1)">ناوگان و مسیرها</div>
+      <div class="shipping-tab" onclick="switchShippingTab(2)">ناوگان سایه</div>
+      <div class="shipping-tab" onclick="switchShippingTab(3)">هزینه و سورشارج</div>
+      <div class="shipping-tab" onclick="switchShippingTab(4)">مدارک و ریسک</div>
+    </div>
+
+    <!-- پن 0: بازار فعلی -->
+    <div class="shipping-pane active" id="shipping-pane-0">
+      <div class="stats-row" style="margin-bottom: 16px;">
+        <div class="stat-card" style="flex: 1;">
+          <div class="stat-title">شاخص‌های Baltic Exchange</div>
+          <div class="stat-item"><span class="label">Baltic Dry Index (BDI)</span><span class="number" style="color:#BA7517;">2,991</span></div>
+          <div class="stat-item"><span class="label">Baltic Capesize (BCI)</span><span class="number" style="color:#1D9E75;">4,954</span></div>
+          <div class="stat-item"><span class="label">Baltic Panamax (BPI)</span><span class="number" style="color:#185FA5;">2,223</span></div>
+          <div class="stat-item"><span class="label">Baltic Supramax (BSI)</span><span class="number" style="color:#185FA5;">1,567</span></div>
+          <div class="stat-item"><span class="label">Baltic Handysize (BHSI)</span><span class="number">843</span></div>
+        </div>
+        <div class="stat-card" style="flex: 1;">
+          <div class="stat-title">Drewry WCI – کانتینر ۴۰ft</div>
+          <div class="stat-item"><span class="label">Shanghai → Rotterdam</span><span class="number" style="color:#1D9E75;">$2,861</span></div>
+          <div class="stat-item"><span class="label">Shanghai → Genoa</span><span class="number" style="color:#185FA5;">$4,253</span></div>
+          <div class="stat-item"><span class="label">Shanghai → New York</span><span class="number" style="color:#1D9E75;">$4,597</span></div>
+          <div class="stat-item"><span class="label">Shanghai → Los Angeles</span><span class="number" style="color:#185FA5;">$3,473</span></div>
+          <div class="stat-item"><span class="label">Rotterdam → Shanghai</span><span class="number">$650</span></div>
+        </div>
+        <div class="stat-card" style="flex: 1;">
+          <div class="stat-title">تانکر – نرخ روزانه</div>
+          <div class="stat-item"><span class="label">VLCC TD3C (MEG→China)</span><span class="number" style="color:#E24B4A;">⚠ تعلیق</span></div>
+          <div class="stat-item"><span class="label">Suezmax (AG→UKC)</span><span class="number" style="color:#BA7517;">$38,200</span></div>
+          <div class="stat-item"><span class="label">Aframax (Baltic)</span><span class="number" style="color:#185FA5;">$26,400</span></div>
+          <div class="stat-item"><span class="label">LNG Spot ($/MMBtu)</span><span class="number" style="color:#1D9E75;">$14.80</span></div>
+          <div class="stat-item"><span class="label">Product MR (UKC→US)</span><span class="number" style="color:#185FA5;">$18,900</span></div>
+        </div>
+      </div>
+
       <div class="card">
-        <div class="section-title" style="margin-bottom:10px"><span class="bar" style="background:#D85A30"></span>نفتکش (Tanker)</div>
-        <div class="inner-grid">
-          <div class="inner-metric"><div class="inner-label">ناوگان نفتکش جهانی</div><div class="inner-value">حدود۷,۵۰۰ فروند</div><div class="inner-sub">کل انواع نفتکش</div></div>
-          <div class="inner-metric"><div class="inner-label">ظرفیت کل ناوگان</div><div class="inner-value">حدود۶۰۰ M DWT</div><div class="inner-sub">Deadweight Tonnage</div></div>
-          <div class="inner-metric"><div class="inner-label">ظرفیت هر VLCC</div><div class="inner-value">حدود۲ M bbl</div><div class="inner-sub">بشکه نفت خام</div></div>
-          <div class="inner-metric"><div class="inner-label">نرخ روزانه VLCC ۲۰۲۵</div><div class="inner-value c-success">$50,000</div><div class="inner-sub">از $38,202 در ۲۰۲۴ — EIA</div></div>
-        </div>
-        <hr class="divider">
-        <div class="kv-list">
-          <div class="kv-row"><span class="kv-key">تنگه هرمز (روزانه)</span><span class="kv-val">حدود۲۰.۹ M bpd</span></div>
-          <div class="kv-row"><span class="kv-key">ناوگان تحریمی / سایه</span><span class="kv-val c-danger">حدود۲۳٪ fleet</span></div>
-          <div class="kv-row"><span class="kv-key">سن بالای ۲۰ سال (crude)</span><span class="kv-val c-warning">۱۸.۲٪</span></div>
-          <div class="kv-row"><span class="kv-key">مسیر اصلی خلیج فارس–چین</span><span class="kv-val">۲۵–۳۰ روز</span></div>
-          <div class="kv-row"><span class="kv-key">نرخ VLCC نوامبر ۲۰۲۵</span><span class="kv-val c-success">بالاترین از ۲۰۲۰</span></div>
-          <div class="kv-row"><span class="kv-key">بهره‌وری ناوگان ۲۰۲۶ (تخمین)</span><span class="kv-val">۹۲٪ — Jefferies</span></div>
+        <div class="shipping-title">وضعیت تنگه‌ها و کانال‌های استراتژیک – June 2026</div>
+        <div class="stats-row" style="margin-bottom: 0;">
+          <div class="stat-card"><div class="stat-title" style="color:#E24B4A;">تنگه هرمز</div><div class="stat-item"><span class="label">ترافیک</span><span class="number" style="color:#E24B4A;">4٪ نرمال</span></div><div class="stat-item"><span class="label">War Risk</span><span class="number" style="color:#E24B4A;">8× عادی</span></div><div class="stat-item"><span class="label">کشتی گیر</span><span class="number" style="color:#E24B4A;">1,550+</span></div><div class="stat-item"><span class="label">وضعیت</span><span class="number" style="color:#E24B4A;">بسته</span></div></div>
+          <div class="stat-card"><div class="stat-title" style="color:#BA7517;">باب‌المندب / دریای سرخ</div><div class="stat-item"><span class="label">حملات</span><span class="number" style="color:#E24B4A;">از ۲۸ فوریه</span></div><div class="stat-item"><span class="label">سوئز</span><span class="number" style="color:#BA7517;">محدود</span></div><div class="stat-item"><span class="label">اضافه مسیر</span><span class="number" style="color:#BA7517;">+14 روز</span></div><div class="stat-item"><span class="label">وضعیت</span><span class="number" style="color:#E24B4A;">خطر</span></div></div>
+          <div class="stat-card"><div class="stat-title" style="color:#1D9E75;">کانال سوئز</div><div class="stat-item"><span class="label">ظرفیت</span><span class="number" style="color:#BA7517;">در حال بازیابی</span></div><div class="stat-item"><span class="label">VLCC</span><span class="number" style="color:#185FA5;">$700K</span></div><div class="stat-item"><span class="label">عرض</span><span class="number" style="color:#1D9E75;">۳۱۳m max</span></div><div class="stat-item"><span class="label">وضعیت</span><span class="number" style="color:#BA7517;">محدود</span></div></div>
+          <div class="stat-card"><div class="stat-title" style="color:#1D9E75;">تنگه ملاکا</div><div class="stat-item"><span class="label">سالانه</span><span class="number" style="color:#1D9E75;">84,000+</span></div><div class="stat-item"><span class="label">عمق</span><span class="number" style="color:#BA7517;">25m محدود</span></div><div class="stat-item"><span class="label">دزدی</span><span class="number" style="color:#1D9E75;">کم</span></div><div class="stat-item"><span class="label">وضعیت</span><span class="number" style="color:#1D9E75;">عادی</span></div></div>
         </div>
       </div>
+
+      <div class="stats-row" style="margin-top: 16px;">
+        <div class="stat-card">
+          <div class="stat-title">نرخ فروایت – FAK ژوئن ۲۰۲۶</div>
+          <div class="stat-item"><span class="label">Asia–N.Europe FAK</span><span class="number" style="color:#E24B4A;">~$4,700/FEU</span></div>
+          <div class="stat-item"><span class="label">Asia–Mediterranean FAK</span><span class="number" style="color:#E24B4A;">$5,500–5,700/FEU</span></div>
+          <div class="stat-item"><span class="label">ONE PSS Transpacific (از ۱ ژوئن)</span><span class="number" style="color:#BA7517;">$2,000/FEU</span></div>
+          <div class="stat-item"><span class="label">MSC EFS Asia–USEC</span><span class="number" style="color:#BA7517;">$644/FEU</span></div>
+          <div class="stat-item"><span class="label">Intra-Asia (IACI)</span><span class="number" style="color:#185FA5;">$959/FEU</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-title">Blank Sailings – هفته ۲۲ تا ۲۶</div>
+          <div class="stat-item"><span class="label">کل Blank Sailings East-West</span><span class="number" style="color:#E24B4A;">41 سفر در ۵ هفته</span></div>
+          <div class="stat-item"><span class="label">از ۷۰۰ سفر برنامه‌ریزی شده</span><span class="number" style="color:#BA7517;">5.9٪ لغو</span></div>
+          <div class="stat-item"><span class="label">Asia–Europe (هفته آینده)</span><span class="number" style="color:#1D9E75;">4 Blank</span></div>
+          <div class="stat-item"><span class="label">Transpacific (هفته آینده)</span><span class="number" style="color:#BA7517;">8 Blank</span></div>
+          <div class="stat-item"><span class="label">وضعیت peak season</span><span class="number" style="color:#E24B4A;">زودتر از معمول ۲۰۲۶</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- پن 1: ناوگان و مسیرها -->
+    <div class="shipping-pane" id="shipping-pane-1">
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-title">انواع کشتی – ناوگان تجاری جهان ۲۰۲۶</div>
+          <div class="stat-item"><span class="label">نفتکش – Oil Tanker</span><span class="number">14,800 (25.6%)</span></div>
+          <div class="stat-item"><span class="label">فله‌خشک – Bulk Carrier</span><span class="number">12,200 (21.1%)</span></div>
+          <div class="stat-item"><span class="label">کانتینربر – Container</span><span class="number">6,500 (11.2%)</span></div>
+          <div class="stat-item"><span class="label">شیمیایی – Chemical Tanker</span><span class="number">5,100 (8.8%)</span></div>
+          <div class="stat-item"><span class="label">حمل عمومی – General Cargo</span><span class="number">4,800 (8.3%)</span></div>
+          <div class="stat-item"><span class="label">گاز مایع – LNG/LPG</span><span class="number">2,400 (4.1%)</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-title">سایزبندی تانکرها و کانتینربرها</div>
+          <div class="stat-item"><span class="label">ULCC</span><span class="number">320K–550K DWT</span></div>
+          <div class="stat-item"><span class="label">VLCC</span><span class="number" style="color:#E24B4A;">200K–320K ⚠ هرمز بسته</span></div>
+          <div class="stat-item"><span class="label">Suezmax</span><span class="number">120K–200K ✓ سوئز</span></div>
+          <div class="stat-item"><span class="label">Aframax/LR2</span><span class="number">80K–120K</span></div>
+          <div class="stat-item"><span class="label">Panamax MR</span><span class="number">40K–80K ✓ پاناما</span></div>
+          <div class="stat-item"><span class="label">Handysize</span><span class="number">10K–40K</span></div>
+        </div>
+      </div>
+
+      <div class="card" style="overflow-x: auto;">
+        <div class="shipping-title">مسیرهای اصلی حمل‌ونقل دریایی – داده واقعی ۲۰۲۶</div>
+        <table class="comparison-table-ahvaz" style="width: 100%; font-size: 11px;">
+          <thead><tr><th>مسیر</th><th>نوع</th><th>نرخ جاری</th><th>مدت</th><th>وضعیت</th><th>ریسک</th></tr></thead>
+          <tbody>
+            <tr><td class="col-hi-new">Shanghai → Rotterdam</th><td>Container</th><td style="color:#1D9E75;">$2,861</th><td>28 روز</th><td>فعال</th><td>متوسط</th></tr>
+            <tr><td class="col-hi-new">Shanghai → New York</th><td>Container</th><td style="color:#1D9E75;">$4,597</th><td>30 روز</th><td>فعال</th><td>متوسط</th></tr>
+            <tr><td class="col-hi-new">MEG → China VLCC</th><td>VLCC</th><td style="color:#E24B4A;">⚠ تعلیق</th><td>—</th><td>بسته</th><td>بحران</th></tr>
+            <tr><td class="col-hi-new">USGC → Europe</th><td>Suezmax</th><td style="color:#BA7517;">$38,200/day</th><td>18 روز</th><td>فعال</th><td>کم</th></tr>
+            <tr><td class="col-hi-new">Australia → China</th><td>Capesize</th><td style="color:#BA7517;">$41,428/day</th><td>12 روز</th><td>فعال</th><td>کم</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="stats-row" style="margin-top: 16px;">
+        <div class="stat-card">
+          <div class="stat-title">بنادر برتر ۲۰۲۵ (TEU)</div>
+          <div class="stat-item"><span class="label">1. Shanghai</span><span class="number" style="color:#185FA5;">49.5M</span></div>
+          <div class="stat-item"><span class="label">2. Singapore</span><span class="number" style="color:#185FA5;">39.0M</span></div>
+          <div class="stat-item"><span class="label">3. Ningbo-Zhoushan</span><span class="number" style="color:#185FA5;">35.1M</span></div>
+          <div class="stat-item"><span class="label">4. Shenzhen</span><span class="number" style="color:#185FA5;">33.0M</span></div>
+          <div class="stat-item"><span class="label">8. Jebel Ali</span><span class="number" style="color:#BA7517;">14.4M</span></div>
+          <div class="stat-item"><span class="label">10. Bandar Abbas</span><span class="number" style="color:#534AB7;">3.1M</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-title">محمولات فله – HS Code</div>
+          <div class="stat-item"><span class="label">نفت خام</span><span class="number">2709.00 | VLCC/Suez</span></div>
+          <div class="stat-item"><span class="label">LNG</span><span class="number">2711.11 | Q-Flex</span></div>
+          <div class="stat-item"><span class="label">LPG</span><span class="number">2711.19 | VLGC</span></div>
+          <div class="stat-item"><span class="label">سنگ آهن</span><span class="number">2601.11 | Capesize</span></div>
+          <div class="stat-item"><span class="label">ذرت/گندم</span><span class="number">1001–1005 | Panamax</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- پن 2: ناوگان سایه -->
+    <div class="shipping-pane" id="shipping-pane-2">
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-title" style="color:#E24B4A;">ناوگان سایه – آمار کلی</div>
+          <div class="stat-item"><span class="label">حجم ناوگان (تخمین)</span><span class="number" style="color:#E24B4A;">1,300–1,400+ کشتی</span></div>
+          <div class="stat-item"><span class="label">سهم ظرفیت تانکر جهانی</span><span class="number" style="color:#E24B4A;">~20٪</span></div>
+          <div class="stat-item"><span class="label">DWT ترکیبی</span><span class="number" style="color:#BA7517;">200M+ dwt</span></div>
+          <div class="stat-item"><span class="label">میانگین سن کشتی‌ها</span><span class="number" style="color:#BA7517;">23+ سال</span></div>
+          <div class="stat-item"><span class="label">بدون بیمه غرب</span><span class="number" style="color:#E24B4A;">~100٪</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-title">روسیه – ناوگان سایه</div>
+          <div class="stat-item"><span class="label">کل کشتی</span><span class="number" style="color:#E24B4A;">561 فروند</span></div>
+          <div class="stat-item"><span class="label">ظرفیت کل (DWT)</span><span class="number" style="color:#BA7517;">49.9M dwt</span></div>
+          <div class="stat-item"><span class="label">Aframax/LR1</span><span class="number" style="color:#185FA5;">228 فروند</span></div>
+          <div class="stat-item"><span class="label">Suezmax</span><span class="number" style="color:#185FA5;">58 فروند</span></div>
+          <div class="stat-item"><span class="label">اپراتور اصلی</span><span class="number">Sovcomflot</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-title">ایران – ناوگان سایه</div>
+          <div class="stat-item"><span class="label">کل کشتی</span><span class="number" style="color:#E24B4A;">170 فروند</span></div>
+          <div class="stat-item"><span class="label">ظرفیت کل (DWT)</span><span class="number" style="color:#BA7517;">34.2M dwt</span></div>
+          <div class="stat-item"><span class="label">VLCC</span><span class="number" style="color:#E24B4A;">86 فروند</span></div>
+          <div class="stat-item"><span class="label">وضعیت VLCC</span><span class="number" style="color:#E24B4A;">تعلیق / floating storage</span></div>
+          <div class="stat-item"><span class="label">اپراتور اصلی</span><span class="number">NITC</span></div>
+        </div>
+      </div>
+
       <div class="card">
-        <div class="section-title" style="margin-bottom:10px"><span class="bar" style="background:#639922"></span>فله‌بر (Bulk Carrier)</div>
-        <div class="inner-grid">
-          <div class="inner-metric"><div class="inner-label">ناوگان فله‌بر جهانی</div><div class="inner-value">>۱۲,۰۰۰</div><div class="inner-sub">فروند — ۲۰۲۴</div></div>
-          <div class="inner-metric"><div class="inner-label">کل تناژ (DWT)</div><div class="inner-value">>۹۵۰ M</div><div class="inner-sub">DWT — ۲۰۲۴</div></div>
-          <div class="inner-metric"><div class="inner-label">محصولات اصلی</div><div class="inner-value" style="font-size:12px;line-height:1.4">سنگ‌آهن، زغال‌سنگ، غلات</div><div class="inner-sub">سنگ‌آهن: ۴۳٪ کل حجم</div></div>
-          <div class="inner-metric"><div class="inner-label">حجم سالانه (جهانی)</div><div class="inner-value">۵.۲ B تن</div><div class="inner-sub">پیش‌بینی ۲۰۲۵</div></div>
+        <div class="shipping-title">تکنیک‌های دقیق فرار از تحریم – ۲۰۲۶</div>
+        <table class="comparison-table-ahvaz" style="width: 100%; font-size: 11px;">
+          <thead><tr><th>تکنیک</th><th>نحوه کار</th><th>شیوع</th><th>قابل ردیابی؟</th><th>کشور اصلی</th></tr></thead>
+          <tbody>
+            <tr><td class="col-hi-new">AIS Dark</th><td>خاموش کردن AIS</th><td>↑ رو به رشد</th><td>جزئی</th><td>روسیه، ایران</th></tr>
+            <tr><td class="col-hi-new">STS Transfer</th><td>انتقال دریا به دریا</th><td>↑ بالا</th><td style="color:#E24B4A;">ضعیف</th><td>روسیه، ایران</th></tr>
+            <tr><td class="col-hi-new">AIS Spoofing</th><td>ارسال مکان جعلی</th><td>متوسط</th><td style="color:#1D9E75;">بله (Kpler)</th><td>ایران، ونزوئلا</th></tr>
+            <tr><td class="col-hi-new">پرچم‌عوضی</th><td>تغییر پرچم و نام</th><td>بالا</th><td>IMO Number ثابت</th><td>همه</th></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- پن 3: هزینه و سورشارج -->
+    <div class="shipping-pane" id="shipping-pane-3">
+      <div class="card">
+        <div class="shipping-title">سورشارج‌های استاندارد – نرخ‌های رسمی ۲۰۲۶</div>
+        <table class="comparison-table-ahvaz" style="width: 100%; font-size: 11px;">
+          <thead><tr><th>کد</th><th>نام سورشارج</th><th>نرخ جاری</th><th>پایه</th><th>وضعیت</th></tr></thead>
+          <tbody>
+            <tr><td class="col-hi-new">BAF</th><td>Bunker Adjustment Factor</th><td>$180–420</th><td>/TEU</th><td>متغیر</th></tr>
+            <tr><td class="col-hi-new">WAR</th><td>War Risk (هرمز/دریای سرخ)</th><td style="color:#E24B4A;">$600–1,200+</th><td>/TEU</th><td style="color:#E24B4A;">↑ بحران جاری</th></tr>
+            <tr><td class="col-hi-new">PSS</th><td>Peak Season Surcharge</th><td style="color:#BA7517;">$2,000</th><td>/FEU</th><td style="color:#BA7517;">از ۱ ژوئن فعال</th></tr>
+            <tr><td class="col-hi-new">EFS</th><td>Emergency Fuel Surcharge</th><td>$467–644</th><td>/FEU</th><td>فعال</th></tr>
+            <tr><td class="col-hi-new">ETS</th><td>EU Emissions Trading System</th><td>+$90–120</th><td>/TEU EU-bound</th><td style="color:#534AB7;">↑ فعال ۲۰۲۶</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="stats-row" style="margin-top: 16px;">
+        <div class="stat-card">
+          <div class="stat-title">Demurrage & Detention</div>
+          <div class="stat-item"><span class="label">Demurrage – کانتینر ۲۰ft</span><span class="number" style="color:#E24B4A;">$80–180/روز</span></div>
+          <div class="stat-item"><span class="label">Detention – ۴۰ft</span><span class="number" style="color:#E24B4A;">$100–250/روز</span></div>
+          <div class="stat-item"><span class="label">Free Time – Rotterdam</span><span class="number" style="color:#1D9E75;">7 روز</span></div>
+          <div class="stat-item"><span class="label">Free Time – Shanghai</span><span class="number" style="color:#1D9E75;">5 روز</span></div>
+          <div class="stat-item"><span class="label">Laytime تانکر – VLCC</span><span class="number" style="color:#185FA5;">72 ساعت</span></div>
         </div>
-        <hr class="divider">
-        <div class="card-title">توزیع Capesize — بزرگترین بخش</div>
-        <div class="bar-row" style="margin-bottom:8px"><span style="font-size:11px;color:var(--text-muted);min-width:90px">سهم از DWT</span><div class="bar-track"><div class="bar-fill" style="width:40%;background:#3B6D11"></div></div><span style="font-size:11px;font-weight:500">۴۰٪ DWT</span></div>
-        <div class="kv-list">
-          <div class="kv-row"><span class="kv-key">ظرفیت Capesize</span><span class="kv-val">۱۸۰k+ DWT</span></div>
-          <div class="kv-row"><span class="kv-key">ارزش بازار (۲۰۲۵)</span><span class="kv-val">$۱۶۸.۵ B</span></div>
-          <div class="kv-row"><span class="kv-key">رشد ۲۰۲۶–۲۰۳۵ (CAGR)</span><span class="kv-val">۴.۱٪</span></div>
-          <div class="kv-row"><span class="kv-key">سهم چین از واردات</span><span class="kv-val">۴۱٪+ (جهانی)</span></div>
-          <div class="kv-row"><span class="kv-key">معدن سیماندو (گینه)</span><span class="kv-val c-success">از دسامبر ۲۰۲۵ فعال</span></div>
+        <div class="stat-card">
+          <div class="stat-title">هزینه‌های بندری – بنادر اصلی</div>
+          <div class="stat-item"><span class="label">Rotterdam – Port Dues</span><span class="number" style="color:#185FA5;">€0.42/GT</span></div>
+          <div class="stat-item"><span class="label">Shanghai – Port Dues</span><span class="number" style="color:#185FA5;">$0.18/GT</span></div>
+          <div class="stat-item"><span class="label">Jebel Ali – Port Dues</span><span class="number" style="color:#185FA5;">$0.28/GT</span></div>
+          <div class="stat-item"><span class="label">Pilotage – بنادر بزرگ</span><span class="number">$2K–8K</span></div>
+          <div class="stat-item"><span class="label">Towage – یدک‌کشی VLCC</span><span class="number">$8K–18K</span></div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="section">
-    <div class="section-title"><span class="bar" style="background:#BA7517"></span>گازبر LNG / LPG</div>
-    <div class="metrics-grid" style="margin-bottom:12px">
-      <div class="metric-card"><div class="metric-label">ناوگان LNG جهانی</div><div class="metric-value">>۶۵۰ فروند</div><div class="metric-sub">+ ۲۸۸+ در orderbook تا ۲۰۳۰</div></div>
-      <div class="metric-card"><div class="metric-label">ناوگان LPG جهانی</div><div class="metric-value">حدود۱,۶۰۰ فروند</div><div class="metric-sub">گاز مایع نفتی</div></div>
-      <div class="metric-card"><div class="metric-label">ظرفیت هر کشتی LNG</div><div class="metric-value" style="font-size:15px">۱۴۵k–۲۶۶k m³</div><div class="metric-sub">QC-Max قطر: ۲۷۱,۰۰۰ m³</div></div>
-      <div class="metric-card"><div class="metric-label">مسیر کلیدی قطر–چین</div><div class="metric-value">حدود۲۰ روز</div><div class="metric-sub">ترانزیت دریایی</div></div>
-      <div class="metric-card"><div class="metric-label">نرخ اجاره اسپات LNG</div><div class="metric-value c-danger">$4,250/day</div><div class="metric-sub">فوریه ۲۰۲۵ — ↓۸۲٪</div></div>
-      <div class="metric-card"><div class="metric-label">تجارت جهانی LNG</div><div class="metric-value">۴۱۱ MT</div><div class="metric-sub">در ۲۰۲۴ — IntelEvoResearch</div></div>
-    </div>
-    <div class="card">
-      <div class="card-title">برنامه توسعه ناوگان QatarEnergy — ۲۰۲۴ تا ۲۰۳۱ (بزرگترین برنامه در تاریخ صنعت LNG)</div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px">
-        <div class="inner-metric"><div class="inner-label">کل سفارش‌ها</div><div class="inner-value">۱۲۸ فروند LNG</div><div class="inner-sub">conventional + QC-Max</div></div>
-        <div class="inner-metric"><div class="inner-label">QC-Max (بزرگترین جهان)</div><div class="inner-value">۲۴ فروند</div><div class="inner-sub">ارزش: $۸ میلیارد</div></div>
-        <div class="inner-metric"><div class="inner-label">کارخانه‌های سازنده</div><div class="inner-value" style="font-size:12px">HD HHI · SHI · CSSC</div><div class="inner-sub">کره جنوبی + چین</div></div>
-        <div class="inner-metric"><div class="inner-label">ظرفیت صادرات قطر</div><div class="inner-value">۷۷ → ۱۲۶ mtpa</div><div class="inner-sub">North Field تا ۲۰۲۷</div></div>
-        <div class="inner-metric"><div class="inner-label">سود Nakilat Q3 2025</div><div class="inner-value c-success">$360 M</div><div class="inner-sub">+۳٪ نسبت به ۲۰۲۴</div></div>
-        <div class="inner-metric"><div class="inner-label">تحویل QC-Max</div><div class="inner-value">۲۰۲۸–۲۰۳۱</div><div class="inner-sub">Hudong-Zhonghua (CSSC)</div></div>
+    <!-- پن 4: مدارک و ریسک -->
+    <div class="shipping-pane" id="shipping-pane-4">
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-title">مدارک اصلی – صادرات دریایی</div>
+          <div class="stat-item"><span class="label">Bill of Lading (B/L)</span><span class="number">اجباری | ۳ اصلی</span></div>
+          <div class="stat-item"><span class="label">Commercial Invoice</span><span class="number">اجباری</span></div>
+          <div class="stat-item"><span class="label">Certificate of Origin</span><span class="number">اجباری</span></div>
+          <div class="stat-item"><span class="label">Packing List</span><span class="number">اجباری</span></div>
+          <div class="stat-item"><span class="label">Letter of Credit</span><span class="number">شرطی (UCP 600)</span></div>
+          <div class="stat-item"><span class="label">VGM Declaration</span><span class="number">اجباری IMO</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-title">بیمه دریایی – P&I و Marine Cargo</div>
+          <div class="stat-item"><span class="label">ICC (A) – All Risks</span><span class="number" style="color:#1D9E75;">0.08–0.15%</span></div>
+          <div class="stat-item"><span class="label">ICC (B) – Named Perils</span><span class="number" style="color:#185FA5;">0.05–0.10%</span></div>
+          <div class="stat-item"><span class="label">JWLA War Risk – هرمز ۲۰۲۶</span><span class="number" style="color:#E24B4A;">⚠ غیرقابل خرید</span></div>
+          <div class="stat-item"><span class="label">War Risk – دریای سرخ</span><span class="number" style="color:#E24B4A;">2.5–5%</span></div>
+          <div class="stat-item"><span class="label">P&I Club – مسئولیت مدنی</span><span class="number">$10M–$1B limit</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="shipping-title">Incoterms 2020 – تقسیم ریسک و هزینه</div>
+        <table class="comparison-table-ahvaz" style="width: 100%; font-size: 11px;">
+          <thead><tr><th>Incoterm</th><th>تحویل کالا در</th><th>حمل</th><th>بیمه</th><th>گمرک صادراتی</th><th>گمرک وارداتی</th></tr></thead>
+          <tbody>
+            <tr><td class="col-hi-new">EXW</th><td>کارخانه فروشنده</th><td>خریدار</th><td>خریدار</th><td>خریدار</th><td>خریدار</th></tr>
+            <tr><td class="col-hi-new">FCA</th><td>نزد حامل اول</th><td>خریدار</th><td>خریدار</th><td>فروشنده</th><td>خریدار</th></tr>
+            <tr><td class="col-hi-new">FOB</th><td>روی عرشه کشتی</th><td>خریدار</th><td>خریدار</th><td>فروشنده</th><td>خریدار</th></tr>
+            <tr><td class="col-hi-new">CIF</th><td>بندر مقصد</th><td>فروشنده</th><td>فروشنده (min)</th><td>فروشنده</th><td>خریدار</th></tr>
+            <tr><td class="col-hi-new">DDP</th><td>مقصد نهایی</th><td>فروشنده</th><td>فروشنده</th><td>فروشنده</th><td>فروشنده</th></tr>
+          </tbody>
+        </table>
       </div>
     </div>
-  </div>
 
-  <div class="section">
-    <div class="section-title"><span class="bar" style="background:#7F77DD"></span>بندرهای کلیدی مسیر چین–ایران–اروپا</div>
-    <div class="ports-grid">
-      <div class="port-card"><div class="port-header"><span class="port-name">چین</span></div><div class="kv-list"><div class="kv-row"><span class="kv-key">شانگهای</span><span class="kv-val">۴۷ M TEU/سال</span></div><div class="kv-row"><span class="kv-key">نینگبو-ژوشان</span><span class="kv-val">>۴۳ M TEU</span></div><div class="kv-row"><span class="kv-key">چینگ‌دائو</span><span class="kv-val">حدود۳۰ M TEU</span></div><div class="kv-row"><span class="kv-key">شنژن</span><span class="kv-val">۲۸ M TEU</span></div></div></div>
-      <div class="port-card"><div class="port-header"><span class="port-name">خلیج فارس</span><span class="tag tag-danger">⚠ بحران</span></div><div class="kv-list"><div class="kv-row"><span class="kv-key">جبل‌علی (دبی)</span><span class="kv-val">۱۵.۵ M TEU</span></div><div class="kv-row"><span class="kv-key">بندرعباس (ایران) ⚠</span><span class="kv-val">حدود۳.۵ M TEU</span></div><div class="kv-row"><span class="kv-key">دوحه (قطر)</span><span class="kv-val">مرکز اصلی LNG</span></div></div><div class="alert alert-danger" style="margin-top:8px">⚠ تنگه هرمز — تعلیق/ریسک بالا</div></div>
-      <div class="port-card featured"><div class="port-header"><span class="port-name">عمان (جایگزین)</span><span class="tag tag-success">توصیه‌شده</span></div><div class="kv-list"><div class="kv-row"><span class="kv-key">سالاله</span><span class="kv-val">۴–۵ M TEU/سال</span></div><div class="kv-row"><span class="kv-key">صحار</span><span class="kv-val">حدود۱ M TEU/سال</span></div><div class="kv-row"><span class="kv-key">دقم</span><span class="kv-val">۲۰۰k TEU</span></div></div><div class="alert alert-success" style="margin-top:8px">  ترافیک ۲× شده — مارس ۲۰۲۶</div></div>
-      <div class="port-card"><div class="port-header"><span class="port-name">دریای سیاه و مدیترانه</span></div><div class="kv-list"><div class="kv-row"><span class="kv-key">آمبارلی (ترکیه)</span><span class="kv-val">حدود۱۲ M TEU</span></div><div class="kv-row"><span class="kv-key">پیرائوس (یونان)</span><span class="kv-val">حدود۷ M TEU</span></div><div class="kv-row"><span class="kv-key">کنستانتسا (رومانی)</span><span class="kv-val">حدود۲ M TEU</span></div><div class="kv-row"><span class="kv-key">مرسین (ترکیه)</span><span class="kv-val">ورودی ایران</span></div></div></div>
+    <div class="dash-footer" style="margin: 16px 20px 20px 20px;">
+      <p>منابع: Baltic Exchange · Drewry WCI · Kpler · S&P Global · EIA · Lloyd's List · IMF PortWatch · Argus Media · BIMCO · ICC · UNCTAD</p>
+      <p>آپدیت: ۲ ژوئن ۲۰۲۶ | داده‌های بازار: ۲۸–۲ می ۲۰۲۶</p>
     </div>
-  </div>
-
-  <div class="section">
-    <div class="section-title"><span class="bar" style="background:#533487"></span>کریدورهای ریلی — مقایسه جامع (۲۰۲۵–۲۰۲۶)</div>
-    <div class="corridor-grid">
-      <div class="corridor-card"><div class="corridor-header"><span class="corridor-name">کریدور شمالی</span><span class="tag tag-danger">تحریم</span></div><div class="corridor-sub">Trans-Siberian · روسیه–بلاروس</div><div class="kv-list"><div class="kv-row"><span class="kv-key">کانتینر ۲۰۲۳</span><span class="kv-val c-danger">حدود۰.۶ M TEU ↓۵۰٪</span></div><div class="kv-row"><span class="kv-key">زمان ترانزیت</span><span class="kv-val">۱۲–۲۵ روز</span></div><div class="kv-row"><span class="kv-key">نرخ (40ft)</span><span class="kv-val">$7,000–$10,000</span></div><div class="kv-row"><span class="kv-key">وضعیت</span><span class="kv-val c-warning">در حال بازیابی</span></div></div></div>
-      <div class="corridor-card featured"><div class="corridor-header"><span class="corridor-name">کریدور میانی (TITR)</span><span class="tag tag-info">رشد ۱۷۵٪</span></div><div class="corridor-sub">قزاقستان · آذربایجان · گرجستان · ترکیه</div><div class="kv-list"><div class="kv-row"><span class="kv-key">کانتینر ۲۰۲۵</span><span class="kv-val c-info">۷۶,۹۰۰ TEU ↑۳۶٪</span></div><div class="kv-row"><span class="kv-key">زمان ترانزیت</span><span class="kv-val">۱۸–۲۵ روز</span></div><div class="kv-row"><span class="kv-key">نرخ (40ft)</span><span class="kv-val">$5,000–$7,000</span></div><div class="kv-row"><span class="kv-key">هدف ۲۰۲۹</span><span class="kv-val c-info">۳۰۰,۰۰۰ TEU</span></div><div class="kv-row"><span class="kv-key">هدف ۲۰۳۰ (تناژ)</span><span class="kv-val">۱۱ M تن/سال</span></div><div class="kv-row"><span class="kv-key">سرمایه‌گذاری ۲۰۲۶</span><span class="kv-val">قرارداد دیجیتال</span></div></div></div>
-      <div class="corridor-card"><div class="corridor-header"><span class="corridor-name">راه ابریشم دریایی</span><span class="tag tag-muted">کاهش جزئی</span></div><div class="corridor-sub">Maritime Silk Road — BRI</div><div class="kv-list"><div class="kv-row"><span class="kv-key">کانتینری اصلی</span><span class="kv-val">حدود۲۴ M TEU ↓</span></div><div class="kv-row"><span class="kv-key">زمان ترانزیت</span><span class="kv-val">۳۵–۴۵ روز</span></div><div class="kv-row"><span class="kv-key">سهم از تجارت جهانی</span><span class="kv-val">۲۲–۲۴٪</span></div><div class="kv-row"><span class="kv-key">اختلال دریای سرخ</span><span class="kv-val c-warning">+۱۰–۱۴ روز</span></div><div class="kv-row"><span class="kv-key">نرخ (40ft اقیانوس)</span><span class="kv-val">$2,000–$3,500</span></div></div></div>
-      <div class="corridor-card"><div class="corridor-header"><span class="corridor-name">INSTC شمال–جنوب</span><span class="tag tag-warning">در حال رشد</span></div><div class="corridor-sub">روسیه · دریای خزر · ایران · هند</div><div class="kv-list"><div class="kv-row"><span class="kv-key">هزینه نسبت به سوئز</span><span class="kv-val c-success">۳۰٪ کمتر</span></div><div class="kv-row"><span class="kv-key">زمان ترانزیت</span><span class="kv-val">۲۵–۳۰ روز</span></div><div class="kv-row"><span class="kv-key">هدف ۲۰۳۰ (EDB)</span><span class="kv-val">۳۰ M تن/سال</span></div><div class="kv-row"><span class="kv-key">تهدید اصلی</span><span class="kv-val c-danger">تحریم ایران+روسیه</span></div><div class="kv-row"><span class="kv-key">حمله به انزلی ۲۰۲۶</span><span class="kv-val c-danger">تأثیر نامشخص</span></div></div></div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-title"><span class="bar" style="background:#993C1D"></span>استراتژی BRI — سرمایه‌گذاری و اهداف تا ۲۰۳۰</div>
-    <div class="bri-grid">
-      <div class="bri-card"><div class="bri-value">$۵–۷ B</div><div class="bri-label">توسعه TITR (۲۰۲۵–۲۸)</div></div>
-      <div class="bri-card"><div class="bri-value">هاب‌های لجستیکی</div><div class="bri-label">چابهار | گوادر | سرخس</div></div>
-      <div class="bri-card"><div class="bri-value">$۴–۶ B</div><div class="bri-label">مسیر بازگشت نفت (دقم)</div></div>
-      <div class="bri-card"><div class="bri-value">$۰.۵–۱ B</div><div class="bri-label">دیجیتال‌سازی Single Window</div></div>
-      <div class="bri-card"><div class="bri-value">$۸–۱۰ B</div><div class="bri-label">INSTC + ریل قرقیزستان</div></div>
-      <div class="bri-card"><div class="bri-value">۱۵ روز</div><div class="bri-label">هدف زمان ترانزیت TITR ۲۰۲۶</div></div>
-      <div class="bri-card"><div class="bri-value">۱,۰۰۰</div><div class="bri-label">هدف قطار/سال TITR ۲۰۲۷</div></div>
-      <div class="bri-card"><div class="bri-value">۲,۰۰۰</div><div class="bri-label">هدف قطار/سال TITR ۲۰۲۸+</div></div>
-    </div>
-  </div>
-
-  <div class="dash-footer">
-    <p>منابع: Alphaliner (Apr 2026) · EIA (Jan 2026) · BIMCO (Q1 2026) · WorldCargoNews (Apr 2026) · Windward AI (May 2026) · AstanaTimes (Mar 2026) · TRACECA (Apr 2026) · RailwayNews (Apr 2026) · DNV · DP World · Tankers International · IntelEvoResearch</p>
-    <p>⚠ اعداد تخمینی — نوسانات بازار در شرایط بحران بالاست</p>
   </div>
 </div>
 
@@ -1887,11 +2080,11 @@
             <tr><th>معیار</th><th>دبی (راشد)</th><th>جبل‌علی / JAFZA</th><th>صحار</th><th>سالاله</th><th>دقم</th><th>خصب</th><th>بندر حمد</th><th>راس لفان</th><th>کراچی</th><th>گوادر</th></tr>
           </thead>
           <tbody>
-            <tr><td>امتیاز کلی</th><td>۶۵</th><td>۷۰</th><td>۸۲</th><td>۷۸</th><td>۷۵</th><td>۴۰</th><td>۷۲</th><td>۶۵</th><td>۵۵</th><td>۴۲</th></tr>
-            <tr><td>FATF وضعیت</th><td>خارج ۲۰۲۴</th><td>خارج ۲۰۲۴</th><td>پاک</th><td>پاک</th><td>پاک</th><td>ریسک بالا</th><td>پاک</th><td>پاک</th><td>پاک</th><td>ریسک CPEC</th></tr>
-            <tr><td>ریسک ایران</th><td>🔴 بسیار بالا</th><td>🔴 بسیار بالا</th><td>🟡 متوسط</th><td>🟡 متوسط</th><td>🟡 متوسط</th><td>🔴 بسیار بالا</th><td>🟡 متوسط</th><td>🟡 متوسط</th><td>🔴 بالا</th><td>🔴 بسیار بالا</th></tr>
-            <tr><td>تحریم ثانویه</th><td>خطر بالا OFAC</th><td>خطر بالا OFAC</th><td>کمتر</th><td>کمتر</th><td>کمتر</th><td>خطر بالا</th><td>کمتر</th><td>کمتر</th><td>خطر بالا</th><td>خطر بسیار بالا</th></tr>
-            <tr><td>تجهیزات OOG</th><td>نامناسب</th><td>مناسب</th><td>بهترین</th><td>مناسب</th><td>عالی (نفتی)</th><td>نامناسب</th><td>متوسط</th><td>متوسط</th><td>متوسط</th><td>محدود</th></tr>
+            <tr><td class="col-hi-new">امتیاز کلی</th><td>۶۵</th><td>۷۰</th><td>۸۲</th><td>۷۸</th><td>۷۵</th><td>۴۰</th><td>۷۲</th><td>۶۵</th><td>۵۵</th><td>۴۲</th></tr>
+            <tr><td class="col-hi-new">FATF وضعیت</th><td>خارج ۲۰۲۴</th><td>خارج ۲۰۲۴</th><td>پاک</th><td>پاک</th><td>پاک</th><td>ریسک بالا</th><td>پاک</th><td>پاک</th><td>پاک</th><td>ریسک CPEC</th></tr>
+            <tr><td class="col-hi-new">ریسک ایران</th><td>🔴 بسیار بالا</th><td>🔴 بسیار بالا</th><td>🟡 متوسط</th><td>🟡 متوسط</th><td>🟡 متوسط</th><td>🔴 بسیار بالا</th><td>🟡 متوسط</th><td>🟡 متوسط</th><td>🔴 بالا</th><td>🔴 بسیار بالا</th></tr>
+            <tr><td class="col-hi-new">تحریم ثانویه</th><td>خطر بالا OFAC</th><td>خطر بالا OFAC</th><td>کمتر</th><td>کمتر</th><td>کمتر</th><td>خطر بالا</th><td>کمتر</th><td>کمتر</th><td>خطر بالا</th><td>خطر بسیار بالا</th></tr>
+            <tr><td class="col-hi-new">تجهیزات OOG</th><td>نامناسب</th><td>مناسب</th><td>بهترین</th><td>مناسب</th><td>عالی (نفتی)</th><td>نامناسب</th><td>متوسط</th><td>متوسط</th><td>متوسط</th><td>محدود</th></tr>
           </tbody>
         </table>
       </div>
@@ -2125,6 +2318,17 @@ function switchCorridorsTab(tabName) {
   if(event && event.target) event.target.classList.add('active');
 }
 
+// توابع تب کشتیرانی جدید
+function switchShippingTab(index) {
+  const panes = document.querySelectorAll('#dash-shipping .shipping-pane');
+  const tabs = document.querySelectorAll('#dash-shipping .shipping-tab');
+  if (!panes.length || !tabs.length) return;
+  panes.forEach(p => p.classList.remove('active'));
+  tabs.forEach(t => t.classList.remove('active'));
+  panes[index].classList.add('active');
+  tabs[index].classList.add('active');
+}
+
 function showDash(id) {
   document.querySelectorAll('.dash-section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -2138,6 +2342,18 @@ function showDash(id) {
     if (detailDiv) detailDiv.style.display = 'none';
     renderRoutesPro();
   }
+  if (id === 'shipping') {
+    setTimeout(() => {
+      const firstPane = document.querySelector('#dash-shipping .shipping-pane');
+      const firstTab = document.querySelector('#dash-shipping .shipping-tab');
+      if (firstPane && firstTab && !firstPane.classList.contains('active')) {
+        document.querySelectorAll('#dash-shipping .shipping-pane').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('#dash-shipping .shipping-tab').forEach(t => t.classList.remove('active'));
+        firstPane.classList.add('active');
+        firstTab.classList.add('active');
+      }
+    }, 50);
+  }
 }
 
 window.onload = () => { 
@@ -2147,6 +2363,7 @@ window.onload = () => {
   document.getElementById('ahvazCard1')?.classList.add('open');
 };
 window.showDash = showDash;
+window.switchShippingTab = switchShippingTab;
 window.toggleAhvazCard = toggleAhvazCard;
 window.toggleAllAhvaz = toggleAllAhvaz;
 window.showPortPanel = showPortPanel;
