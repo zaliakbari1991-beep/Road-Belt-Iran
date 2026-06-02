@@ -2,8 +2,8 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>داشبورد لجستیک چین–ایران | صنایع بالادستی انرژی</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>داشبورد لجستیک چین–ایران | کریدور اختصاصی صنایع بالادستی</title>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -43,6 +43,185 @@
   .container { max-width: 1400px; margin: 0 auto; padding: 1.5rem; }
   .dash-section { display: none; }
   .dash-section.active { display: block; }
+  
+  /* استایل‌های صفحه اول جدید (کریدور اختصاصی) */
+  .main-header-custom {
+    background: #0a2b3e;
+    color: white;
+    padding: 0.9rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+  }
+  .logo-area-custom h1 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+  .logo-area-custom p {
+    font-size: 0.7rem;
+    opacity: 0.75;
+    margin-top: 4px;
+  }
+  .project-description {
+    background: linear-gradient(115deg, #ffffff 0%, #fefcf7 100%);
+    border-radius: 28px;
+    padding: 1.6rem 2rem;
+    margin-bottom: 1.8rem;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.05);
+    border: 1px solid rgba(245,166,35,0.25);
+    border-right: 8px solid #f5a623;
+  }
+  .badge-title {
+    display: inline-block;
+    background: #f5a62320;
+    color: #b4580c;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 40px;
+    margin-bottom: 1rem;
+    letter-spacing: 0.5px;
+  }
+  .project-description h2 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #0b3552;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+  .highlight {
+    color: #f5a623;
+    border-bottom: 2px solid #f5a623;
+    display: inline-block;
+  }
+  .desc-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.8rem;
+    margin: 1.2rem 0 0.6rem;
+  }
+  .desc-card {
+    flex: 1;
+    min-width: 180px;
+    background: #f8fafd;
+    border-radius: 20px;
+    padding: 1rem 1.2rem;
+    border: 1px solid #eef2f9;
+  }
+  .desc-icon {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+  }
+  .desc-card h4 {
+    font-size: 0.9rem;
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+  }
+  .desc-card p {
+    font-size: 0.75rem;
+    color: #49658c;
+    line-height: 1.6;
+  }
+  .desc-footer-note {
+    margin-top: 1.2rem;
+    background: #eef3fc;
+    padding: 0.8rem 1.2rem;
+    border-radius: 18px;
+    font-size: 0.75rem;
+    color: #25597e;
+    display: inline-block;
+    width: auto;
+  }
+  .google-map-card {
+    background: #fff;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+    border: 1px solid #e9edf4;
+    margin-bottom: 1.5rem;
+  }
+  .google-map-frame {
+    width: 100%;
+    height: 620px;
+    border: none;
+    display: block;
+  }
+  .map-footer-note {
+    background: #fbfbfe;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.7rem;
+    color: #6c7f9e;
+    border-top: 1px solid #edf2f8;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .legend-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    margin-left: 6px;
+  }
+  .capabilities-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    margin-top: 0.5rem;
+  }
+  .cap-card {
+    flex: 1;
+    background: white;
+    border-radius: 22px;
+    padding: 1.2rem 1.2rem;
+    border: 1px solid #eef2fa;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    transition: all 0.2s;
+  }
+  .cap-card:hover {
+    transform: translateY(-3px);
+    border-color: #f5a62360;
+  }
+  .cap-title {
+    font-weight: 800;
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+    color: #0f3b5c;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .cap-text {
+    font-size: 0.75rem;
+    color: #446688;
+    line-height: 1.65;
+  }
+  @media (prefers-color-scheme: dark) {
+    .project-description { background: #1e2a3a; border-color: #f5a62340; }
+    .project-description h2 { color: #e2e8f0; }
+    .desc-card { background: #1a2533; border-color: #2a3a4a; }
+    .desc-card p { color: #94a3b8; }
+    .desc-footer-note { background: #0f2a3a; color: #b5d4f4; }
+    .google-map-card { background: #1a2533; border-color: #2a3a4a; }
+    .map-footer-note { background: #1a2533; border-color: #2a3a4a; color: #94a3b8; }
+    .cap-card { background: #1a2533; border-color: #2a3a4a; }
+    .cap-title { color: #e2e8f0; }
+    .cap-text { color: #94a3b8; }
+  }
+  @media (max-width: 780px) {
+    .google-map-frame { height: 460px; }
+    .project-description h2 { font-size: 1.2rem; }
+    .desc-grid { flex-direction: column; gap: 1rem; }
+  }
+
   .card { background: white; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
   .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 20px; }
   .metric-box { background: white; border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
@@ -92,9 +271,6 @@
   .filter-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
   .filt { font-size: 11px; padding: 5px 14px; border-radius: 20px; border: 1px solid #ddd; background: white; cursor: pointer; }
   .filt.on { background: #185FA5; color: white; }
-  .risk-high { color: #E24B4A; font-weight: 700; }
-  .risk-medium { color: #BA7517; font-weight: 700; }
-  .risk-low { color: #1D9E75; font-weight: 700; }
   .update-note { font-size: 10px; color: #999; text-align: left; margin-top: 20px; }
   @media (max-width: 768px) { .countries-container { flex-direction: column; } .countries-list { width: 100%; } }
   
@@ -439,74 +615,74 @@
 
 <div class="container">
 
-<!-- ========== صفحه اول: نمای کلی ========== -->
+<!-- ========== صفحه اول: نمای کلی (جدید - کریدور اختصاصی) ========== -->
 <div id="dash-main" class="dash-section active">
-  <div class="stats-row">
-    <div class="stat-card">
-      <div class="stat-title">کریدور شمالی (Trans-Siberian)</div>
-      <div class="stat-item"><span class="label">کانتینری ۲۰۲۴→۲۰۲۵</span><span class="number">NA → NA TEU <span style="color:#b91c1c;">کاهش NA% نسبت به ۲۰۲۴</span></span></div>
-      <div class="stat-item"><span class="label">انرژی و فله ۲۰۲۴→۲۰۲۵</span><span class="number">NA → NA تن <span style="color:#b91c1c;">کاهش نسبت به ۲۰۲۴</span></span></div>
-      <div class="stat-item"><span class="label">پروژه‌ای (OOG) ۲۰۲۵</span><span class="number">NA تن (کاهش از NA M نسبت به ۲۰۲۴)</span></div>
-      <div class="stat-item"><span class="label">وضعیت</span><span class="number">تحت تحریم، تغییر مسیر</span></div>
+  <!-- بخش توضیح پروژه: حرفه‌ای، کامل، مشاوره‌ای -->
+  <div class="project-description">
+    <div class="badge-title">🎯 پلتفرم اختصاصی لجستیک صنایع بالادستی</div>
+    <h2>کریدور انرژی چین–ایران؛ <span class="highlight">هوشمندی مسیر، کاهش ریسک و بهینه‌سازی زنجیره تأمین</span></h2>
+    <div class="desc-grid">
+      <div class="desc-card">
+        <div class="desc-icon">📍</div>
+        <h4>پایش لحظه‌ای کریدورها</h4>
+        <p>نقشه تعاملی Google Maps شامل تمام گلوگاه‌ها، بنادر استراتژیک، مسیرهای ریلی و جاده‌ای فعال از چین تا خلیج فارس و ایران.</p>
+      </div>
+      <div class="desc-card">
+        <div class="desc-icon">⚖️</div>
+        <h4>تحلیل جایگزین‌های هوشمند</h4>
+        <p>مقایسه مسیر میانی (TITR)، کریدور جنوب عمان، مسیر ترکیه و INSTC از نظر زمان، هزینه و امنیت — پشتیبانی از تصمیم‌گیری راهبردی.</p>
+      </div>
+      <div class="desc-card">
+        <div class="desc-icon">🛡️</div>
+        <h4>هشدار ریسک و تحریم</h4>
+        <p>شناسایی نقاط دارای ریسک ژئوپلیتیک (تنگه هرمز، تحریم‌های ثانویه، بنادر تحت نظر FATF) و معرفی مسیرهای امن جایگزین (عمان، ترکیه).</p>
+      </div>
+      <div class="desc-card">
+        <div class="desc-icon">💰</div>
+        <h4>فرصت‌های سرمایه‌گذاری</h4>
+        <p>داده‌های اختصاصی از پروژه‌های BRI، توسعه کریدور میانی، مناطق آزاد جدید (چابهار، دقم، صحار) و نرخ‌های حمل به‌روز.</p>
+      </div>
     </div>
-    <div class="stat-card">
-      <div class="stat-title">کریدور میانی (TITR)</div>
-      <div class="stat-item"><span class="label">کانتینری ۲۰۲۴→۲۰۲۵</span><span class="number"> NA → NA TEU <span style="color:#15803d;">رشد NA % نسبت به ۲۰۲۴</span></span></div>
-      <div class="stat-item"><span class="label">انرژی و فله ۲۰۲۴→۲۰۲۵</span><span class="number">NA → NA تن <span style="color:#15803d;">رشد  NA % نسبت به ۲۰۲۴</span></span></div>
-      <div class="stat-item"><span class="label">پروژه‌ای (OOG) ۲۰۲۵</span><span class="number">NA تن (رشد از NA M نسبت به ۲۰۲۴)</span></div>
-      <div class="stat-item"><span class="label">زمان ترانزیت ۲۰۲۵</span><span class="number">۱۸-۲۵ روز</span></div>
-      <div class="stat-item"><span class="label">گلوگاه اصلی</span><span class="number">بنادر آکتاو/کوریک | مرز گرجستان</span></div>
-      <div class="stat-item"><span class="label">پیش‌بینی ۲۰۳۰</span><span class="number">۱۰-۱۵ Mt</span></div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-title">راه ابریشم دریایی</div>
-      <div class="stat-item"><span class="label">کانتینری ۲۰۲۴→۲۰۲۵</span><span class="number">NA  → NA TEU <span style="color:#b45309;">کاهش جزئی نسبت به ۲۰۲۴</span></span></div>
-      <div class="stat-item"><span class="label">انرژی و فله ۲۰۲۵</span><span class="number"> NA تن (جایگزینی نفت روسیه نسبت به ۲۰۲۴)</span></div>
-      <div class="stat-item"><span class="label">پروژه‌ای (OOG) ۲۰۲۵</span><span class="number">NA تن (رشد از NA M نسبت به ۲۰۲۴)</span></div>
-      <div class="stat-item"><span class="label">زمان ترانزیت</span><span class="number">۳۵-۴۵ روز</span></div>
-      <div class="stat-item"><span class="label">سهم از تجارت جهانی</span><span class="number">۳۰% (۲۲-۲۴M TEU)</span></div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-title">استراتژی BRI تا ۲۰۳۰</div>
-      <div class="stat-item"><span class="label">توسعه TITR (۲۰۲۵-۲۸)</span><span class="number">NA میلیارد $</span></div>
-      <div class="stat-item"><span class="label">هاب‌های لجستیکی</span><span class="number">دوستم (OOG) | چابهار | سرخس</span></div>
-      <div class="stat-item"><span class="label">مسیر برگشت نفت (دوقم)</span><span class="number">NA میلیارد $</span></div>
-      <div class="stat-item"><span class="label">دیجیتالی‌سازی (Single Window)</span><span class="number">NA میلیارد $</span></div>
-      <div class="stat-item"><span class="label">کریدور INSTC + ریلی قرقیزستان</span><span class="number">NA میلیارد $</span></div>
-      <div class="stat-item"><span class="label">هدف زمانی TITR ۲۰۲۶</span><span class="number">۱۵ روز</span></div>
-      <div class="stat-item"><span class="label">هدف قطارها ۲۰۲۷</span><span class="number">NA قطار/سال</span></div>
+    <div class="desc-footer-note">
+      🧠 این داشبورد برای مدیران زنجیره تأمین، مشاوران لجستیک و سرمایه‌گذاران حوزه انرژی طراحی شده است. 
+      کلیک روی هر نقطه از نقشه، اطلاعات تکمیلی کریدور مربوطه را نمایش می‌دهد.
     </div>
   </div>
-  
-  <div class="map-section">
-    <div class="map-toolbar">
-      <span>نقشه کریدورهای چین به ایران</span>
-      <button class="map-btn active" onclick="resetMapFilter()">همه مسیرها</button>
-      <button class="map-btn" onclick="toggleMeasure()">اندازه‌گیری فاصله</button>
-      <span id="measure-info" style="font-size:10px"></span>
+
+  <!-- نقشه گوگل مپس با تمام نقاط و لایه‌ها -->
+  <div class="google-map-card">
+    <iframe class="google-map-frame" 
+      src="https://www.google.com/maps/d/embed?mid=1aDX7mGtJGuRET29CW8nl9KPxfotrn3Y&ll=31.80909037503909%2C64.40907510300246&z=6" 
+      title="Google My Maps - کریدورهای اختصاصی چین به ایران | صنایع بالادستی انرژی"
+      allowfullscreen>
+    </iframe>
+    <div class="map-footer-note">
+      <span><span class="legend-dot" style="background:#E24B4A;"></span> مسیرهای پرریسک (تنگه هرمز)</span>
+      <span><span class="legend-dot" style="background:#1D9E75;"></span> کریدورهای امن پیشنهادی</span>
+      <span><span class="legend-dot" style="background:#185FA5;"></span> بنادر استراتژیک & هاب‌های لجستیکی</span>
+      <span><span class="legend-dot" style="background:#F5A623;"></span> نقاط ترانزیت کلیدی (ریلی/فری)</span>
+      <span>🔍 <strong>نکته:</strong> نقشه شامل ۱۵+ لایه اطلاعاتی، کریدورهای ریلی TITR، مسیرهای دریایی، مناطق آزاد و گلوگاه‌های گمرکی است.</span>
     </div>
-    <div id="map"></div>
   </div>
-  
-  <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px;">
-    <button class="route-btn" onclick="selectRoute('dubai')">دبی</button>
-    <button class="route-btn" onclick="selectRoute('jebel_ali')">جبل علی</button>
-    <button class="route-btn" onclick="selectRoute('duqm')">دقم (سه شاخه)</button>
-    <button class="route-btn" onclick="selectRoute('sohar')">صحار (سه شاخه)</button>
-    <button class="route-btn" onclick="selectRoute('salalah')">صلاله (سه شاخه)</button>
-    <button class="route-btn" onclick="selectRoute('khasab')">خصب (سه شاخه)</button>
-    <button class="route-btn" onclick="selectRoute('turkmenbashi')">ترکمنباشی</button>
-    <button class="route-btn" onclick="selectRoute('astrakhan')">آستاراخان</button>
-    <button class="route-btn" onclick="selectRoute('mersin')">مرسین</button>
-    <button class="route-btn" onclick="selectRoute('cra')">CRA (سرخس)</button>
-    <button class="route-btn" onclick="selectRoute('kashgar')">کاشغر-گوادر-چابهار</button>
-  </div>
-  
-  <div class="card" id="route-detail">
-    <div style="font-weight:700; margin-bottom:12px; font-size:15px;" id="detail-title">مسیر دبی — چین به اهواز</div>
-    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:10px; font-size:12px;" id="route-detail-grid"></div>
-    <div id="route-branches" style="margin-top:12px; padding-top:10px; border-top:1px solid #eee; font-size:11px;"></div>
-    <div id="route-risks" style="margin-top:8px; font-size:11px; background:#fef5e8; padding:8px; border-radius:8px;"></div>
+
+  <!-- بخش قابلیت‌های حرفه‌ای در زیر نقشه -->
+  <div class="capabilities-section">
+    <div class="cap-card">
+      <div class="cap-title"><span>🗺️</span> پوشش کامل جغرافیایی</div>
+      <div class="cap-text">مسیرهای چین (کاشغر، شانگهای) تا خلیج فارس، دریای خزر، قفقاز، ترکیه و بنادر جنوب ایران (بندرعباس، چابهار، امام خمینی) — همه در یک نقشه تعاملی.</div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-title"><span>📊</span> داده‌های عملیاتی & به‌روز</div>
+      <div class="cap-text">هزینه حمل (FEU)، زمان ترانزیت، نرخ بیمه جنگی، ظرفیت گمرکی و آخرین تحولات تحریم‌ها — بروزرسانی خرداد ۱۴۰۵.</div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-title"><span>🎯</span> رهگیری پروژه‌های کلان BRI</div>
+      <div class="cap-text">پروژه CKU (چین-قرقیزستان-ازبکستان)، ارتقاء BTK گرجستان، کریدور شمال-جنوب (INSTC) و قراردادهای استراتژیک ۲۰۲۶-۲۰۳۰.</div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-title"><span>⚡</span> سناریوهای جایگزین بحران</div>
+      <div class="cap-text">با بسته شدن تنگه هرمز (فوریه ۲۰۲۶)، نقشه مسیرهای امن از بنادر عمان (سالاله، دقم، صحار) و مسیر زمینی ترکیه را اولویت‌بندی کرده است.</div>
+    </div>
   </div>
 </div>
 
@@ -996,9 +1172,9 @@
             </thead>
             <tbody>
               <tr><td>نوع</th><td><span class="badge-new b-rail-new">ریلی</span></td><td><span class="badge-new b-sea-new">دریایی</span></td><td><span class="badge-new b-multi-new">چندوجهی</span></td><td><span class="badge-new b-arc-new">دریایی قطبی</span></td></tr>
-              <tr><td>طول مسیر</td><td>~۹,۲۰۰ کیلومتر</td><td>~۲۱,۰۰۰ کیلومتر (Suez)<br>~۲۸,۰۰۰ کیلومتر (Cape)</td><td>~۸,۷۰۰ کیلومتر</td><td>~۱۴,۰۰۰ کیلومتر<br><span class="note-new">۷,۰۰۰km کوتاه‌تر از Suez</span></td></tr>
-              <tr><td>زمان ترانزیت ۲۰۲۵</td><td>۱۵–۲۲ روز<br><span class="note-new">کاهش سرعت به ۳۶-۴۰km/h</span></td><td>۲۸–۳۵ روز (Suez)<br>۴۰–۵۰ روز (Cape)</td><td>۱۸–۲۵ روز<br><span class="note-new">هدف: ۱۴–۱۸ روز</span></td><td>۱۸–۲۰ روز<br><span class="note-new">فقط فصل تابستان</span></td></tr>
-              <tr><td>ظرفیت واقعی ۲۰۲۴</td><td>~۵۰۰–۶۵۰ هزار TEU<br><span class="note-new">کاهش ۹.۸٪ نسبت به ۲۰۲۳</span></td><td>۱۳.۵–۱۴ میلیون TEU<br><span class="note-new">(China-Europe, 2024)</span></td><td>۴.۴۷ میلیون تن / ۵۵,۰۰۰ TEU<br><span class="note-new">رشد ۶۳٪ نسبت به ۲۰۲۳</span></td><td><span class="badge-new b-na-new">تجاری اولیه</span><br><span class="note-new">آغاز تجاری: اکتبر ۲۰۲۵</span></td></tr>
+              <tr><td>طول مسیر</th><td>~۹,۲۰۰ کیلومتر</th><td>~۲۱,۰۰۰ کیلومتر (Suez)<br>~۲۸,۰۰۰ کیلومتر (Cape)</th><td>~۸,۷۰۰ کیلومتر</th><td>~۱۴,۰۰۰ کیلومتر<br><span class="note-new">۷,۰۰۰km کوتاه‌تر از Suez</span></th></tr>
+              <tr><td>زمان ترانزیت ۲۰۲۵</th><td>۱۵–۲۲ روز<br><span class="note-new">کاهش سرعت به ۳۶-۴۰km/h</span></th><td>۲۸–۳۵ روز (Suez)<br>۴۰–۵۰ روز (Cape)</th><td>۱۸–۲۵ روز<br><span class="note-new">هدف: ۱۴–۱۸ روز</span></th><td>۱۸–۲۰ روز<br><span class="note-new">فقط فصل تابستان</span></th></tr>
+              <tr><td>ظرفیت واقعی ۲۰۲۴</th><td>~۵۰۰–۶۵۰ هزار TEU<br><span class="note-new">کاهش ۹.۸٪ نسبت به ۲۰۲۳</span></th><td>۱۳.۵–۱۴ میلیون TEU<br><span class="note-new">(China-Europe, 2024)</span></th><td>۴.۴۷ میلیون تن / ۵۵,۰۰۰ TEU<br><span class="note-new">رشد ۶۳٪ نسبت به ۲۰۲۳</span></th><td><span class="badge-new b-na-new">تجاری اولیه</span><br><span class="note-new">آغاز تجاری: اکتبر ۲۰۲۵</span></th></tr>
             </tbody>
           </table>
         </div>
@@ -1014,9 +1190,9 @@
           <table>
             <thead><tr><th>نوع هزینه</th><th>ترانس‌سیبری</th><th>راه ابریشم آبی</th><th>کوریدور میانی (TITR)</th><th>راه ابریشم قطبی</th></tr></thead>
             <tbody>
-              <tr><td>هزینه حمل (FEU)</td><td>~$۳,۲۴۰<br><span class="note-new">ERA Index میانگین ۲۰۲۴</span></td><td>$۱,۵۰۰–۷,۹۶۱<br><span class="note-new">Drewry WCI; بحران Suez ۲۰۲۴</span></td><td>$۵,۰۰۰–۷,۰۰۰ (چین→ترکیه)<br><span class="note-new">+$۱,۰۰۰–۲,۰۰۰ تا اروپا</span></td><td>بالا — در حال تعریف<br><span class="note-new">+هزینه یخ‌شکن $۵۰K–۲۰۰K/سفر</span></td></tr>
-              <tr><td>هزینه تغییر گیج</td><td>$۸۰–۲۰۰/TEU (هر نقطه)</td><td>ندارد</td><td>$۸۰–۲۰۰/TEU (هر نقطه)</td><td>ندارد</td></tr>
-              <tr><td>هزینه بیمه اضافی</td><td>+۰.۵–۲٪ ارزش بار<br><span class="note-new">ریسک تحریم + مصادره</span></td><td>+۲–۵٪ Hull<br><span class="note-new">پریمیوم جنگی دریای سرخ</span></td><td>+۰.۲–۰.۵٪<br><span class="note-new">پایین‌ترین پریمیوم بین ریلی</span></td><td>+۲–۵٪ Hull<br><span class="note-new">ریسک یخ + قطبی</span></td></tr>
+              <tr><td>هزینه حمل (FEU)</th><td>~$۳,۲۴۰<br><span class="note-new">ERA Index میانگین ۲۰۲۴</span></th><td>$۱,۵۰۰–۷,۹۶۱<br><span class="note-new">Drewry WCI; بحران Suez ۲۰۲۴</span></th><td>$۵,۰۰۰–۷,۰۰۰ (چین→ترکیه)<br><span class="note-new">+$۱,۰۰۰–۲,۰۰۰ تا اروپا</span></th><td>بالا — در حال تعریف<br><span class="note-new">+هزینه یخ‌شکن $۵۰K–۲۰۰K/سفر</span></th></tr>
+              <tr><td>هزینه تغییر گیج</th><td>$۸۰–۲۰۰/TEU (هر نقطه)</th><td>ندارد</th><td>$۸۰–۲۰۰/TEU (هر نقطه)</th><td>ندارد</th></tr>
+              <tr><td>هزینه بیمه اضافی</th><td>+۰.۵–۲٪ ارزش بار<br><span class="note-new">ریسک تحریم + مصادره</span></th><td>+۲–۵٪ Hull<br><span class="note-new">پریمیوم جنگی دریای سرخ</span></th><td>+۰.۲–۰.۵٪<br><span class="note-new">پایین‌ترین پریمیوم بین ریلی</span></th><td>+۲–۵٪ Hull<br><span class="note-new">ریسک یخ + قطبی</span></th></tr>
             </tbody>
           </table>
         </div>
@@ -1032,9 +1208,9 @@
           <table>
             <thead><tr><th>ویژگی ریسک</th><th>ترانس‌سیبری</th><th>راه ابریشم آبی</th><th>کوریدور میانی (TITR)</th><th>راه ابریشم قطبی</th></tr></thead>
             <tbody>
-              <tr><td>سطح ریسک کلی</td><td><div class="risk-row-new"><div class="rdot-new r-hi-new"></div>بسیار بالا</div></td><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط</div></td><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط-پایین</div></td><td><div class="risk-row-new"><div class="rdot-new r-hi-new"></div>بسیار بالا</div></td></tr>
-              <tr><td>ریسک تحریم</td><td><span class="badge-new b-danger-new">بسیار بالا</span><br><span class="note-new">EU/US/UK تحریم کامل</span></td><td><span class="badge-new b-ok-new">پایین (Suez)</span><br><span class="badge-new b-warn-new">متوسط (Cape)</span></td><td><span class="badge-new b-ok-new">نزدیک به صفر</span><br><span class="note-new">روسیه و بلاروس را دور می‌زند</span></td><td><span class="badge-new b-danger-new">بالا</span><br><span class="note-new">کنترل روسی (Rosatom)</span></td></tr>
-              <tr><td>سطح بیمه‌پذیری</td><td><span class="badge-new b-danger-new">Lloyd's خارج شده</span><br><span class="note-new">فقط بیمه چینی/روسی</span></td><td><span class="badge-new b-ok-new">کامل</span><br><span class="note-new">+پریمیوم جنگی Suez</span></td><td><span class="badge-new b-ok-new">در دسترس</span><br><span class="note-new">پیچیده‌تر برای بخش خزر</span></td><td><span class="badge-new b-danger-new">محدود</span><br><span class="note-new">MSC، Maersk خودداری کرده‌اند</span></td></tr>
+              <tr><td>سطح ریسک کلی</th><td><div class="risk-row-new"><div class="rdot-new r-hi-new"></div>بسیار بالا</div></th><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط</div></th><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط-پایین</div></th><td><div class="risk-row-new"><div class="rdot-new r-hi-new"></div>بسیار بالا</div></th></tr>
+              <tr><td>ریسک تحریم</th><td><span class="badge-new b-danger-new">بسیار بالا</span><br><span class="note-new">EU/US/UK تحریم کامل</span></th><td><span class="badge-new b-ok-new">پایین (Suez)</span><br><span class="badge-new b-warn-new">متوسط (Cape)</span></th><td><span class="badge-new b-ok-new">نزدیک به صفر</span><br><span class="note-new">روسیه و بلاروس را دور می‌زند</span></th><td><span class="badge-new b-danger-new">بالا</span><br><span class="note-new">کنترل روسی (Rosatom)</span></th></tr>
+              <tr><td>سطح بیمه‌پذیری</th><td><span class="badge-new b-danger-new">Lloyd's خارج شده</span><br><span class="note-new">فقط بیمه چینی/روسی</span></th><td><span class="badge-new b-ok-new">کامل</span><br><span class="note-new">+پریمیوم جنگی Suez</span></th><td><span class="badge-new b-ok-new">در دسترس</span><br><span class="note-new">پیچیده‌تر برای بخش خزر</span></th><td><span class="badge-new b-danger-new">محدود</span><br><span class="note-new">MSC، Maersk خودداری کرده‌اند</span></th></tr>
             </tbody>
           </table>
         </div>
@@ -1050,8 +1226,8 @@
           <table>
             <thead><tr><th>ویژگی</th><th>ترانس‌سیبری</th><th>راه ابریشم آبی</th><th>کوریدور میانی (TITR)</th><th>راه ابریشم قطبی</th></tr></thead>
             <tbody>
-              <tr><td>توان بار حجیم (OOG)</td><td><span class="badge-new b-warn-new">محدود</span><br><span class="note-new">نیاز به مجوز ویژه RZD</span></td><td><span class="badge-new b-ok-new">کامل</span><br><span class="note-new">Flat Rack، Open Top، Platform</span></td><td><span class="badge-new b-warn-new">پیچیده در بخش خزر</span><br><span class="note-new">ریل: ممکن</span></td><td><span class="badge-new b-ok-new">مناسب</span><br><span class="note-new">بار سنگین: روی عرشه</span></td></tr>
-              <tr><td>ریسک انطباق تحریم</td><td><span class="badge-new b-danger-new">بسیار بالا</span><br><span class="note-new">OFAC/EU Secondary Sanctions</span></td><td><span class="badge-new b-ok-new">پایین (مسیرهای عادی)</span></td><td><span class="badge-new b-ok-new">پایین</span><br><span class="note-new">بدون تحریم فعلی</span></td><td><span class="badge-new b-danger-new">بالا</span><br><span class="note-new">تحریم‌های روسیه</span></td></tr>
+              <tr><td>توان بار حجیم (OOG)</th><td><span class="badge-new b-warn-new">محدود</span><br><span class="note-new">نیاز به مجوز ویژه RZD</span></th><td><span class="badge-new b-ok-new">کامل</span><br><span class="note-new">Flat Rack، Open Top، Platform</span></th><td><span class="badge-new b-warn-new">پیچیده در بخش خزر</span><br><span class="note-new">ریل: ممکن</span></th><td><span class="badge-new b-ok-new">مناسب</span><br><span class="note-new">بار سنگین: روی عرشه</span></th></tr>
+              <tr><td>ریسک انطباق تحریم</th><td><span class="badge-new b-danger-new">بسیار بالا</span><br><span class="note-new">OFAC/EU Secondary Sanctions</span></th><td><span class="badge-new b-ok-new">پایین (مسیرهای عادی)</span></th><td><span class="badge-new b-ok-new">پایین</span><br><span class="note-new">بدون تحریم فعلی</span></th><td><span class="badge-new b-danger-new">بالا</span><br><span class="note-new">تحریم‌های روسیه</span></th></tr>
             </tbody>
           </table>
         </div>
@@ -1073,9 +1249,9 @@
           <table>
             <thead><tr><th>پروژه / ابتکار</th><th>وضعیت ۲۰۲۵</th><th>سرمایه‌گذاری</th><th>اثر بر کوریدور</th></tr></thead>
             <tbody>
-              <tr><td>CKU (چین-قرقیزستان-ازبکستان)</td><td><span class="badge-new b-warn-new">در حال ساخت</span><br><span class="note-new">تونل‌ها از آوریل ۲۰۲۵</span></td><td>$۴.۷ میلیارد</td><td>TITR: کوتاه‌کردن ۷ روز</td></tr>
-              <tr><td>ارتقاء BTK گرجستان</td><td><span class="badge-new b-ok-new">تکمیل شده (مه ۲۰۲۴)</span></td><td>$۲۵۰ میلیون (آذربایجان)</td><td>ظرفیت: ۱→۵ میلیون تن</td></tr>
-              <tr><td>رشت–آستارا ریل (ایران، INSTC)</td><td><span class="badge-new b-warn-new">در مرحله قرارداد ۲۰۲۵</span></td><td>روسیه: تأمین مالی متعهد</td><td>تکمیل شکاف غربی INSTC</td></tr>
+              <tr><td>CKU (چین-قرقیزستان-ازبکستان)</th><td><span class="badge-new b-warn-new">در حال ساخت</span><br><span class="note-new">تونل‌ها از آوریل ۲۰۲۵</span></th><td>$۴.۷ میلیارد</th><td>TITR: کوتاه‌کردن ۷ روز</th></tr>
+              <tr><td>ارتقاء BTK گرجستان</th><td><span class="badge-new b-ok-new">تکمیل شده (مه ۲۰۲۴)</span></th><td>$۲۵۰ میلیون (آذربایجان)</th><td>ظرفیت: ۱→۵ میلیون تن</th></tr>
+              <tr><td>رشت–آستارا ریل (ایران، INSTC)</th><td><span class="badge-new b-warn-new">در مرحله قرارداد ۲۰۲۵</span></th><td>روسیه: تأمین مالی متعهد</th><td>تکمیل شکاف غربی INSTC</th></tr>
             </tbody>
           </table>
         </div>
@@ -1091,12 +1267,12 @@
           <table>
             <thead><tr><th>کوریدور</th><th>نوع</th><th>TEU / حجم ۲۰۲۴</th><th>زمان ترانزیت</th><th>ریسک</th><th>وضعیت</th></tr></thead>
             <tbody>
-              <tr><td>Trans-Siberian</td><td><span class="badge-new b-rail-new">ریلی</span></td><td>~۵۰۰–۶۵۰ هزار TEU</td><td>۱۵–۲۲ روز</td><td><div class="risk-row-new"><div class="rdot-new r-hi-new"></div>بسیار بالا</div></td><td><span class="badge-new b-danger-new">تحت تحریم</span></td></tr>
-              <tr><td>Maritime Silk Road</td><td><span class="badge-new b-sea-new">دریایی</span></td><td>۱۳.۵–۱۴ میلیون TEU</td><td>۲۸–۵۰ روز</td><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط</div></td><td><span class="badge-new b-ok-new">عملیاتی</span></td></tr>
-              <tr><td>TITR</td><td><span class="badge-new b-multi-new">چندوجهی</span></td><td>۵۵,۰۰۰ TEU / ۴.۴۷M تن</td><td>۱۸–۲۵ روز</td><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط-پایین</div></td><td><span class="badge-new b-ok-new">در حال رشد</span></td></tr>
-              <tr><td>BTK</td><td><span class="badge-new b-rail-new">ریلی</span></td><td>~۶–۸ میلیون تن</td><td>جزء TITR (~۱۵ روز)</td><td><div class="risk-row-new"><div class="rdot-new r-lo-new"></div>پایین</div></td><td><span class="badge-new b-ok-new">ارتقاء ۲۰۲۴</span></td></tr>
-              <tr><td>INSTC</td><td><span class="badge-new b-multi-new">چندوجهی</span></td><td>۲۶.۹ میلیون تن</td><td>۱۹–۳۰ روز</td><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط-بالا</div></td><td><span class="badge-new b-warn-new">در حال توسعه</span></td></tr>
-              <tr><td>Polar Silk Road</td><td><span class="badge-new b-arc-new">قطبی</span></td><td><span class="badge-new b-na-new">آزمایشی/اولیه</span></td><td>۱۸–۲۰ روز (تابستان)</td><td><div class="risk-row-new"><div class="rdot-new r-hi-new"></div>بسیار بالا</div></td><td><span class="badge-new b-warn-new">محدود به فصل</span></td></tr>
+              <tr><td>Trans-Siberian</th><td><span class="badge-new b-rail-new">ریلی</span></th><td>~۵۰۰–۶۵۰ هزار TEU</th><td>۱۵–۲۲ روز</th><td><div class="risk-row-new"><div class="rdot-new r-hi-new"></div>بسیار بالا</div></th><td><span class="badge-new b-danger-new">تحت تحریم</span></th></tr>
+              <tr><td>Maritime Silk Road</th><td><span class="badge-new b-sea-new">دریایی</span></th><td>۱۳.۵–۱۴ میلیون TEU</th><td>۲۸–۵۰ روز</th><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط</div></th><td><span class="badge-new b-ok-new">عملیاتی</span></th></tr>
+              <tr><td>TITR</th><td><span class="badge-new b-multi-new">چندوجهی</span></th><td>۵۵,۰۰۰ TEU / ۴.۴۷M تن</th><td>۱۸–۲۵ روز</th><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط-پایین</div></th><td><span class="badge-new b-ok-new">در حال رشد</span></th></tr>
+              <tr><td>BTK</th><td><span class="badge-new b-rail-new">ریلی</span></th><td>~۶–۸ میلیون تن</th><td>جزء TITR (~۱۵ روز)</th><td><div class="risk-row-new"><div class="rdot-new r-lo-new"></div>پایین</div></th><td><span class="badge-new b-ok-new">ارتقاء ۲۰۲۴</span></th></tr>
+              <tr><td>INSTC</th><td><span class="badge-new b-multi-new">چندوجهی</span></th><td>۲۶.۹ میلیون تن</th><td>۱۹–۳۰ روز</th><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط-بالا</div></th><td><span class="badge-new b-warn-new">در حال توسعه</span></th></tr>
+              <tr><td>Polar Silk Road</th><td><span class="badge-new b-arc-new">قطبی</span></th><td><span class="badge-new b-na-new">آزمایشی/اولیه</span></th><td>۱۸–۲۰ روز (تابستان)</th><td><div class="risk-row-new"><div class="rdot-new r-hi-new"></div>بسیار بالا</div></th><td><span class="badge-new b-warn-new">محدود به فصل</span></th></tr>
             </tbody>
           </table>
         </div>
@@ -1736,171 +1912,7 @@
 </div></div>
 
 <script>
-// ======================== داده‌های صفحه اول (نقشه و مسیرها) ========================
-const routesData = {
-  dubai: { name: 'دبی', title: 'مسیر دبی: چین → دبی → بندرعباس → اهواز', type: 'دریایی + زمینی', time: '۲۲-۳۰ روز', cost: '۲,۰۰۰–۳,۵۰۰ دلار', risk: 'بسیار بالا', riskLevel: 'high', goods: 'کالاهای مصرفی، الکترونیک', forward: 'محدود', status: 'تعلیق', coords: [[31.23,121.47],[25.27,55.30],[27.18,56.27],[31.32,48.67]], color: '#E24B4A', dashPattern: '10, 8' },
-  jebel_ali: { name: 'جبل علی', title: 'مسیر جبل علی: چین → جبل علی → بندرعباس → اهواز', type: 'دریایی + زمینی', time: '۲۲-۳۰ روز', cost: '۲,۰۰۰–۳,۵۰۰ دلار', risk: 'بسیار بالا', riskLevel: 'high', goods: 'کانتینر، ماشین‌آلات', forward: 'تعلیق', status: 'تعلیق', coords: [[31.23,121.47],[25.00,55.05],[27.18,56.27],[31.32,48.67]], color: '#1D9E75', dashPattern: '10, 8' },
-  duqm: { name: 'دقم', title: 'مسیر دقم — سه شاخه', type: 'دریایی + زمینی', time: '۲۵-۳۵ روز', cost: 'متوسط', risk: 'متوسط', riskLevel: 'medium', goods: 'کالای عمومی، فله خشک', forward: 'نیمه فعال', status: 'فعال', branches: 'شاخه اول: چین → دقم → گوادر → چابهار → اهواز | شاخه دوم: چین → دقم → خصب → بندرعباس → اهواز | شاخه سوم: چین → دقم → بندرعباس مستقیم → اهواز', coords: [[31.23,121.47],[19.66,57.70],[25.15,61.45],[27.18,56.27],[31.32,48.67]], color: '#534AB7', dashPattern: '10, 8' },
-  sohar: { name: 'صحار', title: 'مسیر صحار — سه شاخه', type: 'دریایی + زمینی', time: '۲۵-۳۵ روز', cost: 'متوسط', risk: 'متوسط', riskLevel: 'medium', goods: 'فله خشک، کانتینر', forward: 'نیمه فعال', status: 'فعال', branches: 'شاخه اول: چین → صحار → گوادر → چابهار → اهواز | شاخه دوم: چین → صحار → خصب → بندرعباس → اهواز | شاخه سوم: چین → صحار → بندرعباس مستقیم → اهواز', coords: [[31.23,121.47],[24.34,56.73],[25.15,61.45],[27.18,56.27],[31.32,48.67]], color: '#BA7517', dashPattern: '10, 8' },
-  salalah: { name: 'صلاله', title: 'مسیر سالاله — سه شاخه ( بهترین جایگزین)', type: 'دریایی + زمینی', time: '۳۰-۵۰ روز', cost: '۴,۰۰۰–۶,۰۰۰ دلار', risk: 'متوسط', riskLevel: 'medium', goods: 'کالای عمومی FCL/LCL', forward: 'فعال', status: '  بهترین جایگزین', branches: 'شاخه اول: چین → سالاله → گوادر → چابهار → اهواز | شاخه دوم: چین → سالاله → خصب → بندرعباس → اهواز | شاخه سوم: چین → سالاله → بندرعباس مستقیم → اهواز', coords: [[31.23,121.47],[17.00,54.00],[25.15,61.45],[27.18,56.27],[31.32,48.67]], color: '#185FA5', dashPattern: '10, 8' },
-  khasab: { name: 'خصب', title: 'مسیر خصب — سه شاخه', type: 'دریایی + زمینی + فری', time: '۲۵-۴۵ روز', cost: 'متوسط', risk: 'بالا', riskLevel: 'high', goods: 'کالای سبک', forward: 'محدود', status: 'فعال با محدودیت', branches: 'شاخه اول: چین → خصب → گوادر → چابهار → اهواز | شاخه دوم: چین → خصب → بصره (عراق) → مرز شلمچه → اهواز | شاخه سوم: چین → خصب → فری → بندرعباس → اهواز', coords: [[31.23,121.47],[26.18,56.25],[25.15,61.45],[30.50,47.78],[31.32,48.67]], color: '#E24B4A', dashPattern: '10, 8' },
-  turkmenbashi: { name: 'ترکمنباشی', title: 'مسیر ترکمن‌باشی — چین → قزاقستان → ترکمن‌باشی → بندر امیرآباد/انزلی → اهواز', type: 'ریلی + فری + جاده', time: '۲۵-۳۵ روز', cost: '۲,۵۰۰–۴,۰۰۰ دلار', risk: 'متوسط', riskLevel: 'medium', goods: 'کالای کانتینری سبک', forward: 'محدود', status: 'فعال — در حال رشد', coords: [[31.23,121.47],[40.02,52.97],[36.58,53.23],[31.32,48.67]], color: '#1D9E75', dashPattern: '10, 8' },
-  astrakhan: { name: 'آستاراخان', title: 'مسیر آستاراخان — چین → روسیه → استاراخان → بندر انزلی/امیرآباد → اهواز (INSTC)', type: 'ریلی + فری + جاده', time: '۲۵-۴۰ روز', cost: '۲,۵۰۰–۴,۵۰۰ دلار', risk: 'متوسط', riskLevel: 'medium', goods: 'کالاهای روسی، ترانزیت', forward: 'محدود', status: 'فعال — ریسک متوسط', coords: [[31.23,121.47],[46.35,48.05],[37.47,49.46],[31.32,48.67]], color: '#534AB7', dashPattern: '10, 8' },
-  mersin: { name: 'مرسین', title: 'مسیر مرسین — چین → مرسین (ترکیه) → بازرگان → اهواز', type: 'دریایی + جاده', time: '۳۰-۴۵ روز', cost: '۴,۰۰۰–۶,۵۰۰ دلار', risk: 'متوسط', riskLevel: 'medium', goods: 'کالاهای مصرفی، پوشاک، ماشین‌آلات', forward: 'فعال', status: 'فعال — پایدار', coords: [[31.23,121.47],[36.80,34.63],[39.78,44.78],[31.32,48.67]], color: '#BA7517', dashPattern: '10, 8' },
-  cra: { name: 'CRA', title: 'مسیر CRA — چین → سرخس (مرز ایران) → اهواز', type: 'ریلی + زمینی', time: '۱۸-۲۵ روز', cost: 'متوسط', risk: 'پایین', riskLevel: 'low', goods: 'کانتینر، کالای صنعتی', forward: 'فعال', status: 'فعال', coords: [[31.23,121.47],[43.25,76.90],[37.93,60.35],[36.29,61.17],[31.32,48.67]], color: '#0C7B5E', dashPattern: '10, 8' },
-  kashgar: { name: 'کاشغر-گوادر-چابهار', title: 'مسیر کاشغر → گوادر → چابهار → اهواز', type: 'زمینی (جاده‌ای)', time: '۲۵-۳۵ روز', cost: 'متوسط', risk: 'متوسط', riskLevel: 'medium', goods: 'کالای صنعتی، ترانزیت', forward: 'در حال توسعه', status: 'فعال', coords: [[39.47,75.99],[25.13,62.33],[25.29,60.62],[31.32,48.67]], color: '#8B5CF6', dashPattern: '10, 8' }
-};
-
-let map, currentLine, currentMarker, measureMode = false, measurePoints = [], measureMarkers = [], measureLine = null;
-
-function initMap() {
-  map = L.map('map').setView([30, 65], 4);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { attribution: '© OpenStreetMap' }).addTo(map);
-  map.on('click', onMapClick);
-  selectRoute('dubai');
-}
-
-function selectRoute(routeId) {
-  const r = routesData[routeId];
-  if (!r) return;
-  document.querySelectorAll('.route-btn').forEach(btn => btn.classList.remove('active'));
-  if(event && event.target) event.target.classList.add('active');
-  document.getElementById('detail-title').innerHTML = r.title;
-  updateRouteDetail(routeId);
-  if (currentLine) map.removeLayer(currentLine);
-  if (currentMarker) map.removeLayer(currentMarker);
-  currentLine = L.polyline(r.coords, { color: r.color, weight: 3, opacity: 0.9, dashArray: r.dashPattern || '10, 8' }).addTo(map);
-  currentMarker = L.circleMarker(r.coords[r.coords.length-1], { radius: 6, color: r.color, fillColor: r.color, fillOpacity: 1 }).addTo(map);
-  map.fitBounds(currentLine.getBounds());
-}
-
-function resetMapFilter() {
-  if (currentLine) map.removeLayer(currentLine);
-  if (currentMarker) map.removeLayer(currentMarker);
-  Object.values(routesData).forEach(r => { L.polyline(r.coords, { color: r.color, weight: 2, opacity: 0.5, dashArray: r.dashPattern || '8, 6' }).addTo(map); L.circleMarker(r.coords[r.coords.length-1], { radius: 4, color: r.color, fillColor: r.color, fillOpacity: 0.7 }).addTo(map); });
-  map.setView([30, 65], 4);
-  document.getElementById('detail-title').innerHTML = 'نقشه همه مسیرها — برای جزئیات روی مسیر کلیک کنید';
-  document.getElementById('route-detail-grid').innerHTML = '<div style="grid-column:span 2; text-align:center; color:#666">یک مسیر را از دکمه‌های بالا انتخاب کنید</div>';
-  document.getElementById('route-branches').innerHTML = '';
-  document.getElementById('route-risks').style.display = 'none';
-}
-
-function updateRouteDetail(routeId) {
-  const r = routesData[routeId];
-  if (!r) return;
-  const riskClass = r.riskLevel === 'high' ? 'risk-high' : (r.riskLevel === 'low' ? 'risk-low' : 'risk-medium');
-  let html = `<div><span style="color:#666">نوع حمل:</span> <strong>${r.type}</strong></div><div><span style="color:#666">وضعیت فعلی مسیر:</span> <strong class="${riskClass}">${r.status}</strong></div><div><span style="color:#666">زمان تحویل:</span> <strong>${r.time}</strong></div><div><span style="color:#666">هزینه حمل:</span> <strong>${r.cost}</strong></div><div><span style="color:#666">مناسب برای:</span> <strong>${r.goods}</strong></div><div><span style="color:#666">وضعیت فورواردر:</span> <strong>${r.forward}</strong></div>`;
-  document.getElementById('route-detail-grid').innerHTML = html;
-  if (r.branches) document.getElementById('route-branches').innerHTML = `<strong>شاخه‌های مسیر:</strong><br>${r.branches.replace(/\|/g, '<br>')}`;
-  else document.getElementById('route-branches').innerHTML = '';
-  document.getElementById('route-risks').style.display = 'none';
-}
-
-function toggleMeasure() {
-  measureMode = !measureMode;
-  const info = document.getElementById('measure-info');
-  if (measureMode) { info.textContent = 'نقطه اول را کلیک کنید'; map.getContainer().style.cursor = 'crosshair'; }
-  else { info.textContent = ''; clearMeasure(); map.getContainer().style.cursor = ''; }
-}
-function clearMeasure() { measureMarkers.forEach(m => map.removeLayer(m)); measureMarkers = []; if (measureLine) { map.removeLayer(measureLine); measureLine = null; } measurePoints = []; }
-function onMapClick(e) {
-  if (!measureMode) return;
-  measurePoints.push(e.latlng);
-  const m = L.circleMarker(e.latlng, { radius: 6, color: '#c9a84c', fillColor: '#c9a84c', fillOpacity: 1 }).addTo(map);
-  measureMarkers.push(m);
-  if (measurePoints.length === 1) document.getElementById('measure-info').textContent = 'نقطه دوم را کلیک کنید';
-  else if (measurePoints.length === 2) {
-    const km = (measurePoints[0].distanceTo(measurePoints[1]) / 1000).toFixed(0);
-    measureLine = L.polyline(measurePoints, { color: '#c9a84c', weight: 2, dashArray: '6,4' }).addTo(map);
-    document.getElementById('measure-info').textContent = `فاصله: ${km.toLocaleString()} کیلومتر`;
-    setTimeout(() => { clearMeasure(); if (measureMode) document.getElementById('measure-info').textContent = 'نقطه اول را کلیک کنید'; }, 4000);
-  }
-}
-
-// ======================== داده‌های کشورها ========================
-const countriesData = {
-  china: { name: 'چین', capital: 'پکن', population: '۱.۴ میلیارد', keyPorts: 'شانگهای، نینگبو، شنژن', role: 'مبدأ اصلی صادرات، تولید ۳۰٪ کالاهای جهانی', corridor: 'راه ابریشم - مبدأ' },
-  iran: { name: 'ایران', capital: 'تهران', population: '۸۵ میلیون', keyPorts: 'بندرعباس، امام خمینی، انزلی', role: 'مرکز ترانزیت شمال-جنوب و شرق-غرب', corridor: 'INSTC, TITR' },
-  turkey: { name: 'ترکیه', capital: 'آنکارا', population: '۸۵ میلیون', keyPorts: 'آمبارلی، مرسین', role: 'پل ارتباطی آسیا به اروپا', corridor: 'TITR, BTK' },
-  uae: { name: 'امارات متحده عربی', capital: 'ابوظبی', population: '۹.۵ میلیون', keyPorts: 'جبل علی، خلیفه', role: 'هاب لجستیک منطقه', corridor: 'مسیر اصلی دریایی چین-خاورمیانه' },
-  oman: { name: 'عمان', capital: 'مسقط', population: '۵ میلیون', keyPorts: 'صحار، صلاله، دقم، خصب', role: 'ترانزیت جایگزین دبی', corridor: 'مسیر دریایی جنوب ایران' },
-  pakistan: { name: 'پاکستان', capital: 'اسلام‌آباد', population: '۲۴۰ میلیون', keyPorts: 'گواتر، کراچی', role: 'دسترسی به اقیانوس هند، CPEC', corridor: 'راه ابریشم جنوبی' },
-  turkmenistan: { name: 'ترکمنستان', capital: 'عشق‌آباد', population: '۶ میلیون', keyPorts: 'بندر ترکمنباشی', role: 'ترانزیت گاز و ریلی به خزر', corridor: 'مسیر شمال-جنوب، CRA' },
-  azerbaijan: { name: 'آذربایجان', capital: 'باکو', population: '۱۰ میلیون', keyPorts: 'بندر آلیات (خزر)', role: 'گلوگاه ریلی و دریایی BTK', corridor: 'TITR, BTK, INSTC' },
-  georgia: { name: 'گرجستان', capital: 'تفلیس', population: '۳.۷ میلیون', keyPorts: 'پوتی، باتومی', role: 'دسترسی به دریای سیاه', corridor: 'TITR, BTK' },
-  russia: { name: 'روسیه', capital: 'مسکو', population: '۱۴۶ میلیون', keyPorts: 'نووروسیسک، سن پترزبورگ', role: 'مسیر شمالی و کریدور شمال-جنوب', corridor: 'CRE شمالی، INSTC' },
-  india: { name: 'هند', capital: 'دهلی نو', population: '۱.۴ میلیارد', keyPorts: 'مومبای، نهاوا شیوا', role: 'بازار بزرگ جنوب آسیا', corridor: 'INSTC' },
-  iraq: { name: 'عراق', capital: 'بغداد', population: '۴۳ میلیون', keyPorts: 'بندر ام قصر', role: 'ترانزیت به مدیترانه و اروپا', corridor: 'مسیر زمینی غرب ایران' },
-  afghanistan: { name: 'افغانستان', capital: 'کابل', population: '۴۰ میلیون', keyPorts: '-', role: 'ترانزیت زمینی بین آسیای مرکزی و جنوب آسیا', corridor: 'ABEC' },
-  kazakhstan: { name: 'قزاقستان', capital: 'آستانه', population: '۱۹ میلیون', keyPorts: 'بندر آکتائو (خزر)', role: 'ترانزیت ریلی، مسیر میانی چین به اروپا', corridor: 'TITR, CRE' }
-};
-const countryList = ['china', 'kazakhstan', 'turkmenistan', 'azerbaijan', 'georgia', 'turkey', 'iran', 'afghanistan', 'pakistan', 'india', 'russia', 'iraq', 'oman', 'uae'];
-
-function renderCountries() {
-  const container = document.getElementById('country-list-items');
-  if (!container) return;
-  container.innerHTML = '';
-  countryList.forEach(id => {
-    const c = countriesData[id];
-    const div = document.createElement('div');
-    div.className = 'country-item';
-    div.textContent = c.name;
-    div.onclick = () => selectCountry(id);
-    container.appendChild(div);
-  });
-}
-function selectCountry(id) {
-  document.querySelectorAll('.country-item').forEach(el => el.classList.remove('active'));
-  if(event && event.target) event.target.classList.add('active');
-  const c = countriesData[id];
-  document.getElementById('country-detail-title').innerHTML = c.name;
-  document.getElementById('country-detail-content').innerHTML = `<div class="country-info-row"><div class="country-info-label">پایتخت</div><div class="country-info-value">${c.capital}</div></div><div class="country-info-row"><div class="country-info-label">جمعیت</div><div class="country-info-value">${c.population}</div></div><div class="country-info-row"><div class="country-info-label">بنادر کلیدی</div><div class="country-info-value">${c.keyPorts}</div></div><div class="country-info-row"><div class="country-info-label">نقش در کریدور</div><div class="country-info-value">${c.role}</div></div><div class="country-info-row"><div class="country-info-label">کریدورهای مرتبط</div><div class="country-info-value">${c.corridor}</div></div>`;
-}
-
-// ======================== توابع گزارش اهواز ========================
-function toggleAhvazCard(id) {
-  const card = document.getElementById(id);
-  if (card) card.classList.toggle('open');
-}
-function toggleAllAhvaz() {
-  const cards = document.querySelectorAll('.route-card-ahvaz');
-  const anyOpen = Array.from(cards).some(c => c.classList.contains('open'));
-  cards.forEach(c => { if (anyOpen) c.classList.remove('open'); else c.classList.add('open'); });
-}
-
-// ======================== توابع صفحه کریدورها (جدید) ========================
-function toggleCorridorNew(id) {
-  const body = document.getElementById(id + '-body');
-  const chev = document.getElementById(id + '-chev');
-  const isOpen = body.classList.contains('open');
-  body.classList.toggle('open', !isOpen);
-  if (chev) chev.classList.toggle('open', !isOpen);
-}
-
-function switchTabNew(corridorId, tabName) {
-  const body = document.getElementById(corridorId + '-body');
-  if (!body) return;
-  body.querySelectorAll('.tab-content-new').forEach(el => {
-    el.classList.toggle('active', el.id === corridorId + '-' + tabName);
-  });
-  body.querySelectorAll('.tab-new').forEach(el => {
-    const clickAttr = el.getAttribute('onclick');
-    if (clickAttr && clickAttr.includes("'" + tabName + "'")) {
-      el.classList.add('active');
-    } else {
-      el.classList.remove('active');
-    }
-  });
-}
-
-function switchCorridorsTab(tabName) {
-  document.querySelectorAll('.corridors-tab-pane').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.corridors-tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('corridors-tab-' + tabName).classList.add('active');
-  if(event && event.target) event.target.classList.add('active');
-}
-
-// ======================== داده‌ها و توابع صفحه مقایسه بنادر ========================
+// داده‌های صفحه مقایسه بنادر
 const portsDataPro = [
   { id:'dxb', name:'دبی – بندر راشد', country:'امارات', region:'uae', score:63, scoreClass:'sr-amber-pro', fatf:'زیر نظر', fatfClass:'fatf-watch-pro', capacity:'~۲۲ میلیون TEU / سال', draft:'17m', mainTraders:'چین · هند · اروپا · آمریکا', goods:['کانتینر','خودرو (RORO)','الکترونیک','مواد غذایی','نفت و گاز'], docs:['Bill of Lading','Certificate of Origin','Packing List','EDD Form (UAE Circ.7)','OFAC Screening','End-User Certificate دوگانه‌کاربرد'], risks:['Circular 7/2025 – ریسک تحریم ثانویه با ایران','IRGC VHF Warning Zone در محور RAK','بستن مسیر هرمز از مارس ۲۰۲۶'], facilities:['۶۷ اسکله جبل‌علی','منطقه آزاد JAFZA','انبار سرد','سیستم دیجیتال Trakhees','مرکز لجستیک چندوجهی'], note:'DP World اپراتور؛ رتبه ۱۰ جهان. مسیر زمینی از طریق عمان فعال شد.' },
   { id:'jafza', name:'جبل‌علی / JAFZA', country:'امارات', region:'uae', score:70, scoreClass:'sr-amber-pro', fatf:'زیر نظر', fatfClass:'fatf-watch-pro', capacity:'۲۲ میلیون TEU / سال', draft:'17m', mainTraders:'چین · هند · اروپا', goods:['کانتینر','پتروشیمی','خودرو','الکترونیک'], docs:['Bill of Lading','JAFZA Import Declaration','OFAC/SDN Screening','EDD برای ایران-مرتبط','Free Zone Entry Permit'], risks:['اجاره اجباری در JAFZA/DAFZA','Circular 7 – ریسک ثانویه','نزدیکی به منطقه هشدار IRGC'], facilities:['۱۳۵+ km جاده داخلی','۷,۰۰۰+ شرکت مستقر','انبار خودکار','پل جبل‌علی-القوز','فرودگاه Al Maktoum مجاور'], note:'بزرگترین منطقه آزاد خاورمیانه. الزام اجاره از شرکت در زون برای عملیات تجاری.' },
@@ -2030,12 +2042,94 @@ function showPortPanel(panelName) {
   }
 }
 
+// ======================== داده‌های صفحه کشورها ========================
+const countriesData = {
+  china: { name: 'چین', capital: 'پکن', population: '۱.۴ میلیارد', keyPorts: 'شانگهای، نینگبو، شنژن', role: 'مبدأ اصلی صادرات، تولید ۳۰٪ کالاهای جهانی', corridor: 'راه ابریشم - مبدأ' },
+  iran: { name: 'ایران', capital: 'تهران', population: '۸۵ میلیون', keyPorts: 'بندرعباس، امام خمینی، انزلی', role: 'مرکز ترانزیت شمال-جنوب و شرق-غرب', corridor: 'INSTC, TITR' },
+  turkey: { name: 'ترکیه', capital: 'آنکارا', population: '۸۵ میلیون', keyPorts: 'آمبارلی، مرسین', role: 'پل ارتباطی آسیا به اروپا', corridor: 'TITR, BTK' },
+  uae: { name: 'امارات متحده عربی', capital: 'ابوظبی', population: '۹.۵ میلیون', keyPorts: 'جبل علی، خلیفه', role: 'هاب لجستیک منطقه', corridor: 'مسیر اصلی دریایی چین-خاورمیانه' },
+  oman: { name: 'عمان', capital: 'مسقط', population: '۵ میلیون', keyPorts: 'صحار، صلاله، دقم، خصب', role: 'ترانزیت جایگزین دبی', corridor: 'مسیر دریایی جنوب ایران' },
+  pakistan: { name: 'پاکستان', capital: 'اسلام‌آباد', population: '۲۴۰ میلیون', keyPorts: 'گواتر، کراچی', role: 'دسترسی به اقیانوس هند، CPEC', corridor: 'راه ابریشم جنوبی' },
+  turkmenistan: { name: 'ترکمنستان', capital: 'عشق‌آباد', population: '۶ میلیون', keyPorts: 'بندر ترکمنباشی', role: 'ترانزیت گاز و ریلی به خزر', corridor: 'مسیر شمال-جنوب، CRA' },
+  azerbaijan: { name: 'آذربایجان', capital: 'باکو', population: '۱۰ میلیون', keyPorts: 'بندر آلیات (خزر)', role: 'گلوگاه ریلی و دریایی BTK', corridor: 'TITR, BTK, INSTC' },
+  georgia: { name: 'گرجستان', capital: 'تفلیس', population: '۳.۷ میلیون', keyPorts: 'پوتی، باتومی', role: 'دسترسی به دریای سیاه', corridor: 'TITR, BTK' },
+  russia: { name: 'روسیه', capital: 'مسکو', population: '۱۴۶ میلیون', keyPorts: 'نووروسیسک، سن پترزبورگ', role: 'مسیر شمالی و کریدور شمال-جنوب', corridor: 'CRE شمالی، INSTC' },
+  india: { name: 'هند', capital: 'دهلی نو', population: '۱.۴ میلیارد', keyPorts: 'مومبای، نهاوا شیوا', role: 'بازار بزرگ جنوب آسیا', corridor: 'INSTC' },
+  iraq: { name: 'عراق', capital: 'بغداد', population: '۴۳ میلیون', keyPorts: 'بندر ام قصر', role: 'ترانزیت به مدیترانه و اروپا', corridor: 'مسیر زمینی غرب ایران' },
+  afghanistan: { name: 'افغانستان', capital: 'کابل', population: '۴۰ میلیون', keyPorts: '-', role: 'ترانزیت زمینی بین آسیای مرکزی و جنوب آسیا', corridor: 'ABEC' },
+  kazakhstan: { name: 'قزاقستان', capital: 'آستانه', population: '۱۹ میلیون', keyPorts: 'بندر آکتائو (خزر)', role: 'ترانزیت ریلی، مسیر میانی چین به اروپا', corridor: 'TITR, CRE' }
+};
+const countryList = ['china', 'kazakhstan', 'turkmenistan', 'azerbaijan', 'georgia', 'turkey', 'iran', 'afghanistan', 'pakistan', 'india', 'russia', 'iraq', 'oman', 'uae'];
+
+function renderCountries() {
+  const container = document.getElementById('country-list-items');
+  if (!container) return;
+  container.innerHTML = '';
+  countryList.forEach(id => {
+    const c = countriesData[id];
+    const div = document.createElement('div');
+    div.className = 'country-item';
+    div.textContent = c.name;
+    div.onclick = () => selectCountry(id);
+    container.appendChild(div);
+  });
+}
+function selectCountry(id) {
+  document.querySelectorAll('.country-item').forEach(el => el.classList.remove('active'));
+  if(event && event.target) event.target.classList.add('active');
+  const c = countriesData[id];
+  document.getElementById('country-detail-title').innerHTML = c.name;
+  document.getElementById('country-detail-content').innerHTML = `<div class="country-info-row"><div class="country-info-label">پایتخت</div><div class="country-info-value">${c.capital}</div></div><div class="country-info-row"><div class="country-info-label">جمعیت</div><div class="country-info-value">${c.population}</div></div><div class="country-info-row"><div class="country-info-label">بنادر کلیدی</div><div class="country-info-value">${c.keyPorts}</div></div><div class="country-info-row"><div class="country-info-label">نقش در کریدور</div><div class="country-info-value">${c.role}</div></div><div class="country-info-row"><div class="country-info-label">کریدورهای مرتبط</div><div class="country-info-value">${c.corridor}</div></div>`;
+}
+
+// ======================== توابع گزارش اهواز ========================
+function toggleAhvazCard(id) {
+  const card = document.getElementById(id);
+  if (card) card.classList.toggle('open');
+}
+function toggleAllAhvaz() {
+  const cards = document.querySelectorAll('.route-card-ahvaz');
+  const anyOpen = Array.from(cards).some(c => c.classList.contains('open'));
+  cards.forEach(c => { if (anyOpen) c.classList.remove('open'); else c.classList.add('open'); });
+}
+
+// ======================== توابع صفحه کریدورها ========================
+function toggleCorridorNew(id) {
+  const body = document.getElementById(id + '-body');
+  const chev = document.getElementById(id + '-chev');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  if (chev) chev.classList.toggle('open', !isOpen);
+}
+
+function switchTabNew(corridorId, tabName) {
+  const body = document.getElementById(corridorId + '-body');
+  if (!body) return;
+  body.querySelectorAll('.tab-content-new').forEach(el => {
+    el.classList.toggle('active', el.id === corridorId + '-' + tabName);
+  });
+  body.querySelectorAll('.tab-new').forEach(el => {
+    const clickAttr = el.getAttribute('onclick');
+    if (clickAttr && clickAttr.includes("'" + tabName + "'")) {
+      el.classList.add('active');
+    } else {
+      el.classList.remove('active');
+    }
+  });
+}
+
+function switchCorridorsTab(tabName) {
+  document.querySelectorAll('.corridors-tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.corridors-tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('corridors-tab-' + tabName).classList.add('active');
+  if(event && event.target) event.target.classList.add('active');
+}
+
 function showDash(id) {
   document.querySelectorAll('.dash-section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('dash-' + id).classList.add('active');
   if(event && event.target) event.target.classList.add('active');
-  if (id === 'main' && map) setTimeout(() => map.invalidateSize(), 100);
   if (id === 'countries') renderCountries();
   if (id === 'portcompare') {
     renderPortsGridPro();
@@ -2047,16 +2141,12 @@ function showDash(id) {
 }
 
 window.onload = () => { 
-  initMap(); 
   renderCountries();
   renderPortsGridPro();
   renderRoutesPro();
   document.getElementById('ahvazCard1')?.classList.add('open');
 };
 window.showDash = showDash;
-window.selectRoute = selectRoute;
-window.resetMapFilter = resetMapFilter;
-window.toggleMeasure = toggleMeasure;
 window.toggleAhvazCard = toggleAhvazCard;
 window.toggleAllAhvaz = toggleAllAhvaz;
 window.showPortPanel = showPortPanel;
