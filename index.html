@@ -9,14 +9,31 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Vazirmatn', Tahoma, 'Segoe UI', Arial, sans-serif; background: #f0efe9; direction: rtl; line-height: 1.5; }
-  @media (prefers-color-scheme: dark) { body { background: #1c1c1a; } .card, .page-header, .cor-card, .detail-panel, .map-section, .shipping-card, .country-card, .investment-card, .stat-card { background: #252523; border-color: #3a3a36; color: #e0e0e0; } .stat-item { border-bottom-color: #3a3a36; } }
+  body { font-family: 'Vazirmatn', Tahoma, 'Segoe UI', Arial, sans-serif; background: #f0efe9; direction: rtl; line-height: 1.5; color: #1a2a6b; }
+  @media (prefers-color-scheme: dark) { body { background: #1c1c1a; } .card, .page-header, .cor-card, .detail-panel, .map-section, .shipping-card, .country-card, .investment-card, .stat-card { background: #252523; border-color: #3a3a36; color: #d0d4e8; } .stat-item { border-bottom-color: #3a3a36; } }
   
-  /* خط نازک نارنجی دور همه کادرها */
-  .card, .page-header, .cor-card, .detail-panel, .map-section, .shipping-card, .country-card, .investment-card, .stat-card, .metric-box, .stats-row .stat-card, .shipping-card, .countries-list, .country-detail, .investment-card, .cor-card, .route-card-ahvaz, .port-card, .corridor-card, .bri-card, .metric-card, .inner-metric, .alert-banner, .compare-tab, .port-compare-wrapper, .comp-table-wrap, .recommend-box, .pc, .alert, .reco, .thresh, .carec-map-card, .topbar, .tabs, .port-grid .pc, .panel .alert, .ref, .sdiv, .thresh, .comp-wrap, .reco, .port-grid .pc .cs, .pc-head {
+  /* خط نازک نارنجی یکسان برای همه کادرها */
+  .card, .page-header, .cor-card, .detail-panel, .map-section, .shipping-card, .country-card, .investment-card, .stat-card, .metric-box, .stats-row .stat-card, .shipping-card, .countries-list, .country-detail, .investment-card, .cor-card, .route-card-ahvaz, .port-card, .corridor-card, .bri-card, .metric-card, .inner-metric, .alert-banner, .compare-tab, .port-compare-wrapper, .comp-table-wrap, .recommend-box, .pc, .alert, .reco, .thresh, .carec-map-card, .topbar, .tabs, .port-grid .pc, .panel .alert, .ref, .sdiv, .thresh, .comp-wrap, .reco, .port-grid .pc .cs, .pc-head, .route-card-pro, .port-card-pro, .info-card-pro, .route-card-new, .corridor-card-new, .corridor-header-new, .tab-new, .compare-tab, .section-card-new, .alert, .alert-box-new, .ref-box-new, .branch-ahvaz, .info-item-ahvaz, .path-visual-ahvaz, .comparison-table-ahvaz, .carec-map-card, .pdf-download-section, .bri-card-new, .corridor-card, .port-card, .bri-card, .metric-card, .inner-metric {
     outline: 0.5px solid #F79646;
     outline-offset: -0.5px;
   }
+  
+  /* یکدست کردن رنگ متن اصلی همه بخش‌ها به سرمه‌ای */
+  body, .card, .page-header, .cor-card, .detail-panel, .map-section, .shipping-card, .country-card, .investment-card, .stat-card, .metric-box, .stats-row .stat-card, .shipping-card, .countries-list, .country-detail, .investment-card, .cor-card, .route-card-ahvaz, .port-card, .corridor-card, .bri-card, .metric-card, .inner-metric, .alert-banner, .compare-tab, .port-compare-wrapper, .comp-table-wrap, .recommend-box, .pc, .alert, .reco, .thresh, .carec-map-card, .topbar, .tabs, .port-grid .pc, .panel .alert, .ref, .sdiv, .thresh, .comp-wrap, .reco, .port-grid .pc .cs, .pc-head, .route-card-pro, .port-card-pro, .info-card-pro, .route-card-new, .corridor-card-new, .corridor-header-new, .tab-new, .compare-tab, .section-card-new, .alert, .alert-box-new, .ref-box-new, .branch-ahvaz, .info-item-ahvaz, .path-visual-ahvaz, .comparison-table-ahvaz, .carec-map-card, .pdf-download-section, .bri-card-new, .corridor-card, .port-card, .bri-card, .metric-card, .inner-metric, .detail-panel-pro, .port-detail-pro, .route-detail, .country-info-value, .stat-item .number, .metric-value, .stat-title, .shipping-title, .investment-title, .cor-name, .detail-title, .info-value-ahvaz, .info-label-ahvaz, .route-name-ahvaz, .branch-title-ahvaz, .alert-title, .card-title, .section-title, .inner-value, .kv-val, .corridor-name, .bri-value, .port-name, .metric-label, .stat-item .label, .country-info-label, .update-note, .dash-footer p, .badge, .tag, .compare-tab, .nav-btn, .route-btn, .map-btn, .filt, .cor-badge, .status-badge-ahvaz, .ref-box-ahvaz, .footer-note-ahvaz, th, td, .caption, .pdf-link, .alert-body, .route-sub-ahvaz, .info-label, .kv-key, .inner-label, .metric-sub, .bar-label, .bar-pct, .port-header, .corridor-header, .bri-label, .metric-label-new, .metric-value-new, .metric-note-new, .tag-new, .route-step-new, .route-arrow-new, .leg-item-new, .li-new, .sec-header-new h2, .ref-inline-new, .badge-new, .note-new, .risk-row-new, .rdot-new, .src-badge-new, .alert-warn-new, .alert-danger-new, .alert-ok-new, .compare-panel, .filter-btn-pro, .port-stat-label-pro, .port-stat-value-pro, .detail-close-pro, .info-label-pro, .info-value-pro, .route-title-pro, .rf-label-pro, .rf-val-pro, .risk-item-pro, .route-note-pro, .thresh-title, .thresh-row, .branch-title-ahvaz, .info-label-ahvaz, .info-value-ahvaz strong, .country-info-value, .country-info-label {
+    color: #1a2a6b;
+  }
+  
+  /* حفظ رنگ‌های ویژه (اخطار، ریسک، موفقیت) بدون تغییر */
+  .risk-high, .c-danger, .status-critical-ahvaz, .alert-danger-new, .tag-danger, .badge-danger, .c-warning, .tag-warning, .risk-medium, .c-info, .tag-info, .c-success, .tag-success, .status-active-ahvaz, .alert-success, .risk-low, .text-success, .text-danger, .text-warning, .text-info {
+    color: inherit;
+  }
+  .risk-high { color: #E24B4A; }
+  .risk-medium { color: #BA7517; }
+  .risk-low { color: #1D9E75; }
+  .c-danger { color: #b91c1c; }
+  .c-success { color: #15803d; }
+  .c-warning { color: #c2410c; }
+  .c-info { color: #185FA5; }
   
   .page-header { background: white; border-bottom: 1px solid rgba(0,0,0,0.1); padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; position: sticky; top: 0; z-index: 100; }
   .page-header h1 { font-size: 18px; font-weight: 600; }
@@ -205,6 +222,9 @@
       --danger-text: #F7C1C1;
       --info-bg: #042C53;
       --info-text: #B5D4F4;
+    }
+    body, .card, .page-header, .cor-card, .detail-panel, .map-section, .shipping-card, .country-card, .investment-card, .stat-card, .metric-box, .stats-row .stat-card, .shipping-card, .countries-list, .country-detail, .investment-card, .cor-card, .route-card-ahvaz, .port-card, .corridor-card, .bri-card, .metric-card, .inner-metric, .alert-banner, .compare-tab, .port-compare-wrapper, .comp-table-wrap, .recommend-box, .pc, .alert, .reco, .thresh, .carec-map-card, .topbar, .tabs, .port-grid .pc, .panel .alert, .ref, .sdiv, .thresh, .comp-wrap, .reco, .port-grid .pc .cs, .pc-head, .route-card-pro, .port-card-pro, .info-card-pro, .route-card-new, .corridor-card-new, .corridor-header-new, .tab-new, .compare-tab, .section-card-new, .alert, .alert-box-new, .ref-box-new, .branch-ahvaz, .info-item-ahvaz, .path-visual-ahvaz, .comparison-table-ahvaz, .carec-map-card, .pdf-download-section, .bri-card-new, .corridor-card, .port-card, .bri-card, .metric-card, .inner-metric, .detail-panel-pro, .port-detail-pro, .route-detail, .country-info-value, .stat-item .number, .metric-value, .stat-title, .shipping-title, .investment-title, .cor-name, .detail-title, .info-value-ahvaz, .info-label-ahvaz, .route-name-ahvaz, .branch-title-ahvaz, .alert-title, .card-title, .section-title, .inner-value, .kv-val, .corridor-name, .bri-value, .port-name, .metric-label, .stat-item .label, .country-info-label, .update-note, .dash-footer p, .badge, .tag, .compare-tab, .nav-btn, .route-btn, .map-btn, .filt, .cor-badge, .status-badge-ahvaz, .ref-box-ahvaz, .footer-note-ahvaz, th, td, .caption, .pdf-link, .alert-body, .route-sub-ahvaz, .info-label, .kv-key, .inner-label, .metric-sub, .bar-label, .bar-pct, .port-header, .corridor-header, .bri-label, .metric-label-new, .metric-value-new, .metric-note-new, .tag-new, .route-step-new, .route-arrow-new, .leg-item-new, .li-new, .sec-header-new h2, .ref-inline-new, .badge-new, .note-new, .risk-row-new, .rdot-new, .src-badge-new, .alert-warn-new, .alert-danger-new, .alert-ok-new, .compare-panel, .filter-btn-pro, .port-stat-label-pro, .port-stat-value-pro, .detail-close-pro, .info-label-pro, .info-value-pro, .route-title-pro, .rf-label-pro, .rf-val-pro, .risk-item-pro, .route-note-pro, .thresh-title, .thresh-row, .branch-title-ahvaz, .info-label-ahvaz, .info-value-ahvaz strong, .country-info-value, .country-info-label {
+      color: #cbd5e1;
     }
   }
 
@@ -975,7 +995,7 @@
               <tr><th>ویژگی</th><th>ترانس‌سیبری<br><span style="font-weight:400;font-size:10px;">(Northern/TSR)</span></th><th>راه ابریشم آبی<br><span style="font-weight:400;font-size:10px;">(Maritime)</span></th><th>کوریدور میانی<br><span style="font-weight:400;font-size:10px;">(TITR)</span></th><th>کریدور شمالی قطبی<br><span style="font-weight:400;font-size:10px;">(Polar/NSR)</span></th></tr>
             </thead>
             <tbody>
-              <tr><td>نوع</td><td><span class="badge-new b-rail-new">ریلی</span></td><td><span class="badge-new b-sea-new">دریایی</span></td><td><span class="badge-new b-multi-new">چندوجهی</span></td><td><span class="badge-new b-arc-new">دریایی قطبی</span></td></tr>
+              <tr><td>نوع</th><td><span class="badge-new b-rail-new">ریلی</span></td><td><span class="badge-new b-sea-new">دریایی</span></td><td><span class="badge-new b-multi-new">چندوجهی</span></td><td><span class="badge-new b-arc-new">دریایی قطبی</span></td></tr>
               <tr><td>طول مسیر</td><td>~۹,۲۰۰ کیلومتر</td><td>~۲۱,۰۰۰ کیلومتر (Suez)<br>~۲۸,۰۰۰ کیلومتر (Cape)</td><td>~۸,۷۰۰ کیلومتر</td><td>~۱۴,۰۰۰ کیلومتر<br><span class="note-new">۷,۰۰۰km کوتاه‌تر از Suez</span></td></tr>
               <tr><td>زمان ترانزیت ۲۰۲۵</td><td>۱۵–۲۲ روز<br><span class="note-new">کاهش سرعت به ۳۶-۴۰km/h</span></td><td>۲۸–۳۵ روز (Suez)<br>۴۰–۵۰ روز (Cape)</td><td>۱۸–۲۵ روز<br><span class="note-new">هدف: ۱۴–۱۸ روز</span></td><td>۱۸–۲۰ روز<br><span class="note-new">فقط فصل تابستان</span></td></tr>
               <tr><td>ظرفیت واقعی ۲۰۲۴</td><td>~۵۰۰–۶۵۰ هزار TEU<br><span class="note-new">کاهش ۹.۸٪ نسبت به ۲۰۲۳</span></td><td>۱۳.۵–۱۴ میلیون TEU<br><span class="note-new">(China-Europe, 2024)</span></td><td>۴.۴۷ میلیون تن / ۵۵,۰۰۰ TEU<br><span class="note-new">رشد ۶۳٪ نسبت به ۲۰۲۳</span></td><td><span class="badge-new b-na-new">تجاری اولیه</span><br><span class="note-new">آغاز تجاری: اکتبر ۲۰۲۵</span></td></tr>
@@ -1587,14 +1607,14 @@
     <table class="comparison-table-ahvaz">
       <thead><tr><th>مسیر</th><th>وضعیت فعلی</th><th>زمان کل تخمینی</th><th>هزینه (40ft) تخمینی</th><th>توصیه</th></tr></thead>
       <tbody>
-        <tr><td>دبی → بندرعباس</td><td style="color:#b91c1c;"> تعلیق/خطر بالا</td><td>۲۵–۴۰ روز</td><td>$3,000–$8,000+</td><td> فعلاً توصیه نمی‌شود</td></tr>
-        <tr><td>جبل‌علی → بندرعباس</td><td style="color:#b91c1c;"> تعلیق/خطر بالا</td><td>۲۵–۴۰ روز</td><td>$3,000–$8,000+</td><td> فعلاً توصیه نمی‌شود</td></tr>
-        <tr><td>دقم → چابهار/گوادر</td><td style="color:#15803d;"> فعال</td><td>۳۵–۵۵ روز</td><td>$4,000–$6,500</td><td> مناسب برای کالاهای معمول</td></tr>
-        <tr><td>صحار → چابهار/گوادر</td><td style="color:#15803d;"> فعال</td><td>۳۵–۵۵ روز</td><td>$4,000–$6,500</td><td> مناسب برای فله و کانتینر</td></tr>
-        <tr style="background:rgba(16,185,129,0.05)"><td><strong>سالاله → چابهار</strong></td><td style="color:#15803d;"> بهترین جایگزین</td><td>۳۵–۵۰ روز</td><td>$4,000–$6,000</td><td> بهترین گزینه کنونی</td></tr>
-        <tr><td>ترکمن‌باشی → انزلی</td><td style="color:#f59e0b;"> فعال — ظرفیت محدود</td><td>۲۵–۳۵ روز</td><td>$2,500–$4,000</td><td> مناسب اما ظرفیت محدود</td></tr>
-        <tr><td>استاراخان → انزلی/امیرآباد</td><td style="color:#f59e0b;"> فعال — پیچیده</td><td>۲۵–۴۰ روز</td><td>$2,500–$4,500</td><td> برای شرکت‌های تحریم‌پذیر دشوار</td></tr>
-        <tr style="background:rgba(236,72,153,0.05)"><td><strong>مرسین → بازرگان → اهواز</strong></td><td style="color:#15803d;"> فعال — پایدار</td><td>۳۰–۴۵ روز</td><td>$4,000–$6,500</td><td> پایدارترین مسیر غیردریایی</td></tr>
+        <tr><td>دبی → بندرعباس</th><td style="color:#b91c1c;"> تعلیق/خطر بالا</th><td>۲۵–۴۰ روز</th><td>$3,000–$8,000+</th><td> فعلاً توصیه نمی‌شود</th></tr>
+        <tr><td>جبل‌علی → بندرعباس</th><td style="color:#b91c1c;"> تعلیق/خطر بالا</th><td>۲۵–۴۰ روز</th><td>$3,000–$8,000+</th><td> فعلاً توصیه نمی‌شود</th></tr>
+        <tr><td>دقم → چابهار/گوادر</th><td style="color:#15803d;"> فعال</th><td>۳۵–۵۵ روز</th><td>$4,000–$6,500</th><td> مناسب برای کالاهای معمول</th></tr>
+        <tr><td>صحار → چابهار/گوادر</th><td style="color:#15803d;"> فعال</th><td>۳۵–۵۵ روز</th><td>$4,000–$6,500</th><td> مناسب برای فله و کانتینر</th></tr>
+        <tr style="background:rgba(16,185,129,0.05)"><td><strong>سالاله → چابهار</strong></th><td style="color:#15803d;"> بهترین جایگزین</th><td>۳۵–۵۰ روز</th><td>$4,000–$6,000</th><td> بهترین گزینه کنونی</th></tr>
+        <tr><td>ترکمن‌باشی → انزلی</th><td style="color:#f59e0b;"> فعال — ظرفیت محدود</th><td>۲۵–۳۵ روز</th><td>$2,500–$4,000</th><td> مناسب اما ظرفیت محدود</th></tr>
+        <tr><td>استاراخان → انزلی/امیرآباد</th><td style="color:#f59e0b;"> فعال — پیچیده</th><td>۲۵–۴۰ روز</th><td>$2,500–$4,500</th><td> برای شرکت‌های تحریم‌پذیر دشوار</th></tr>
+        <tr style="background:rgba(236,72,153,0.05)"><td><strong>مرسین → بازرگان → اهواز</strong></th><td style="color:#15803d;"> فعال — پایدار</th><td>۳۰–۴۵ روز</th><td>$4,000–$6,500</th><td> پایدارترین مسیر غیردریایی</th></tr>
       </tbody>
     </table>
   </div>
@@ -1691,11 +1711,11 @@
             <tr><th>معیار</th><th>دبی (راشد)</th><th>جبل‌علی / JAFZA</th><th>صحار</th><th>سالاله</th><th>دقم</th><th>خصب</th><th>بندر حمد</th><th>راس لفان</th><th>کراچی</th><th>گوادر</th></tr>
           </thead>
           <tbody>
-            <tr><td>امتیاز کلی</td><td>۶۵</td><td>۷۰</td><td>۸۲</td><td>۷۸</td><td>۷۵</td><td>۴۰</td><td>۷۲</td><td>۶۵</td><td>۵۵</td><td>۴۲</td></tr>
-            <tr><td>FATF وضعیت</td><td>خارج ۲۰۲۴</td><td>خارج ۲۰۲۴</td><td>پاک</td><td>پاک</td><td>پاک</td><td>ریسک بالا</td><td>پاک</td><td>پاک</td><td>پاک</td><td>ریسک CPEC</td></tr>
-            <tr><td>ریسک ایران</td><td>🔴 بسیار بالا</td><td>🔴 بسیار بالا</td><td>🟡 متوسط</td><td>🟡 متوسط</td><td>🟡 متوسط</td><td>🔴 بسیار بالا</td><td>🟡 متوسط</td><td>🟡 متوسط</td><td>🔴 بالا</td><td>🔴 بسیار بالا</td></tr>
-            <tr><td>تحریم ثانویه</td><td>خطر بالا OFAC</td><td>خطر بالا OFAC</td><td>کمتر</td><td>کمتر</td><td>کمتر</td><td>خطر بالا</td><td>کمتر</td><td>کمتر</td><td>خطر بالا</td><td>خطر بسیار بالا</td></tr>
-            <tr><td>تجهیزات OOG</td><td>نامناسب</td><td>مناسب</td><td>بهترین</td><td>مناسب</td><td>عالی (نفتی)</td><td>نامناسب</td><td>متوسط</td><td>متوسط</td><td>متوسط</td><td>محدود</td></tr>
+            <tr><td>امتیاز کلی</th><td>۶۵</th><td>۷۰</th><td>۸۲</th><td>۷۸</th><td>۷۵</th><td>۴۰</th><td>۷۲</th><td>۶۵</th><td>۵۵</th><td>۴۲</th></tr>
+            <tr><td>FATF وضعیت</th><td>خارج ۲۰۲۴</th><td>خارج ۲۰۲۴</th><td>پاک</th><td>پاک</th><td>پاک</th><td>ریسک بالا</th><td>پاک</th><td>پاک</th><td>پاک</th><td>ریسک CPEC</th></tr>
+            <tr><td>ریسک ایران</th><td>🔴 بسیار بالا</th><td>🔴 بسیار بالا</th><td>🟡 متوسط</th><td>🟡 متوسط</th><td>🟡 متوسط</th><td>🔴 بسیار بالا</th><td>🟡 متوسط</th><td>🟡 متوسط</th><td>🔴 بالا</th><td>🔴 بسیار بالا</th></tr>
+            <tr><td>تحریم ثانویه</th><td>خطر بالا OFAC</th><td>خطر بالا OFAC</th><td>کمتر</th><td>کمتر</th><td>کمتر</th><td>خطر بالا</th><td>کمتر</th><td>کمتر</th><td>خطر بالا</th><td>خطر بسیار بالا</th></tr>
+            <tr><td>تجهیزات OOG</th><td>نامناسب</th><td>مناسب</th><td>بهترین</th><td>مناسب</th><td>عالی (نفتی)</th><td>نامناسب</th><td>متوسط</th><td>متوسط</th><td>متوسط</th><td>محدود</th></tr>
           </tbody>
         </table>
       </div>
