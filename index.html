@@ -1985,35 +1985,33 @@
 <!-- ========== صفحه هشتم: مقایسه بنادر مهم ========== -->
 <div id="dash-portcompare" class="dash-section">
   <div class="port-compare-wrapper">
-    <!--  فقط نمای کلی بنادر نمایش داده می‌شود -->
+    <!-- تب‌ها حذف شدند - فقط نمای کلی بنادر نمایش داده می‌شود -->
     
-    <div id="panel-overview" class="compare-panel active" style="display:block">
+    <div class="compare-panel active">
       <div class="alert alert-danger" style="margin-bottom:16px">
-        <span>📢</span>
+        <span>⚠</span>
         <span><strong>هشدار بحران ۲۰۲۶:</strong> از ۲۸ فوریه ۲۰۲۶ تنگه هرمز عملاً بسته است. دبی و جبل‌علی مسیر ایران را مسدود کرده‌اند. بنادر عمان (صحار، سالاله، دقم) به عنوان جایگزین اصلی معرفی شده‌اند.</span>
       </div>
       <div class="alert alert-warning" style="margin-bottom:20px">
-        <span>📢</span>
+        <span>📋</span>
         <span><strong>UAE Circular No. 7/2025:</strong> هر تراکنش با ایران نیاز به فیلترهای EDD دارد. خطر تحریم ثانویه برای شرکت‌های ثالث فعال در بنادر امارات بالاست.</span>
       </div>
       
       <div class="filter-bar-pro" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px">
-        <button class="filter-btn-pro active" onclick="filterPortsPro('all',this)">همه بنادر</button>
-        <button class="filter-btn-pro" onclick="filterPortsPro('uae',this)">امارات</button>
-        <button class="filter-btn-pro" onclick="filterPortsPro('oman',this)">عمان</button>
-        <button class="filter-btn-pro" onclick="filterPortsPro('qatar',this)">قطر</button>
-        <button class="filter-btn-pro" onclick="filterPortsPro('pakistan',this)">پاکستان</button>
+        <button class="filter-btn-pro active" data-filter="all">همه بنادر</button>
+        <button class="filter-btn-pro" data-filter="uae">امارات</button>
+        <button class="filter-btn-pro" data-filter="oman">عمان</button>
+        <button class="filter-btn-pro" data-filter="qatar">قطر</button>
+        <button class="filter-btn-pro" data-filter="pakistan">پاکستان</button>
       </div>
       
       <div id="portsGridPro" class="port-grid-pro" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px"></div>
       <div id="portDetailPro" class="detail-panel-pro" style="display:none;margin-top:24px"></div>
 
-      <div class="divider-custom" style="height:1px;background:var(--border);margin:32px 0"></div>
-      <div class="section-label-custom" style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;margin:28px 0 12px">مسیرهای زمینی استراتژیک</div>
+      <div class="divider-custom" style="height:1px;background:#e2e8f0;margin:32px 0"></div>
+      <div class="section-label-custom" style="font-size:11px;font-weight:600;color:#64748b;text-transform:uppercase;margin:28px 0 12px">مسیرهای زمینی استراتژیک</div>
       <div id="routesGridPro" class="routes-grid-pro" style="display:grid;gap:16px"></div>
     </div>
-
-    <!-- پنل‌های دیگر (دبی، عمان، قطر، پاکستان، مقایسه) حذف شدند -->
 
   </div>
 </div>
@@ -2044,10 +2042,15 @@ const routesPro = [
 let activeFilterPro = 'all';
 let activePortPro = null;
 
-function filterPortsPro(filter, btn) {
+function filterPortsPro(filter) {
   activeFilterPro = filter;
-  document.querySelectorAll('.filter-btn-pro').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+  document.querySelectorAll('.filter-btn-pro').forEach(btn => {
+    if(btn.dataset.filter === filter) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
   renderPortsGridPro();
 }
 
@@ -2057,20 +2060,20 @@ function renderPortsGridPro() {
   const filtered = activeFilterPro === 'all' ? portsDataPro : portsDataPro.filter(p => p.region === activeFilterPro);
   container.innerHTML = filtered.map(p => {
     const isActive = activePortPro === p.id;
-    const fatfLabel = p.fatfClass === 'fatf-clean-pro' ? 'انطباق با FATF' : p.fatfClass === 'fatf-grey-pro' ? '👀 ریسک بالا' : '⚠️ زیر نظر';
+    const fatfLabel = p.fatfClass === 'fatf-clean-pro' ? '✓ پاک' : p.fatfClass === 'fatf-grey-pro' ? '⚠ ریسک بالا' : '◎ زیر نظر';
     return `
-      <div class="port-card-pro ${isActive ? 'active' : ''}" onclick="selectPortPro('${p.id}')" style="cursor:pointer;background:var(--bg2);border-radius:14px;padding:18px;cursor:pointer;transition:all 0.2s;border:1px solid var(--border);position:relative;overflow:hidden">
+      <div class="port-card-pro ${isActive ? 'active' : ''}" onclick="selectPortPro('${p.id}')" style="cursor:pointer;background:#ffffff;border-radius:14px;padding:18px;transition:all 0.2s;border:1px solid #e2e8f0;position:relative;overflow:hidden">
         <div class="port-header-pro" style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
           <div>
-            <div class="port-name-pro" style="font-size:15px;font-weight:700;color:var(--text)">${p.name}</div>
-            <div class="port-country-pro" style="font-size:11px;color:var(--text-muted);margin-top:2px">${p.country}</div>
+            <div class="port-name-pro" style="font-size:15px;font-weight:700;color:#0f172a">${p.name}</div>
+            <div class="port-country-pro" style="font-size:11px;color:#5b6e8c;margin-top:2px">${p.country}</div>
           </div>
-          <div class="score-ring-pro ${p.scoreClass}" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;font-size:15px;font-weight:700;border:2px solid;background:var(--bg3)">${p.score}</div>
+          <div class="score-ring-pro ${p.scoreClass}" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;font-size:15px;font-weight:700;border:2px solid;background:#f8fafc">${p.score}</div>
         </div>
         <div class="port-stats-pro" style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
-          <div class="port-stat-pro" style="display:flex;justify-content:space-between;font-size:11px;padding:4px 0;border-bottom:0.5px solid var(--border)"><span class="port-stat-label-pro" style="color:var(--text-muted)">FATF</span><span class="fatf-tag-pro ${p.fatfClass}" style="font-size:10px;padding:3px 10px;border-radius:20px;font-weight:600;display:inline-block">${fatfLabel}</span></div>
-          <div class="port-stat-pro" style="display:flex;justify-content:space-between;font-size:11px;padding:4px 0;border-bottom:0.5px solid var(--border)"><span class="port-stat-label-pro" style="color:var(--text-muted)">ظرفیت</span><span class="port-stat-value-pro" style="font-weight:500;color:var(--text)">${p.capacity.split('·')[0]}</span></div>
-          <div class="port-stat-pro" style="display:flex;justify-content:space-between;font-size:11px;padding:4px 0;border-bottom:0.5px solid var(--border)"><span class="port-stat-label-pro" style="color:var(--text-muted)">آبخور</span><span class="port-stat-value-pro" style="font-weight:500;color:var(--text)">${p.draft}</span></div>
+          <div class="port-stat-pro" style="display:flex;justify-content:space-between;font-size:11px;padding:4px 0;border-bottom:0.5px solid #e2e8f0"><span class="port-stat-label-pro" style="color:#5b6e8c">FATF</span><span class="fatf-tag-pro ${p.fatfClass}" style="font-size:10px;padding:3px 10px;border-radius:20px;font-weight:600;display:inline-block">${fatfLabel}</span></div>
+          <div class="port-stat-pro" style="display:flex;justify-content:space-between;font-size:11px;padding:4px 0;border-bottom:0.5px solid #e2e8f0"><span class="port-stat-label-pro" style="color:#5b6e8c">ظرفیت</span><span class="port-stat-value-pro" style="font-weight:500;color:#0f172a">${p.capacity.split('·')[0]}</span></div>
+          <div class="port-stat-pro" style="display:flex;justify-content:space-between;font-size:11px;padding:4px 0;border-bottom:0.5px solid #e2e8f0"><span class="port-stat-label-pro" style="color:#5b6e8c">آبخور</span><span class="port-stat-value-pro" style="font-weight:500;color:#0f172a">${p.draft}</span></div>
         </div>
       </div>
     `;
@@ -2089,21 +2092,20 @@ function selectPortPro(id) {
   renderPortsGridPro();
   const detailDiv = document.getElementById('portDetailPro');
   detailDiv.style.display = 'block';
-  const fatfLabel = p.fatfClass === 'fatf-clean-pro' ? 'انطباق با FATF' : p.fatfClass === 'fatf-grey-pro' ? '👀 ریسک بالا' : '⚠️ زیر نظر';
   detailDiv.innerHTML = `
-    <div class="detail-header-pro" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:20px 24px;background:var(--bg3);border-bottom:1px solid var(--border)">
-      <div class="detail-title-pro" style="font-size:18px;font-weight:700;color:var(--text)">${p.name}</div>
-      <button class="detail-close-pro" onclick="selectPortPro(null)" style="background:transparent;border:1px solid var(--border);color:var(--text-muted);border-radius:8px;padding:6px 14px;font-size:12px;cursor:pointer">✕ بستن</button>
+    <div class="detail-header-pro" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:20px 24px;background:#f8fafc;border-bottom:1px solid #e2e8f0">
+      <div class="detail-title-pro" style="font-size:18px;font-weight:700;color:#0f172a">${p.name}</div>
+      <button class="detail-close-pro" onclick="selectPortPro(null)" style="background:transparent;border:1px solid #e2e8f0;color:#5b6e8c;border-radius:8px;padding:6px 14px;font-size:12px;cursor:pointer">✕ بستن</button>
     </div>
     <div class="detail-body-pro" style="padding:24px">
       <div class="info-grid-pro" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:24px">
-        <div class="info-card-pro" style="background:var(--bg);border-radius:12px;padding:14px 16px;border:0.5px solid var(--border)"><div class="info-label-pro" style="font-size:10px;color:var(--text-dim);text-transform:uppercase;margin-bottom:6px">امتیاز ریسک</div><div class="info-value-pro" style="font-size:14px;font-weight:600;color:var(--text)">${p.score} / ۱۰۰</div></div>
-        <div class="info-card-pro" style="background:var(--bg);border-radius:12px;padding:14px 16px;border:0.5px solid var(--border)"><div class="info-label-pro" style="font-size:10px;color:var(--text-dim);text-transform:uppercase;margin-bottom:6px">وضعیت FATF</div><div class="info-value-pro" style="font-size:14px;font-weight:600;color:var(--text)">${p.fatf}</div></div>
-        <div class="info-card-pro" style="background:var(--bg);border-radius:12px;padding:14px 16px;border:0.5px solid var(--border)"><div class="info-label-pro" style="font-size:10px;color:var(--text-dim);text-transform:uppercase;margin-bottom:6px">ظرفیت</div><div class="info-value-pro" style="font-size:14px;font-weight:600;color:var(--text)">${p.capacity}</div></div>
-        <div class="info-card-pro" style="background:var(--bg);border-radius:12px;padding:14px 16px;border:0.5px solid var(--border)"><div class="info-label-pro" style="font-size:10px;color:var(--text-dim);text-transform:uppercase;margin-bottom:6px">آبخور</div><div class="info-value-pro" style="font-size:14px;font-weight:600;color:var(--text)">${p.draft}</div></div>
+        <div class="info-card-pro" style="background:#ffffff;border-radius:12px;padding:14px 16px;border:0.5px solid #e2e8f0"><div class="info-label-pro" style="font-size:10px;color:#5b6e8c;text-transform:uppercase;margin-bottom:6px">امتیاز ریسک</div><div class="info-value-pro" style="font-size:14px;font-weight:600;color:#0f172a">${p.score} / ۱۰۰</div></div>
+        <div class="info-card-pro" style="background:#ffffff;border-radius:12px;padding:14px 16px;border:0.5px solid #e2e8f0"><div class="info-label-pro" style="font-size:10px;color:#5b6e8c;text-transform:uppercase;margin-bottom:6px">وضعیت FATF</div><div class="info-value-pro" style="font-size:14px;font-weight:600;color:#0f172a">${p.fatf}</div></div>
+        <div class="info-card-pro" style="background:#ffffff;border-radius:12px;padding:14px 16px;border:0.5px solid #e2e8f0"><div class="info-label-pro" style="font-size:10px;color:#5b6e8c;text-transform:uppercase;margin-bottom:6px">ظرفیت</div><div class="info-value-pro" style="font-size:14px;font-weight:600;color:#0f172a">${p.capacity}</div></div>
+        <div class="info-card-pro" style="background:#ffffff;border-radius:12px;padding:14px 16px;border:0.5px solid #e2e8f0"><div class="info-label-pro" style="font-size:10px;color:#5b6e8c;text-transform:uppercase;margin-bottom:6px">آبخور</div><div class="info-value-pro" style="font-size:14px;font-weight:600;color:#0f172a">${p.draft}</div></div>
       </div>
       <div class="section-title-pro" style="font-size:13px;font-weight:600;color:#185FA5;margin:20px 0 12px;padding-right:8px;border-right:3px solid #185FA5">🌐 کشورهای عمده فعال</div>
-      <div style="font-size:13px;color:var(--text-muted);margin-bottom:16px">${p.mainTraders}</div>
+      <div style="font-size:13px;color:#5b6e8c;margin-bottom:16px">${p.mainTraders}</div>
       <div class="section-title-pro" style="font-size:13px;font-weight:600;color:#185FA5;margin:20px 0 12px;padding-right:8px;border-right:3px solid #185FA5">📦 کالاهای اصلی</div>
       <div class="tags-pro" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px">${p.goods.map(g => `<span class="tag-pro tag-pro-cargo" style="font-size:11px;padding:5px 12px;border-radius:20px;background:rgba(34,197,94,0.1);color:#22c55e;border:0.5px solid rgba(34,197,94,0.2)">${g}</span>`).join('')}</div>
       <div class="section-title-pro" style="font-size:13px;font-weight:600;color:#185FA5;margin:20px 0 12px;padding-right:8px;border-right:3px solid #185FA5">📋 مدارک کامپلاینس کلیدی</div>
@@ -2111,8 +2113,8 @@ function selectPortPro(id) {
       <div class="section-title-pro" style="font-size:13px;font-weight:600;color:#185FA5;margin:20px 0 12px;padding-right:8px;border-right:3px solid #185FA5">⚠ ریسک‌ها و هشدارها</div>
       <div class="tags-pro" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px">${p.risks.map(r => `<span class="tag-pro tag-pro-risk" style="font-size:11px;padding:5px 12px;border-radius:20px;background:rgba(239,68,68,0.1);color:#ef4444;border:0.5px solid rgba(239,68,68,0.2)">${r}</span>`).join('')}</div>
       <div class="section-title-pro" style="font-size:13px;font-weight:600;color:#185FA5;margin:20px 0 12px;padding-right:8px;border-right:3px solid #185FA5">🏗 امکانات و زیرساخت</div>
-      <div class="tags-pro" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px">${p.facilities.map(f => `<span class="tag-pro tag-pro-fac" style="font-size:11px;padding:5px 12px;border-radius:20px;background:var(--bg3);color:var(--text-muted);border:0.5px solid var(--border)">${f}</span>`).join('')}</div>
-      <div class="note-box-pro" style="background:var(--bg3);border-radius:12px;padding:16px;border-right:3px solid #F79646;font-size:12px;color:var(--text-muted);line-height:1.7;margin-top:16px">${p.note}</div>
+      <div class="tags-pro" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px">${p.facilities.map(f => `<span class="tag-pro tag-pro-fac" style="font-size:11px;padding:5px 12px;border-radius:20px;background:#f8fafc;color:#5b6e8c;border:0.5px solid #e2e8f0">${f}</span>`).join('')}</div>
+      <div class="note-box-pro" style="background:#f8fafc;border-radius:12px;padding:16px;border-right:3px solid #F79646;font-size:12px;color:#5b6e8c;line-height:1.7;margin-top:16px">${p.note}</div>
     </div>
   `;
   detailDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -2122,28 +2124,33 @@ function renderRoutesPro() {
   const container = document.getElementById('routesGridPro');
   if (!container) return;
   container.innerHTML = routesPro.map(r => {
-    const pathHtml = r.path.map((n,i)=>i<r.path.length-1?`<span class="route-node-pro" style="background:var(--bg2);border:1px solid var(--border2);border-radius:6px;padding:4px 12px;font-size:12px;color:var(--text2)">${n}</span><span class="route-arrow-pro" style="color:var(--text3);font-size:12px">←</span>`:`<span class="route-node-pro" style="background:var(--bg2);border:1px solid var(--border2);border-radius:6px;padding:4px 12px;font-size:12px;color:var(--text2)">${n}</span>`).join('');
-    const factsHtml = r.facts.map(f=>`<div class="rf-pro" style="background:var(--bg3);border-radius:8px;padding:10px 12px"><div class="rf-label-pro" style="font-size:10px;color:var(--text3);margin-bottom:3px">${f.l}</div><div class="rf-val-pro" style="font-size:13px;font-weight:600;color:var(--text)">${f.v}</div></div>`).join('');
-    const riskColors = {high:'r-high-pro',med:'r-med-pro',low:'r-low-pro'};
-    const risksHtml = r.risks.map(ri=>`<div class="risk-item-pro" style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--text2);line-height:1.5"><div class="risk-dot-pro ${riskColors[ri.level]}" style="width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:4px;background:${ri.level==='high'?'#ef4444':(ri.level==='med'?'#f59e0b':'#22c55e')}"></div><div>${ri.text}</div></div>`).join('');
+    const pathHtml = r.path.map((n,i)=>i<r.path.length-1?`<span class="route-node-pro" style="background:#ffffff;border:1px solid #cbd5e1;border-radius:6px;padding:4px 12px;font-size:12px;color:#334155">${n}</span><span class="route-arrow-pro" style="color:#64748b;font-size:12px">←</span>`:`<span class="route-node-pro" style="background:#ffffff;border:1px solid #cbd5e1;border-radius:6px;padding:4px 12px;font-size:12px;color:#334155">${n}</span>`).join('');
+    const factsHtml = r.facts.map(f=>`<div class="rf-pro" style="background:#f8fafc;border-radius:8px;padding:10px 12px"><div class="rf-label-pro" style="font-size:10px;color:#64748b;margin-bottom:3px">${f.l}</div><div class="rf-val-pro" style="font-size:13px;font-weight:600;color:#0f172a">${f.v}</div></div>`).join('');
+    const risksHtml = r.risks.map(ri=>`<div class="risk-item-pro" style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#334155;line-height:1.5"><div class="risk-dot-pro" style="width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:4px;background:${ri.level==='high'?'#ef4444':(ri.level==='med'?'#f59e0b':'#22c55e')}"></div><div>${ri.text}</div></div>`).join('');
     return `
-      <div class="route-card-pro" style="background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:20px">
-        <div class="route-title-pro" style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:14px">🛣 ${r.title}</div>
-        <div class="route-path-pro" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:16px;padding:12px;background:var(--bg3);border-radius:10px">${pathHtml}</div>
+      <div class="route-card-pro" style="background:#ffffff;border:1px solid #e2e8f0;border-radius:14px;padding:20px">
+        <div class="route-title-pro" style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:14px">🛣 ${r.title}</div>
+        <div class="route-path-pro" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:16px;padding:12px;background:#f8fafc;border-radius:10px">${pathHtml}</div>
         <div class="route-facts-pro" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:16px">${factsHtml}</div>
-        <div class="section-title-pro" style="font-size:13px;font-weight:600;color:#185FA5;margin:20px 0 12px;padding-right:8px;border-right:3px solid #185FA5">📢 نکات حیاتی مسیر</div>
+        <div class="section-title-pro" style="font-size:13px;font-weight:600;color:#185FA5;margin:20px 0 12px;padding-right:8px;border-right:3px solid #185FA5">⚠ نکات حیاتی مسیر</div>
         <div class="risks-list-pro" style="display:flex;flex-direction:column;gap:7px;margin-bottom:14px">${risksHtml}</div>
-        <div class="route-note-pro" style="background:var(--bg3);border-radius:10px;padding:12px 14px;border-right:3px solid #f59e0b;font-size:12px;color:var(--text2);line-height:1.7;margin-top:14px">${r.note}</div>
+        <div class="route-note-pro" style="background:#f8fafc;border-radius:10px;padding:12px 14px;border-right:3px solid #f59e0b;font-size:12px;color:#334155;line-height:1.7;margin-top:14px">${r.note}</div>
       </div>
     `;
   }).join('');
 }
 
+// اتصال رویدادها به دکمه‌های فیلتر
+document.querySelectorAll('.filter-btn-pro').forEach(btn => {
+  btn.addEventListener('click', function() {
+    filterPortsPro(this.dataset.filter);
+  });
+});
+
 // راه‌اندازی اولیه
 renderPortsGridPro();
 renderRoutesPro();
 </script>
-
 
 
 // ======================== داده‌های صفحه کشورها ========================
