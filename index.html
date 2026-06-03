@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>داشبورد لجستیک چین–ایران | کریدور اختصاصی صنایع بالادستی</title>
+<title>داشبورد لجستیک چین_ایران | بررسی کریدورهای منطقه </title>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -209,7 +209,7 @@
   .update-note { font-size: 10px; color: #999; text-align: left; margin-top: 20px; }
   @media (max-width: 768px) { .countries-container { flex-direction: column; } .countries-list { width: 100%; } }
   
-  /* استایل‌های گزارش اهواز */
+  /* استایل‌های مقصد:اهواز */
   .alert-banner { margin: 20px 0; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.3); border-right: 4px solid #ef4444; border-radius: 8px; padding: 14px 18px; display: flex; gap: 12px; align-items: flex-start; }
   .alert-icon { font-size: 20px; }
   .alert-title { font-weight: 700; color: #b91c1c; font-size: 13px; margin-bottom: 4px; }
@@ -523,7 +523,7 @@
   .bri-sub-new { font-size: 10px; color: var(--text-dim); margin-top: 2px; }
   .col-hi-new { background: var(--surface2); }
 
-  /* استایل صفحه کشتیرانی جدید - هماهنگ با بقیه صفحات */
+  /* استایل صفحه کشتیرانی */
   .shipping-section-wrapper {
     background: var(--bg);
     border-radius: 16px;
@@ -627,7 +627,7 @@
   }
   .shipping-pane.active { display: block; }
   
-  /* ریسپانسیو */
+  /* Responseive */
   @media (max-width: 768px) {
     .shipping-kpi-grid { grid-template-columns: repeat(2, 1fr); }
     .shipping-tabs { overflow-x: auto; white-space: nowrap; }
@@ -640,51 +640,50 @@
 <div class="page-header">
   <div>
     <h1>داشبورد لجستیک چین–ایران</h1>
-    <p>صنایع بالادستی انرژی — تحلیل کریدورها و فرصت‌های سرمایه‌گذاری | به‌روز: مه ۲۰۲۶</p>
+    <p>— تحلیل کریدورها و بنادر | بروزرسانی: می ۲۰۲۶</p>
   </div>
   <div style="display: flex; gap: 8px; flex-wrap: wrap;">
     <button class="nav-btn active" onclick="showDash('main')">نمای کلی</button>
     <button class="nav-btn" onclick="showDash('carec')">کریدورهای بین‌المللی</button>
-    <button class="nav-btn" onclick="showDash('shipping')">کشتیرانی</button>
-    <button class="nav-btn" onclick="showDash('countries')">کشورها</button>
-    <button class="nav-btn" onclick="showDash('investment')">فرصت‌های سرمایه‌گذاری</button>
-    <button class="nav-btn" onclick="showDash('suggestions')">پیشنهادات</button>
-    <button class="nav-btn" onclick="showDash('ahvaz')">گزارش اهواز</button>
+    <button class="nav-btn" onclick="showDash('ahvaz')">مقصد:اهواز</button>
     <button class="nav-btn" onclick="showDash('portcompare')">مقایسه بنادر مهم</button>
+    <button class="nav-btn" onclick="showDash('shipping')">کشتیرانی</button>
+    <button class="nav-btn" onclick="showDash('suggestions')">پیشنهادات</button>
+   <button class="nav-btn" onclick="showDash('investment')">منابع</button>
   </div>
 </div>
 
 <div class="container">
 
-<!-- ========== صفحه اول: نمای کلی (کریدور اختصاصی) ========== -->
+<!-- ========== صفحه اول: نمای کلی  ========== -->
 <div id="dash-main" class="dash-section active">
   <div class="project-description">
-    <div class="badge-title">🎯 پلتفرم اختصاصی لجستیک صنایع بالادستی</div>
+    <div class="badge-title"> پلتفرم اختصاصی لجستیک </div>
     <h2>کریدور انرژی چین–ایران؛ <span class="highlight">هوشمندی مسیر، کاهش ریسک و بهینه‌سازی زنجیره تأمین</span></h2>
     <div class="desc-grid">
       <div class="desc-card">
-        <div class="desc-icon">📍</div>
+        <div class="desc-icon" style="font-size: 48px; text-align: center;"> 🔍 </div>
         <h4>پایش لحظه‌ای کریدورها</h4>
-        <p>نقشه تعاملی Google Maps شامل تمام گلوگاه‌ها، بنادر استراتژیک، مسیرهای ریلی و جاده‌ای فعال از چین تا خلیج فارس و ایران.</p>
+        <p>نقشه تعاملی Google Maps شامل تمام موانع و محدودیت‌ها، بنادر استراتژیک، مسیرهای ریلی و جاده‌ای فعال از چین تا خلیج فارس و ایران.</p>
       </div>
       <div class="desc-card">
-        <div class="desc-icon">⚖️</div>
+        <div class="desc-icon" style="font-size: 48px; text-align: center;"> 🔄🤖 </div>
         <h4>تحلیل جایگزین‌های هوشمند</h4>
         <p>مقایسه مسیر میانی (TITR)، کریدور جنوب عمان، مسیر ترکیه و INSTC از نظر زمان، هزینه و امنیت — پشتیبانی از تصمیم‌گیری راهبردی.</p>
       </div>
       <div class="desc-card">
-        <div class="desc-icon">🛡️</div>
+        <div class="desc-icon" style="font-size: 48px; text-align: center;"> ⚠️ </div>
         <h4>هشدار ریسک و تحریم</h4>
         <p>شناسایی نقاط دارای ریسک ژئوپلیتیک (تنگه هرمز، تحریم‌های ثانویه، بنادر تحت نظر FATF) و معرفی مسیرهای امن جایگزین (عمان، ترکیه).</p>
       </div>
       <div class="desc-card">
-        <div class="desc-icon">💰</div>
-        <h4>فرصت‌های سرمایه‌گذاری</h4>
+        <div class="desc-icon" style="font-size: 48px; text-align: center;"> 🗺️💎 </div>
+        <h4>اطلاعات لازم برای شکار فرصت‌ها</h4>
         <p>داده‌های اختصاصی از پروژه‌های BRI، توسعه کریدور میانی، مناطق آزاد جدید (چابهار، دقم، صحار) و نرخ‌های حمل به‌روز.</p>
       </div>
     </div>
     <div class="desc-footer-note">
-      🧠 این داشبورد برای مدیران زنجیره تأمین، مشاوران لجستیک و سرمایه‌گذاران حوزه انرژی طراحی شده است. 
+      💡 این داشبورد برای مدیران زنجیره تأمین، مشاوران لجستیک و سرمایه‌گذاران حوزه انرژی طراحی شده است. 
       کلیک روی هر نقطه از نقشه، اطلاعات تکمیلی کریدور مربوطه را نمایش می‌دهد.
     </div>
   </div>
@@ -700,7 +699,7 @@
       <span><span class="legend-dot" style="background:#1D9E75;"></span> کریدورهای امن پیشنهادی</span>
       <span><span class="legend-dot" style="background:#185FA5;"></span> بنادر استراتژیک & هاب‌های لجستیکی</span>
       <span><span class="legend-dot" style="background:#F5A623;"></span> نقاط ترانزیت کلیدی (ریلی/فری)</span>
-      <span>🔍 <strong>نکته:</strong> نقشه شامل ۱۵+ لایه اطلاعاتی، کریدورهای ریلی TITR، مسیرهای دریایی، مناطق آزاد و گلوگاه‌های گمرکی است.</span>
+      <span>🔍 <strong>نکته:</strong> نقشه شامل چندین لایه اطلاعاتی، کریدورهای ریلی TITR، مسیرهای دریایی، مناطق آزاد و گلوگاه‌های گمرکی است؛ همچنین اطلاعات به طور متناوب در حال کامل‌تر شدن است.</span>
     </div>
   </div>
 
@@ -710,15 +709,15 @@
       <div class="cap-text">مسیرهای چین (کاشغر، شانگهای) تا خلیج فارس، دریای خزر، قفقاز، ترکیه و بنادر جنوب ایران (بندرعباس، چابهار، امام خمینی) — همه در یک نقشه تعاملی.</div>
     </div>
     <div class="cap-card">
-      <div class="cap-title"><span>📊</span> داده‌های عملیاتی & به‌روز</div>
+      <div class="cap-title"><span>📊</span> داده‌های عملیاتی & بروزرسانی شده</div>
       <div class="cap-text">هزینه حمل (FEU)، زمان ترانزیت، نرخ بیمه جنگی، ظرفیت گمرکی و آخرین تحولات تحریم‌ها — بروزرسانی خرداد ۱۴۰۵.</div>
     </div>
     <div class="cap-card">
-      <div class="cap-title"><span>🎯</span> رهگیری پروژه‌های کلان BRI</div>
+      <div class="cap-title"><span>📍</span> رهگیری پروژه‌های کلان BRI</div>
       <div class="cap-text">پروژه CKU (چین-قرقیزستان-ازبکستان)، ارتقاء BTK گرجستان، کریدور شمال-جنوب (INSTC) و قراردادهای استراتژیک ۲۰۲۶-۲۰۳۰.</div>
     </div>
     <div class="cap-card">
-      <div class="cap-title"><span>⚡</span> سناریوهای جایگزین بحران</div>
+      <div class="cap-title"><span>🔀</span> سناریوهای جایگزین بحران</div>
       <div class="cap-text">با بسته شدن تنگه هرمز (فوریه ۲۰۲۶)، نقشه مسیرهای امن از بنادر عمان (سالاله، دقم، صحار) و مسیر زمینی ترکیه را اولویت‌بندی کرده است.</div>
     </div>
   </div>
@@ -1647,7 +1646,7 @@
   </div>
 </div>
 
-<!-- ========== صفحه هفتم: گزارش اهواز ========== -->
+<!-- ========== صفحه هفتم: مقصد:اهواز ========== -->
 <div id="dash-ahvaz" class="dash-section">
   <div class="alert-banner">
     <div class="alert-icon"></div>
