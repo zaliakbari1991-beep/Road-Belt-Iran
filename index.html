@@ -731,6 +731,137 @@
     color: #334155;
     line-height: 1.5;
   }
+  
+  /* استایل‌های دمو پیشنهادات جدید - ادغام شده با استایل اصلی */
+  .dash { font-family: 'Vazirmatn', sans-serif; direction: rtl; background: #fff; color: #1a1a1a; padding: 0; }
+  .header { background: linear-gradient(135deg, #FF6B00 0%, #FF8C35 50%, #FFB347 100%); padding: 28px 32px 24px; position: relative; overflow: hidden; border-radius: 20px; margin-bottom: 20px; }
+  .header::before { content: ''; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; background: rgba(255,255,255,0.08); border-radius: 50%; }
+  .header::after { content: ''; position: absolute; bottom: -60px; left: 10%; width: 300px; height: 300px; background: rgba(255,255,255,0.05); border-radius: 50%; }
+  .header-top { display: flex; justify-content: space-between; align-items: flex-start; position: relative; z-index: 1; }
+  .header-badge { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.35); border-radius: 20px; padding: 4px 14px; font-size: 11px; color: #fff; letter-spacing: 0.5px; }
+  .header h1 { font-size: 22px; font-weight: 700; color: #fff; margin-top: 12px; position: relative; z-index: 1; line-height: 1.4; }
+  .header p { font-size: 13px; color: rgba(255,255,255,0.85); margin-top: 6px; position: relative; z-index: 1; }
+  .header-stats { display: flex; gap: 24px; margin-top: 18px; position: relative; z-index: 1; }
+  .hstat { text-align: center; }
+  .hstat-num { font-size: 20px; font-weight: 700; color: #fff; }
+  .hstat-lbl { font-size: 10px; color: rgba(255,255,255,0.75); margin-top: 2px; }
+  .hstat-div { width: 1px; background: rgba(255,255,255,0.25); align-self: stretch; }
+  .nav { display: flex; gap: 4px; padding: 16px 24px 0; border-bottom: 1.5px solid #f0f0f0; background: #fff; }
+  .nav-btn { padding: 8px 16px; border: none; background: none; font-family: 'Vazirmatn', sans-serif; font-size: 13px; font-weight: 500; color: #888; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1.5px; transition: all 0.2s; border-radius: 4px 4px 0 0; }
+  .nav-btn.active { color: #FF6B00; border-bottom-color: #FF6B00; background: #fff8f3; }
+  .nav-btn:hover:not(.active) { color: #444; background: #fafafa; }
+  .content { padding: 24px; }
+  .section-title { font-size: 14px; font-weight: 700; color: #FF6B00; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to left, transparent, #FFD4A8); }
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+  .kpi { background: #fff; border: 1px solid #f0ebe5; border-radius: 12px; padding: 16px; position: relative; overflow: hidden; }
+  .kpi::before { content: ''; position: absolute; top: 0; right: 0; width: 40px; height: 40px; border-radius: 0 12px 0 40px; }
+  .kpi.orange::before { background: #FF6B001a; }
+  .kpi.blue::before { background: #1a7fe41a; }
+  .kpi.green::before { background: #16a34a1a; }
+  .kpi.amber::before { background: #d977061a; }
+  .kpi-label { font-size: 11px; color: #999; margin-bottom: 8px; }
+  .kpi-value { font-size: 22px; font-weight: 700; color: #1a1a1a; }
+  .kpi-sub { font-size: 11px; margin-top: 4px; }
+  .kpi-sub.up { color: #16a34a; }
+  .kpi-sub.neutral { color: #888; }
+  .kpi-sub.warn { color: #d97706; }
+  .two-col { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; margin-bottom: 24px; }
+  .card { background: #fff; border: 1px solid #f0ebe5; border-radius: 14px; padding: 20px; }
+  .card-title { font-size: 13px; font-weight: 700; color: #333; margin-bottom: 16px; display: flex; align-items: center; gap: 6px; }
+  .card-title .dot { width: 8px; height: 8px; border-radius: 50%; background: #FF6B00; }
+  .strat-list { display: flex; flex-direction: column; gap: 10px; }
+  .strat-item { display: flex; align-items: flex-start; gap: 10px; padding: 12px; background: #fafafa; border-radius: 10px; border-right: 3px solid #FF6B00; cursor: pointer; transition: all 0.2s; }
+  .strat-item:hover { background: #fff8f3; transform: translateX(-2px); }
+  .strat-item.blue-b { border-right-color: #1a7fe4; }
+  .strat-item.green-b { border-right-color: #16a34a; }
+  .strat-item.amber-b { border-right-color: #d97706; }
+  .strat-num { width: 24px; height: 24px; border-radius: 50%; background: #FF6B00; color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .strat-num.blue { background: #1a7fe4; }
+  .strat-num.green { background: #16a34a; }
+  .strat-num.amber { background: #d97706; }
+  .strat-text h4 { font-size: 12px; font-weight: 700; color: #1a1a1a; margin-bottom: 3px; }
+  .strat-text p { font-size: 11px; color: #666; line-height: 1.5; }
+  .route-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .route-card { padding: 12px; border-radius: 10px; border: 1px solid #f0ebe5; position: relative; }
+  .route-badge { position: absolute; top: 8px; left: 8px; font-size: 9px; padding: 2px 8px; border-radius: 10px; font-weight: 700; }
+  .badge-top { background: #FF6B001a; color: #FF6B00; }
+  .badge-good { background: #16a34a1a; color: #16a34a; }
+  .badge-check { background: #1a7fe41a; color: #1a7fe4; }
+  .badge-new { background: #d976061a; color: #d97706; }
+  .route-name { font-size: 13px; font-weight: 700; color: #1a1a1a; margin-top: 20px; margin-bottom: 6px; }
+  .route-flags { display: flex; gap: 4px; margin-bottom: 8px; }
+  .flag-item { font-size: 10px; padding: 2px 8px; border-radius: 10px; background: #f5f5f5; color: #555; }
+  .route-pros, .route-cons { margin-top: 6px; }
+  .route-pros-title, .route-cons-title { font-size: 10px; font-weight: 700; color: #16a34a; margin-bottom: 3px; }
+  .route-cons-title { color: #e54d4d; }
+  .route-detail { font-size: 10px; color: #666; line-height: 1.5; }
+  .score-bar { height: 4px; background: #f0f0f0; border-radius: 2px; margin-top: 8px; overflow: hidden; }
+  .score-fill { height: 100%; border-radius: 2px; }
+  .score-fill.orange { background: #FF6B00; }
+  .score-fill.green { background: #16a34a; }
+  .score-fill.blue { background: #1a7fe4; }
+  .score-fill.amber { background: #d97706; }
+  .full-card { margin-bottom: 24px; }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  .china-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+  .china-card { padding: 16px; border-radius: 12px; border: 1px solid #f0ebe5; text-align: center; }
+  .china-icon { font-size: 28px; margin-bottom: 8px; }
+  .china-title { font-size: 12px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
+  .china-desc { font-size: 10px; color: #888; line-height: 1.5; }
+  .timeline { position: relative; padding-right: 24px; }
+  .timeline::before { content: ''; position: absolute; right: 11px; top: 0; bottom: 0; width: 1.5px; background: linear-gradient(to bottom, #FF6B00, #FFB347, #f0f0f0); }
+  .tl-item { display: flex; flex-direction: row-reverse; gap: 16px; margin-bottom: 20px; align-items: flex-start; }
+  .tl-dot { width: 22px; height: 22px; border-radius: 50%; background: #FF6B00; border: 3px solid #fff; box-shadow: 0 0 0 1.5px #FF6B00; flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; }
+  .tl-dot-inner { width: 6px; height: 6px; background: #fff; border-radius: 50%; }
+  .tl-dot.step2 { background: #d97706; box-shadow: 0 0 0 1.5px #d97706; }
+  .tl-dot.step3 { background: #1a7fe4; box-shadow: 0 0 0 1.5px #1a7fe4; }
+  .tl-dot.step4 { background: #16a34a; box-shadow: 0 0 0 1.5px #16a34a; }
+  .tl-body { flex: 1; padding: 12px; background: #fafafa; border-radius: 10px; border: 1px solid #f0ebe5; }
+  .tl-phase { font-size: 10px; font-weight: 700; color: #FF6B00; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .tl-phase.p2 { color: #d97706; }
+  .tl-phase.p3 { color: #1a7fe4; }
+  .tl-phase.p4 { color: #16a34a; }
+  .tl-title { font-size: 13px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+  .tl-items { display: flex; flex-direction: column; gap: 4px; }
+  .tl-bullet { font-size: 11px; color: #555; display: flex; gap: 6px; }
+  .tl-bullet::before { content: '◆'; color: #FF6B00; font-size: 7px; margin-top: 4px; flex-shrink: 0; }
+  .invest-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+  .invest-card { padding: 16px; border-radius: 12px; border: 1px solid #f0ebe5; }
+  .inv-sector { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; padding: 3px 8px; border-radius: 20px; display: inline-block; }
+  .sec-infra { background: #FF6B001a; color: #FF6B00; }
+  .sec-agri { background: #16a34a1a; color: #16a34a; }
+  .sec-energy { background: #1a7fe41a; color: #1a7fe4; }
+  .inv-title { font-size: 13px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+  .inv-desc { font-size: 11px; color: #666; line-height: 1.5; margin-bottom: 10px; }
+  .inv-meta { display: flex; gap: 8px; flex-wrap: wrap; }
+  .inv-tag { font-size: 10px; padding: 2px 8px; border-radius: 8px; background: #f5f5f5; color: #666; }
+  .risk-row { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 8px; margin-bottom: 6px; background: #fafafa; }
+  .risk-level { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .risk-text { font-size: 11px; color: #444; flex: 1; }
+  .risk-score { font-size: 11px; font-weight: 700; }
+  .footer-note { margin-top: 20px; padding: 14px 16px; background: linear-gradient(135deg, #fff8f3, #fff); border: 1px solid #FFD4A8; border-radius: 12px; border-right: 4px solid #FF6B00; }
+  .footer-note p { font-size: 11px; color: #666; line-height: 1.7; }
+  .footer-note strong { color: #FF6B00; }
+  .chart-wrap { margin-top: 8px; }
+  .inline-chart { display: flex; align-items: flex-end; gap: 6px; height: 80px; margin-top: 12px; }
+  .bar-group { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
+  .bar-val { font-size: 10px; font-weight: 700; color: #1a1a1a; }
+  .bar-body { width: 100%; border-radius: 4px 4px 0 0; min-height: 4px; }
+  .bar-lbl { font-size: 9px; color: #999; text-align: center; }
+  .priority-matrix { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; border-radius: 10px; overflow: hidden; margin-bottom: 16px; }
+  .matrix-cell { padding: 14px; }
+  .matrix-cell h4 { font-size: 11px; font-weight: 700; margin-bottom: 6px; }
+  .matrix-cell p { font-size: 10px; line-height: 1.6; }
+  .mc-q1 { background: #FF6B001a; }
+  .mc-q1 h4 { color: #FF6B00; }
+  .mc-q2 { background: #16a34a1a; }
+  .mc-q2 h4 { color: #16a34a; }
+  .mc-q3 { background: #f5f5f5; }
+  .mc-q3 h4 { color: #888; }
+  .mc-q4 { background: #1a7fe41a; }
+  .mc-q4 h4 { color: #1a7fe4; }
 </style>
 </head>
 <body>
@@ -742,20 +873,20 @@
     <p>— تحلیل کریدورها و بنادر | بروزرسانی: می ۲۰۲۶</p>
   </div>
   <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-    <button class="nav-btn active" onclick="showDash('main')">نمای کلی</button>
+    <button class="nav-btn" onclick="showDash('main')">نمای کلی</button>
     <button class="nav-btn" onclick="showDash('carec')">کریدورهای بین‌المللی</button>
     <button class="nav-btn" onclick="showDash('ahvaz')">مقصد:اهواز</button>
     <button class="nav-btn" onclick="showDash('portcompare')">مقایسه بنادر مهم</button>
     <button class="nav-btn" onclick="showDash('shipping')">کشتیرانی</button>
-    <button class="nav-btn" onclick="showDash('suggestions')">پیشنهادات</button>
-   <button class="nav-btn" onclick="showDash('investment')">منابع</button>
+    <button class="nav-btn active" onclick="showDash('suggestions')">پیشنهادات</button>
+    <button class="nav-btn" onclick="showDash('investment')">منابع</button>
   </div>
 </div>
 
 <div class="container">
 
 <!-- ========== صفحه اول: نمای کلی  ========== -->
-<div id="dash-main" class="dash-section active">
+<div id="dash-main" class="dash-section">
   <div class="project-description">
     <div class="badge-title"> پلتفرم اختصاصی لجستیک </div>
     <h2>کریدور انرژی چین–ایران؛ <span class="highlight">هوشمندی مسیر، کاهش ریسک و بهینه‌سازی زنجیره تأمین</span></h2>
@@ -817,7 +948,7 @@
     </div>
     <div class="cap-card">
       <div class="cap-title"><span>🔀</span> سناریوهای جایگزین بحران</div>
-      <div class="cap-text">با بسته شدن تنگه هرمز (فوریه ۲۰۲۶)، نقشه مسیرهای امن از بنادر عمان (صلاله، دقم، صحار) و مسیر زمینی ترکیه را اولویت‌بندی کرده است.</div>
+      <div class="cap-text">با بسته شدن تنگه هرمز (فوریه ۲۰۲۶)، نقشه مسیرهای امن از بنادر عمان (سالاله، دقم، صحار) و مسیر زمینی ترکیه را اولویت‌بندی کرده است.</div>
     </div>
   </div>
 </div>
@@ -1304,10 +1435,10 @@
               <tr><th>ویژگی</th><th>ترانس‌سیبری<br><span style="font-weight:400;font-size:10px;">(Northern/TSR)</span></th><th>راه ابریشم آبی<br><span style="font-weight:400;font-size:10px;">(Maritime)</span></th><th>کوریدور میانی<br><span style="font-weight:400;font-size:10px;">(TITR)</span></th><th>کریدور شمالی قطبی<br><span style="font-weight:400;font-size:10px;">(Polar/NSR)</span></th></tr>
             </thead>
             <tbody>
-              <tr><td>نوع</td><td><span class="badge-new b-rail-new">ریلی</span></td><td><span class="badge-new b-sea-new">دریایی</span></td><td><span class="badge-new b-multi-new">چندوجهی</span></td><td><span class="badge-new b-arc-new">دریایی قطبی</span></td></tr>
-              <tr><td>طول مسیر</td><td>تقریبا۹,۲۰۰ کیلومتر</td><td>تقریبا۲۱,۰۰۰ کیلومتر (Suez)<br>تقریبا۲۸,۰۰۰ کیلومتر (Cape)</td><td>تقریبا۸,۷۰۰ کیلومتر</td><td>تقریبا۱۴,۰۰۰ کیلومتر<br><span class="note-new">۷,۰۰۰km کوتاه‌تر از Suez</span></td></tr>
-              <tr><td>زمان ترانزیت ۲۰۲۵</td><td>۱۵–۲۲ روز<br><span class="note-new">کاهش سرعت به ۳۶-۴۰km/h</span></td><td>۲۸–۳۵ روز (Suez)<br>۴۰–۵۰ روز (Cape)</td><td>۱۸–۲۵ روز<br><span class="note-new">هدف: ۱۴–۱۸ روز</span></td><td>۱۸–۲۰ روز<br><span class="note-new">فقط فصل تابستان</span></td></tr>
-              <tr><td>ظرفیت واقعی ۲۰۲۴</td><td>تقریبا۵۰۰–۶۵۰ هزار TEU<br><span class="note-new">کاهش ۹.۸درصد نسبت به ۲۰۲۳</span></td><td>۱۳.۵–۱۴ میلیون TEU<br><span class="note-new">(China-Europe, 2024)</span></td><td>۴.۴۷ میلیون تن / ۵۵,۰۰۰ TEU<br><span class="note-new">رشد ۶۳درصد نسبت به ۲۰۲۳</span></td><td><span class="badge-new b-na-new">تجاری اولیه</span><br><span class="note-new">آغاز تجاری: اکتبر ۲۰۲۵</span></td></tr>
+              <tr><td>نوع</th><td><span class="badge-new b-rail-new">ریلی</span></th><td><span class="badge-new b-sea-new">دریایی</span></th><td><span class="badge-new b-multi-new">چندوجهی</span></th><td><span class="badge-new b-arc-new">دریایی قطبی</span></th></tr>
+              <tr><td>طول مسیر</th><td>تقریبا۹,۲۰۰ کیلومتر</th><td>تقریبا۲۱,۰۰۰ کیلومتر (Suez)<br>تقریبا۲۸,۰۰۰ کیلومتر (Cape)</th><td>تقریبا۸,۷۰۰ کیلومتر</th><td>تقریبا۱۴,۰۰۰ کیلومتر<br><span class="note-new">۷,۰۰۰km کوتاه‌تر از Suez</span></th></tr>
+              <tr><td>زمان ترانزیت ۲۰۲۵</th><td>۱۵–۲۲ روز<br><span class="note-new">کاهش سرعت به ۳۶-۴۰km/h</span></th><td>۲۸–۳۵ روز (Suez)<br>۴۰–۵۰ روز (Cape)</th><td>۱۸–۲۵ روز<br><span class="note-new">هدف: ۱۴–۱۸ روز</span></th><td>۱۸–۲۰ روز<br><span class="note-new">فقط فصل تابستان</span></th></tr>
+              <tr><td>ظرفیت واقعی ۲۰۲۴</th><td>تقریبا۵۰۰–۶۵۰ هزار TEU<br><span class="note-new">کاهش ۹.۸درصد نسبت به ۲۰۲۳</span></th><td>۱۳.۵–۱۴ میلیون TEU<br><span class="note-new">(China-Europe, 2024)</span></th><td>۴.۴۷ میلیون تن / ۵۵,۰۰۰ TEU<br><span class="note-new">رشد ۶۳درصد نسبت به ۲۰۲۳</span></th><td><span class="badge-new b-na-new">تجاری اولیه</span><br><span class="note-new">آغاز تجاری: اکتبر ۲۰۲۵</span></th></tr>
             </tbody>
           </table>
         </div>
@@ -1648,7 +1779,7 @@
             <tr><td class="col-hi-new">EFS</th><td>Emergency Fuel Surcharge</th><td>$۴۶۷–۶۴۴</th><td>/FEU</th><td>فعال</th></tr>
             <tr><td class="col-hi-new">ETS</th><td>EU Emissions Trading System</th><td>+$۹۰–۱۲۰</th><td>/TEU EU-bound</th><td style="color:#534AB7;">🔺 فعال ۲۰۲۶</th></tr>
           </tbody>
-        </table>
+        </tr>
       </div>
 
       <div class="stats-row" style="margin-top: 16px;">
@@ -1731,15 +1862,474 @@
   </div>
 </div>
 
-<!-- ========== صفحه ششم: پیشنهادات ========== -->
+<!-- ========== صفحه ششم: پیشنهادات (ادغام شده با دموی استراتژی تجاری) ========== -->
 <div id="dash-suggestions" class="dash-section">
-  <div class="investment-section">
-    <div class="investment-title">پیشنهادات راهبردی لجستیکی</div>
-    <div class="investment-card">
-      <div class="investment-placeholder-suggest">
-        <p style="font-weight:700; margin-bottom:12px;"> این بخش در حال مطالعه و تدوین است...</p>
-        <p>پیشنهادات تکمیلی بر اساس تحلیل کامل بنادر، کریدورها و شرایط بحران دریایی متعاقباً ارائه خواهد شد.</p>
-        <p style="margin-top:12px; font-size:11px; color:#999;">⏳ مطالعه و بررسی اسناد مرتبط با لجستیک چین-ایران و بهترین مسیرهای جایگزین</p>
+  <div class="dash">
+    <div class="header">
+      <div class="header-top">
+        <div>
+          <div class="header-badge">Strategic Intelligence Dashboard</div>
+          <h1>استراتژی توسعه تجاری — چین و مسیرهای جایگزین</h1>
+          <p>تحلیل فرصت‌ها، ریسک‌ها و اولویت‌بندی اقدامات استراتژیک</p>
+        </div>
+        <div style="text-align:left; color:rgba(255,255,255,0.7); font-size:11px; line-height:1.8;">
+          <div>آخرین بروزرسانی: ژوئن ۲۰۲۵</div>
+          <div>وضعیت: در حال بررسی</div>
+          <div style="margin-top:4px; background:rgba(255,255,255,0.2); border-radius:6px; padding:3px 8px; color:#fff; font-size:10px; font-weight:700;">CONFIDENTIAL</div>
+        </div>
+      </div>
+      <div class="header-stats">
+        <div class="hstat"><div class="hstat-num">4</div><div class="hstat-lbl">محور استراتژیک</div></div>
+        <div class="hstat-div"></div>
+        <div class="hstat"><div class="hstat-num">3+</div><div class="hstat-lbl">مسیر جغرافیایی</div></div>
+        <div class="hstat-div"></div>
+        <div class="hstat"><div class="hstat-num">۱۲-۱۸</div><div class="hstat-lbl">ماه اجرا</div></div>
+        <div class="hstat-div"></div>
+        <div class="hstat"><div class="hstat-num">HIGH</div><div class="hstat-lbl">اولویت</div></div>
+      </div>
+    </div>
+
+    <div class="nav" id="suggestionsNav">
+      <button class="nav-btn active" onclick="switchSuggestionsTab('overview')">نمای کلی</button>
+      <button class="nav-btn" onclick="switchSuggestionsTab('china')">دفتر چین</button>
+      <button class="nav-btn" onclick="switchSuggestionsTab('routes')">مسیرها و هاب‌ها</button>
+      <button class="nav-btn" onclick="switchSuggestionsTab('invest')">سرمایه‌گذاری</button>
+      <button class="nav-btn" onclick="switchSuggestionsTab('roadmap')">نقشه راه</button>
+    </div>
+
+    <div class="content">
+      <div id="suggestions-overview" class="tab-content active">
+        <div class="kpi-grid">
+          <div class="kpi orange">
+            <div class="kpi-label">وضعیت دفتر چین</div>
+            <div class="kpi-value" style="font-size:16px; color:#FF6B00;">پیشنهادی</div>
+            <div class="kpi-sub warn">⬤ آماده تصمیم‌گیری</div>
+          </div>
+          <div class="kpi blue">
+            <div class="kpi-label">صرفه‌جویی فورواردینگ</div>
+            <div class="kpi-value">۲۰-۳۵%</div>
+            <div class="kpi-sub up">↑ هزینه‌های عملیاتی</div>
+          </div>
+          <div class="kpi green">
+            <div class="kpi-label">هاب پیشنهادی</div>
+            <div class="kpi-value" style="font-size:16px; color:#16a34a;">صلاله / عمان</div>
+            <div class="kpi-sub up">✓ اولویت اول</div>
+          </div>
+          <div class="kpi" style="border-color:#f0ebe5;">
+            <div class="kpi-label">مسیر در حال بررسی</div>
+            <div class="kpi-value" style="font-size:14px; color:#d97706;">خصب</div>
+            <div class="kpi-sub neutral">⬤ نیاز به ارزیابی</div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="card">
+            <div class="card-title"><span class="dot"></span>محورهای استراتژیک چهارگانه</div>
+            <div class="strat-list">
+              <div class="strat-item" onclick="switchSuggestionsTab('china')">
+                <div class="strat-num">۱</div>
+                <div class="strat-text">
+                  <h4>ایجاد دفتر کوچک در چین</h4>
+                  <p>شناسایی فرصت، نقش تریدر، اطلاعات بازار — بدون ساختار سنگین</p>
+                </div>
+              </div>
+              <div class="strat-item blue-b" onclick="switchSuggestionsTab('china');">
+                <div class="strat-num blue">۲</div>
+                <div class="strat-text">
+                  <h4>داخلی‌سازی فورواردینگ</h4>
+                  <p>حذف واسطه، صرفه‌جویی هزینه، ایجاد لاین تجاری برای سایر صنایع</p>
+                </div>
+              </div>
+              <div class="strat-item green-b" onclick="switchSuggestionsTab('invest')">
+                <div class="strat-num green">۳</div>
+                <div class="strat-text">
+                  <h4>فرصت‌های سرمایه‌گذاری کریدوری</h4>
+                  <p>تجهیزات به‌جای پول نقد — راهکار محدودیت‌های بانکی بین‌المللی</p>
+                </div>
+              </div>
+              <div class="strat-item amber-b" onclick="switchSuggestionsTab('routes')">
+                <div class="strat-num amber">۴</div>
+                <div class="strat-text">
+                  <h4>بررسی مسیرها و هاب‌های جایگزین</h4>
+                  <p>خصب، صلاله، پاکستان — ارزیابی براساس نیاز صنعت</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title"><span class="dot" style="background:#1a7fe4"></span>ماتریس اولویت اقدام</div>
+            <div class="priority-matrix">
+              <div class="matrix-cell mc-q1">
+                <h4>🔴 فوری + اثر بالا</h4>
+                <p>ثبت دفتر چین، شروع گفتگوی صلاله، بررسی لایسنس فورواردینگ</p>
+              </div>
+              <div class="matrix-cell mc-q2">
+                <h4>🟢 مهم + پایدار</h4>
+                <p>ایجاد لاین تجاری برای سایر صنایع، مطالعات بازار کشاورزی ترکیه</p>
+              </div>
+              <div class="matrix-cell mc-q3">
+                <h4>⚪ کم‌اولویت</h4>
+                <p>دفتر امارات — جایگزینی با هاب‌های تخصصی‌تر توصیه می‌شود</p>
+              </div>
+              <div class="matrix-cell mc-q4">
+                <h4>🔵 ارزیابی بیشتر</h4>
+                <p>مسیر پاکستان، شرکت‌های JV محلی، سرمایه‌گذاری کریدوری</p>
+              </div>
+            </div>
+            <div class="footer-note" style="margin-top:0;">
+              <p><strong>نکته کلیدی:</strong> با توجه به محدودیت‌های سیستم بانکی، استراتژی <strong>تجهیزات به‌جای نقدینگی</strong> مزیت رقابتی مهمی ایجاد می‌کند.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-title">تحلیل رقابتی مسیرهای هاب</div>
+        <div class="route-grid">
+          <div class="route-card">
+            <div class="route-badge badge-top">اولویت اول</div>
+            <div class="route-name">صلاله — عمان</div>
+            <div class="route-flags">
+              <span class="flag-item">تجهیزات</span>
+              <span class="flag-item">چینی‌محور</span>
+              <span class="flag-item">لجستیک</span>
+            </div>
+            <div class="route-pros"><div class="route-pros-title">✓ مزایا</div>
+            <div class="route-detail">مدیریت چینی، همکاری آسان‌تر، رشد سریع، موقعیت استراتژیک برای تجهیزات</div></div>
+            <div class="route-cons"><div class="route-cons-title">✗ محدودیت‌ها</div>
+            <div class="route-detail">ظرفیت کمتر از جبل علی، بدون منطقه آزاد مانند دبی</div></div>
+            <div class="score-bar"><div class="score-fill orange" style="width:85%"></div></div>
+            <div style="font-size:10px; color:#999; margin-top:4px;">امتیاز تناسب: ۸۵٪</div>
+          </div>
+          <div class="route-card">
+            <div class="route-badge badge-check">بررسی جاری</div>
+            <div class="route-name">خصب — عمان</div>
+            <div class="route-flags">
+              <span class="flag-item">رقبا فعال</span>
+              <span class="flag-item">در حال ارزیابی</span>
+            </div>
+            <div class="route-pros"><div class="route-pros-title">✓ مزایا</div>
+            <div class="route-detail">رقبا از این مسیر استفاده می‌کنند، نزدیکی به ایران، هزینه پایین‌تر</div></div>
+            <div class="route-cons"><div class="route-cons-title">✗ محدودیت‌ها</div>
+            <div class="route-detail">نیاز به بررسی دقیق‌تر ویژگی‌های مثبت/منفی برای صنعت هدف</div></div>
+            <div class="score-bar"><div class="score-fill amber" style="width:55%"></div></div>
+            <div style="font-size:10px; color:#999; margin-top:4px;">امتیاز تناسب: در حال بررسی</div>
+          </div>
+          <div class="route-card">
+            <div class="route-badge badge-good">کشاورزی</div>
+            <div class="route-name">ترکیه — استانبول</div>
+            <div class="route-flags">
+              <span class="flag-item">کشاورزی</span>
+              <span class="flag-item">واردات</span>
+            </div>
+            <div class="route-pros"><div class="route-pros-title">✓ مزایا</div>
+            <div class="route-detail">بهترین هاب برای بخش کشاورزی، روابط تجاری قوی، دسترسی به بازار اروپا</div></div>
+            <div class="route-cons"><div class="route-cons-title">✗ محدودیت‌ها</div>
+            <div class="route-detail">برای تجهیزات صنعتی توصیه نمی‌شود</div></div>
+            <div class="score-bar"><div class="score-fill green" style="width:78%"></div></div>
+            <div style="font-size:10px; color:#999; margin-top:4px;">امتیاز تناسب (کشاورزی): ۷۸٪</div>
+          </div>
+          <div class="route-card">
+            <div class="route-badge badge-new">پتانسیل بالقوه</div>
+            <div class="route-name">پاکستان</div>
+            <div class="route-flags">
+              <span class="flag-item">گوادر</span>
+              <span class="flag-item">CPEC</span>
+              <span class="flag-item">چین‌محور</span>
+            </div>
+            <div class="route-pros"><div class="route-pros-title">✓ مزایا</div>
+            <div class="route-detail">بندر گوادر با حضور چینی قوی، CPEC، هزینه پایین، مسیر جدید</div></div>
+            <div class="route-cons"><div class="route-cons-title">✗ محدودیت‌ها</div>
+            <div class="route-detail">بی‌ثباتی سیاسی، زیرساخت ناکامل، ریسک بالاتر</div></div>
+            <div class="score-bar"><div class="score-fill blue" style="width:42%"></div></div>
+            <div style="font-size:10px; color:#999; margin-top:4px;">امتیاز تناسب: نیاز به بررسی عمیق</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="suggestions-china" class="tab-content">
+        <div class="section-title">دفتر نمایندگی چین — ساختار پیشنهادی</div>
+        <div class="china-grid">
+          <div class="china-card" style="border-top:3px solid #FF6B00;">
+            <div class="china-icon">🏢</div>
+            <div class="china-title">ساختار سبک</div>
+            <div class="china-desc">حداکثر ۲-۳ نفر، دفتر کوچک در شنزن یا یی‌وو، بدون هزینه‌های ثابت سنگین</div>
+          </div>
+          <div class="china-card" style="border-top:3px solid #1a7fe4;">
+            <div class="china-icon">🔍</div>
+            <div class="china-title">نقش اطلاعاتی</div>
+            <div class="china-desc">شناسایی فرصت‌های صادراتی و وارداتی، رصد رقبا و قیمت‌ها، گزارش بازار منظم</div>
+          </div>
+          <div class="china-card" style="border-top:3px solid #16a34a;">
+            <div class="china-icon">🤝</div>
+            <div class="china-title">نقش تریدر</div>
+            <div class="china-desc">مذاکره مستقیم با تامین‌کنندگان، حذف واسطه، انجام فورواردینگ برای پروژه‌های شرکت</div>
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="card">
+            <div class="card-title"><span class="dot" style="background:#1a7fe4"></span>داخلی‌سازی فورواردینگ</div>
+            <div class="strat-list">
+              <div class="strat-item blue-b">
+                <div class="strat-num blue">A</div>
+                <div class="strat-text">
+                  <h4>صرفه‌جویی هزینه مستقیم</h4>
+                  <p>حذف کمیسیون فورواردر خارجی — ۲۰ تا ۳۵ درصد کاهش هزینه‌های لجستیک</p>
+                </div>
+              </div>
+              <div class="strat-item" style="border-right-color:#FF6B00;">
+                <div class="strat-num">B</div>
+                <div class="strat-text">
+                  <h4>لاین تجاری جدید</h4>
+                  <p>ارائه خدمات فورواردینگ به سایر صنایع — ایجاد جریان درآمدی مستقل</p>
+                </div>
+              </div>
+              <div class="strat-item green-b">
+                <div class="strat-num green">C</div>
+                <div class="strat-text">
+                  <h4>واردات تجهیزات صنعتی</h4>
+                  <p>ورود به بازار تامین تجهیزات برای سایر صنایع داخلی با شناخت از بازار چین</p>
+                </div>
+              </div>
+              <div class="strat-item amber-b">
+                <div class="strat-num amber">D</div>
+                <div class="strat-text">
+                  <h4>مطالعات بازار جدید</h4>
+                  <p>شناسایی دریچه‌های تجاری جدید با تکیه بر حضور فیزیکی در چین</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title"><span class="dot" style="background:#d97706"></span>ریسک‌ها و ملاحظات</div>
+            <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
+              <div class="risk-row">
+                <div class="risk-level" style="background:#e54d4d;"></div>
+                <div class="risk-text">محدودیت‌های قانونی ثبت شرکت در چین برای ایرانیان</div>
+                <div class="risk-score" style="color:#e54d4d;">بالا</div>
+              </div>
+              <div class="risk-row">
+                <div class="risk-level" style="background:#d97706;"></div>
+                <div class="risk-text">نیاز به شریک چینی یا ساختار لایه‌ای حقوقی</div>
+                <div class="risk-score" style="color:#d97706;">متوسط</div>
+              </div>
+              <div class="risk-row">
+                <div class="risk-level" style="background:#d97706;"></div>
+                <div class="risk-text">ریسک تحریم‌های ثانویه — انتخاب ساختار حقوقی مناسب</div>
+                <div class="risk-score" style="color:#d97706;">متوسط</div>
+              </div>
+              <div class="risk-row">
+                <div class="risk-level" style="background:#16a34a;"></div>
+                <div class="risk-text">هزینه‌های عملیاتی دفتر کوچک — قابل کنترل</div>
+                <div class="risk-score" style="color:#16a34a;">پایین</div>
+              </div>
+              <div class="risk-row">
+                <div class="risk-level" style="background:#16a34a;"></div>
+                <div class="risk-text">زمان‌بندی اجرا — ۶ تا ۱۲ ماه برای راه‌اندازی</div>
+                <div class="risk-score" style="color:#16a34a;">قابل مدیریت</div>
+              </div>
+            </div>
+            <div class="footer-note" style="margin-top:0;">
+              <p><strong>پیشنهاد:</strong> شهرهای ترجیحی: <strong>یی‌وو</strong> (کالاهای عمومی) یا <strong>شنزن/گوانگژو</strong> (تجهیزات صنعتی)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="suggestions-routes" class="tab-content">
+        <div class="section-title">مقایسه تفصیلی هاب‌ها و مسیرها</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px;">
+          <div class="card" style="border-top:3px solid #FF6B00;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div class="card-title" style="margin:0;"><span class="dot"></span>صلاله — عمان 🇴🇲</div>
+              <span style="font-size:10px; background:#FF6B001a; color:#FF6B00; padding:3px 10px; border-radius:10px; font-weight:700;">RECOMMENDED</span>
+            </div>
+            <div style="font-size:12px; color:#333; line-height:1.8; margin-bottom:12px;">
+              بندر صلاله با مدیریت چینی (Hutchison Ports) بهترین گزینه برای شرکت‌هایی است که عمده تامین‌شان از چین است. روابط کاری با طرف چینی به‌مراتب ساده‌تر خواهد بود.
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+              <div style="padding:8px; background:#16a34a1a; border-radius:8px;">
+                <div style="font-size:10px; font-weight:700; color:#16a34a; margin-bottom:4px;">✓ مزایای کلیدی</div>
+                <div style="font-size:10px; color:#444; line-height:1.6;">مدیریت چینی<br>Free Zone فعال<br>ترانزیت ایران<br>رشد ظرفیت سریع</div>
+              </div>
+              <div style="padding:8px; background:#e54d4d1a; border-radius:8px;">
+                <div style="font-size:10px; font-weight:700; color:#e54d4d; margin-bottom:4px;">✗ محدودیت‌ها</div>
+                <div style="font-size:10px; color:#444; line-height:1.6;">ظرفیت کمتر از جبل علی<br>خدمات مالی محدودتر<br>فاصله از دبی</div>
+              </div>
+            </div>
+            <div style="margin-top:12px; padding:8px 12px; background:#fafafa; border-radius:8px; font-size:11px; color:#555; line-height:1.6;">
+              <strong style="color:#FF6B00;">نتیجه:</strong> برای تجهیزات صنعتی و واردات از چین — انتخاب اول
+            </div>
+          </div>
+          <div class="card" style="border-top:3px solid #d97706;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div class="card-title" style="margin:0;"><span class="dot" style="background:#d97706"></span>خصب — عمان 🇴🇲</div>
+              <span style="font-size:10px; background:#d976061a; color:#d97706; padding:3px 10px; border-radius:10px; font-weight:700;">در حال بررسی</span>
+            </div>
+            <div style="font-size:12px; color:#333; line-height:1.8; margin-bottom:12px;">
+              رقبا از این مسیر استفاده می‌کنند. نزدیک‌ترین بندر عمان به ایران. بررسی‌های اولیه انجام شده، نیاز به تصمیم نهایی درباره تناسب با صنعت هدف.
+            </div>
+            <div style="padding:10px; background:#fafafa; border-radius:8px; margin-bottom:10px;">
+              <div style="font-size:10px; font-weight:700; color:#333; margin-bottom:6px;">سوالات باز:</div>
+              <div style="font-size:11px; color:#555; line-height:1.8;">
+                ◆ چه صنایعی از این مسیر استفاده می‌کنند؟<br>
+                ◆ ظرفیت هندلینگ تجهیزات سنگین چقدر است؟<br>
+                ◆ هزینه مقایسه‌ای با صلاله؟
+              </div>
+            </div>
+            <div style="margin-top:8px; padding:8px 12px; background:#fafafa; border-radius:8px; font-size:11px; color:#555; line-height:1.6;">
+              <strong style="color:#d97706;">پیشنهاد:</strong> ارزیابی تکمیلی برای تصمیم‌گیری نهایی
+            </div>
+          </div>
+          <div class="card" style="border-top:3px solid #16a34a;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div class="card-title" style="margin:0;"><span class="dot" style="background:#16a34a"></span>ترکیه 🇹🇷</div>
+              <span style="font-size:10px; background:#16a34a1a; color:#16a34a; padding:3px 10px; border-radius:10px; font-weight:700;">کشاورزی</span>
+            </div>
+            <div style="font-size:12px; color:#333; line-height:1.8; margin-bottom:12px;">
+              برای بخش کشاورزی ترکیه بهترین گزینه است. دسترسی به بازارهای اروپایی و خاورمیانه، روابط تجاری قوی با ایران.
+            </div>
+            <div style="padding:10px; background:#16a34a0d; border-radius:8px; font-size:11px; color:#444; line-height:1.7;">
+              ◆ صادرات کشاورزی به اروپا از طریق ترکیه<br>
+              ◆ واردات نهاده‌های کشاورزی<br>
+              ◆ استانبول: هاب لجستیک منطقه‌ای
+            </div>
+          </div>
+          <div class="card" style="border-top:3px solid #1a7fe4;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div class="card-title" style="margin:0;"><span class="dot" style="background:#1a7fe4"></span>پاکستان 🇵🇰</div>
+              <span style="font-size:10px; background:#1a7fe41a; color:#1a7fe4; padding:3px 10px; border-radius:10px; font-weight:700;">پتانسیل بالقوه</span>
+            </div>
+            <div style="font-size:12px; color:#333; line-height:1.8; margin-bottom:12px;">
+              بندر گوادر در چارچوب CPEC با حضور قوی چین. مسیر جدید و کمتر شناخته‌شده که فرصت‌های اولیه ارزنده‌ای دارد.
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+              <div style="padding:8px; background:#1a7fe41a; border-radius:8px; font-size:10px; color:#1a7fe4; line-height:1.6;"><strong>فرصت:</strong><br>CPEC infrastructure<br>حضور چینی<br>هزینه کم</div>
+              <div style="padding:8px; background:#e54d4d1a; border-radius:8px; font-size:10px; color:#e54d4d; line-height:1.6;"><strong>ریسک:</strong><br>بی‌ثباتی سیاسی<br>زیرساخت ناکافی<br>تجربه کمتر</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="suggestions-invest" class="tab-content">
+        <div class="section-title">فرصت‌های سرمایه‌گذاری کریدوری</div>
+        <div class="card" style="margin-bottom:16px; background:#fff8f3; border-color:#FFD4A8;">
+          <div style="display:flex; gap:12px; align-items:flex-start;">
+            <div style="font-size:24px; flex-shrink:0;">💡</div>
+            <div>
+              <div style="font-size:13px; font-weight:700; color:#FF6B00; margin-bottom:6px;">چرا تجهیزات به‌جای پول نقد؟</div>
+              <div style="font-size:12px; color:#555; line-height:1.7;">با توجه به محدودیت‌های سیستم بانکی بین‌المللی برای ایران، پرداخت از طریق <strong style="color:#FF6B00;">تجهیزات و کالاهای ارزشمند</strong> یکی از هوشمندانه‌ترین مکانیزم‌های تسویه است. تجهیزات صنعتی، کالاهای اساسی و ماشین‌آلات می‌توانند نقش ارز را بازی کنند.</div>
+            </div>
+          </div>
+        </div>
+        <div class="invest-grid">
+          <div class="invest-card">
+            <div class="inv-sector sec-infra">زیرساخت</div>
+            <div class="inv-title">تجهیزات صنعتی و ماشین‌آلات</div>
+            <div class="inv-desc">تامین ماشین‌آلات برای پروژه‌های صنعتی کشورهای مسیر کریدور. سودآوری دوگانه: از فروش و از کریدیت تجاری</div>
+            <div class="inv-meta">
+              <span class="inv-tag">ریسک متوسط</span>
+              <span class="inv-tag">بازده بالا</span>
+              <span class="inv-tag">مدارک لازم</span>
+            </div>
+          </div>
+          <div class="invest-card">
+            <div class="inv-sector sec-agri">کشاورزی</div>
+            <div class="inv-title">نهاده و تجهیزات کشاورزی</div>
+            <div class="inv-desc">کود، بذر، سموم، ماشین‌آلات کشاورزی. تقاضای پایدار در کشورهای مسیر، امکان سرمایه‌گذاری در قالب goods-for-goods</div>
+            <div class="inv-meta">
+              <span class="inv-tag">ریسک پایین</span>
+              <span class="inv-tag">تقاضای پایدار</span>
+              <span class="inv-tag">ترکیه-مناسب</span>
+            </div>
+          </div>
+          <div class="invest-card">
+            <div class="inv-sector sec-energy">انرژی</div>
+            <div class="inv-title">تجهیزات انرژی و برق</div>
+            <div class="inv-desc">پنل خورشیدی، ژنراتور، تجهیزات برق‌رسانی. تقاضای بالا در پاکستان، عمان و افریقا. همراستا با توسعه CPEC</div>
+            <div class="inv-meta">
+              <span class="inv-tag">رشد بالا</span>
+              <span class="inv-tag">چین-محور</span>
+              <span class="inv-tag">ریسک متوسط</span>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="dot" style="background:#1a7fe4"></span>مدارک و پیش‌نیازهای اجرایی</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;">
+            <div style="padding:12px; background:#fafafa; border-radius:10px; border-right:3px solid #FF6B00;">
+              <div style="font-size:11px; font-weight:700; color:#FF6B00; margin-bottom:8px;">مدارک حقوقی</div>
+              <div style="font-size:10px; color:#555; line-height:1.8;">◆ اساسنامه شرکت<br>◆ سوابق تجاری<br>◆ گواهی‌نامه‌های صادرات<br>◆ رتبه‌بندی اعتباری</div>
+            </div>
+            <div style="padding:12px; background:#fafafa; border-radius:10px; border-right:3px solid #1a7fe4;">
+              <div style="font-size:11px; font-weight:700; color:#1a7fe4; margin-bottom:8px;">اهداف قابل دفاع</div>
+              <div style="font-size:10px; color:#555; line-height:1.8;">◆ حداقل ۳ هدف مشخص<br>◆ ROI اولیه برآورد شده<br>◆ Timeline واقعی<br>◆ Exit strategy</div>
+            </div>
+            <div style="padding:12px; background:#fafafa; border-radius:10px; border-right:3px solid #16a34a;">
+              <div style="font-size:11px; font-weight:700; color:#16a34a; margin-bottom:8px;">پیش‌نیاز عملیاتی</div>
+              <div style="font-size:10px; color:#555; line-height:1.8;">◆ شبکه توزیع محلی<br>◆ شریک محلی معتبر<br>◆ تیم حقوقی مسلط<br>◆ بیمه تجاری بین‌المللی</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="suggestions-roadmap" class="tab-content">
+        <div class="section-title">نقشه راه اجرایی</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+            <div class="tl-body">
+              <div class="tl-phase">فاز ۱ — ماه ۱ تا ۳</div>
+              <div class="tl-title">بررسی و تصمیم‌گیری استراتژیک</div>
+              <div class="tl-items">
+                <div class="tl-bullet">تصمیم نهایی درباره ساختار حقوقی دفتر چین</div>
+                <div class="tl-bullet">ارزیابی تفصیلی مسیر خصب در برابر صلاله</div>
+                <div class="tl-bullet">انتخاب صنعت هدف برای هاب جایگزین دبی</div>
+                <div class="tl-bullet">بررسی امکان‌سنجی فورواردینگ داخلی</div>
+              </div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot step2"><div class="tl-dot-inner"></div></div>
+            <div class="tl-body">
+              <div class="tl-phase p2">فاز ۲ — ماه ۳ تا ۶</div>
+              <div class="tl-title">راه‌اندازی ساختارهای اولیه</div>
+              <div class="tl-items">
+                <div class="tl-bullet">ثبت نمایندگی یا دفتر در چین (یی‌وو یا شنزن)</div>
+                <div class="tl-bullet">آغاز گفتگو با بندر صلاله</div>
+                <div class="tl-bullet">استخدام تیم کوچک چین‌پایه</div>
+                <div class="tl-bullet">تهیه مدارک پایه برای سرمایه‌گذاری کریدوری</div>
+              </div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot step3"><div class="tl-dot-inner"></div></div>
+            <div class="tl-body">
+              <div class="tl-phase p3">فاز ۳ — ماه ۶ تا ۱۲</div>
+              <div class="tl-title">فعال‌سازی لاین‌های تجاری</div>
+              <div class="tl-items">
+                <div class="tl-bullet">اولین محموله از مسیر صلاله</div>
+                <div class="tl-bullet">آغاز ارائه خدمات فورواردینگ به صنایع دیگر</div>
+                <div class="tl-bullet">شناسایی اولین فرصت سرمایه‌گذاری کریدوری</div>
+                <div class="tl-bullet">بررسی بازار کشاورزی ترکیه برای تنوع‌بخشی</div>
+              </div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot step4"><div class="tl-dot-inner"></div></div>
+            <div class="tl-body">
+              <div class="tl-phase p4">فاز ۴ — ماه ۱۲ تا ۱۸</div>
+              <div class="tl-title">توسعه و بهینه‌سازی</div>
+              <div class="tl-items">
+                <div class="tl-bullet">ارزیابی عملکرد دفتر چین و تصمیم برای توسعه</div>
+                <div class="tl-bullet">بررسی پتانسیل مسیر پاکستان (گوادر/CPEC)</div>
+                <div class="tl-bullet">مقیاس‌دهی لاین فورواردینگ برای صنایع دیگر</div>
+                <div class="tl-bullet">اجرای اولین پروژه سرمایه‌گذاری کریدوری</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer-note">
+          <p><strong>جمع‌بندی استراتژیک:</strong> موفقیت این برنامه به <strong>انتخاب صنعت هدف</strong> برای هاب جایگزین دبی وابسته است. تجهیزات صنعتی → صلاله. کشاورزی → ترکیه. هر دو مسیر نیاز به <strong>حضور فیزیکی در چین</strong> دارند که دفتر کوچک پیشنهادی آن را تامین می‌کند.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -1751,7 +2341,7 @@
     <div class="alert-icon"></div>
     <div>
       <div class="alert-title">هشدار بحران بزرگ دریایی — فوریه ۲۰۲۶ تاکنون</div>
-      <div class="alert-body">از ۲۸ فوریه ۲۰۲۶، با آغاز عملیات نظامی آمریکا-اسرائیل علیه ایران (Operation Epic Fury)، تنگه هرمز عملاً بسته شده است. ایران با مین‌گذاری، قایق‌های گشتی سپاه و هشدارهای رادیویی، تردد کشتی‌های خارجی را به شدت محدود کرده است. ترافیک تجاری کاهش ۹۴درصد نسبت به پیش از درگیری داشته است. <strong>تمام مسیرهایی که از بندرعباس و خلیج فارس عبور می‌کنند در حالت تعلیق یا ریسک بسیار بالا قرار دارند.</strong> عمان (صلاله، صحار، دقم) به مهم‌ترین مرکز ترانزیت جایگزین تبدیل شده است.</div>
+      <div class="alert-body">از ۲۸ فوریه ۲۰۲۶، با آغاز عملیات نظامی آمریکا-اسرائیل علیه ایران (Operation Epic Fury)، تنگه هرمز عملاً بسته شده است. ایران با مین‌گذاری، قایق‌های گشتی سپاه و هشدارهای رادیویی، تردد کشتی‌های خارجی را به شدت محدود کرده است. ترافیک تجاری کاهش ۹۴درصد نسبت به پیش از درگیری داشته است. <strong>تمام مسیرهایی که از بندرعباس و خلیج فارس عبور می‌کنند در حالت تعلیق یا ریسک بسیار بالا قرار دارند.</strong> عمان (سالاله، صحار، دقم) به مهم‌ترین مرکز ترانزیت جایگزین تبدیل شده است.</div>
     </div>
   </div>
 
@@ -1944,8 +2534,8 @@
       <div class="route-header-left">
         <div class="route-num-ahvaz" style="background:rgba(16,185,129,0.15);color:#6ee7b7;">۵</div>
         <div>
-          <div class="route-name-ahvaz">صلاله (Salalah) — سه شاخه</div>
-          <div class="route-sub-ahvaz">چین ← صلاله ← [گوادر/چابهار | خصب/بندرعباس | مستقیم بندرعباس]</div>
+          <div class="route-name-ahvaz">سالاله (Salalah) — سه شاخه</div>
+          <div class="route-sub-ahvaz">چین ← سالاله ← [گوادر/چابهار | خصب/بندرعباس | مستقیم بندرعباس]</div>
         </div>
       </div>
       <div style="display:flex;align-items:center;gap:10px">
@@ -1956,9 +2546,9 @@
     <div class="divider-ahvaz"></div>
     <div class="route-body-ahvaz">
       <div class="info-grid-ahvaz">
-        <div class="info-item-ahvaz"><div class="info-label-ahvaz"> 🏛️📦ظرفیت بندر صلاله</div><div class="info-value-ahvaz"><strong>۴–۵ میلیون TEU</strong> سالانه</div></div>
-        <div class="info-item-ahvaz"><div class="info-label-ahvaz"> 📍وضعیت فعلی صلاله</div><div class="info-value-ahvaz" style="color:#15803d;">تبدیل به <strong>اصلی‌ترین مرکز ترانزیت جایگزین</strong> شد</div></div>
-        <div class="info-item-ahvaz"><div class="info-label-ahvaz"> 💸نرخ چین-صلاله</div><div class="info-value-ahvaz"><strong>+۲۸درصد</strong> افزایش در هفته اول درگیری</div></div>
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz"> 🏛️📦ظرفیت بندر سالاله</div><div class="info-value-ahvaz"><strong>۴–۵ میلیون TEU</strong> سالانه</div></div>
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz"> 📍وضعیت فعلی سالاله</div><div class="info-value-ahvaz" style="color:#15803d;">تبدیل به <strong>اصلی‌ترین مرکز ترانزیت جایگزین</strong> شد</div></div>
+        <div class="info-item-ahvaz"><div class="info-label-ahvaz"> 💸نرخ چین-سالاله</div><div class="info-value-ahvaz"><strong>+۲۸درصد</strong> افزایش در هفته اول درگیری</div></div>
         <div class="info-item-ahvaz"><div class="info-label-ahvaz">🤝 شریک تجاری</div><div class="info-value-ahvaz">Asyad + Maersk (Gemini Cooperation)</div></div>
       </div>
       <div class="ref-box-ahvaz">📚 منابع: Windward AI — One Month Into Iran War | Med-Or — Oman Connectivity Strategy</div>
@@ -2075,7 +2665,7 @@
     <strong>⚠ یادداشت‌های مهم:</strong><br>
     ۱. تمام قیمت‌ها تخمینی هستند و در شرایط بحران کنونی نوسان بالایی دارند.<br>
     ۲. <strong>بحران تنگه هرمز</strong> (از ۲۸ فوریه ۲۰۲۶) بزرگترین اختلال دریایی از جنگ جهانی دوم است.<br>
-    ۳. <strong>مسیرهای جایگزین توصیه‌شده</strong> در شرایط فعلی: صلاله/دقم عمان → گوادر → چابهار، و مرسین ترکیه → بازرگان<br>
+    ۳. <strong>مسیرهای جایگزین توصیه‌شده</strong> در شرایط فعلی: سالاله/دقم عمان → گوادر → چابهار، و مرسین ترکیه → بازرگان<br>
     ۴. اطلاعات این گزارش در خرداد ۱۴۰۵ (مه ۲۰۲۶) گردآوری شده. اوضاع ممکن است روزانه تغییر کند.<br>
     ۵. <strong>توصیه اکید:</strong> قبل از ارسال هر محموله، با فورواردر متخصص در ایران مشورت کنید و بیمه جنگی (War Risk) تهیه نمایید.
   </div>
@@ -2089,7 +2679,7 @@
     <div class="compare-panel active">
       <div class="alert alert-danger" style="margin-bottom:16px">
         <span>⚠</span>
-        <span><strong>هشدار بحران ۲۰۲۶:</strong> از ۲۸ فوریه ۲۰۲۶ تنگه هرمز عملاً بسته است. دبی و جبل‌علی مسیر ایران را مسدود کرده‌اند. بنادر عمان (صحار، صلاله، دقم) به عنوان جایگزین اصلی معرفی شده‌اند.</span>
+        <span><strong>هشدار بحران ۲۰۲۶:</strong> از ۲۸ فوریه ۲۰۲۶ تنگه هرمز عملاً بسته است. دبی و جبل‌علی مسیر ایران را مسدود کرده‌اند. بنادر عمان (صحار، سالاله، دقم) به عنوان جایگزین اصلی معرفی شده‌اند.</span>
       </div>
       <div class="alert alert-warning" style="margin-bottom:20px">
         <span>📋</span>
@@ -2123,7 +2713,7 @@ const portsDataPro = [
   { id:'dxb', name:'دبی – بندر راشد', country:'امارات', region:'uae', score:63, scoreClass:'sr-amber-pro', fatf:'زیر نظر', fatfClass:'fatf-watch-pro', capacity:'تقریبا۲۲ میلیون TEU / سال', draft:'17m', mainTraders:'چین · هند · اروپا · آمریکا', goods:['کانتینر','خودرو (RORO)','الکترونیک','مواد غذایی','نفت و گاز'], docs:['Bill of Lading','Certificate of Origin','Packing List','EDD Form (UAE Circ.7)','OFAC Screening','End-User Certificate دوگانه‌کاربرد'], risks:['Circular 7/2025 – ریسک تحریم ثانویه با ایران','IRGC VHF Warning Zone در محور RAK','بستن مسیر هرمز از مارس ۲۰۲۶'], facilities:['۶۷ اسکله جبل‌علی','منطقه آزاد JAFZA','انبار سرد','سیستم دیجیتال Trakhees','مرکز لجستیک چندوجهی'], note:'DP World اپراتور؛ رتبه ۱۰ جهان. مسیر زمینی از طریق عمان فعال شد.' },
   { id:'jafza', name:'جبل‌علی / JAFZA', country:'امارات', region:'uae', score:70, scoreClass:'sr-amber-pro', fatf:'زیر نظر', fatfClass:'fatf-watch-pro', capacity:'۲۲ میلیون TEU / سال', draft:'17m', mainTraders:'چین · هند · اروپا', goods:['کانتینر','پتروشیمی','خودرو','الکترونیک'], docs:['Bill of Lading','JAFZA Import Declaration','OFAC/SDN Screening','EDD برای ایران-مرتبط','Free Zone Entry Permit'], risks:['اجاره اجباری در JAFZA/DAFZA','Circular 7 – ریسک ثانویه','نزدیکی به منطقه هشدار IRGC'], facilities:['۱۳۵+ km جاده داخلی','۷,۰۰۰+ شرکت مستقر','انبار خودکار','پل جبل‌علی-القوز','فرودگاه Al Maktoum مجاور'], note:'بزرگترین منطقه آزاد خاورمیانه. الزام اجاره از شرکت در زون برای عملیات تجاری.' },
   { id:'sohar', name:'صحار', country:'عمان', region:'oman', score:82, scoreClass:'sr-green-pro', fatf:'پاک', fatfClass:'fatf-clean-pro', capacity:'۴ میلیون TEU (هدف ۲۰۳۰)', draft:'16m', mainTraders:'هند · چین · اروپا · GCC', goods:['فله خشک','پتروشیمی','آهن و فولاد','کانتینر','محصولات غذایی'], docs:['Bill of Lading','Certificate of Origin (عمانی)','Customs Declaration (ASYCUDA World)','SOHAR Port Clearance','Packing List','LC یا TT بانکی'], risks:['ریسک متوسط – عمان بی‌طرف','نزدیکی به ایران بالقوه حساس'], facilities:['منطقه صنعتی SOHAR FZ','مرکز لجستیک یکپارچه','خط ریلی آینده به مسقط','نزدیکی به خلیج فارس'], note:'بهترین تراز ژئوپلیتیکی در منطقه. تولید H1-2025: ۳۴ میلیون تن.' },
-  { id:'salalah', name:'صلاله', country:'عمان', region:'oman', score:78, scoreClass:'sr-green-pro', fatf:'پاک', fatfClass:'fatf-clean-pro', capacity:'⁺۵ میلیون TEU ترانس‌شیپمنت', draft:'16.5m', mainTraders:'آسیای شرقی · اروپا · آفریقای شرقی · هند', goods:['ترانس‌شیپمنت کانتینر','نفت','مواد ساختمانی','محصولات کشاورزی','دام'], docs:['Bill of Lading','Port Health Certificate','Phytosanitary (کشاورزی)','Oman Customs Single Window','ISPS Security Declaration'], risks:['ریسک متوسط–پایین','نزدیکی به یمن و هوتی','پایگاه سوخت‌گیری مارس ۲۰۲۶ هدف قرار گرفت'], facilities:['ترمینال APM','Salalah Container Terminal','انبار CFS','گمرک','اتصال جاده‌ای به GCC'], note:'قطر صلاله را به عنوان جایگزین اصلی بندر حمد در بحران مارس ۲۰۲۶ تعیین کرد.' },
+  { id:'salalah', name:'سالاله', country:'عمان', region:'oman', score:78, scoreClass:'sr-green-pro', fatf:'پاک', fatfClass:'fatf-clean-pro', capacity:'⁺۵ میلیون TEU ترانس‌شیپمنت', draft:'16.5m', mainTraders:'آسیای شرقی · اروپا · آفریقای شرقی · هند', goods:['ترانس‌شیپمنت کانتینر','نفت','مواد ساختمانی','محصولات کشاورزی','دام'], docs:['Bill of Lading','Port Health Certificate','Phytosanitary (کشاورزی)','Oman Customs Single Window','ISPS Security Declaration'], risks:['ریسک متوسط–پایین','نزدیکی به یمن و هوتی','پایگاه سوخت‌گیری مارس ۲۰۲۶ هدف قرار گرفت'], facilities:['ترمینال APM','Salalah Container Terminal','انبار CFS','گمرک','اتصال جاده‌ای به GCC'], note:'قطر سلاله را به عنوان جایگزین اصلی بندر حمد در بحران مارس ۲۰۲۶ تعیین کرد.' },
   { id:'khasab', name:'خصب / مسندم', country:'عمان', region:'oman', score:40, scoreClass:'sr-red-pro', fatf:'ریسک بالا', fatfClass:'fatf-grey-pro', capacity:'ظرفیت محدود – فاقد FTZ تجاری', draft:'محدود', mainTraders:'عمان · امارات · ایران (تاریخی)', goods:['کانتینر کوچک','سوخت','تجهیزات','محموله ناوبری محدود'], docs:['Customs Declaration','NOC از مسقط','Ship Clearance محلی'], risks:['سابقه قاچاق بالا','ریسک بسیار بالا – نزدیکی جغرافیایی به ایران','تحت نظارت IRGC VHF Warning Zone','فاقد Free Trade Zone رسمی','حادثه کشتی آوریل ۲۰۲۶'], facilities:['اسکله محلی','انبار محدود','گمرک محلی','بدون منطقه آزاد'], note:'موقعیت استراتژیک در تنگه هرمز اما ریسک کامپلاینس بسیار بالا.' },
   { id:'hamad', name:'بندر حمد (قطر)', country:'قطر', region:'qatar', score:72, scoreClass:'sr-amber-pro', fatf:'پاک', fatfClass:'fatf-clean-pro', capacity:'۷.۵ میلیون TEU / سال', draft:'17m', mainTraders:'چین · هند · اروپا · آمریکای شمالی', goods:['کانتینر','خودرو (RORO)','دام','مواد ساختمانی','محموله عمومی'], docs:['Bill of Lading','Mwani Qatar e-Clearance','Certificate of Origin','Phytosanitary (دام)','ISPS Declaration','GCC Certificate of Conformity'], risks:['ضربات موشکی ایران به راس‌لفان مارس ۲۰۲۶','حمله موشکی به Al Udeid مارس ۲۰۲۶','محدودیت ظرفیتی پس از حملات'], facilities:['۱۲ اسکله','۲۸.۵ km² مساحت','ترمینال RORO','انبار یخچال‌دار','سیستم e-Gate دیجیتال','مجاورت با منطقه صنعتی'], note:'۵۰درصد ترانس‌شیپمنت در ۲۰۲۵. رتبه ۱۱ جهانی CPPI.' },
   { id:'raslaffan', name:'راس لفان', country:'قطر', region:'qatar', score:65, scoreClass:'sr-amber-pro', fatf:'پاک', fatfClass:'fatf-clean-pro', capacity:'بزرگترین تأسیسات LNG جهان', draft:'18m', mainTraders:'ژاپن · کره · چین · اروپا', goods:['LNG','NGL','پتروشیمی','اتیلن','متانول'], docs:['LNG Export Certificate','QatarEnergy Authorization','Bill of Lading','ISPS Declaration','Certificate of Origin'], risks:['حمله موشکی ایران ۱۸ مارس ۲۰۲۶ – "خسارت گسترده"','بستگی شدید به یک محصول (LNG)'], facilities:['۱۴ خط تولید LNG','مجتمع پتروشیمی','راه‌آهن اختصاصی','کانال ورودی ۱۸m'], note:'بزرگترین صادرکننده LNG جهان. پس از حمله مارس ۲۰۲۶ خسارت‌های ساختاری گزارش شد.' },
@@ -2134,7 +2724,7 @@ const portsDataPro = [
 ];
 
 const routesPro = [
-  { title:'مسیر زمینی صلاله ← خصب (اکسلیو مسندم)', path:['صلاله','Route 47/31','مسقط','E11 شمالی','دبی (عبور)','E11 / RAK','Al Darah Border','خصب / مسندم'], facts:[{l:'مسافت هوایی',v:'تقریبا۱,۰۴۰ km'},{l:'مسافت جاده',v:'تقریبا۱,۳۵۰ km'},{l:'زمان تقریبی',v:'۱۴–۱۶ ساعت'},{l:'وضعیت جاده',v:'آسفالت کامل'},{l:'مرز عبوری',v:'Al Darah (RAK–Musandam)'},{l:'نوع کارگو',v:'محدود به سبک'}], risks:[{level:'high', text:'مستقیم از صلاله به خصب مسیر زمینی یکپارچه ندارد – مسندم اکسلیو جداگانه از بدنه اصلی عمان است و از خاک امارات عبور لازم است'},{level:'high', text:'جاده A13 خصب–تیبات (49km) باریک و کوهستانی است – برای کامیون سنگین غیرمناسب'},{level:'med', text:'کارگو تجاری سنگین در این مسیر بسیار محدود و غیراقتصادی است'},{level:'med', text:'نیاز به ویزای عبور امارات + مجوزهای دوگانه عمانی'},{level:'low', text:'برای سفر سبک و پیک لجستیک گزینه‌ای ممکن اما پرهزینه'}], note:'⚠️ گزینه عملی‌تر: صلاله → مسقط → سوهار → کارگو دریایی (فیدر) به خصب. مسیر زمینی مستقیم برای کارگو سنگین توصیه نمی‌شود.' },
+  { title:'مسیر زمینی سلاله ← خصب (اکسلیو مسندم)', path:['سلاله','Route 47/31','مسقط','E11 شمالی','دبی (عبور)','E11 / RAK','Al Darah Border','خصب / مسندم'], facts:[{l:'مسافت هوایی',v:'تقریبا۱,۰۴۰ km'},{l:'مسافت جاده',v:'تقریبا۱,۳۵۰ km'},{l:'زمان تقریبی',v:'۱۴–۱۶ ساعت'},{l:'وضعیت جاده',v:'آسفالت کامل'},{l:'مرز عبوری',v:'Al Darah (RAK–Musandam)'},{l:'نوع کارگو',v:'محدود به سبک'}], risks:[{level:'high', text:'مستقیم از سلاله به خصب مسیر زمینی یکپارچه ندارد – مسندم اکسلیو جداگانه از بدنه اصلی عمان است و از خاک امارات عبور لازم است'},{level:'high', text:'جاده A13 خصب–تیبات (49km) باریک و کوهستانی است – برای کامیون سنگین غیرمناسب'},{level:'med', text:'کارگو تجاری سنگین در این مسیر بسیار محدود و غیراقتصادی است'},{level:'med', text:'نیاز به ویزای عبور امارات + مجوزهای دوگانه عمانی'},{level:'low', text:'برای سفر سبک و پیک لجستیک گزینه‌ای ممکن اما پرهزینه'}], note:'⚠️ گزینه عملی‌تر: سلاله → مسقط → سوهار → کارگو دریایی (فیدر) به خصب. مسیر زمینی مستقیم برای کارگو سنگین توصیه نمی‌شود.' },
   { title:'مسیر زمینی کراچی ← گوادر (N10 / مکران ساحلی)', path:['کراچی','Lyari / Zero Point','N10 ساحلی','اورمارا','پسنی','Eastbay Expressway','گوادر'], facts:[{l:'مسافت N10',v:'تقریبا۶۸۳ km'},{l:'زمان LTV',v:'۶–۷ ساعت'},{l:'زمان کامیون',v:'۸–۱۲ ساعت'},{l:'عرض جاده',v:'۳۰ فوت (۲ خطه)'},{l:'بالاترین نقطه',v:'۳۲۳m (Buzi Pass)'},{l:'موبایل در مسیر',v:'بسیار محدود'}], risks:[{level:'high', text:'ریسک امنیتی بلوچستان – جاده از مناطق حساس می‌گذرد، حضور گروه‌های مسلح تأیید شده در سال‌های اخیر'},{level:'high', text:'ریسک تحریم – SRO 691/2026: هر کارگو ایران‌بند از این مسیر به OFAC Screening نیاز دارد'},{level:'high', text:'جاده دوخطه برای ترافیک سنگین بندری کافی نیست – موتوروی تا ۲۰۳۰ آماده نمی‌شود'},{level:'med', text:'بدون شهر بزرگ در مسیر – تنها اورمارا (شهر کوچک ساحلی)'},{level:'med', text:'هوا: بیابانی شدید، طوفان شن، گرمای تابستانی ۴۵+°C'},{level:'low', text:'گزینه آبی بهینه: فیدر دریایی کراچی–گوادر، صرفه‌جویی تقریبا$180,000 در هزینه حمل'}], note:'گزینه بهینه فعلی: فیدر دریایی از کراچی به گوادر (۵۳۳km دریایی). سپس Gwadar–Gabd تقریبا89km به مرز ایران. زمان کل ایران: ۲–۳ ساعت از گوادر در مقابل ۱۶–۱۸ ساعت از کراچی.' }
 ];
 
@@ -2287,13 +2877,12 @@ function renderCountries() {
 }
 
 function selectCountry(id) {
-  document.querySelectorAll('.country-item').forEach(el => el.classList.remove('active'));
-  // پیدا کردن عنصر کلیک شده
   const items = document.querySelectorAll('.country-item');
   for (let i = 0; i < items.length; i++) {
     if (items[i].textContent === countriesData[id].name) {
       items[i].classList.add('active');
-      break;
+    } else {
+      items[i].classList.remove('active');
     }
   }
   const c = countriesData[id];
@@ -2302,7 +2891,6 @@ function selectCountry(id) {
 }
 
 function showPortPanel(panelId) {
-  // تابع خالی برای جلوگیری از خطا
   console.log('showPortPanel called with', panelId);
 }
 
@@ -2314,20 +2902,27 @@ function toggleAhvazCard(id) {
 function toggleAllAhvaz() {
   const cards = document.querySelectorAll('.route-card-ahvaz');
   const anyOpen = Array.from(cards).some(c => c.classList.contains('open'));
-  cards.forEach(c => { if (anyOpen) c.classList.remove('open'); else c.classList.add('open'); });
+  for (let i = 0; i < cards.length; i++) {
+    if (anyOpen) {
+      cards[i].classList.remove('open');
+    } else {
+      cards[i].classList.add('open');
+    }
+  }
 }
 
 // ======================== توابع صفحه کریدورها ========================
 function toggleCorridorNew(id) {
   const body = document.getElementById(id + '-body');
   const chev = document.getElementById(id + '-chev');
-  const isOpen = body.classList.contains('open');
-  if (isOpen) {
-    body.classList.remove('open');
-    if (chev) chev.classList.remove('open');
-  } else {
-    body.classList.add('open');
-    if (chev) chev.classList.add('open');
+  if (body) {
+    if (body.classList.contains('open')) {
+      body.classList.remove('open');
+      if (chev) chev.classList.remove('open');
+    } else {
+      body.classList.add('open');
+      if (chev) chev.classList.add('open');
+    }
   }
 }
 
@@ -2336,21 +2931,19 @@ function switchTabNew(corridorId, tabName) {
   if (!body) return;
   const contents = body.querySelectorAll('.tab-content-new');
   for (let i = 0; i < contents.length; i++) {
-    const el = contents[i];
-    if (el.id === corridorId + '-' + tabName) {
-      el.classList.add('active');
+    if (contents[i].id === corridorId + '-' + tabName) {
+      contents[i].classList.add('active');
     } else {
-      el.classList.remove('active');
+      contents[i].classList.remove('active');
     }
   }
   const tabs = body.querySelectorAll('.tab-new');
   for (let i = 0; i < tabs.length; i++) {
-    const el = tabs[i];
-    const onclickAttr = el.getAttribute('onclick');
+    const onclickAttr = tabs[i].getAttribute('onclick');
     if (onclickAttr && onclickAttr.indexOf("'" + tabName + "'") !== -1) {
-      el.classList.add('active');
+      tabs[i].classList.add('active');
     } else {
-      el.classList.remove('active');
+      tabs[i].classList.remove('active');
     }
   }
 }
@@ -2364,7 +2957,8 @@ function switchCorridorsTab(tabName) {
   for (let i = 0; i < btns.length; i++) {
     btns[i].classList.remove('active');
   }
-  document.getElementById('corridors-tab-' + tabName).classList.add('active');
+  const activePane = document.getElementById('corridors-tab-' + tabName);
+  if (activePane) activePane.classList.add('active');
   if (window.event && window.event.target) {
     window.event.target.classList.add('active');
   }
@@ -2381,8 +2975,31 @@ function switchShippingTab(index) {
   for (let i = 0; i < tabs.length; i++) {
     tabs[i].classList.remove('active');
   }
-  panes[index].classList.add('active');
-  tabs[index].classList.add('active');
+  if (panes[index]) panes[index].classList.add('active');
+  if (tabs[index]) tabs[index].classList.add('active');
+}
+
+// توابع تب پیشنهادات داخلی
+function switchSuggestionsTab(tabName) {
+  const container = document.getElementById('dash-suggestions');
+  if (!container) return;
+  const tabs = container.querySelectorAll('#suggestionsNav .nav-btn');
+  const panes = container.querySelectorAll('#dash-suggestions .tab-content');
+  for (let i = 0; i < panes.length; i++) {
+    panes[i].classList.remove('active');
+  }
+  for (let i = 0; i < tabs.length; i++) {
+    tabs[i].classList.remove('active');
+  }
+  const activePane = document.getElementById('suggestions-' + tabName);
+  if (activePane) activePane.classList.add('active');
+  for (let i = 0; i < tabs.length; i++) {
+    const btnOnclick = tabs[i].getAttribute('onclick');
+    if (btnOnclick && btnOnclick.indexOf("'" + tabName + "'") !== -1) {
+      tabs[i].classList.add('active');
+      break;
+    }
+  }
 }
 
 function showDash(id) {
@@ -2390,13 +3007,18 @@ function showDash(id) {
   for (let i = 0; i < sections.length; i++) {
     sections[i].classList.remove('active');
   }
-  const btns = document.querySelectorAll('.nav-btn');
+  const btns = document.querySelectorAll('.page-header .nav-btn');
   for (let i = 0; i < btns.length; i++) {
     btns[i].classList.remove('active');
   }
-  document.getElementById('dash-' + id).classList.add('active');
-  if (window.event && window.event.target) {
-    window.event.target.classList.add('active');
+  const activeSection = document.getElementById('dash-' + id);
+  if (activeSection) activeSection.classList.add('active');
+  for (let i = 0; i < btns.length; i++) {
+    const btnOnclick = btns[i].getAttribute('onclick');
+    if (btnOnclick && btnOnclick.indexOf("'" + id + "'") !== -1) {
+      btns[i].classList.add('active');
+      break;
+    }
   }
   if (id === 'countries') renderCountries();
   if (id === 'portcompare') {
@@ -2417,8 +3039,8 @@ function showDash(id) {
         for (let i = 0; i < tabs.length; i++) {
           tabs[i].classList.remove('active');
         }
-        panes[0].classList.add('active');
-        tabs[0].classList.add('active');
+        if (panes[0]) panes[0].classList.add('active');
+        if (tabs[0]) tabs[0].classList.add('active');
       }
     }, 50);
   }
@@ -2432,7 +3054,6 @@ window.onload = function() {
   if (ahvazCard) ahvazCard.classList.add('open');
 };
 
-// تعریف توابع در سطح window
 window.showDash = showDash;
 window.switchShippingTab = switchShippingTab;
 window.toggleAhvazCard = toggleAhvazCard;
@@ -2443,6 +3064,7 @@ window.selectPortPro = selectPortPro;
 window.switchCorridorsTab = switchCorridorsTab;
 window.toggleCorridorNew = toggleCorridorNew;
 window.switchTabNew = switchTabNew;
+window.switchSuggestionsTab = switchSuggestionsTab;
 </script>
 </body>
 </html>
