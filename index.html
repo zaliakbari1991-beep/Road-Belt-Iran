@@ -726,8 +726,8 @@
 <!-- ========== صفحه دوم: کریدورهای بین‌المللی ========== -->
 <div id="dash-carec" class="dash-section">
   <div class="corridors-tab-bar">
-    <button class="corridors-tab-btn active" onclick="switchCorridorsTab('analysis')">📊 تحلیل کوریدورهای ابریشم</button>
-    <button class="corridors-tab-btn" onclick="switchCorridorsTab('comparison')">📋 جداول مقایسه جامع</button>
+    <button class="corridors-tab-btn active" onclick="switchCorridorsTab('analysis')">📈🔍 تحلیل کوریدورهای کلی چین به اروپا</button>
+    <button class="corridors-tab-btn" onclick="switchCorridorsTab('comparison')">🆚 جداول مقایسه جامع کوریدورهای اصلی </button>
   </div>
   
   <div id="corridors-tab-analysis" class="corridors-tab-pane active">
@@ -747,7 +747,7 @@
       <div class="corridor-header-new" onclick="toggleCorridorNew('c1')">
         <div class="risk-dot-new risk-high-new"></div>
         <span class="transport-badge-new badge-rail-new">ریلی</span>
-        <div style="flex:1"><h3 style="font-size:14px;font-weight:500;">کوریدور شمالی — ترانس‌سیبری <span style="font-size:11px;color:var(--text-muted);">(Trans-Siberian / Northern)</span></h3></div>
+        <div style="flex:1"><h3 style="font-size:14px;font-weight:500;">کوریدور شمالی — Trans-Siberian <span style="font-size:11px;color:var(--text-muted);">(Trans-Siberian / Northern)</span></h3></div>
         <i class="chevron-new" id="c1-chev" aria-hidden="true">▼</i>
       </div>
       <div class="corridor-body-new" id="c1-body">
@@ -761,23 +761,23 @@
         <div class="tab-content-new active" id="c1-infra">
           <div class="section-title-new">مسیر و نوع زیرساخت</div>
           <div class="route-steps-new">
-            <span class="route-step-new rail-s">چین (ولادیووستوک)</span>
+            <span class="route-step-new rail-s">چین (Vladivostok)</span>
             <span class="route-arrow-new">→</span>
-            <span class="route-step-new break-s">تغییر گیج: ۱۴۳۵→۱۵۲۰mm</span>
+            <span class="route-step-new break-s">تغییر گیج ریل از ۱۴۳۵ به ۱۵۲۰ میلی‌متر (استاندارد روسیه)</span>
             <span class="route-arrow-new">→</span>
             <span class="route-step-new rail-s">ترانس‌سیبری / BAM</span>
             <span class="route-arrow-new">→</span>
             <span class="route-step-new rail-s">مسکو</span>
             <span class="route-arrow-new">→</span>
-            <span class="route-step-new break-s">تغییر گیج: ۱۵۲۰→۱۴۳۵mm</span>
+            <span class="route-step-new break-s">تغییر عرض ریل از گیج روسی (۱۵۲۰ میلی‌متر) به گیج استاندارد (۱۴۳۵ میلی‌متر)</span>
             <span class="route-arrow-new">→</span>
             <span class="route-step-new rail-s">اروپا (برست/مالاشویچه)</span>
           </div>
           <div class="info-grid-new">
-            <div class="metric-card-new"><div class="metric-label-new">طول کل مسیر</div><div class="metric-value-new">~۹,۲۰۰ کیلومتر</div><div class="metric-note-new">چین تا اروپای غربی</div></div>
-            <div class="metric-card-new"><div class="metric-label-new">زمان ترانزیت</div><div class="metric-value-new">۱۵–۲۲ روز</div><div class="metric-note-new">در شرایط عادی (پیش از ۲۰۲۲: ۱۵-۱۹ روز)</div></div>
-            <div class="metric-card-new"><div class="metric-label-new">گیج ریل روسیه</div><div class="metric-value-new">۱۵۲۰ mm</div><div class="metric-note-new">ناسازگار با اروپا/چین (۱۴۳۵mm)</div></div>
-            <div class="metric-card-new"><div class="metric-label-new">ظرفیت واقعی ۲۰۲۴</div><div class="metric-value-new">~۵۰۰–۶۵۰ هزار TEU</div><div class="metric-note-new">کاهش ۹.۸٪ نسبت به سال قبل</div></div>
+            <div class="metric-card-new"><div class="metric-label-new">طول کل مسیر</div><div class="metric-value-new">در ۹,۲۰۰ کیلومتر</div><div class="metric-note-new">چین تا اروپای غربی</div></div>
+            <div class="metric-card-new"><div class="metric-label-new">زمان ترانزیت</div><div class="metric-value-new">۱۵-۲۲ روز </div><div class="metric-note-new">در شرایط عادی (پیش از ۲۰۲۲: ۱۵-۱۹ روز)</div></div>
+            <div class="metric-card-new"><div class="metric-label-new">گیج ریل روسیه</div><div class="metric-value-new">۱۵۲۰ mm</div><div class="metric-note-new">ناسازگار با اروپا و چین (۱۴۳۵mm)</div></div>
+            <div class="metric-card-new"><div class="metric-label-new">ظرفیت واقعی ۲۰۲۴</div><div class="metric-value-new"> در حدود ۵۰۰–۶۵۰ هزار TEU</div><div class="metric-note-new">کاهش ۹.۸درصد  نسبت به سال قبل</div></div>
           </div>
           <div class="section-title-new">محدودیت‌های زیرساختی</div>
           <div class="tag-row-new">
@@ -789,15 +789,15 @@
         </div>
         <div class="tab-content-new" id="c1-cost">
           <div class="info-grid-new">
-            <div class="metric-card-new"><div class="metric-label-new">هزینه حمل (FEU)</div><div class="metric-value-new">~$۳,۲۴۰</div><div class="metric-note-new">میانگین ۲۰۲۴ (ERA Index)</div></div>
-            <div class="metric-card-new"><div class="metric-label-new">هزینه توقف مرزی</div><div class="metric-value-new">$۱۵۰–$۴۰۰/روز</div><div class="metric-note-new">برست، مالاشویچه</div></div>
-            <div class="metric-card-new"><div class="metric-label-new">هزینه تغییر گیج</div><div class="metric-value-new">$۸۰–۲۰۰/TEU</div><div class="metric-note-new">هر نقطه تعویض بوگی/باربرداری</div></div>
-            <div class="metric-card-new"><div class="metric-label-new">بیمه اضافی</div><div class="metric-value-new">+۰.۵–۲٪</div><div class="metric-note-new">ریسک سیاسی و تحریم</div></div>
+            <div class="metric-card-new"><div class="metric-label-new">هزینه حمل (FEU)</div><div class="metric-value-new">تقریباً ۳,۲۴۰ دلار</div><div class="metric-note-new">میانگین ۲۰۲۴ (ERA Index)</div></div>
+            <div class="metric-card-new"><div class="metric-label-new">هزینه توقف مرزی</div><div class="metric-value-new">۱۵۰ تا ۴۰۰ دلار در روز</div><div class="metric-note-new">برست، مالاشویچه</div></div>
+            <div class="metric-card-new"><div class="metric-label-new">هزینه تغییر گیج</div><div class="metric-value-new">نرخ هر TEU بین ۸۰ تا ۲۰۰ دلار است</div><div class="metric-note-new">هر نقطه تعویض بوگی و باربرداری</div></div>
+            <div class="metric-card-new"><div class="metric-label-new">بیمه اضافی</div><div class="metric-value-new">مبلغ نهایی شامل نیم تا دو درصد اضافه‌کارمزد خواهد بود</div><div class="metric-note-new">ریسک سیاسی و تحریم</div></div>
           </div>
-          <div class="alert-warn-new alert-box-new">⚠ از اوایل ۲۰۲۲، اکثر شرکت‌های اروپایی از این مسیر خارج شدند. استفاده از این کوریدور ممکن است با قوانین تحریم EU/US تداخل داشته باشد.</div>
+          <div class="alert-warn-new alert-box-new">⚠️ از اوایل ۲۰۲۲، اکثر شرکت‌های اروپایی از این مسیر خارج شدند. استفاده از این کوریدور ممکن است با قوانین تحریم EU/US تداخل داشته باشد.</div>
         </div>
         <div class="tab-content-new" id="c1-risk">
-          <div class="alert-danger-new alert-box-new">🔴 ریسک بسیار بالا: این مسیر به دلیل جنگ روسیه-اوکراین و تحریم‌های گسترده غربی برای اکثر شرکت‌های اروپایی و آمریکایی عملاً مسدود است.</div>
+          <div class="alert-danger-new alert-box-new">🔴 ریسک بسیار بالا: این مسیر به دلیل جنگ روسیه-اوکراین و تحریم‌های گسترده برای اکثر شرکت‌های اروپایی و آمریکایی عملاً مسدود است.</div>
           <div class="section-title-new">ریسک‌های اصلی</div>
           <div class="tag-row-new">
             <span class="tag-new danger">تحریم‌های گسترده EU/US/UK</span>
@@ -847,26 +847,26 @@
           <div class="tab-new" onclick="switchTabNew('c2','ref')">منابع</div>
         </div>
         <div class="tab-content-new active" id="c2-infra">
-          <div class="section-title-new">مسیر کامل (چین → اروپا)</div>
+          <div class="section-title-new">مسیر کامل ریلی از چین به اروپا</div>
           <div class="route-steps-new">
             <span class="route-step-new rail-s">چین (کاشغر/اورومچی)</span>
-            <span class="route-arrow-new">→</span>
-            <span class="route-step-new break-s">تغییر گیج: ۱۴۳۵→۱۵۲۰</span>
-            <span class="route-arrow-new">→</span>
+            <span class="route-arrow-new"> _به _‌</span>
+            <span class="route-step-new break-s">تغییر گیج ریل از ۱۴۳۵ به ۱۵۲۰ میلی‌متر </span>
+            <span class="route-arrow-new">_به _‌</span>
             <span class="route-step-new rail-s">قزاقستان</span>
-            <span class="route-arrow-new">→</span>
-            <span class="route-step-new sea-s">فری‌بات دریای خزر (آکتاو/کوریک→باکو)</span>
-            <span class="route-arrow-new">→</span>
-            <span class="route-step-new rail-s">BTK: باکو→تفلیس→قارص</span>
-            <span class="route-arrow-new">→</span>
-            <span class="route-step-new break-s">تغییر گیج قارص→استانبول</span>
-            <span class="route-arrow-new">→</span>
-            <span class="route-step-new rail-s">ترکیه→اروپا</span>
+            <span class="route-arrow-new">_به _‌</span>
+            <span class="route-step-new sea-s">فری(Ferry)‌ بات دریای خزر از آکتاو یا کوریک به باکو</span>
+            <span class="route-arrow-new">_به _‌</span>
+            <span class="route-step-new rail-s">BTK: مسیر باکو به تفلیس به قارص</span>
+            <span class="route-arrow-new">_به _‌</span>
+            <span class="route-step-new break-s">تغییر گیج قبل از قارص به سمت استانبول</span>
+            <span class="route-arrow-new">_به _‌</span>
+            <span class="route-step-new rail-s">ترکیه به اروپا</span>
           </div>
           <div class="info-grid-new">
-            <div class="metric-card-new"><div class="metric-label-new">طول کل مسیر</div><div class="metric-value-new">~۸,۷۰۰ کیلومتر</div><div class="metric-note-new">چین تا اروپای مرکزی</div></div>
+            <div class="metric-card-new"><div class="metric-label-new">طول کل مسیر</div><div class="metric-value-new"> در حدود ۸,۷۰۰ کیلومتر</div><div class="metric-note-new">چین تا اروپای مرکزی</div></div>
             <div class="metric-card-new"><div class="metric-label-new">زمان ترانزیت</div><div class="metric-value-new">۱۸–۲۵ روز</div><div class="metric-note-new">هدف ۱۴–۱۸ روز تا ۲۰۲۵</div></div>
-            <div class="metric-card-new"><div class="metric-label-new">ظرفیت واقعی ۲۰۲۴</div><div class="metric-value-new">۴.۴۷ میلیون تن</div><div class="metric-note-new">۳۸۱ هزار TEU (۷.۸٪ سهم ریلی)</div></div>
+            <div class="metric-card-new"><div class="metric-label-new">ظرفیت واقعی ۲۰۲۴</div><div class="metric-value-new">۴.۴۷ میلیون تن</div><div class="metric-note-new">۳۸۱ هزار TEU (۷.۸درصد سهم ریلی)</div></div>
             <div class="metric-card-new"><div class="metric-label-new">فری‌بات دریای خزر</div><div class="metric-value-new">۳–۵ روز</div><div class="metric-note-new">تأخیر رایج: صف انتظار</div></div>
           </div>
           <div class="alert-ok-new alert-box-new">✅ در مه ۲۰۲۴، بخش گرجستان BTK کاملاً بازسازی شد. ظرفیت از ۱ به ۵ میلیون تن رسید.</div>
