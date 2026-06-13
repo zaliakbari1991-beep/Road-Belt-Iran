@@ -732,7 +732,7 @@
     line-height: 1.5;
   }
   
-  /* استایل‌های دمو پیشنهادات */
+  /* استایل‌های دمو ات */
   .dash { font-family: 'Vazirmatn', sans-serif; direction: rtl; background: #fff; color: #1a1a1a; padding: 0; }
   .header { background: linear-gradient(135deg, #FF6B00 0%, #FF8C35 50%, #FFB347 100%); padding: 28px 32px 24px; position: relative; overflow: hidden; border-radius: 20px; margin-bottom: 20px; }
   .header::before { content: ''; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; background: rgba(255,255,255,0.08); border-radius: 50%; }
@@ -878,7 +878,7 @@
     <button class="nav-btn" onclick="showDash('ahvaz')">مقصد:اهواز</button>
     <button class="nav-btn" onclick="showDash('portcompare')">مقایسه بنادر مهم</button>
     <button class="nav-btn" onclick="showDash('shipping')">کشتیرانی</button>
-    <button class="nav-btn " onclick="showDash('suggestions')">پیشنهادات</button>
+    <button class="nav-btn " onclick="showDash('suggestions')">ات</button>
     <button class="nav-btn" onclick="showDash('investment')">منابع</button>
   </div>
 </div>
@@ -926,7 +926,7 @@
     </iframe>
     <div class="map-footer-note">
       <span><span class="legend-dot" style="background:#E24B4A;"></span> مسیرهای پرریسک (تنگه هرمز)</span>
-      <span><span class="legend-dot" style="background:#1D9E75;"></span> کریدورهای امن پیشنهادی</span>
+      <span><span class="legend-dot" style="background:#1D9E75;"></span> کریدورهای امن ی</span>
       <span><span class="legend-dot" style="background:#185FA5;"></span> بنادر استراتژیک & هاب‌های لجستیکی</span>
       <span><span class="legend-dot" style="background:#F5A623;"></span> نقاط ترانزیت کلیدی (ریلی/فری)</span>
       <span>🔍 <strong>نکته:</strong> نقشه شامل چندین لایه اطلاعاتی، کریدورهای ریلی TITR، مسیرهای دریایی، مناطق آزاد و گلوگاه‌های گمرکی است؛ همچنین اطلاعات به طور متناوب در حال کامل‌تر شدن است.</span>
@@ -1929,15 +1929,15 @@ function switchShippingTab(index) {
 </div>
 
 
-<!-- ========== صفحه ششم: پیشنهادات (ادغام شده با دموی استراتژی تجاری) ========== -->
+<!-- ========== صفحه ششم: پیشنهادات — نسخه کامل بازنویسی شده ========== -->
 <div id="dash-suggestions" class="dash-section">
   <div class="dash">
     <div class="header">
       <div class="header-top">
         <div>
           <div class="header-badge">Strategic Intelligence Dashboard</div>
-          <h1>استراتژی توسعه تجاری — چین و مسیرهای جایگزین</h1>
-          <p>تحلیل فرصت‌ها، ریسک‌ها و اولویت‌بندی اقدامات استراتژیک</p>
+          <h1>استراتژی توسعه تجاری — واکنش به اختلال منطقه‌ای</h1>
+          <p>از سناریوی جنگ تا پیشنهادات اجرایی: فرصت‌ها، مسیرها و راهبردها</p>
         </div>
         <div style="text-align:left; color:rgba(255,255,255,0.7); font-size:11px; line-height:1.8;">
           <div>آخرین بروزرسانی: ژوئن ۲۰۲۵</div>
@@ -1957,248 +1957,165 @@ function switchShippingTab(index) {
     </div>
 
     <div class="nav" id="suggestionsNav">
-      <button class="nav-btn active" onclick="switchSuggestionsTab('overview')">سناریوها</button>
-      <button class="nav-btn" onclick="switchSuggestionsTab('reaction')">عکس‌العمل استراتژیک</button>
-      <button class="nav-btn" onclick="switchSuggestionsTab('barter')">کالا به کالا</button>
-      <button class="nav-btn" onclick="switchSuggestionsTab('china')">دفتر چین</button>
-      <button class="nav-btn" onclick="switchSuggestionsTab('hubs')">هاب‌های جایگزین</button>
-      <button class="nav-btn" onclick="switchSuggestionsTab('corridors')">کریدورهای محاصره</button>
-      <button class="nav-btn" onclick="switchSuggestionsTab('roadmap')">راهبردها</button>
+      <button class="nav-btn active" onclick="switchSuggestionsTab('s-overview')">سناریو چیست؟</button>
+      <button class="nav-btn" onclick="switchSuggestionsTab('s-response')">واکنش استراتژیک</button>
+      <button class="nav-btn" onclick="switchSuggestionsTab('s-barter')">مبادله کالا به کالا</button>
+      <button class="nav-btn" onclick="switchSuggestionsTab('s-china')">دفتر چین</button>
+      <button class="nav-btn" onclick="switchSuggestionsTab('s-altdubai')">جایگزین امارات</button>
+      <button class="nav-btn" onclick="switchSuggestionsTab('s-corridors')">کریدورها</button>
+      <button class="nav-btn" onclick="switchSuggestionsTab('s-rahabard')">راهبردها</button>
     </div>
 
     <div class="content">
 
-      <!-- ======= تب ۱: سناریوها ======= -->
-      <div id="suggestions-overview" class="tab-content active">
-        <div class="section-title">خلاصه سناریوهای تحلیلی</div>
+      <!-- ===== TAB 1: سناریو چیست ===== -->
+      <div id="suggestions-s-overview" class="tab-content active">
+        <div class="section-title">خلاصه سناریوی دوم — اختلال منطقه‌ای در زیرساخت‌های صنعتی</div>
 
         <div class="kpi-grid">
           <div class="kpi orange">
-            <div class="kpi-label">سناریوی فعال</div>
-            <div class="kpi-value" style="font-size:15px; color:#FF6B00;">اختلال منطقه‌ای</div>
-            <div class="kpi-sub warn">⬤ در حال اجرا</div>
+            <div class="kpi-label">شدت اختلال</div>
+            <div class="kpi-value" style="font-size:15px; color:#FF6B00;">چند کریدور</div>
+            <div class="kpi-sub warn">⬤ هم‌زمان محدود</div>
           </div>
           <div class="kpi blue">
-            <div class="kpi-label">بازه بازسازی</div>
-            <div class="kpi-value">۱–۳ سال</div>
-            <div class="kpi-sub neutral">⬤ میان‌مدت</div>
+            <div class="kpi-label">سرعت بازسازی</div>
+            <div class="kpi-value">۱-۳ سال</div>
+            <div class="kpi-sub neutral">⬤ کند ارزیابی می‌شود</div>
           </div>
           <div class="kpi green">
-            <div class="kpi-label">اولویت بازار سرمایه</div>
-            <div class="kpi-value" style="font-size:15px; color:#16a34a;">دفاعی + مالی</div>
-            <div class="kpi-sub up">✓ پناهگاه سرمایه</div>
+            <div class="kpi-label">اقتصاد ملی</div>
+            <div class="kpi-value" style="font-size:15px; color:#16a34a;">همچنان فعال</div>
+            <div class="kpi-sub up">✓ شبکه حاکمیتی پایدار</div>
           </div>
           <div class="kpi" style="border-color:#f0ebe5;">
-            <div class="kpi-label">ریسک کلیدی</div>
-            <div class="kpi-value" style="font-size:14px; color:#d97706;">زنجیره تامین</div>
-            <div class="kpi-sub neutral">⬤ اختلال لجستیک</div>
+            <div class="kpi-label">نقش کریدورهای شمالی</div>
+            <div class="kpi-value" style="font-size:14px; color:#d97706;">افزایش می‌یابد</div>
+            <div class="kpi-sub neutral">⬤ بنادر جنوب محدود</div>
           </div>
         </div>
 
         <div class="two-col">
-          <!-- سناریوی دوم - خلاصه -->
-          <div class="card" style="border-top:3px solid #FF6B00;">
-            <div class="card-title"><span class="dot"></span>سناریوی دوم: اختلال منطقه‌ای زیرساخت صنعتی</div>
-            <div style="font-size:12px; color:#444; line-height:1.8; margin-bottom:14px;">
-              چند کریدور صنعتی و لجستیکی کشور به‌طور هم‌زمان با محدودیت عملیاتی مواجه می‌شوند. اقتصاد ملی فعال می‌ماند اما ظرفیت صنعتی افت محسوس دارد. بازگشت به سطح اسمی بین یک تا سه سال زمان می‌برد.
+          <div class="card">
+            <div class="card-title"><span class="dot"></span>تعریف و ماهیت سناریو</div>
+            <div style="font-size:12px; color:#333; line-height:1.9; margin-bottom:14px;">
+              در این سناریو شدت اختلال‌ها از سطح آسیب‌های نقطه‌ای عبور کرده و <strong>چند کریدور صنعتی و لجستیکی کشور به‌طور هم‌زمان</strong> با محدودیت عملیاتی مواجه می‌شوند. اقتصاد ملی همچنان فعال باقی می‌ماند اما بخش قابل توجهی از ظرفیت صنعتی کشور برای یک دوره میان‌مدت با افت محسوس تولید روبه‌رو می‌شود.
             </div>
-
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px;">
-              <div style="padding:10px; background:#fff4ec; border-radius:8px; border-right:3px solid #FF6B00;">
-                <div style="font-size:10px; font-weight:700; color:#FF6B00; margin-bottom:6px;">پیامدهای کلیدی</div>
-                <div style="font-size:10px; color:#555; line-height:1.8;">
-                  ◆ تغییر جغرافیای تولید<br>
-                  ◆ جابه‌جایی مسیرهای تجارت<br>
-                  ◆ افزایش هزینه عملیاتی<br>
-                  ◆ اختلال در زنجیره تامین<br>
-                  ◆ کاهش ظرفیت بنادر جنوبی
-                </div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <div style="padding:10px 12px; background:#fff8f3; border-right:3px solid #FF6B00; border-radius:6px; font-size:11px; color:#444; line-height:1.7;">
+                <strong style="color:#FF6B00;">بنادر جنوبی:</strong> افزایش زمان انتظار کشتی‌ها، کاهش ظرفیت لجستیکی، افزایش هزینه بیمه و حمل دریایی — نه تعطیلی کامل
               </div>
-              <div style="padding:10px; background:#f0f7ff; border-radius:8px; border-right:3px solid #1a7fe4;">
-                <div style="font-size:10px; font-weight:700; color:#1a7fe4; margin-bottom:6px;">تغییر الگوی تجاری</div>
-                <div style="font-size:10px; color:#555; line-height:1.8;">
-                  ◆ رشد کریدورهای شمالی و شرقی<br>
-                  ◆ اهمیت بیشتر آسیای مرکزی<br>
-                  ◆ تقویت مسیر عراق و افغانستان<br>
-                  ◆ فشار بیشتر بر مالیه عمومی<br>
-                  ◆ رشد انتشار اوراق بدهی
-                </div>
+              <div style="padding:10px 12px; background:#eff6ff; border-right:3px solid #1a7fe4; border-radius:6px; font-size:11px; color:#444; line-height:1.7;">
+                <strong style="color:#1a7fe4;">تولید صنعتی:</strong> آسیب به مجتمع‌های پتروشیمی و فولاد، درگیر شدن زنجیره پایین‌دستی، اختلال در انرژی و لجستیک صنایع
               </div>
-            </div>
-
-            <div style="font-size:11px; font-weight:700; color:#333; margin-bottom:8px;">جهت‌گیری بازار سرمایه در دو شاخه تحریمی</div>
-            <div style="overflow-x:auto;">
-              <table style="width:100%; font-size:10px; border-collapse:collapse;">
-                <thead>
-                  <tr style="background:#f5f5f5;">
-                    <th style="padding:6px 8px; text-align:right; border:1px solid #e5e5e5; font-weight:700; color:#333;">حوزه</th>
-                    <th style="padding:6px 8px; text-align:center; border:1px solid #e5e5e5; font-weight:700; color:#e54d4d;">تداوم تحریم</th>
-                    <th style="padding:6px 8px; text-align:center; border:1px solid #e5e5e5; font-weight:700; color:#16a34a;">کاهش تحریم</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td style="padding:5px 8px; border:1px solid #e5e5e5; color:#444;">خدمات میادین نفتی</td>
-                    <td style="padding:5px 8px; border:1px solid #e5e5e5; text-align:center; color:#FF6B00; font-weight:700;">بالا</td>
-                    <td style="padding:5px 8px; border:1px solid #e5e5e5; text-align:center; color:#FF6B00; font-weight:700;">بسیار بالا</td>
-                  </tr>
-                  <tr style="background:#fafafa;">
-                    <td style="padding:5px 8px; border:1px solid #e5e5e5; color:#444;">پروژه‌های انرژی (متوسط)</td>
-                    <td style="padding:5px 8px; border:1px solid #e5e5e5; text-align:center; color:#FF6B00; font-weight:700;">بالا</td>
-                    <td style="padding:5px 8px; border:1px solid #e5e5e5; text-align:center; color:#d97706; font-weight:700;">متوسط</td>
-                  </tr>
-                  <tr>
-                    <td style="padding:5px 8px; border:1px solid #e5e5e5; color:#444;">صنایع دفاعی بازار سرمایه</td>
-                    <td style="padding:5px 8px; border:1px solid #e5e5e5; text-align:center; color:#FF6B00; font-weight:700;">بسیار بالا</td>
-                    <td style="padding:5px 8px; border:1px solid #e5e5e5; text-align:center; color:#FF6B00; font-weight:700;">بالا</td>
-                  </tr>
-                  <tr style="background:#fafafa;">
-                    <td style="padding:5px 8px; border:1px solid #e5e5e5; color:#444;">صندوق‌های طلا</td>
-                    <td style="padding:5px 8px; border:1px solid #e5e5e5; text-align:center; color:#FF6B00; font-weight:700;">بالا</td>
-                    <td style="padding:5px 8px; border:1px solid #e5e5e5; text-align:center; color:#888; font-weight:700;">محدود</td>
-                  </tr>
-                  <tr>
-                    <td style="padding:5px 8px; border:1px solid #e5e5e5; color:#444;">صنایع صادراتی</td>
-                    <td style="padding:5px 8px; border:1px solid #e5e5e5; text-align:center; color:#888; font-weight:700;">محدود</td>
-                    <td style="padding:5px 8px; border:1px solid #e5e5e5; text-align:center; color:#FF6B00; font-weight:700;">بالا</td>
-                  </tr>
-                </tbody>
-              </table>
+              <div style="padding:10px 12px; background:#f0fdf4; border-right:3px solid #16a34a; border-radius:6px; font-size:11px; color:#444; line-height:1.7;">
+                <strong style="color:#16a34a;">تجارت خارجی:</strong> نقش کریدورهای شمالی و شرقی افزایش می‌یابد؛ بازارهای آسیای مرکزی، عراق و افغانستان اهمیت بیشتری پیدا می‌کنند
+              </div>
+              <div style="padding:10px 12px; background:#fffbeb; border-right:3px solid #d97706; border-radius:6px; font-size:11px; color:#444; line-height:1.7;">
+                <strong style="color:#d97706;">مالیه عمومی:</strong> کسری بودجه دولت افزایش قابل توجهی می‌یابد؛ انتشار اوراق بدهی و برداشت از صندوق توسعه ملی
+              </div>
             </div>
           </div>
-
-          <!-- جمع‌بندی راهبردی سناریو -->
-          <div class="card" style="border-top:3px solid #1a7fe4;">
-            <div class="card-title"><span class="dot" style="background:#1a7fe4"></span>چارچوب راهبردی سازمان در این سناریو</div>
-
-            <div style="font-size:12px; color:#444; line-height:1.8; margin-bottom:14px;">
-              مسیر راهبردی سازمان بر مهار دو وضعیت متضاد اما هم‌زمان استوار است: کاهش توان عملیاتی صنایع بزرگ از یک سو، و گشایش فرصت‌های تازه در بازسازی و خدمات انرژی از سوی دیگر.
-            </div>
-
-            <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:14px;">
-              <div style="padding:10px 12px; background:#fff4ec; border-radius:8px; border-right:3px solid #e54d4d;">
-                <div style="font-size:10px; font-weight:700; color:#e54d4d; margin-bottom:4px;">شاخه تداوم تحریم</div>
-                <div style="font-size:11px; color:#555; line-height:1.7;">تمرکز بر نگهداشت زیرساخت انرژی، مبادلات منطقه‌ای و پروژه‌های میان‌برد با دوره بازگشت کوتاه</div>
+          <div class="card">
+            <div class="card-title"><span class="dot" style="background:#1a7fe4"></span>جابه‌جایی سرمایه در بازار</div>
+            <div style="font-size:11px; color:#555; margin-bottom:12px; line-height:1.7;">شکاف عملکردی میان صنایع به شکل محسوسی افزایش می‌یابد. سرمایه به سمت صنایعی حرکت می‌کند که وابستگی کمتری به زیرساخت‌های آسیب‌پذیر دارند.</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px;">
+              <div style="padding:10px; background:#f0fdf4; border-radius:8px;">
+                <div style="font-size:10px; font-weight:700; color:#16a34a; margin-bottom:6px;">✓ پایدار / رشد</div>
+                <div style="font-size:10px; color:#444; line-height:1.8;">مواد غذایی<br>دارو<br>خدمات مالی<br>فناوری اطلاعات داخلی<br>صندوق‌های طلا</div>
               </div>
-              <div style="padding:10px 12px; background:#f0fdf4; border-radius:8px; border-right:3px solid #16a34a;">
-                <div style="font-size:10px; font-weight:700; color:#16a34a; margin-bottom:4px;">شاخه کاهش تحریم</div>
-                <div style="font-size:11px; color:#555; line-height:1.7;">ورود به طرح‌های بزرگ توسعه انرژی، نوسازی زیرساخت و احیای صنایع صادرات‌محور</div>
+              <div style="padding:10px; background:#fef2f2; border-radius:8px;">
+                <div style="font-size:10px; font-weight:700; color:#e54d4d; margin-bottom:6px;">✗ تحت فشار</div>
+                <div style="font-size:10px; color:#444; line-height:1.8;">فولاد<br>پتروشیمی (جنوب)<br>سیمان<br>خودروسازان بزرگ<br>پالایشگاه‌ها</div>
               </div>
             </div>
-
-            <div style="font-size:11px; font-weight:700; color:#333; margin-bottom:8px;">پیامدهای مستقیم برای استراتژی تجاری</div>
-            <div style="display:flex; flex-direction:column; gap:6px;">
-              <div style="display:flex; align-items:flex-start; gap:8px; padding:8px 10px; background:#fafafa; border-radius:8px;">
-                <div style="width:20px; height:20px; background:#FF6B00; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; color:#fff; font-weight:700; flex-shrink:0;">۱</div>
-                <div style="font-size:11px; color:#444; line-height:1.6;">محدودیت انتقال پول نقد → نیاز به سازوکار مبادله کالا به کالا</div>
-              </div>
-              <div style="display:flex; align-items:flex-start; gap:8px; padding:8px 10px; background:#fafafa; border-radius:8px;">
-                <div style="width:20px; height:20px; background:#1a7fe4; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; color:#fff; font-weight:700; flex-shrink:0;">۲</div>
-                <div style="font-size:11px; color:#444; line-height:1.6;">اختلال بنادر جنوبی → شناسایی هاب‌های جایگزین در عمان، ترکیه، پاکستان</div>
-              </div>
-              <div style="display:flex; align-items:flex-start; gap:8px; padding:8px 10px; background:#fafafa; border-radius:8px;">
-                <div style="width:20px; height:20px; background:#16a34a; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; color:#fff; font-weight:700; flex-shrink:0;">۳</div>
-                <div style="font-size:11px; color:#444; line-height:1.6;">تغییر جغرافیای تجارت → ضرورت حضور فیزیکی در نقاط کلیدی کریدور</div>
-              </div>
-              <div style="display:flex; align-items:flex-start; gap:8px; padding:8px 10px; background:#fafafa; border-radius:8px;">
-                <div style="width:20px; height:20px; background:#d97706; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; color:#fff; font-weight:700; flex-shrink:0;">۴</div>
-                <div style="font-size:11px; color:#444; line-height:1.6;">رشد نیاز به تجهیزات بازسازی → فرصت تجاری در تامین ماشین‌آلات و تجهیزات انرژی</div>
-              </div>
-            </div>
-
-            <div class="footer-note" style="margin-top:12px;">
-              <p><strong>نتیجه‌گیری:</strong> سناریوی دوم عملاً الزام تحول در مدل کسب‌وکار را تسریع می‌کند. تب‌های بعدی هر محور اقدام را به‌طور مستقل بررسی می‌کنند.</p>
+            <div class="footer-note" style="margin-top:0;">
+              <p><strong>نکته کلیدی:</strong> بازار سرمایه با <strong>واگرایی شدید</strong> میان صنایع مواجه می‌شود. صنایع مصرفی، خدماتی و برخی دارایی‌های مالی جایگاه باثبات‌تری پیدا می‌کنند.</p>
             </div>
           </div>
+        </div>
+
+        <div class="section-title">تخصیص کیفی پورتفولیو در دو شاخه تحریمی</div>
+        <div style="overflow-x:auto; margin-bottom:16px;">
+          <table style="width:100%; border-collapse:collapse; font-size:11px;">
+            <thead>
+              <tr style="background:#f8f8f8;">
+                <th style="padding:10px 12px; text-align:right; border:1px solid #e5e7eb; font-weight:700; color:#333; white-space:nowrap;">حوزه</th>
+                <th style="padding:10px 12px; text-align:center; border:1px solid #e5e7eb; font-weight:700; color:#e54d4d; white-space:nowrap;">تداوم تحریم</th>
+                <th style="padding:10px 12px; text-align:center; border:1px solid #e5e7eb; font-weight:700; color:#16a34a; white-space:nowrap;">کاهش تحریم</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td style="padding:8px 12px; border:1px solid #e5e7eb; color:#444;">اکتشاف و تولید</td><td style="padding:8px 12px; border:1px solid #e5e7eb; text-align:center; color:#e54d4d; font-weight:600;">پایین</td><td style="padding:8px 12px; border:1px solid #e5e7eb; text-align:center; color:#d97706; font-weight:600;">متوسط</td></tr>
+              <tr style="background:#fafafa;"><td style="padding:8px 12px; border:1px solid #e5e7eb; color:#444;">خدمات میادین نفتی</td><td style="padding:8px 12px; border:1px solid #e5e7eb; text-align:center; color:#FF6B00; font-weight:600;">بالا</td><td style="padding:8px 12px; border:1px solid #e5e7eb; text-align:center; color:#16a34a; font-weight:700;">بسیار بالا</td></tr>
+              <tr><td style="padding:8px 12px; border:1px solid #e5e7eb; color:#444;">پروژه‌های انرژی (مقیاس متوسط)</td><td style="padding:8px 12px; border:1px solid #e5e7eb; text-align:center; color:#FF6B00; font-weight:600;">بالا</td><td style="padding:8px 12px; border:1px solid #e5e7eb; text-align:center; color:#d97706; font-weight:600;">متوسط</td></tr>
+              <tr style="background:#fafafa;"><td style="padding:8px 12px; border:1px solid #e5e7eb; color:#444;">پروژه‌های انرژی (مقیاس بزرگ)</td><td style="padding:8px 12px; border:1px solid #e5e7eb; text-align:center; color:#e54d4d; font-weight:600;">بسیار محدود</td><td style="padding:8px 12px; border:1px solid #e5e7eb; text-align:center; color:#FF6B00; font-weight:600;">بالا</td></tr>
+              <tr><td style="padding:8px 12px; border:1px solid #e5e7eb; color:#444;">معادن و فلزات (فرآوری محدود)</td><td style="padding:8px 12px; border:1px solid #e5e7eb; text-align:center; color:#d97706; font-weight:600;">متوسط</td><td style="padding:8px 12px; border:1px solid #e5e7eb; text-align:center; color:#d97706; font-weight:600;">متوسط</td></tr>
+              <tr style="background:#fafafa;"><td style="padding:8px 12px; border:1px solid #e5e7eb; color:#444;">معادن (توسعه زنجیره ارزش)</td><td style="padding:8px 12px; border:1px solid #e5e7eb; text-align:center; color:#e54d4d; font-weight:600;">بسیار محدود</td><td style="padding:8px 12px; border:1px solid #e5e7eb; text-align:center; color:#d97706; font-weight:600;">متوسط تا بالا</td></tr>
+              <tr><td style="padding:8px 12px; border:1px solid #e5e7eb; color:#444;">سرمایه‌گذاری در طلا (معدن)</td><td style="padding:8px 12px; border:1px solid #e5e7eb; text-align:center; color:#d97706; font-weight:600;">متوسط تا بالا</td><td style="padding:8px 12px; border:1px solid #e5e7eb; text-align:center; color:#e54d4d; font-weight:600;">محدود</td></tr>
+              <tr style="background:#fafafa;"><td style="padding:8px 12px; border:1px solid #e5e7eb; color:#444;">صندوق‌های طلا</td><td style="padding:8px 12px; border:1px solid #e5e7eb; text-align:center; color:#FF6B00; font-weight:600;">بالا</td><td style="padding:8px 12px; border:1px solid #e5e7eb; text-align:center; color:#e54d4d; font-weight:600;">محدود تا متوسط</td></tr>
+              <tr><td style="padding:8px 12px; border:1px solid #e5e7eb; color:#444;">صندوق‌های درآمد ثابت</td><td style="padding:8px 12px; border:1px solid #e5e7eb; text-align:center; color:#FF6B00; font-weight:600;">بالا</td><td style="padding:8px 12px; border:1px solid #e5e7eb; text-align:center; color:#d97706; font-weight:600;">متوسط</td></tr>
+              <tr style="background:#fafafa;"><td style="padding:8px 12px; border:1px solid #e5e7eb; color:#444;">صندوق‌های نقره و زعفران</td><td style="padding:8px 12px; border:1px solid #e5e7eb; text-align:center; color:#e54d4d; font-weight:600;">محدود</td><td style="padding:8px 12px; border:1px solid #e5e7eb; text-align:center; color:#e54d4d; font-weight:600;">محدود</td></tr>
+              <tr><td style="padding:8px 12px; border:1px solid #e5e7eb; color:#444;">صنایع دفاعی بازار سرمایه</td><td style="padding:8px 12px; border:1px solid #e5e7eb; text-align:center; color:#16a34a; font-weight:700;">بسیار بالا</td><td style="padding:8px 12px; border:1px solid #e5e7eb; text-align:center; color:#FF6B00; font-weight:600;">بالا</td></tr>
+              <tr style="background:#fafafa;"><td style="padding:8px 12px; border:1px solid #e5e7eb; color:#444;">صنایع صادراتی بازار سرمایه</td><td style="padding:8px 12px; border:1px solid #e5e7eb; text-align:center; color:#e54d4d; font-weight:600;">محدود</td><td style="padding:8px 12px; border:1px solid #e5e7eb; text-align:center; color:#FF6B00; font-weight:600;">بالا</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
-      <!-- ======= تب ۲: عکس‌العمل استراتژیک ======= -->
-      <div id="suggestions-reaction" class="tab-content">
-        <div class="section-title">عکس‌العمل استراتژیک سازمان در برابر جنگ</div>
+      <!-- ===== TAB 2: واکنش استراتژیک ===== -->
+      <div id="suggestions-s-response" class="tab-content">
+        <div class="section-title">واکنش استراتژیک سازمان به اختلال — دو مسیر موازی</div>
 
-        <div style="background:linear-gradient(135deg,#fff4ec,#fff); border:1px solid #FFD4A8; border-radius:12px; padding:16px 20px; margin-bottom:20px; display:flex; gap:14px; align-items:flex-start;">
-          <div style="font-size:28px; flex-shrink:0;">⚡</div>
-          <div>
-            <div style="font-size:13px; font-weight:700; color:#FF6B00; margin-bottom:6px;">پیش‌فرض تحلیلی</div>
-            <div style="font-size:12px; color:#555; line-height:1.8;">وقوع جنگ، تصویر محیطی سازمان را به‌طور بنیادی تغییر داد. ادامه مسیر قبلی بدون بازطراحی، به معنای پذیرش ریسک‌هایی است که در شرایط عادی وجود نداشتند. عکس‌العمل سازمانی باید چهار بعد عملیاتی، لجستیکی، مالی و اطلاعاتی را هم‌زمان پوشش دهد.</div>
-          </div>
-        </div>
-
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
           <div class="card" style="border-top:3px solid #e54d4d;">
-            <div class="card-title"><span class="dot" style="background:#e54d4d"></span>وضعیت پیش از جنگ</div>
-            <div style="display:flex; flex-direction:column; gap:8px;">
-              <div style="padding:9px 12px; background:#fafafa; border-radius:8px; font-size:11px; color:#555; line-height:1.7; border-right:3px solid #ccc;">
-                <strong style="color:#333;">مسیر تجاری:</strong> وابستگی عمده به دبی و بنادر جنوبی
-              </div>
-              <div style="padding:9px 12px; background:#fafafa; border-radius:8px; font-size:11px; color:#555; line-height:1.7; border-right:3px solid #ccc;">
-                <strong style="color:#333;">انتقال مالی:</strong> کانال‌های مستقیم‌تر با واسطه‌های منطقه‌ای
-              </div>
-              <div style="padding:9px 12px; background:#fafafa; border-radius:8px; font-size:11px; color:#555; line-height:1.7; border-right:3px solid #ccc;">
-                <strong style="color:#333;">تامین کالا:</strong> فورواردر خارجی، بدون حضور فیزیکی در چین
-              </div>
-              <div style="padding:9px 12px; background:#fafafa; border-radius:8px; font-size:11px; color:#555; line-height:1.7; border-right:3px solid #ccc;">
-                <strong style="color:#333;">ریسک:</strong> متمرکز، قابل مدیریت با ابزارهای موجود
-              </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div class="card-title" style="margin:0;"><span class="dot" style="background:#e54d4d"></span>شاخه: تداوم تحریم‌ها</div>
+              <span style="font-size:10px; background:#e54d4d1a; color:#e54d4d; padding:3px 10px; border-radius:10px; font-weight:700;">مسیر الف</span>
+            </div>
+            <div style="font-size:12px; color:#555; line-height:1.8; margin-bottom:12px;">در این حالت سازمان باید بر فعالیت‌هایی تمرکز کند که با <strong>نگهداشت و نوسازی زیرساخت‌های انرژی، مبادلات منطقه‌ای و پروژه‌های میان‌برد با دوره بازگشت کوتاه</strong> گره خورده‌اند.</div>
+            <div style="display:flex; flex-direction:column; gap:7px;">
+              <div style="padding:8px 12px; background:#fef2f2; border-radius:6px; font-size:11px; color:#444; line-height:1.7;"><strong style="color:#e54d4d;">اکتشاف و تولید:</strong> تمرکز بر تثبیت تولید موجود — شروع پروژه‌های تازه توجیه ندارد</div>
+              <div style="padding:8px 12px; background:#fef2f2; border-radius:6px; font-size:11px; color:#444; line-height:1.7;"><strong style="color:#e54d4d;">خدمات میادین نفتی:</strong> قطب غالب فعالیت — تقاضا به سمت پیمانکاران داخلی؛ فرسودگی تجهیزات ریسک اصلی</div>
+              <div style="padding:8px 12px; background:#fef2f2; border-radius:6px; font-size:11px; color:#444; line-height:1.7;"><strong style="color:#e54d4d;">انرژی:</strong> طرح‌های کم‌ظرفیت و سریع‌الاجرا: نیروگاه‌های خورشیدی، واحدهای گازی کوچک، بهینه‌سازی مصرف</div>
+              <div style="padding:8px 12px; background:#fef2f2; border-radius:6px; font-size:11px; color:#444; line-height:1.7;"><strong style="color:#e54d4d;">معادن:</strong> استخراج با حداقل فرآوری — دشواری انتقال به بنادر ریسک اصلی</div>
+              <div style="padding:8px 12px; background:#fef2f2; border-radius:6px; font-size:11px; color:#444; line-height:1.7;"><strong style="color:#e54d4d;">پورتفولیو بازار سرمایه:</strong> تمرکز بر غذا، دارو، خدمات مالی، فناوری داخلی + صندوق‌های طلا و درآمد ثابت</div>
             </div>
           </div>
           <div class="card" style="border-top:3px solid #16a34a;">
-            <div class="card-title"><span class="dot" style="background:#16a34a"></span>الزامات پس از جنگ</div>
-            <div style="display:flex; flex-direction:column; gap:8px;">
-              <div style="padding:9px 12px; background:#f0fdf4; border-radius:8px; font-size:11px; color:#555; line-height:1.7; border-right:3px solid #16a34a;">
-                <strong style="color:#333;">مسیر تجاری:</strong> تنوع‌بخشی به هاب‌ها — عمان، ترکیه، پاکستان
-              </div>
-              <div style="padding:9px 12px; background:#f0fdf4; border-radius:8px; font-size:11px; color:#555; line-height:1.7; border-right:3px solid #16a34a;">
-                <strong style="color:#333;">انتقال مالی:</strong> جایگزینی نقدینگی با کالا و تجهیزات
-              </div>
-              <div style="padding:9px 12px; background:#f0fdf4; border-radius:8px; font-size:11px; color:#555; line-height:1.7; border-right:3px solid #16a34a;">
-                <strong style="color:#333;">تامین کالا:</strong> دفتر چین، داخلی‌سازی فورواردینگ
-              </div>
-              <div style="padding:9px 12px; background:#f0fdf4; border-radius:8px; font-size:11px; color:#555; line-height:1.7; border-right:3px solid #16a34a;">
-                <strong style="color:#333;">ریسک:</strong> توزیع‌شده، پوشش چندلایه با کریدورهای موازی
-              </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div class="card-title" style="margin:0;"><span class="dot" style="background:#16a34a"></span>شاخه: کاهش نسبی تحریم‌ها</div>
+              <span style="font-size:10px; background:#16a34a1a; color:#16a34a; padding:3px 10px; border-radius:10px; font-weight:700;">مسیر ب</span>
+            </div>
+            <div style="font-size:12px; color:#555; line-height:1.8; margin-bottom:12px;">در این حالت سازمان باید ظرفیت ورود به <strong>طرح‌های بزرگ توسعه انرژی، نوسازی زیرساخت و احیای صنایع صادرات‌محور</strong> را در اختیار داشته باشد.</div>
+            <div style="display:flex; flex-direction:column; gap:7px;">
+              <div style="padding:8px 12px; background:#f0fdf4; border-radius:6px; font-size:11px; color:#444; line-height:1.7;"><strong style="color:#16a34a;">اکتشاف و تولید:</strong> گزینه‌های توسعه میادین بررسی موردبه‌مورد — مشارکت شرکت‌های خارجی</div>
+              <div style="padding:8px 12px; background:#f0fdf4; border-radius:6px; font-size:11px; color:#444; line-height:1.7;"><strong style="color:#16a34a;">خدمات میادین نفتی:</strong> بسیار بالا — نقش شریک داخلی در طرح‌های توسعه‌ای؛ رقبای خارجی فضای رقابتی‌تر می‌آورند</div>
+              <div style="padding:8px 12px; background:#f0fdf4; border-radius:6px; font-size:11px; color:#444; line-height:1.7;"><strong style="color:#16a34a;">انرژی:</strong> پروژه‌های بزرگ زنجیره گاز، تولید برق در مقیاس بالا، زیرساخت‌های انتقال</div>
+              <div style="padding:8px 12px; background:#f0fdf4; border-radius:6px; font-size:11px; color:#444; line-height:1.7;"><strong style="color:#16a34a;">معادن:</strong> تکمیل زنجیره ارزش، تولید محصولات پیشرفته‌تر — نیاز به سرمایه و فناوری</div>
+              <div style="padding:8px 12px; background:#f0fdf4; border-radius:6px; font-size:11px; color:#444; line-height:1.7;"><strong style="color:#16a34a;">پورتفولیو بازار سرمایه:</strong> افزایش تدریجی سهم پتروشیمی، فلزات، انرژی صادراتی با افق بلندمدت</div>
             </div>
           </div>
         </div>
 
         <div class="card">
-          <div class="card-title"><span class="dot"></span>ماتریس چهار بعد عکس‌العمل سازمانی</div>
-          <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:12px;">
-            <div style="padding:14px; background:#fff4ec; border-radius:10px; border-top:3px solid #FF6B00; text-align:center;">
-              <div style="font-size:20px; margin-bottom:6px;">🏭</div>
-              <div style="font-size:11px; font-weight:700; color:#FF6B00; margin-bottom:8px;">عملیاتی</div>
-              <div style="font-size:10px; color:#555; line-height:1.7; text-align:right;">تنوع‌بخشی به مسیرهای تامین، کاهش وابستگی به یک کریدور، ایجاد ذخایر استراتژیک</div>
-            </div>
-            <div style="padding:14px; background:#f0f7ff; border-radius:10px; border-top:3px solid #1a7fe4; text-align:center;">
-              <div style="font-size:20px; margin-bottom:6px;">🚢</div>
-              <div style="font-size:11px; font-weight:700; color:#1a7fe4; margin-bottom:8px;">لجستیکی</div>
-              <div style="font-size:10px; color:#555; line-height:1.7; text-align:right;">شناسایی هاب‌های جایگزین، داخلی‌سازی فورواردینگ، حضور در ابتدای کریدور</div>
-            </div>
-            <div style="padding:14px; background:#f0fdf4; border-radius:10px; border-top:3px solid #16a34a; text-align:center;">
-              <div style="font-size:20px; margin-bottom:6px;">💱</div>
-              <div style="font-size:11px; font-weight:700; color:#16a34a; margin-bottom:8px;">مالی</div>
-              <div style="font-size:10px; color:#555; line-height:1.7; text-align:right;">جایگزینی نقدینگی با تجهیزات، مبادله کالا به کالا، کاهش وابستگی به سیستم بانکی</div>
-            </div>
-            <div style="padding:14px; background:#fffbeb; border-radius:10px; border-top:3px solid #d97706; text-align:center;">
-              <div style="font-size:20px; margin-bottom:6px;">🔍</div>
-              <div style="font-size:11px; font-weight:700; color:#d97706; margin-bottom:8px;">اطلاعاتی</div>
-              <div style="font-size:10px; color:#555; line-height:1.7; text-align:right;">دفتر چین برای رصد بازار، شناسایی فرصت‌های جدید، ارزیابی مستمر مسیرها</div>
-            </div>
+          <div class="card-title"><span class="dot"></span>جمع‌بندی راهبردی — دو وضعیت متضاد اما هم‌زمان</div>
+          <div style="font-size:12px; color:#444; line-height:1.9;">
+            بررسی سناریوی دوم نشان می‌دهد که مسیر راهبردی سازمان بر مهار <strong>دو وضعیت متضاد اما هم‌زمان</strong> استوار است؛ از یک طرف کاهش توان عملیاتی در برخی صنایع بزرگ و از طرف دیگر گشایش فرصت‌های تازه در عرصه بازسازی و خدمات مرتبط با انرژی. توان فنی بالا، استانداردهای عملیاتی منسجم و ظرفیت حرفه‌ای در مدیریت پروژه، در <strong>هر دو مسیر</strong> — چه تحریم ادامه یابد و چه کاهش پیدا کند — به عنوان عناصر حیاتی موفقیت مطرح هستند.
           </div>
         </div>
       </div>
 
-      <!-- ======= تب ۳: کالا به کالا ======= -->
-      <div id="suggestions-barter" class="tab-content">
-        <div class="section-title">سازوکار مبادله کالا به کالا — راه‌حل محدودیت بانکی</div>
+      <!-- ===== TAB 3: مبادله کالا به کالا ===== -->
+      <div id="suggestions-s-barter" class="tab-content">
+        <div class="section-title">محدودیت انتقال پول — راه‌حل مبادله کالا به کالا</div>
 
         <div class="card" style="margin-bottom:16px; background:#fff8f3; border-color:#FFD4A8;">
           <div style="display:flex; gap:12px; align-items:flex-start;">
-            <div style="font-size:24px; flex-shrink:0;">💡</div>
+            <div style="font-size:28px; flex-shrink:0;">💡</div>
             <div>
-              <div style="font-size:13px; font-weight:700; color:#FF6B00; margin-bottom:6px;">چرا کالا به‌جای پول نقد؟</div>
-              <div style="font-size:12px; color:#555; line-height:1.7;">یکی از مستقیم‌ترین پیامدهای جنگ، تشدید محدودیت‌های سیستم بانکی بین‌المللی است. پرداخت از طریق <strong style="color:#FF6B00;">تجهیزات و کالاهای ارزشمند</strong> نه‌تنها این دیوار را دور می‌زند، بلکه به ایجاد روابط تجاری ساختاری با طرف مقابل منجر می‌شود. تجهیزات صنعتی، نهاده‌های کشاورزی و ماشین‌آلات نقش ارز را بازی می‌کنند.</div>
+              <div style="font-size:13px; font-weight:700; color:#FF6B00; margin-bottom:6px;">چرا مبادله کالا به کالا؟</div>
+              <div style="font-size:12px; color:#555; line-height:1.8;">یکی از نتایج اختلال منطقه‌ای و ادامه تحریم‌ها این است که <strong style="color:#FF6B00;">انتقال پول به داخل ایران دشوار یا غیرممکن می‌شود.</strong> راه‌حل عمومی در این شرایط، مبادله کالا به کالا (Goods-for-Goods / Barter) است. تجهیزات صنعتی، کالاهای اساسی و ماشین‌آلات می‌توانند نقش ارز را بازی کنند و این یک <strong>مزیت رقابتی واقعی</strong> برای سازمانی است که شبکه تامین از چین دارد.</div>
             </div>
           </div>
         </div>
@@ -2207,86 +2124,65 @@ function switchShippingTab(index) {
           <div class="invest-card">
             <div class="inv-sector sec-infra">زیرساخت</div>
             <div class="inv-title">تجهیزات صنعتی و ماشین‌آلات</div>
-            <div class="inv-desc">تامین ماشین‌آلات برای پروژه‌های صنعتی کشورهای مسیر کریدور. سودآوری دوگانه: از فروش تجهیزات و از اعتبار تجاری حاصل</div>
+            <div class="inv-desc">تامین ماشین‌آلات برای پروژه‌های صنعتی کشورهای مسیر کریدور. سودآوری دوگانه: از فروش تجهیزات و از کردیت تجاری. بازسازی زیرساخت‌های آسیب‌دیده تقاضای این بخش را تقویت می‌کند.</div>
             <div class="inv-meta">
               <span class="inv-tag">ریسک متوسط</span>
               <span class="inv-tag">بازده بالا</span>
-              <span class="inv-tag">اولویت اول</span>
+              <span class="inv-tag">چین‌محور</span>
             </div>
           </div>
           <div class="invest-card">
             <div class="inv-sector sec-agri">کشاورزی</div>
             <div class="inv-title">نهاده و تجهیزات کشاورزی</div>
-            <div class="inv-desc">کود، بذر، سموم، ماشین‌آلات کشاورزی. تقاضای پایدار در کشورهای مسیر، امکان سرمایه‌گذاری در قالب goods-for-goods</div>
+            <div class="inv-desc">کود، بذر، سموم، ماشین‌آلات کشاورزی. تقاضای پایدار در کشورهای مسیر. امکان سرمایه‌گذاری در قالب goods-for-goods. ترکیه بهترین هاب برای این بخش است. همبستگی کمتر با چرخه صنعتی آسیب‌دیده.</div>
             <div class="inv-meta">
               <span class="inv-tag">ریسک پایین</span>
               <span class="inv-tag">تقاضای پایدار</span>
-              <span class="inv-tag">ترکیه-محور</span>
+              <span class="inv-tag">ترکیه-مناسب</span>
             </div>
           </div>
           <div class="invest-card">
             <div class="inv-sector sec-energy">انرژی</div>
             <div class="inv-title">تجهیزات انرژی و برق</div>
-            <div class="inv-desc">پنل خورشیدی، ژنراتور، تجهیزات برق‌رسانی. تقاضای بالا در پاکستان، عمان و آفریقا. همراستا با توسعه CPEC</div>
+            <div class="inv-desc">پنل خورشیدی، ژنراتور، تجهیزات برق‌رسانی. در سناریوی اختلال منطقه‌ای تقاضا برای این دسته بسیار بالا می‌رود. تقاضای بالا در پاکستان، عمان و افریقا. همراستا با توسعه CPEC.</div>
             <div class="inv-meta">
               <span class="inv-tag">رشد بالا</span>
-              <span class="inv-tag">چین-محور</span>
+              <span class="inv-tag">چین‌محور</span>
               <span class="inv-tag">ریسک متوسط</span>
             </div>
           </div>
         </div>
 
-        <div class="two-col">
-          <div class="card">
-            <div class="card-title"><span class="dot" style="background:#1a7fe4"></span>مکانیزم اجرای مبادله</div>
-            <div style="display:flex; flex-direction:column; gap:8px;">
-              <div style="display:flex; gap:10px; align-items:flex-start; padding:10px; background:#fafafa; border-radius:8px;">
-                <div style="width:24px; height:24px; background:#FF6B00; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; color:#fff; font-weight:700; flex-shrink:0;">۱</div>
-                <div style="font-size:11px; color:#444; line-height:1.6;"><strong>شناسایی نیاز طرف مقابل</strong> — تجهیزات صنعتی، انرژی یا کشاورزی مورد نیاز کشور مقصد</div>
-              </div>
-              <div style="display:flex; gap:10px; align-items:flex-start; padding:10px; background:#fafafa; border-radius:8px;">
-                <div style="width:24px; height:24px; background:#1a7fe4; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; color:#fff; font-weight:700; flex-shrink:0;">۲</div>
-                <div style="font-size:11px; color:#444; line-height:1.6;"><strong>تامین از چین</strong> — خرید مستقیم از تولیدکننده چینی از طریق دفتر پیشنهادی</div>
-              </div>
-              <div style="display:flex; gap:10px; align-items:flex-start; padding:10px; background:#fafafa; border-radius:8px;">
-                <div style="width:24px; height:24px; background:#16a34a; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; color:#fff; font-weight:700; flex-shrink:0;">۳</div>
-                <div style="font-size:11px; color:#444; line-height:1.6;"><strong>تحویل در هاب</strong> — تحویل در صلاله یا هاب انتخابی، تسویه با کالای معادل</div>
-              </div>
-              <div style="display:flex; gap:10px; align-items:flex-start; padding:10px; background:#fafafa; border-radius:8px;">
-                <div style="width:24px; height:24px; background:#d97706; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; color:#fff; font-weight:700; flex-shrink:0;">۴</div>
-                <div style="font-size:11px; color:#444; line-height:1.6;"><strong>ورود به ایران</strong> — کالای تسویه از مسیر کریدور مطمئن وارد می‌شود</div>
-              </div>
+        <div class="card" style="margin-top:16px;">
+          <div class="card-title"><span class="dot" style="background:#1a7fe4"></span>پیش‌نیازهای اجرایی مبادله کالا به کالا</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;">
+            <div style="padding:12px; background:#fafafa; border-radius:10px; border-right:3px solid #FF6B00;">
+              <div style="font-size:11px; font-weight:700; color:#FF6B00; margin-bottom:8px;">مدارک حقوقی</div>
+              <div style="font-size:10px; color:#555; line-height:1.8;">◆ اساسنامه شرکت<br>◆ سوابق تجاری<br>◆ گواهی‌نامه‌های صادرات<br>◆ رتبه‌بندی اعتباری</div>
             </div>
-          </div>
-
-          <div class="card">
-            <div class="card-title"><span class="dot" style="background:#d97706"></span>پیش‌نیازهای اجرایی</div>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-              <div style="padding:10px; background:#fafafa; border-radius:8px; border-right:3px solid #FF6B00;">
-                <div style="font-size:10px; font-weight:700; color:#FF6B00; margin-bottom:6px;">حقوقی</div>
-                <div style="font-size:10px; color:#555; line-height:1.8;">◆ اساسنامه شرکت<br>◆ سوابق تجاری<br>◆ گواهی صادرات<br>◆ رتبه اعتباری</div>
-              </div>
-              <div style="padding:10px; background:#fafafa; border-radius:8px; border-right:3px solid #1a7fe4;">
-                <div style="font-size:10px; font-weight:700; color:#1a7fe4; margin-bottom:6px;">عملیاتی</div>
-                <div style="font-size:10px; color:#555; line-height:1.8;">◆ شبکه توزیع محلی<br>◆ شریک محلی معتبر<br>◆ تیم حقوقی مسلط<br>◆ بیمه بین‌المللی</div>
-              </div>
+            <div style="padding:12px; background:#fafafa; border-radius:10px; border-right:3px solid #1a7fe4;">
+              <div style="font-size:11px; font-weight:700; color:#1a7fe4; margin-bottom:8px;">اهداف قابل دفاع</div>
+              <div style="font-size:10px; color:#555; line-height:1.8;">◆ حداقل ۳ هدف مشخص<br>◆ ROI اولیه برآورد شده<br>◆ Timeline واقعی<br>◆ Exit strategy</div>
             </div>
-            <div class="footer-note" style="margin-top:12px;">
-              <p><strong>نکته کلیدی:</strong> دفتر چین پیشنهادی مهم‌ترین پیش‌نیاز اجرای این مکانیزم است — هم در شناسایی تجهیزات و هم در مذاکره مستقیم با تامین‌کنندگان.</p>
+            <div style="padding:12px; background:#fafafa; border-radius:10px; border-right:3px solid #16a34a;">
+              <div style="font-size:11px; font-weight:700; color:#16a34a; margin-bottom:8px;">پیش‌نیاز عملیاتی</div>
+              <div style="font-size:10px; color:#555; line-height:1.8;">◆ شبکه توزیع محلی<br>◆ شریک محلی معتبر<br>◆ تیم حقوقی مسلط<br>◆ بیمه تجاری بین‌المللی</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ======= تب ۴: دفتر چین ======= -->
-      <div id="suggestions-china" class="tab-content">
-        <div class="section-title">دفتر نمایندگی چین — ابتدای کریدور و بزرگ‌ترین واردکننده</div>
+      <!-- ===== TAB 4: دفتر چین ===== -->
+      <div id="suggestions-s-china" class="tab-content">
+        <div class="section-title">دفتر نمایندگی چین — اولین و ضروری‌ترین اقدام</div>
 
-        <div style="background:linear-gradient(135deg,#f0f7ff,#fff); border:1px solid #c3d9f7; border-radius:12px; padding:16px 20px; margin-bottom:20px; display:flex; gap:14px; align-items:flex-start;">
-          <div style="font-size:28px; flex-shrink:0;">🇨🇳</div>
-          <div>
-            <div style="font-size:13px; font-weight:700; color:#1a7fe4; margin-bottom:6px;">چرا چین اولویت اول است؟</div>
-            <div style="font-size:12px; color:#555; line-height:1.8;">چین هم بزرگ‌ترین واردکننده به ایران است و هم ابتدای کریدور تجاری. بدون حضور فیزیکی در این نقطه، نه شناسایی فرصت ممکن است، نه کنترل زنجیره تامین، نه اجرای مبادله کالا به کالا. دفتر کوچک چین، مادر همه تحولات بعدی است.</div>
+        <div class="card" style="margin-bottom:16px; background:#eff6ff; border-color:#bfdbfe;">
+          <div style="display:flex; gap:12px; align-items:flex-start;">
+            <div style="font-size:28px; flex-shrink:0;">🇨🇳</div>
+            <div>
+              <div style="font-size:13px; font-weight:700; color:#1a7fe4; margin-bottom:6px;">چرا دفتر چین اجتناب‌ناپذیر است؟</div>
+              <div style="font-size:12px; color:#555; line-height:1.8;">برای شناسایی فرصت‌های سرمایه‌گذاری — چه در داخل ایران، چه خارج و چه در مسیر کریدور — <strong style="color:#1a7fe4;">حضور فیزیکی در چین الزامی است.</strong> چین هم بزرگ‌ترین وارد کننده به ایران است و هم ابتدای مسیر کریدور. بدون دفتر چین، نه مبادله کالا به کالا کارآمد است، نه فورواردینگ داخلی، نه اطلاعات بازار به‌روز.</div>
+            </div>
           </div>
         </div>
 
@@ -2294,17 +2190,17 @@ function switchShippingTab(index) {
           <div class="china-card" style="border-top:3px solid #FF6B00;">
             <div class="china-icon">🏢</div>
             <div class="china-title">ساختار سبک</div>
-            <div class="china-desc">حداکثر ۲–۳ نفر، دفتر کوچک در شنزن یا یی‌وو، بدون هزینه‌های ثابت سنگین</div>
+            <div class="china-desc">حداکثر ۲-۳ نفر، دفتر کوچک در شنزن یا یی‌وو، بدون هزینه‌های ثابت سنگین. ۶ تا ۱۲ ماه برای راه‌اندازی</div>
           </div>
           <div class="china-card" style="border-top:3px solid #1a7fe4;">
             <div class="china-icon">🔍</div>
             <div class="china-title">نقش اطلاعاتی</div>
-            <div class="china-desc">شناسایی فرصت‌های صادراتی و وارداتی، رصد رقبا و قیمت‌ها، گزارش بازار منظم</div>
+            <div class="china-desc">شناسایی فرصت‌های صادراتی و وارداتی، رصد رقبا و قیمت‌ها، گزارش بازار منظم، تحقیقات بازار برای توسعه تجارت</div>
           </div>
           <div class="china-card" style="border-top:3px solid #16a34a;">
             <div class="china-icon">🤝</div>
             <div class="china-title">نقش تریدر</div>
-            <div class="china-desc">مذاکره مستقیم با تامین‌کنندگان، حذف واسطه، انجام فورواردینگ برای پروژه‌های شرکت</div>
+            <div class="china-desc">مذاکره مستقیم با تامین‌کنندگان، حذف واسطه، انجام فورواردینگ برای پروژه‌های شرکت، کاهش ۲۰-۳۵٪ هزینه لجستیک</div>
           </div>
         </div>
 
@@ -2342,7 +2238,6 @@ function switchShippingTab(index) {
               </div>
             </div>
           </div>
-
           <div class="card">
             <div class="card-title"><span class="dot" style="background:#d97706"></span>ریسک‌ها و ملاحظات</div>
             <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
@@ -2364,12 +2259,570 @@ function switchShippingTab(index) {
               <div class="risk-row">
                 <div class="risk-level" style="background:#16a34a;"></div>
                 <div class="risk-text">هزینه‌های عملیاتی دفتر کوچک — قابل کنترل</div>
-                <div class="risk-score" sty</p>
+                <div class="risk-score" style="color:#16a34a;">پایین</div>
+              </div>
+              <div class="risk-row">
+                <div class="risk-level" style="background:#16a34a;"></div>
+                <div class="risk-text">زمان‌بندی اجرا — ۶ تا ۱۲ ماه برای راه‌اندازی</div>
+                <div class="risk-score" style="color:#16a34a;">قابل مدیریت</div>
+              </div>
+            </div>
+            <div class="footer-note" style="margin-top:0;">
+              <p><strong>پیشنهاد:</strong> شهرهای ترجیحی: <strong>یی‌وو</strong> (کالاهای عمومی) یا <strong>شنزن/گوانگژو</strong> (تجهیزات صنعتی)</p>
+            </div>
+          </div>
         </div>
       </div>
+
+      <!-- ===== TAB 5: جایگزین امارات ===== -->
+      <div id="suggestions-s-altdubai" class="tab-content">
+        <div class="section-title">جایگزین امارات — انتخاب هاب تجاری مکمل</div>
+
+        <div class="card" style="margin-bottom:16px; background:#fef9ec; border-color:#fcd34d;">
+          <div style="display:flex; gap:12px; align-items:flex-start;">
+            <div style="font-size:28px; flex-shrink:0;">⚠️</div>
+            <div>
+              <div style="font-size:13px; font-weight:700; color:#d97706; margin-bottom:6px;">وضعیت امارات</div>
+              <div style="font-size:12px; color:#555; line-height:1.8;">به دلیل اختلال منطقه‌ای و تغییرات در سیاست‌های تجاری، احتمال دارد که همکاری با امارات (دبی/جبل علی) <strong>محدود یا غیرممکن شود.</strong> نیاز است یک دفتر مکمل امارات شناسایی شود. گزینه‌های اصلی: عمان (صلاله و مسقط)، ترکیه، عراق، پاکستان. انتخاب باید بر اساس <strong>صنعت هدف</strong> انجام شود.</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px;">
+          <div class="card" style="border-top:3px solid #FF6B00;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div class="card-title" style="margin:0;"><span class="dot"></span>صلاله — عمان 🇴🇲</div>
+              <span style="font-size:10px; background:#FF6B001a; color:#FF6B00; padding:3px 10px; border-radius:10px; font-weight:700;">RECOMMENDED</span>
+            </div>
+            <div style="font-size:12px; color:#333; line-height:1.8; margin-bottom:12px;">
+              بندر صلاله با مدیریت چینی (Hutchison Ports) بهترین گزینه برای شرکت‌هایی است که عمده تامین‌شان از چین است. روابط کاری با طرف چینی به‌مراتب ساده‌تر خواهد بود.
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px;">
+              <div style="padding:8px; background:#16a34a1a; border-radius:8px;">
+                <div style="font-size:10px; font-weight:700; color:#16a34a; margin-bottom:4px;">✓ مزایای کلیدی</div>
+                <div style="font-size:10px; color:#444; line-height:1.6;">مدیریت چینی<br>Free Zone فعال<br>ترانزیت ایران<br>رشد ظرفیت سریع</div>
+              </div>
+              <div style="padding:8px; background:#e54d4d1a; border-radius:8px;">
+                <div style="font-size:10px; font-weight:700; color:#e54d4d; margin-bottom:4px;">✗ محدودیت‌ها</div>
+                <div style="font-size:10px; color:#444; line-height:1.6;">ظرفیت کمتر از جبل علی<br>خدمات مالی محدودتر<br>فاصله از دبی</div>
+              </div>
+            </div>
+            <div style="padding:8px 12px; background:#fafafa; border-radius:8px; font-size:11px; color:#555;">
+              <strong style="color:#FF6B00;">نتیجه:</strong> برای تجهیزات صنعتی و واردات از چین — انتخاب اول
+            </div>
+          </div>
+
+          <div class="card" style="border-top:3px solid #1a7fe4;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div class="card-title" style="margin:0;"><span class="dot" style="background:#1a7fe4"></span>مسقط — عمان 🇴🇲</div>
+              <span style="font-size:10px; background:#1a7fe41a; color:#1a7fe4; padding:3px 10px; border-radius:10px; font-weight:700;">بررسی</span>
+            </div>
+            <div style="font-size:12px; color:#333; line-height:1.8; margin-bottom:12px;">
+              پایتخت عمان — مرکز خدمات مالی و حقوقی. برای ثبت شرکت، حساب‌های بانکی بین‌المللی و قراردادهای تجاری گزینه مکمل صلاله است.
+            </div>
+            <div style="padding:10px; background:#fafafa; border-radius:8px; font-size:11px; color:#444; line-height:1.7;">
+              ◆ خدمات مالی و بانکی بهتر از صلاله<br>
+              ◆ ثبت شرکت در منطقه آزاد عمان<br>
+              ◆ ارتباط با نهادهای دولتی عمان<br>
+              ◆ تکمیل‌کننده صلاله (نه جایگزین)
+            </div>
+          </div>
+
+          <div class="card" style="border-top:3px solid #16a34a;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div class="card-title" style="margin:0;"><span class="dot" style="background:#16a34a"></span>ترکیه — استانبول 🇹🇷</div>
+              <span style="font-size:10px; background:#16a34a1a; color:#16a34a; padding:3px 10px; border-radius:10px; font-weight:700;">کشاورزی</span>
+            </div>
+            <div style="font-size:12px; color:#333; line-height:1.8; margin-bottom:12px;">
+              برای بخش کشاورزی بهترین گزینه است. دسترسی به بازارهای اروپایی و خاورمیانه، روابط تجاری قوی با ایران. برای تجهیزات صنعتی توصیه نمی‌شود.
+            </div>
+            <div style="padding:10px; background:#16a34a0d; border-radius:8px; font-size:11px; color:#444; line-height:1.7;">
+              ◆ صادرات کشاورزی به اروپا از طریق ترکیه<br>
+              ◆ واردات نهاده‌های کشاورزی<br>
+              ◆ استانبول: هاب لجستیک منطقه‌ای قوی<br>
+              ◆ مطالعه بازار کشاورزی ترکیه توصیه می‌شود
+            </div>
+          </div>
+
+          <div class="card" style="border-top:3px solid #d97706;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div class="card-title" style="margin:0;"><span class="dot" style="background:#d97706"></span>عراق 🇮🇶</div>
+              <span style="font-size:10px; background:#d976061a; color:#d97706; padding:3px 10px; border-radius:10px; font-weight:700;">مجاورت</span>
+            </div>
+            <div style="font-size:12px; color:#333; line-height:1.8; margin-bottom:12px;">
+              نزدیک‌ترین بازار بزرگ به ایران. در سناریوی اختلال منطقه‌ای، بازار عراق اهمیت بیشتری پیدا می‌کند. برای صادرات و واردات کالاهای اساسی.
+            </div>
+            <div style="padding:10px; background:#fafafa; border-radius:8px; font-size:11px; color:#444; line-height:1.7;">
+              ◆ بازار آسیای مرکزی و عراق در سناریوی دوم اهمیت بیشتری پیدا می‌کنند<br>
+              ◆ نیاز به شریک محلی معتبر<br>
+              ◆ ریسک بی‌ثباتی سیاسی در نظر گرفته شود
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-note">
+          <p><strong>جمع‌بندی:</strong> انتخاب هاب جایگزین امارات به <strong>صنعت هدف</strong> وابسته است. تجهیزات صنعتی → صلاله. کشاورزی → ترکیه. هر دو مسیر نیاز به <strong>حضور فیزیکی در چین</strong> دارند که دفتر کوچک پیشنهادی آن را تامین می‌کند.</p>
+        </div>
+      </div>
+
+      <!-- ===== TAB 6: کریدورها ===== -->
+      <div id="suggestions-s-corridors" class="tab-content">
+        <div class="section-title">کریدورهای جایگزین — برنامه‌ریزی برای شرایط محاصره</div>
+
+        <div class="card" style="margin-bottom:16px; background:#fef2f2; border-color:#fca5a5;">
+          <div style="display:flex; gap:12px; align-items:flex-start;">
+            <div style="font-size:28px; flex-shrink:0;">🔒</div>
+            <div>
+              <div style="font-size:13px; font-weight:700; color:#e54d4d; margin-bottom:6px;">دو حالت: محاصره یا بدون محاصره</div>
+              <div style="font-size:12px; color:#555; line-height:1.8;">اگر محاصره رفع شود، راه‌حل‌های عادی وجود دارد. اما باید <strong>احتیاط‌هایی</strong> داشت که اگر محاصره برگردد آماده باشیم. پس باید کریدورهایی برای شرایط محاصره از پیش طراحی و آزمایش شده باشند. کریدورهای اصلی در دسترس: <strong>صلاله، خصب، ترکیه، پاکستان</strong>.</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+          <div class="route-card" style="position:relative;">
+            <div class="route-badge badge-top">اولویت اول</div>
+            <div class="route-name">صلاله — عمان 🇴🇲</div>
+            <div class="route-flags">
+              <span class="flag-item">تجهیزات</span>
+              <span class="flag-item">چینی‌محور</span>
+              <span class="flag-item">لجستیک</span>
+            </div>
+            <div class="route-pros">
+              <div class="route-pros-title">✓ مزایا</div>
+              <div class="route-detail">مدیریت چینی (Hutchison Ports)، Free Zone فعال، ترانزیت ایران، رشد ظرفیت سریع، بهترین همکاری برای تامین از چین</div>
+            </div>
+            <div class="route-cons">
+              <div class="route-cons-title">✗ محدودیت‌ها</div>
+              <div class="route-detail">ظرفیت کمتر از جبل علی، خدمات مالی محدودتر، فاصله از دبی</div>
+            </div>
+            <div class="score-bar"><div class="score-fill orange" style="width:85%"></div></div>
+            <div style="font-size:10px; color:#999; margin-top:4px;">امتیاز تناسب: ۸۵٪ — تجهیزات صنعتی</div>
+          </div>
+
+          <div class="route-card">
+            <div class="route-badge badge-check">بررسی جاری</div>
+            <div class="route-name">خصب — عمان 🇴🇲</div>
+            <div class="route-flags">
+              <span class="flag-item">رقبا فعال</span>
+              <span class="flag-item">نزدیک به ایران</span>
+              <span class="flag-item">در حال ارزیابی</span>
+            </div>
+            <div class="route-pros">
+              <div class="route-pros-title">✓ مزایا</div>
+              <div class="route-detail">رقبا از این مسیر استفاده می‌کنند، نزدیک‌ترین بندر عمان به ایران، هزینه حمل پایین‌تر، بررسی‌های اولیه انجام شده</div>
+            </div>
+            <div class="route-cons">
+              <div class="route-cons-title">✗ محدودیت‌ها</div>
+              <div class="route-detail">نیاز به بررسی دقیق‌تر ظرفیت هندلینگ تجهیزات سنگین، مقایسه هزینه با صلاله</div>
+            </div>
+            <div class="score-bar"><div class="score-fill amber" style="width:55%"></div></div>
+            <div style="font-size:10px; color:#999; margin-top:4px;">امتیاز تناسب: در حال بررسی</div>
+          </div>
+
+          <div class="route-card">
+            <div class="route-badge badge-good">کشاورزی</div>
+            <div class="route-name">ترکیه — استانبول 🇹🇷</div>
+            <div class="route-flags">
+              <span class="flag-item">کشاورزی</span>
+              <span class="flag-item">واردات</span>
+              <span class="flag-item">اروپا</span>
+            </div>
+            <div class="route-pros">
+              <div class="route-pros-title">✓ مزایا</div>
+              <div class="route-detail">بهترین هاب برای بخش کشاورزی، روابط تجاری قوی با ایران، دسترسی به بازار اروپا، زیرساخت لجستیک پیشرفته</div>
+            </div>
+            <div class="route-cons">
+              <div class="route-cons-title">✗ محدودیت‌ها</div>
+              <div class="route-detail">برای تجهیزات صنعتی توصیه نمی‌شود، حساسیت سیاسی در برخی دوره‌ها</div>
+            </div>
+            <div class="score-bar"><div class="score-fill green" style="width:78%"></div></div>
+            <div style="font-size:10px; color:#999; margin-top:4px;">امتیاز تناسب (کشاورزی): ۷۸٪</div>
+          </div>
+
+          <div class="route-card">
+            <div class="route-badge badge-new">پتانسیل بالقوه</div>
+            <div class="route-name">پاکستان — گوادر 🇵🇰</div>
+            <div class="route-flags">
+              <span class="flag-item">گوادر</span>
+              <span class="flag-item">CPEC</span>
+              <span class="flag-item">چین‌محور</span>
+            </div>
+            <div class="route-pros">
+              <div class="route-pros-title">✓ مزایا</div>
+              <div class="route-detail">بندر گوادر با حضور چینی قوی، CPEC، هزینه پایین، مسیر جدید و کمتر شناخته‌شده با فرصت‌های اولیه ارزنده</div>
+            </div>
+            <div class="route-cons">
+              <div class="route-cons-title">✗ محدودیت‌ها</div>
+              <div class="route-detail">بی‌ثباتی سیاسی، زیرساخت ناکامل، ریسک بالاتر، نیاز به بررسی عمیق‌تر</div>
+            </div>
+            <div class="score-bar"><div class="score-fill blue" style="width:42%"></div></div>
+            <div style="font-size:10px; color:#999; margin-top:4px;">امتیاز تناسب: نیاز به بررسی عمیق</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span class="dot" style="background:#e54d4d"></span>سوالات باز — نیاز به ارزیابی تکمیلی</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div style="padding:12px; background:#fafafa; border-radius:10px; border-right:3px solid #d97706;">
+              <div style="font-size:11px; font-weight:700; color:#d97706; margin-bottom:8px;">خصب — سوالات باز</div>
+              <div style="font-size:10px; color:#555; line-height:1.8;">◆ چه صنایعی از این مسیر استفاده می‌کنند؟<br>◆ ظرفیت هندلینگ تجهیزات سنگین چقدر است؟<br>◆ هزینه مقایسه‌ای با صلاله؟<br>◆ آیا رقبا از این مسیر سود برده‌اند؟</div>
+            </div>
+            <div style="padding:12px; background:#fafafa; border-radius:10px; border-right:3px solid #1a7fe4;">
+              <div style="font-size:11px; font-weight:700; color:#1a7fe4; margin-bottom:8px;">پاکستان — سوالات باز</div>
+              <div style="font-size:10px; color:#555; line-height:1.8;">◆ وضعیت فعلی بندر گوادر چیست؟<br>◆ امنیت مسیر حمل به ایران چگونه است؟<br>◆ آیا شرکت‌های ایرانی از این مسیر استفاده می‌کنند؟<br>◆ پتانسیل همکاری با زیرساخت CPEC؟</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== TAB 7: راهبردها ===== -->
+      <div id="suggestions-s-rahabard" class="tab-content">
+        <div class="section-title">راهبردهای اجرایی — ۱۰ اقدام کلیدی</div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:16px;" id="stratBoxGrid">
+
+          <!-- Box 1 -->
+          <div class="strat-box" onclick="toggleStratBox('sb1')">
+            <div class="sb-header">
+              <div class="sb-num">۱</div>
+              <div class="sb-title">ثبت دفتر نمایندگی در چین</div>
+              <div class="sb-arrow" id="sb1-arrow">▼</div>
+            </div>
+            <div class="sb-short">یی‌وو یا شنزن — ساختار سبک، ۲-۳ نفر — اولویت فوری</div>
+            <div class="sb-detail" id="sb1">
+              <div class="sb-pros">
+                <div class="sb-pros-title">✓ نقاط مثبت</div>
+                <div class="sb-pros-list">شناسایی فرصت‌های صادراتی و وارداتی · رصد رقبا و قیمت‌ها · مذاکره مستقیم با تامین‌کنندگان · کاهش ۲۰-۳۵٪ هزینه فورواردینگ · پایه‌ای برای تمام راهبردهای دیگر</div>
+              </div>
+              <div class="sb-cons">
+                <div class="sb-cons-title">✗ نقاط منفی</div>
+                <div class="sb-cons-list">محدودیت‌های قانونی ثبت شرکت برای ایرانیان در چین · نیاز به شریک چینی یا ساختار لایه‌ای حقوقی · ریسک تحریم‌های ثانویه · ۶ تا ۱۲ ماه زمان راه‌اندازی</div>
+              </div>
+              <div style="margin-top:10px; padding:8px; background:#fff8f3; border-radius:6px; font-size:10px; color:#FF6B00; font-weight:700;">⚡ اولویت: فوری — پیش‌نیاز تمام راهبردهای دیگر</div>
+            </div>
+          </div>
+
+          <!-- Box 2 -->
+          <div class="strat-box" onclick="toggleStratBox('sb2')">
+            <div class="sb-header">
+              <div class="sb-num">۲</div>
+              <div class="sb-title">داخلی‌سازی فورواردینگ</div>
+              <div class="sb-arrow" id="sb2-arrow">▼</div>
+            </div>
+            <div class="sb-short">حذف واسطه، ایجاد لاین تجاری برای سایر صنایع</div>
+            <div class="sb-detail" id="sb2">
+              <div class="sb-pros">
+                <div class="sb-pros-title">✓ نقاط مثبت</div>
+                <div class="sb-pros-list">کاهش مستقیم هزینه‌های لجستیک · ایجاد جریان درآمدی مستقل از ارائه خدمات به دیگران · کنترل بیشتر بر زنجیره تامین · کاهش وابستگی به واسطه‌های خارجی</div>
+              </div>
+              <div class="sb-cons">
+                <div class="sb-cons-title">✗ نقاط منفی</div>
+                <div class="sb-cons-list">نیاز به لایسنس فورواردینگ · منابع انسانی متخصص لجستیک · یادگیری پیچیدگی‌های گمرکی و قانونی · ریسک شکست در مراحل اولیه</div>
+              </div>
+              <div style="margin-top:10px; padding:8px; background:#eff6ff; border-radius:6px; font-size:10px; color:#1a7fe4; font-weight:700;">⚡ اولویت: فوری — بررسی لایسنس فورواردینگ</div>
+            </div>
+          </div>
+
+          <!-- Box 3 -->
+          <div class="strat-box" onclick="toggleStratBox('sb3')">
+            <div class="sb-header">
+              <div class="sb-num">۳</div>
+              <div class="sb-title">استقرار در صلاله (عمان)</div>
+              <div class="sb-arrow" id="sb3-arrow">▼</div>
+            </div>
+            <div class="sb-short">هاب اول برای تجهیزات صنعتی — مدیریت چینی</div>
+            <div class="sb-detail" id="sb3">
+              <div class="sb-pros">
+                <div class="sb-pros-title">✓ نقاط مثبت</div>
+                <div class="sb-pros-list">مدیریت چینی (Hutchison Ports) — همکاری آسان‌تر · Free Zone فعال · ترانزیت به ایران امکان‌پذیر · رشد سریع ظرفیت · جایگزین خوب برای جبل علی</div>
+              </div>
+              <div class="sb-cons">
+                <div class="sb-cons-title">✗ نقاط منفی</div>
+                <div class="sb-cons-list">ظرفیت کمتر از جبل علی · خدمات مالی محدودتر · نیاز به بررسی هزینه مقایسه‌ای با دبی · فاصله از مراکز مالی اصلی</div>
+              </div>
+              <div style="margin-top:10px; padding:8px; background:#f0fdf4; border-radius:6px; font-size:10px; color:#16a34a; font-weight:700;">⚡ اولویت: فوری — شروع گفتگو با بندر صلاله</div>
+            </div>
+          </div>
+
+          <!-- Box 4 -->
+          <div class="strat-box" onclick="toggleStratBox('sb4')">
+            <div class="sb-header">
+              <div class="sb-num">۴</div>
+              <div class="sb-title">ارزیابی مسیر خصب</div>
+              <div class="sb-arrow" id="sb4-arrow">▼</div>
+            </div>
+            <div class="sb-short">رقبا از این مسیر استفاده می‌کنند — نیاز به بررسی دقیق</div>
+            <div class="sb-detail" id="sb4">
+              <div class="sb-pros">
+                <div class="sb-pros-title">✓ نقاط مثبت</div>
+                <div class="sb-pros-list">نزدیک‌ترین بندر عمان به ایران · رقبا موفقانه از این مسیر استفاده می‌کنند · هزینه حمل احتمالاً پایین‌تر · بررسی‌های اولیه انجام شده</div>
+              </div>
+              <div class="sb-cons">
+                <div class="sb-cons-title">✗ نقاط منفی</div>
+                <div class="sb-cons-list">عدم اطلاعات کامل از ظرفیت هندلینگ تجهیزات سنگین · نیاز به مقایسه دقیق هزینه با صلاله · سوالات باز درباره صنایع مناسب این مسیر</div>
+              </div>
+              <div style="margin-top:10px; padding:8px; background:#fffbeb; border-radius:6px; font-size:10px; color:#d97706; font-weight:700;">⚡ اولویت: ماه ۱-۳ — ارزیابی تفصیلی و تصمیم نهایی</div>
+            </div>
+          </div>
+
+          <!-- Box 5 -->
+          <div class="strat-box" onclick="toggleStratBox('sb5')">
+            <div class="sb-header">
+              <div class="sb-num">۵</div>
+              <div class="sb-title">مبادله کالا به کالا — تجهیزات صنعتی</div>
+              <div class="sb-arrow" id="sb5-arrow">▼</div>
+            </div>
+            <div class="sb-short">راه‌حل اصلی برای محدودیت بانکی — تجهیزات به جای پول</div>
+            <div class="sb-detail" id="sb5">
+              <div class="sb-pros">
+                <div class="sb-pros-title">✓ نقاط مثبت</div>
+                <div class="sb-pros-list">دور زدن محدودیت‌های سیستم بانکی بین‌المللی · سودآوری دوگانه از فروش تجهیزات و کردیت تجاری · تقاضای بالا در دوران بازسازی زیرساخت · مزیت رقابتی پایدار</div>
+              </div>
+              <div class="sb-cons">
+                <div class="sb-cons-title">✗ نقاط منفی</div>
+                <div class="sb-cons-list">پیچیدگی مدیریت ارزش‌گذاری کالا · نیاز به مدارک حقوقی دقیق · ریسک نوسان قیمت تجهیزات · نیاز به شریک محلی معتبر در مقصد</div>
+              </div>
+              <div style="margin-top:10px; padding:8px; background:#fff8f3; border-radius:6px; font-size:10px; color:#FF6B00; font-weight:700;">⚡ اولویت: میان‌مدت — تهیه مدارک پایه از ماه ۳</div>
+            </div>
+          </div>
+
+          <!-- Box 6 -->
+          <div class="strat-box" onclick="toggleStratBox('sb6')">
+            <div class="sb-header">
+              <div class="sb-num">۶</div>
+              <div class="sb-title">هاب کشاورزی از طریق ترکیه</div>
+              <div class="sb-arrow" id="sb6-arrow">▼</div>
+            </div>
+            <div class="sb-short">بهترین مسیر برای نهاده و تجهیزات کشاورزی</div>
+            <div class="sb-detail" id="sb6">
+              <div class="sb-pros">
+                <div class="sb-pros-title">✓ نقاط مثبت</div>
+                <div class="sb-pros-list">بهترین هاب برای بخش کشاورزی · دسترسی به بازار اروپا · روابط تجاری قوی ترکیه با ایران · تقاضای پایدار برای نهاده‌های کشاورزی · ریسک کمتر نسبت به دیگر مسیرها</div>
+              </div>
+              <div class="sb-cons">
+                <div class="sb-cons-title">✗ نقاط منفی</div>
+                <div class="sb-cons-list">برای تجهیزات صنعتی توصیه نمی‌شود · حساسیت سیاسی در برخی دوره‌ها · نیاز به مطالعه بازار کشاورزی ترکیه</div>
+              </div>
+              <div style="margin-top:10px; padding:8px; background:#f0fdf4; border-radius:6px; font-size:10px; color:#16a34a; font-weight:700;">⚡ اولویت: ماه ۶-۱۲ — مطالعه بازار کشاورزی ترکیه</div>
+            </div>
+          </div>
+
+          <!-- Box 7 -->
+          <div class="strat-box" onclick="toggleStratBox('sb7')">
+            <div class="sb-header">
+              <div class="sb-num">۷</div>
+              <div class="sb-title">بررسی مسیر پاکستان (گوادر/CPEC)</div>
+              <div class="sb-arrow" id="sb7-arrow">▼</div>
+            </div>
+            <div class="sb-short">پتانسیل بالقوه — نیاز به بررسی عمیق‌تر</div>
+            <div class="sb-detail" id="sb7">
+              <div class="sb-pros">
+                <div class="sb-pros-title">✓ نقاط مثبت</div>
+                <div class="sb-pros-list">بندر گوادر با حضور چینی قوی · چارچوب CPEC · هزینه پایین · مسیر جدید و کمتر شناخته‌شده با فرصت‌های اولیه · همراستا با توسعه تجهیزات انرژی</div>
+              </div>
+              <div class="sb-cons">
+                <div class="sb-cons-title">✗ نقاط منفی</div>
+                <div class="sb-cons-list">بی‌ثباتی سیاسی در پاکستان · زیرساخت ناکامل · تجربه کمتر از این مسیر · ریسک بالاتر عملیاتی · نیاز به شریک بسیار معتبر محلی</div>
+              </div>
+              <div style="margin-top:10px; padding:8px; background:#eff6ff; border-radius:6px; font-size:10px; color:#1a7fe4; font-weight:700;">⚡ اولویت: ماه ۱۲-۱۸ — بررسی پتانسیل و تصمیم‌گیری</div>
+            </div>
+          </div>
+
+          <!-- Box 8 -->
+          <div class="strat-box" onclick="toggleStratBox('sb8')">
+            <div class="sb-header">
+              <div class="sb-num">۸</div>
+              <div class="sb-title">سرمایه‌گذاری در تجهیزات انرژی</div>
+              <div class="sb-arrow" id="sb8-arrow">▼</div>
+            </div>
+            <div class="sb-short">پنل خورشیدی، ژنراتور، تجهیزات برق — تقاضای بالا</div>
+            <div class="sb-detail" id="sb8">
+              <div class="sb-pros">
+                <div class="sb-pros-title">✓ نقاط مثبت</div>
+                <div class="sb-pros-list">در سناریوی اختلال زیرساخت تقاضا بسیار بالا است · همراستا با CPEC و نیاز پاکستان · تقاضای بالا در عمان و افریقا · امکان مبادله کالا به کالا · رشد بالای بازار</div>
+              </div>
+              <div class="sb-cons">
+                <div class="sb-cons-title">✗ نقاط منفی</div>
+                <div class="sb-cons-list">رقابت قوی از تولیدکنندگان چینی مستقیم · نیاز به دانش فنی تخصصی · ریسک نوسان قیمت جهانی تجهیزات انرژی</div>
+              </div>
+              <div style="margin-top:10px; padding:8px; background:#f0fdf4; border-radius:6px; font-size:10px; color:#16a34a; font-weight:700;">⚡ اولویت: میان‌مدت — شناسایی اولین فرصت از ماه ۶</div>
+            </div>
+          </div>
+
+          <!-- Box 9 -->
+          <div class="strat-box" onclick="toggleStratBox('sb9')">
+            <div class="sb-header">
+              <div class="sb-num">۹</div>
+              <div class="sb-title">پورتفولیوی بازار سرمایه دفاعی</div>
+              <div class="sb-arrow" id="sb9-arrow">▼</div>
+            </div>
+            <div class="sb-short">غذا، دارو، خدمات مالی + صندوق‌های طلا و درآمد ثابت</div>
+            <div class="sb-detail" id="sb9">
+              <div class="sb-pros">
+                <div class="sb-pros-title">✓ نقاط مثبت</div>
+                <div class="sb-pros-list">کمترین وابستگی به زیرساخت‌های آسیب‌پذیر · تقاضای پایدار در شرایط نااطمینانی · صندوق‌های طلا ابزار اصلی پوشش ریسک تورم · صندوق‌های درآمد ثابت پناهگاه سرمایه محافظه‌کار</div>
+              </div>
+              <div class="sb-cons">
+                <div class="sb-cons-title">✗ نقاط منفی</div>
+                <div class="sb-cons-list">محدودیت نقدشوندگی برخی نمادهای دفاعی · بازده کمتر در شرایط عادی · صندوق‌های نقره ابزار پناهگاه نیستند — ریسک همبستگی صنعتی</div>
+              </div>
+              <div style="margin-top:10px; padding:8px; background:#fff8f3; border-radius:6px; font-size:10px; color:#FF6B00; font-weight:700;">⚡ اولویت: فوری — در شاخه تداوم تحریم بسیار بالا</div>
+            </div>
+          </div>
+
+          <!-- Box 10 -->
+          <div class="strat-box" onclick="toggleStratBox('sb10')">
+            <div class="sb-header">
+              <div class="sb-num">۱۰</div>
+              <div class="sb-title">آمادگی برای گشایش تحریم‌ها</div>
+              <div class="sb-arrow" id="sb10-arrow">▼</div>
+            </div>
+            <div class="sb-short">پتروشیمی، فلزات، انرژی صادراتی — آماده‌باش برای مسیر ب</div>
+            <div class="sb-detail" id="sb10">
+              <div class="sb-pros">
+                <div class="sb-pros-title">✓ نقاط مثبت</div>
+                <div class="sb-pros-list">در صورت کاهش تحریم صنایع صادراتی موتور اصلی رشد می‌شوند · بازسازی زیرساخت فرصت بزرگ خدمات میادین نفتی است · شرکت‌هایی که از بازسازی بهره می‌برند رشد چشمگیر دارند</div>
+              </div>
+              <div class="sb-cons">
+                <div class="sb-cons-title">✗ نقاط منفی</div>
+                <div class="sb-cons-list">کندی روند توافق‌ها و احتمال بازگشت محدودیت‌ها · نیاز به نقدینگی بالا برای ورود سریع · ریسک سیاسی بالا در زمان‌بندی</div>
+              </div>
+              <div style="margin-top:10px; padding:8px; background:#eff6ff; border-radius:6px; font-size:10px; color:#1a7fe4; font-weight:700;">⚡ اولویت: پایش مستمر — افزایش تدریجی سهم با دریافت سیگنال کاهش تحریم</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="footer-note">
+          <p><strong>جمع‌بندی راهبردی:</strong> موفقیت این برنامه به <strong>دفتر چین + هاب صلاله + داخلی‌سازی فورواردینگ</strong> به عنوان سه اقدام فوری وابسته است. مبادله کالا به کالا استراتژی <strong>تجهیزات به‌جای نقدینگی</strong> — مزیت رقابتی پایدار در شرایط محدودیت بانکی — را ایجاد می‌کند.</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
+
+<style>
+/* ===== Strat Box Styles ===== */
+.strat-box {
+  background: #fff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  user-select: none;
+}
+.strat-box:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  border-color: #FF6B00;
+}
+.sb-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.sb-num {
+  width: 28px;
+  height: 28px;
+  background: #FF6B00;
+  color: #fff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.sb-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111;
+  flex: 1;
+}
+.sb-arrow {
+  font-size: 11px;
+  color: #999;
+  transition: transform 0.25s;
+}
+.sb-arrow.open {
+  transform: rotate(180deg);
+}
+.sb-short {
+  font-size: 11px;
+  color: #777;
+  margin-bottom: 0;
+  padding-right: 38px;
+}
+.sb-detail {
+  display: none;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed #e5e7eb;
+}
+.sb-detail.visible {
+  display: block;
+}
+.sb-pros, .sb-cons {
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+.sb-pros {
+  background: #f0fdf4;
+}
+.sb-cons {
+  background: #fef2f2;
+}
+.sb-pros-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: #16a34a;
+  margin-bottom: 5px;
+}
+.sb-cons-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: #e54d4d;
+  margin-bottom: 5px;
+}
+.sb-pros-list, .sb-cons-list {
+  font-size: 11px;
+  color: #444;
+  line-height: 1.7;
+}
+</style>
+
+<script>
+function switchSuggestionsTab(tab) {
+  // Hide all tab contents
+  document.querySelectorAll('#dash-suggestions .tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('#suggestionsNav .nav-btn').forEach(el => el.classList.remove('active'));
+
+  // Show selected
+  const el = document.getElementById('suggestions-' + tab);
+  if (el) el.classList.add('active');
+
+  // Activate button
+  const btns = document.querySelectorAll('#suggestionsNav .nav-btn');
+  const tabOrder = ['s-overview','s-response','s-barter','s-china','s-altdubai','s-corridors','s-rahabard'];
+  const idx = tabOrder.indexOf(tab);
+  if (idx >= 0 && btns[idx]) btns[idx].classList.add('active');
+}
+
+function toggleStratBox(id) {
+  const detail = document.getElementById(id);
+  const arrow = document.getElementById(id + '-arrow');
+  if (!detail) return;
+  const isOpen = detail.classList.contains('visible');
+  detail.classList.toggle('visible', !isOpen);
+  if (arrow) arrow.classList.toggle('open', !isOpen);
+}
+</script>
+
 
 <!-- ========== صفحه هفتم: مقصد:اهواز ========== -->
 <div id="dash-ahvaz" class="dash-section">
