@@ -1916,10 +1916,799 @@ function switchShippingTab(index) {
 <!-- ========== صفحه چهارم: نقاط مرزی مهم ========== -->
 <div id="dash-border" class="dash-section">
   <div class="border-points">
-    <div class="countries-list"><h4>کشورهای مسیر راه ابریشم و همسایگان ایران</h4><div id="country-list-items"></div></div>
-    <div class="country-detail" id="country-detail"><h4 id="country-detail-title">انتخاب کشور</h4><div id="country-detail-content" style="color:#999; text-align:center; padding:40px 0;">برای مشاهده اطلاعات روی هر کشور کلیک کنید</div></div>
+
+    
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Vazirmatn','Tahoma','Segoe UI',sans-serif;background:#f4f6f9;color:#1f2937;font-size:13px;}
+:root{
+  --bg0:#f4f6f9;--bg1:#ffffff;--bg2:#ffffff;--bg3:#fafbfc;
+  --line:#e8a05a;          /* orange border */
+  --line-soft:#f3c896;
+  --acc:#d35400;           /* deep orange accent */
+  --acc-soft:#fff3e6;
+  --txt:#1f2937;--muted:#6b7280;--dim:#9ca3af;
+  --grn:#16a34a;--amb:#d97706;--red:#dc2626;--blue:#2563eb;--pur:#7c3aed;--teal:#0d9488;
+}
+.wrap{background:var(--bg0);color:var(--txt);padding:18px;min-height:100vh;}
+
+/* HEADER */
+.hdr{display:flex;align-items:center;justify-content:space-between;background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:14px 18px;margin-bottom:14px;flex-wrap:wrap;gap:8px;}
+.hdr-logo{font-size:17px;font-weight:800;color:var(--acc);letter-spacing:.5px;}
+.hdr-logo span{color:var(--txt);font-weight:600;font-size:12px;display:block;margin-top:2px;}
+.hdr-meta{display:flex;gap:16px;font-size:11px;color:var(--muted);flex-wrap:wrap;align-items:center;}
+.pulse{width:7px;height:7px;border-radius:50%;display:inline-block;margin-left:5px;animation:blink 1.6s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.p-grn{background:var(--grn);}
+.p-red{background:var(--red);}
+.p-amb{background:var(--amb);}
+
+/* TABS */
+.tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;}
+.tab{padding:9px 18px;font-size:12px;font-weight:700;cursor:pointer;border:1.5px solid var(--line);border-radius:8px;background:#fff;color:var(--muted);letter-spacing:.3px;transition:all .15s;}
+.tab:hover{color:var(--acc);border-color:var(--acc);}
+.tab.on{color:#fff;background:var(--acc);border-color:var(--acc);}
+.pane{display:none;}
+.pane.on{display:block;}
+
+/* GRID LAYOUTS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px;}
+.g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:12px;}
+.g5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:12px;}
+.g13{display:grid;grid-template-columns:1fr 2fr;gap:12px;margin-bottom:12px;}
+.g31{display:grid;grid-template-columns:2fr 1fr;gap:12px;margin-bottom:12px;}
+.mb{margin-bottom:12px;}
+@media (max-width:900px){
+  .g2,.g3,.g4,.g5,.g13,.g31{grid-template-columns:1fr;}
+}
+
+/* PANEL */
+.p{background:var(--bg1);border:1.5px solid var(--line);border-radius:10px;padding:14px 16px;}
+.p-title{font-size:12px;font-weight:800;color:var(--acc);letter-spacing:.5px;margin-bottom:10px;padding-bottom:8px;border-bottom:1.5px solid var(--line-soft);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;}
+.p-src{font-size:9.5px;color:var(--dim);font-weight:500;text-align:left;}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;}
+.tbl{width:100%;border-collapse:collapse;font-size:11.5px;}
+.tbl th{font-size:10px;color:var(--acc);font-weight:800;padding:7px 8px;border-bottom:2px solid var(--line);text-align:right;letter-spacing:.3px;background:var(--acc-soft);white-space:nowrap;}
+.tbl th:first-child{border-radius:6px 0 0 0;}
+.tbl th:last-child{border-radius:0 6px 0 0;}
+.tbl td{padding:7px 8px;border-bottom:1px solid #f1e3d0;vertical-align:top;line-height:1.6;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:#fff8f0;}
+
+/* ROW */
+.row{display:flex;justify-content:space-between;align-items:flex-start;padding:6px 0;border-bottom:1px solid #f1e3d0;gap:8px;}
+.row:last-child{border-bottom:none;}
+.rl{font-size:12px;color:var(--txt);}
+.rr{font-size:12px;font-weight:800;text-align:left;flex-shrink:0;}
+.rsub{font-size:10px;color:var(--muted);margin-top:2px;}
+
+/* BADGES */
+.bd{display:inline-block;padding:2px 8px;border-radius:5px;font-size:10px;font-weight:800;letter-spacing:.3px;white-space:nowrap;}
+.bd-r{background:#fde8e8;color:var(--red);}
+.bd-a{background:#fef3e2;color:var(--amb);}
+.bd-g{background:#e6f6ec;color:var(--grn);}
+.bd-b{background:#e8f0fe;color:var(--blue);}
+.bd-p{background:#f3ebfe;color:var(--pur);}
+.bd-t{background:#e3f7f5;color:var(--teal);}
+.bd-o{background:var(--acc-soft);color:var(--acc);}
+
+/* KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px;}
+.kpi-grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:12px;}
+.kpi{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;}
+.kpi-v{font-size:21px;font-weight:800;line-height:1.15;color:var(--txt);}
+.kpi-l{font-size:10.5px;color:var(--muted);margin-top:4px;letter-spacing:.3px;font-weight:700;}
+.kpi-sub{font-size:9.5px;color:var(--dim);margin-top:3px;}
+@media (max-width:900px){.kpi-grid,.kpi-grid5{grid-template-columns:1fr 1fr;}}
+
+/* ALERT BOXES */
+.alert{background:#fff7ed;border:1.5px solid var(--line);border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:12px;color:#92400e;line-height:1.7;}
+.alert-red{background:#fef2f2;border-color:#fca5a5;color:#b91c1c;}
+.alert-blue{background:#eff6ff;border-color:#93c5fd;color:#1e40af;}
+.alert-grn{background:#f0fdf4;border-color:#86efac;color:#166534;}
+
+/* SHIP CARD / GENERIC CARD */
+.card{background:var(--bg3);border:1.5px solid var(--line-soft);border-radius:10px;padding:12px 14px;margin-bottom:10px;}
+.card-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;flex-wrap:wrap;gap:6px;}
+.card-name{font-size:14px;font-weight:800;}
+.card-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:8px 0;}
+.card-stat{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.3px;}
+.card-stat span{display:block;font-size:13px;font-weight:800;color:var(--txt);margin-top:3px;}
+.card-divider{border-top:1.5px solid var(--line-soft);margin:10px 0;}
+@media (max-width:900px){.card-grid{grid-template-columns:1fr 1fr;}}
+
+/* PRO/CON */
+.pro-con{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;}
+.pro-col{background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:8px;padding:10px 12px;}
+.con-col{background:#fef2f2;border:1.5px solid #fecaca;border-radius:8px;padding:10px 12px;}
+.pro-con-title{font-size:10.5px;font-weight:800;letter-spacing:.5px;margin-bottom:6px;}
+.pro-con-item{font-size:11.5px;color:var(--txt);padding:3px 0;border-bottom:1px solid rgba(0,0,0,.04);line-height:1.6;}
+.pro-con-item:last-child{border-bottom:none;}
+@media (max-width:900px){.pro-con{grid-template-columns:1fr;}}
+
+/* VS COMPARISON */
+.vs-grid{display:grid;grid-template-columns:1fr 50px 1fr;gap:10px;margin-bottom:12px;}
+.vs-card{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:14px 16px;}
+.vs-title{font-size:14px;font-weight:800;margin-bottom:10px;text-align:center;padding-bottom:8px;border-bottom:1.5px solid var(--line-soft);}
+.vs-mid{display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--acc);}
+.vs-item{display:flex;align-items:flex-start;gap:7px;padding:5px 0;border-bottom:1px solid #f1e3d0;font-size:12px;line-height:1.6;}
+.vs-item:last-child{border-bottom:none;}
+.vs-icon{flex-shrink:0;margin-top:2px;font-weight:800;}
+@media (max-width:900px){.vs-grid{grid-template-columns:1fr;}.vs-mid{display:none;}}
+
+/* SIGNAL ROW */
+.sig{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid #f1e3d0;}
+.sig:last-child{border-bottom:none;}
+.sig-lvl{font-size:10px;padding:2px 7px;border-radius:5px;font-weight:800;flex-shrink:0;margin-top:1px;white-space:nowrap;}
+.sig-name{font-size:12px;flex:1;line-height:1.6;}
+.sig-sub{font-size:10.5px;color:var(--muted);margin-top:2px;}
+.sig-val{font-size:11px;color:var(--muted);text-align:left;font-weight:700;}
+
+/* BAR */
+.bar-wrap{width:100%;height:6px;background:#f1e3d0;border-radius:3px;margin-top:4px;}
+.bar-fill{height:100%;border-radius:3px;}
+.sb{margin:6px 0;}
+.sbl{display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:3px;}
+.sbw{width:100%;height:8px;background:#f1e3d0;border-radius:4px;}
+.sbf{height:100%;border-radius:4px;}
+
+/* FLOW */
+.flow{display:flex;align-items:flex-start;gap:6px;padding:6px 0;border-bottom:1px solid #f1e3d0;}
+.flow:last-child{border-bottom:none;}
+.fa{color:var(--acc);font-size:12px;font-weight:800;margin-top:2px;}
+.fn{font-size:12px;flex:1;line-height:1.6;}
+.fs{font-size:10.5px;color:var(--muted);margin-top:2px;}
+.fv{font-size:11px;font-weight:800;color:var(--acc);text-align:left;flex-shrink:0;}
+
+/* DISTRIBUTION BOX */
+.dist-box{background:var(--bg3);border:1.5px solid var(--line-soft);border-radius:8px;padding:10px;text-align:center;}
+.dist-v{font-size:18px;font-weight:800;color:var(--acc);}
+.dist-l{font-size:10.5px;color:var(--muted);margin-top:3px;}
+.dist-s{font-size:10px;margin-top:4px;color:var(--txt);}
+
+/* FOOTER */
+.foot{margin-top:14px;padding-top:10px;border-top:1.5px solid var(--line);font-size:10px;color:var(--muted);line-height:1.8;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+/* REFERENCE BLOCK */
+.ref-block{background:var(--bg3);border:1.5px solid var(--line-soft);border-radius:8px;padding:10px 12px;margin-top:10px;}
+.ref-title{font-size:10px;font-weight:800;color:var(--acc);letter-spacing:1px;margin-bottom:8px;}
+.ref-list{column-count:2;column-gap:16px;}
+.ref-item{font-size:9.5px;color:var(--muted);padding:2px 0;break-inside:avoid;line-height:1.6;}
+.ref-item span{color:var(--acc);font-weight:700;}
+@media (max-width:700px){.ref-list{column-count:1;}}
+
+.star{color:var(--amb);}
+.sect-label{font-size:10.5px;font-weight:800;color:var(--acc);letter-spacing:.5px;padding:6px 0 8px;border-top:1.5px solid var(--line-soft);margin-top:6px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="border">
+  
+  </div>
+  <div class="border-meta">
+    <span><span class="pulse p-red"></span>هرمز: بحران فعال</span>
+    <span><span class="pulse p-grn"></span>چابهار: فعال</span>
+    <span style="color:var(--dim);">به‌روزرسانی: ۱۴ ژوئن ۲۰۲۶</span>
   </div>
 </div>
+
+<div class="tabs">
+  <div class="tab on" onclick="sw(0)">۱ · جریان تجارت خارجی</div>
+  <div class="tab" onclick="sw(1)">۲ · صادرات ایران</div>
+  <div class="tab" onclick="sw(2)">۳ · واردات ایران</div>
+  <div class="tab" onclick="sw(3)">۴ · بنادر و مرزهای ایران</div>
+</div>
+
+<!-- ========================= TAB 0: جریان تجارت خارجی ========================= -->
+<div class="pane on" id="p0">
+
+<div class="kpi-grid5">
+  <div class="kpi"><div class="kpi-v" style="color:var(--acc);">$13.3B</div><div class="kpi-l">صادرات ۲۰۲۴</div><div class="kpi-sub" style="color:var(--red);">↓ از $41.6B در ۲۰۱۹</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:var(--red);">$29.3B</div><div class="kpi-l">واردات ۲۰۲۴</div><div class="kpi-sub">عمدتاً ماشین‌آلات + مواد غذایی</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:var(--grn);">۸۰٪</div><div class="kpi-l">سهم نفت و پتروشیمی از صادرات</div><div class="kpi-sub">۲۰٪ صادرات غیرنفتی</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:var(--amb);">چین</div><div class="kpi-l">بزرگ‌ترین شریک تجاری</div><div class="kpi-sub">$22B واردات از ایران</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:var(--pur);">$26.8B</div><div class="kpi-l">مازاد تجاری ۱۴۰۳</div><div class="kpi-sub" style="color:var(--grn);">↑ $5.8B نسبت به سال قبل</div></div>
+</div>
+
+<div class="g2">
+  <div class="p">
+    <div class="p-title">جریان صادرات — مقاصد و ارزش <span class="p-src">منبع: OEC 2024 · WorldsTopExports · Reuters</span></div>
+    <div class="sb"><div class="sbl"><span>🇨🇳 چین</span><span style="color:var(--acc);font-weight:800;">$4.44B — ۳۳٪ کل صادرات</span></div><div class="sbw"><div class="sbf" style="width:100%;background:var(--acc);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🇹🇷 ترکیه</span><span style="color:var(--grn);font-weight:800;">$2.45B — ۱۸٪</span></div><div class="sbw"><div class="sbf" style="width:55%;background:var(--grn);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🇮🇶 عراق</span><span style="color:var(--amb);font-weight:800;">$10.5B (انرژی + کالا) — ۱۱٪</span></div><div class="sbw"><div class="sbf" style="width:48%;background:var(--amb);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🇦🇪 امارات</span><span style="color:#b45309;font-weight:800;">$7.5B — ۸٪</span></div><div class="sbw"><div class="sbf" style="width:35%;background:#b45309;"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🇮🇳 هند</span><span style="color:var(--pur);font-weight:800;">$1.06B — ۸٪</span></div><div class="sbw"><div class="sbf" style="width:24%;background:var(--pur);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🇵🇰 پاکستان</span><span style="color:var(--teal);font-weight:800;">$1.2B</span></div><div class="sbw"><div class="sbf" style="width:18%;background:var(--teal);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🇦🇿 آذربایجان</span><span style="color:var(--muted);font-weight:800;">$633M</span></div><div class="sbw"><div class="sbf" style="width:10%;background:var(--muted);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🌍 آفریقا (مجموع)</span><span style="color:#be185d;font-weight:800;">~$134M — ۱٪ کل</span></div><div class="sbw"><div class="sbf" style="width:5%;background:#be185d;"></div></div></div>
+  </div>
+  <div class="p">
+    <div class="p-title">جریان واردات — مبادی و ارزش <span class="p-src">منبع: OEC 2024 · UN COMTRADE · TradeImeX</span></div>
+    <div class="sb"><div class="sbl"><span>🇨🇳 چین</span><span style="color:var(--red);font-weight:800;">$18.2B — ۶۲٪ کل واردات</span></div><div class="sbw"><div class="sbf" style="width:100%;background:var(--red);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🇹🇷 ترکیه</span><span style="color:var(--amb);font-weight:800;">$3.1B — ۱۱٪</span></div><div class="sbw"><div class="sbf" style="width:42%;background:var(--amb);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🇧🇷 برزیل</span><span style="color:var(--grn);font-weight:800;">$3.0B — ۱۰٪</span></div><div class="sbw"><div class="sbf" style="width:40%;background:var(--grn);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🇩🇪 آلمان</span><span style="color:var(--blue);font-weight:800;">$1.3B — ۴٪</span></div><div class="sbw"><div class="sbf" style="width:20%;background:var(--blue);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🇮🇳 هند</span><span style="color:var(--pur);font-weight:800;">$1.25B — ۴٪</span></div><div class="sbw"><div class="sbf" style="width:19%;background:var(--pur);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🇦🇪 امارات</span><span style="color:var(--teal);font-weight:800;">$1.1B — ۴٪</span></div><div class="sbw"><div class="sbf" style="width:17%;background:var(--teal);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🇷🇺 روسیه</span><span style="color:#be185d;font-weight:800;">$900M — ۳٪</span></div><div class="sbw"><div class="sbf" style="width:14%;background:#be185d;"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🇲🇾 مالزی</span><span style="color:var(--muted);font-weight:800;">$499M</span></div><div class="sbw"><div class="sbf" style="width:8%;background:var(--muted);"></div></div></div>
+  </div>
+</div>
+
+<div class="p mb">
+  <div class="p-title">توزیع جغرافیایی صادرات ایران <span class="p-src">منبع: WorldsTopExports · Blooming Global 2025</span></div>
+  <div class="g5">
+    <div class="dist-box">
+      <div class="dist-v">۹۶.۱٪</div>
+      <div class="dist-l">آسیا</div>
+      <div class="dist-s">چین، عراق، ترکیه، هند</div>
+    </div>
+    <div class="dist-box">
+      <div class="dist-v">۲.۴٪</div>
+      <div class="dist-l">اروپا</div>
+      <div class="dist-s">آلمان، ایتالیا</div>
+    </div>
+    <div class="dist-box">
+      <div class="dist-v" style="color:#be185d;">۱.۰٪</div>
+      <div class="dist-l">آفریقا</div>
+      <div class="dist-s">نیجریه، کنیا، مصر</div>
+    </div>
+    <div class="dist-box">
+      <div class="dist-v" style="color:var(--muted);">۰.۴٪</div>
+      <div class="dist-l">آمریکای لاتین</div>
+      <div class="dist-s">ونزوئلا</div>
+    </div>
+    <div class="dist-box">
+      <div class="dist-v" style="color:var(--muted);">۰.۰۳٪</div>
+      <div class="dist-l">آمریکای شمالی</div>
+      <div class="dist-s">غیرمستقیم</div>
+    </div>
+  </div>
+</div>
+
+<div class="alert-blue alert">💡 نکته کلیدی: ایران به برزیل حدود <strong>$3B</strong> بدهکار است (واردات سویا و ذرت) اما صادرات مستقیمی به این کشور ندارد. آفریقا فرصت دست‌نخورده‌ای است — تنها ۱٪ صادرات ایران به ۵۴ کشور پرجمعیت این قاره می‌رود.</div>
+
+<div class="p">
+  <div class="p-title">جریان کالا در خلیج فارس — چه چیزی از تنگه هرمز رد می‌شود؟ <span class="p-src">منبع: UNCTAD RMT 2024 · EIA · IEA · IMF PortWatch · Kpler</span></div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>نوع کالا</th><th>حجم سالانه (تخمین ۲۰۲۴)</th><th>کشورهای اصلی مبدأ</th><th>کشورهای اصلی مقصد</th><th>نوع کشتی</th></tr></thead>
+    <tbody>
+      <tr><td><strong style="color:#b45309;">نفت خام</strong></td><td>~15M bbl/day از طریق هرمز (تنکرها)</td><td>عربستان، عراق، امارات، ایران، کویت</td><td>چین (۵۰٪)، هند (۲۰٪)، ژاپن/کره (۱۵٪)</td><td>VLCC، Suezmax، Aframax</td></tr>
+      <tr><td><strong style="color:var(--blue);">LNG</strong></td><td>~100M ton/yr (قطر)</td><td>قطر (عمده)</td><td>اروپا، ژاپن، کره، چین</td><td>LNG Carrier (145K–177K m³)</td></tr>
+      <tr><td><strong style="color:var(--acc);">پتروشیمی / مواد شیمیایی</strong></td><td>~12M ton/yr</td><td>عربستان، ایران، امارات</td><td>هند، چین، اروپا، آفریقا</td><td>Chemical Tanker، Product Tanker</td></tr>
+      <tr><td><strong style="color:var(--grn);">کالاهای مصرفی (کانتینر)</strong></td><td>~1.16M TEU/هفته</td><td>چین، هند، اروپا</td><td>خاورمیانه، آفریقا، آسیا</td><td>Containership</td></tr>
+      <tr><td><strong style="color:var(--grn);">غلات</strong></td><td>~45M ton/yr</td><td>اوکراین، روسیه، آمریکا، استرالیا</td><td>مصر، ایران، عراق، پاکستان</td><td>Panamax، Handymax</td></tr>
+      <tr><td><strong style="color:var(--muted);">فولاد / سنگ‌آهن</strong></td><td>~35M ton/yr</td><td>استرالیا، برزیل، هند</td><td>عربستان، امارات، هند، ایران</td><td>Capesize، Supramax</td></tr>
+      <tr><td><strong style="color:var(--muted);">خودرو (RoRo)</strong></td><td>545K خودرو در نیمه اول ۲۰۲۵ (جبل‌علی)</td><td>چین، ژاپن، کره، هند، تایلند</td><td>خاورمیانه، آفریقا</td><td>PCTC / RoRo Carrier</td></tr>
+    </tbody>
+   </table>
+  </div>
+</div>
+
+</div>
+
+<!-- ========================= TAB 1: صادرات ایران ========================= -->
+<div class="pane" id="p1">
+
+<div class="p mb">
+  <div class="p-title">برترین کالاهای صادراتی ایران — محصول، مقصد، حجم، کانال حمل <span class="p-src">منبع: OEC 2024 · ITP Blog · ChemAnalyst · Tehran Times · WorldsTopExports</span></div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead>
+      <tr><th>محصول</th><th>کد HS</th><th>ارزش ۲۰۲۴</th><th>مقصد اول</th><th>مقصد دوم</th><th>مقصد سوم</th><th>حجم سالانه</th><th>قیمت FOB</th><th>کانال حمل</th><th>ریسک</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong style="color:var(--acc);">پلیمر اتیلن (HDPE/LDPE/LLDPE)</strong></td><td>3901</td><td style="color:var(--grn);font-weight:800;">$1.88B</td><td>🇨🇳 چین (۶۶٪)</td><td>🇹🇷 ترکیه</td><td>🇮🇳 هند</td><td>1.8M ton/۶ ماه</td><td>$650–900/MT</td><td>Chemical Tanker / فله کانتینر</td><td><span class="bd bd-a">OFAC</span></td></tr>
+      <tr><td><strong style="color:var(--acc);">سنگ‌آهن</strong></td><td>2601</td><td style="color:var(--grn);font-weight:800;">$1.13B</td><td>🇨🇳 چین</td><td>🇮🇳 هند</td><td>🇹🇷 ترکیه</td><td>~20M ton/yr</td><td>$40–75/MT</td><td>Capesize / Panamax Bulk</td><td><span class="bd bd-a">متوسط</span></td></tr>
+      <tr><td><strong style="color:var(--acc);">متانول</strong></td><td>2905</td><td style="color:var(--grn);font-weight:800;">$1.05B</td><td>🇨🇳 چین (۸۰٪)</td><td>🇮🇳 هند</td><td>🇦🇪 امارات (re-export)</td><td>4.3M ton/۶ ماه</td><td>$255–275/MT FOB</td><td>Chemical Tanker MR/LR1</td><td><span class="bd bd-r">تحریم OFAC</span></td></tr>
+      <tr><td><strong style="color:var(--amb);">آجیل و خشکبار (پسته + گردو)</strong></td><td>0802</td><td style="color:var(--grn);font-weight:800;">$777M</td><td>🇨🇳 چین</td><td>🇩🇪 آلمان</td><td>🇦🇪 امارات</td><td>~200K ton/yr</td><td>$3–12/kg</td><td>Reefer Container 40ft RF</td><td><span class="bd bd-g">کم</span></td></tr>
+      <tr><td><strong style="color:var(--acc);">گاز نفتی (LPG)</strong></td><td>2711</td><td style="color:var(--grn);font-weight:800;">$765M</td><td>🇨🇳 چین</td><td>🇯🇵 ژاپن</td><td>🇰🇷 کره جنوبی</td><td>CP پروپان</td><td>—</td><td>VLGC (Very Large Gas Carrier)</td><td><span class="bd bd-r">هرمز بسته</span></td></tr>
+      <tr><td><strong style="color:var(--amb);">اوره / کود ازته</strong></td><td>3102</td><td style="color:var(--grn);font-weight:800;">$620M (تخمین)</td><td>🇮🇳 هند</td><td>🌍 آفریقا</td><td>🇹🇷 ترکیه</td><td>3M ton/yr</td><td>$280–320/MT</td><td>Handymax Bulk</td><td><span class="bd bd-a">متوسط</span></td></tr>
+      <tr><td class="col-hi-new">\(<strong style="color:var(--teal);">بیتومن (قیر)</strong>\)<td class="col-hi-new">2713<td style="color:var(--grn);font-weight:800;">$550M (تخمین)<td class="col-hi-new">🇮🇳 هند<td class="col-hi-new">🌍 آفریقا<td class="col-hi-new">🇵🇰 پاکستان<td class="col-hi-new">~2M ton/yr<td class="col-hi-new">$280–380/MT<td class="col-hi-new">Product Tanker / بشکه<td class="col-hi-new"><span class="bd bd-g">کم</span></td></tr>
+      <tr><td class="col-hi-new">\(<strong style="color:var(--amb);">زعفران</strong>\)<td class="col-hi-new">0910<td style="color:var(--grn);font-weight:800;">$207M<td class="col-hi-new">🇦🇪 امارات<td class="col-hi-new">🇨🇳 چین<td class="col-hi-new">🇪🇸 اسپانیا<td class="col-hi-new">~350 ton/yr<td class="col-hi-new">$800–2,500/kg<td class="col-hi-new">هوایی + کانتینر کوچک<td class="col-hi-new"><span class="bd bd-g">کم</span></td></tr>
+      <tr><td class="col-hi-new">\(<strong style="color:var(--amb);">خرما</strong>\)<td class="col-hi-new">0804<td style="color:var(--grn);font-weight:800;">$213M<td class="col-hi-new">🇮🇶 عراق<td class="col-hi-new">🌍 آفریقا<td class="col-hi-new">🇵🇰 پاکستان<td class="col-hi-new">~400K ton/yr<td class="col-hi-new">$0.8–2.5/kg<td class="col-hi-new">General Cargo / کامیون<td class="col-hi-new"><span class="bd bd-g">کم</span></td></tr>
+      <tr><td class="col-hi-new">\(<strong style="color:var(--acc);">آلومینیوم خام</strong>\)<td class="col-hi-new">7601<td style="color:var(--muted);">کاهش ۳۰٪<td class="col-hi-new">🇨🇳 چین<td class="col-hi-new">🇮🇳 هند<td class="col-hi-new">—<td class="col-hi-new">—<td class="col-hi-new">$2,400–2,800/MT<td class="col-hi-new">General Cargo / Container<td class="col-hi-new"><span class="bd bd-a">متوسط</span></td></tr>
+      <tr><td class="col-hi-new">\(<strong style="color:var(--acc);">گوگرد</strong>\)<td class="col-hi-new">2503<td class="col-hi-new">—<td class="col-hi-new">🇮🇳 هند<td class="col-hi-new">🌍 آفریقا (کود)<td class="col-hi-new">🇨🇳 چین<td class="col-hi-new">~4M ton/yr<td class="col-hi-new">$120–180/MT<td class="col-hi-new">Handymax Bulk<td class="col-hi-new"><span class="bd bd-a">متوسط</span></td></tr>
+      <tr><td class="col-hi-new">\(<strong style="color:var(--acc);">اتیلن گلیکول (MEG)</strong>\)<td class="col-hi-new">2905<td class="col-hi-new">—<td class="col-hi-new">🇨🇳 چین (۸۰٪)<td class="col-hi-new">🇮🇳 هند<td class="col-hi-new">—<td class="col-hi-new">0.6M ton/۶ ماه<td class="col-hi-new">$450–570/MT<td class="col-hi-new">Chemical Tanker MR<td class="col-hi-new"><span class="bd bd-r">تحریم</span></td></tr>
+      <tr><td class="col-hi-new">\(<strong style="color:#be185d;">نفت خام (تحریمی)</strong>\)<td class="col-hi-new">2709<td style="color:var(--red);font-weight:800;">$22B (پیک ۲۰۲۲)<td class="col-hi-new">🇨🇳 چین (۸۰٪+ بر اساس Kpler)<td class="col-hi-new">🇸🇾 سوریه<td class="col-hi-new">بازار سایه<td class="col-hi-new">1.3–1.7 میلیون بشکه/روز<td class="col-hi-new">discount ~$10/bbl<td class="col-hi-new">VLCC Shadow Fleet<td class="col-hi-new"><span class="bd bd-r">OFAC شدید</span></td></tr>
+    </tbody>
+   </table>
+  </div>
+</div>
+
+<div class="g2">
+  <div class="p">
+    <div class="p-title">فرصت‌های صادراتی به آفریقا <span class="p-src">منبع: Araz Tejarat · Abrisham Road · COMTRADE</span></div>
+    <div class="flow"><span class="fa">←</span><div class="fn"><strong>مصر:</strong> فولاد ($8.9M)، پلیمر، بیتومن جاده‌سازی<div class="fs">کانال سوئز ← اسکندریه / ۴ روز از بندرعباس</div></div><div class="fv">بالقوه</div></div>
+    <div class="flow"><span class="fa">←</span><div class="fn"><strong>نیجریه:</strong> پتروشیمی، HDPE، گوگرد، کود<div class="fs">دماغه امید ← لاگوس، ۱۸ روز</div></div><div class="fv">کم‌بهره</div></div>
+    <div class="flow"><span class="fa">←</span><div class="fn"><strong>کنیا:</strong> خرما، پسته، پتروشیمی<div class="fs">خلیج عدن ← مومباسا، ۸ روز</div></div><div class="fv">در حال رشد</div></div>
+    <div class="flow"><span class="fa">←</span><div class="fn"><strong>تانزانیا/موزامبیک:</strong> قیر بیتومن برای جاده‌سازی<div class="fs">چابهار ← دارالسلام، ۱۰ روز</div></div><div class="fv">نیاز بالا</div></div>
+    <div class="flow"><span class="fa">←</span><div class="fn"><strong>آفریقای جنوبی:</strong> مصالح ساختمانی، کاشی<div class="fs">چابهار ← دوربان، ۱۶ روز</div></div><div class="fv">ضعیف</div></div>
+    <div style="font-size:11px;color:var(--amb);margin-top:8px;font-weight:700;">⚠ محدودیت اصلی: پرداخت بین‌المللی دشوار؛ نیاز به واسطه (امارات/عمان)؛ رقابت با محصولات چینی</div>
+  </div>
+  <div class="p">
+    <div class="p-title">کانال‌های صادراتی عملیاتی — کالاهای غیرنفتی</div>
+    <div class="row"><div class="rl">پتروشیمی → چین</div><div class="rr" style="color:var(--red);">⚠ تحریم<div class="rsub" style="text-align:left;">اغلب با پرچم سوم + STS یا از طریق عمان</div></div></div>
+    <div class="row"><div class="rl">پتروشیمی → ترکیه</div><div class="rr" style="color:var(--amb);">قابل اجرا<div class="rsub" style="text-align:left;">مرز بازرگان/رازی + کامیون یا MR tanker مدیترانه</div></div></div>
+    <div class="row"><div class="rl">پتروشیمی → هند</div><div class="rr" style="color:var(--grn);">فعال<div class="rsub" style="text-align:left;">چابهار → موندرا (LR1 chemical tanker)</div></div></div>
+    <div class="row"><div class="rl">سنگ‌آهن → چین</div><div class="rr" style="color:var(--red);">تعلیق<div class="rsub" style="text-align:left;">Capesize از بندرعباس (پیش از بحران) / چابهار</div></div></div>
+    <div class="row"><div class="rl">خشکبار → اروپا</div><div class="rr" style="color:var(--grn);">فعال<div class="rsub" style="text-align:left;">ترکیه → زمینی / بازرگان → استانبول → TIR</div></div></div>
+    <div class="row"><div class="rl">کود → آفریقا</div><div class="rr" style="color:var(--blue);">در حال رشد<div class="rsub" style="text-align:left;">چابهار → سالاله → مومباسا/دارالسلام</div></div></div>
+    <div class="row"><div class="rl">زعفران → جهان</div><div class="rr" style="color:var(--grn);">فعال<div class="rsub" style="text-align:left;">هوایی از تهران + بسته‌بندی در امارات/ترکیه</div></div></div>
+  </div>
+</div>
+
+</div>
+
+<!-- ========================= TAB 2: واردات ایران ========================= -->
+<div class="pane" id="p2">
+
+<div class="p mb">
+  <div class="p-title">برترین کالاهای وارداتی ایران — محصول، مبدأ، حجم، مسیر <span class="p-src">منبع: OEC 2024 · UN COMTRADE · Volza · TradeImeX 2025</span></div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead>
+      <tr><th>محصول</th><th>کد HS</th><th>ارزش</th><th>مبدأ اول</th><th>مبدأ دوم</th><th>حجم سالانه</th><th>مسیر ورودی</th><th>هزینه حمل تقریبی</th><th>چالش اصلی</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong style="color:var(--red);">کنجاله سویا</strong></td>
+        <td>2304</td>
+        <td style="color:var(--red);font-weight:800;">$1.16B</td>
+        <td>🇧🇷 برزیل</td>
+        <td>🇦🇷 آرژانتین</td>
+        <td>~3M ton/yr</td>
+        <td>Panamax → بندرعباس/امام خمینی</td>
+        <td>$40–60/MT دریایی</td>
+        <td>پرداخت بین‌المللی پیچیده</td>
+        </tr>
+      <tr>
+        <td><strong style="color:var(--red);">دانه سویا</strong></td>
+        <td>1201</td>
+        <td style="color:var(--red);font-weight:800;">$1.1B</td>
+        <td>🇧🇷 برزیل</td>
+        <td>🇺🇦 اوکراین</td>
+        <td>~2M ton/yr</td>
+        <td>Panamax → بندرعباس</td>
+        <td>$40–65/MT</td>
+        <td>محدودیت SWIFT</td>
+        </tr>
+      <tr>
+        <td><strong style="color:var(--amb);">ذرت</strong></td>
+        <td>1005</td>
+        <td style="color:var(--amb);font-weight:800;">$1.07B</td>
+        <td>🇧🇷 برزیل</td>
+        <td>🇺🇦 اوکراین</td>
+        <td>~6M ton/yr</td>
+        <td>Panamax/Supramax فله خشک</td>
+        <td>$35–55/MT</td>
+        <td>واسطه‌های ترکیه/امارات</td>
+        </tr>
+      <tr>
+        <td><strong style="color:var(--red);">خودرو و قطعات</strong></td>
+        <td>8703</td>
+        <td style="color:var(--red);font-weight:800;">$753M</td>
+        <td>🇨🇳 چین</td>
+        <td>🇩🇪 آلمان</td>
+        <td>—</td>
+        <td>RoRo / Container از شانگهای</td>
+        <td>$1,500–3,000/unit</td>
+        <td>تحریم قطعات اروپایی</td>
+        </tr>
+      <tr>
+        <td><strong style="color:var(--red);">برنج</strong></td>
+        <td>1006</td>
+        <td style="color:var(--amb);font-weight:800;">$701M</td>
+        <td>🇮🇳 هند (بسمتی)</td>
+        <td>🇵🇰 پاکستان</td>
+        <td>~1.5M ton/yr</td>
+        <td>کانتینر 40ft / چابهار + موندرا</td>
+        <td>$25–40/MT</td>
+        <td>کم</td>
+        </tr>
+      <tr>
+        <td><strong style="color:var(--acc);">ماشین‌آلات صنعتی</strong></td>
+        <td>8479</td>
+        <td style="color:var(--acc);font-weight:800;">$658M (فقط ترکیه)</td>
+        <td>🇨🇳 چین</td>
+        <td>🇹🇷 ترکیه</td>
+        <td>—</td>
+        <td>کانتینر / بازرگان زمینی</td>
+        <td>$2,000–6,000/40ft</td>
+        <td>کنترل صادرات کالاهای دومنظوره</td>
+        </tr>
+      <tr>
+        <td><strong style="color:var(--acc);">روغن نباتی</strong></td>
+        <td>1507–1515</td>
+        <td style="color:var(--acc);font-weight:800;">$813M (ترکیه)</td>
+        <td>🇹🇷 ترکیه</td>
+        <td>🇲🇾 مالزی</td>
+        <td>~600K ton/yr</td>
+        <td>کامیون بازرگان / Flexi-tank</td>
+        <td>$60–90/MT</td>
+        <td>کم</td>
+        </tr>
+      <tr>
+        <td><strong style="color:var(--acc);">پلاستیک و مواد اولیه</strong></td>
+        <td>3901–3914</td>
+        <td style="color:var(--acc);font-weight:800;">$287M (ترکیه)</td>
+        <td>🇹🇷 ترکیه</td>
+        <td>🇨🇳 چین</td>
+        <td>—</td>
+        <td>کامیون TIR / Container</td>
+        <td>$1,500–2,500/20ft</td>
+        <td>کم</td>
+        </tr>
+      <tr>
+        <td><strong style="color:var(--teal);">غلات (گندم)</strong></td>
+        <td>1001</td>
+        <td style="color:var(--teal);font-weight:800;">متغیر</td>
+        <td>🇷🇺 روسیه</td>
+        <td>🇺🇦 اوکراین</td>
+        <td>5–8M ton/yr</td>
+        <td>Panamax → بندرعباس/امام خمینی</td>
+        <td>$30–50/MT</td>
+        <td>هرمز بسته — کاهش جدی</td>
+        </tr>
+      <tr>
+        <td><strong>دارو و تجهیزات پزشکی</strong></td>
+        <td>3004</td>
+        <td>$92M (ترکیه)</td>
+        <td>🇩🇪 آلمان</td>
+        <td>🇨🇭 سوئیس</td>
+        <td>—</td>
+        <td>هوایی + کانتینر سرد</td>
+        <td>بالا</td>
+        <td>تحریم قطعات حساس</td>
+        </tr>
+    </tbody>
+   </table>
+  </div>
+</div>
+
+<div class="alert-blue alert">🔑 نکته عملیاتی: برزیل بزرگ‌ترین تامین‌کننده مواد غذایی ایران است (در حدود $3B) اما مسیر مستقیم تجاری ندارد. سویا و ذرت برزیل از طریق واسطه ترکیه یا امارات به ایران می‌رسد. پرداخت اغلب از طریق بارتر نفت یا ارزهای جایگزین انجام می‌شود.</div>
+
+</div>
+
+<!-- ========================= TAB 3: بنادر و مرزهای ایران ========================= -->
+<div class="pane" id="p3">
+
+<div class="kpi-grid">
+  <div class="kpi"><div class="kpi-v" style="color:var(--acc);">۲۲</div><div class="kpi-l">گذرگاه مرزی فعال</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:var(--grn);">6.65M</div><div class="kpi-l">ظرفیت TEU بندر رجایی</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:var(--amb);">100K → 500K</div><div class="kpi-l">ظرفیت TEU چابهار ۲۰۲۶</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:var(--red);">۵۷</div><div class="kpi-l">کشته در انفجار بندر رجایی</div></div>
+</div>
+
+<div class="alert">⚠ انفجار ۲۶ آوریل ۲۰۲۵ در بندر رجایی: ۵۷ کشته و بیش از ۱۰۰۰ مجروح — عملیات بندر ظرف چند روز از سر گرفته شد. ظرفیت ۱۰۰ میلیون تن در سال و 6.65M TEU توسط Iran International و The National تأیید شده است.</div>
+
+<div class="alert-red alert">⚠ بحران هرمز ۲۰۲۶: از ۲۸ فوریه ۲۰۲۶ تنگه هرمز عملاً بسته شده است. میانگین ترانزیت روزانه از ۱۲۹ کشتی به ۶ کشتی رسیده (UNCTAD، ۱ آوریل ۲۰۲۶). بیش از ۱۵۰ کشتی غیرتحریمی، از جمله ۶۲ نفتکش VLCC، در خلیج فارس گیر کرده‌اند (Lloyd's List). بیش از ۱۶۲ میلیون بشکه نفت دیگر در معرض خطر است (IEA).</div>
+
+<!-- SOUTHERN PORTS -->
+<div class="p mb">
+  <div class="p-title">بنادر جنوبی — خلیج فارس و دریای عمان <span class="p-src">منبع: PMO Iran · UNESCAP · Iran Int'l · The National · India Shipping News · EIA</span></div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead>
+      <tr><th>بندر</th><th>ظرفیت سالانه</th><th>زیرساخت و توسعه</th><th>وضعیت / آسیب</th><th>عمق آب</th><th>محدودیت‌ها</th><th>مزیت رقابتی</th><th>کالاهای اصلی</th><th>راه‌آهن</th><th>فاصله تا تهران/اهواز</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong style="color:var(--acc);">🏗 رجایی (بندرعباس)</strong><br><span class="rsub">IRSRP | ۳۲°۲۰N</span></td>
+        <td style="color:var(--grn);font-weight:800;">100M ton/yr<br>6.65M TEU<br>۴۰+ اسکله</td>
+        <td>۴۸۰۰ هکتار، ۱۰ اسکله کانتینری با عمق ۱۳–۱۷ متر، ۲۳.۵ کیلومتر ریل داخلی، ترمینال جدید $430M، پذیرش کشتی‌های Panamax تا 18,400 TEU؛ عمق ۱۷ متر در حال ساخت</td>
+        <td><span class="bd bd-r">انفجار آوریل ۲۰۲۵</span><br><span style="font-size:10px;">عملیات ظرف ۷۲ ساعت بازگشت</span></td>
+        <td>13–16m</td>
+        <td>هرمز بسته — عملاً قطع ارتباط؛ بدون SWIFT؛ بدون بیمه‌گران غربی؛ فاصله ریل تا اسکله حدود ۱.۵ کیلومتر</td>
+        <td style="color:var(--grn);">۸۵٪ ترافیک کانتینری ایران؛ هاب اصلی INSTC؛ بزرگ‌ترین بندر کانتینری آسیا–خاورمیانه</td>
+        <td>کانتینر، نفت، سنگ‌آهن، مواد شیمیایی، خودرو، غلات</td>
+        <td><span class="bd bd-g">✓ بله</span><br><span style="font-size:10px;">تهران–بندرعباس</span></td>
+        <td>1,381 km<br><span style="font-size:10px;">جاده: ~۱۲ ساعت / قطار: ~۱۸ ساعت</span></td>
+        </tr>
+      <tr>
+        <td><strong style="color:var(--acc);">⚓ باهنر (بندرعباس)</strong><br><span class="rsub">IRBND</span></td>
+        <td>37M ton/yr<br>1M TEU</td>
+        <td>بندر قدیمی‌تر بندرعباس؛ ترمینال عمومی، RoRo، خودروبر</td>
+        <td><span class="bd bd-a">آسیب غیرمستقیم</span></td>
+        <td>—</td>
+        <td>هرمز بسته؛ زیرساخت قدیمی‌تر</td>
+        <td>صادرات سنتی: فرش، زعفران، پسته؛ واردات: چای، قند</td>
+        <td>فرش، پسته، خودرو، فرآورده نفتی</td>
+        <td><span class="bd bd-g">✓ بله</span></td>
+        <td>1,050 km</td>
+        </tr>
+      <tr>
+        <td><strong style="color:var(--teal);">🌊 چابهار (شهید بهشتی)</strong><br><span class="rsub">بیرون از هرمز | ۲۵°۲۰N</span></td>
+        <td style="color:var(--grn);font-weight:800;">100K TEU فعلی<br>8.5M ton (فاز ۱)</td>
+        <td>۲ اسکله کانتینری ۳۶۰ متری، عمق ۱۶ متر برای کشتی‌های Post-Panamax، ۶ جرثقیل موبایل هندی، اپراتور IPGL، توسعه به ۵۰۰K TEU در فاز ۲، سرمایه‌گذاری هند $370M، ریل ۶۲۸ کیلومتری تا زاهدان در حال ساخت</td>
+        <td><span class="bd bd-g">فعال — بدون آسیب</span><br><span style="font-size:10px;">بیرون از تنگه هرمز</span></td>
+        <td>16m</td>
+        <td>تحریم OFAC با waiver تا آوریل ۲۰۲۶؛ راه‌آهن هنوز ناقص؛ ظرفیت فعلی محدود به ۱۰۰K TEU</td>
+        <td style="color:var(--grn);">تنها بندر اقیانوسی ایران؛ ۷۰۰ مایل از هند؛ هاب INSTC؛ دسترسی به افغانستان و آسیای مرکزی</td>
+        <td>کانتینر، فله خشک، ماشین‌آلات، کالای افغانستان و آسیای مرکزی</td>
+        <td><span class="bd bd-r">× در دست ساخت</span><br><span style="font-size:10px;">۶۲۸ کیلومتر تا زاهدان</span></td>
+        <td>1,850 km<br><span style="font-size:10px;">جاده: ~۲۰ ساعت</span></td>
+        </tr>
+      <tr>
+        <td><strong style="color:var(--acc);">🛢 بوشهر</strong></td>
+        <td>550K TEU<br>15M ton/yr</td>
+        <td>بندر تجاری، پشتیبانی نفتی، ترمینال نفت خام؛ ترمینال جدید پارس جنوبی در دست احداث</td>
+        <td><span class="bd bd-r">هرمز بسته</span></td>
+        <td>10m</td>
+        <td>هرمز بسته؛ ظرفیت محدود؛ ریل محدود</td>
+        <td>نزدیک به میادین گاز پارس جنوبی</td>
+        <td>نفت، گاز LNG، پتروشیمی، مواد عمومی</td>
+        <td><span class="bd bd-a">محدود</span></td>
+        <td>1,100 km<br><span style="font-size:10px;">جاده: ~۶ ساعت</span></td>
+        </tr>
+      <tr>
+        <td><strong style="color:var(--acc);">⚓ ماهشهر</strong></td>
+        <td>25M ton/yr<br>هاب پتروشیمی اصلی</td>
+        <td>ترمینال پتروشیمی، اسکله‌های تخصصی شیمیایی؛ اسکله LPG جدید در دست احداث</td>
+        <td><span class="bd bd-r">هرمز بسته</span></td>
+        <td>14m</td>
+        <td>هرمز بسته؛ کاملاً تخصصی پتروشیمی</td>
+        <td>نزدیک‌ترین بندر صادراتی پتروشیمی به اروپا (از طریق سوئز)</td>
+        <td>پتروشیمی، متانول، اوره، گوگرد، LPG</td>
+        <td><span class="bd bd-g">✓ بله</span></td>
+        <td>190 km<br><span style="font-size:10px;">جاده: ~۲ ساعت تا اهواز / 1,150km تا تهران</span></td>
+        </tr>
+      <tr>
+        <td><strong style="color:var(--grn);">🛳 بندر امام خمینی</strong><br><span class="rsub">IRIMK | شمال خلیج فارس</span></td>
+        <td>40M ton/yr</td>
+        <td>۱۸ اسکله، ترمینال کانتینری، سیلوی غلات؛ توسعه سیلوی غلات تا ظرفیت ۱M ton</td>
+        <td><span class="bd bd-r">هرمز بسته</span></td>
+        <td>10–12m</td>
+        <td>هرمز بسته؛ مشکل گِل و رسوب‌گذاری</td>
+        <td>نزدیک‌ترین بندر به اهواز؛ تامین غلات برای خوزستان</td>
+        <td>غلات، فولاد، ماشین‌آلات، کالای عمومی</td>
+        <td><span class="bd bd-g">✓ بله</span></td>
+        <td>1,100 km<br><span style="font-size:10px;">جاده: ~۱.۵ ساعت تا اهواز</span></td>
+        </tr>
+    </tbody>
+   </table>
+  </div>
+</div>
+
+<!-- NORTHERN PORTS -->
+<div class="p mb">
+  <div class="p-title">بنادر شمالی — دریای خزر <span class="p-src">منبع: INSTC Reports · Tarangya · PMO Iran</span></div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>بندر</th><th>ظرفیت</th><th>زیرساخت</th><th>مزیت رقابتی</th><th>کالاهای اصلی</th><th>راه‌آهن</th><th>فاصله تا اهواز</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong style="color:var(--grn);">🚢 انزلی</strong></td>
+        <td>15M ton/yr</td>
+        <td>قدیمی‌ترین بندر شمال، بندر تجاری روسیه</td>
+        <td style="color:var(--grn);">دروازه اصلی ورود چوب، کاغذ و فولاد روسیه به ایران</td>
+        <td>چوب، فولاد، غلات، کانتینر INSTC</td>
+        <td><span class="bd bd-a">نزدیک (رشت)</span></td>
+        <td>1,200 km / ~۱۴ ساعت</td>
+        </tr>
+      <tr>
+        <td><strong style="color:var(--grn);">🚢 امیرآباد</strong></td>
+        <td>10M ton/yr</td>
+        <td>تنها بندر با RoRo ریلی — قطار مستقیماً روی کشتی بارگذاری می‌شود</td>
+        <td style="color:var(--grn);">کنسرسیوم روسیه–ایران–هند ۲۰۲۶؛ RoRo ریلی منحصربه‌فرد در منطقه</td>
+        <td>خودرو، ماشین‌آلات، کانتینر، فله خشک</td>
+        <td><span class="bd bd-g">✓ RoRo ریلی</span></td>
+        <td>1,300 km / ~۱۵ ساعت</td>
+        </tr>
+      <tr>
+        <td><strong>🚢 نوشهر</strong></td>
+        <td>5M ton/yr</td>
+        <td>بندر کوچک تجاری و گردشگری</td>
+        <td>محدود</td>
+        <td>کالای عمومی، مسافر</td>
+        <td><span class="bd bd-a">محدود</span></td>
+        <td>1,300 km</td>
+        </tr>
+      <tr>
+        <td><strong>🚢 ترکمن</strong></td>
+        <td>3M ton/yr</td>
+        <td>بندر کوچک با دسترسی به ترکمنستان</td>
+        <td>ترانزیت آسیای مرکزی</td>
+        <td>فله خشک، غلات، کانتینر کوچک</td>
+        <td><span class="bd bd-a">محدود</span></td>
+        <td>1,400 km</td>
+        </tr>
+    </tbody>
+   </table>
+  </div>
+</div>
+
+<!-- LAND BORDERS -->
+<div class="p mb">
+  <div class="p-title">گذرگاه‌های مرزی — ظرفیت، کالا، هزینه، معطلی <span class="p-src">منبع: IRICA · PMO · COMCEC · گمرک ایران</span></div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>گذرگاه</th><th>کشور مقابل</th><th>ظرفیت روزانه</th><th>کالاهای اصلی</th><th>مزیت</th><th>محدودیت</th><th>فاصله تا اهواز</th><th>جاده/ریل</th><th>هزینه ترانزیت</th><th>زمان معطلی</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong style="color:var(--acc);">بازرگان</strong></td>
+        <td>🇹🇷 ترکیه</td>
+        <td>2,000 کامیون/روز</td>
+        <td>ماشین‌آلات، الکترونیک، نساجی، مواد غذایی</td>
+        <td style="color:var(--grn);">پرترافیک‌ترین مرز ایران-ترکیه؛ دسترسی به اروپا</td>
+        <td>ترافیک سنگین؛ بدون ریل مستقیم</td>
+        <td>1,600 km / ~۱۸ ساعت</td>
+        <td><span class="bd bd-g">جاده ✓</span> <span class="bd bd-r">ریل ×</span></td>
+        <td>$300–500/ton</td>
+        <td>۱–۴ روز</td>
+        </tr>
+      <tr>
+        <td><strong style="color:var(--acc);">رازی</strong></td>
+        <td>🇹🇷 ترکیه</td>
+        <td>ریلی + جاده‌ای</td>
+        <td>فله خشک، کانتینر ریلی</td>
+        <td style="color:var(--grn);">تنها گذرگاه ریلی ایران–ترکیه</td>
+        <td>ظرفیت ریل محدود؛ اختلاف عرض خط</td>
+        <td>1,650 km / ~۱۹ ساعت</td>
+        <td><span class="bd bd-g">جاده ✓</span> <span class="bd bd-g">ریل ✓</span></td>
+        <td>$250–400/ton</td>
+        <td>۲–۵ روز</td>
+        </tr>
+      <tr>
+        <td><strong>پل‌دشت / سرو</strong></td>
+        <td>🇹🇷 ترکیه</td>
+        <td>200 کامیون/روز</td>
+        <td>میوه، سبزیجات، کالای کشاورزی</td>
+        <td>مسیر کوتاه‌تر آذربایجان غربی به ترکیه</td>
+        <td>ظرفیت کم؛ جاده کوهستانی</td>
+        <td>1,700 km</td>
+        <td><span class="bd bd-g">جاده ✓</span></td>
+        <td>$280–420/ton</td>
+        <td>۱–۳ روز</td>
+        </tr>
+      <tr>
+        <td><strong style="color:var(--acc);">خسروی</strong></td>
+        <td>🇮🇶 عراق</td>
+        <td>800 کامیون/روز</td>
+        <td>مواد غذایی، مصالح ساختمانی، پوشاک</td>
+        <td style="color:var(--grn);">اصلی‌ترین مرز تجاری ایران–عراق (کرمانشاه)</td>
+        <td>ریسک امنیتی؛ معطلی گمرکی بالا</td>
+        <td>450 km / ~۵ ساعت</td>
+        <td><span class="bd bd-g">جاده ✓</span></td>
+        <td>$150–250/ton</td>
+        <td>۲–۷ روز</td>
+        </tr>
+      <tr>
+        <td><strong>پرویزخان</strong></td>
+        <td>🇮🇶 عراق</td>
+        <td>500 کامیون/روز</td>
+        <td>کالای تجاری، اقلیم کردستان</td>
+        <td>دسترسی به اقلیم کردستان عراق</td>
+        <td>ریسک منطقه‌ای؛ دوگانگی کردستان–بغداد<\/span>
+        <td>440 km / ~۵ ساعت<\/span>
+        <td><span class="bd bd-g">جاده ✓</span><\/span>
+        <td>$130–220/ton<\/span>
+        <td>۲–۵ روز<\/span>
+        </span>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--amb);">شلمچه</strong></td>
+        <td>🇮🇶 عراق<\/span>
+        <td>1,200 کامیون/روز<\/span>
+        <td>پتروشیمی، مصالح ساختمانی، مواد غذایی<\/span>
+        <td style="color:var(--grn);">نزدیک‌ترین مرز به بصره؛ پروژه ریل شلمچه–بصره<\/span>
+        <td>پروژه ریل در مرحله مذاکره؛ ترافیک سنگین زائرین<\/span>
+        <td>100 km / ~۱.۵ ساعت<\/span>
+        <td><span class="bd bd-g">جاده ✓</span> <span class="bd bd-a">ریل در دست احداث</span><\/span>
+        <td>$80–150/ton<\/span>
+        <td>۱–۴ روز<\/span>
+        </span>
+      </tr>
+      <tr>
+        <td><strong>مهران (سردار سلیمانی)</strong><\/span>
+        <td>🇮🇶 عراق<\/span>
+        <td>400 کامیون/روز<\/span>
+        <td>کالای زائرین، کالای تجاری<\/span>
+        <td>دسترسی به کربلا و نجف<\/span>
+        <td>ظرفیت کم؛ اشباع در ایام اربعین<\/span>
+        <td>350 km / ~۴ ساعت<\/span>
+        <td><span class="bd bd-g">جاده ✓</span><\/span>
+        <td>$120–200/ton<\/span>
+        <td>۳–۱۴ روز (اربعین)<\/span>
+        </span>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--teal);">سرخس</strong><\/span>
+        <td>🇹🇲 ترکمنستان<\/span>
+        <td>ریلی اصلی<\/span>
+        <td>گاز، نفت، فله خشک، کانتینر<\/span>
+        <td style="color:var(--grn);">ریل مستقیم به آسیای مرکزی، چین و روسیه<\/span>
+        <td>کنترل ترکمنستان؛ معطلی گمرکی<\/span>
+        <td>1,800 km / ~۲۰ ساعت<\/span>
+        <td><span class="bd bd-g">جاده ✓</span> <span class="bd bd-g">ریل ✓</span><\/span>
+        <td>$200–350/ton<\/span>
+        <td>۳–۸ روز<\/span>
+        </span>
+      </tr>
+      <tr>
+        <td><strong>دوغارون</strong><\/span>
+        <td>🇦🇫 افغانستان<\/span>
+        <td>600 کامیون/روز<\/span>
+        <td>مواد غذایی، سوخت، ماشین‌آلات<\/span>
+        <td>مسیر اصلی واردات افغانستان<\/span>
+        <td>ریسک طالبان؛ بدون ریل<\/span>
+        <td>1,900 km<\/span>
+        <td><span class="bd bd-g">جاده ✓</span><\/span>
+        <td>$180–300/ton<\/span>
+        <td>۳–۱۰ روز<\/span>
+        </span>
+      </tr>
+      <tr>
+        <td><strong>میرجاوه</strong><\/span>
+        <td>🇵🇰 پاکستان<\/span>
+        <td>300 کامیون/روز<\/span>
+        <td>فرآورده نفتی، کالای مصرفی<\/span>
+        <td>گسترش بالقوه کریدور CPEC<\/span>
+        <td>زیرساخت ضعیف؛ ریسک امنیتی<\/span>
+        <td>1,800 km<\/span>
+        <td><span class="bd bd-g">جاده ✓</span><\/span>
+        <td>$150–280/ton<\/span>
+        <td>۴–۱۲ روز<\/span>
+        </span>
+      </tr>
+      <tr>
+        <td><strong>آستارا</strong><\/span>
+        <td>🇦🇿 آذربایجان<\/span>
+        <td>ریلی + جاده‌ای<\/span>
+        <td>فولاد، چوب، کالای روسیه<\/span>
+        <td style="color:var(--grn);">گذرگاه غربی INSTC؛ ریل مستقیم به آذربایجان<\/span>
+        <td>مناقشه قره‌باغ؛ روابط پرتنش ایران–آذربایجان<\/span>
+        <td>1,200 km<\/span>
+        <td><span class="bd bd-g">جاده ✓</span> <span class="bd bd-g">ریل ✓</span><\/span>
+        <td>$180–300/ton<\/span>
+        <td>۲–۶ روز<\/span>
+        </span>
+      </tr>
+    <\/tbody>
+   <\/table>
+  <\/div>
+<\/div>
+
+<div class="g2">
+  <div class="p">
+    <div class="p-title">امکانات ترانزیتی ویژه <span class="p-src">منبع: PMO · IRICA</span></div>
+    <div class="sig"><span class="sig-lvl bd-g">TIR</span><span class="sig-name">کاپوتاژ TIR — عبور با مهر و موم بدون باز کردن بار</span><span class="sig-val">مرزهای ترکیه، عراق، ترکمنستان</span></div>
+    <div class="sig"><span class="sig-lvl bd-b">ATA</span><span class="sig-name">دفترچه ATA — ورود موقت بدون گمرک برای نمایشگاه‌ها</span><span class="sig-val">بنادر و مرزهای بین‌المللی</span></div>
+    <div class="sig"><span class="sig-lvl bd-p">FTZ</span><span class="sig-name">مناطق آزاد: کیش، قشم، چابهار، منطقه آزاد ارس</span><span class="sig-val">معافیت گمرکی</span></div>
+    <div class="sig"><span class="sig-lvl bd-a">INSTC</span><span class="sig-name">کریدور شمال–جنوب: هند → رجایی → سرخس → روسیه</span><span class="sig-val">۳۰٪ کاهش هزینه نسبت به سوئز</span></div>
+    <div class="sig"><span class="sig-lvl bd-g">RoRo</span><span class="sig-name">امیرآباد: تنها RoRo ریلی خزر — قطار روی کشتی</span><span class="sig-val">ابتکار ۲۰۲۶ روسیه–ایران</span></div>
+    <div class="sig"><span class="sig-lvl bd-r">⚠</span><span class="sig-name">کالاهای ممنوع عبور: اسلحه، مواد هسته‌ای، مواد مخدر، کالای تحت تحریم OFAC</span><span class="sig-val">بدون استثنا</span></div>
+  </div>
+  <div class="p">
+    <div class="p-title">کالاهای اصلی صادرات/واردات هر مسیر</div>
+    <div class="sig"><span class="sig-lvl bd-b">ترکیه</span><span class="sig-name"><strong>صادرات ایران:</strong> پتروشیمی، پسته، زعفران، فرش</span></div>
+    <div class="sig"><span class="sig-lvl bd-b">ترکیه</span><span class="sig-name"><strong>واردات ایران:</strong> ماشین‌آلات، نساجی، الکترونیک، فولاد</span></div>
+    <div class="sig"><span class="sig-lvl bd-a">عراق</span><span class="sig-name"><strong>صادرات ایران:</strong> مواد غذایی، پتروشیمی، سیمان، برق</span></div>
+    <div class="sig"><span class="sig-lvl bd-a">عراق</span><span class="sig-name"><strong>واردات ایران:</strong> نفت خام (خوزستان)، ماشین‌آلات</span></div>
+    <div class="sig"><span class="sig-lvl bd-t">روسیه</span><span class="sig-name"><strong>واردات ایران:</strong> گندم، فولاد، چوب، لوازم خانگی (INSTC)</span></div>
+    <div class="sig"><span class="sig-lvl bd-t">روسیه</span><span class="sig-name"><strong>صادرات ایران:</strong> پتروشیمی، میوه، خشکبار، فرش</span></div>
+    <div class="sig"><span class="sig-lvl bd-p">آسیا</span><span class="sig-name"><strong>رجایی/چابهار:</strong> نفت خام، LNG، سنگ‌آهن، پتروشیمی</span></div>
+  </div>
+</div>
+
+</div>
+
+</div>
+
+<script>
+function sw(i){
+  document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('on',i===j));
+  document.querySelectorAll('.pane').forEach((p,j)=>p.classList.toggle('on',i===j));
+}
+</script>
+</body>
+</html>
 
 <!-- ========== صفحه پنجم: فرصت‌های سرمایه‌گذاری ========== -->
 <div id="dash-investment" class="dash-section">
