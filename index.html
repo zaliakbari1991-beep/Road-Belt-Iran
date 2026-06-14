@@ -1405,6 +1405,18 @@
   </div>
   
   <div id="corridors-tab-comparison" class="corridors-tab-pane">
+  <!-- ===== بخش تب‌ها (فقط ساختار تب، بدون تغییر در محتوا یا داده) ===== -->
+  <div class="tab-buttons" style="display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 24px; border-bottom: 1px solid #e2edf2; padding: 0 0 8px 0;">
+    <button class="tab-btn active" data-tab="tab1" style="background: transparent; border: none; padding: 8px 16px; font-size: 0.85rem; font-weight: 600; cursor: pointer; border-radius: 24px; transition: 0.2s; font-family: inherit;">۱ — زیرساخت، مسیر و زمان ترانزیت</button>
+    <button class="tab-btn" data-tab="tab2" style="background: transparent; border: none; padding: 8px 16px; font-size: 0.85rem; font-weight: 600; cursor: pointer; border-radius: 24px; transition: 0.2s; font-family: inherit;">۲ — هزینه‌ها: حمل، گمرک، تأخیر و اداری</button>
+    <button class="tab-btn" data-tab="tab3" style="background: transparent; border: none; padding: 8px 16px; font-size: 0.85rem; font-weight: 600; cursor: pointer; border-radius: 24px; transition: 0.2s; font-family: inherit;">۳ — ریسک‌ها: امنیتی، ژئوپلیتیک، بیمه و مسیرهای پشتیبان</button>
+    <button class="tab-btn" data-tab="tab4" style="background: transparent; border: none; padding: 8px 16px; font-size: 0.85rem; font-weight: 600; cursor: pointer; border-radius: 24px; transition: 0.2s; font-family: inherit;">۴ — بار، داکیومنت‌ها، انطباق گمرکی و مجوزها</button>
+    <button class="tab-btn" data-tab="tab5" style="background: transparent; border: none; padding: 8px 16px; font-size: 0.85rem; font-weight: 600; cursor: pointer; border-radius: 24px; transition: 0.2s; font-family: inherit;">۵ — استراتژی BRI تا ۲۰۳۰ و سرمایه‌گذاری‌های کلیدی</button>
+    <button class="tab-btn" data-tab="tab6" style="background: transparent; border: none; padding: 8px 16px; font-size: 0.85rem; font-weight: 600; cursor: pointer; border-radius: 24px; transition: 0.2s; font-family: inherit;">۶ — خلاصه مقایسه‌ای تمام کریدورها</button>
+  </div>
+
+  <!-- محتوای تب ۱ -->
+  <div id="tab1" class="tab-content-item" style="display: block;">
     <div class="wrap-new">
       <div class="top-new">
         <h1>جدول مقایسه جامع کریدورهای ابریشم</h1>
@@ -1436,6 +1448,25 @@
         </div>
       </div>
 
+      <div style="margin-top:1.5rem;padding:12px 0;border-top:0.5px solid var(--border);">
+        <p style="font-size:11px;color:var(--text-dim);">📢 این داشبورد برای اهداف تحقیقاتی است. داده‌های عملیاتی، تعرفه‌های دقیق، و شرایط گمرکی باید از اپراتورهای لجستیکی معتبر دریافت شوند. آخرین به‌روزرسانی: ژوئن ۲۰۲۶</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- محتوای تب ۲ -->
+  <div id="tab2" class="tab-content-item" style="display: none;">
+    <div class="wrap-new">
+      <div class="top-new">
+        <h1>جدول مقایسه جامع کریدورهای ابریشم</h1>
+        <span class="src-badge-new">داده‌های تأیید‌شده ۲۰۲۴–۲۰۲۶</span>
+      </div>
+      <div class="legend-new">
+        <div class="li-new"><div class="ld-new" style="background:#639922"></div>ریسک پایین</div>
+        <div class="li-new"><div class="ld-new" style="background:#EF9F27"></div>ریسک متوسط</div>
+        <div class="li-new"><div class="ld-new" style="background:#E24B4A"></div>ریسک بالا</div>
+      </div>
+
       <div class="section-card-new">
         <div class="sec-header-new">
           <h2>۲ — هزینه‌ها: حمل، گمرک، تأخیر و اداری</h2>
@@ -1446,11 +1477,30 @@
             <thead><tr><th>نوع هزینه</th><th>ترانس‌سیبری</th><th>راه ابریشم آبی</th><th>کریدور میانی (TITR)</th><th>راه ابریشم قطبی</th></tr></thead>
             <tbody>
               <tr><td>هزینه حمل (FEU)</td><td>تقریبا$۳,۲۴۰<br><span class="note-new">ERA Index میانگین ۲۰۲۴</span></td><td>$۱,۵۰۰–۷,۹۶۱<br><span class="note-new">Drewry WCI; بحران Suez ۲۰۲۴</span></td><td>$۵,۰۰۰–۷,۰۰۰ (چین→ترکیه)<br><span class="note-new">+$۱,۰۰۰–۲,۰۰۰ تا اروپا</span></td><td>بالا — در حال تعریف<br><span class="note-new">+هزینه یخ‌شکن $۵۰K–۲۰۰K/سفر</span></td></tr>
-              <tr><td>هزینه تغییر گیج</td><td>$۸۰–۲۰۰/TEU (هر نقطه)</td><td>ندارد</td><td>$۸۰–۲۰۰/TEU (هر نقطه)</td><td>ندارد</td></tr>
+              <tr><td>هزینه تغییر گیج</th><td>$۸۰–۲۰۰/TEU (هر نقطه)</th><td>ندارد</th><td>$۸۰–۲۰۰/TEU (هر نقطه)</th><td>ندارد</th></tr>
               <tr><td>هزینه بیمه اضافی</td><td>نیم تا دو درصد اضافه بر اساس ارزش بار<br><span class="note-new">ریسک تحریم + مصادره</span></td><td>به اضافه ۲ تا ۵ درصد برای بدنه کشتی (Hull)<br><span class="note-new">پریمیوم جنگی دریای سرخ</span></td><td>به اضافه ۰.۲ تا ۰.۵ درصد<br><span class="note-new">پایین‌ترین پریمیوم بین ریلی</span></td><td>+۲–۵درصد Hull<br><span class="note-new">ریسک یخ + قطبی</span></td></tr>
             </tbody>
           </table>
         </div>
+      </div>
+
+      <div style="margin-top:1.5rem;padding:12px 0;border-top:0.5px solid var(--border);">
+        <p style="font-size:11px;color:var(--text-dim);">📢 این داشبورد برای اهداف تحقیقاتی است. داده‌های عملیاتی، تعرفه‌های دقیق، و شرایط گمرکی باید از اپراتورهای لجستیکی معتبر دریافت شوند. آخرین به‌روزرسانی: ژوئن ۲۰۲۶</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- محتوای تب ۳ -->
+  <div id="tab3" class="tab-content-item" style="display: none;">
+    <div class="wrap-new">
+      <div class="top-new">
+        <h1>جدول مقایسه جامع کریدورهای ابریشم</h1>
+        <span class="src-badge-new">داده‌های تأیید‌شده ۲۰۲۴–۲۰۲۶</span>
+      </div>
+      <div class="legend-new">
+        <div class="li-new"><div class="ld-new" style="background:#639922"></div>ریسک پایین</div>
+        <div class="li-new"><div class="ld-new" style="background:#EF9F27"></div>ریسک متوسط</div>
+        <div class="li-new"><div class="ld-new" style="background:#E24B4A"></div>ریسک بالا</div>
       </div>
 
       <div class="section-card-new">
@@ -1470,6 +1520,25 @@
         </div>
       </div>
 
+      <div style="margin-top:1.5rem;padding:12px 0;border-top:0.5px solid var(--border);">
+        <p style="font-size:11px;color:var(--text-dim);">📢 این داشبورد برای اهداف تحقیقاتی است. داده‌های عملیاتی، تعرفه‌های دقیق، و شرایط گمرکی باید از اپراتورهای لجستیکی معتبر دریافت شوند. آخرین به‌روزرسانی: ژوئن ۲۰۲۶</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- محتوای تب ۴ -->
+  <div id="tab4" class="tab-content-item" style="display: none;">
+    <div class="wrap-new">
+      <div class="top-new">
+        <h1>جدول مقایسه جامع کریدورهای ابریشم</h1>
+        <span class="src-badge-new">داده‌های تأیید‌شده ۲۰۲۴–۲۰۲۶</span>
+      </div>
+      <div class="legend-new">
+        <div class="li-new"><div class="ld-new" style="background:#639922"></div>ریسک پایین</div>
+        <div class="li-new"><div class="ld-new" style="background:#EF9F27"></div>ریسک متوسط</div>
+        <div class="li-new"><div class="ld-new" style="background:#E24B4A"></div>ریسک بالا</div>
+      </div>
+
       <div class="section-card-new">
         <div class="sec-header-new">
           <h2>۴ — بار، داکیومنت‌ها، انطباق گمرکی و مجوزها</h2>
@@ -1484,6 +1553,25 @@
             </tbody>
           </table>
         </div>
+      </div>
+
+      <div style="margin-top:1.5rem;padding:12px 0;border-top:0.5px solid var(--border);">
+        <p style="font-size:11px;color:var(--text-dim);">📢 این داشبورد برای اهداف تحقیقاتی است. داده‌های عملیاتی، تعرفه‌های دقیق، و شرایط گمرکی باید از اپراتورهای لجستیکی معتبر دریافت شوند. آخرین به‌روزرسانی: ژوئن ۲۰۲۶</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- محتوای تب ۵ -->
+  <div id="tab5" class="tab-content-item" style="display: none;">
+    <div class="wrap-new">
+      <div class="top-new">
+        <h1>جدول مقایسه جامع کریدورهای ابریشم</h1>
+        <span class="src-badge-new">داده‌های تأیید‌شده ۲۰۲۴–۲۰۲۶</span>
+      </div>
+      <div class="legend-new">
+        <div class="li-new"><div class="ld-new" style="background:#639922"></div>ریسک پایین</div>
+        <div class="li-new"><div class="ld-new" style="background:#EF9F27"></div>ریسک متوسط</div>
+        <div class="li-new"><div class="ld-new" style="background:#E24B4A"></div>ریسک بالا</div>
       </div>
 
       <div class="section-card-new">
@@ -1507,6 +1595,25 @@
             </tbody>
           </table>
         </div>
+      </div>
+
+      <div style="margin-top:1.5rem;padding:12px 0;border-top:0.5px solid var(--border);">
+        <p style="font-size:11px;color:var(--text-dim);">📢 این داشبورد برای اهداف تحقیقاتی است. داده‌های عملیاتی، تعرفه‌های دقیق، و شرایط گمرکی باید از اپراتورهای لجستیکی معتبر دریافت شوند. آخرین به‌روزرسانی: ژوئن ۲۰۲۶</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- محتوای تب ۶ -->
+  <div id="tab6" class="tab-content-item" style="display: none;">
+    <div class="wrap-new">
+      <div class="top-new">
+        <h1>جدول مقایسه جامع کریدورهای ابریشم</h1>
+        <span class="src-badge-new">داده‌های تأیید‌شده ۲۰۲۴–۲۰۲۶</span>
+      </div>
+      <div class="legend-new">
+        <div class="li-new"><div class="ld-new" style="background:#639922"></div>ریسک پایین</div>
+        <div class="li-new"><div class="ld-new" style="background:#EF9F27"></div>ریسک متوسط</div>
+        <div class="li-new"><div class="ld-new" style="background:#E24B4A"></div>ریسک بالا</div>
       </div>
 
       <div class="section-card-new">
@@ -1535,6 +1642,49 @@
     </div>
   </div>
 </div>
+
+<script>
+  // فقط عملیات سوییچ تب‌ها - بدون تغییر در فونت یا داده‌ها
+  (function() {
+    const btns = document.querySelectorAll('#corridors-tab-comparison .tab-btn');
+    const panes = {
+      tab1: document.querySelector('#corridors-tab-comparison #tab1'),
+      tab2: document.querySelector('#corridors-tab-comparison #tab2'),
+      tab3: document.querySelector('#corridors-tab-comparison #tab3'),
+      tab4: document.querySelector('#corridors-tab-comparison #tab4'),
+      tab5: document.querySelector('#corridors-tab-comparison #tab5'),
+      tab6: document.querySelector('#corridors-tab-comparison #tab6')
+    };
+    
+    function activateTab(tabId) {
+      for (let key in panes) {
+        if (panes[key]) panes[key].style.display = 'none';
+      }
+      if (panes[tabId]) panes[tabId].style.display = 'block';
+      
+      btns.forEach(btn => {
+        btn.style.background = 'transparent';
+        btn.style.fontWeight = '600';
+        btn.style.color = '#1a2c3e';
+      });
+      const activeBtn = Array.from(btns).find(btn => btn.getAttribute('data-tab') === tabId);
+      if (activeBtn) {
+        activeBtn.style.background = '#eef2f8';
+        activeBtn.style.color = '#1d6f2e';
+      }
+    }
+    
+    btns.forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const tabId = this.getAttribute('data-tab');
+        if (tabId && panes[tabId]) activateTab(tabId);
+      });
+    });
+    
+    // فعال کردن تب اول پیش‌فرض
+    if (panes.tab1) activateTab('tab1');
+  })();
+</script>
 
 <!-- ========== صفحه سوم: کشتیرانی  ========== -->
 <div id="dash-shipping" class="dash-section">
