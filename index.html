@@ -877,7 +877,7 @@
     <button class="nav-btn" onclick="showDash('carec')">کریدورهای BRI</button>
     <button class="nav-btn" onclick="showDash('ahvaz')">مقصد:اهواز</button>
     <button class="nav-btn" onclick="showDash('portcompare')">مقایسه بنادر مهم</button>
-    <button class="nav-btn" onclick="showDash('borderpoints')">نقاط مرزی مهم</button>
+    <button class="nav-btn" onclick="showDash('border')">نقاط مرزی مهم</button>
     <button class="nav-btn" onclick="showDash('shipping')">کشتیرانی</button>
     <button class="nav-btn " onclick="showDash('suggestions')">پیشنهادات</button>
     <button class="nav-btn" onclick="showDash('investment')">منابع</button>
@@ -1913,8 +1913,8 @@ function switchShippingTab(index) {
 }
 </script>
  
-<!-- ========== صفحه چهارم: کشورها ========== -->
-<div id="dash-countries" class="dash-section">
+<!-- ========== صفحه چهارم: نقاط مرزی مهم ========== -->
+<div id="dash-border" class="dash-section">
   <div class="border-points">
     <div class="countries-list"><h4>کشورهای مسیر راه ابریشم و همسایگان ایران</h4><div id="country-list-items"></div></div>
     <div class="country-detail" id="country-detail"><h4 id="country-detail-title">انتخاب کشور</h4><div id="country-detail-content" style="color:#999; text-align:center; padding:40px 0;">برای مشاهده اطلاعات روی هر کشور کلیک کنید</div></div>
@@ -3332,7 +3332,7 @@ renderPortsGridPro();
 renderRoutesPro();
 
 
-// ======================== داده‌های صفحه کشورها ========================
+// ======================== داده‌های صفحه نقاط مرزی مهم  ========================
 const countriesData = {
   china: { name: 'چین', capital: 'پکن', population: '۱.۴ میلیارد', keyPorts: 'شانگهای، نینگبو، شنژن', role: 'مبدأ اصلی صادرات، تولید ۳۰درصد کالاهای جهانی', corridor: 'راه ابریشم - مبدأ' },
   iran: { name: 'ایران', capital: 'تهران', population: '۸۵ میلیون', keyPorts: 'بندرعباس، امام خمینی، انزلی', role: 'مرکز ترانزیت شمال-جنوب و شرق-غرب', corridor: 'INSTC, TITR' },
