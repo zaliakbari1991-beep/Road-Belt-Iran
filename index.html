@@ -2085,14 +2085,12 @@ body{font-family:'Vazirmatn','Tahoma','Segoe UI',sans-serif;background:#f4f6f9;c
 <body>
 <div class="wrap">
 
-<div class="border">
   <!-- اصلاح شد: div border با محتوای کامل -->
   <div class="border-meta">
     <span><span class="pulse p-red"></span>هرمز: بحران فعال</span>
     <span><span class="pulse p-grn"></span>چابهار: فعال</span>
     <span style="color:var(--dim);">به‌روزرسانی: ۱۴ ژوئن ۲۰۲۶</span>
   </div>
-</div>
 
 <div class="tabs">
   <div class="tab on" onclick="sw(0)">۱ · جریان تجارت خارجی</div>
@@ -3027,7 +3025,7 @@ function sw(i){
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:16px;" id="stratBoxGrid">
 
           <!-- Box 1 -->
-          <div class="strat-box" onclick="toggleStratBox('sb1')">
+          <div class="" onclick="toggleStratBox('sb1')">
             <div class="sb-header">
               <div class="sb-num">۱</div>
               <div class="sb-title">ثبت دفتر نمایندگی در چین</div>
@@ -3048,7 +3046,7 @@ function sw(i){
           </div>
 
           <!-- Box 2 -->
-          <div class="strat-box" onclick="toggleStratBox('sb2')">
+          <div class="" onclick="toggleStratBox('sb2')">
             <div class="sb-header">
               <div class="sb-num">۲</div>
               <div class="sb-title">داخلی‌سازی فورواردینگ</div>
@@ -3069,7 +3067,7 @@ function sw(i){
           </div>
 
           <!-- Box 3 -->
-          <div class="strat-box" onclick="toggleStratBox('sb3')">
+          <div class="" onclick="toggleStratBox('sb3')">
             <div class="sb-header">
               <div class="sb-num">۳</div>
               <div class="sb-title">استقرار در صلاله (عمان)</div>
@@ -3090,7 +3088,7 @@ function sw(i){
           </div>
 
           <!-- Box 4 -->
-          <div class="strat-box" onclick="toggleStratBox('sb4')">
+          <div class="" onclick="toggleStratBox('sb4')">
             <div class="sb-header">
               <div class="sb-num">۴</div>
               <div class="sb-title">ارزیابی مسیر خصب</div>
@@ -3111,7 +3109,7 @@ function sw(i){
           </div>
 
           <!-- Box 5 -->
-          <div class="strat-box" onclick="toggleStratBox('sb5')">
+          <div class="" onclick="toggleStratBox('sb5')">
             <div class="sb-header">
               <div class="sb-num">۵</div>
               <div class="sb-title">مبادله کالا به کالا — تجهیزات صنعتی، کشاورزی و غیره </div>
@@ -3132,7 +3130,7 @@ function sw(i){
           </div>
 
           <!-- Box 6 -->
-          <div class="strat-box" onclick="toggleStratBox('sb6')">
+          <div class="" onclick="toggleStratBox('sb6')">
             <div class="sb-header">
               <div class="sb-num">۶</div>
               <div class="sb-title">هاب کشاورزی از طریق ترکیه</div>
@@ -3153,7 +3151,7 @@ function sw(i){
           </div>
 
           <!-- Box 7 -->
-          <div class="strat-box" onclick="toggleStratBox('sb7')">
+          <div class="" onclick="toggleStratBox('sb7')">
             <div class="sb-header">
               <div class="sb-num">۷</div>
               <div class="sb-title">بررسی مسیر پاکستان (گوادر/CPEC)</div>
@@ -3174,7 +3172,7 @@ function sw(i){
           </div>
 
           <!-- Box 8 -->
-          <div class="strat-box" onclick="toggleStratBox('sb8')">
+          <div class="" onclick="toggleStratBox('sb8')">
             <div class="sb-header">
               <div class="sb-num">۸</div>
               <div class="sb-title">سرمایه‌گذاری در تجهیزات انرژی</div>
@@ -3195,7 +3193,7 @@ function sw(i){
           </div>
 
           <!-- Box 9 -->
-          <div class="strat-box" onclick="toggleStratBox('sb9')">
+          <div class="" onclick="toggleStratBox('sb9')">
             <div class="sb-header">
               <div class="sb-num">۹</div>
               <div class="sb-title">پیشنهاد جدید </div>
@@ -3216,7 +3214,7 @@ function sw(i){
           </div>
 
           <!-- Box 10 -->
-          <div class="strat-box" onclick="toggleStratBox('sb10')">
+          <div class="" onclick="toggleStratBox('sb10')">
             <div class="sb-header">
               <div class="sb-num">۱۰</div>
               <div class="sb-title">آمادگی برای گشایش تحریم‌ها</div>
@@ -3249,7 +3247,7 @@ function sw(i){
 
 <style>
 /* ===== Strat Box Styles ===== */
-.strat-box {
+. {
   background: #fff;
   border: 1.5px solid #e5e7eb;
   border-radius: 12px;
@@ -3258,7 +3256,7 @@ function sw(i){
   transition: box-shadow 0.2s, border-color 0.2s;
   user-select: none;
 }
-.strat-box:hover {
+.:hover {
   box-shadow: 0 4px 16px rgba(0,0,0,0.08);
   border-color: #FF6B00;
 }
@@ -3875,22 +3873,14 @@ renderPortsGridPro();
 renderRoutesPro();
 
 
-// ======================== داده‌های صفحه نقاط مرزی مهم  ========================
+// ======================== داده‌های صفحه نقاط مرزی مهم ========================
 const countriesData = {
-  china: { name: 'چین', capital: 'پکن', population: '۱.۴ میلیارد', keyPorts: 'شانگهای، نینگبو، شنژن', role: 'مبدأ اصلی صادرات، تولید ۳۰درصد کالاهای جهانی', corridor: 'راه ابریشم - مبدأ' },
-  iran: { name: 'ایران', capital: 'تهران', population: '۸۵ میلیون', keyPorts: 'بندرعباس، امام خمینی، انزلی', role: 'مرکز ترانزیت شمال-جنوب و شرق-غرب', corridor: 'INSTC, TITR' },
+  china: { name: 'چین', capital: 'پکن', population: '۱.۴ میلیارد', keyPorts: 'شانگهای، نینگبو، شنژن', role: 'مبدأ اصلی صادرات', corridor: 'راه ابریشم' },
+  iran: { name: 'ایران', capital: 'تهران', population: '۸۵ میلیون', keyPorts: 'بندرعباس، امام خمینی', role: 'مرکز ترانزیت', corridor: 'INSTC, TITR' },
   turkey: { name: 'ترکیه', capital: 'آنکارا', population: '۸۵ میلیون', keyPorts: 'آمبارلی، مرسین', role: 'پل ارتباطی آسیا به اروپا', corridor: 'TITR, BTK' },
-  uae: { name: 'امارات متحده عربی', capital: 'ابوظبی', population: '۹.۵ میلیون', keyPorts: 'جبل علی، خلیفه', role: 'هاب لجستیک منطقه', corridor: 'مسیر اصلی دریایی چین-خاورمیانه' },
-  oman: { name: 'عمان', capital: 'مسقط', population: '۵ میلیون', keyPorts: 'صحار، صلاله، دقم، خصب', role: 'ترانزیت جایگزین دبی', corridor: 'مسیر دریایی جنوب ایران' },
-  pakistan: { name: 'پاکستان', capital: 'اسلام‌آباد', population: '۲۴۰ میلیون', keyPorts: 'گواتر، کراچی', role: 'دسترسی به اقیانوس هند، CPEC', corridor: 'راه ابریشم جنوبی' },
-  turkmenistan: { name: 'ترکمنستان', capital: 'عشق‌آباد', population: '۶ میلیون', keyPorts: 'بندر ترکمنباشی', role: 'ترانزیت گاز و ریلی به خزر', corridor: 'مسیر شمال-جنوب، CRA' },
-  azerbaijan: { name: 'آذربایجان', capital: 'باکو', population: '۱۰ میلیون', keyPorts: 'بندر آلیات (خزر)', role: 'گلوگاه ریلی و دریایی BTK', corridor: 'TITR, BTK, INSTC' },
-  georgia: { name: 'گرجستان', capital: 'تفلیس', population: '۳.۷ میلیون', keyPorts: 'پوتی، باتومی', role: 'دسترسی به دریای سیاه', corridor: 'TITR, BTK' },
-  russia: { name: 'روسیه', capital: 'مسکو', population: '۱۴۶ میلیون', keyPorts: 'نووروسیسک، سن پترزبورگ', role: 'مسیر شمالی و کریدور شمال-جنوب', corridor: 'CRE شمالی، INSTC' },
-  india: { name: 'هند', capital: 'دهلی نو', population: '۱.۴ میلیارد', keyPorts: 'مومبای، نهاوا شیوا', role: 'بازار بزرگ جنوب آسیا', corridor: 'INSTC' },
-  iraq: { name: 'عراق', capital: 'بغداد', population: '۴۳ میلیون', keyPorts: 'بندر ام قصر', role: 'ترانزیت به مدیترانه و اروپا', corridor: 'مسیر زمینی غرب ایران' },
-  afghanistan: { name: 'افغانستان', capital: 'کابل', population: '۴۰ میلیون', keyPorts: '-', role: 'ترانزیت زمینی بین آسیای مرکزی و جنوب آسیا', corridor: 'ABEC' },
-  kazakhstan: { name: 'قزاقستان', capital: 'آستانه', population: '۱۹ میلیون', keyPorts: 'بندر آکتائو (خزر)', role: 'ترانزیت ریلی، مسیر میانی چین به اروپا', corridor: 'TITR, CRE' }
+  uae: { name: 'امارات', capital: 'ابوظبی', population: '۹.۵ میلیون', keyPorts: 'جبل علی', role: 'هاب لجستیک منطقه', corridor: 'مسیر اصلی دریایی' },
+  oman: { name: 'عمان', capital: 'مسقط', population: '۵ میلیون', keyPorts: 'صحار، صلاله، دقم', role: 'ترانزیت جایگزین', corridor: 'مسیر جنوب ایران' },
+  pakistan: { name: 'پاکستان', capital: 'اسلام‌آباد', population: '۲۴۰ میلیون', keyPorts: 'گواتر، کراچی', role: 'دسترسی به اقیانوس هند', corridor: 'CPEC' }
 };
 const countryList = ['china', 'kazakhstan', 'turkmenistan', 'azerbaijan', 'georgia', 'turkey', 'iran', 'afghanistan', 'pakistan', 'india', 'russia', 'iraq', 'oman', 'uae'];
 
@@ -3900,12 +3890,11 @@ function renderCountries() {
   container.innerHTML = '';
   countryList.forEach(id => {
     const c = countriesData[id];
+    if(!c) return;
     const div = document.createElement('div');
     div.className = 'country-item';
     div.textContent = c.name;
-    div.onclick = (function(id) {
-      return function() { selectCountry(id); };
-    })(id);
+    div.onclick = (function(iid) { return function() { selectCountry(iid); }; })(id);
     container.appendChild(div);
   });
 }
@@ -3913,192 +3902,202 @@ function renderCountries() {
 function selectCountry(id) {
   const items = document.querySelectorAll('.country-item');
   for (let i = 0; i < items.length; i++) {
-    if (items[i].textContent === countriesData[id].name) {
-      items[i].classList.add('active');
-    } else {
-      items[i].classList.remove('active');
-    }
+    items[i].classList.remove('active');
+    if (items[i].textContent === countriesData[id]?.name) items[i].classList.add('active');
   }
   const c = countriesData[id];
+  if(!c) return;
   document.getElementById('country-detail-title').innerHTML = c.name;
   document.getElementById('country-detail-content').innerHTML = '<div class="country-info-row"><div class="country-info-label">پایتخت</div><div class="country-info-value">' + c.capital + '</div></div><div class="country-info-row"><div class="country-info-label">جمعیت</div><div class="country-info-value">' + c.population + '</div></div><div class="country-info-row"><div class="country-info-label">بنادر کلیدی</div><div class="country-info-value">' + c.keyPorts + '</div></div><div class="country-info-row"><div class="country-info-label">نقش در کریدور</div><div class="country-info-value">' + c.role + '</div></div><div class="country-info-row"><div class="country-info-label">کریدورهای مرتبط</div><div class="country-info-value">' + c.corridor + '</div></div>';
 }
 
-function showPortPanel(panelId) {
-  console.log('showPortPanel called with', panelId);
+// ======================== توابع صفحه مقایسه بنادر ========================
+let activeFilterPro = 'all';
+let activePortPro = null;
+
+function filterPortsPro(filter) {
+  activeFilterPro = filter;
+  document.querySelectorAll('.filter-btn-pro').forEach(btn => {
+    if(btn.dataset.filter === filter) btn.classList.add('active');
+    else btn.classList.remove('active');
+  });
+  renderPortsGridPro();
 }
 
-// ======================== توابع گزارش اهواز ========================
+function renderPortsGridPro() {
+  const container = document.getElementById('portsGridPro');
+  if (!container) return;
+  const portsDataPro = window.portsDataPro || [];
+  const filtered = activeFilterPro === 'all' ? portsDataPro : portsDataPro.filter(p => p.region === activeFilterPro);
+  if(filtered.length === 0) { container.innerHTML = '<div style="padding:20px;text-align:center">بندری یافت نشد</div>'; return; }
+  container.innerHTML = filtered.map(p => `<div class="port-card-pro ${activePortPro === p.id ? 'active' : ''}" onclick="selectPortPro('${p.id}')" style="cursor:pointer;background:#fff;border-radius:14px;padding:18px;border:1px solid #e2e8f0;margin-bottom:12px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+      <div><div style="font-size:15px;font-weight:700">${p.name}</div><div style="font-size:11px;color:#5b6e8c">${p.country}</div></div>
+      <div style="width:42px;height:42px;border-radius:50%;border:2px solid ${p.score >= 70 ? '#22c55e' : (p.score >= 50 ? '#f59e0b' : '#ef4444')};display:flex;align-items:center;justify-content:center;font-weight:700">${p.score}</div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:11px;margin-top:8px"><span>FATF</span><span>${p.fatf || 'نامشخص'}</span></div>
+    <div style="display:flex;justify-content:space-between;font-size:11px;margin-top:4px"><span>ظرفیت</span><span>${p.capacity?.split('·')[0] || 'نامشخص'}</span></div>
+  </div>`).join('');
+}
+
+function selectPortPro(id) {
+  if (activePortPro === id) { activePortPro = null; document.getElementById('portDetailPro').style.display = 'none'; renderPortsGridPro(); return; }
+  activePortPro = id;
+  const p = (window.portsDataPro || []).find(x => x.id === id);
+  renderPortsGridPro();
+  const detailDiv = document.getElementById('portDetailPro');
+  if(!detailDiv) return;
+  detailDiv.style.display = 'block';
+  detailDiv.innerHTML = `<div style="padding:20px;background:#f8fafc;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between"><h3>${p?.name || ''}</h3><button onclick="selectPortPro(null)">✕ بستن</button></div>
+  <div style="padding:20px"><div><strong>کشور:</strong> ${p?.country || ''}</div><div><strong>ظرفیت:</strong> ${p?.capacity || ''}</div><div><strong>آبخور:</strong> ${p?.draft || ''}</div><div><strong>کالاهای اصلی:</strong> ${p?.goods?.join(', ') || ''}</div><div><strong>ریسک‌ها:</strong> ${p?.risks?.join(', ') || ''}</div><div style="margin-top:12px;padding:12px;background:#f0fdf4;border-radius:8px">${p?.note || ''}</div></div>`;
+  detailDiv.scrollIntoView({ behavior: 'smooth' });
+}
+
+function renderRoutesPro() {
+  const container = document.getElementById('routesGridPro');
+  if(!container) return;
+  const routesPro = window.routesPro || [];
+  container.innerHTML = routesPro.map(r => `<div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:20px;margin-bottom:16px">
+    <h4 style="margin-bottom:12px">🛣 ${r.title}</h4>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">${r.path?.map(n => `<span style="background:#f8fafc;padding:4px 12px;border-radius:6px;border:1px solid #cbd5e1">${n}</span>`).join(' ← ') || ''}</div>
+    <div style="font-size:12px;color:#64748b">${r.note || ''}</div>
+  </div>`).join('');
+}
+
+function setupPortFilters() {
+  document.querySelectorAll('.filter-btn-pro').forEach(btn => {
+    btn.onclick = function() { filterPortsPro(this.dataset.filter); };
+  });
+}
+
+// ======================== توابع صفحه پیشنهادات ========================
+function switchSuggestionsTab(tabName) {
+  document.querySelectorAll('#dash-suggestions .tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('#suggestionsNav .nav-btn').forEach(el => el.classList.remove('active'));
+  const activePane = document.getElementById('suggestions-' + tabName);
+  if(activePane) activePane.classList.add('active');
+  const btns = document.querySelectorAll('#suggestionsNav .nav-btn');
+  const tabOrder = ['s-overview','s-response','s-barter','s-china','s-altdubai','s-corridors','s-rahabard'];
+  const idx = tabOrder.indexOf(tabName);
+  if(idx >= 0 && btns[idx]) btns[idx].classList.add('active');
+}
+
+function toggleStratBox(id) {
+  const detail = document.getElementById(id);
+  const arrow = document.getElementById(id + '-arrow');
+  if(!detail) return;
+  const isOpen = detail.classList.contains('visible');
+  if(isOpen) {
+    detail.classList.remove('visible');
+    if(arrow) arrow.classList.remove('open');
+  } else {
+    detail.classList.add('visible');
+    if(arrow) arrow.classList.add('open');
+  }
+}
+
+// ======================== توابع صفحه اهواز ========================
 function toggleAhvazCard(id) {
   const card = document.getElementById(id);
-  if (card) card.classList.toggle('open');
+  if(card) card.classList.toggle('open');
 }
+
 function toggleAllAhvaz() {
   const cards = document.querySelectorAll('.route-card-ahvaz');
   const anyOpen = Array.from(cards).some(c => c.classList.contains('open'));
-  for (let i = 0; i < cards.length; i++) {
-    if (anyOpen) {
-      cards[i].classList.remove('open');
-    } else {
-      cards[i].classList.add('open');
-    }
-  }
+  cards.forEach(c => { if(anyOpen) c.classList.remove('open'); else c.classList.add('open'); });
 }
 
 // ======================== توابع صفحه کریدورها ========================
 function toggleCorridorNew(id) {
   const body = document.getElementById(id + '-body');
   const chev = document.getElementById(id + '-chev');
-  if (body) {
-    if (body.classList.contains('open')) {
-      body.classList.remove('open');
-      if (chev) chev.classList.remove('open');
-    } else {
-      body.classList.add('open');
-      if (chev) chev.classList.add('open');
-    }
+  if(body) {
+    body.classList.toggle('open');
+    if(chev) chev.classList.toggle('open');
   }
 }
 
 function switchTabNew(corridorId, tabName) {
   const body = document.getElementById(corridorId + '-body');
-  if (!body) return;
-  const contents = body.querySelectorAll('.tab-content-new');
-  for (let i = 0; i < contents.length; i++) {
-    if (contents[i].id === corridorId + '-' + tabName) {
-      contents[i].classList.add('active');
-    } else {
-      contents[i].classList.remove('active');
-    }
-  }
-  const tabs = body.querySelectorAll('.tab-new');
-  for (let i = 0; i < tabs.length; i++) {
-    const onclickAttr = tabs[i].getAttribute('onclick');
-    if (onclickAttr && onclickAttr.indexOf("'" + tabName + "'") !== -1) {
-      tabs[i].classList.add('active');
-    } else {
-      tabs[i].classList.remove('active');
-    }
-  }
+  if(!body) return;
+  body.querySelectorAll('.tab-content-new').forEach(c => c.classList.remove('active'));
+  body.querySelectorAll('.tab-new').forEach(t => t.classList.remove('active'));
+  const targetContent = document.getElementById(corridorId + '-' + tabName);
+  if(targetContent) targetContent.classList.add('active');
+  const targetTab = Array.from(body.querySelectorAll('.tab-new')).find(t => t.getAttribute('onclick')?.includes("'" + tabName + "'"));
+  if(targetTab) targetTab.classList.add('active');
 }
 
 function switchCorridorsTab(tabName) {
-  const panes = document.querySelectorAll('.corridors-tab-pane');
-  for (let i = 0; i < panes.length; i++) {
-    panes[i].classList.remove('active');
-  }
-  const btns = document.querySelectorAll('.corridors-tab-btn');
-  for (let i = 0; i < btns.length; i++) {
-    btns[i].classList.remove('active');
-  }
+  document.querySelectorAll('.corridors-tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.corridors-tab-btn').forEach(b => b.classList.remove('active'));
   const activePane = document.getElementById('corridors-tab-' + tabName);
-  if (activePane) activePane.classList.add('active');
-  if (window.event && window.event.target) {
-    window.event.target.classList.add('active');
-  }
+  if(activePane) activePane.classList.add('active');
+  if(window.event?.target) window.event.target.classList.add('active');
 }
 
-// توابع تب کشتیرانی جدید
+// ======================== توابع صفحه کشتیرانی ========================
 function switchShippingTab(index) {
   const panes = document.querySelectorAll('#dash-shipping .shipping-pane');
   const tabs = document.querySelectorAll('#dash-shipping .shipping-tab');
-  if (!panes.length || !tabs.length) return;
-  for (let i = 0; i < panes.length; i++) {
-    panes[i].classList.remove('active');
-  }
-  for (let i = 0; i < tabs.length; i++) {
-    tabs[i].classList.remove('active');
-  }
-  if (panes[index]) panes[index].classList.add('active');
-  if (tabs[index]) tabs[index].classList.add('active');
+  if(!panes.length) return;
+  panes.forEach(p => p.classList.remove('active'));
+  tabs.forEach(t => t.classList.remove('active'));
+  if(panes[index]) panes[index].classList.add('active');
+  if(tabs[index]) tabs[index].classList.add('active');
 }
 
-// توابع تب پیشنهادات داخلی
-function switchSuggestionsTab(tabName) {
-  const container = document.getElementById('dash-suggestions');
-  if (!container) return;
-  const tabs = container.querySelectorAll('#suggestionsNav .nav-btn');
-  const panes = container.querySelectorAll('#dash-suggestions .tab-content');
-  for (let i = 0; i < panes.length; i++) {
-    panes[i].classList.remove('active');
-  }
-  for (let i = 0; i < tabs.length; i++) {
-    tabs[i].classList.remove('active');
-  }
-  const activePane = document.getElementById('suggestions-' + tabName);
-  if (activePane) activePane.classList.add('active');
-  for (let i = 0; i < tabs.length; i++) {
-    const btnOnclick = tabs[i].getAttribute('onclick');
-    if (btnOnclick && btnOnclick.indexOf("'" + tabName + "'") !== -1) {
-      tabs[i].classList.add('active');
-      break;
-    }
-  }
-}
-
+// ======================== تابع اصلی تغییر صفحه ========================
 function showDash(id) {
-  const sections = document.querySelectorAll('.dash-section');
-  for (let i = 0; i < sections.length; i++) {
-    sections[i].classList.remove('active');
-  }
-  const btns = document.querySelectorAll('.page-header .nav-btn');
-  for (let i = 0; i < btns.length; i++) {
-    btns[i].classList.remove('active');
-  }
+  document.querySelectorAll('.dash-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.page-header .nav-btn').forEach(b => b.classList.remove('active'));
   const activeSection = document.getElementById('dash-' + id);
-  if (activeSection) activeSection.classList.add('active');
-  for (let i = 0; i < btns.length; i++) {
-    const btnOnclick = btns[i].getAttribute('onclick');
-    if (btnOnclick && btnOnclick.indexOf("'" + id + "'") !== -1) {
+  if(activeSection) activeSection.classList.add('active');
+  const btns = document.querySelectorAll('.page-header .nav-btn');
+  for(let i=0; i<btns.length; i++) {
+    if(btns[i].getAttribute('onclick')?.includes("'" + id + "'")) {
       btns[i].classList.add('active');
       break;
     }
   }
-  if (id === 'countries') renderCountries();
-  if (id === 'portcompare') {
-    renderPortsGridPro();
-    activePortPro = null;
-    const detailDiv = document.getElementById('portDetailPro');
-    if (detailDiv) detailDiv.style.display = 'none';
-    renderRoutesPro();
-  }
-  if (id === 'shipping') {
-    setTimeout(function() {
-      const panes = document.querySelectorAll('#dash-shipping .shipping-pane');
-      const tabs = document.querySelectorAll('#dash-shipping .shipping-tab');
-      if (panes.length && tabs.length && !panes[0].classList.contains('active')) {
-        for (let i = 0; i < panes.length; i++) {
-          panes[i].classList.remove('active');
-        }
-        for (let i = 0; i < tabs.length; i++) {
-          tabs[i].classList.remove('active');
-        }
-        if (panes[0]) panes[0].classList.add('active');
-        if (tabs[0]) tabs[0].classList.add('active');
-      }
-    }, 50);
-  }
+  if(id === 'countries') renderCountries();
+  if(id === 'portcompare') { renderPortsGridPro(); activePortPro = null; if(document.getElementById('portDetailPro')) document.getElementById('portDetailPro').style.display = 'none'; renderRoutesPro(); setupPortFilters(); }
 }
 
+// ======================== داده‌های بنادر ========================
+window.portsDataPro = [
+  { id:'sohar', name:'صحار', country:'عمان', region:'oman', score:82, fatf:'White List', capacity:'۴ میلیون TEU', draft:'16m', goods:['فله خشک','پتروشیمی'], risks:['ریسک متوسط'], note:'بهترین گزینه' },
+  { id:'salalah', name:'صلاله', country:'عمان', region:'oman', score:78, fatf:'White List', capacity:'۵+ میلیون TEU', draft:'16.5m', goods:['کانتینر','نفت'], risks:['نزدیکی به یمن'], note:'جایگزین اصلی' },
+  { id:'duqm', name:'دقم', country:'عمان', region:'oman', score:75, fatf:'تحت نظارت', capacity:'بالا', draft:'18m', goods:['تجهیزات نفت','پروژه سنگین'], risks:['حمله پهپادی'], note:'استراتژیک' },
+  { id:'jafza', name:'جبل‌علی', country:'امارات', region:'uae', score:70, fatf:'زیر نظر', capacity:'۲۲ میلیون TEU', draft:'17m', goods:['کانتینر','خودرو'], risks:['ریسک تحریم'], note:'بزرگترین منطقه آزاد' }
+];
+window.routesPro = [
+  { title:'مسیر صلاله به خصب', path:['صلاله','مسقط','دبی','خصب'], note:'مسیر زمینی برای کارگو سنگین توصیه نمی‌شود' }
+];
+
+// ======================== اجرا در زمان بارگذاری ========================
 window.onload = function() { 
   renderCountries();
   renderPortsGridPro();
   renderRoutesPro();
-  var ahvazCard = document.getElementById('ahvazCard1');
-  if (ahvazCard) ahvazCard.classList.add('open');
+  setupPortFilters();
+  const ahvazCard = document.getElementById('ahvazCard1');
+  if(ahvazCard) ahvazCard.classList.add('open');
 };
 
+// اکسپورت توابع به گلوبال
 window.showDash = showDash;
 window.switchShippingTab = switchShippingTab;
 window.toggleAhvazCard = toggleAhvazCard;
 window.toggleAllAhvaz = toggleAllAhvaz;
-window.showPortPanel = showPortPanel;
 window.filterPortsPro = filterPortsPro;
 window.selectPortPro = selectPortPro;
 window.switchCorridorsTab = switchCorridorsTab;
 window.toggleCorridorNew = toggleCorridorNew;
 window.switchTabNew = switchTabNew;
 window.switchSuggestionsTab = switchSuggestionsTab;
+window.toggleStratBox = toggleStratBox;
 </script>
 </body>
 </html>
