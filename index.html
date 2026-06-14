@@ -1644,27 +1644,25 @@
 </div>
 
 <script>
-  // فقط عملیات سوییچ تب‌ها - بدون تغییر در فونت یا داده‌ها
+  <script>
   (function() {
+    // پیدا کردن تمام تب‌ها
     const btns = document.querySelectorAll('#corridors-tab-comparison .tab-btn');
-    const panes = {
-      tab1: document.querySelector('#corridors-tab-comparison #tab1'),
-      tab2: document.querySelector('#corridors-tab-comparison #tab2'),
-      tab3: document.querySelector('#corridors-tab-comparison #tab3'),
-      tab4: document.querySelector('#corridors-tab-comparison #tab4'),
-      tab5: document.querySelector('#corridors-tab-comparison #tab5'),
-      tab6: document.querySelector('#corridors-tab-comparison #tab6')
-    };
+    
+    // پیدا کردن تمام محتواهای تب (با کلاس tab-pane)
+    const panes = document.querySelectorAll('#corridors-tab-comparison .tab-pane');
     
     function activateTab(tabId) {
-      for (let key in panes) {
-        if (panes[key]) panes[key].style.display = 'none';
-      }
-      if (panes[tabId]) panes[tabId].style.display = 'block';
+      // مخفی کردن همه پنل‌ها
+      panes.forEach(pane => pane.style.display = 'none');
       
+      // نمایش پنل مربوطه
+      const activePane = document.getElementById(tabId);
+      if (activePane) activePane.style.display = 'block';
+      
+      // تغییر استایل دکمه‌ها
       btns.forEach(btn => {
         btn.style.background = 'transparent';
-        btn.style.fontWeight = '600';
         btn.style.color = '#1a2c3e';
       });
       const activeBtn = Array.from(btns).find(btn => btn.getAttribute('data-tab') === tabId);
@@ -1675,14 +1673,17 @@
     }
     
     btns.forEach(btn => {
-      btn.addEventListener('click', function(e) {
+      btn.addEventListener('click', function() {
         const tabId = this.getAttribute('data-tab');
-        if (tabId && panes[tabId]) activateTab(tabId);
+        if (tabId) activateTab(tabId);
       });
     });
     
-    // فعال کردن تب اول پیش‌فرض
-    if (panes.tab1) activateTab('tab1');
+    // فعال کردن تب اول به صورت پیش‌فرض
+    if (btns.length > 0) {
+      const firstTabId = btns[0].getAttribute('data-tab');
+      if (firstTabId) activateTab(firstTabId);
+    }
   })();
 </script>
 
