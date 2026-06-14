@@ -1916,150 +1916,172 @@ function switchShippingTab(index) {
  
 <!-- ========== صفحه چهارم: نقاط مرزی مهم ========== -->
 <div id="dash-border" class="dash-section">
-  <div class="border-points">
-    <style>
-      *{box-sizing:border-box;margin:0;padding:0;}
-      body{font-family:'Vazirmatn','Tahoma','Segoe UI',sans-serif;background:#f4f6f9;color:#1f2937;font-size:13px;}
-      :root{
-        --bg0:#f4f6f9;--bg1:#ffffff;--bg2:#ffffff;--bg3:#fafbfc;
-        --line:#e8a05a;
-        --line-soft:#f3c896;
-        --acc:#d35400;
-        --acc-soft:#fff3e6;
-        --txt:#1f2937;--muted:#6b7280;--dim:#9ca3af;
-        --grn:#16a34a;--amb:#d97706;--red:#dc2626;--blue:#2563eb;--pur:#7c3aed;--teal:#0d9488;
-      }
-      .wrap{background:var(--bg0);color:var(--txt);padding:18px;min-height:100vh;}
-      .hdr{display:flex;align-items:center;justify-content:space-between;background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:14px 18px;margin-bottom:14px;flex-wrap:wrap;gap:8px;}
-      .hdr-logo{font-size:17px;font-weight:800;color:var(--acc);letter-spacing:.5px;}
-      .hdr-logo span{color:var(--txt);font-weight:600;font-size:12px;display:block;margin-top:2px;}
-      .hdr-meta{display:flex;gap:16px;font-size:11px;color:var(--muted);flex-wrap:wrap;align-items:center;}
-      .pulse{width:7px;height:7px;border-radius:50%;display:inline-block;margin-left:5px;animation:blink 1.6s infinite;}
-      @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
-      .p-grn{background:var(--grn);}
-      .p-red{background:var(--red);}
-      .p-amb{background:var(--amb);}
-      .tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;}
-      .tab{padding:9px 18px;font-size:12px;font-weight:700;cursor:pointer;border:1.5px solid var(--line);border-radius:8px;background:#fff;color:var(--muted);letter-spacing:.3px;transition:all .15s;}
-      .tab:hover{color:var(--acc);border-color:var(--acc);}
-      .tab.on{color:#fff;background:var(--acc);border-color:var(--acc);}
-      .pane{display:none;}
-      .pane.on{display:block;}
-      .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
-      .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px;}
-      .g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:12px;}
-      .g5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:12px;}
-      .g13{display:grid;grid-template-columns:1fr 2fr;gap:12px;margin-bottom:12px;}
-      .g31{display:grid;grid-template-columns:2fr 1fr;gap:12px;margin-bottom:12px;}
-      .mb{margin-bottom:12px;}
-      @media (max-width:900px){
-        .g2,.g3,.g4,.g5,.g13,.g31{grid-template-columns:1fr;}
-      }
-      .p{background:var(--bg1);border:1.5px solid var(--line);border-radius:10px;padding:14px 16px;}
-      .p-title{font-size:12px;font-weight:800;color:var(--acc);letter-spacing:.5px;margin-bottom:10px;padding-bottom:8px;border-bottom:1.5px solid var(--line-soft);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;}
-      .p-src{font-size:9.5px;color:var(--dim);font-weight:500;text-align:left;}
-      .tbl-wrap{overflow-x:auto;}
-      .tbl{width:100%;border-collapse:collapse;font-size:11.5px;}
-      .tbl th{font-size:10px;color:var(--acc);font-weight:800;padding:7px 8px;border-bottom:2px solid var(--line);text-align:right;letter-spacing:.3px;background:var(--acc-soft);white-space:nowrap;}
-      .tbl th:first-child{border-radius:6px 0 0 0;}
-      .tbl th:last-child{border-radius:0 6px 0 0;}
-      .tbl td{padding:7px 8px;border-bottom:1px solid #f1e3d0;vertical-align:top;line-height:1.6;}
-      .tbl tr:last-child td{border-bottom:none;}
-      .tbl tr:hover td{background:#fff8f0;}
-      .row{display:flex;justify-content:space-between;align-items:flex-start;padding:6px 0;border-bottom:1px solid #f1e3d0;gap:8px;}
-      .row:last-child{border-bottom:none;}
-      .rl{font-size:12px;color:var(--txt);}
-      .rr{font-size:12px;font-weight:800;text-align:left;flex-shrink:0;}
-      .rsub{font-size:10px;color:var(--muted);margin-top:2px;}
-      .bd{display:inline-block;padding:2px 8px;border-radius:5px;font-size:10px;font-weight:800;letter-spacing:.3px;white-space:nowrap;}
-      .bd-r{background:#fde8e8;color:var(--red);}
-      .bd-a{background:#fef3e2;color:var(--amb);}
-      .bd-g{background:#e6f6ec;color:var(--grn);}
-      .bd-b{background:#e8f0fe;color:var(--blue);}
-      .bd-p{background:#f3ebfe;color:var(--pur);}
-      .bd-t{background:#e3f7f5;color:var(--teal);}
-      .bd-o{background:var(--acc-soft);color:var(--acc);}
-      .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px;}
-      .kpi-grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:12px;}
-      .kpi{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;}
-      .kpi-v{font-size:21px;font-weight:800;line-height:1.15;color:var(--txt);}
-      .kpi-l{font-size:10.5px;color:var(--muted);margin-top:4px;letter-spacing:.3px;font-weight:700;}
-      .kpi-sub{font-size:9.5px;color:var(--dim);margin-top:3px;}
-      @media (max-width:900px){.kpi-grid,.kpi-grid5{grid-template-columns:1fr 1fr;}}
-      .alert{background:#fff7ed;border:1.5px solid var(--line);border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:12px;color:#92400e;line-height:1.7;}
-      .alert-red{background:#fef2f2;border-color:#fca5a5;color:#b91c1c;}
-      .alert-blue{background:#eff6ff;border-color:#93c5fd;color:#1e40af;}
-      .alert-grn{background:#f0fdf4;border-color:#86efac;color:#166534;}
-      .card{background:var(--bg3);border:1.5px solid var(--line-soft);border-radius:10px;padding:12px 14px;margin-bottom:10px;}
-      .card-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;flex-wrap:wrap;gap:6px;}
-      .card-name{font-size:14px;font-weight:800;}
-      .card-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:8px 0;}
-      .card-stat{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.3px;}
-      .card-stat span{display:block;font-size:13px;font-weight:800;color:var(--txt);margin-top:3px;}
-      .card-divider{border-top:1.5px solid var(--line-soft);margin:10px 0;}
-      @media (max-width:900px){.card-grid{grid-template-columns:1fr 1fr;}}
-      .pro-con{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;}
-      .pro-col{background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:8px;padding:10px 12px;}
-      .con-col{background:#fef2f2;border:1.5px solid #fecaca;border-radius:8px;padding:10px 12px;}
-      .pro-con-title{font-size:10.5px;font-weight:800;letter-spacing:.5px;margin-bottom:6px;}
-      .pro-con-item{font-size:11.5px;color:var(--txt);padding:3px 0;border-bottom:1px solid rgba(0,0,0,.04);line-height:1.6;}
-      .pro-con-item:last-child{border-bottom:none;}
-      @media (max-width:900px){.pro-con{grid-template-columns:1fr;}}
-      .vs-grid{display:grid;grid-template-columns:1fr 50px 1fr;gap:10px;margin-bottom:12px;}
-      .vs-card{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:14px 16px;}
-      .vs-title{font-size:14px;font-weight:800;margin-bottom:10px;text-align:center;padding-bottom:8px;border-bottom:1.5px solid var(--line-soft);}
-      .vs-mid{display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--acc);}
-      .vs-item{display:flex;align-items:flex-start;gap:7px;padding:5px 0;border-bottom:1px solid #f1e3d0;font-size:12px;line-height:1.6;}
-      .vs-item:last-child{border-bottom:none;}
-      .vs-icon{flex-shrink:0;margin-top:2px;font-weight:800;}
-      @media (max-width:900px){.vs-grid{grid-template-columns:1fr;}.vs-mid{display:none;}}
-      .sig{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid #f1e3d0;}
-      .sig:last-child{border-bottom:none;}
-      .sig-lvl{font-size:10px;padding:2px 7px;border-radius:5px;font-weight:800;flex-shrink:0;margin-top:1px;white-space:nowrap;}
-      .sig-name{font-size:12px;flex:1;line-height:1.6;}
-      .sig-sub{font-size:10.5px;color:var(--muted);margin-top:2px;}
-      .sig-val{font-size:11px;color:var(--muted);text-align:left;font-weight:700;}
-      .bar-wrap{width:100%;height:6px;background:#f1e3d0;border-radius:3px;margin-top:4px;}
-      .bar-fill{height:100%;border-radius:3px;}
-      .sb{margin:6px 0;}
-      .sbl{display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:3px;}
-      .sbw{width:100%;height:8px;background:#f1e3d0;border-radius:4px;}
-      .sbf{height:100%;border-radius:4px;}
-      .flow{display:flex;align-items:flex-start;gap:6px;padding:6px 0;border-bottom:1px solid #f1e3d0;}
-      .flow:last-child{border-bottom:none;}
-      .fa{color:var(--acc);font-size:12px;font-weight:800;margin-top:2px;}
-      .fn{font-size:12px;flex:1;line-height:1.6;}
-      .fs{font-size:10.5px;color:var(--muted);margin-top:2px;}
-      .fv{font-size:11px;font-weight:800;color:var(--acc);text-align:left;flex-shrink:0;}
-      .dist-box{background:var(--bg3);border:1.5px solid var(--line-soft);border-radius:8px;padding:10px;text-align:center;}
-      .dist-v{font-size:18px;font-weight:800;color:var(--acc);}
-      .dist-l{font-size:10.5px;color:var(--muted);margin-top:3px;}
-      .dist-s{font-size:10px;margin-top:4px;color:var(--txt);}
-      .foot{margin-top:14px;padding-top:10px;border-top:1.5px solid var(--line);font-size:10px;color:var(--muted);line-height:1.8;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
-      .ref-block{background:var(--bg3);border:1.5px solid var(--line-soft);border-radius:8px;padding:10px 12px;margin-top:10px;}
-      .ref-title{font-size:10px;font-weight:800;color:var(--acc);letter-spacing:1px;margin-bottom:8px;}
-      .ref-list{column-count:2;column-gap:16px;}
-      .ref-item{font-size:9.5px;color:var(--muted);padding:2px 0;break-inside:avoid;line-height:1.6;}
-      .ref-item span{color:var(--acc);font-weight:700;}
-      @media (max-width:700px){.ref-list{column-count:1;}}
-      .star{color:var(--amb);}
-      .sect-label{font-size:10.5px;font-weight:800;color:var(--acc);letter-spacing:.5px;padding:6px 0 8px;border-top:1.5px solid var(--line-soft);margin-top:6px;}
-    </style>
-    <div class="wrap">
-      <!-- ادامه محتوای border points -->
-      <div class="border">
-        <div class="border-meta">
-          <span><span class="pulse p-red"></span>هرمز: بحران فعال</span>
-          <span><span class="pulse p-grn"></span>چابهار: فعال</span>
-          <span style="color:var(--dim);">به‌روزرسانی: ۱۴ ژوئن ۲۰۲۶</span>
+  <style>
+    /* استایل‌های مربوط به نقاط مرزی */
+    .border-points-wrap {
+      background: #f4f6f9;
+      padding: 0;
+      border-radius: 16px;
+    }
+    .border-points-wrap .tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      padding: 0;
+    }
+    .border-points-wrap .tab {
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid #e8a05a;
+      border-radius: 8px;
+      background: white;
+      color: #6b7280;
+      transition: all 0.15s;
+    }
+    .border-points-wrap .tab.on {
+      background: #d35400;
+      color: white;
+      border-color: #d35400;
+    }
+    .border-points-wrap .pane {
+      display: none;
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid #e8a05a;
+    }
+    .border-points-wrap .pane.on {
+      display: block;
+    }
+    .status-bar {
+      background: #fff;
+      border: 1px solid #e8a05a;
+      border-radius: 10px;
+      padding: 12px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+    }
+    .pulse-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .pulse-dot.red { background: #dc2626; box-shadow: 0 0 4px #dc2626; animation: pulseRed 1.5s infinite; }
+    .pulse-dot.green { background: #16a34a; box-shadow: 0 0 4px #16a34a; }
+    @keyframes pulseRed {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+  </style>
+
+  <div class="border-points-wrap">
+    <!-- نوار وضعیت -->
+    <div class="status-bar">
+      <div class="status-item">
+        <span class="pulse-dot red"></span>
+        <span>هرمز: بحران فعال</span>
+      </div>
+      <div class="status-item">
+        <span class="pulse-dot green"></span>
+        <span>چابهار: فعال</span>
+      </div>
+      <div class="status-item">
+        <span style="color:#9ca3af;">به‌روزرسانی: ۱۴ ژوئن ۲۰۲۶</span>
+      </div>
+    </div>
+
+    <!-- تب‌ها -->
+    <div class="tabs">
+      <div class="tab on" onclick="switchBorderTab(0)">۱ · جریان تجارت خارجی</div>
+      <div class="tab" onclick="switchBorderTab(1)">۲ · صادرات ایران</div>
+      <div class="tab" onclick="switchBorderTab(2)">۳ · واردات ایران</div>
+      <div class="tab" onclick="switchBorderTab(3)">۴ · بنادر و مرزهای ایران</div>
+    </div>
+
+    <!-- پنل 1: جریان تجارت خارجی -->
+    <div id="border-pane-0" class="pane on">
+      <h3 style="color:#d35400; margin-bottom:16px; font-size:16px;">📊 جریان تجارت خارجی ایران</h3>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:20px">
+        <div style="background:#f8fafc; padding:14px; border-radius:12px; text-align:center">
+          <div style="font-size:22px; font-weight:800; color:#d35400;">$13.3B</div>
+          <div style="font-size:11px; color:#666;">صادرات ۲۰۲۴</div>
+        </div>
+        <div style="background:#f8fafc; padding:14px; border-radius:12px; text-align:center">
+          <div style="font-size:22px; font-weight:800; color:#dc2626;">$29.3B</div>
+          <div style="font-size:11px; color:#666;">واردات ۲۰۲۴</div>
+        </div>
+        <div style="background:#f8fafc; padding:14px; border-radius:12px; text-align:center">
+          <div style="font-size:22px; font-weight:800; color:#16a34a;">۸۰%</div>
+          <div style="font-size:11px; color:#666;">سهم نفت و پتروشیمی</div>
+        </div>
+        <div style="background:#f8fafc; padding:14px; border-radius:12px; text-align:center">
+          <div style="font-size:22px; font-weight:800; color:#2563eb;">چین</div>
+          <div style="font-size:11px; color:#666;">بزرگ‌ترین شریک تجاری</div>
         </div>
       </div>
-     <script>
-function sw(i){
-  document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('on',i===j));
-  document.querySelectorAll('.pane').forEach((p,j)=>p.classList.toggle('on',i===j));
+      <div class="alert-blue" style="background:#eff6ff; padding:12px; border-radius:10px; font-size:12px;">
+        💡 نکته کلیدی: ایران به برزیل حدود <strong>$3B</strong> بدهکار است (واردات سویا و ذرت) اما صادرات مستقیمی به این کشور ندارد.
+      </div>
+    </div>
+
+    <!-- پنل 2: صادرات ایران -->
+    <div id="border-pane-1" class="pane">
+      <h3 style="color:#d35400; margin-bottom:16px; font-size:16px;">📤 صادرات ایران</h3>
+      <div class="alert-blue" style="background:#eff6ff; padding:12px; border-radius:10px; font-size:12px; margin-bottom:16px;">
+        💡 نکته کلیدی: چین بزرگ‌ترین مقصد صادراتی ایران با ۳۳٪ سهم کل صادرات است.
+      </div>
+      <!-- محتوای صادرات ایران اینجا قرار می‌گیرد -->
+    </div>
+
+    <!-- پنل 3: واردات ایران -->
+    <div id="border-pane-2" class="pane">
+      <h3 style="color:#d35400; margin-bottom:16px; font-size:16px;">📥 واردات ایران</h3>
+      <div class="alert-blue" style="background:#eff6ff; padding:12px; border-radius:10px; font-size:12px; margin-bottom:16px;">
+        💡 نکته کلیدی: چین ۶۲٪ کل واردات ایران را تأمین می‌کند.
+      </div>
+      <!-- محتوای واردات ایران اینجا قرار می‌گیرد -->
+    </div>
+
+    <!-- پنل 4: بنادر و مرزهای ایران -->
+    <div id="border-pane-3" class="pane">
+      <h3 style="color:#d35400; margin-bottom:16px; font-size:16px;">🏗 بنادر و مرزهای ایران</h3>
+      <div class="alert-red" style="background:#fef2f2; padding:12px; border-radius:10px; font-size:12px; margin-bottom:16px;">
+        ⚠ بحران هرمز ۲۰۲۶: از ۲۸ فوریه ۲۰۲۶ تنگه هرمز عملاً بسته شده است.
+      </div>
+      <!-- محتوای بنادر و مرزها اینجا قرار می‌گیرد -->
+    </div>
+  </div>
+</div>
+
+<script>
+function switchBorderTab(index) {
+  // مخفی کردن همه پنل‌ها
+  for (let i = 0; i < 4; i++) {
+    const pane = document.getElementById('border-pane-' + i);
+    if (pane) pane.classList.remove('on');
+  }
+  // غیرفعال کردن همه تب‌ها
+  const tabs = document.querySelectorAll('#dash-border .tab');
+  tabs.forEach(tab => tab.classList.remove('on'));
+  // فعال کردن پنل انتخاب شده
+  const activePane = document.getElementById('border-pane-' + index);
+  if (activePane) activePane.classList.add('on');
+  // فعال کردن تب انتخاب شده
+  if (tabs[index]) tabs[index].classList.add('on');
 }
-</script>
+</script>>
       <div class="tabs">
         <div class="tab on" onclick="sw(0)">۱ · جریان تجارت خارجی</div>
         <div class="tab" onclick="sw(1)">۲ · صادرات ایران</div>
