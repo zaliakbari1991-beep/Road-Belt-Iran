@@ -1,0 +1,2150 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>داشبورد جامع هوش تجاری و لجستیک ایران ۲۰۲۶</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Vazirmatn','Tahoma','Segoe UI',sans-serif;background:#f4f6f9;color:#1f2937;font-size:13px;}
+:root{
+  --bg0:#f4f6f9;--bg1:#ffffff;--bg2:#ffffff;--bg3:#fafbfc;
+  --line:#e8a05a;          /* orange border */
+  --line-soft:#f3c896;
+  --acc:#d35400;           /* deep orange accent */
+  --acc-soft:#fff3e6;
+  --txt:#1f2937;--muted:#6b7280;--dim:#9ca3af;
+  --grn:#16a34a;--amb:#d97706;--red:#dc2626;--blue:#2563eb;--pur:#7c3aed;--teal:#0d9488;
+}
+.wrap{background:var(--bg0);color:var(--txt);padding:18px;min-height:100vh;}
+
+/* HEADER */
+.hdr{display:flex;align-items:center;justify-content:space-between;background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:14px 18px;margin-bottom:14px;flex-wrap:wrap;gap:8px;}
+.hdr-logo{font-size:17px;font-weight:800;color:var(--acc);letter-spacing:.5px;}
+.hdr-logo span{color:var(--txt);font-weight:600;font-size:12px;display:block;margin-top:2px;}
+.hdr-meta{display:flex;gap:16px;font-size:11px;color:var(--muted);flex-wrap:wrap;align-items:center;}
+.pulse{width:7px;height:7px;border-radius:50%;display:inline-block;margin-left:5px;animation:blink 1.6s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.p-grn{background:var(--grn);}
+.p-red{background:var(--red);}
+.p-amb{background:var(--amb);}
+
+/* TABS */
+.tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;}
+.tab{padding:9px 18px;font-size:12px;font-weight:700;cursor:pointer;border:1.5px solid var(--line);border-radius:8px;background:#fff;color:var(--muted);letter-spacing:.3px;transition:all .15s;}
+.tab:hover{color:var(--acc);border-color:var(--acc);}
+.tab.on{color:#fff;background:var(--acc);border-color:var(--acc);}
+.pane{display:none;}
+.pane.on{display:block;}
+
+/* GRID LAYOUTS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px;}
+.g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:12px;}
+.g5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:12px;}
+.g13{display:grid;grid-template-columns:1fr 2fr;gap:12px;margin-bottom:12px;}
+.g31{display:grid;grid-template-columns:2fr 1fr;gap:12px;margin-bottom:12px;}
+.mb{margin-bottom:12px;}
+@media (max-width:900px){
+  .g2,.g3,.g4,.g5,.g13,.g31{grid-template-columns:1fr;}
+}
+
+/* PANEL */
+.p{background:var(--bg1);border:1.5px solid var(--line);border-radius:10px;padding:14px 16px;}
+.p-title{font-size:12px;font-weight:800;color:var(--acc);letter-spacing:.5px;margin-bottom:10px;padding-bottom:8px;border-bottom:1.5px solid var(--line-soft);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;}
+.p-src{font-size:9.5px;color:var(--dim);font-weight:500;text-align:left;}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;}
+.tbl{width:100%;border-collapse:collapse;font-size:11.5px;}
+.tbl th{font-size:10px;color:var(--acc);font-weight:800;padding:7px 8px;border-bottom:2px solid var(--line);text-align:right;letter-spacing:.3px;background:var(--acc-soft);white-space:nowrap;}
+.tbl th:first-child{border-radius:6px 0 0 0;}
+.tbl th:last-child{border-radius:0 6px 0 0;}
+.tbl td{padding:7px 8px;border-bottom:1px solid #f1e3d0;vertical-align:top;line-height:1.6;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:#fff8f0;}
+
+/* ROW */
+.row{display:flex;justify-content:space-between;align-items:flex-start;padding:6px 0;border-bottom:1px solid #f1e3d0;gap:8px;}
+.row:last-child{border-bottom:none;}
+.rl{font-size:12px;color:var(--txt);}
+.rr{font-size:12px;font-weight:800;text-align:left;flex-shrink:0;}
+.rsub{font-size:10px;color:var(--muted);margin-top:2px;}
+
+/* BADGES */
+.bd{display:inline-block;padding:2px 8px;border-radius:5px;font-size:10px;font-weight:800;letter-spacing:.3px;white-space:nowrap;}
+.bd-r{background:#fde8e8;color:var(--red);}
+.bd-a{background:#fef3e2;color:var(--amb);}
+.bd-g{background:#e6f6ec;color:var(--grn);}
+.bd-b{background:#e8f0fe;color:var(--blue);}
+.bd-p{background:#f3ebfe;color:var(--pur);}
+.bd-t{background:#e3f7f5;color:var(--teal);}
+.bd-o{background:var(--acc-soft);color:var(--acc);}
+
+/* KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px;}
+.kpi-grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:12px;}
+.kpi{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;}
+.kpi-v{font-size:21px;font-weight:800;line-height:1.15;color:var(--txt);}
+.kpi-l{font-size:10.5px;color:var(--muted);margin-top:4px;letter-spacing:.3px;font-weight:700;}
+.kpi-sub{font-size:9.5px;color:var(--dim);margin-top:3px;}
+@media (max-width:900px){.kpi-grid,.kpi-grid5{grid-template-columns:1fr 1fr;}}
+
+/* ALERT BOXES */
+.alert{background:#fff7ed;border:1.5px solid var(--line);border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:12px;color:#92400e;line-height:1.7;}
+.alert-red{background:#fef2f2;border-color:#fca5a5;color:#b91c1c;}
+.alert-blue{background:#eff6ff;border-color:#93c5fd;color:#1e40af;}
+.alert-grn{background:#f0fdf4;border-color:#86efac;color:#166534;}
+
+/* SHIP CARD / GENERIC CARD */
+.card{background:var(--bg3);border:1.5px solid var(--line-soft);border-radius:10px;padding:12px 14px;margin-bottom:10px;}
+.card-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;flex-wrap:wrap;gap:6px;}
+.card-name{font-size:14px;font-weight:800;}
+.card-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:8px 0;}
+.card-stat{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.3px;}
+.card-stat span{display:block;font-size:13px;font-weight:800;color:var(--txt);margin-top:3px;}
+.card-divider{border-top:1.5px solid var(--line-soft);margin:10px 0;}
+@media (max-width:900px){.card-grid{grid-template-columns:1fr 1fr;}}
+
+/* PRO/CON */
+.pro-con{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;}
+.pro-col{background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:8px;padding:10px 12px;}
+.con-col{background:#fef2f2;border:1.5px solid #fecaca;border-radius:8px;padding:10px 12px;}
+.pro-con-title{font-size:10.5px;font-weight:800;letter-spacing:.5px;margin-bottom:6px;}
+.pro-con-item{font-size:11.5px;color:var(--txt);padding:3px 0;border-bottom:1px solid rgba(0,0,0,.04);line-height:1.6;}
+.pro-con-item:last-child{border-bottom:none;}
+@media (max-width:900px){.pro-con{grid-template-columns:1fr;}}
+
+/* VS COMPARISON */
+.vs-grid{display:grid;grid-template-columns:1fr 50px 1fr;gap:10px;margin-bottom:12px;}
+.vs-card{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:14px 16px;}
+.vs-title{font-size:14px;font-weight:800;margin-bottom:10px;text-align:center;padding-bottom:8px;border-bottom:1.5px solid var(--line-soft);}
+.vs-mid{display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--acc);}
+.vs-item{display:flex;align-items:flex-start;gap:7px;padding:5px 0;border-bottom:1px solid #f1e3d0;font-size:12px;line-height:1.6;}
+.vs-item:last-child{border-bottom:none;}
+.vs-icon{flex-shrink:0;margin-top:2px;font-weight:800;}
+@media (max-width:900px){.vs-grid{grid-template-columns:1fr;}.vs-mid{display:none;}}
+
+/* SIGNAL ROW */
+.sig{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid #f1e3d0;}
+.sig:last-child{border-bottom:none;}
+.sig-lvl{font-size:10px;padding:2px 7px;border-radius:5px;font-weight:800;flex-shrink:0;margin-top:1px;white-space:nowrap;}
+.sig-name{font-size:12px;flex:1;line-height:1.6;}
+.sig-sub{font-size:10.5px;color:var(--muted);margin-top:2px;}
+.sig-val{font-size:11px;color:var(--muted);text-align:left;font-weight:700;}
+
+/* BAR */
+.bar-wrap{width:100%;height:6px;background:#f1e3d0;border-radius:3px;margin-top:4px;}
+.bar-fill{height:100%;border-radius:3px;}
+.sb{margin:6px 0;}
+.sbl{display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:3px;}
+.sbw{width:100%;height:8px;background:#f1e3d0;border-radius:4px;}
+.sbf{height:100%;border-radius:4px;}
+
+/* FLOW */
+.flow{display:flex;align-items:flex-start;gap:6px;padding:6px 0;border-bottom:1px solid #f1e3d0;}
+.flow:last-child{border-bottom:none;}
+.fa{color:var(--acc);font-size:12px;font-weight:800;margin-top:2px;}
+.fn{font-size:12px;flex:1;line-height:1.6;}
+.fs{font-size:10.5px;color:var(--muted);margin-top:2px;}
+.fv{font-size:11px;font-weight:800;color:var(--acc);text-align:left;flex-shrink:0;}
+
+/* DISTRIBUTION BOX */
+.dist-box{background:var(--bg3);border:1.5px solid var(--line-soft);border-radius:8px;padding:10px;text-align:center;}
+.dist-v{font-size:18px;font-weight:800;color:var(--acc);}
+.dist-l{font-size:10.5px;color:var(--muted);margin-top:3px;}
+.dist-s{font-size:10px;margin-top:4px;color:var(--txt);}
+
+/* FOOTER */
+.foot{margin-top:14px;padding-top:10px;border-top:1.5px solid var(--line);font-size:10px;color:var(--muted);line-height:1.8;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+/* REFERENCE BLOCK */
+.ref-block{background:var(--bg3);border:1.5px solid var(--line-soft);border-radius:8px;padding:10px 12px;margin-top:10px;}
+.ref-title{font-size:10px;font-weight:800;color:var(--acc);letter-spacing:1px;margin-bottom:8px;}
+.ref-list{column-count:2;column-gap:16px;}
+.ref-item{font-size:9.5px;color:var(--muted);padding:2px 0;break-inside:avoid;line-height:1.6;}
+.ref-item span{color:var(--acc);font-weight:700;}
+@media (max-width:700px){.ref-list{column-count:1;}}
+
+.star{color:var(--amb);}
+.sect-label{font-size:10.5px;font-weight:800;color:var(--acc);letter-spacing:.5px;padding:6px 0 8px;border-top:1.5px solid var(--line-soft);margin-top:6px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hdr">
+  <div class="hdr-logo">⚓ داشبورد جامع هوش تجاری، دریایی و لجستیک ایران
+    <span>Iran Trade, Maritime &amp; Logistics Intelligence — نسخه یکپارچه ۲۰۲۶</span>
+  </div>
+  <div class="hdr-meta">
+    <span><span class="pulse p-red"></span>هرمز: بحران فعال (~۴٪ ترافیک عادی)</span>
+    <span><span class="pulse p-grn"></span>چابهار: فعال (waiver)</span>
+    <span><span class="pulse p-amb"></span>سالاله/صحار: فعال</span>
+    <span style="color:var(--dim);">به‌روزرسانی: ۱۴ ژوئن ۲۰۲۶</span>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab on" onclick="sw(0)">۱ · جریان تجارت خارجی</div>
+  <div class="tab" onclick="sw(1)">۲ · صادرات ایران</div>
+  <div class="tab" onclick="sw(2)">۳ · واردات ایران</div>
+  <div class="tab" onclick="sw(3)">۴ · بنادر و مرزهای ایران</div>
+  <div class="tab" onclick="sw(4)">۵ · ناوگان و کشتیرانی خلیج فارس</div>
+  <div class="tab" onclick="sw(5)">۶ · مسیرهای دریایی عملیاتی</div>
+  <div class="tab" onclick="sw(6)">۷ · قیمت‌ها و هزینه‌های واقعی</div>
+  <div class="tab" onclick="sw(7)">۸ · انتخاب دفتر منطقه‌ای: عمان یا ترکیه</div>
+  <div class="tab" onclick="sw(8)">۹ · منابع و رفرنس‌ها</div>
+  <div class="tab" onclick="sw(9)">۱۰ · بازار جهانی کشتیرانی</div>
+</div>
+
+<!-- PLACEHOLDER FOR PANES -->
+<!-- ===== TAB 0: جریان تجارت خارجی ===== -->
+<div class="pane on" id="p0">
+
+<div class="kpi-grid5">
+  <div class="kpi"><div class="kpi-v" style="color:var(--acc);">$13.3B</div><div class="kpi-l">صادرات ۲۰۲۴</div><div class="kpi-sub" style="color:var(--red);">↓ از $41.6B در ۲۰۱۹</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:var(--red);">$29.3B</div><div class="kpi-l">واردات ۲۰۲۴</div><div class="kpi-sub">عمدتاً ماشین‌آلات + مواد غذایی</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:var(--grn);">۸۰٪</div><div class="kpi-l">سهم نفت و پتروشیمی از صادرات</div><div class="kpi-sub">۲۰٪ صادرات غیرنفتی</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:var(--amb);">چین</div><div class="kpi-l">بزرگ‌ترین شریک تجاری</div><div class="kpi-sub">$22B واردات از ایران</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:var(--pur);">$26.8B</div><div class="kpi-l">مازاد تجاری ۱۴۰۳</div><div class="kpi-sub" style="color:var(--grn);">↑ $5.8B نسبت به سال قبل</div></div>
+</div>
+
+<div class="g2">
+  <div class="p">
+    <div class="p-title">جریان صادرات — مقاصد و ارزش <span class="p-src">منبع: OEC 2024 · WorldsTopExports · Reuters</span></div>
+    <div class="sb"><div class="sbl"><span>🇨🇳 چین</span><span style="color:var(--acc);font-weight:800;">$4.44B — ۳۳٪ کل صادرات</span></div><div class="sbw"><div class="sbf" style="width:100%;background:var(--acc);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🇹🇷 ترکیه</span><span style="color:var(--grn);font-weight:800;">$2.45B — ۱۸٪</span></div><div class="sbw"><div class="sbf" style="width:55%;background:var(--grn);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🇮🇶 عراق</span><span style="color:var(--amb);font-weight:800;">$10.5B (انرژی + کالا) — ۱۱٪</span></div><div class="sbw"><div class="sbf" style="width:48%;background:var(--amb);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🇦🇪 امارات</span><span style="color:#b45309;font-weight:800;">$7.5B — ۸٪</span></div><div class="sbw"><div class="sbf" style="width:35%;background:#b45309;"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🇮🇳 هند</span><span style="color:var(--pur);font-weight:800;">$1.06B — ۸٪</span></div><div class="sbw"><div class="sbf" style="width:24%;background:var(--pur);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🇵🇰 پاکستان</span><span style="color:var(--teal);font-weight:800;">$1.2B</span></div><div class="sbw"><div class="sbf" style="width:18%;background:var(--teal);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🇦🇿 آذربایجان</span><span style="color:var(--muted);font-weight:800;">$633M</span></div><div class="sbw"><div class="sbf" style="width:10%;background:var(--muted);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🌍 آفریقا (مجموع)</span><span style="color:#be185d;font-weight:800;">~$134M — ۱٪ کل</span></div><div class="sbw"><div class="sbf" style="width:5%;background:#be185d;"></div></div></div>
+  </div>
+  <div class="p">
+    <div class="p-title">جریان واردات — مبادی و ارزش <span class="p-src">منبع: OEC 2024 · UN COMTRADE · TradeImeX</span></div>
+    <div class="sb"><div class="sbl"><span>🇨🇳 چین</span><span style="color:var(--red);font-weight:800;">$18.2B — ۶۲٪ کل واردات</span></div><div class="sbw"><div class="sbf" style="width:100%;background:var(--red);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🇹🇷 ترکیه</span><span style="color:var(--amb);font-weight:800;">$3.1B — ۱۱٪</span></div><div class="sbw"><div class="sbf" style="width:42%;background:var(--amb);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🇧🇷 برزیل</span><span style="color:var(--grn);font-weight:800;">$3.0B — ۱۰٪</span></div><div class="sbw"><div class="sbf" style="width:40%;background:var(--grn);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🇩🇪 آلمان</span><span style="color:var(--blue);font-weight:800;">$1.3B — ۴٪</span></div><div class="sbw"><div class="sbf" style="width:20%;background:var(--blue);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🇮🇳 هند</span><span style="color:var(--pur);font-weight:800;">$1.25B — ۴٪</span></div><div class="sbw"><div class="sbf" style="width:19%;background:var(--pur);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🇦🇪 امارات</span><span style="color:var(--teal);font-weight:800;">$1.1B — ۴٪</span></div><div class="sbw"><div class="sbf" style="width:17%;background:var(--teal);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🇷🇺 روسیه</span><span style="color:#be185d;font-weight:800;">$900M — ۳٪</span></div><div class="sbw"><div class="sbf" style="width:14%;background:#be185d;"></div></div></div>
+    <div class="sb"><div class="sbl"><span>🇲🇾 مالزی</span><span style="color:var(--muted);font-weight:800;">$499M</span></div><div class="sbw"><div class="sbf" style="width:8%;background:var(--muted);"></div></div></div>
+  </div>
+</div>
+
+<div class="p mb">
+  <div class="p-title">توزیع جغرافیایی صادرات ایران <span class="p-src">منبع: WorldsTopExports · Blooming Global 2025</span></div>
+  <div class="g5">
+    <div class="dist-box">
+      <div class="dist-v">۹۶.۱٪</div>
+      <div class="dist-l">آسیا</div>
+      <div class="dist-s">چین، عراق، ترکیه، هند</div>
+    </div>
+    <div class="dist-box">
+      <div class="dist-v">۲.۴٪</div>
+      <div class="dist-l">اروپا</div>
+      <div class="dist-s">آلمان، ایتالیا</div>
+    </div>
+    <div class="dist-box">
+      <div class="dist-v" style="color:#be185d;">۱.۰٪</div>
+      <div class="dist-l">آفریقا</div>
+      <div class="dist-s">نیجریه، کنیا، مصر</div>
+    </div>
+    <div class="dist-box">
+      <div class="dist-v" style="color:var(--muted);">۰.۴٪</div>
+      <div class="dist-l">آمریکای لاتین</div>
+      <div class="dist-s">ونزوئلا</div>
+    </div>
+    <div class="dist-box">
+      <div class="dist-v" style="color:var(--muted);">۰.۰۳٪</div>
+      <div class="dist-l">آمریکای شمالی</div>
+      <div class="dist-s">غیرمستقیم</div>
+    </div>
+  </div>
+</div>
+
+<div class="alert-blue alert">💡 نکته کلیدی: ایران به برزیل حدود <strong>$3B</strong> بدهکار است (واردات سویا و ذرت) اما صادرات مستقیمی به این کشور ندارد. آفریقا فرصت دست‌نخورده‌ای است — تنها ۱٪ صادرات ایران به ۵۴ کشور پرجمعیت این قاره می‌رود.</div>
+
+<div class="p">
+  <div class="p-title">جریان کالا در خلیج فارس — چه چیزی از تنگه هرمز رد می‌شود؟ <span class="p-src">منبع: UNCTAD RMT 2024 · EIA · IEA · IMF PortWatch · Kpler</span></div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>نوع کالا</th><th>حجم سالانه (تخمین ۲۰۲۴)</th><th>کشورهای اصلی مبدأ</th><th>کشورهای اصلی مقصد</th><th>نوع کشتی</th></tr></thead>
+    <tbody>
+      <tr><td><strong style="color:#b45309;">نفت خام</strong></td><td>~15M bbl/day از طریق هرمز (تنکرها)</td><td>عربستان، عراق، امارات، ایران، کویت</td><td>چین (۵۰٪)، هند (۲۰٪)، ژاپن/کره (۱۵٪)</td><td>VLCC، Suezmax، Aframax</td></tr>
+      <tr><td><strong style="color:var(--blue);">LNG</strong></td><td>~100M ton/yr (قطر)</td><td>قطر (عمده)</td><td>اروپا، ژاپن، کره، چین</td><td>LNG Carrier (145K–177K m³)</td></tr>
+      <tr><td><strong style="color:var(--acc);">پتروشیمی / مواد شیمیایی</strong></td><td>~12M ton/yr</td><td>عربستان، ایران، امارات</td><td>هند، چین، اروپا، آفریقا</td><td>Chemical Tanker، Product Tanker</td></tr>
+      <tr><td><strong style="color:var(--grn);">کالاهای مصرفی (کانتینر)</strong></td><td>~1.16M TEU/هفته</td><td>چین، هند، اروپا</td><td>خاورمیانه، آفریقا، آسیا</td><td>Containership</td></tr>
+      <tr><td><strong style="color:var(--grn);">غلات</strong></td><td>~45M ton/yr</td><td>اوکراین، روسیه، آمریکا، استرالیا</td><td>مصر، ایران، عراق، پاکستان</td><td>Panamax، Handymax</td></tr>
+      <tr><td><strong style="color:var(--muted);">فولاد / سنگ‌آهن</strong></td><td>~35M ton/yr</td><td>استرالیا، برزیل، هند</td><td>عربستان، امارات، هند، ایران</td><td>Capesize، Supramax</td></tr>
+      <tr><td><strong style="color:var(--muted);">خودرو (RoRo)</strong></td><td>545K خودرو در نیمه اول ۲۰۲۵ (جبل‌علی)</td><td>چین، ژاپن، کره، هند، تایلند</td><td>خاورمیانه، آفریقا</td><td>PCTC / RoRo Carrier</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+</div>
+<!-- ===== TAB 1: صادرات ایران ===== -->
+<div class="pane" id="p1">
+
+<div class="p mb">
+  <div class="p-title">برترین کالاهای صادراتی ایران — محصول، مقصد، حجم، کانال حمل <span class="p-src">منبع: OEC 2024 · ITP Blog · ChemAnalyst · Tehran Times · WorldsTopExports</span></div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead>
+      <tr><th>محصول</th><th>کد HS</th><th>ارزش ۲۰۲۴</th><th>مقصد اول</th><th>مقصد دوم</th><th>مقصد سوم</th><th>حجم سالانه</th><th>قیمت FOB</th><th>کانال حمل</th><th>ریسک</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong style="color:var(--acc);">پلیمر اتیلن (HDPE/LDPE/LLDPE)</strong></td>
+        <td>3901</td>
+        <td style="color:var(--grn);font-weight:800;">$1.88B</td>
+        <td>🇨🇳 چین (۶۶٪)</td>
+        <td>🇹🇷 ترکیه</td>
+        <td>🇮🇳 هند</td>
+        <td>1.8M ton/۶ ماه</td>
+        <td>$650–900/MT</td>
+        <td>Chemical Tanker / فله کانتینر</td>
+        <td><span class="bd bd-a">OFAC</span></td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--acc);">سنگ‌آهن</strong></td>
+        <td>2601</td>
+        <td style="color:var(--grn);font-weight:800;">$1.13B</td>
+        <td>🇨🇳 چین</td>
+        <td>🇮🇳 هند</td>
+        <td>🇹🇷 ترکیه</td>
+        <td>~20M ton/yr</td>
+        <td>$40–75/MT</td>
+        <td>Capesize / Panamax Bulk</td>
+        <td><span class="bd bd-a">متوسط</span></td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--acc);">متانول</strong></td>
+        <td>2905</td>
+        <td style="color:var(--grn);font-weight:800;">$1.05B</td>
+        <td>🇨🇳 چین (۸۰٪)</td>
+        <td>🇮🇳 هند</td>
+        <td>🇦🇪 امارات (re-export)</td>
+        <td>4.3M ton/۶ ماه</td>
+        <td>$255–275/MT FOB</td>
+        <td>Chemical Tanker MR/LR1</td>
+        <td><span class="bd bd-r">تحریم OFAC</span></td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--amb);">آجیل و خشکبار (پسته + گردو)</strong></td>
+        <td>0802</td>
+        <td style="color:var(--grn);font-weight:800;">$777M</td>
+        <td>🇨🇳 چین</td>
+        <td>🇩🇪 آلمان</td>
+        <td>🇦🇪 امارات</td>
+        <td>~200K ton/yr</td>
+        <td>$3–12/kg</td>
+        <td>Reefer Container 40ft RF</td>
+        <td><span class="bd bd-g">کم</span></td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--acc);">گاز نفتی (LPG)</strong></td>
+        <td>2711</td>
+        <td style="color:var(--grn);font-weight:800;">$765M</td>
+        <td>🇨🇳 چین</td>
+        <td>🇯🇵 ژاپن</td>
+        <td>🇰🇷 کره جنوبی</td>
+        <td>CP پروپان</td>
+        <td>—</td>
+        <td>VLGC (Very Large Gas Carrier)</td>
+        <td><span class="bd bd-r">هرمز بسته</span></td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--amb);">اوره / کود ازته</strong></td>
+        <td>3102</td>
+        <td style="color:var(--grn);font-weight:800;">$620M (تخمین)</td>
+        <td>🇮🇳 هند</td>
+        <td>🌍 آفریقا</td>
+        <td>🇹🇷 ترکیه</td>
+        <td>3M ton/yr</td>
+        <td>$280–320/MT</td>
+        <td>Handymax Bulk</td>
+        <td><span class="bd bd-a">متوسط</span></td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--teal);">بیتومن (قیر)</strong></td>
+        <td>2713</td>
+        <td style="color:var(--grn);font-weight:800;">$550M (تخمین)</td>
+        <td>🇮🇳 هند</td>
+        <td>🌍 آفریقا</td>
+        <td>🇵🇰 پاکستان</td>
+        <td>~2M ton/yr</td>
+        <td>$280–380/MT</td>
+        <td>Product Tanker / بشکه</td>
+        <td><span class="bd bd-g">کم</span></td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--amb);">زعفران</strong></td>
+        <td>0910</td>
+        <td style="color:var(--grn);font-weight:800;">$207M</td>
+        <td>🇦🇪 امارات</td>
+        <td>🇨🇳 چین</td>
+        <td>🇪🇸 اسپانیا</td>
+        <td>~350 ton/yr</td>
+        <td>$800–2,500/kg</td>
+        <td>هوایی + کانتینر کوچک</td>
+        <td><span class="bd bd-g">کم</span></td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--amb);">خرما</strong></td>
+        <td>0804</td>
+        <td style="color:var(--grn);font-weight:800;">$213M</td>
+        <td>🇮🇶 عراق</td>
+        <td>🌍 آفریقا</td>
+        <td>🇵🇰 پاکستان</td>
+        <td>~400K ton/yr</td>
+        <td>$0.8–2.5/kg</td>
+        <td>General Cargo / کامیون</td>
+        <td><span class="bd bd-g">کم</span></td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--acc);">آلومینیوم خام</strong></td>
+        <td>7601</td>
+        <td style="color:var(--muted);">کاهش ۳۰٪</td>
+        <td>🇨🇳 چین</td>
+        <td>🇮🇳 هند</td>
+        <td>—</td>
+        <td>—</td>
+        <td>$2,400–2,800/MT</td>
+        <td>General Cargo / Container</td>
+        <td><span class="bd bd-a">متوسط</span></td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--acc);">گوگرد</strong></td>
+        <td>2503</td>
+        <td>—</td>
+        <td>🇮🇳 هند</td>
+        <td>🌍 آفریقا (کود)</td>
+        <td>🇨🇳 چین</td>
+        <td>~4M ton/yr</td>
+        <td>$120–180/MT</td>
+        <td>Handymax Bulk</td>
+        <td><span class="bd bd-a">متوسط</span></td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--acc);">اتیلن گلیکول (MEG)</strong></td>
+        <td>2905</td>
+        <td>—</td>
+        <td>🇨🇳 چین (۸۰٪)</td>
+        <td>🇮🇳 هند</td>
+        <td>—</td>
+        <td>0.6M ton/۶ ماه</td>
+        <td>$450–570/MT</td>
+        <td>Chemical Tanker MR</td>
+        <td><span class="bd bd-r">تحریم</span></td>
+      </tr>
+      <tr>
+        <td><strong style="color:#be185d;">نفت خام (تحریمی)</strong></td>
+        <td>2709</td>
+        <td style="color:var(--red);font-weight:800;">$22B (پیک ۲۰۲۲)</td>
+        <td>🇨🇳 چین (۸۰٪+ بر اساس Kpler)</td>
+        <td>🇸🇾 سوریه</td>
+        <td>بازار سایه</td>
+        <td>1.3–1.7 میلیون بشکه/روز</td>
+        <td>discount ~$10/bbl</td>
+        <td>VLCC Shadow Fleet</td>
+        <td><span class="bd bd-r">OFAC شدید</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="g2">
+  <div class="p">
+    <div class="p-title">فرصت‌های صادراتی به آفریقا <span class="p-src">منبع: Araz Tejarat · Abrisham Road · COMTRADE</span></div>
+    <div class="flow"><span class="fa">←</span><div class="fn"><strong>مصر:</strong> فولاد ($8.9M)، پلیمر، بیتومن جاده‌سازی<div class="fs">کانال سوئز ← اسکندریه / ۴ روز از بندرعباس</div></div><div class="fv">بالقوه</div></div>
+    <div class="flow"><span class="fa">←</span><div class="fn"><strong>نیجریه:</strong> پتروشیمی، HDPE، گوگرد، کود<div class="fs">دماغه امید ← لاگوس، ۱۸ روز</div></div><div class="fv">کم‌بهره</div></div>
+    <div class="flow"><span class="fa">←</span><div class="fn"><strong>کنیا:</strong> خرما، پسته، پتروشیمی<div class="fs">خلیج عدن ← مومباسا، ۸ روز</div></div><div class="fv">در حال رشد</div></div>
+    <div class="flow"><span class="fa">←</span><div class="fn"><strong>تانزانیا/موزامبیک:</strong> قیر بیتومن برای جاده‌سازی<div class="fs">چابهار ← دارالسلام، ۱۰ روز</div></div><div class="fv">نیاز بالا</div></div>
+    <div class="flow"><span class="fa">←</span><div class="fn"><strong>آفریقای جنوبی:</strong> مصالح ساختمانی، کاشی<div class="fs">چابهار ← دوربان، ۱۶ روز</div></div><div class="fv">ضعیف</div></div>
+    <div style="font-size:11px;color:var(--amb);margin-top:8px;font-weight:700;">⚠ محدودیت اصلی: پرداخت بین‌المللی دشوار؛ نیاز به واسطه (امارات/عمان)؛ رقابت با محصولات چینی</div>
+  </div>
+  <div class="p">
+    <div class="p-title">کانال‌های صادراتی عملیاتی — کالاهای غیرنفتی</div>
+    <div class="row"><div class="rl">پتروشیمی → چین</div><div class="rr" style="color:var(--red);">⚠ تحریم<div class="rsub" style="text-align:left;">اغلب با پرچم سوم + STS یا از طریق عمان</div></div></div>
+    <div class="row"><div class="rl">پتروشیمی → ترکیه</div><div class="rr" style="color:var(--amb);">قابل اجرا<div class="rsub" style="text-align:left;">مرز بازرگان/رازی + کامیون یا MR tanker مدیترانه</div></div></div>
+    <div class="row"><div class="rl">پتروشیمی → هند</div><div class="rr" style="color:var(--grn);">فعال<div class="rsub" style="text-align:left;">چابهار → موندرا (LR1 chemical tanker)</div></div></div>
+    <div class="row"><div class="rl">سنگ‌آهن → چین</div><div class="rr" style="color:var(--red);">تعلیق<div class="rsub" style="text-align:left;">Capesize از بندرعباس (پیش از بحران) / چابهار</div></div></div>
+    <div class="row"><div class="rl">خشکبار → اروپا</div><div class="rr" style="color:var(--grn);">فعال<div class="rsub" style="text-align:left;">ترکیه → زمینی / بازرگان → استانبول → TIR</div></div></div>
+    <div class="row"><div class="rl">کود → آفریقا</div><div class="rr" style="color:var(--blue);">در حال رشد<div class="rsub" style="text-align:left;">چابهار → سالاله → مومباسا/دارالسلام</div></div></div>
+    <div class="row"><div class="rl">زعفران → جهان</div><div class="rr" style="color:var(--grn);">فعال<div class="rsub" style="text-align:left;">هوایی از تهران + بسته‌بندی در امارات/ترکیه</div></div></div>
+  </div>
+</div>
+
+</div>
+<!-- ===== TAB 2: واردات ایران ===== -->
+<div class="pane" id="p2">
+
+<div class="p mb">
+  <div class="p-title">برترین کالاهای وارداتی ایران — محصول، مبدأ، حجم، مسیر <span class="p-src">منبع: OEC 2024 · UN COMTRADE · Volza · TradeImeX 2025</span></div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead>
+      <tr><th>محصول</th><th>کد HS</th><th>ارزش</th><th>مبدأ اول</th><th>مبدأ دوم</th><th>حجم سالانه</th><th>مسیر ورودی</th><th>هزینه حمل تقریبی</th><th>چالش اصلی</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong style="color:var(--red);">کنجاله سویا</strong></td>
+        <td>2304</td>
+        <td style="color:var(--red);font-weight:800;">$1.16B</td>
+        <td>🇧🇷 برزیل</td>
+        <td>🇦🇷 آرژانتین</td>
+        <td>~3M ton/yr</td>
+        <td>Panamax → بندرعباس/امام خمینی</td>
+        <td>$40–60/MT دریایی</td>
+        <td>پرداخت بین‌المللی پیچیده</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--red);">دانه سویا</strong></td>
+        <td>1201</td>
+        <td style="color:var(--red);font-weight:800;">$1.1B</td>
+        <td>🇧🇷 برزیل</td>
+        <td>🇺🇦 اوکراین</td>
+        <td>~2M ton/yr</td>
+        <td>Panamax → بندرعباس</td>
+        <td>$40–65/MT</td>
+        <td>محدودیت SWIFT</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--amb);">ذرت</strong></td>
+        <td>1005</td>
+        <td style="color:var(--amb);font-weight:800;">$1.07B</td>
+        <td>🇧🇷 برزیل</td>
+        <td>🇺🇦 اوکراین</td>
+        <td>~6M ton/yr</td>
+        <td>Panamax/Supramax فله خشک</td>
+        <td>$35–55/MT</td>
+        <td>واسطه‌های ترکیه/امارات</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--red);">خودرو و قطعات</strong></td>
+        <td>8703</td>
+        <td style="color:var(--red);font-weight:800;">$753M</td>
+        <td>🇨🇳 چین</td>
+        <td>🇩🇪 آلمان</td>
+        <td>—</td>
+        <td>RoRo / Container از شانگهای</td>
+        <td>$1,500–3,000/unit</td>
+        <td>تحریم قطعات اروپایی</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--red);">برنج</strong></td>
+        <td>1006</td>
+        <td style="color:var(--amb);font-weight:800;">$701M</td>
+        <td>🇮🇳 هند (بسمتی)</td>
+        <td>🇵🇰 پاکستان</td>
+        <td>~1.5M ton/yr</td>
+        <td>کانتینر 40ft / چابهار + موندرا</td>
+        <td>$25–40/MT</td>
+        <td>کم</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--acc);">ماشین‌آلات صنعتی</strong></td>
+        <td>8479</td>
+        <td style="color:var(--acc);font-weight:800;">$658M (فقط ترکیه)</td>
+        <td>🇨🇳 چین</td>
+        <td>🇹🇷 ترکیه</td>
+        <td>—</td>
+        <td>کانتینر / بازرگان زمینی</td>
+        <td>$2,000–6,000/40ft</td>
+        <td>کنترل صادرات کالاهای دومنظوره</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--acc);">روغن نباتی</strong></td>
+        <td>1507–1515</td>
+        <td style="color:var(--acc);font-weight:800;">$813M (ترکیه)</td>
+        <td>🇹🇷 ترکیه</td>
+        <td>🇲🇾 مالزی</td>
+        <td>~600K ton/yr</td>
+        <td>کامیون بازرگان / Flexi-tank</td>
+        <td>$60–90/MT</td>
+        <td>کم</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--acc);">پلاستیک و مواد اولیه</strong></td>
+        <td>3901–3914</td>
+        <td style="color:var(--acc);font-weight:800;">$287M (ترکیه)</td>
+        <td>🇹🇷 ترکیه</td>
+        <td>🇨🇳 چین</td>
+        <td>—</td>
+        <td>کامیون TIR / Container</td>
+        <td>$1,500–2,500/20ft</td>
+        <td>کم</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--teal);">غلات (گندم)</strong></td>
+        <td>1001</td>
+        <td style="color:var(--teal);font-weight:800;">متغیر</td>
+        <td>🇷🇺 روسیه</td>
+        <td>🇺🇦 اوکراین</td>
+        <td>5–8M ton/yr</td>
+        <td>Panamax → بندرعباس/امام خمینی</td>
+        <td>$30–50/MT</td>
+        <td>هرمز بسته — کاهش جدی</td>
+      </tr>
+      <tr>
+        <td><strong>دارو و تجهیزات پزشکی</strong></td>
+        <td>3004</td>
+        <td>$92M (ترکیه)</td>
+        <td>🇩🇪 آلمان</td>
+        <td>🇨🇭 سوئیس</td>
+        <td>—</td>
+        <td>هوایی + کانتینر سرد</td>
+        <td>بالا</td>
+        <td>تحریم قطعات حساس</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="alert-blue alert">🔑 نکته عملیاتی: برزیل بزرگ‌ترین تامین‌کننده مواد غذایی ایران است (در حدود $3B) اما مسیر مستقیم تجاری ندارد. سویا و ذرت برزیل از طریق واسطه ترکیه یا امارات به ایران می‌رسد. پرداخت اغلب از طریق بارتر نفت یا ارزهای جایگزین انجام می‌شود.</div>
+
+</div>
+<!-- ===== TAB 3: بنادر و مرزهای ایران ===== -->
+<div class="pane" id="p3">
+
+<div class="kpi-grid">
+  <div class="kpi"><div class="kpi-v" style="color:var(--acc);">۲۲</div><div class="kpi-l">گذرگاه مرزی فعال</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:var(--grn);">6.65M</div><div class="kpi-l">ظرفیت TEU بندر رجایی</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:var(--amb);">100K → 500K</div><div class="kpi-l">ظرفیت TEU چابهار ۲۰۲۶</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:var(--red);">۵۷</div><div class="kpi-l">کشته در انفجار بندر رجایی</div></div>
+</div>
+
+<div class="alert">⚠ انفجار ۲۶ آوریل ۲۰۲۵ در بندر رجایی: ۵۷ کشته و بیش از ۱۰۰۰ مجروح — عملیات بندر ظرف چند روز از سر گرفته شد. ظرفیت ۱۰۰ میلیون تن در سال و 6.65M TEU توسط Iran International و The National تأیید شده است.</div>
+
+<div class="alert-red alert">⚠ بحران هرمز ۲۰۲۶: از ۲۸ فوریه ۲۰۲۶ تنگه هرمز عملاً بسته شده است. میانگین ترانزیت روزانه از ۱۲۹ کشتی به ۶ کشتی رسیده (UNCTAD، ۱ آوریل ۲۰۲۶). بیش از ۱۵۰ کشتی غیرتحریمی، از جمله ۶۲ نفتکش VLCC، در خلیج فارس گیر کرده‌اند (Lloyd's List). بیش از ۱۶۲ میلیون بشکه نفت دیگر در معرض خطر است (IEA).</div>
+
+<!-- SOUTHERN PORTS -->
+<div class="p mb">
+  <div class="p-title">بنادر جنوبی — خلیج فارس و دریای عمان <span class="p-src">منبع: PMO Iran · UNESCAP · Iran Int'l · The National · India Shipping News · EIA</span></div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead>
+      <tr><th>بندر</th><th>ظرفیت سالانه</th><th>زیرساخت و توسعه</th><th>وضعیت / آسیب</th><th>عمق آب</th><th>محدودیت‌ها</th><th>مزیت رقابتی</th><th>کالاهای اصلی</th><th>راه‌آهن</th><th>فاصله تا تهران/اهواز</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong style="color:var(--acc);">🏗 رجایی (بندرعباس)</strong><br><span class="rsub">IRSRP | ۳۲°۲۰N</span></td>
+        <td style="color:var(--grn);font-weight:800;">100M ton/yr<br>6.65M TEU<br>۴۰+ اسکله</td>
+        <td>۴۸۰۰ هکتار، ۱۰ اسکله کانتینری با عمق ۱۳–۱۷ متر، ۲۳.۵ کیلومتر ریل داخلی، ترمینال جدید $430M، پذیرش کشتی‌های Panamax تا 18,400 TEU؛ عمق ۱۷ متر در حال ساخت</td>
+        <td><span class="bd bd-r">انفجار آوریل ۲۰۲۵</span><br><span style="font-size:10px;">عملیات ظرف ۷۲ ساعت بازگشت</span></td>
+        <td>13–16m</td>
+        <td>هرمز بسته — عملاً قطع ارتباط؛ بدون SWIFT؛ بدون بیمه‌گران غربی؛ فاصله ریل تا اسکله حدود ۱.۵ کیلومتر</td>
+        <td style="color:var(--grn);">۸۵٪ ترافیک کانتینری ایران؛ هاب اصلی INSTC؛ بزرگ‌ترین بندر کانتینری آسیا–خاورمیانه</td>
+        <td>کانتینر، نفت، سنگ‌آهن، مواد شیمیایی، خودرو، غلات</td>
+        <td><span class="bd bd-g">✓ بله</span><br><span style="font-size:10px;">تهران–بندرعباس</span></td>
+        <td>1,381 km<br><span style="font-size:10px;">جاده: ~۱۲ ساعت / قطار: ~۱۸ ساعت</span></td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--acc);">⚓ باهنر (بندرعباس)</strong><br><span class="rsub">IRBND</span></td>
+        <td>37M ton/yr<br>1M TEU</td>
+        <td>بندر قدیمی‌تر بندرعباس؛ ترمینال عمومی، RoRo، خودروبر</td>
+        <td><span class="bd bd-a">آسیب غیرمستقیم</span></td>
+        <td>—</td>
+        <td>هرمز بسته؛ زیرساخت قدیمی‌تر</td>
+        <td>صادرات سنتی: فرش، زعفران، پسته؛ واردات: چای، قند</td>
+        <td>فرش، پسته، خودرو، فرآورده نفتی</td>
+        <td><span class="bd bd-g">✓ بله</span></td>
+        <td>1,050 km</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--teal);">🌊 چابهار (شهید بهشتی)</strong><br><span class="rsub">بیرون از هرمز | ۲۵°۲۰N</span></td>
+        <td style="color:var(--grn);font-weight:800;">100K TEU فعلی<br>8.5M ton (فاز ۱)</td>
+        <td>۲ اسکله کانتینری ۳۶۰ متری، عمق ۱۶ متر برای کشتی‌های Post-Panamax، ۶ جرثقیل موبایل هندی، اپراتور IPGL، توسعه به ۵۰۰K TEU در فاز ۲، سرمایه‌گذاری هند $370M، ریل ۶۲۸ کیلومتری تا زاهدان در حال ساخت</td>
+        <td><span class="bd bd-g">فعال — بدون آسیب</span><br><span style="font-size:10px;">بیرون از تنگه هرمز</span></td>
+        <td>16m</td>
+        <td>تحریم OFAC با waiver تا آوریل ۲۰۲۶؛ راه‌آهن هنوز ناقص؛ ظرفیت فعلی محدود به ۱۰۰K TEU</td>
+        <td style="color:var(--grn);">تنها بندر اقیانوسی ایران؛ ۷۰۰ مایل از هند؛ هاب INSTC؛ دسترسی به افغانستان و آسیای مرکزی</td>
+        <td>کانتینر، فله خشک، ماشین‌آلات، کالای افغانستان و آسیای مرکزی</td>
+        <td><span class="bd bd-r">× در دست ساخت</span><br><span style="font-size:10px;">۶۲۸ کیلومتر تا زاهدان</span></td>
+        <td>1,850 km<br><span style="font-size:10px;">جاده: ~۲۰ ساعت</span></td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--acc);">🛢 بوشهر</strong></td>
+        <td>550K TEU<br>15M ton/yr</td>
+        <td>بندر تجاری، پشتیبانی نفتی، ترمینال نفت خام؛ ترمینال جدید پارس جنوبی در دست احداث</td>
+        <td><span class="bd bd-r">هرمز بسته</span></td>
+        <td>10m</td>
+        <td>هرمز بسته؛ ظرفیت محدود؛ ریل محدود</td>
+        <td>نزدیک به میادین گاز پارس جنوبی</td>
+        <td>نفت، گاز LNG، پتروشیمی، مواد عمومی</td>
+        <td><span class="bd bd-a">محدود</span></td>
+        <td>1,100 km<br><span style="font-size:10px;">جاده: ~۶ ساعت</span></td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--acc);">⚓ ماهشهر</strong></td>
+        <td>25M ton/yr<br>هاب پتروشیمی اصلی</td>
+        <td>ترمینال پتروشیمی، اسکله‌های تخصصی شیمیایی؛ اسکله LPG جدید در دست احداث</td>
+        <td><span class="bd bd-r">هرمز بسته</span></td>
+        <td>14m</td>
+        <td>هرمز بسته؛ کاملاً تخصصی پتروشیمی</td>
+        <td>نزدیک‌ترین بندر صادراتی پتروشیمی به اروپا (از طریق سوئز)</td>
+        <td>پتروشیمی، متانول، اوره، گوگرد، LPG</td>
+        <td><span class="bd bd-g">✓ بله</span></td>
+        <td>190 km<br><span style="font-size:10px;">جاده: ~۲ ساعت تا اهواز / 1,150km تا تهران</span></td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--grn);">🛳 بندر امام خمینی</strong><br><span class="rsub">IRIMK | شمال خلیج فارس</span></td>
+        <td>40M ton/yr</td>
+        <td>۱۸ اسکله، ترمینال کانتینری، سیلوی غلات؛ توسعه سیلوی غلات تا ظرفیت ۱M ton</td>
+        <td><span class="bd bd-r">هرمز بسته</span></td>
+        <td>10–12m</td>
+        <td>هرمز بسته؛ مشکل گِل و رسوب‌گذاری</td>
+        <td>نزدیک‌ترین بندر به اهواز؛ تامین غلات برای خوزستان</td>
+        <td>غلات، فولاد، ماشین‌آلات، کالای عمومی</td>
+        <td><span class="bd bd-g">✓ بله</span></td>
+        <td>1,100 km<br><span style="font-size:10px;">جاده: ~۱.۵ ساعت تا اهواز</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- NORTHERN PORTS -->
+<div class="p mb">
+  <div class="p-title">بنادر شمالی — دریای خزر <span class="p-src">منبع: INSTC Reports · Tarangya · PMO Iran</span></div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>بندر</th><th>ظرفیت</th><th>زیرساخت</th><th>مزیت رقابتی</th><th>کالاهای اصلی</th><th>راه‌آهن</th><th>فاصله تا اهواز</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong style="color:var(--grn);">🚢 انزلی</strong></td>
+        <td>15M ton/yr</td>
+        <td>قدیمی‌ترین بندر شمال، بندر تجاری روسیه</td>
+        <td style="color:var(--grn);">دروازه اصلی ورود چوب، کاغذ و فولاد روسیه به ایران</td>
+        <td>چوب، فولاد، غلات، کانتینر INSTC</td>
+        <td><span class="bd bd-a">نزدیک (رشت)</span></td>
+        <td>1,200 km / ~۱۴ ساعت</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--grn);">🚢 امیرآباد</strong></td>
+        <td>10M ton/yr</td>
+        <td>تنها بندر با RoRo ریلی — قطار مستقیماً روی کشتی بارگذاری می‌شود</td>
+        <td style="color:var(--grn);">کنسرسیوم روسیه–ایران–هند ۲۰۲۶؛ RoRo ریلی منحصربه‌فرد در منطقه</td>
+        <td>خودرو، ماشین‌آلات، کانتینر، فله خشک</td>
+        <td><span class="bd bd-g">✓ RoRo ریلی</span></td>
+        <td>1,300 km / ~۱۵ ساعت</td>
+      </tr>
+      <tr>
+        <td><strong>🚢 نوشهر</strong></td>
+        <td>5M ton/yr</td>
+        <td>بندر کوچک تجاری و گردشگری</td>
+        <td>محدود</td>
+        <td>کالای عمومی، مسافر</td>
+        <td><span class="bd bd-a">محدود</span></td>
+        <td>1,300 km</td>
+      </tr>
+      <tr>
+        <td><strong>🚢 ترکمن</strong></td>
+        <td>3M ton/yr</td>
+        <td>بندر کوچک با دسترسی به ترکمنستان</td>
+        <td>ترانزیت آسیای مرکزی</td>
+        <td>فله خشک، غلات، کانتینر کوچک</td>
+        <td><span class="bd bd-a">محدود</span></td>
+        <td>1,400 km</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- LAND BORDERS -->
+<div class="p mb">
+  <div class="p-title">گذرگاه‌های مرزی — ظرفیت، کالا، هزینه، معطلی <span class="p-src">منبع: IRICA · PMO · COMCEC · گمرک ایران</span></div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>گذرگاه</th><th>کشور مقابل</th><th>ظرفیت روزانه</th><th>کالاهای اصلی</th><th>مزیت</th><th>محدودیت</th><th>فاصله تا اهواز</th><th>جاده/ریل</th><th>هزینه ترانزیت</th><th>زمان معطلی</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong style="color:var(--acc);">بازرگان</strong></td>
+        <td>🇹🇷 ترکیه</td>
+        <td>2,000 کامیون/روز</td>
+        <td>ماشین‌آلات، الکترونیک، نساجی، مواد غذایی</td>
+        <td style="color:var(--grn);">پرترافیک‌ترین مرز ایران-ترکیه؛ دسترسی به اروپا</td>
+        <td>ترافیک سنگین؛ بدون ریل مستقیم</td>
+        <td>1,600 km / ~۱۸ ساعت</td>
+        <td><span class="bd bd-g">جاده ✓</span> <span class="bd bd-r">ریل ×</span></td>
+        <td>$300–500/ton</td>
+        <td>۱–۴ روز</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--acc);">رازی</strong></td>
+        <td>🇹🇷 ترکیه</td>
+        <td>ریلی + جاده‌ای</td>
+        <td>فله خشک، کانتینر ریلی</td>
+        <td style="color:var(--grn);">تنها گذرگاه ریلی ایران–ترکیه</td>
+        <td>ظرفیت ریل محدود؛ اختلاف عرض خط</td>
+        <td>1,650 km / ~۱۹ ساعت</td>
+        <td><span class="bd bd-g">جاده ✓</span> <span class="bd bd-g">ریل ✓</span></td>
+        <td>$250–400/ton</td>
+        <td>۲–۵ روز</td>
+      </tr>
+      <tr>
+        <td><strong>پل‌دشت / سرو</strong></td>
+        <td>🇹🇷 ترکیه</td>
+        <td>200 کامیون/روز</td>
+        <td>میوه، سبزیجات، کالای کشاورزی</td>
+        <td>مسیر کوتاه‌تر آذربایجان غربی به ترکیه</td>
+        <td>ظرفیت کم؛ جاده کوهستانی</td>
+        <td>1,700 km</td>
+        <td><span class="bd bd-g">جاده ✓</span></td>
+        <td>$280–420/ton</td>
+        <td>۱–۳ روز</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--acc);">خسروی</strong></td>
+        <td>🇮🇶 عراق</td>
+        <td>800 کامیون/روز</td>
+        <td>مواد غذایی، مصالح ساختمانی، پوشاک</td>
+        <td style="color:var(--grn);">اصلی‌ترین مرز تجاری ایران–عراق (کرمانشاه)</td>
+        <td>ریسک امنیتی؛ معطلی گمرکی بالا</td>
+        <td>450 km / ~۵ ساعت</td>
+        <td><span class="bd bd-g">جاده ✓</span></td>
+        <td>$150–250/ton</td>
+        <td>۲–۷ روز</td>
+      </tr>
+      <tr>
+        <td><strong>پرویزخان</strong></td>
+        <td>🇮🇶 عراق</td>
+        <td>500 کامیون/روز</td>
+        <td>کالای تجاری، اقلیم کردستان</td>
+        <td>دسترسی به اقلیم کردستان عراق</td>
+        <td>ریسک منطقه‌ای؛ دوگانگی کردستان–بغداد</td>
+        <td>440 km / ~۵ ساعت</td>
+        <td><span class="bd bd-g">جاده ✓</span></td>
+        <td>$130–220/ton</td>
+        <td>۲–۵ روز</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--amb);">شلمچه</strong></td>
+        <td>🇮🇶 عراق</td>
+        <td>1,200 کامیون/روز</td>
+        <td>پتروشیمی، مصالح ساختمانی، مواد غذایی</td>
+        <td style="color:var(--grn);">نزدیک‌ترین مرز به بصره؛ پروژه ریل شلمچه–بصره</td>
+        <td>پروژه ریل در مرحله مذاکره؛ ترافیک سنگین زائرین</td>
+        <td>100 km / ~۱.۵ ساعت</td>
+        <td><span class="bd bd-g">جاده ✓</span> <span class="bd bd-a">ریل در دست احداث</span></td>
+        <td>$80–150/ton</td>
+        <td>۱–۴ روز</td>
+      </tr>
+      <tr>
+        <td><strong>مهران (سردار سلیمانی)</strong></td>
+        <td>🇮🇶 عراق</td>
+        <td>400 کامیون/روز</td>
+        <td>کالای زائرین، کالای تجاری</td>
+        <td>دسترسی به کربلا و نجف</td>
+        <td>ظرفیت کم؛ اشباع در ایام اربعین</td>
+        <td>350 km / ~۴ ساعت</td>
+        <td><span class="bd bd-g">جاده ✓</span></td>
+        <td>$120–200/ton</td>
+        <td>۳–۱۴ روز (اربعین)</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--teal);">سرخس</strong></td>
+        <td>🇹🇲 ترکمنستان</td>
+        <td>ریلی اصلی</td>
+        <td>گاز، نفت، فله خشک، کانتینر</td>
+        <td style="color:var(--grn);">ریل مستقیم به آسیای مرکزی، چین و روسیه</td>
+        <td>کنترل ترکمنستان؛ معطلی گمرکی</td>
+        <td>1,800 km / ~۲۰ ساعت</td>
+        <td><span class="bd bd-g">جاده ✓</span> <span class="bd bd-g">ریل ✓</span></td>
+        <td>$200–350/ton</td>
+        <td>۳–۸ روز</td>
+      </tr>
+      <tr>
+        <td><strong>دوغارون</strong></td>
+        <td>🇦🇫 افغانستان</td>
+        <td>600 کامیون/روز</td>
+        <td>مواد غذایی، سوخت، ماشین‌آلات</td>
+        <td>مسیر اصلی واردات افغانستان</td>
+        <td>ریسک طالبان؛ بدون ریل</td>
+        <td>1,900 km</td>
+        <td><span class="bd bd-g">جاده ✓</span></td>
+        <td>$180–300/ton</td>
+        <td>۳–۱۰ روز</td>
+      </tr>
+      <tr>
+        <td><strong>میرجاوه</strong></td>
+        <td>🇵🇰 پاکستان</td>
+        <td>300 کامیون/روز</td>
+        <td>فرآورده نفتی، کالای مصرفی</td>
+        <td>گسترش بالقوه کریدور CPEC</td>
+        <td>زیرساخت ضعیف؛ ریسک امنیتی</td>
+        <td>1,800 km</td>
+        <td><span class="bd bd-g">جاده ✓</span></td>
+        <td>$150–280/ton</td>
+        <td>۴–۱۲ روز</td>
+      </tr>
+      <tr>
+        <td><strong>آستارا</strong></td>
+        <td>🇦🇿 آذربایجان</td>
+        <td>ریلی + جاده‌ای</td>
+        <td>فولاد، چوب، کالای روسیه</td>
+        <td style="color:var(--grn);">گذرگاه غربی INSTC؛ ریل مستقیم به آذربایجان</td>
+        <td>مناقشه قره‌باغ؛ روابط پرتنش ایران–آذربایجان</td>
+        <td>1,200 km</td>
+        <td><span class="bd bd-g">جاده ✓</span> <span class="bd bd-g">ریل ✓</span></td>
+        <td>$180–300/ton</td>
+        <td>۲–۶ روز</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="g2">
+  <div class="p">
+    <div class="p-title">امکانات ترانزیتی ویژه <span class="p-src">منبع: PMO · IRICA</span></div>
+    <div class="sig"><span class="sig-lvl bd-g">TIR</span><span class="sig-name">کاپوتاژ TIR — عبور با مهر و موم بدون باز کردن بار</span><span class="sig-val">مرزهای ترکیه، عراق، ترکمنستان</span></div>
+    <div class="sig"><span class="sig-lvl bd-b">ATA</span><span class="sig-name">دفترچه ATA — ورود موقت بدون گمرک برای نمایشگاه‌ها</span><span class="sig-val">بنادر و مرزهای بین‌المللی</span></div>
+    <div class="sig"><span class="sig-lvl bd-p">FTZ</span><span class="sig-name">مناطق آزاد: کیش، قشم، چابهار، منطقه آزاد ارس</span><span class="sig-val">معافیت گمرکی</span></div>
+    <div class="sig"><span class="sig-lvl bd-a">INSTC</span><span class="sig-name">کریدور شمال–جنوب: هند → رجایی → سرخس → روسیه</span><span class="sig-val">۳۰٪ کاهش هزینه نسبت به سوئز</span></div>
+    <div class="sig"><span class="sig-lvl bd-g">RoRo</span><span class="sig-name">امیرآباد: تنها RoRo ریلی خزر — قطار روی کشتی</span><span class="sig-val">ابتکار ۲۰۲۶ روسیه–ایران</span></div>
+    <div class="sig"><span class="sig-lvl bd-r">⚠</span><span class="sig-name">کالاهای ممنوع عبور: اسلحه، مواد هسته‌ای، مواد مخدر، کالای تحت تحریم OFAC</span><span class="sig-val">بدون استثنا</span></div>
+  </div>
+  <div class="p">
+    <div class="p-title">کالاهای اصلی صادرات/واردات هر مسیر</div>
+    <div class="sig"><span class="sig-lvl bd-b">ترکیه</span><span class="sig-name"><strong>صادرات ایران:</strong> پتروشیمی، پسته، زعفران، فرش</span></div>
+    <div class="sig"><span class="sig-lvl bd-b">ترکیه</span><span class="sig-name"><strong>واردات ایران:</strong> ماشین‌آلات، نساجی، الکترونیک، فولاد</span></div>
+    <div class="sig"><span class="sig-lvl bd-a">عراق</span><span class="sig-name"><strong>صادرات ایران:</strong> مواد غذایی، پتروشیمی، سیمان، برق</span></div>
+    <div class="sig"><span class="sig-lvl bd-a">عراق</span><span class="sig-name"><strong>واردات ایران:</strong> نفت خام (خوزستان)، ماشین‌آلات</span></div>
+    <div class="sig"><span class="sig-lvl bd-t">روسیه</span><span class="sig-name"><strong>واردات ایران:</strong> گندم، فولاد، چوب، لوازم خانگی (INSTC)</span></div>
+    <div class="sig"><span class="sig-lvl bd-t">روسیه</span><span class="sig-name"><strong>صادرات ایران:</strong> پتروشیمی، میوه، خشکبار، فرش</span></div>
+    <div class="sig"><span class="sig-lvl bd-p">آسیا</span><span class="sig-name"><strong>رجایی/چابهار:</strong> نفت خام، LNG، سنگ‌آهن، پتروشیمی</span></div>
+  </div>
+</div>
+
+</div>
+<!-- ===== TAB 4: ناوگان و کشتیرانی خلیج فارس ===== -->
+<div class="pane" id="p4">
+
+<div class="kpi-grid">
+  <div class="kpi"><div class="kpi-v" style="color:var(--red);">~۶۲</div><div class="kpi-l">نفتکش VLCC گیر در خلیج فارس</div><div class="kpi-sub">Lloyd's List / USNI — مه ۲۰۲۶</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:var(--amb);">~۱۴۷</div><div class="kpi-l">کانتینربر گیر کرده (≈470K TEU)</div><div class="kpi-sub">HormuzTracker / Kpler ۲۰۲۶</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:var(--grn);">20.3M</div><div class="kpi-l">bbl/day هرمز در حالت عادی (۲۰۲۴)</div><div class="kpi-sub">IEA / EIA</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:var(--acc);">1.16M</div><div class="kpi-l">TEU/هفته ظرفیت پیش از بحران</div><div class="kpi-sub">Kpler — مارس ۲۰۲۶</div></div>
+</div>
+
+<div class="alert-red alert">⚠ وضعیت بحران ۲۰۲۶: ظرفیت پیش از بحران خلیج فارس ۱.۱۶ میلیون TEU در هفته بوده است. بنادر جایگزین در بهترین حالت ظرفیتی معادل ۶۳۵ هزار TEU در هفته دارند — یعنی کمبود ساختاری حدود ۴۸٪ (Kpler، آوریل ۲۰۲۶). خروج نفت خام از هرمز ۹۵٪، LNG حدود ۹۹٪ و کود حدود ۸۷٪ کاهش یافته است (WTO DataLab، از ۲۸ فوریه).</div>
+
+<div class="p mb">
+  <div class="p-title">جریان نفت از خلیج فارس — کشورهای صادرکننده و مسیرهای جایگزین <span class="p-src">منبع: IEA Oil 2025 · EIA · Statista · Kpler</span></div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>کشور صادرکننده</th><th>بشکه/روز (۲۰۲۴)</th><th>سهم از هرمز</th><th>مقصد اصلی</th><th>مسیر جایگزین</th></tr></thead>
+    <tbody>
+      <tr><td><strong style="color:var(--acc);">عربستان سعودی</strong></td><td>~7.5M bbl/day</td><td>~۳۷٪</td><td>چین، هند، کره جنوبی، ژاپن</td><td>خط لوله شرق–غرب (Petroline) → ینبو: 5M bbl/day</td></tr>
+      <tr><td><strong style="color:var(--acc);">عراق</strong></td><td>~3.5M bbl/day</td><td>~۱۷٪</td><td>چین، هند، اروپا</td><td>خط لوله ترکیه (کرکوک–جیحان): ~0.45M bbl/day — محدود</td></tr>
+      <tr><td><strong style="color:var(--acc);">امارات متحده عربی</strong></td><td>~3.0M bbl/day</td><td>~۱۵٪</td><td>چین، هند، ژاپن</td><td>خط لوله ADCO → فجیره (حبشان–فجیره): 1.5M bbl/day</td></tr>
+      <tr><td><strong style="color:var(--acc);">کویت</strong></td><td>~2.5M bbl/day</td><td>~۱۲٪</td><td>چین، هند، کره</td><td>بدون مسیر جایگزین جدی</td></tr>
+      <tr><td><strong style="color:var(--acc);">قطر (LNG)</strong></td><td>~2.0M bbl/day</td><td>~۱۰٪</td><td>اروپا، ژاپن، کره، چین</td><td>بدون جایگزین کامل</td></tr>
+      <tr><td><strong style="color:var(--acc);">ایران</strong></td><td>~1.8M bbl/day (تحریمی)</td><td>~۹٪</td><td>چین (عمده)، ترکیه</td><td>چابهار (محدود) — ناوگان سایه</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="g2">
+  <div class="p">
+    <div class="p-title">آمار کشتی‌های کانتینربر خلیج فارس <span class="p-src">Kpler · UNCTAD · DP World · Alphaliner</span></div>
+    <table class="tbl">
+      <thead><tr><th>مسیر</th><th>ظرفیت هفتگی (پیش از بحران)</th><th>وضعیت ۲۰۲۶</th></tr></thead>
+      <tbody>
+        <tr><td>جبل‌علی ↔ چین</td><td>~380K TEU/هفته</td><td><span class="bd bd-r">تعلیق / مسیر کیپ هورن</span></td></tr>
+        <tr><td>جبل‌علی ↔ هند</td><td>~210K TEU/هفته</td><td><span class="bd bd-a">کاهش ۷۰٪</span></td></tr>
+        <tr><td>جبل‌علی ↔ اروپا (سوئز)</td><td>~180K TEU/هفته</td><td><span class="bd bd-r">تعلیق / مسیر کیپ هورن</span></td></tr>
+        <tr><td>خلیج ↔ پاکستان</td><td>~95K TEU/هفته</td><td><span class="bd bd-a">کاهش</span></td></tr>
+        <tr><td>خلیج ↔ آفریقای شرقی</td><td>~52K TEU/هفته</td><td><span class="bd bd-a">کاهش</span></td></tr>
+        <tr><td><strong>مجموع خلیج فارس</strong></td><td><strong style="color:var(--grn);">~1.16M TEU/هفته</strong></td><td><strong style="color:var(--red);">~56K TEU فعلی</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="p">
+    <div class="p-title">بزرگ‌ترین بنادر کانتینری منطقه (۲۰۲۴) <span class="p-src">DP World · World Bank · UNCTAD · Tradlinx</span></div>
+    <table class="tbl">
+      <thead><tr><th>بندر</th><th>TEU ۲۰۲۴ (واقعی)</th><th>ظرفیت</th><th>توسعه</th></tr></thead>
+      <tbody>
+        <tr><td><strong style="color:var(--acc);">جبل‌علی (دبی)</strong></td><td><strong style="color:var(--grn);">15.5M TEU</strong><br><span class="rsub">+۷٪ رشد، رکورد دهه</span></td><td>19.4M TEU</td><td>ترمینال ۴ RoRo جدید — ۲۰۲۵</td></tr>
+        <tr><td><strong style="color:var(--acc);">خلیفه (ابوظبی)</strong></td><td>~10M TEU</td><td>~10M TEU</td><td>ترمینال‌های CMA جدید — ۲۰۲۴</td></tr>
+        <tr><td><strong style="color:var(--acc);">فجیره (امارات)</strong></td><td>~720K TEU<br>130M ton فله</td><td>720K TEU</td><td>—</td></tr>
+        <tr><td><strong style="color:var(--grn);">سالاله (عمان)</strong></td><td><strong style="color:var(--grn);">3.3M TEU</strong></td><td>4.5M → <strong>6.5M TEU</strong></td><td>$300M — تکمیل ۲۰۲۵</td></tr>
+        <tr><td><strong style="color:var(--grn);">صحار (عمان)</strong></td><td>942K TEU</td><td>1.3M TEU</td><td>منطقه صنعتی SEZAD</td></tr>
+        <tr><td><strong style="color:var(--amb);">رجایی (ایران)</strong></td><td>~1.55M TEU<br><span class="rsub">آخرین آمار جهانی: ۲۰۲۱</span></td><td>6.65M TEU</td><td>ترمینال $430M</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- CONTAINER SHIPS -->
+<div class="card">
+  <div class="card-hdr">
+    <div class="card-name" style="color:var(--acc);">📦 کانتینربر (Container Ship)</div>
+    <div><span class="bd bd-g">سودآورترین مسیر: چین–خاورمیانه</span></div>
+  </div>
+  <div class="card-grid">
+    <div class="card-stat">ظرفیت (TEU)<span>100 – 24,000+ TEU</span></div>
+    <div class="card-stat">DWT<span>1,000 – 220,000 DWT</span></div>
+    <div class="card-stat">سرعت<span>14–25 knots</span></div>
+    <div class="card-stat">عمر اقتصادی<span>25–30 سال</span></div>
+  </div>
+  <div class="card-divider"></div>
+
+  <div style="font-size:11px;font-weight:800;color:var(--acc);margin-bottom:6px;">نرخ اجاره روزانه (Time Charter) — منبع: Clarksons Research / MSI / Lloyd's List ۲۰۲۵–۲۰۲۶</div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>کلاس کشتی</th><th>ظرفیت</th><th>نرخ اجاره روزانه (USD/day)</th><th>دوره قرارداد معمول</th><th>وضعیت بازار ۲۰۲۵</th></tr></thead>
+    <tbody>
+      <tr><td>Feeder (کوچک)</td><td>100–1,000 TEU</td><td style="color:var(--grn);font-weight:800;">$8,000–$15,800</td><td>۳–۱۲ ماه</td><td>پایدار — Non-eco 1.1K: $15,800/day</td></tr>
+      <tr><td>Feeder (متوسط)</td><td>1,000–3,000 TEU</td><td style="color:var(--grn);font-weight:800;">$20,000–$30,100</td><td>۶–۱۸ ماه</td><td>مقاوم — 2.1K: $30,100/day</td></tr>
+      <tr><td>Panamax (کلاسیک)</td><td>3,500–5,100 TEU</td><td style="color:var(--grn);font-weight:800;">$35,000–$56,000</td><td>۱۲–۳۶ ماه</td><td>قوی — 4.3K: $56,000/day</td></tr>
+      <tr><td>Post-Panamax</td><td>5,000–8,000 TEU</td><td style="color:var(--grn);font-weight:800;">$25,000–$40,000</td><td>۱۲–۲۴ ماه</td><td>نزولی از اوج؛ فشار تحویل‌های ۲۰۲۶</td></tr>
+      <tr><td>ULCV (غول‌پیکر)</td><td>14,000–24,000+ TEU</td><td style="color:var(--amb);font-weight:800;">$20,000–$60,000</td><td>۲–۵ سال</td><td>بسته به فصل و مسیر</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="card-divider"></div>
+
+  <div class="pro-con">
+    <div class="pro-col">
+      <div class="pro-con-title" style="color:var(--grn);">✅ نقاط قوت</div>
+      <div class="pro-con-item">سریع‌ترین و قابل‌پیش‌بینی‌ترین خدمات لاینر منظم</div>
+      <div class="pro-con-item">هر نوع کالای بسته‌بندی‌شده قابل حمل است</div>
+      <div class="pro-con-item">اتصال به شبکه جهانی هاب‌ها (فیدر ↔ مادر)</div>
+      <div class="pro-con-item">ردیابی و امنیت بالا</div>
+      <div class="pro-con-item">اتوماسیون و بهره‌وری بالای بنادر کانتینری</div>
+    </div>
+    <div class="con-col">
+      <div class="pro-con-title" style="color:var(--red);">❌ نقاط ضعف</div>
+      <div class="pro-con-item">هزینه بالای THC و سورشارج‌های مختلف</div>
+      <div class="pro-con-item">وابستگی به زمان‌بندی لاینر و انعطاف کم</div>
+      <div class="pro-con-item">نیاز به بنادر مجهز و عمیق</div>
+      <div class="pro-con-item">در بحران هرمز: حدود ۱۴۷ کشتی گیر کرده</div>
+      <div class="pro-con-item">فشار نزولی نرخ‌ها در ۲۰۲۶ به دلیل تحویل‌های جدید</div>
+    </div>
+  </div>
+
+  <div class="card-divider"></div>
+  <div class="sect-label">💰 سودآورترین مسیرها برای کانتینربر</div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>مسیر</th><th>نوع کشتی مناسب</th><th>نرخ باری تقریبی (۲۰۲۵)</th><th>وضعیت عرضه/تقاضا</th><th>سطح سودآوری</th></tr></thead>
+    <tbody>
+      <tr><td>شانگهای → جبل‌علی/خلیج</td><td>Panamax / Post-Panamax</td><td>$1,500–2,500/FEU</td><td>مازاد ظرفیت در جهت برگشت خالی</td><td><span class="star">★★★★</span></td></tr>
+      <tr><td>جبل‌علی → اروپا (سوئز)</td><td>ULCV / Post-Panamax</td><td>$1,800–3,500/FEU</td><td>تقریباً متوازن</td><td><span class="star">★★★★</span></td></tr>
+      <tr><td>خلیج → مومباسا/آفریقا</td><td>Feeder / Panamax کوچک</td><td>$1,200–2,200/FEU</td><td>مازاد ظرفیت در جهت رفت</td><td><span class="star">★★★</span></td></tr>
+      <tr><td>خلیج → هند/پاکستان</td><td>Feeder / Panamax کوچک</td><td>$300–800/FEU</td><td>کمبود در هر دو جهت</td><td><span class="star">★★★</span></td></tr>
+      <tr><td>مرسین ↔ خلیج (ترانزیت)</td><td>Feeder / Panamax</td><td>$900–1,600/FEU</td><td>نسبتاً متوازن</td><td><span class="star">★★★</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- BULK CARRIERS -->
+<div class="card">
+  <div class="card-hdr">
+    <div class="card-name" style="color:var(--grn);">⚓ فله‌بر (Bulk Carrier / Dry Bulk)</div>
+    <div><span class="bd bd-g">سودآورترین مسیر: برزیل/استرالیا → چین (Capesize)</span></div>
+  </div>
+  <div class="card-grid">
+    <div class="card-stat">ظرفیت<span>3,000–350,000 DWT</span></div>
+    <div class="card-stat">کالاهای اصلی<span>سنگ‌آهن، زغال، غلات، بوکسیت</span></div>
+    <div class="card-stat">سرعت<span>12–15 knots</span></div>
+    <div class="card-stat">عمر اقتصادی<span>20–25 سال</span></div>
+  </div>
+  <div class="card-divider"></div>
+
+  <div style="font-size:11px;font-weight:800;color:var(--acc);margin-bottom:6px;">نرخ اجاره (Time Charter Equivalent) — منبع: Baltic Exchange / Kpler / Clarksons ۲۰۲۵</div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>کلاس</th><th>DWT</th><th>نرخ ۲۰۲۵ (USD/day میانگین)</th><th>دامنه (min–max ۲۰۲۴–۲۰۲۵)</th><th>کالاهای اصلی</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Capesize</strong><br><span class="rsub">BCI 5TC</span></td><td>100,000–220,000</td><td style="color:var(--grn);font-weight:800;">$21,297/day</td><td>$9,600 – $47,900/day</td><td>سنگ‌آهن، زغال، بوکسیت</td></tr>
+      <tr><td><strong>Panamax</strong><br><span class="rsub">BPI 5TC</span></td><td>60,000–85,000</td><td style="color:var(--grn);font-weight:800;">$13,361/day</td><td>$8,796 – $20,000/day</td><td>غلات، زغال، کود</td></tr>
+      <tr><td><strong>Supramax</strong><br><span class="rsub">BSI 10TC</span></td><td>50,000–65,000</td><td style="color:var(--grn);font-weight:800;">$14,275/day</td><td>$10,000 – $25,000/day</td><td>غلات، فله خشک متنوع</td></tr>
+      <tr><td><strong>Handysize</strong><br><span class="rsub">BHSI 7TC</span></td><td>28,000–40,000</td><td style="color:var(--grn);font-weight:800;">$11,911/day</td><td>$10,000 – $18,000/day</td><td>کود، زغال، بوکسیت، غلات</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="card-divider"></div>
+  <div class="pro-con">
+    <div class="pro-col">
+      <div class="pro-con-title" style="color:var(--grn);">✅ نقاط قوت</div>
+      <div class="pro-con-item">اقتصاد مقیاس بالا — Capesize با کمترین هزینه به ازای تن</div>
+      <div class="pro-con-item">انعطاف بالا در بنادر کوچک‌تر (Handysize)</div>
+      <div class="pro-con-item">محدودیت‌های تحریمی کمتر نسبت به نفتکش</div>
+      <div class="pro-con-item">تقاضای پایدار (سنگ‌آهن چین، غلات خاورمیانه)</div>
+      <div class="pro-con-item">Capesize در ۲۰۲۵–۲۰۲۶ به دلیل پروژه Simandou نرخ قوی دارد</div>
+    </div>
+    <div class="con-col">
+      <div class="pro-con-title" style="color:var(--red);">❌ نقاط ضعف</div>
+      <div class="pro-con-item">نیاز Capesize به بنادر عمیق (بیش از ۱۷ متر)</div>
+      <div class="pro-con-item">بار برگشت اغلب خالی (ballast)</div>
+      <div class="pro-con-item">نرخ بسیار نوسانی (شاخص BDI)</div>
+      <div class="pro-con-item">ریسک خالی ماندن کرایه (deadfreight)</div>
+      <div class="pro-con-item">سرعت پایین (12–15 kn) — مناسب کالای فوری نیست</div>
+    </div>
+  </div>
+
+  <div class="card-divider"></div>
+  <div class="sect-label">💰 سودآورترین مسیرها برای فله‌بر در خلیج/منطقه</div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>مسیر</th><th>کلاس</th><th>نرخ TCE</th><th>وضعیت عرضه/تقاضا</th><th>سود</th></tr></thead>
+    <tbody>
+      <tr><td>برزیل/گینه → چین (سنگ‌آهن/بوکسیت)</td><td>Capesize</td><td>$26,000–47,000/day</td><td>تقاضای قوی (پروژه Simandou ۲۰۲۶)</td><td><span class="star">★★★★★</span></td></tr>
+      <tr><td>استرالیا → چین (سنگ‌آهن)</td><td>Capesize</td><td>$20,000–35,000/day</td><td>مازاد عرضه جزئی</td><td><span class="star">★★★★</span></td></tr>
+      <tr><td>اوکراین/آمریکا → خاورمیانه (گندم)</td><td>Panamax/Handymax</td><td>$13,000–20,000/day</td><td>تقاضای پایدار ایران/مصر/پاکستان</td><td><span class="star">★★★</span></td></tr>
+      <tr><td>خلیج فارس → جنوب آسیا (کود/گوگرد)</td><td>Supramax</td><td>$12,000–18,000/day</td><td>عرضه قوی از خلیج</td><td><span class="star">★★★</span></td></tr>
+      <tr><td>هند → خاورمیانه (زغال/سنگ)</td><td>Handysize</td><td>$10,000–15,000/day</td><td>کمبود ظرفیت Handysize</td><td><span class="star">★★★</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- OIL TANKERS -->
+<div class="card">
+  <div class="card-hdr">
+    <div class="card-name" style="color:#b45309;">🛢 نفت‌کش (Oil Tanker / Crude Tanker)</div>
+    <div><span class="bd bd-o">اوج بازار: بحران هرمز ۲۰۲۶ — VLCC به بیش از $420K/day رسید</span></div>
+  </div>
+  <div class="card-grid">
+    <div class="card-stat">ظرفیت (bbl)<span>300K – 3.2M bbl</span></div>
+    <div class="card-stat">کالا<span>نفت خام، فرآورده، LPG</span></div>
+    <div class="card-stat">سرعت<span>14–17 knots</span></div>
+    <div class="card-stat">خدمه<span>20–35 نفر</span></div>
+  </div>
+  <div class="card-divider"></div>
+
+  <div style="font-size:11px;font-weight:800;color:var(--acc);margin-bottom:6px;">نرخ اجاره نفت‌کش — منبع: Clarksons / Baltic Exchange / Lloyd's List / European Maritime Finance</div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>کلاس</th><th>DWT</th><th>مسیر استاندارد</th><th>نرخ عادی ۲۰۲۴ (USD/day)</th><th>نرخ بحران ۲۰۲۶ (USD/day)</th></tr></thead>
+    <tbody>
+      <tr><td><strong>VLCC</strong><br><span class="rsub">Very Large Crude Carrier</span></td><td>200,000–320,000</td><td>خلیج ← چین (TD3)</td><td style="color:var(--grn);font-weight:800;">$24,786–$48,000</td><td style="color:var(--red);font-weight:800;">$109,772–$420,000+<br><span class="rsub">Lloyd's List، مارس ۲۰۲۶</span></td></tr>
+      <tr><td><strong>Suezmax</strong></td><td>120,000–200,000</td><td>غرب آفریقا ← اروپا/آسیا</td><td style="color:var(--grn);font-weight:800;">$40,000–$78,000</td><td style="color:var(--red);font-weight:800;">$124,000–$185,766</td></tr>
+      <tr><td><strong>Aframax</strong></td><td>80,000–120,000</td><td>خلیج ← هند، مدیترانه</td><td style="color:var(--grn);font-weight:800;">$31,500–$60,000</td><td style="color:var(--red);font-weight:800;">$47,940–$107,000</td></tr>
+      <tr><td><strong>Panamax Tanker</strong></td><td>60,000–80,000</td><td>متنوع</td><td style="color:var(--grn);font-weight:800;">$20,000–$40,000</td><td style="color:var(--amb);font-weight:800;">$30,000–$60,000</td></tr>
+      <tr><td><strong>Product Tanker (LR2)</strong></td><td>80,000–120,000</td><td>فرآورده نفتی</td><td style="color:var(--grn);font-weight:800;">$29,800–$60,000</td><td style="color:var(--amb);font-weight:800;">$50,000–$80,000</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div style="margin:8px 0;font-size:11px;color:var(--muted);">⚠ اوج تاریخی: نرخ VLCC در بحران هرمز مارس ۲۰۲۶ از معادل $420,000+ در روز عبور کرد — بالاترین ثبت تاریخی (Lloyd's List، ۳ مارس ۲۰۲۶)</div>
+
+  <div class="card-divider"></div>
+  <div class="pro-con">
+    <div class="pro-col">
+      <div class="pro-con-title" style="color:var(--grn);">✅ نقاط قوت</div>
+      <div class="pro-con-item">حجم بار بسیار بالا (VLCC حدود ۲ میلیون بشکه)</div>
+      <div class="pro-con-item">در بحران‌های ژئوپولیتیک نرخ‌ها انفجاری می‌شود (۲۰۲۶)</div>
+      <div class="pro-con-item">تقاضای جهانی نفت پایدار است</div>
+      <div class="pro-con-item">قابلیت تبدیل LR2 بین بار تمیز و کثیف</div>
+      <div class="pro-con-item">مسیر خلیج–چین بالاترین حجم تجاری جهان است</div>
+    </div>
+    <div class="con-col">
+      <div class="pro-con-title" style="color:var(--red);">❌ نقاط ضعف</div>
+      <div class="pro-con-item">بیمه بسیار گران (war risk در ۲۰۲۶)</div>
+      <div class="pro-con-item">ریسک تحریم برای کشتی‌های ایرانی/روسی</div>
+      <div class="pro-con-item">نیاز VLCC به بنادر با عمق بیش از ۲۰ متر</div>
+      <div class="pro-con-item">نرخ‌های فصلی نوسان بسیار بالایی دارند</div>
+      <div class="pro-con-item">مقررات زیست‌محیطی سخت‌تر (IMO 2030)</div>
+    </div>
+  </div>
+
+  <div class="card-divider"></div>
+  <div class="sect-label">💰 مقایسه سودآوری نفت‌کش بر مسیرهای خلیج</div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>مسیر</th><th>کلاس مناسب</th><th>نرخ (عادی / بحران)</th><th>وضعیت عرضه/تقاضا</th><th>سود</th></tr></thead>
+    <tbody>
+      <tr><td>خلیج فارس (MEG) → چین</td><td>VLCC</td><td>$35K / $120K+ /day</td><td>تقاضای بسیار قوی</td><td><span class="star">★★★★★</span></td></tr>
+      <tr><td>خلیج → هند (غرب)</td><td>VLCC / Suezmax</td><td>$30K / $90K+ /day</td><td>قوی</td><td><span class="star">★★★★</span></td></tr>
+      <tr><td>خلیج → اروپا (سوئز)</td><td>VLCC / Suezmax</td><td>$28K / $100K+ /day</td><td>مازاد جزئی / ریسک باز</td><td><span class="star">★★★★</span></td></tr>
+      <tr><td>غرب آفریقا → چین</td><td>VLCC</td><td>$25K / $93K /day</td><td>تقاضای رو به رشد</td><td><span class="star">★★★</span></td></tr>
+      <tr><td>خلیج → ترکیه (مدیترانه)</td><td>Aframax / Suezmax</td><td>$25K / $80K /day</td><td>متوازن</td><td><span class="star">★★★</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="p">
+  <div class="p-title">جدول نهایی — کدام نوع کشتی در مسیرهای ایران/خلیج سودآورتر است؟ <span class="p-src">ترکیب داده‌های Baltic Exchange، Clarksons، Lloyd's List، Kpler ۲۰۲۴–۲۰۲۶</span></div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>نوع کشتی</th><th>سودآوری کلی</th><th>ریسک</th><th>مناسب‌ترین مسیر برای ایران</th><th>توصیه</th></tr></thead>
+    <tbody>
+      <tr><td><strong style="color:#b45309;">نفت‌کش (VLCC/Suezmax)</strong></td><td style="color:var(--grn);font-weight:800;">★★★★★ — در دوران بحران</td><td>بالا (تحریم، بیمه، هرمز)</td><td>چابهار → هند، چین (با ناوگان سایه)</td><td><span class="bd bd-o">تنها برای ناوگانی که ریسک تحریم می‌پذیرد</span></td></tr>
+      <tr><td><strong style="color:var(--acc);">کانتینربر (Panamax)</strong></td><td style="color:var(--grn);font-weight:800;">★★★★ — در شرایط عادی</td><td>متوسط</td><td>مرسین/صحار ↔ چین/اروپا (از طریق واسطه)</td><td><span class="bd bd-g">مناسب برای شرکت‌های واسطه</span></td></tr>
+      <tr><td><strong style="color:var(--grn);">فله‌بر (Capesize)</strong></td><td style="color:var(--grn);font-weight:800;">★★★★ — ۲۰۲۵–۲۰۲۶</td><td>کم (کالاهای غیرتحریمی)</td><td>استرالیا/برزیل → رجایی/بندر امام (سنگ‌آهن، غلات)</td><td><span class="bd bd-g">پتانسیل بالا</span></td></tr>
+      <tr><td><strong style="color:var(--grn);">فله‌بر (Handysize/Supramax)</strong></td><td style="color:var(--amb);font-weight:800;">★★★ — ثبات</td><td>کم</td><td>خلیج ↔ هند، پاکستان (کود، گوگرد)</td><td><span class="bd bd-a">مسیرهای کوتاه ترجیحاً بهتر</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+</div>
+<!-- ===== TAB 5: مسیرهای دریایی عملیاتی ===== -->
+<div class="pane" id="p5">
+
+<div class="alert-red alert">⚠ وضعیت بحران ژوئن ۲۰۲۶: تنگه هرمز در حدود ۴٪ ظرفیت عادی فعالیت می‌کند؛ گذر از باب‌المندب خطرناک است؛ چابهار تنها گزینه مطمئن برای محموله‌های اقیانوسی است.</div>
+
+<div class="card">
+  <div class="card-hdr"><span class="card-name" style="color:var(--acc);">① چابهار → مومباسا / دارالسلام (آفریقای شرقی)</span><span class="bd bd-a">فعال ✓</span></div>
+  <div style="font-size:12px;color:var(--muted);line-height:1.7;">بهترین مسیر صادراتی ایران به آفریقای شرقی. خارج از تنگه هرمز و بدون عبور از باب‌المندب — مستقیم از طریق دریای عرب.</div>
+  <div class="card-grid">
+    <div class="card-stat">فاصله<span>1,850 NM</span></div>
+    <div class="card-stat">مدت سفر<span>۷–۹ روز</span></div>
+    <div class="card-stat">نوع کشتی<span>Handymax / MPP</span></div>
+    <div class="card-stat">هزینه کرایه<span>$35–55/MT</span></div>
+  </div>
+  <div style="font-size:11px;color:var(--muted);margin-top:6px;">کالا: کود اوره، بیتومن، پتروشیمی، مصالح ساختمانی، خرما | ریسک: پایین | چالش: تعرفه‌گذاری و گمرک کنیا/تانزانیا</div>
+</div>
+
+<div class="card">
+  <div class="card-hdr"><span class="card-name" style="color:var(--grn);">② چابهار → موندرا / نهاوا شیوا (هند)</span><span class="bd bd-g">فعال ✓ INSTC</span></div>
+  <div style="font-size:12px;color:var(--muted);line-height:1.7;">مسیر استراتژیک کریدور INSTC. اپراتور IPGL. تنها ۷۰۰ مایل دریایی — نزدیک‌ترین بندر هند به ایران، مستقیم و بدون عبور از هرمز.</div>
+  <div class="card-grid">
+    <div class="card-stat">فاصله<span>700 NM</span></div>
+    <div class="card-stat">مدت سفر<span>۳–۴ روز</span></div>
+    <div class="card-stat">نوع کشتی<span>Feeder / MR Chemical</span></div>
+    <div class="card-stat">هزینه/TEU<span>$350–600</span></div>
+  </div>
+  <div style="font-size:11px;color:var(--muted);margin-top:6px;">صادرات: متانول، MEG، HDPE، سنگ‌آهن | واردات: برنج بسمتی، ماشین‌آلات، داروسازی | ریسک: متوسط (تحریم هند)</div>
+</div>
+
+<div class="card">
+  <div class="card-hdr"><span class="card-name" style="color:var(--grn);">③ چابهار → کراچی / پورت قاسم (پاکستان)</span><span class="bd bd-g">فعال ✓</span></div>
+  <div style="font-size:12px;color:var(--muted);line-height:1.7;">کوتاه‌ترین مسیر دریایی ایران. خطوط فیدر هفتگی. ارزش تجاری حدود $1.2B بین ایران و پاکستان.</div>
+  <div class="card-grid">
+    <div class="card-stat">فاصله<span>450 NM</span></div>
+    <div class="card-stat">مدت سفر<span>۲ روز</span></div>
+    <div class="card-stat">نوع کشتی<span>Feeder / Coaster</span></div>
+    <div class="card-stat">هزینه/TEU<span>$200–400</span></div>
+  </div>
+  <div style="font-size:11px;color:var(--muted);margin-top:6px;">کالا: فرآورده نفتی، مصالح ساختمانی، خشکبار، HDPE | مزیت: مستقیم و سریع | ریسک: تنش هند–پاکستان (حمل از طریق کلمبو)</div>
+</div>
+
+<div class="card">
+  <div class="card-hdr"><span class="card-name" style="color:var(--amb);">④ بندرعباس/ماهشهر → ترکیه (مرسین)</span><span class="bd bd-a">⚠ تحت‌تأثیر هرمز</span></div>
+  <div style="font-size:12px;color:var(--muted);line-height:1.7;">مسیر تاریخی صادرات پتروشیمی ایران به ترکیه با MR Chemical Tanker یا کانتینر از طریق سوئز و مدیترانه. اکنون عمدتاً با مسیر زمینی از بازرگان جایگزین شده است.</div>
+  <div class="card-grid">
+    <div class="card-stat">دریایی (حالت عادی)<span>3,200 NM / ۱۰ روز</span></div>
+    <div class="card-stat">زمینی (فعلی)<span>بازرگان، ۲–۴ روز</span></div>
+    <div class="card-stat">هزینه دریایی<span>$1,200–1,800/TEU</span></div>
+    <div class="card-stat">هزینه زمینی<span>$800–1,400/ton</span></div>
+  </div>
+  <div style="font-size:11px;color:var(--muted);margin-top:6px;">کالا: HDPE، متانول، پسته، فرش، کاشی | اکنون عمدتاً از مرز بازرگان | ریسک: هرمز بسته — جایگزین زمینی فعال است</div>
+</div>
+
+<div class="card">
+  <div class="card-hdr"><span class="card-name" style="color:var(--acc);">⑤ بندرعباس → شانگهای / نینگبو (چین)</span><span class="bd bd-r">⚠ هرمز + ناوگان سایه</span></div>
+  <div style="font-size:12px;color:var(--muted);line-height:1.7;">بزرگ‌ترین مسیر تجاری ایران؛ حدود ۸۰٪ نفت خام و پتروشیمی به چین صادر می‌شود. اما تنگه هرمز بسته است و حمل از طریق ناوگان سایه با خاموش بودن AIS صورت می‌گیرد.</div>
+  <div class="card-grid">
+    <div class="card-stat">فاصله<span>6,400 NM</span></div>
+    <div class="card-stat">مدت (حالت عادی)<span>۱۸–۲۲ روز</span></div>
+    <div class="card-stat">VLCC (نفت خام)<span>تعلیق</span></div>
+    <div class="card-stat">MR (پتروشیمی)<span>$1,800–2,200/TEU</span></div>
+  </div>
+  <div style="font-size:11px;color:var(--muted);margin-top:6px;">نفت: VLCC سایه + STS در آب‌های عمان | پتروشیمی: از طریق عمان → re-label سنگاپور → چین | ریسک: تحریم OFAC بالا</div>
+</div>
+
+<div class="card">
+  <div class="card-hdr"><span class="card-name" style="color:#be185d;">⑥ انزلی/امیرآباد → آستاراخان (روسیه)</span><span class="bd bd-t">کریدور INSTC فعال</span></div>
+  <div style="font-size:12px;color:var(--muted);line-height:1.7;">کریدور شمالی INSTC از طریق دریای خزر. امیرآباد دارای RoRo ریلی. کنسرسیوم روسیه–ایران–هند برای ۲۰۲۶ فعال است.</div>
+  <div class="card-grid">
+    <div class="card-stat">فاصله<span>500 NM (دریای خزر)</span></div>
+    <div class="card-stat">مدت سفر<span>۲–۳ روز</span></div>
+    <div class="card-stat">نوع کشتی<span>RoRo + Barge</span></div>
+    <div class="card-stat">هزینه<span>$35–70/MT</span></div>
+  </div>
+  <div style="font-size:11px;color:var(--muted);margin-top:6px;">کالا صادراتی: فرآورده نفتی، پتروشیمی، خشکبار | کالا وارداتی: غلات، فولاد، چوب، کالای مصرفی | مزیت: بدون تحریم مستقیم</div>
+</div>
+
+<div class="p mb">
+  <div class="p-title">مسافت‌های دقیق دریایی — خلیج فارس و مقاصد اصلی <span class="p-src">Searates · Sea-Distances.org · IMO · UNCTAD Maritime Transport</span></div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>مبدأ</th><th>مقصد</th><th>مسافت (مایل ناتیکال)</th><th>مسافت (km)</th><th>مسیر</th><th>زمان تقریبی (کانتینربر 20kn)</th></tr></thead>
+    <tbody>
+      <tr><td>بندرعباس</td><td>شانگهای (چین)</td><td><strong style="color:var(--acc);">6,380 NM</strong></td><td>11,816 km</td><td>هرمز → هند → مالاکا → چین</td><td>~۱۳–۱۴ روز</td></tr>
+      <tr><td>بندرعباس</td><td>بمبئی (هند)</td><td><strong style="color:var(--acc);">1,425 NM</strong></td><td>2,639 km</td><td>هرمز → دریای عرب</td><td>~۳–۴ روز</td></tr>
+      <tr><td>بندرعباس</td><td>کراچی (پاکستان)</td><td><strong style="color:var(--acc);">840 NM</strong></td><td>1,556 km</td><td>هرمز → دریای عرب</td><td>~۲ روز</td></tr>
+      <tr><td>بندرعباس</td><td>دبی (جبل‌علی)</td><td><strong style="color:var(--acc);">155 NM</strong></td><td>287 km</td><td>داخل خلیج فارس</td><td>~۸–۱۰ ساعت</td></tr>
+      <tr><td>بندرعباس</td><td>مسقط/صحار (عمان)</td><td><strong style="color:var(--acc);">210 NM</strong></td><td>389 km</td><td>هرمز → خلیج عمان</td><td>~۱۱–۱۲ ساعت</td></tr>
+      <tr><td>بندرعباس</td><td>مرسین (ترکیه)</td><td><strong style="color:var(--acc);">2,780 NM</strong></td><td>5,148 km</td><td>هرمز → سوئز → مدیترانه</td><td>~۷–۸ روز</td></tr>
+      <tr><td>بندرعباس</td><td>مومباسا (کنیا)</td><td><strong style="color:var(--acc);">2,640 NM</strong></td><td>4,890 km</td><td>هرمز → دریای عرب → آفریقا</td><td>~۶–۷ روز</td></tr>
+      <tr><td>بندرعباس</td><td>دوربان (آفریقای جنوبی)</td><td><strong style="color:var(--acc);">5,120 NM</strong></td><td>9,482 km</td><td>هرمز → اقیانوس هند</td><td>~۱۱–۱۲ روز</td></tr>
+      <tr><td>چابهار</td><td>شانگهای (چین)</td><td><strong style="color:var(--acc);">5,980 NM</strong></td><td>11,075 km</td><td>مستقیم → هند → مالاکا</td><td>~۱۲–۱۳ روز</td></tr>
+      <tr><td>چابهار</td><td>بمبئی (هند)</td><td><strong style="color:var(--acc);">745 NM</strong></td><td>1,380 km</td><td>مستقیم دریای عرب</td><td>~۱.۵–۲ روز</td></tr>
+      <tr><td>سالاله (عمان)</td><td>شانگهای</td><td><strong style="color:var(--acc);">5,820 NM</strong></td><td>10,780 km</td><td>دریای عرب → هند → مالاکا</td><td>~۱۲ روز</td></tr>
+      <tr><td>جبل‌علی (دبی)</td><td>شانگهای</td><td><strong style="color:var(--acc);">6,200 NM</strong></td><td>11,482 km</td><td>هرمز → هند → مالاکا</td><td>~۱۳ روز</td></tr>
+      <tr><td>جبل‌علی (دبی)</td><td>مرسین (ترکیه)</td><td><strong style="color:var(--acc);">2,620 NM</strong></td><td>4,852 km</td><td>هرمز → سوئز → مدیترانه</td><td>~۷ روز</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="g2">
+  <div class="p">
+    <div class="p-title">مسیر زمینی عملیاتی — ایران → ترکیه → اروپا</div>
+    <div class="row"><div class="rl">تهران → بازرگان (مرز)<div class="rsub">بزرگراه E80 / ۷۵۰ کیلومتر</div></div><div class="rr" style="color:var(--acc);">۱۲ ساعت / $400–600</div></div>
+    <div class="row"><div class="rl">بازرگان → استانبول<div class="rsub">TIR / بزرگراه D100</div></div><div class="rr" style="color:var(--acc);">۲۴ ساعت / $300–500</div></div>
+    <div class="row"><div class="rl">استانبول → روتردام<div class="rsub">TIR اروپایی</div></div><div class="rr" style="color:var(--acc);">۳۶ ساعت / $1,200–1,800</div></div>
+    <div class="row"><div class="rl">بازرگان → مرسین (بندر)<div class="rsub">جنوب ترکیه → کشتی مدیترانه</div></div><div class="rr" style="color:var(--grn);">۸ ساعت / $200</div></div>
+    <div style="font-size:11px;color:var(--amb);margin-top:8px;font-weight:700;">کل مسیر تهران → روتردام (TIR): ۳–۵ روز / $2,000–3,000 به ازای هر کامیون<br>ریسک: گمرک ترکیه تحت فشار OFAC قرار دارد</div>
+  </div>
+  <div class="p">
+    <div class="p-title">مسیر زمینی — ایران → عراق → خلیج</div>
+    <div class="row"><div class="rl">اهواز → شلمچه → بصره<div class="rsub">نزدیک‌ترین مسیر به دریا</div></div><div class="rr" style="color:var(--grn);">100 km / $80–150/MT</div></div>
+    <div class="row"><div class="rl">بصره → بندر ام‌القصر (عراق)<div class="rsub">بنادر عراق</div></div><div class="rr" style="color:var(--acc);">40 km</div></div>
+    <div class="row"><div class="rl">بصره → کویت → جبل‌علی<div class="rsub">صادرات مجدد از دبی</div></div><div class="rr" style="color:var(--amb);">خطرناک در ۲۰۲۶</div></div>
+    <div class="row"><div class="rl">خسروی → بغداد → اردن<div class="rsub">مسیر کالاهای غیرانرژی</div></div><div class="rr" style="color:var(--acc);">750 km / $500</div></div>
+    <div style="font-size:11px;color:var(--amb);margin-top:8px;font-weight:700;">مزیت شلمچه: کوتاه‌ترین راه به دریا برای خوزستان (اهواز → شلمچه → بصره → خلیج). پروژه ریل شلمچه–بصره در حال احداث است.</div>
+  </div>
+</div>
+
+</div>
+<!-- ===== TAB 6: قیمت‌ها و هزینه‌های واقعی ===== -->
+<div class="pane" id="p6">
+
+<div class="p mb">
+  <div class="p-title">قیمت‌های FOB واقعی محصولات صادراتی ایران <span class="p-src">منبع: ChemAnalyst · EnergyJam · ITP Blog · Tehran Times ۲۰۲۵</span></div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>محصول</th><th>قیمت FOB بندرعباس</th><th>رقیب منطقه‌ای</th><th>مزیت ایران</th><th>روش تسویه</th><th>حجم معمول کارگو</th></tr></thead>
+    <tbody>
+      <tr><td>متانول</td><td style="color:var(--grn);font-weight:800;">$255–275/MT (سه‌ماهه چهارم ۲۰۲۵)</td><td>عربستان: $280–300</td><td style="color:var(--grn);">$15–30 ارزان‌تر</td><td>بارتر / یوان / روبل</td><td>10,000–25,000 MT</td></tr>
+      <tr><td>HDPE (پلی‌اتیلن سبک)</td><td style="color:var(--grn);font-weight:800;">$650–720/MT</td><td>عربستان: $750–820</td><td style="color:var(--grn);">$80–100 ارزان‌تر</td><td>L/C یا TT غیرمستقیم</td><td>500–2,000 MT</td></tr>
+      <tr><td>LDPE</td><td style="color:var(--grn);font-weight:800;">$700–780/MT</td><td>قطر: $800–870</td><td style="color:var(--grn);">$90 ارزان‌تر</td><td>TT از طریق ترکیه/عمان</td><td>500–1,500 MT</td></tr>
+      <tr><td>MEG (مونواتیلن گلیکول)</td><td style="color:var(--grn);font-weight:800;">$450–520/MT</td><td>عربستان: $520–580</td><td style="color:var(--grn);">$60–80 ارزان‌تر</td><td>یوان مستقیم / بارتر</td><td>1,000–5,000 MT</td></tr>
+      <tr><td>اوره ۴۶٪</td><td style="color:var(--grn);font-weight:800;">$280–320/MT</td><td>مصر: $290–330</td><td style="color:var(--grn);">رقابتی</td><td>L/C از عمان/ترکیه</td><td>5,000–25,000 MT</td></tr>
+      <tr><td>گوگرد</td><td style="color:var(--grn);font-weight:800;">$120–160/MT</td><td>قطر: $140–180</td><td style="color:var(--grn);">رقابتی</td><td>TT / بارتر</td><td>10,000–50,000 MT</td></tr>
+      <tr><td>پسته (احمدآقایی)</td><td>$8.5–11/kg</td><td>آمریکا: $12–16/kg</td><td style="color:var(--grn);">۳۰٪ ارزان‌تر</td><td>TT از ترکیه/امارات</td><td>10–500 MT</td></tr>
+      <tr><td>زعفران سرگل</td><td>$1,200–1,800/kg</td><td>اسپانیا: $5,000+</td><td style="color:var(--grn);">حدود ۴ برابر ارزان‌تر</td><td>TT / هوایی</td><td>5–100 kg</td></tr>
+      <tr><td>بیتومن ۶۰/۷۰</td><td style="color:var(--grn);font-weight:800;">$280–360/MT</td><td>روسیه: $320–400</td><td style="color:var(--grn);">رقابتی</td><td>TT / بارتر</td><td>1,000–10,000 MT</td></tr>
+      <tr><td>سنگ‌آهن (عیار ۶۵٪)</td><td style="color:var(--grn);font-weight:800;">$40–75/MT</td><td>استرالیا: $90–110</td><td style="color:var(--grn);">به‌مراتب ارزان‌تر</td><td>پیچیده / بارتر</td><td>50,000–150,000 MT</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="g2">
+  <div class="p">
+    <div class="p-title">هزینه واقعی حمل — مسیرهای اصلی ۲۰۲۶ <span class="p-src">منبع: Drewry · Argus · Freightos</span></div>
+    <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>مسیر</th><th>نوع کشتی/حمل</th><th>هزینه</th><th>مدت</th><th>وضعیت</th></tr></thead>
+      <tbody>
+        <tr><td>بندرعباس → شانگهای</td><td>MR chem 25K MT</td><td style="color:var(--red);">$18–22/MT + war risk</td><td>۲۲ روز</td><td><span class="bd bd-r">هرمز</span></td></tr>
+        <tr><td>چابهار → موندرا (هند)</td><td>Feeder 500 TEU</td><td style="color:var(--grn);">$350–500/TEU</td><td>۴ روز</td><td><span class="bd bd-g">فعال</span></td></tr>
+        <tr><td>بندرعباس → مرسین</td><td>MR 15K MT</td><td style="color:var(--red);">$28–35/MT</td><td>۱۰ روز</td><td><span class="bd bd-r">هرمز</span></td></tr>
+        <tr><td>بازرگان → استانبول</td><td>TIR کامیون</td><td style="color:var(--grn);">$1,200–1,600/truck</td><td>۲ روز</td><td><span class="bd bd-g">فعال</span></td></tr>
+        <tr><td>چابهار → مومباسا</td><td>MPP 10K MT</td><td style="color:var(--grn);">$35–55/MT</td><td>۸ روز</td><td><span class="bd bd-g">فعال</span></td></tr>
+        <tr><td>انزلی → آستاراخان</td><td>Barge/RoRo</td><td style="color:var(--grn);">$35–70/MT</td><td>۲ روز</td><td><span class="bd bd-g">فعال</span></td></tr>
+        <tr><td>سرخس → مشهد → چین</td><td>قطار باری</td><td style="color:var(--acc);">$60–90/MT</td><td>۱۲ روز</td><td><span class="bd bd-a">محدود</span></td></tr>
+        <tr><td>اهواز → شلمچه → بصره</td><td>کامیون</td><td style="color:var(--grn);">$80–150/MT</td><td>۱ روز</td><td><span class="bd bd-g">فعال</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="p">
+    <div class="p-title">هزینه‌های پنهان و سورشارج‌های ایران ۲۰۲۶</div>
+    <div class="row"><div class="rl">بیمه War Risk — هرمز<div class="rsub">۶ باشگاه P&amp;I پوشش را لغو کردند</div></div><div class="rr" style="color:var(--red);">۸ برابر نرمال</div></div>
+    <div class="row"><div class="rl">پرداخت غیرمستقیم (ترکیه/عمان)<div class="rsub">کمیسیون واسطه</div></div><div class="rr" style="color:var(--amb);">۲–۵٪ از ارزش</div></div>
+    <div class="row"><div class="rl">تخفیف نفت ایران نسبت به بازار<div class="rsub">به دلیل تحریم OFAC</div></div><div class="rr" style="color:var(--red);">$8–15/bbl</div></div>
+    <div class="row"><div class="rl">برچسب‌گذاری مجدد پتروشیمی در عمان<div class="rsub">origin washing fee</div></div><div class="rr" style="color:var(--amb);">$5–15/MT</div></div>
+    <div class="row"><div class="rl">گمرک خروجی ایران<div class="rsub">بر اساس ارزش FOB</div></div><div class="rr" style="color:var(--acc);">۰–۴٪</div></div>
+    <div class="row"><div class="rl">معطلی در گمرک<div class="rsub">میانگین در بنادر ایران</div></div><div class="rr" style="color:var(--red);">۵–۲۱ روز</div></div>
+    <div class="row"><div class="rl">شکاف نرخ ارز (رسمی در مقابل آزاد)<div class="rsub">تا ۵۰٪ فاصله</div></div><div class="rr" style="color:var(--red);">ریسک جدی</div></div>
+    <div class="row"><div class="rl">هزینه تامین مالی تجاری<div class="rsub">بدون SWIFT رسمی</div></div><div class="rr" style="color:var(--red);">+۳–۸٪ بر ROI</div></div>
+  </div>
+</div>
+
+<div class="p">
+  <div class="p-title">ماتریس سودآوری کالا × مسیر — تحلیل عملیاتی ۲۰۲۶ <span class="p-src">تحلیل ترکیبی منابع</span></div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>کالا</th><th>مسیر بهینه</th><th>مارجین خالص تقریبی</th><th>مانع اصلی</th><th>جایگزین فعلی</th><th>توصیه عملی</th></tr></thead>
+    <tbody>
+      <tr><td>متانول → چین</td><td>STS عمان → سنگاپور → شانگهای</td><td style="color:var(--grn);font-weight:800;">۱۸–۲۵٪</td><td>تحریم OFAC / ناوگان سایه</td><td>برچسب مجدد در عمان</td><td><span class="bd bd-g">بیشترین سود</span></td></tr>
+      <tr><td>HDPE → ترکیه</td><td>بازرگان/رازی (زمینی)</td><td style="color:var(--grn);font-weight:800;">۱۵–۲۲٪</td><td>فشار OFAC بر ترکیه</td><td>شرکت پوششی</td><td><span class="bd bd-g">جذاب</span></td></tr>
+      <tr><td>سنگ‌آهن → هند</td><td>چابهار → موندرا</td><td style="color:var(--grn);font-weight:800;">۲۰–۳۰٪</td><td>ظرفیت محدود چابهار</td><td>صادرات مستقیم</td><td><span class="bd bd-g">عالی</span></td></tr>
+      <tr><td>اوره → آفریقا</td><td>چابهار → سالاله → مومباسا/دارالسلام</td><td style="color:var(--acc);font-weight:800;">۱۲–۱۸٪</td><td>دشواری پرداخت آفریقا</td><td>واسطه عمان</td><td><span class="bd bd-a">خوب</span></td></tr>
+      <tr><td>بیتومن → هند/آفریقا</td><td>چابهار → مستقیم</td><td style="color:var(--acc);font-weight:800;">۱۰–۱۸٪</td><td>رقابت روسیه</td><td>مستقیم</td><td><span class="bd bd-a">متوسط رو به خوب</span></td></tr>
+      <tr><td>پسته → چین</td><td>هوایی تهران یا کانتینر reefer</td><td style="color:var(--acc);font-weight:800;">۲۵–۴۰٪</td><td>الزامات بهداشت گیاهی</td><td>بسته‌بندی در ترکیه</td><td><span class="bd bd-g">بسیار جذاب</span></td></tr>
+      <tr><td>زعفران → اروپا</td><td>هوایی + بسته‌بندی اسپانیا</td><td style="color:var(--grn);font-weight:800;">۵۰–۱۵۰٪</td><td>برچسب‌گذاری مبدأ</td><td>بسته‌بندی مجدد در اسپانیا/امارات</td><td><span class="bd bd-g">بالاترین مارجین</span></td></tr>
+      <tr><td>ذرت/سویا ← برزیل</td><td>Panamax → بندرعباس</td><td>واردات — هزینه‌بر</td><td>هرمز بسته + پرداخت</td><td>واسطه ترکیه</td><td><span class="bd bd-r">هزینه بالا</span></td></tr>
+      <tr><td>نفت خام → چین</td><td>VLCC سایه + STS</td><td style="color:var(--grn);font-weight:800;">۱۵–۲۰٪ خالص</td><td>تحریم OFAC شدید</td><td>ناوگان سایه</td><td><span class="bd bd-r">ریسک بالا</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+</div>
+<!-- ===== TAB 7: انتخاب دفتر منطقه‌ای — عمان یا ترکیه ===== -->
+<div class="pane" id="p7">
+
+<div class="kpi-grid">
+  <div class="kpi"><div class="kpi-v" style="color:var(--grn);">مسقط</div><div class="kpi-l">فاصله دریایی تا بندرعباس</div><div class="kpi-sub">210 NM / 389 km</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:var(--acc);">استانبول</div><div class="kpi-l">فاصله دریایی تا بندرعباس</div><div class="kpi-sub">2,780 NM / 5,148 km</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:var(--grn);">$1,200–2,000</div><div class="kpi-l">اجاره دفتر مسقط در ماه</div><div class="kpi-sub">منطقه Al Ghubra، عمان</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:var(--amb);">$2,000–4,000</div><div class="kpi-l">اجاره دفتر استانبول در ماه</div><div class="kpi-sub">منطقه Levent، ترکیه</div></div>
+</div>
+
+<div class="alert-red alert">⚠ وضعیت ۲۰۲۶: امارات متحده عربی با ایران در تنش است و تنگه هرمز عملاً بسته است. دفاتر مرتبط با ایران در دبی تحت فشار شدید OFAC قرار گرفته‌اند. وزارت خزانه‌داری آمریکا در آوریل ۲۰۲۵ بروکرهای نفتی مستقر در امارات را تحریم کرد. دفتر جدید لجستیک باید خارج از امارات باشد. بررسی جابجایی دفتر لجستیک به عمان یا ترکیه:</div>
+
+<div class="vs-grid">
+  <div class="vs-card">
+    <div class="vs-title" style="color:var(--teal);">🇴🇲 عمان — مسقط / صحار / صلاله</div>
+    <div class="vs-item"><span class="vs-icon" style="color:var(--grn);">✓</span><div><strong>موقعیت جغرافیایی بی‌نظیر:</strong> خارج از تنگه هرمز؛ بنادر صلاله، صحار و دقم در دریای عرب — جایگزین اصلی خلیج فارس در ۲۰۲۶ (Omanet / MSC End-of-Voyage)</div></div>
+    <div class="vs-item"><span class="vs-icon" style="color:var(--grn);">✓</span><div><strong>بی‌طرفی سیاسی:</strong> عمان با ایران و آمریکا هر دو روابط دیپلماتیک دارد؛ واسطه تاریخی مذاکرات؛ ریسک تحریم ثانویه پایین‌تر</div></div>
+    <div class="vs-item"><span class="vs-icon" style="color:var(--grn);">✓</span><div><strong>جایگزین فوری هرمز:</strong> سیاست "End of Voyage" در MSC، تحویل کارگو در صلاله؛ Hapag-Lloyd از صلاله فیدر به خلیج می‌زند</div></div>
+    <div class="vs-item"><span class="vs-icon" style="color:var(--grn);">✓</span><div><strong>زیرساخت رو به رشد:</strong> Asyad Shipping (دولتی) خرید VLCC به ارزش $206M؛ صلاله به عنوان transshipment hub؛ دقم صنعتی-نفتی؛ Maersk در بندر خشک Khazaen</div></div>
+    <div class="vs-item"><span class="vs-icon" style="color:var(--grn);">✓</span><div><strong>مناسب برای ایران:</strong> مسیر ایران → عمان از طریق دریای عمان بدون نیاز به هرمز ممکن است؛ جایگزین طبیعی دبی برای شرکت‌های ایرانی</div></div>
+    <div class="vs-item"><span class="vs-icon" style="color:var(--grn);">✓</span><div><strong>هزینه پایین‌تر:</strong> اجاره دفتر مسقط $800–2,000 در ماه؛ حقوق کارمندان ۳۰–۵۰٪ ارزان‌تر از دبی</div></div>
+    <div class="vs-item"><span class="vs-icon" style="color:var(--red);">✗</span><div><strong>بازار کوچک‌تر:</strong> شبکه لجستیک محدودتر از دبی؛ تعداد کمتر freight forwarder؛ خطوط هوایی کمتر</div></div>
+    <div class="vs-item"><span class="vs-icon" style="color:var(--red);">✗</span><div><strong>بانکداری محدود:</strong> بانک‌های بین‌المللی کمتری نسبت به دبی؛ SWIFT وجود دارد اما محدودیت‌های مرتبط با ایران همچنان باقی است</div></div>
+    <div class="vs-item"><span class="vs-icon" style="color:var(--amb);">△</span><div><strong>شهر پیشنهادی:</strong> مسقط (مرکز تجاری و دیپلماتیک) یا صلاله (بندر و ترانشیپمنت)</div></div>
+  </div>
+
+  <div class="vs-mid">VS</div>
+
+  <div class="vs-card">
+    <div class="vs-title" style="color:var(--amb);">🇹🇷 ترکیه — استانبول / مرسین</div>
+    <div class="vs-item"><span class="vs-icon" style="color:var(--grn);">✓</span><div><strong>شبکه لجستیک عمیق:</strong> بزرگ‌ترین مرکز freight-forwarding خاورمیانه-اروپا؛ صدها شرکت کشتیرانی؛ اتاق حمل‌ونقل قوی</div></div>
+    <div class="vs-item"><span class="vs-icon" style="color:var(--grn);">✓</span><div><strong>دسترسی به اروپا و آسیا:</strong> بسفر–مدیترانه–سوئز–آسیا؛ پل زمینی اروپا–آسیا؛ بازرگان–رازی برای ایران</div></div>
+    <div class="vs-item"><span class="vs-icon" style="color:var(--grn);">✓</span><div><strong>بندر مرسین:</strong> بزرگ‌ترین بندر ترکیه در مدیترانه؛ مسیر مستقیم به روتردام بدون عبور از هرمز/سوئز</div></div>
+    <div class="vs-item"><span class="vs-icon" style="color:var(--grn);">✓</span><div><strong>منابع انسانی متخصص:</strong> جامعه فارسی‌زبان بزرگ؛ مترجم و وکیل باتجربه ایران-ترکیه</div></div>
+    <div class="vs-item"><span class="vs-icon" style="color:var(--grn);">✓</span><div><strong>بانکداری بهتر:</strong> بانک‌های ترکی (Halkbank سابقه همکاری با ایران)؛ تراکنش راحت‌تر؛ ارزهای متعدد</div></div>
+    <div class="vs-item"><span class="vs-icon" style="color:var(--red);">✗</span><div><strong>ریسک تحریم ثانویه:</strong> آمریکا Halkbank را تحت فشار قرار داده؛ ترکیه پیوسته در معرض فشار OFAC برای تجارت با ایران است</div></div>
+    <div class="vs-item"><span class="vs-icon" style="color:var(--red);">✗</span><div><strong>تورم و بی‌ثباتی ارزی:</strong> نوسان شدید لیر ترکیه؛ قراردادها باید دلاری باشند؛ هزینه عملیات غیرقابل‌پیش‌بینی</div></div>
+    <div class="vs-item"><span class="vs-icon" style="color:var(--red);">✗</span><div><strong>دورتر از خلیج فارس:</strong> برای عملیات خلیج، مسیر طولانی‌تر؛ فاصله بیشتر از چابهار و بنادر اصلی ایران</div></div>
+    <div class="vs-item"><span class="vs-icon" style="color:var(--amb);">△</span><div><strong>شهر پیشنهادی:</strong> استانبول (مرکز مالی-لجستیک) یا مرسین (عملیات بندری مستقیم)</div></div>
+  </div>
+</div>
+
+<div class="p mb">
+  <div class="p-title">جدول مقایسه ۱: تصمیم‌گیری معیاری — عمان یا ترکیه؟ <span class="p-src">منبع: ITA / TradeGov / Omanet / BIMCO / Flexport</span></div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>معیار</th><th>عمان (مسقط/صلاله)</th><th>ترکیه (استانبول/مرسین)</th><th>برنده</th></tr></thead>
+    <tbody>
+      <tr><td>موقعیت دریایی برای خلیج فارس</td><td style="color:var(--grn);">بی‌نظیر — خارج از هرمز</td><td style="color:var(--muted);">متوسط — مدیترانه</td><td><span class="bd bd-t">عمان</span></td></tr>
+      <tr><td>بی‌طرفی سیاسی / ریسک تحریم</td><td style="color:var(--grn);">بسیار کم — واسطه دیپلماتیک</td><td style="color:var(--amb);">متوسط — فشار OFAC</td><td><span class="bd bd-t">عمان</span></td></tr>
+      <tr><td>شبکه لجستیک و freight forwarder</td><td style="color:var(--muted);">محدودتر</td><td style="color:var(--grn);">عمیق و گسترده</td><td><span class="bd bd-a">ترکیه</span></td></tr>
+      <tr><td>دسترسی به اروپا</td><td style="color:var(--muted);">غیرمستقیم</td><td style="color:var(--grn);">مستقیم — بسفر، مدیترانه</td><td><span class="bd bd-a">ترکیه</span></td></tr>
+      <tr><td>بانکداری و تراکنش بین‌المللی</td><td style="color:var(--blue);">خوب — بانک‌های عمان</td><td style="color:var(--grn);">خوب اما پیچیده‌تر</td><td><span class="bd bd-b">برابر</span></td></tr>
+      <tr><td>هزینه اجاره دفتر</td><td style="color:var(--grn);">$800–2,000/ماه</td><td style="color:var(--amb);">$1,500–4,000/ماه</td><td><span class="bd bd-t">عمان</span></td></tr>
+      <tr><td>منابع انسانی فارسی‌زبان</td><td style="color:var(--muted);">محدود</td><td style="color:var(--grn);">جامعه ایرانی قوی</td><td><span class="bd bd-a">ترکیه</span></td></tr>
+      <tr><td>ثبات اقتصادی / ارزی</td><td style="color:var(--grn);">ریال عمان: ثابت، وابسته به دلار</td><td style="color:var(--red);">لیر ترکیه: نوسان شدید</td><td><span class="bd bd-t">عمان</span></td></tr>
+      <tr><td>وضعیت ۲۰۲۶ برای تجارت با ایران</td><td style="color:var(--grn);">بهترین جایگزین دبی</td><td style="color:var(--amb);">ریسک فشار آمریکا</td><td><span class="bd bd-t">عمان</span></td></tr>
+      <tr><td>دسترسی به INSTC / آسیای مرکزی</td><td style="color:var(--muted);">غیرمستقیم</td><td style="color:var(--grn);">از طریق ایران/قفقاز</td><td><span class="bd bd-a">ترکیه</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="g2">
+  <div class="p">
+    <div class="p-title">🏆 توصیه نهایی — بر اساس داده‌های ۲۰۲۶</div>
+    <div class="sig"><span class="sig-lvl bd-t">اول</span><span class="sig-name"><strong>مسقط، عمان</strong> — دفتر اصلی</span><span class="sig-val" style="color:var(--teal);">پیشنهاد اول</span></div>
+    <div style="font-size:11px;color:var(--muted);padding:4px 0 10px 0;line-height:1.7;">بی‌طرفی سیاسی؛ خارج از هرمز؛ ارز ثابت؛ روابط هم‌زمان با ایران و آمریکا؛ جایگزین طبیعی دبی در بحران هرمز. بندر صلاله به عنوان هاب ترانشیپمنت. مسیر ایران از طریق دریای عمان به چابهار → مسقط مستقیم است.</div>
+    <div class="sig"><span class="sig-lvl bd-a">دوم</span><span class="sig-name"><strong>استانبول، ترکیه</strong> — دفتر اروپا-آسیا</span><span class="sig-val" style="color:var(--amb);">در صورت اولویت بازار اروپا</span></div>
+    <div style="font-size:11px;color:var(--muted);padding:4px 0 10px 0;line-height:1.7;">اگر تجارت اصلی ایران → اروپا باشد، مرسین گزینه بهتری نسبت به مسقط است. شبکه freight forwarder قوی و جامعه ایرانی بزرگ. اما ریسک OFAC و نوسان لیر باید مدیریت شود.</div>
+    <div class="sig"><span class="sig-lvl" style="background:#e3f7f5;color:var(--teal);">ایده‌آل</span><span class="sig-name"><strong>دو دفتر:</strong> مسقط + استانبول</span><span class="sig-val" style="color:var(--grn);">بهینه‌ترین گزینه</span></div>
+    <div style="font-size:11px;color:var(--muted);padding:4px 0 0 0;line-height:1.7;">مسقط برای عملیات خلیج/آسیا و استانبول برای اروپا/CIS — این ترکیب ریسک را میان دو منطقه تقسیم می‌کند.</div>
+  </div>
+  <div class="p">
+    <div class="p-title">هزینه‌های تخمینی راه‌اندازی</div>
+    <div class="row"><div class="rl">اجاره دفتر — مسقط (Al Ghubra)</div><div class="rr" style="color:var(--grn);">$1,200–2,000/ماه</div></div>
+    <div class="row"><div class="rl">اجاره دفتر — صلاله</div><div class="rr" style="color:var(--grn);">$600–1,200/ماه</div></div>
+    <div class="row"><div class="rl">اجاره دفتر — استانبول (Levent)</div><div class="rr" style="color:var(--amb);">$2,000–4,000/ماه</div></div>
+    <div class="row"><div class="rl">اجاره دفتر — مرسین</div><div class="rr" style="color:var(--blue);">$800–1,500/ماه</div></div>
+    <div class="row"><div class="rl">ثبت شرکت — عمان (LLC)</div><div class="rr" style="color:var(--grn);">$3,000–5,000</div></div>
+    <div class="row"><div class="rl">ثبت شرکت — ترکیه (Ltd. Şti)</div><div class="rr" style="color:var(--grn);">$2,000–4,000</div></div>
+    <div class="row"><div class="rl">حقوق کارمند لجستیک — مسقط</div><div class="rr" style="color:var(--blue);">$1,500–3,500/ماه</div></div>
+    <div class="row"><div class="rl">حقوق کارمند لجستیک — استانبول</div><div class="rr" style="color:var(--amb);">$1,200–3,000/ماه</div></div>
+    <div class="row"><div class="rl">ویزای کاری — عمان</div><div class="rr" style="color:var(--grn);">نسبتاً آسان</div></div>
+    <div class="row"><div class="rl">ویزای کاری — ترکیه</div><div class="rr" style="color:var(--grn);">آسان (برای ایرانیان)</div></div>
+  </div>
+</div>
+
+<div class="p mb">
+  <div class="p-title">جدول مقایسه ۲: مسقط در برابر استانبول — تحلیل تکمیلی <span class="p-src">منبع: OFAC · UNCTAD · World Bank · Kpler · Business Year Oman 2025</span></div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>معیار</th><th>مسقط، عمان</th><th>استانبول، ترکیه</th><th>برنده</th></tr></thead>
+    <tbody>
+      <tr><td>فاصله دریایی تا ایران</td><td style="color:var(--grn);">210 NM تا بندرعباس</td><td style="color:var(--red);">2,780 NM (از طریق سوئز)</td><td><span class="bd bd-g">عمان</span></td></tr>
+      <tr><td>ریسک تحریم OFAC</td><td style="color:var(--grn);">پایین (عمان تحت تحریم نیست)</td><td style="color:var(--red);">بالا (شرکت‌های ایرانی در استانبول تحریم شده‌اند)</td><td><span class="bd bd-g">عمان</span></td></tr>
+      <tr><td>اجاره دفتر</td><td style="color:var(--red);">$15,000–$25,000/ماه (دفاتر تجاری بزرگ)</td><td style="color:var(--grn);">$2,000–$8,000/ماه</td><td><span class="bd bd-b">ترکیه</span></td></tr>
+      <tr><td>دسترسی به بازار اروپا</td><td style="color:var(--red);">ضعیف (فاصله زیاد)</td><td style="color:var(--grn);">عالی (مدیترانه + کریدور سوئز)</td><td><span class="bd bd-b">ترکیه</span></td></tr>
+      <tr><td>استخدام نیروی ایرانی</td><td style="color:var(--red);">محدود</td><td style="color:var(--grn);">جامعه ایرانی بزرگ</td><td><span class="bd bd-b">ترکیه</span></td></tr>
+      <tr><td>دیپلماسی با ایران</td><td style="color:var(--grn);">عالی (روابط مستمر)</td><td style="color:var(--amb);">خوب اما تحت فشار ناتو</td><td><span class="bd bd-g">عمان</span></td></tr>
+      <tr><td>ظرفیت بندری نزدیک</td><td style="color:var(--grn);">سالاله 6.5M TEU؛ صحار 1.3M TEU</td><td style="color:var(--grn);">مرسین 3.6M TEU؛ آمبارلی 3.5M TEU</td><td><span class="bd bd-a">برابر</span></td></tr>
+      <tr><td>مسیر فیدر به ایران</td><td style="color:var(--grn);">چابهار ↔ صحار (745 NM)</td><td style="color:var(--amb);">مرسین ↔ رجایی (2,780 NM)</td><td><span class="bd bd-g">عمان</span></td></tr>
+      <tr><td>اتصال هوایی به ایران</td><td style="color:var(--amb);">محدود (مسقط ↔ تهران)</td><td style="color:var(--grn);">متعدد (استانبول ↔ تهران/مشهد/اصفهان)</td><td><span class="bd bd-b">ترکیه</span></td></tr>
+      <tr><td>ثبات ارزی</td><td style="color:var(--grn);">ریال عمان (پایدار، ~$2.60)</td><td style="color:var(--red);">لیر ترکیه (نوسان بالا)</td><td><span class="bd bd-g">عمان</span></td></tr>
+      <tr><td>بانکداری بین‌المللی</td><td style="color:var(--amb);">متوسط</td><td style="color:var(--grn);">بهتر (QNB، Halkbank)</td><td><span class="bd bd-b">ترکیه</span></td></tr>
+      <tr><td>کریدور آسیای مرکزی</td><td style="color:var(--amb);">از طریق چابهار (INSTC)</td><td style="color:var(--grn);">کریدور جاده‌ای مستقیم</td><td><span class="bd bd-b">ترکیه</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="g2">
+  <div class="p">
+    <div class="p-title" style="color:var(--grn);">🟢 جزئیات مسقط — مزایا و معایب تفصیلی</div>
+    <div class="pro-col mb">
+      <div class="pro-con-title" style="color:var(--grn);">مزایا</div>
+      <div class="pro-con-item">🌊 نزدیک‌ترین کشور دوستانه به هرمز — ۲۱۰ مایل از بندرعباس</div>
+      <div class="pro-con-item">⚓ سالاله: 3.3M TEU (۲۰۲۴)، خارج از هرمز، توسعه $300M</div>
+      <div class="pro-con-item">🤝 عمان تنها کشور عربی با روابط دیپلماتیک مستمر با ایران</div>
+      <div class="pro-con-item">💼 امکان همکاری با ASYAD (لجستیک ملی عمان)</div>
+      <div class="pro-con-item">🛢 صحار: منطقه آزاد + پالایشگاه + بندر، یعنی یک اکوسیستم کامل</div>
+      <div class="pro-con-item">🔒 ریسک تحریم کمتر از ترکیه — OFAC استانبول را هدف قرار داده است</div>
+      <div class="pro-con-item">📦 مسیر چابهار ← صحار/سالاله: مسیر نجات هرمز</div>
+      <div class="pro-con-item">🏛 محیط قانونی شفاف و بهبود رتبه Ease of Doing Business</div>
+      <div class="pro-con-item">🌐 کریدور مستقیم INSTC هند–ایران–روسیه از عمان</div>
+    </div>
+    <div class="con-col">
+      <div class="pro-con-title" style="color:var(--red);">معایب</div>
+      <div class="pro-con-item">💰 هزینه زندگی و اجاره دفتر بالاتر از ترکیه</div>
+      <div class="pro-con-item">🧑‍💼 استخدام متخصص لجستیک ایرانی دشوارتر</div>
+      <div class="pro-con-item">🏦 بانکداری بین‌المللی محدودتر (ولی بهتر از دبی برای ایران)</div>
+      <div class="pro-con-item">✈️ اتصال هوایی مستقیم محدود به ایران</div>
+      <div class="pro-con-item">🇺🇸 فشار آمریکا بر عمان برای همکاری با تحریم‌ها</div>
+      <div class="pro-con-item">🌍 دسترسی کمتر به اروپا و غرب</div>
+    </div>
+    <div class="alert-grn alert" style="margin-top:10px;">
+      <strong>🏆 توصیه برای مسقط:</strong> بهترین شهر مسقط (Muscat) است — نه سالاله که از بنادر اصلی فاصله زیادی دارد. صحار برای دفتر عملیاتی بهتر است (نزدیک به بندر صحار). مسقط برای دفتر مدیریتی و روابط دولتی بهترین انتخاب است.
+    </div>
+  </div>
+  <div class="p">
+    <div class="p-title" style="color:var(--acc);">🔵 جزئیات استانبول — مزایا و معایب تفصیلی</div>
+    <div class="pro-col mb">
+      <div class="pro-con-title" style="color:var(--grn);">مزایا</div>
+      <div class="pro-con-item">🌍 اتصال بین‌المللی: اروپا + آسیا + آفریقا</div>
+      <div class="pro-con-item">🧑‍💼 جامعه ایرانی بزرگ: استخدام آسان، زبان و فرهنگ مشترک</div>
+      <div class="pro-con-item">💰 اجاره دفتر ارزان‌تر: $2,000–$8,000/ماه در مقابل $15,000–$25,000 عمان</div>
+      <div class="pro-con-item">🏦 بانکداری و فناوری مالی بهتر (Ziraat، Halkbank، QNB)</div>
+      <div class="pro-con-item">✈️ اتصال هوایی مستقیم به تهران، مشهد و اصفهان</div>
+      <div class="pro-con-item">📦 مرسین با ظرفیت 2.0–3.6M TEU، دروازه اروپا و خاورمیانه</div>
+      <div class="pro-con-item">🚚 کریدور جاده‌ای ترکیه–ایران از طریق بازرگان</div>
+      <div class="pro-con-item">🌐 اتصال ریلی ایران–ترکیه (خط تبریز–وان)</div>
+    </div>
+    <div class="con-col">
+      <div class="pro-con-title" style="color:var(--red);">معایب</div>
+      <div class="pro-con-item">⚠️ OFAC چندین شرکت ایرانی در استانبول را در ۲۰۲۴–۲۰۲۶ تحریم کرده است</div>
+      <div class="pro-con-item">🔍 فشار آمریکا بر ترکیه برای جلوگیری از دور زدن تحریم تشدید شده</div>
+      <div class="pro-con-item">🛢 5,148 کیلومتر دریایی از بندرعباس — فاصله زیاد از بنادر اصلی ایران</div>
+      <div class="pro-con-item">📊 تورم بالای ترکیه: ریسک ارزی بالا (لیر)</div>
+      <div class="pro-con-item">🏛 بوروکراسی و مالیات پیچیده برای شرکت‌های خارجی</div>
+      <div class="pro-con-item">🇺🇸 عضویت ترکیه در ناتو، فشار بیشتر ائتلاف غرب</div>
+    </div>
+    <div class="alert-blue alert" style="margin-top:10px;">
+      <strong>🏆 توصیه برای استانبول:</strong> بهترین شهر استانبول (بخش آسیایی) است — منطقه Ümraniye/Kadıköy برای دفتر تجاری. برای عملیات لجستیک، مرسین (نزدیک بندر MIP) یا گازی‌آنتپ (Gaziantep) به عنوان مرکز تجارت با ایران و عراق پیشنهاد می‌شود.
+    </div>
+  </div>
+</div>
+
+<div class="p" style="background:#f0fdf4;border:1.5px solid #86efac;">
+  <div class="p-title" style="color:var(--grn);">🏆 توصیه نهایی استراتژیک <span class="p-src">تحلیل ترکیبی — OFAC / Business Year / Lloyd's List / Kpler ۲۰۲۶</span></div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>استراتژی</th><th>ترکیب پیشنهادی</th><th>دلیل اصلی</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong style="color:var(--grn);">گزینه اول (ایمن‌ترین)</strong></td>
+        <td><strong style="color:var(--grn);">مسقط (مدیریت) + صحار (عملیات)</strong></td>
+        <td>کمترین ریسک OFAC؛ نزدیک‌ترین به چابهار/بندرعباس؛ سالاله تنها بندر مادر خارج از هرمز با ظرفیت کافی</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--acc);">گزینه دوم (تجاری)</strong></td>
+        <td><strong style="color:var(--acc);">استانبول (مدیریت) + مرسین (عملیات)</strong></td>
+        <td>دسترسی به اروپا؛ جامعه ایرانی؛ هزینه پایین‌تر — اما ریسک تحریم بالاتر و نیاز به compliance بیشتر</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--amb);">گزینه سوم (ترکیبی)</strong></td>
+        <td><strong style="color:var(--amb);">مسقط (ثبت قانونی) + استانبول (فروش/بازاریابی)</strong></td>
+        <td>ترکیب بهترین‌ها: ریسک پایین عمان + دسترسی اروپا از ترکیه — نیاز به تیم دو کشوری</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+</div>
+<!-- ===== TAB 9: منابع و رفرنس‌ها ===== -->
+<div class="pane" id="p8">
+
+<div class="p-title">📚 منابع کامل — تمام داده‌های این داشبورد <span class="p-src">بیش از ۱۰۶ رفرنس علنی، تحلیلی، خبری</span></div>
+
+<div class="g2">
+<div>
+<div class="ref-block">
+  <div class="ref-title">🌊 منابع دریایی و لجستیک</div>
+  <div class="ref-list">
+    <div class="ref-item"><span>[R01]</span> UNCTAD Review of Maritime Transport 2024 — unctad.org/rmt2024</div>
+    <div class="ref-item"><span>[R02]</span> UNCTAD Impact Assessment Hormuz — osginf2024d2_en.pdf (Apr 2026)</div>
+    <div class="ref-item"><span>[R03]</span> Lloyd's List — Crude tanker rally VLCC $420K (Mar 3, 2026)</div>
+    <div class="ref-item"><span>[R04]</span> Lloyd's List — Commodity rates 'winter of discontent' (Dec 17, 2024)</div>
+    <div class="ref-item"><span>[R05]</span> Lloyd's List — Boxship charter rates Red Sea (Jan 16, 2024)</div>
+    <div class="ref-item"><span>[R06]</span> Lloyd's List — Alarm bells crude tankers (Nov 5, 2024)</div>
+    <div class="ref-item"><span>[R07]</span> Clarksons Research — VLCC non-eco avg $29,600/day (Nov 2024)</div>
+    <div class="ref-item"><span>[R08]</span> Clarksons Research — Containership TC Rate Index (Dec 2023)</div>
+    <div class="ref-item"><span>[R09]</span> Baltic Exchange — TD3 VLCC MEG-China index (daily)</div>
+    <div class="ref-item"><span>[R10]</span> Baltic Exchange — BCI, BPI, BSI, BHSI (2025 annual avg)</div>
+    <div class="ref-item"><span>[R11]</span> Kpler — Persian Gulf Port Capacity 1.16M TEU/week (Mar 30, 2026)</div>
+    <div class="ref-item"><span>[R12]</span> Kpler — Alternative Port Capacity 489K–635K TEU/week (Apr 2026)</div>
+    <div class="ref-item"><span>[R13]</span> Kpler — 2025 Dry Bulk Carrier Earnings (Jan 2, 2026)</div>
+    <div class="ref-item"><span>[R14]</span> Riviera MM — VLCC rates Dec 2025: $109,772/day MEG-China</div>
+    <div class="ref-item"><span>[R15]</span> European Maritime Finance — Suezmax $124K/day Hormuz crisis (2026)</div>
+    <div class="ref-item"><span>[R16]</span> Alphaliner — Containership market weekly reports 2024–2025</div>
+    <div class="ref-item"><span>[R17]</span> MSI (Maritime Strategies International) — TC Rate Reports Q4 2025</div>
+    <div class="ref-item"><span>[R18]</span> MundoMaritimo — Containership charter market Dec 2025 report</div>
+    <div class="ref-item"><span>[R19]</span> Container News — Charter rates large boxships Jan 2024</div>
+    <div class="ref-item"><span>[R20]</span> Container News — Turkish ports 13.5M TEU 2024 (Feb 7, 2025)</div>
+    <div class="ref-item"><span>[R21]</span> FreightWaves — VLCC rates $98,400/day (Oct 2019 benchmark)</div>
+    <div class="ref-item"><span>[R22]</span> Splash247 — Tanker rates in context (Aug 27, 2024)</div>
+    <div class="ref-item"><span>[R23]</span> HandyBulk — Ship Charter Rates May 18, 2026</div>
+    <div class="ref-item"><span>[R24]</span> Teekay Corp — Suezmax/Aframax Spot Rates (Mar 21, 2025 PDF)</div>
+    <div class="ref-item"><span>[R25]</span> Blue Economy News — Daily Operating Costs Ships (Mar 2025)</div>
+    <div class="ref-item"><span>[R26]</span> HZ-Containers — Daily Rates Maritime Shipping (Feb 2026)</div>
+    <div class="ref-item"><span>[R27]</span> DNV — Bulk carrier market cautious optimism (2026)</div>
+    <div class="ref-item"><span>[R28]</span> MID-SHIP Group — Dry Bulk Market Mar 26, 2025</div>
+    <div class="ref-item"><span>[R29]</span> MID-SHIP Group — Market Insights weekly (2024–2025)</div>
+    <div class="ref-item"><span>[R30]</span> MPC Container Ships — Q1 2025 Results: Aframax $31,931/day</div>
+    <div class="ref-item"><span>[R31]</span> Tradlinx Blog — UAE Port List: Jebel Ali / Fujairah (Apr 2025)</div>
+    <div class="ref-item"><span>[R32]</span> Tradlinx Blog — Turkish Port List: Mersin / Ambarli (2025)</div>
+    <div class="ref-item"><span>[R33]</span> Tradlinx Blog — Dry Bulk: Capesize vessel types (Jan 2026)</div>
+    <div class="ref-item"><span>[R34]</span> Sea-distances.org — Nautical miles calculator (all routes)</div>
+    <div class="ref-item"><span>[R35]</span> Searates.com — Port-to-port distance database</div>
+    <div class="ref-item"><span>[R36]</span> IMO — International Maritime Organization vessel classification</div>
+  </div>
+</div>
+
+<div class="ref-block">
+  <div class="ref-title">⚓ منابع بنادر و عمان</div>
+  <div class="ref-list">
+    <div class="ref-item"><span>[R37]</span> Oman MTCIT — Omani Ports 137M Tonnes 2024 (Mar 24, 2025)</div>
+    <div class="ref-item"><span>[R38]</span> Oman MTCIT — Oman Maritime Position Growth H1 2025 (Aug 2025)</div>
+    <div class="ref-item"><span>[R39]</span> Oman Ministry of Finance — Ports Adding Value 2024</div>
+    <div class="ref-item"><span>[R40]</span> Hellenic Shipping News — Omani Ports 4.2M TEU (Mar 26, 2025)</div>
+    <div class="ref-item"><span>[R41]</span> The Business Year — Oman Ports Expansion 2025 (Sep 2025)</div>
+    <div class="ref-item"><span>[R42]</span> Megaproject.com — Omani Ports 2024 statistics</div>
+    <div class="ref-item"><span>[R43]</span> National Maritime Foundation — Oman IMEC Integration (Jul 9, 2025)</div>
+    <div class="ref-item"><span>[R44]</span> Middle East Briefing — Oman Logistics Duqm Salalah (Aug 2025)</div>
+    <div class="ref-item"><span>[R45]</span> SOHAR Port — Port Statistics PDF Q1–Q4 2025</div>
+    <div class="ref-item"><span>[R46]</span> Salalah Port Services Company — Annual Report 2024</div>
+    <div class="ref-item"><span>[R47]</span> DP World — Jebel Ali Record Volumes 2024 (Feb 25, 2025)</div>
+    <div class="ref-item"><span>[R48]</span> Logistics Manager — Jebel Ali 15.5M TEU (Mar 31, 2025)</div>
+    <div class="ref-item"><span>[R49]</span> Container News — DP World Jebel Ali record (2025)</div>
+    <div class="ref-item"><span>[R50]</span> Gulf News — DP World Jebel Ali RoRo expansion H1 2025</div>
+    <div class="ref-item"><span>[R51]</span> UAE Human Journey — Jebel Ali Blueprint 2025 analysis</div>
+    <div class="ref-item"><span>[R52]</span> Grokipedia — Port of Jebel Ali detailed stats (Mar 25, 2026)</div>
+    <div class="ref-item"><span>[R53]</span> Gulf Today — Jebel Ali monthly record 1.4M TEU July 2024</div>
+    <div class="ref-item"><span>[R54]</span> Dubai Eye 103.8 — Jebel Ali container record Aug 2024</div>
+    <div class="ref-item"><span>[R55]</span> The Maritime Standard — Jebel Ali monthly record (Sep 2024)</div>
+  </div>
+</div>
+</div>
+
+<div class="g2">
+<div>
+<div class="ref-block">
+  <div class="ref-title">🛢 منابع نفت / انرژی / هرمز</div>
+  <div class="ref-list">
+    <div class="ref-item"><span>[R56]</span> IEA — Oil 2025 Report: Hormuz 20M bbl/day (2025)</div>
+    <div class="ref-item"><span>[R57]</span> EIA — Strait of Hormuz Oil Flows 2024: 20.3M bbl/day</div>
+    <div class="ref-item"><span>[R58]</span> Statista — Oil flows Hormuz 2014–2024 (Apr 2026)</div>
+    <div class="ref-item"><span>[R59]</span> Statista — Ship Traffic Hormuz chart (Jun 2026)</div>
+    <div class="ref-item"><span>[R60]</span> CNN — How traffic through Hormuz shrank (May 5, 2026)</div>
+    <div class="ref-item"><span>[R61]</span> CSIS — Strait of Hormuz in 8 Charts (Apr 23, 2026)</div>
+    <div class="ref-item"><span>[R62]</span> USNI News — Hormuz transits lowest level (May 2, 2026)</div>
+    <div class="ref-item"><span>[R63]</span> Maritime Executive — Chinese Korean VLCCs Hormuz (May 20, 2026)</div>
+    <div class="ref-item"><span>[R64]</span> StoneX — Update Hormuz Vessel Traffic (Apr 15, 2026)</div>
+    <div class="ref-item"><span>[R65]</span> HormuzTracker.com — Live dashboard (Jun 2026)</div>
+    <div class="ref-item"><span>[R66]</span> HormuzTracking.com — AIS vessel tracking (Jun 2026)</div>
+    <div class="ref-item"><span>[R67]</span> Mexico Business News — Persian Gulf capacity limits (Apr 6, 2026)</div>
+    <div class="ref-item"><span>[R68]</span> Lloyd's List Webinar — Meade: Hormuz normalization Sep 2026 min</div>
+    <div class="ref-item"><span>[R69]</span> Saudi Aramco — East-West Pipeline (Petroline) capacity data</div>
+    <div class="ref-item"><span>[R70]</span> ADNOC — Habshan-Fujairah pipeline: 1.5M bbl/day capacity</div>
+  </div>
+</div>
+
+<div class="ref-block">
+  <div class="ref-title">🇹🇷 منابع ترکیه / تحریم / دفتر</div>
+  <div class="ref-list">
+    <div class="ref-item"><span>[R71]</span> Daily Sabah — Mersin capacity 3.6M TEU (Jan 7, 2025)</div>
+    <div class="ref-item"><span>[R72]</span> Hurriyet Daily News — Mersin expansion announcement (Jan 2025)</div>
+    <div class="ref-item"><span>[R73]</span> Transport Corridors — Mersin 25M TEU milestone (Apr 2024)</div>
+    <div class="ref-item"><span>[R74]</span> PortsEurope — MIP 25M TEU cumulative (Mar 28, 2024)</div>
+    <div class="ref-item"><span>[R75]</span> SteelRadar — Top 100 Container Ports Turkey 2025 ranking</div>
+    <div class="ref-item"><span>[R76]</span> Dynamar — Turkish port market analysis 2024</div>
+    <div class="ref-item"><span>[R77]</span> Ballast Markets — Tekirdag 20% growth 2024 analysis</div>
+    <div class="ref-item"><span>[R78]</span> OFAC — Iran-related Designations Feb 6, 2026 (Istanbul firms)</div>
+    <div class="ref-item"><span>[R79]</span> OFAC — Iran-related Designations Feb 25, 2026 (Istanbul firms)</div>
+    <div class="ref-item"><span>[R80]</span> US Treasury — Iran Shadow Fleet sanctions Apr 18, 2025</div>
+    <div class="ref-item"><span>[R81]</span> OFAC — Shipping Maritime Advisory Apr 16, 2025 (Iran oil)</div>
+    <div class="ref-item"><span>[R82]</span> OFAC — Iran Sanctions Program overview (May 2026)</div>
+    <div class="ref-item"><span>[R83]</span> OFAC — Shipping Guidance (Oct 31, 2024 PDF)</div>
+    <div class="ref-item"><span>[R84]</span> Asadi Express — Turkey to Oman logistics (Apr 2026)</div>
+    <div class="ref-item"><span>[R85]</span> Hiper Logistics — Turkey–Oman shipping routes (Jan 2025)</div>
+    <div class="ref-item"><span>[R86]</span> Clutch.co — Top shipping companies Istanbul (Feb 2026)</div>
+    <div class="ref-item"><span>[R87]</span> OpenSooq — Top shipping companies Oman 2024</div>
+  </div>
+</div>
+</div>
+
+<div>
+<div class="ref-block">
+  <div class="ref-title">📊 منابع بین‌المللی / تحلیلی</div>
+  <div class="ref-list">
+    <div class="ref-item"><span>[R88]</span> World Bank — Container Port Traffic Iran 1,550,304 TEU (2021)</div>
+    <div class="ref-item"><span>[R89]</span> World Bank — Container Port Traffic global indicator</div>
+    <div class="ref-item"><span>[R90]</span> IMF PortWatch — Real-time maritime trade platform (2026)</div>
+    <div class="ref-item"><span>[R91]</span> UNCTAD — Global merchandise trade growth forecast 1.5–2.5% (2026)</div>
+    <div class="ref-item"><span>[R92]</span> UNCTAD — Shanghai SCFI doubled Nov 2023–Feb 2024</div>
+    <div class="ref-item"><span>[R93]</span> Loadstar — Charter market soaring analysis (Oct 2020)</div>
+    <div class="ref-item"><span>[R94]</span> Marksparksolutions — Asia-Pacific Dry Bulk $78B 2025 report</div>
+    <div class="ref-item"><span>[R95]</span> ResearchGate — VLCC/Suezmax/Aframax TC rates 2005–2017</div>
+    <div class="ref-item"><span>[R96]</span> DNV — Bulk carrier market analysis (2026)</div>
+    <div class="ref-item"><span>[R97]</span> MOL Service — Dry Bulk 2023 review / 2024 outlook</div>
+    <div class="ref-item"><span>[R98]</span> Statista Seko Bansard — World largest container ports 2022 ranking</div>
+    <div class="ref-item"><span>[R99]</span> India Shipping News — Iran Chabahar port operations 2024</div>
+    <div class="ref-item"><span>[R100]</span> INSTC — International North-South Transport Corridor data</div>
+    <div class="ref-item"><span>[R101]</span> CBRE — Istanbul commercial real estate 2024</div>
+    <div class="ref-item"><span>[R102]</span> Business Oman — Commercial property Muscat 2024</div>
+    <div class="ref-item"><span>[R103]</span> IMO 2020 / IMO 2030 — Decarbonization regulations shipping</div>
+    <div class="ref-item"><span>[R104]</span> Valuates Reports — Bulk Carrier Ships Market 2020–2024</div>
+    <div class="ref-item"><span>[R105]</span> Towards Automotive — Dry Bulk Shipping Market $294.75Bn 2025</div>
+    <div class="ref-item"><span>[R106]</span> DocShipper — Bulk Freight Rate Definition 2026</div>
+  </div>
+</div>
+</div>
+
+<div class="foot">
+  <div>📋 داشبورد یکپارچه هوش تجاری و لجستیک ایران — نسخه نهایی | تمام داده‌ها از منابع علنی، تحلیلی و خبری معتبر جمع‌آوری شده‌اند | آخرین بروزرسانی: ۱۴ ژوئن ۲۰۲۶</div>
+  <div>⚠ این داشبورد صرفاً برای مقاصد تحلیلی است. تطابق با قوانین تحریم و مقررات بین‌المللی الزامی است.</div>
+</div>
+
+</div>
+<!-- ===== TAB 10: بازار جهانی کشتیرانی ===== -->
+<div class="pane" id="p9">
+
+<div class="p-title">⚓ داشبورد هوش کشتیرانی تجاری جهان <span class="p-src">داده‌های زنده ژوئن ۲۰۲۶ — منبع: Baltic Exchange / Drewry / Kpler / S&amp;P Global</span></div>
+
+<div class="alert-red alert">
+  <strong>⚠ بحران تنگه هرمز – روز ۹۴:</strong>
+  تنها ۴ فروند کشتی تجاری در ۲۴ می ۲۰۲۶ ترانزیت داشت (۴٪ نرمال) · بیش از ۱,۵۵۰ کشتی بلاک‌شده · War-risk insurance معادل ۸ برابر نرخ پیش از بحران · ۶ باشگاه P&amp;I پوشش را لغو کرده‌اند.
+</div>
+
+<div class="kpi-grid5">
+  <div class="kpi"><div class="kpi-v" style="color:var(--amb);">2,991</div><div class="kpi-l">BDI – Baltic Dry</div><div class="kpi-sub" style="color:var(--grn);">↑ +27 واحد (۲۸ می)</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:var(--acc);">$2,800</div><div class="kpi-l">WCI – $/FEU (Drewry)</div><div class="kpi-sub" style="color:var(--grn);">↑ +۳٪ هفته چهارم</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:var(--grn);">$2,861</div><div class="kpi-l">Shanghai → Rotterdam</div><div class="kpi-sub" style="color:var(--grn);">↑ +۱۵٪ در ماه می</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:var(--red);">$94.01</div><div class="kpi-l">Brent — دلار/بشکه</div><div class="kpi-sub" style="color:var(--grn);">↑ +۱.۶٪ در ۲۴ ساعت</div></div>
+  <div class="kpi"><div class="kpi-v" style="color:var(--red);">4٪</div><div class="kpi-l">ترافیک هرمز</div><div class="kpi-sub" style="color:var(--red);">نسبت به ترافیک عادی</div></div>
+</div>
+
+<!-- بازار فعلی -->
+<div class="sect-label">📈 بازار فعلی — شاخص‌های نرخ کرایه</div>
+
+<div class="g3">
+  <div class="p">
+    <div class="p-title">شاخص‌های Baltic Exchange <span class="p-src">منبع: Baltic Exchange / HandyBulk</span></div>
+    <div class="row"><div><div class="rl">Baltic Dry Index (BDI)</div><div class="rsub">شاخص کل فله‌خشک</div></div><div class="rr" style="color:var(--amb);">2,991</div></div>
+    <div class="row"><div><div class="rl">Baltic Capesize (BCI)</div><div class="rsub">Capesize — $41,428/day</div></div><div class="rr" style="color:var(--grn);">4,954</div></div>
+    <div class="row"><div><div class="rl">Baltic Panamax (BPI)</div><div class="rsub">Panamax — $20,004/day</div></div><div class="rr" style="color:var(--acc);">2,223</div></div>
+    <div class="row"><div><div class="rl">Baltic Supramax (BSI)</div><div class="rsub">Supramax — $19,801/day</div></div><div class="rr" style="color:var(--acc);">1,567</div></div>
+    <div class="row"><div><div class="rl">Baltic Handysize (BHSI)</div><div class="rsub">Handysize — $15,168/day</div></div><div class="rr" style="color:var(--muted);">843</div></div>
+  </div>
+
+  <div class="p">
+    <div class="p-title">Drewry WCI — کانتینر ۴۰ft <span class="p-src">منبع: Drewry، ۲۸ می</span></div>
+    <div class="row"><div><div class="rl">Shanghai → Rotterdam</div><div class="rsub">رشد پیاپی هفته چهارم</div></div><div class="rr" style="color:var(--grn);">$2,861</div></div>
+    <div class="row"><div><div class="rl">Shanghai → Genoa</div><div class="rsub">مدیترانه، رشد ۴٪</div></div><div class="rr" style="color:var(--acc);">$4,253</div></div>
+    <div class="row"><div><div class="rl">Shanghai → New York</div><div class="rsub">↑ ۶٪ نسبت به هفته قبل</div></div><div class="rr" style="color:var(--grn);">$4,597</div></div>
+    <div class="row"><div><div class="rl">Shanghai → Los Angeles</div><div class="rsub">PSS معادل $۲,۰۰۰ از ۱ ژوئن</div></div><div class="rr" style="color:var(--acc);">$3,473</div></div>
+    <div class="row"><div><div class="rl">Rotterdam → Shanghai</div><div class="rsub">مسیر بازگشت — خالی</div></div><div class="rr" style="color:var(--muted);">$650</div></div>
+  </div>
+
+  <div class="p">
+    <div class="p-title">تانکر — نرخ روزانه <span class="p-src">منبع: EIA / Argus / Clarksons</span></div>
+    <div class="row"><div><div class="rl">VLCC TD3C (MEG→China)</div><div class="rsub">پیک بحران مارس: $424K/day</div></div><div class="rr" style="color:var(--red);">⚠ تعلیق</div></div>
+    <div class="row"><div><div class="rl">Suezmax (AG→UKC)</div><div class="rsub">مسیر جایگزین اطلس</div></div><div class="rr" style="color:var(--amb);">$38,200</div></div>
+    <div class="row"><div><div class="rl">Aframax (Baltic)</div><div class="rsub">روسیه — تقاضا ثابت</div></div><div class="rr" style="color:var(--acc);">$26,400</div></div>
+    <div class="row"><div><div class="rl">LNG Spot ($/MMBtu)</div><div class="rsub">اروپا — تقاضای بالا</div></div><div class="rr" style="color:var(--grn);">$14.80</div></div>
+    <div class="row"><div><div class="rl">Product MR (UKC→US)</div><div class="rsub">فرآورده تصفیه‌شده</div></div><div class="rr" style="color:var(--acc);">$18,900</div></div>
+  </div>
+</div>
+
+<!-- STRAITS -->
+<div class="p mb">
+  <div class="p-title">وضعیت تنگه‌ها و کانال‌های استراتژیک — ژوئن ۲۰۲۶ <span class="p-src">منبع: straits.live / IMF PortWatch / CNN</span></div>
+  <div class="g4">
+    <div class="card" style="border-color:#fca5a5;margin-bottom:0;">
+      <div class="card-hdr"><span class="card-name" style="color:var(--red);">تنگه هرمز</span><span class="bd bd-r">بسته</span></div>
+      <div class="card-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div class="card-stat">ترافیک<span style="color:var(--red);">۴٪ نرمال</span></div>
+        <div class="card-stat">War Risk<span style="color:var(--red);">۸× عادی</span></div>
+        <div class="card-stat">کشتی گیر<span style="color:var(--red);">۱,۵۵۰+</span></div>
+      </div>
+      <div style="font-size:10.5px;color:var(--muted);margin-top:6px;line-height:1.7;">بحران از ۲۸ فوریه · ۶ باشگاه P&amp;I پوشش را لغو کردند · تعلیق کامل VLCC · مسیر جایگزین از دماغه امید: +۱۴ روز</div>
+    </div>
+    <div class="card" style="border-color:#fca5a5;margin-bottom:0;">
+      <div class="card-hdr"><span class="card-name" style="color:var(--red);">باب‌المندب / دریای سرخ</span><span class="bd bd-r">خطر</span></div>
+      <div class="card-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div class="card-stat">حملات<span style="color:var(--red);">از ۲۸ فوریه</span></div>
+        <div class="card-stat">سوئز<span style="color:var(--amb);">محدود</span></div>
+        <div class="card-stat">اضافه مسیر<span style="color:var(--amb);">+۱۴ روز</span></div>
+      </div>
+      <div style="font-size:10.5px;color:var(--muted);margin-top:6px;line-height:1.7;">حوثی‌ها حملات را از سر گرفتند · Maersk/MSC/CMA CGM تعلیق · بازیابی محدود سوئز از ۱۲۰ کشتی/روز</div>
+    </div>
+    <div class="card" style="border-color:var(--line-soft);margin-bottom:0;">
+      <div class="card-hdr"><span class="card-name" style="color:var(--grn);">کانال سوئز</span><span class="bd bd-a">محدود</span></div>
+      <div class="card-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div class="card-stat">ظرفیت<span style="color:var(--amb);">در حال بازیابی</span></div>
+        <div class="card-stat">VLCC<span style="color:var(--acc);">$700K</span></div>
+        <div class="card-stat">عرض<span style="color:var(--grn);">۳۱۳m حداکثر</span></div>
+      </div>
+      <div style="font-size:10.5px;color:var(--muted);margin-top:6px;line-height:1.7;">باز اما ورودی محدود با اثر دریای سرخ · کارمزد SCA بدون تغییر · اولویت کانتینر و LNG</div>
+    </div>
+    <div class="card" style="border-color:var(--line-soft);margin-bottom:0;">
+      <div class="card-hdr"><span class="card-name" style="color:var(--grn);">تنگه ملاکا</span><span class="bd bd-g">عادی</span></div>
+      <div class="card-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div class="card-stat">سالانه<span style="color:var(--grn);">۸۴,۰۰۰+</span></div>
+        <div class="card-stat">عمق<span style="color:var(--amb);">۲۵m محدود</span></div>
+        <div class="card-stat">دزدی دریایی<span style="color:var(--grn);">کم</span></div>
+      </div>
+      <div style="font-size:10.5px;color:var(--muted);margin-top:6px;line-height:1.7;">۲۵٪ تجارت آسیا · VLCC عبور نمی‌کند (Too Large) · Malacca-max: ۳۰۰K DWT حداکثر · NSR جایگزین فصلی</div>
+    </div>
+  </div>
+</div>
+
+<div class="g2">
+  <div class="p">
+    <div class="p-title">نرخ فریت CMA CGM / Maersk — FAK ژوئن ۲۰۲۶ <span class="p-src">منبع: Drewry / Fibre2Fashion</span></div>
+    <div class="row"><div class="rl">Asia–N.Europe FAK (اعلام‌شده)</div><div class="rr" style="color:var(--red);">~$4,700/FEU</div></div>
+    <div class="row"><div class="rl">Asia–Mediterranean FAK</div><div class="rr" style="color:var(--red);">$5,500–5,700/FEU</div></div>
+    <div class="row"><div class="rl">ONE PSS Transpacific (از ۱ ژوئن)</div><div class="rr" style="color:var(--amb);">$2,000/FEU</div></div>
+    <div class="row"><div class="rl">MSC EFS Asia–USEC</div><div class="rr" style="color:var(--amb);">$644/FEU</div></div>
+    <div class="row"><div class="rl">MSC EFS Asia–USWC</div><div class="rr" style="color:var(--amb);">$467/FEU</div></div>
+    <div class="row"><div class="rl">Intra-Asia (IACI)</div><div class="rr" style="color:var(--acc);">$959/FEU</div></div>
+  </div>
+  <div class="p">
+    <div class="p-title">Blank Sailings — هفته‌های ۲۲ تا ۲۶ <span class="p-src">منبع: Drewry Container Capacity Insight، ۲۸ می</span></div>
+    <div class="row"><div class="rl">کل Blank Sailings شرق–غرب</div><div class="rr" style="color:var(--red);">۴۱ سفر در ۵ هفته</div></div>
+    <div class="row"><div class="rl">از مجموع ۷۰۰ سفر برنامه‌ریزی‌شده</div><div class="rr" style="color:var(--amb);">۵.۹٪ لغو</div></div>
+    <div class="row"><div class="rl">Asia–Europe (هفته آینده)</div><div class="rr" style="color:var(--grn);">۴ Blank — ظرفیت پایدار</div></div>
+    <div class="row"><div class="rl">Transpacific (هفته آینده)</div><div class="rr" style="color:var(--amb);">۸ Blank — تایت‌تر</div></div>
+    <div class="row"><div class="rl">وضعیت Peak Season</div><div class="rr" style="color:var(--red);">زودتر از معمول در ۲۰۲۶</div></div>
+    <div class="row"><div class="rl">پیش‌بینی Drewry</div><div class="rr" style="color:var(--amb);">↑ افزایش نرخ‌ها در هفته‌های آتی</div></div>
+  </div>
+</div>
+
+<!-- ناوگان و مسیرها -->
+<div class="sect-label">🚢 ناوگان جهانی، انواع کشتی و مسیرهای اصلی</div>
+
+<div class="g2">
+  <div class="p">
+    <div class="p-title">انواع کشتی — ناوگان تجاری جهان ۲۰۲۶ <span class="p-src">منبع: UNCTAD / Clarkson Research</span></div>
+    <div class="sb"><div class="sbl"><span>نفتکش — Oil Tanker</span><span>۱۴,۸۰۰ — ۲۵.۶٪</span></div><div class="sbw"><div class="sbf" style="width:88%;background:var(--red);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>فله‌خشک — Bulk Carrier</span><span>۱۲,۲۰۰ — ۲۱.۱٪</span></div><div class="sbw"><div class="sbf" style="width:95%;background:var(--amb);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>کانتینربر — Container</span><span>۶,۵۰۰ — ۱۱.۲٪</span></div><div class="sbw"><div class="sbf" style="width:62%;background:var(--acc);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>شیمیایی — Chemical Tanker</span><span>۵,۱۰۰ — ۸.۸٪</span></div><div class="sbw"><div class="sbf" style="width:50%;background:var(--blue);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>حمل عمومی — General Cargo</span><span>۴,۸۰۰ — ۸.۳٪</span></div><div class="sbw"><div class="sbf" style="width:42%;background:var(--muted);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>Offshore Support Vessel</span><span>۴,۲۰۰ — ۷.۳٪</span></div><div class="sbw"><div class="sbf" style="width:44%;background:var(--pur);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>فله چندمنظوره — MPP</span><span>۳,۸۰۰ — ۶.۶٪</span></div><div class="sbw"><div class="sbf" style="width:38%;background:var(--teal);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>گاز مایع — LNG/LPG</span><span>۲,۴۰۰ — ۴.۱٪</span></div><div class="sbw"><div class="sbf" style="width:28%;background:var(--grn);"></div></div></div>
+    <div class="sb"><div class="sbl"><span>رورو / خودروبر — RoRo</span><span>۶۸۰ — ۱.۲٪</span></div><div class="sbw"><div class="sbf" style="width:8%;background:#ec4899;"></div></div></div>
+  </div>
+
+  <div class="p">
+    <div class="p-title">سایزبندی تانکرها و کانتینربرها <span class="p-src">منبع: Clarksons / IMO</span></div>
+    <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>کلاس</th><th>DWT</th><th>محموله اصلی</th><th>محدودیت</th></tr></thead>
+      <tbody>
+        <tr><td><span class="bd bd-r">ULCC</span></td><td>320K–550K</td><td>نفت خام</td><td>⚠ هرمز بسته</td></tr>
+        <tr><td><span class="bd bd-r">VLCC</span></td><td>200K–320K</td><td>نفت خام — LR</td><td>⚠ هرمز بسته</td></tr>
+        <tr><td><span class="bd bd-a">Suezmax</span></td><td>120K–200K</td><td>خام، فرآورده</td><td>سوئز ✓</td></tr>
+        <tr><td><span class="bd bd-b">Aframax/LR2</span></td><td>80K–120K</td><td>خام، گازوئیل</td><td>انعطاف بالا</td></tr>
+        <tr><td><span class="bd bd-g">Panamax MR</span></td><td>40K–80K</td><td>فرآورده، کانتینر</td><td>پاناما ✓</td></tr>
+        <tr><td><span class="bd bd-p">Handysize</span></td><td>10K–40K</td><td>محصولات پاک</td><td>بنادر کوچک</td></tr>
+        <tr><td style="color:var(--acc);">ULCS Container</td><td>+220K TEU</td><td>کانتینر +۲۴,۰۰۰ TEU</td><td>سوئز محدود</td></tr>
+        <tr><td style="color:var(--acc);">Neo-Panamax</td><td>130K TEU</td><td>کانتینر — ۱۴,۵۰۰ TEU</td><td>پاناما ✓</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+<div class="p mb">
+  <div class="p-title">مسیرهای اصلی حمل‌ونقل دریایی — داده واقعی ۲۰۲۶ <span class="p-src">منبع: Drewry WCI / Baltic Exchange / Argus / EIA</span></div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>مسیر</th><th>نوع</th><th>نرخ جاری</th><th>تغییر ماهانه</th><th>مدت</th><th>کانال</th><th>وضعیت</th><th>ریسک</th></tr></thead>
+    <tbody>
+      <tr><td>Shanghai → Rotterdam</td><td>کانتینر ۴۰ft</td><td style="color:var(--grn);">$2,861</td><td style="color:var(--grn);">↑ +۱۵٪ ماه می</td><td>۲۸ روز</td><td>سوئز</td><td><span class="bd bd-g">فعال</span></td><td><span class="bd bd-a">متوسط</span></td></tr>
+      <tr><td>Shanghai → New York</td><td>کانتینر ۴۰ft</td><td style="color:var(--grn);">$4,597</td><td style="color:var(--grn);">↑ +۶٪</td><td>۳۰ روز</td><td>سوئز/پاناما</td><td><span class="bd bd-g">فعال</span></td><td><span class="bd bd-a">متوسط</span></td></tr>
+      <tr><td>Shanghai → LA</td><td>کانتینر ۴۰ft</td><td style="color:var(--acc);">$3,473</td><td style="color:var(--grn);">↑ +۳٪</td><td>۱۴ روز</td><td>اقیانوس آرام</td><td><span class="bd bd-g">فعال</span></td><td><span class="bd bd-g">کم</span></td></tr>
+      <tr><td>MEG → China</td><td>VLCC TD3C</td><td style="color:var(--red);">⚠ تعلیق</td><td style="color:var(--red);">پیک $424K/day مارس</td><td>—</td><td>هرمز</td><td><span class="bd bd-r">بسته</span></td><td><span class="bd bd-r">بحران</span></td></tr>
+      <tr><td>USGC → Europe</td><td>Suezmax</td><td style="color:var(--amb);">$38,200/day</td><td style="color:var(--grn);">↑ جایگزین هرمز</td><td>۱۸ روز</td><td>اطلس</td><td><span class="bd bd-g">فعال</span></td><td><span class="bd bd-g">کم</span></td></tr>
+      <tr><td>Australia → China</td><td>Capesize</td><td style="color:var(--amb);">$41,428/day</td><td style="color:var(--grn);">↑ +۳.۴٪ BCI</td><td>۱۲ روز</td><td>مستقیم</td><td><span class="bd bd-g">فعال</span></td><td><span class="bd bd-g">کم</span></td></tr>
+      <tr><td>Brazil → China</td><td>Capesize</td><td style="color:var(--amb);">$41,428/day</td><td>ثابت</td><td>۳۲ روز</td><td>دماغه امید</td><td><span class="bd bd-g">فعال</span></td><td><span class="bd bd-g">کم</span></td></tr>
+      <tr><td>Baltic → China (روسیه)</td><td>Aframax — سایه</td><td style="color:var(--pur);">$26,400/day</td><td>تقاضای ثابت</td><td>۲۵ روز</td><td>NSR/Cape</td><td><span class="bd bd-p">سایه</span></td><td><span class="bd bd-r">تحریم</span></td></tr>
+      <tr><td>Shanghai → Genoa</td><td>کانتینر ۴۰ft</td><td style="color:var(--acc);">$4,253</td><td style="color:var(--grn);">↑ +۴٪</td><td>۳۰ روز</td><td>سوئز</td><td><span class="bd bd-g">فعال</span></td><td><span class="bd bd-a">متوسط</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="g2">
+  <div class="p">
+    <div class="p-title">بنادر برتر جهان ۲۰۲۵ — حجم TEU <span class="p-src">منبع: UNCTAD / Alphaliner</span></div>
+    <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>#</th><th>بندر</th><th>کشور</th><th>TEU (میلیون)</th></tr></thead>
+      <tbody>
+        <tr><td>۱</td><td>Shanghai</td><td>🇨🇳 چین</td><td style="color:var(--acc);">49.5M</td></tr>
+        <tr><td>۲</td><td>Singapore</td><td>🇸🇬 سنگاپور</td><td style="color:var(--acc);">39.0M</td></tr>
+        <tr><td>۳</td><td>Ningbo-Zhoushan</td><td>🇨🇳 چین</td><td style="color:var(--acc);">35.1M</td></tr>
+        <tr><td>۴</td><td>Shenzhen</td><td>🇨🇳 چین</td><td style="color:var(--acc);">33.0M</td></tr>
+        <tr><td>۵</td><td>Guangzhou</td><td>🇨🇳 چین</td><td style="color:var(--grn);">25.8M</td></tr>
+        <tr><td>۶</td><td>Busan</td><td>🇰🇷 کره جنوبی</td><td style="color:var(--grn);">22.7M</td></tr>
+        <tr><td>۷</td><td>Rotterdam</td><td>🇳🇱 هلند</td><td style="color:var(--amb);">14.8M</td></tr>
+        <tr><td>۸</td><td>Jebel Ali</td><td>🇦🇪 امارات</td><td style="color:var(--amb);">14.4M</td></tr>
+        <tr><td>۹</td><td>Hamburg</td><td>🇩🇪 آلمان</td><td style="color:var(--muted);">8.3M</td></tr>
+        <tr><td>۱۰</td><td>Bandar Abbas</td><td>🇮🇷 ایران</td><td style="color:var(--pur);">3.1M</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="p">
+    <div class="p-title">محمولات فله — کد HS و مقررات <span class="p-src">منبع: IMO / WCO / IMSBC</span></div>
+    <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>محموله</th><th>HS Code</th><th>کشتی</th><th>کد ایمنی</th></tr></thead>
+      <tbody>
+        <tr><td>نفت خام</td><td>2709.00</td><td>VLCC/Suez</td><td>MARPOL Annex I</td></tr>
+        <tr><td>LNG</td><td>2711.11</td><td>Q-Flex</td><td>IGC Code</td></tr>
+        <tr><td>LPG</td><td>2711.19</td><td>VLGC</td><td>IGC Code</td></tr>
+        <tr><td>سنگ آهن</td><td>2601.11</td><td>Capesize</td><td>IMSBC Group C</td></tr>
+        <tr><td>ذرت/گندم</td><td>1001–1005</td><td>Panamax</td><td>IMSBC / Phyto</td></tr>
+        <tr><td>مواد شیمیایی</td><td>2801–2942</td><td>IBC Tanker</td><td>IBC Code / MARPOL II</td></tr>
+        <tr><td>زغال‌سنگ</td><td>2701</td><td>Capesize</td><td>IMSBC Group B</td></tr>
+        <tr><td>کود (آمونیوم)</td><td>3102</td><td>MPP</td><td>IMDG Class 5.1</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+<!-- ناوگان سایه -->
+<div class="sect-label">🕶 ناوگان سایه — Shadow Fleet</div>
+
+<div class="g3">
+  <div class="card" style="border-color:#fca5a5;">
+    <div class="card-name" style="color:var(--red);margin-bottom:6px;">ناوگان سایه — آمار کلی</div>
+    <div class="row"><div class="rl">حجم ناوگان (تخمین)</div><div class="rr" style="color:var(--red);">۱,۳۰۰–۱,۴۰۰+ کشتی</div></div>
+    <div class="row"><div class="rl">سهم از ظرفیت تانکر جهانی</div><div class="rr" style="color:var(--red);">~۲۰٪</div></div>
+    <div class="row"><div class="rl">ظرفیت کل (تخمین UST)</div><div class="rr" style="color:var(--amb);">+۲۰۰M dwt</div></div>
+    <div class="row"><div class="rl">میانگین سن کشتی‌ها</div><div class="rr" style="color:var(--amb);">+۲۳ سال</div></div>
+    <div class="row"><div class="rl">بدون بیمه غربی</div><div class="rr" style="color:var(--red);">~۱۰۰٪</div></div>
+    <div class="row"><div class="rl">رشد از ۲۰۲۲</div><div class="rr" style="color:var(--red);">+۴۵٪ (S&amp;P، ۲۰۲۵)</div></div>
+    <div class="p-src" style="text-align:right;margin-top:6px;">منبع: Lloyd's List / S&amp;P Global / Kpler / CNBC، فوریه ۲۰۲۶</div>
+  </div>
+
+  <div class="card">
+    <div class="card-name" style="margin-bottom:6px;">روسیه — ناوگان سایه</div>
+    <div class="row"><div class="rl">کل کشتی</div><div class="rr" style="color:var(--red);">۵۶۱ فروند</div></div>
+    <div class="row"><div class="rl">ظرفیت کل (DWT)</div><div class="rr" style="color:var(--amb);">49.9M dwt</div></div>
+    <div class="row"><div class="rl">Aframax/LR1</div><div class="rr" style="color:var(--acc);">۲۲۸ فروند</div></div>
+    <div class="row"><div class="rl">Suezmax</div><div class="rr" style="color:var(--acc);">۵۸ فروند</div></div>
+    <div class="row"><div class="rl">اپراتور اصلی</div><div class="rr" style="color:var(--pur);">Sovcomflot</div></div>
+    <div class="row"><div class="rl">مبدأ بار</div><div class="rr" style="color:var(--muted);">Baltic / Black Sea</div></div>
+    <div class="p-src" style="text-align:right;margin-top:6px;">منبع: S&amp;P Global Commodities، سپتامبر ۲۰۲۵</div>
+  </div>
+
+  <div class="card">
+    <div class="card-name" style="margin-bottom:6px;">ایران — ناوگان سایه</div>
+    <div class="row"><div class="rl">کل کشتی</div><div class="rr" style="color:var(--red);">۱۷۰ فروند</div></div>
+    <div class="row"><div class="rl">ظرفیت کل (DWT)</div><div class="rr" style="color:var(--amb);">34.2M dwt</div></div>
+    <div class="row"><div class="rl">VLCC</div><div class="rr" style="color:var(--red);">۸۶ فروند</div></div>
+    <div class="row"><div class="rl">وضعیت VLCC</div><div class="rr" style="color:var(--red);">تعلیق / ذخیره شناور</div></div>
+    <div class="row"><div class="rl">اپراتور اصلی</div><div class="rr" style="color:var(--pur);">NITC (زیرمجموعه)</div></div>
+    <div class="row"><div class="rl">اثر بحران هرمز</div><div class="rr" style="color:var(--red);">فعالیت متوقف</div></div>
+    <div class="p-src" style="text-align:right;margin-top:6px;">منبع: S&amp;P Global / Kpler، Q1 2026</div>
+  </div>
+</div>
+
+<div class="p mb">
+  <div class="p-title">تکنیک‌های دقیق فرار از تحریم — ۲۰۲۶ <span class="p-src">منبع: Kpler / CNBC / Lloyd's List / ShipFinEx</span></div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>تکنیک</th><th>نحوه کار</th><th>شیوع</th><th>قابل ردیابی؟</th><th>کشور اصلی</th></tr></thead>
+    <tbody>
+      <tr><td><span class="bd bd-r">AIS Dark</span></td><td>خاموش کردن ترانسپوندر AIS در آب‌های بین‌الملل</td><td style="color:var(--red);">↑ رو به رشد</td><td style="color:var(--amb);">جزئی</td><td>روسیه، ایران</td></tr>
+      <tr><td><span class="bd bd-r">STS Transfer</span></td><td>انتقال دریا به دریا — بدون ردیابی در دریای آزاد</td><td style="color:var(--red);">↑ بالا</td><td style="color:var(--red);">ضعیف</td><td>روسیه، ایران، کره شمالی</td></tr>
+      <tr><td><span class="bd bd-a">AIS Spoofing</span></td><td>ارسال مکان جعلی — کشتی در خلیج فارس، AIS مدیترانه نشان می‌دهد</td><td style="color:var(--amb);">متوسط</td><td style="color:var(--grn);">بله (Kpler)</td><td>ایران، ونزوئلا</td></tr>
+      <tr><td><span class="bd bd-a">پرچم‌عوضی</span></td><td>تغییر پرچم و نام بین سفرها — پاناما، گابون، کامبوج</td><td style="color:var(--amb);">بالا</td><td style="color:var(--amb);">IMO Number ثابت</td><td>همه</td></tr>
+      <tr><td><span class="bd bd-b">شرکت پوششی</span></td><td>مالکیت در ۵+ لایه شرکت پوششی — امارات، هند، آذربایجان</td><td style="color:var(--red);">↑ ۷۸٪ کشتی‌ها</td><td style="color:var(--red);">بسیار ضعیف</td><td>روسیه (Nautikraft/AZ)</td></tr>
+      <tr><td><span class="bd bd-p">Blending</span></td><td>مخلوط‌کردن نفت تحریمی با غیرتحریمی — خلیج فارس / Batam</td><td style="color:var(--muted);">متوسط</td><td style="color:var(--amb);">اثر انگشت مولکولی</td><td>ایران، روسیه</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="g2">
+  <div class="p">
+    <div class="p-title">پرچم‌های پرریسک (FOC) — ۲۰۲۶ <span class="p-src">منبع: ShipFinEx / Lloyd's List</span></div>
+    <div class="row"><div><div class="rl">🇵🇦 پاناما</div><div class="rsub">بیشترین ناوگان سایه — کنترل ضعیف</div></div><div class="rr" style="color:var(--red);">~۲۸٪</div></div>
+    <div class="row"><div><div class="rl">🇱🇷 لیبریا</div><div class="rsub">دومین رجیستری بزرگ جهان</div></div><div class="rr" style="color:var(--amb);">~۱۸٪</div></div>
+    <div class="row"><div><div class="rl">🇲🇭 جزایر مارشال</div><div class="rsub">رو به رشد — نظارت محدود</div></div><div class="rr" style="color:var(--amb);">~۱۲٪</div></div>
+    <div class="row"><div><div class="rl">🇬🇦 گابون / کامبوج</div><div class="rsub">جدید — نوظهور ۲۰۲۴–۲۰۲۵</div></div><div class="rr" style="color:var(--acc);">~۹٪</div></div>
+    <div class="row"><div><div class="rl">🇷🇺 پرچم روسی</div><div class="rsub">+۴۰ کشتی reflag در Q4 2025</div></div><div class="rr" style="color:var(--pur);">↑ رشد</div></div>
+  </div>
+
+  <div class="p">
+    <div class="p-title">رویداد کلیدی: ضبط «Marinera» — ژانویه ۲۰۲۶ <span class="p-src">منبع: CNBC، فوریه ۲۰۲۶ / Lloyd's List</span></div>
+    <div class="sig"><span class="sig-lvl bd-r">HIGH</span><div class="sig-name">نفتکش سابق «Bella 1» توسط نیروی آمریکا ضبط شد<div class="sig-sub">۷ ژانویه</div></div></div>
+    <div class="sig"><span class="sig-lvl bd-a">INFO</span><div class="sig-name">بین ایسلند و اسکاتلند، در آب‌های بین‌الملل<div class="sig-sub">اطلس شمالی</div></div></div>
+    <div class="sig"><span class="sig-lvl bd-r">INFO</span><div class="sig-name">حمل همزمان نفت ونزوئلا، روسیه و ایران — ادعای OFAC</div></div>
+    <div class="sig"><span class="sig-lvl bd-b">INFO</span><div class="sig-name">نشان داد ناوگان سایه در اطلس شمالی هم فعال است</div></div>
+    <div class="sig"><span class="sig-lvl bd-p">DATA</span><div class="sig-name">+۴۰ کشتی در مالزی لنگر، STS در سواحل سنگاپور — Kpler</div></div>
+  </div>
+</div>
+
+<!-- هزینه و سورشارج -->
+<div class="sect-label">💰 هزینه‌ها، سورشارج‌ها و دموراژ</div>
+
+<div class="p mb">
+  <div class="p-title">سورشارج‌های استاندارد — نرخ‌های رسمی ۲۰۲۶ <span class="p-src">منبع: Drewry / BIMCO / MSC / CMA CGM / Hapag-Lloyd</span></div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>کد</th><th>نام سورشارج</th><th>نرخ جاری</th><th>پایه محاسبه</th><th>وضعیت</th></tr></thead>
+    <tbody>
+      <tr><td><span class="bd bd-a">BAF</span></td><td>Bunker Adjustment Factor</td><td>$180–420</td><td>بر TEU</td><td><span class="bd bd-a">متغیر با قیمت نفت</span></td></tr>
+      <tr><td><span class="bd bd-r">WAR</span></td><td>War Risk (دریای سرخ / هرمز)</td><td>$600–1,200+</td><td>بر TEU</td><td><span class="bd bd-r">↑ بحران جاری</span></td></tr>
+      <tr><td><span class="bd bd-r">PSS</span></td><td>Peak Season Surcharge</td><td>$2,000</td><td>بر FEU — ONE/CMA</td><td><span class="bd bd-r">از ۱ ژوئن فعال</span></td></tr>
+      <tr><td><span class="bd bd-a">EFS</span></td><td>Emergency Fuel Surcharge — MSC</td><td>$467–644</td><td>بر FEU</td><td><span class="bd bd-a">فعال</span></td></tr>
+      <tr><td><span class="bd bd-b">SCS</span></td><td>Suez Canal Surcharge</td><td>$120–200</td><td>بر TEU</td><td><span class="bd bd-b">عادی</span></td></tr>
+      <tr><td><span class="bd bd-b">THC</span></td><td>Terminal Handling Charge</td><td>$150–280</td><td>بر TEU بندر</td><td><span class="bd bd-b">ثابت</span></td></tr>
+      <tr><td><span class="bd bd-g">LSS</span></td><td>Low Sulphur Surcharge — IMO 2020</td><td>$40–80</td><td>بر TEU</td><td><span class="bd bd-g">استاندارد</span></td></tr>
+      <tr><td><span class="bd bd-p">ETS</span></td><td>EU Emissions Trading System — 2026</td><td>+$90–120</td><td>بر TEU مقصد اروپا</td><td><span class="bd bd-p">↑ فعال در ۲۰۲۶</span></td></tr>
+      <tr><td><span class="bd bd-a">CON</span></td><td>Congestion Surcharge (بندر منتخب)</td><td>$200–500</td><td>بر TEU</td><td><span class="bd bd-a">فصلی</span></td></tr>
+      <tr><td><span class="bd bd-b">DOC</span></td><td>Documentation Fee</td><td>$50–150</td><td>بر B/L</td><td><span class="bd bd-b">اجباری</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="g2">
+  <div class="p">
+    <div class="p-title">Demurrage &amp; Detention — نرخ جاری <span class="p-src">منبع: Freightos / BIMCO</span></div>
+    <div class="row"><div><div class="rl">Demurrage — کانتینر ۲۰ft</div><div class="rsub">تأخیر در برگشت به ترمینال</div></div><div class="rr" style="color:var(--red);">$80–180/روز</div></div>
+    <div class="row"><div><div class="rl">Detention — کانتینر ۴۰ft</div><div class="rsub">پس از پایان Free Time</div></div><div class="rr" style="color:var(--red);">$100–250/روز</div></div>
+    <div class="row"><div><div class="rl">Free Time — Rotterdam</div><div class="rsub">بدون هزینه اضافه</div></div><div class="rr" style="color:var(--grn);">۷ روز</div></div>
+    <div class="row"><div><div class="rl">Free Time — Shanghai</div><div class="rsub">بنادر چین</div></div><div class="rr" style="color:var(--grn);">۵ روز</div></div>
+    <div class="row"><div><div class="rl">Laytime تانکر — VLCC</div><div class="rsub">زمان مجاز تخلیه/بارگیری</div></div><div class="rr" style="color:var(--acc);">۷۲ ساعت</div></div>
+    <div class="row"><div><div class="rl">Demurrage تانکر — VLCC</div><div class="rsub">تأخیر روزانه</div></div><div class="rr" style="color:var(--red);">$40K–80K/روز</div></div>
+  </div>
+
+  <div class="p">
+    <div class="p-title">هزینه‌های بندری — بنادر اصلی <span class="p-src">منبع: Port Authorities / IAPH</span></div>
+    <div class="row"><div><div class="rl">Rotterdam — Port Dues</div><div class="rsub">بر اساس GT کشتی</div></div><div class="rr" style="color:var(--acc);">€0.42/GT</div></div>
+    <div class="row"><div><div class="rl">Shanghai — Port Dues</div><div class="rsub">بر اساس GT</div></div><div class="rr" style="color:var(--acc);">$0.18/GT</div></div>
+    <div class="row"><div><div class="rl">Jebel Ali — Port Dues</div><div class="rsub">DP World</div></div><div class="rr" style="color:var(--acc);">$0.28/GT</div></div>
+    <div class="row"><div><div class="rl">Pilotage — بنادر بزرگ</div><div class="rsub">هزینه راهنمای بندر</div></div><div class="rr" style="color:var(--muted);">$2K–8K</div></div>
+    <div class="row"><div><div class="rl">Towage — یدک‌کشی VLCC</div><div class="rsub">ورود/خروج بندر</div></div><div class="rr" style="color:var(--muted);">$8K–18K</div></div>
+    <div class="row"><div><div class="rl">Wharfage / Quayage</div><div class="rsub">هزینه اسکله/پهلوگیری</div></div><div class="rr" style="color:var(--muted);">$0.05–0.15/تن</div></div>
+  </div>
+</div>
+
+<!-- مدارک و ریسک -->
+<div class="sect-label">📋 مدارک، بیمه و Incoterms</div>
+
+<div class="g2">
+  <div class="p">
+    <div class="p-title">مدارک اصلی — صادرات دریایی <span class="p-src">منبع: ICC / UCP 600 / IMO / WCO</span></div>
+    <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>مدرک</th><th>استاندارد</th><th>نسخه</th><th>اهمیت</th></tr></thead>
+      <tbody>
+        <tr><td>Bill of Lading (B/L)</td><td>BIMCO / CMI</td><td>۳ نسخه اصلی</td><td><span class="bd bd-r">اجباری</span></td></tr>
+        <tr><td>Commercial Invoice</td><td>WCO / Incoterms</td><td>۱+</td><td><span class="bd bd-r">اجباری</span></td></tr>
+        <tr><td>Certificate of Origin</td><td>اتاق بازرگانی</td><td>۱</td><td><span class="bd bd-r">اجباری</span></td></tr>
+        <tr><td>Packing List</td><td>—</td><td>۱+</td><td><span class="bd bd-r">اجباری</span></td></tr>
+        <tr><td>Letter of Credit</td><td>UCP 600 (ICC)</td><td>Sight/Usance</td><td><span class="bd bd-a">شرطی</span></td></tr>
+        <tr><td>MSDS / DGD</td><td>IMDG Code / IMO</td><td>—</td><td><span class="bd bd-r">کالای خطرناک</span></td></tr>
+        <tr><td>Insurance Certificate</td><td>ICC A/B/C</td><td>—</td><td><span class="bd bd-a">L/C اجباری</span></td></tr>
+        <tr><td>VGM Declaration</td><td>SOLAS 2016</td><td>قبل از بارگیری</td><td><span class="bd bd-r">اجباری IMO</span></td></tr>
+        <tr><td>Charter Party</td><td>BIMCO/NYPE</td><td>Voyage/Time</td><td><span class="bd bd-b">قرارداد اجاره</span></td></tr>
+        <tr><td>Phytosanitary Cert</td><td>IPPC</td><td>—</td><td><span class="bd bd-a">مواد غذایی</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="p">
+    <div class="p-title">بیمه دریایی — P&amp;I و Marine Cargo <span class="p-src">منبع: Lloyd's / IUMI / IG P&amp;I Clubs</span></div>
+    <div class="row"><div><div class="rl">ICC (A) — All Risks</div><div class="rsub">پوشش کامل — توصیه‌شده BIMCO</div></div><div class="rr" style="color:var(--grn);">۰.۰۸–۰.۱۵٪</div></div>
+    <div class="row"><div><div class="rl">ICC (B) — Named Perils</div><div class="rsub">آتش، غرق، واژگونی</div></div><div class="rr" style="color:var(--acc);">۰.۰۵–۰.۱۰٪</div></div>
+    <div class="row"><div><div class="rl">ICC (C) — Major Casualties</div><div class="rsub">حداقلی، فاجعه‌محور</div></div><div class="rr" style="color:var(--muted);">۰.۰۳–۰.۰۸٪</div></div>
+    <div class="row"><div><div class="rl">JWLA War Risk — هرمز ۲۰۲۶</div><div class="rsub">۸ برابر نرخ عادی — ۶ باشگاه لغو کردند</div></div><div class="rr" style="color:var(--red);">⚠ غیرقابل خرید</div></div>
+    <div class="row"><div><div class="rl">War Risk — دریای سرخ</div><div class="rsub">منطقه JWLA — حوثی</div></div><div class="rr" style="color:var(--red);">۲.۵–۵٪</div></div>
+    <div class="row"><div><div class="rl">P&amp;I Club — مسئولیت مدنی</div><div class="rsub">گروه IG — ۱۳ باشگاه، ۹۰٪ جهان</div></div><div class="rr" style="color:var(--pur);">$10M–$1B سقف</div></div>
+    <div class="row"><div><div class="rl">H&amp;M — بدنه و موتورخانه</div><div class="rsub">ارزش جایگزینی کشتی</div></div><div class="rr" style="color:var(--acc);">۰.۸–۱.۲٪/سال</div></div>
+  </div>
+</div>
+
+<div class="p mb">
+  <div class="p-title">Incoterms 2020 — تقسیم ریسک و هزینه <span class="p-src">منبع: ICC — International Chamber of Commerce</span></div>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>Incoterm</th><th>تحویل کالا در</th><th>حمل</th><th>بیمه</th><th>گمرک صادراتی</th><th>گمرک وارداتی</th><th>کاربرد دریایی</th></tr></thead>
+    <tbody>
+      <tr><td><span class="bd bd-a">EXW</span></td><td>کارخانه فروشنده</td><td>خریدار</td><td>خریدار</td><td>خریدار</td><td>خریدار</td><td>هر نوع</td></tr>
+      <tr><td><span class="bd bd-g">FCA</span></td><td>نزد حامل اول</td><td>خریدار</td><td>خریدار</td><td>فروشنده</td><td>خریدار</td><td>✓ کانتینری</td></tr>
+      <tr><td><span class="bd bd-b">FAS</span></td><td>کنار کشتی در بندر</td><td>خریدار</td><td>خریدار</td><td>فروشنده</td><td>خریدار</td><td>✓ فله/نفت</td></tr>
+      <tr><td><span class="bd bd-g">FOB</span></td><td>روی عرشه کشتی</td><td>خریدار</td><td>خریدار</td><td>فروشنده</td><td>خریدار</td><td>✓ رایج‌ترین</td></tr>
+      <tr><td><span class="bd bd-a">CFR</span></td><td>بندر مقصد</td><td>فروشنده</td><td>خریدار</td><td>فروشنده</td><td>خریدار</td><td>✓ فله</td></tr>
+      <tr><td><span class="bd bd-a">CIF</span></td><td>بندر مقصد</td><td>فروشنده</td><td>فروشنده (حداقل)</td><td>فروشنده</td><td>خریدار</td><td>✓ کالای عمده</td></tr>
+      <tr><td><span class="bd bd-r">DDP</span></td><td>مقصد نهایی</td><td>فروشنده</td><td>فروشنده</td><td>فروشنده</td><td>فروشنده</td><td>⚠ ریسک بالا</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="foot">
+  <div>📋 منابع: Baltic Exchange · Drewry WCI · Kpler · S&amp;P Global · EIA · Lloyd's List · IMF PortWatch · Argus Media · BIMCO · ICC · UNCTAD · straits.live · CNN</div>
+  <div>به‌روزرسانی بازار جهانی: ۲ ژوئن ۲۰۲۶ | داده‌های بازار: ۲۸ می تا ۲ ژوئن ۲۰۲۶</div>
+</div>
+
+</div>
+
+</div>
+
+<script>
+function sw(i){
+  document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('on',i===j));
+  document.querySelectorAll('.pane').forEach((p,j)=>p.classList.toggle('on',i===j));
+}
+</script>
+</body>
+</html>
