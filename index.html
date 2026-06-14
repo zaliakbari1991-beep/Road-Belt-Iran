@@ -1894,24 +1894,6 @@
   </div>
 </div>
 
-<script>
-function switchShippingTab(index) {
-  // مخفی کردن همه پن‌ها
-  var panes = document.querySelectorAll('.shipping-pane');
-  for (var i = 0; i < panes.length; i++) {
-    panes[i].classList.remove('active');
-  }
-  // حذف active از همه تب‌ها
-  var tabs = document.querySelectorAll('.shipping-tab');
-  for (var i = 0; i < tabs.length; i++) {
-    tabs[i].classList.remove('active');
-  }
-  // ش پن انتخاب شده
-  document.getElementById('shipping-pane-' + index).classList.add('active');
-  // فعال کردن تب انتخاب شده
-  tabs[index].classList.add('active');
-}
-</script>
 
  
 <!-- ========== صفحه چهارم: نقاط مرزی مهم ========== -->
@@ -2082,18 +2064,7 @@ body{font-family:'Vazirmatn','Tahoma','Segoe UI',sans-serif;background:#f4f6f9;c
 .star{color:var(--amb);}
 .sect-label{font-size:10.5px;font-weight:800;color:var(--acc);letter-spacing:.5px;padding:6px 0 8px;border-top:1.5px solid var(--line-soft);margin-top:6px;}
 </style>
-</head>
-<body>
-<div class="wrap">
 
-<div class="border">
-  <!-- اصلاح شد: div border با محتوای کامل -->
-  <div class="border-meta">
-    <span><span class="pulse p-red"></span>هرمز: بحران فعال</span>
-    <span><span class="pulse p-grn"></span>چابهار: فعال</span>
-    <span style="color:var(--dim);">به‌روزرسانی: ۱۴ ژوئن ۲۰۲۶</span>
-  </div>
-</div>
 
 <div class="tabs">
   <div class="tab on" onclick="sw(0)">۱ · جریان تجارت خارجی</div>
