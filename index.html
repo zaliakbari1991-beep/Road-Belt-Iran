@@ -881,6 +881,7 @@
     <button class="nav-btn" onclick="showDash('shipping')">کشتیرانی</button>
     <button class="nav-btn " onclick="showDash('suggestions')">پیشنهادات</button>
     <button class="nav-btn" onclick="showDash('investment')">منابع</button>
+    <button class="nav-btn" onclick="showDash('Dictionary')">دیکشنری</button>
   </div>
 </div>
 
@@ -3555,7 +3556,159 @@ function toggleStratBox(id) {
 }
 </script>
 
+<!-- ========== صفحه: دیکشنری ========== -->
+<div id="dash-Dictionary" class="dash-section">
+  <div class="glossary-section" style="margin-top:0;">
+    <div class="glossary-header">
+      <span style="font-size:28px;">📖</span>
+      <div>
+        <h3 style="margin-bottom:4px;">دیکشنری داشبورد — اصطلاحات لجستیک و کشتیرانی</h3>
+        <p style="font-size:11.5px;color:#7e93b3;margin:0;">راهنمای اصطلاحات تخصصی استفاده‌شده در سراسر این پلتفرم — برای جست‌وجو تایپ کنید.</p>
+      </div>
+    </div>
+    <div class="glossary-search">
+      <input type="text" id="glossarySearch" placeholder="🔍 جست‌وجوی اصطلاح... (مثلاً TEU، BDI، Surcharge)" oninput="filterGlossary()">
+    </div>
+    <div class="glossary-grid" id="glossaryGrid"></div>
+  </div>
+</div>
 
+<style>
+  /* ===== دیکشنری داشبورد ===== */
+  .glossary-section { background: white; border-radius: 28px; padding: 1.6rem 2rem; box-shadow: 0 12px 28px rgba(0,0,0,0.05); border: 1px solid #eef2f9; }
+  .glossary-header { display:flex; align-items:flex-start; gap:12px; margin-bottom: 1.2rem; }
+  .glossary-header h3 { font-size: 1.15rem; font-weight: 800; color: #0b3552; }
+  .glossary-search { margin-bottom: 1rem; }
+  .glossary-search input { width:100%; padding: 10px 16px; border-radius: 14px; border: 1px solid #e9edf4; font-family: 'Vazirmatn', sans-serif; font-size: 13px; background:#f8fafd; color:#1a2a6b; outline:none; transition:border-color .2s; }
+  .glossary-search input:focus { border-color:#185FA5; }
+  .glossary-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(230px,1fr)); gap: 10px; }
+  .glossary-item { background:#f8fafd; border:1px solid #eef2f9; border-radius:14px; padding: 12px 16px; cursor:pointer; transition: all .2s; }
+  .glossary-item:hover { border-color:#185FA560; box-shadow:0 4px 12px rgba(24,95,165,0.06); }
+  .glossary-item.open { border-color:#185FA5; background:#f1f6fd; }
+  .glossary-term-row { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+  .glossary-term { font-size:13px; font-weight:800; color:#185FA5; }
+  .glossary-fa { font-size:11px; color:#7e93b3; margin-top:2px; }
+  .glossary-chev { font-size:11px; color:#9ab0cd; transition: transform .25s; flex-shrink:0; }
+  .glossary-item.open .glossary-chev { transform: rotate(180deg); }
+  .glossary-detail { display:none; margin-top:10px; padding-top:10px; border-top:1px dashed #dde7f3; font-size:12px; color:#446688; line-height:1.9; }
+  .glossary-item.open .glossary-detail { display:block; }
+  .glossary-empty { font-size:12px; color:#9ab0cd; text-align:center; padding: 20px; grid-column: 1 / -1; }
+  @media (prefers-color-scheme: dark) {
+    .glossary-section { background:#1e2a3a; border-color:#2a3a4a; }
+    .glossary-header h3 { color:#e2e8f0; }
+    .glossary-header p { color:#7e93b3 !important; }
+    .glossary-search input { background:#152030; border-color:#2a3a4a; color:#cbd5e1; }
+    .glossary-item { background:#152030; border-color:#2a3a4a; }
+    .glossary-item.open { background:#1c2c40; border-color:#185FA5; }
+    .glossary-fa { color:#7e93b3; }
+    .glossary-detail { color:#a8bdd8; border-top-color:#2a3a4a; }
+  }
+</style>
+
+<script>
+const glossaryData = [
+  { term:'TEU', fa:'واحد معادل بیست فوت', def:'واحد استاندارد سنجش ظرفیت کانتینری معادل یک کانتینر ۲۰ فوتی. مبنای اصلی محاسبه ظرفیت بنادر و کشتی‌ها.' },
+  { term:'FEU', fa:'واحد معادل چهل فوت', def:'واحد سنجش معادل یک کانتینر ۴۰ فوتی؛ تقریباً برابر با دو TEU. در نرخ‌گذاری حمل دریایی پرکاربرد است.' },
+  { term:'BDI', fa:'شاخص بالتیک خشک', def:'Baltic Dry Index — شاخص هزینه حمل فله خشک (سنگ‌آهن، زغال‌سنگ، غلات) که توسط Baltic Exchange محاسبه و به‌عنوان دماسنج اقتصاد جهانی شناخته می‌شود.' },
+  { term:'BCI', fa:'شاخص کیپ‌ساز', def:'Baltic Capesize Index — زیرشاخص BDI مخصوص کشتی‌های Capesize (بزرگ‌ترین کشتی‌های فله‌بر، عمدتاً برای سنگ‌آهن و زغال‌سنگ).' },
+  { term:'BPI', fa:'شاخص پاناماکس', def:'Baltic Panamax Index — زیرشاخص نرخ کرایه کشتی‌های Panamax که اندازه آن‌ها برای عبور از کانال پاناما محدود شده است.' },
+  { term:'BSI', fa:'شاخص سوپرامکس', def:'Baltic Supramax Index — زیرشاخص نرخ کرایه کشتی‌های فله‌بر متوسط (Supramax)، مناسب بنادر با امکانات محدودتر.' },
+  { term:'BHSI', fa:'شاخص هندی‌سایز', def:'Baltic Handysize Index — زیرشاخص نرخ کرایه کوچک‌ترین کلاس کشتی‌های فله‌بر تجاری، مناسب بنادر کوچک و کم‌عمق.' },
+  { term:'Blank Sailing', fa:'سفر لغوشده', def:'لغو یک سفر برنامه‌ریزی‌شده توسط خط کشتیرانی، معمولاً برای تعدیل عرضه ظرفیت در برابر تقاضا و کنترل نرخ‌ها.' },
+  { term:'Surcharge', fa:'هزینه اضافی', def:'هر نوع هزینه جانبی که علاوه بر کرایه پایه حمل دریافت می‌شود؛ شامل BAF، WAR، PSS، THC و موارد مشابه.' },
+  { term:'BAF', fa:'فاکتور تعدیل سوخت', def:'Bunker Adjustment Factor — هزینه اضافی متغیر بر اساس قیمت سوخت کشتی (Bunker Fuel) که به نرخ پایه کرایه افزوده می‌شود.' },
+  { term:'WAR Risk', fa:'حق بیمه جنگ', def:'War Risk Surcharge — هزینه اضافی بیمه‌ای که در مناطق پرریسک ژئوپلیتیک (مانند دریای سرخ یا تنگه هرمز) به کرایه افزوده می‌شود.' },
+  { term:'PSS', fa:'سورشارج فصل اوج', def:'Peak Season Surcharge — هزینه اضافی موقت که خطوط کشتیرانی در دوره‌های پرتقاضا (مانند پیش از سال نو چین) اعمال می‌کنند.' },
+  { term:'EFS', fa:'سورشارج فوری سوخت', def:'Emergency Fuel Surcharge — هزینه اضافی اضطراری سوخت که برخی خطوط (مانند MSC) در نوسانات شدید قیمت نفت اعلام می‌کنند.' },
+  { term:'SCS', fa:'عوارض کانال سوئز', def:'Suez Canal Surcharge — هزینه اضافی مربوط به عبور کشتی از کانال سوئز که توسط اداره کانال (SCA) دریافت می‌شود.' },
+  { term:'THC', fa:'هزینه ترمینال', def:'Terminal Handling Charge — هزینه بارگیری/تخلیه کانتینر در ترمینال بندری که از فرستنده یا گیرنده دریافت می‌شود.' },
+  { term:'LSS', fa:'سورشارج سولفور پایین', def:'Low Sulphur Surcharge — هزینه اضافی ناشی از استفاده از سوخت کم‌سولفور مطابق استاندارد IMO 2020 برای کاهش آلودگی.' },
+  { term:'ETS', fa:'نظام تجارت کربن اروپا', def:'EU Emissions Trading System — طرح قیمت‌گذاری کربن اتحادیه اروپا که از ۲۰۲۴–۲۰۲۶ به‌تدریج بخش دریایی را نیز شامل می‌شود و هزینه اضافی برای کشتی‌های مقصد اروپا ایجاد می‌کند.' },
+  { term:'Demurrage', fa:'هزینه توقف کانتینر در بندر', def:'هزینه‌ای که در صورت نگه‌داشتن کانتینر در ترمینال بندر بیش از زمان آزاد (Free Time) از مالک بار دریافت می‌شود.' },
+  { term:'Detention', fa:'هزینه توقف کانتینر خارج بندر', def:'هزینه‌ای که برای نگه‌داشتن کانتینر خارج از بندر (نزد گیرنده) بیش از زمان آزاد توافق‌شده دریافت می‌شود.' },
+  { term:'Free Time', fa:'زمان آزاد', def:'بازه زمانی رایگانی که برای تخلیه یا بازگشت کانتینر بدون پرداخت Demurrage/Detention در اختیار صاحب بار قرار می‌گیرد.' },
+  { term:'Laytime', fa:'زمان مجاز بارگیری', def:'مدت زمانی که طبق قرارداد اجاره کشتی (Charter Party) برای بارگیری یا تخلیه کشتی در بندر در اختیار اجاره‌کننده قرار دارد.' },
+  { term:'VLCC', fa:'نفتکش غول‌پیکر', def:'Very Large Crude Carrier — نفتکش با ظرفیت ۲۰۰ تا ۳۲۰ هزار تن وزن مرده (DWT)، مناسب حمل نفت خام در مسافت‌های طولانی.' },
+  { term:'ULCC', fa:'نفتکش فوق‌غول‌پیکر', def:'Ultra Large Crude Carrier — بزرگ‌ترین کلاس نفتکش‌ها با ظرفیت ۳۲۰ تا ۵۵۰ هزار تن، عمدتاً برای مسیرهای بسیار طولانی نفت خام.' },
+  { term:'Suezmax', fa:'کلاس سوئزمکس', def:'بزرگ‌ترین کلاس نفتکش که می‌تواند بدون محدودیت بارگیری از کانال سوئز عبور کند (ظرفیت ۱۲۰ تا ۲۰۰ هزار تن).' },
+  { term:'Aframax', fa:'کلاس آفرامکس', def:'کلاس نفتکش با ظرفیت ۸۰ تا ۱۲۰ هزار تن، انعطاف بالا برای ورود به بنادر متوسط؛ مبنای محاسبه نرخ AFRA.' },
+  { term:'Panamax', fa:'کلاس پاناماکس', def:'حداکثر اندازه کشتی که می‌تواند از کانال پاناما (پیش از توسعه آن) عبور کند؛ در کشتی‌های فله و کانتینری کاربرد دارد.' },
+  { term:'Capesize', fa:'کلاس کیپ‌ساز', def:'بزرگ‌ترین کلاس کشتی‌های فله‌بر که به دلیل اندازه بزرگ، باید از دماغه امید نیک یا کیپ هورن عبور کنند، نه از کانال‌های سوئز/پاناما.' },
+  { term:'Handysize', fa:'کلاس هندی‌سایز', def:'کوچک‌ترین کلاس استاندارد کشتی‌های فله‌بر تجاری (۱۰ تا ۴۰ هزار تن)، مناسب بنادر کوچک با تجهیزات محدود.' },
+  { term:'STS Transfer', fa:'انتقال کشتی به کشتی', def:'Ship-to-Ship Transfer — انتقال مستقیم محموله بین دو کشتی در دریای آزاد، بدون ورود به بندر؛ روشی رایج برای دور زدن ردیابی و تحریم.' },
+  { term:'AIS', fa:'سامانه شناسایی خودکار', def:'Automatic Identification System — سیستم ردیابی موقعیت کشتی‌ها از طریق ترانسپوندر؛ خاموش کردن آن (AIS Dark) برای پنهان‌کاری استفاده می‌شود.' },
+  { term:'FOC', fa:'پرچم مصلحتی', def:'Flag of Convenience — ثبت کشتی در کشوری غیر از کشور مالک برای کاهش هزینه، مقررات یا افزایش پوشش‌دهی هویتی (مانند پاناما، لیبریا).' },
+  { term:'P&I Club', fa:'باشگاه حمایت و غرامت', def:'Protection & Indemnity Club — تشکل بیمه متقابل کشتی‌مالکان که مسئولیت‌های مدنی (آسیب به اشخاص ثالث، آلودگی، خسارت بار) را پوشش می‌دهد.' },
+  { term:'H&M', fa:'بیمه بدنه و موتور', def:'Hull & Machinery — بیمه‌ای که خسارت فیزیکی به بدنه و ماشین‌آلات کشتی را (در برابر برخورد، آتش‌سوزی، طوفان و غیره) پوشش می‌دهد.' },
+  { term:'ICC (A/B/C)', fa:'شرایط بیمه باربری', def:'Institute Cargo Clauses — استاندارد بین‌المللی بیمه باربری دریایی با سه سطح پوشش: (A) همه ریسک‌ها، (B) خطرات نام‌برده، (C) حوادث عمده.' },
+  { term:'Incoterms', fa:'اصطلاحات تجارت بین‌المللی', def:'مجموعه قوانین استاندارد ICC (مانند FOB، CIF، EXW، DDP) که نقطه تحویل کالا و تقسیم مسئولیت هزینه، ریسک و بیمه بین خریدار و فروشنده را تعیین می‌کند.' },
+  { term:'FOB', fa:'تحویل روی عرشه', def:'Free On Board — فروشنده مسئول تحویل کالا روی عرشه کشتی در بندر مبدأ است؛ از آن نقطه به بعد هزینه و ریسک با خریدار است.' },
+  { term:'CIF', fa:'هزینه، بیمه و کرایه', def:'Cost, Insurance & Freight — فروشنده هزینه حمل و حداقل بیمه تا بندر مقصد را پرداخت می‌کند؛ ریسک از لحظه بارگیری به خریدار منتقل می‌شود.' },
+  { term:'B/L', fa:'بارنامه دریایی', def:'Bill of Lading — سند رسمی حمل دریایی که هم رسید تحویل کالا، هم قرارداد حمل و هم سند مالکیت کالا محسوب می‌شود.' },
+  { term:'LC', fa:'اعتبار اسنادی', def:'Letter of Credit — تعهد بانکی به نفع فروشنده که در صورت ارائه اسناد منطبق با شرایط قرارداد، وجه معامله پرداخت می‌شود؛ تحت قوانین UCP 600.' },
+  { term:'VGM', fa:'اعلام وزن ناخالص تأییدشده', def:'Verified Gross Mass — اعلام اجباری وزن کل کانتینر (بار + کانتینر خالی) پیش از بارگیری، طبق الزامات IMO/SOLAS.' },
+  { term:'OOG', fa:'بار خارج از ابعاد استاندارد', def:'Out of Gauge — محموله‌ای که از ابعاد استاندارد کانتینر بزرگ‌تر است و نیاز به تجهیزات و مجوزهای حمل ویژه دارد.' },
+  { term:'Reefer', fa:'کانتینر یخچالی', def:'کانتینر مجهز به سیستم سردخانه برای حمل کالاهای فاسدشدنی مانند میوه، گوشت و داروهای حساس به دما.' },
+  { term:'Flat Rack', fa:'کانتینر تخت', def:'نوعی کانتینر بدون دیواره جانبی برای حمل بارهای حجیم، سنگین یا با شکل غیرمعمول (مانند ماشین‌آلات صنعتی).' },
+  { term:'OFAC', fa:'اداره کنترل دارایی‌های خارجی آمریکا', def:'Office of Foreign Assets Control — نهاد وزارت خزانه‌داری آمریکا که فهرست تحریم‌ها و افراد/نهادهای تحت تحریم (SDN List) را اجرا می‌کند.' },
+  { term:'FATF', fa:'گروه ویژه اقدام مالی', def:'Financial Action Task Force — نهاد بین‌المللی مبارزه با پول‌شویی و تأمین مالی تروریسم که کشورها را در فهرست‌های سیاه/خاکستری/سفید رتبه‌بندی می‌کند.' },
+  { term:'Gauge (Rail)', fa:'گیج ریل', def:'فاصله بین دو ریل خط‌آهن. تفاوت گیج استاندارد جهانی (۱۴۳۵mm) و گیج روسی-آسیای‌مرکزی (۱۵۲۰mm) باعث نیاز به تعویض بوگی یا تغییر گیج در مرزهای کریدورهای ریلی می‌شود.' },
+  { term:'Transshipment', fa:'ترانس‌شیپمنت', def:'انتقال محموله از یک کشتی به کشتی دیگر در یک بندر واسط، پیش از رسیدن به مقصد نهایی؛ معمولاً برای اتصال خطوط اصلی به خطوط فیدر.' },
+  { term:'FTZ', fa:'منطقه آزاد تجاری', def:'Free Trade Zone — منطقه جغرافیایی با معافیت یا تخفیف گمرکی و مالیاتی برای تسهیل تجارت، انبارداری و مونتاژ مجدد کالا.' },
+  { term:'TIR', fa:'کاپوتاژ تیر', def:'Transports Internationaux Routiers — سیستم بین‌المللی حمل کامیونی با مهروموم گمرکی واحد که عبور از چند کشور بدون بازرسی مکرر بار را ممکن می‌کند.' },
+  { term:'DWT', fa:'وزن مرده کشتی', def:'Deadweight Tonnage — حداکثر وزنی (بار، سوخت، آب، خدمه) که یک کشتی می‌تواند با ایمنی حمل کند؛ معیار اصلی اندازه‌گیری ظرفیت کشتی‌های فله و تانکر.' },
+  { term:'Shadow Fleet', fa:'ناوگان سایه', def:'مجموعه کشتی‌های قدیمی و عمدتاً بدون بیمه استاندارد غربی که برای حمل نفت کشورهای تحت تحریم (ایران، روسیه) با پنهان‌کاری هویت و موقعیت فعالیت می‌کنند.' },
+  { term:'War Risk Zone', fa:'منطقه پرریسک جنگی', def:'محدوده جغرافیایی که توسط بیمه‌گران (Lloyd&#39;s JWLA) به دلیل درگیری یا تهدید نظامی به‌عنوان پرریسک طبقه‌بندی شده و مشمول حق بیمه اضافی است.' }
+];
+
+function renderGlossary(list) {
+  const grid = document.getElementById('glossaryGrid');
+  if (!grid) return;
+  if (list.length === 0) {
+    grid.innerHTML = '<div class="glossary-empty">موردی یافت نشد</div>';
+    return;
+  }
+  grid.innerHTML = list.map((g, i) => `
+    <div class="glossary-item" id="gloss-${i}" onclick="toggleGlossary(${i})">
+      <div class="glossary-term-row">
+        <div>
+          <div class="glossary-term">${g.term}</div>
+          <div class="glossary-fa">${g.fa}</div>
+        </div>
+        <div class="glossary-chev">🔻</div>
+      </div>
+      <div class="glossary-detail">${g.def}</div>
+    </div>
+  `).join('');
+}
+
+function toggleGlossary(idx) {
+  const items = document.querySelectorAll('.glossary-item');
+  items.forEach((item, i) => {
+    if (i === idx) {
+      item.classList.toggle('open');
+    } else {
+      item.classList.remove('open');
+    }
+  });
+}
+
+function filterGlossary() {
+  const q = document.getElementById('glossarySearch').value.trim().toLowerCase();
+  if (!q) { renderGlossary(glossaryData); return; }
+  const filtered = glossaryData.filter(g =>
+    g.term.toLowerCase().includes(q) ||
+    g.fa.toLowerCase().includes(q) ||
+    g.def.toLowerCase().includes(q)
+  );
+  renderGlossary(filtered);
+}
+
+renderGlossary(glossaryData);
+window.toggleGlossary = toggleGlossary;
+window.filterGlossary = filterGlossary;
+</script>
+ 
 <!-- ========== صفحه هفتم: مقصد:اهواز ========== -->
 <div id="dash-ahvaz" class="dash-section">
   <div class="alert-banner">
