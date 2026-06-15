@@ -3989,11 +3989,11 @@ const portsDataPro = [
   { id:'gwadar', name:'گوادر', country:'پاکستان', region:'pakistan', score:42, scoreClass:'sr-red-pro', fatf:'ریسک CPEC', fatfClass:'fatf-grey-pro', capacity:'۱۱,۰۰۰ TEU آوریل ۲۰۲۶', draft:'12.5m', mainTraders:'چین (CPEC) · افغانستان · آسیای مرکزی', goods:['ترانزیت ایران‌بند','محموله افغانستان','مواد CPEC','نفت','محصولات معدنی'], docs:['Bill of Lading','GPA Clearance','FBR Transit Declaration (SRO 691/2026)','Certificate of Origin','CPEC Transit Permit','Customs Act 1969'], risks:['ریسک تحریم اول – کریدور ایران از ۲۵ آوریل ۲۰۲۶','تهدیدات امنیتی بلوچستان','عملیات بنادر چین (COPHC)','فشار آمریکا بر کانال‌های مالی'], facilities:['۴ اسکله فعال (۵۰ تا ۲۰۳۰)','منطقه آزاد ۲,۲۹۲ هکتار','Gwadar Eastbay Expressway','فرودگاه بین‌المللی جدید','برق ۳۰۰ MW'], note:'تعرفه‌ها ۴۰درصد کاهش یافت (مه ۲۰۲۶). کریدور Gwadar–Gabd به ایران تقریبا۸۹ km.' }
 ];
 
-// داده‌های مسیرهای زمینی با افزودن فیلتر regionRoute
+// داده‌های مسیرهای زمینی
 const routesPro = [
   { 
     title:'مسیر زمینی صلاله ← خصب (اکسلیو مسندم)', 
-    regionRoute:'oman', // فقط در تب عمان نمایش داده شود
+    regionRoute:'oman',
     path:['صلاله','Route 47/31','مسقط','E11 شمالی','دبی (عبور)','E11 / RAK','Al Darah Border','خصب / مسندم'], 
     facts:[{l:'مسافت هوایی',v:'تقریبا۱,۰۴۰ km'},{l:'مسافت جاده',v:'تقریبا۱,۳۵۰ km'},{l:'زمان تقریبی',v:'۱۴–۱۶ ساعت'},{l:'وضعیت جاده',v:'آسفالت کامل'},{l:'مرز عبوری',v:'Al Darah (RAK–Musandam)'},{l:'نوع کارگو',v:'محدود به سبک'}], 
     risks:[{level:'high', text:'مستقیم از صلاله به خصب مسیر زمینی یکپارچه ندارد – مسندم اکسلیو جداگانه از بدنه اصلی عمان است و از خاک امارات عبور لازم است'},{level:'high', text:'جاده A13 خصب–تیبات (49km) باریک و کوهستانی است – برای کامیون سنگین غیرمناسب'},{level:'med', text:'کارگو تجاری سنگین در این مسیر بسیار محدود و غیراقتصادی است'},{level:'med', text:'نیاز به ویزای عبور امارات + مجوزهای دوگانه عمانی'},{level:'low', text:'برای سفر سبک و پیک لجستیک گزینه‌ای ممکن اما پرهزینه'}], 
@@ -4001,7 +4001,7 @@ const routesPro = [
   },
   { 
     title:'مسیر زمینی کراچی ← گوادر (N10 / مکران ساحلی)', 
-    regionRoute:'pakistan', // فقط در تب پاکستان نمایش داده شود
+    regionRoute:'pakistan',
     path:['کراچی','Lyari / Zero Point','N10 ساحلی','اورمارا','پسنی','Eastbay Expressway','گوادر'], 
     facts:[{l:'مسافت N10',v:'تقریبا۶۸۳ km'},{l:'زمان LTV',v:'۶–۷ ساعت'},{l:'زمان کامیون',v:'۸–۱۲ ساعت'},{l:'عرض جاده',v:'۳۰ فوت (۲ خطه)'},{l:'بالاترین نقطه',v:'۳۲۳m (Buzi Pass)'},{l:'موبایل در مسیر',v:'بسیار محدود'}], 
     risks:[{level:'high', text:'ریسک امنیتی بلوچستان – جاده از مناطق حساس می‌گذرد، حضور گروه‌های مسلح تأیید شده در سال‌های اخیر'},{level:'high', text:'ریسک تحریم – SRO 691/2026: هر کارگو ایران‌بند از این مسیر به OFAC Screening نیاز دارد'},{level:'high', text:'جاده دوخطه برای ترافیک سنگین بندری کافی نیست – موتوروی تا ۲۰۳۰ آماده نمی‌شود'},{level:'med', text:'بدون شهر بزرگ در مسیر – تنها اورمارا (شهر کوچک ساحلی)'},{level:'med', text:'هوا: بیابانی شدید، طوفان شن، گرمای تابستانی ۴۵+°C'},{level:'low', text:'گزینه آبی بهینه: فیدر دریایی کراچی–گوادر، صرفه‌جویی تقریبا$180,000 در هزینه حمل'}], 
@@ -4014,7 +4014,8 @@ let activePortPro = null;
 
 function filterPortsPro(filter) {
   activeFilterPro = filter;
-  document.querySelectorAll('.filter-btn-pro').forEach(btn => {
+  const btns = document.querySelectorAll('.filter-btn-pro');
+  btns.forEach(btn => {
     if(btn.dataset.filter === filter) {
       btn.classList.add('active');
     } else {
@@ -4022,7 +4023,7 @@ function filterPortsPro(filter) {
     }
   });
   renderPortsGridPro();
-  renderRoutesPro(); // هر بار که فیلتر عوض شد، مسیرها نیز بازآوری می‌شوند
+  renderRoutesPro();
 }
 
 function renderPortsGridPro() {
@@ -4095,13 +4096,11 @@ function renderRoutesPro() {
   const container = document.getElementById('routesGridPro');
   if (!container) return;
   
-  // فیلتر کردن مسیرها بر اساس تب فعال
   let filteredRoutes = routesPro;
   if (activeFilterPro !== 'all') {
     filteredRoutes = routesPro.filter(route => route.regionRoute === activeFilterPro);
   }
   
-  // اگر مسیری برای فیلتر فعلی وجود نداشت، پیام نمایش داده شود
   if (filteredRoutes.length === 0) {
     container.innerHTML = `<div style="text-align:center;padding:40px;background:#f8fafc;border-radius:14px;color:#64748b;">مسیر زمینی برای این منطقه تعریف نشده است.</div>`;
     return;
@@ -4124,16 +4123,19 @@ function renderRoutesPro() {
   }).join('');
 }
 
-// اتصال رویدادها به دکمه‌های فیلتر
-document.querySelectorAll('.filter-btn-pro').forEach(btn => {
-  btn.addEventListener('click', function() {
-    filterPortsPro(this.dataset.filter);
+// راه‌اندازی اولیه با استفاده از DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+  renderPortsGridPro();
+  renderRoutesPro();
+  
+  // اتصال رویدادها به دکمه‌های فیلتر
+  const filterBtns = document.querySelectorAll('.filter-btn-pro');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      filterPortsPro(this.dataset.filter);
+    });
   });
 });
-
-// راه‌اندازی اولیه
-renderPortsGridPro();
-renderRoutesPro();
 </script>
 
 // ======================== داده‌های صفحه تجارت خارجی  ========================
