@@ -3170,6 +3170,1131 @@ function shpSw(i){
   </div>
 </div>
 
+
+ <!-- ========================================================
+     صفحه هفتم: هاب‌های تجاری
+     این بلوک شامل سه بخش است که باید در داشبورد اصلی جا بگیرد:
+     1) دکمه نویگیشن (داخل نوار منو)
+     2) استایل CSS مخصوص این صفحه (داخل <head> یا کنار سایر استایل‌ها)
+     3) محتوای صفحه (در محل سایر dash-section ها) + اسکریپت پایانی
+     ======================================================== -->
+
+<!-- ========== 1) دکمه نویگیشن ========== -->
+<button class="nav-btn" onclick="showDash('TradeHubs')">هاب‌های تجاری</button>
+
+
+<!-- ========== 2) استایل (تم سفید مخصوص این صفحه) ========== -->
+<style>
+  #dash-TradeHubs {
+    background: #ffffff;
+    color: #1e293b;
+  }
+  #dash-TradeHubs * { box-sizing: border-box; }
+
+  #dash-TradeHubs .th-hero {
+    background: #ffffff;
+    border: 1px solid #ffffff;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin-bottom: 20px;
+  }
+  #dash-TradeHubs .th-hero-title {
+    font-size: 18px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #10b981);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 6px;
+  }
+  #dash-TradeHubs .th-hero-sub { font-size: 12px; color: #64748b; }
+
+  #dash-TradeHubs .th-alert {
+    background: #ffffff;
+    border: 1px solid #ffffff;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    border-right: 4px solid #f59e0b;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 18px;
+    font-size: 12px;
+    color: #475569;
+    line-height: 1.9;
+  }
+  #dash-TradeHubs .th-alert.critical { border-right-color: #ef4444; }
+  #dash-TradeHubs .th-alert.purple { border-right-color: #8b5cf6; }
+  #dash-TradeHubs .th-alert strong { color: #1e293b; }
+
+  #dash-TradeHubs .th-section-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: #1e293b;
+    margin: 28px 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  #dash-TradeHubs .th-section-title::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 16px;
+    background: #3b82f6;
+    border-radius: 2px;
+  }
+
+  /* country tabs */
+  #dash-TradeHubs .th-country-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+  #dash-TradeHubs .th-country-tab {
+    background: #ffffff;
+    border: 1px solid #ffffff;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-family: 'Vazirmatn', 'Tahoma', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  #dash-TradeHubs .th-country-tab:hover { color: #3b82f6; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  #dash-TradeHubs .th-country-tab.active {
+    color: #3b82f6;
+    box-shadow: 0 2px 10px rgba(59,130,246,0.15);
+    border-color: #ffffff;
+  }
+
+  #dash-TradeHubs .th-country-panel { display: none; }
+  #dash-TradeHubs .th-country-panel.active { display: block; }
+
+  /* city tabs */
+  #dash-TradeHubs .th-city-tabs {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  #dash-TradeHubs .th-city-tab {
+    background: #ffffff;
+    border: 1px solid #ffffff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-family: 'Vazirmatn', 'Tahoma', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  #dash-TradeHubs .th-city-tab:hover { color: #475569; }
+  #dash-TradeHubs .th-city-tab.active {
+    color: #ffffff;
+    background: linear-gradient(90deg, #3b82f6, #6366f1);
+    box-shadow: 0 2px 8px rgba(59,130,246,0.3);
+  }
+
+  #dash-TradeHubs .th-city-panel { display: none; }
+  #dash-TradeHubs .th-city-panel.active { display: block; }
+
+  /* info card grid */
+  #dash-TradeHubs .th-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  #dash-TradeHubs .th-card {
+    background: #ffffff;
+    border: 1px solid #ffffff;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    border-radius: 14px;
+    padding: 16px;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  #dash-TradeHubs .th-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.10); transform: translateY(-2px); }
+  #dash-TradeHubs .th-card-title {
+    font-size: 12px;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  #dash-TradeHubs .th-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 5px 0;
+    font-size: 11px;
+    border-bottom: 1px dashed #ffffff;
+  }
+  #dash-TradeHubs .th-row:last-child { border-bottom: none; }
+  #dash-TradeHubs .th-row-label { color: #94a3b8; flex-shrink: 0; }
+  #dash-TradeHubs .th-row-val { color: #1e293b; font-weight: 700; text-align: left; }
+
+  /* risk badges */
+  #dash-TradeHubs .th-risk {
+    display: inline-block;
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+  #dash-TradeHubs .th-risk-low { background: rgba(16,185,129,0.12); color: #059669; border: 1px solid rgba(16,185,129,0.25); }
+  #dash-TradeHubs .th-risk-mid { background: rgba(245,158,11,0.12); color: #d97706; border: 1px solid rgba(245,158,11,0.25); }
+  #dash-TradeHubs .th-risk-high { background: rgba(239,68,68,0.12); color: #dc2626; border: 1px solid rgba(239,68,68,0.25); }
+  #dash-TradeHubs .th-risk-critical { background: rgba(239,68,68,0.18); color: #b91c1c; border: 1px solid rgba(239,68,68,0.4); }
+
+  /* pro/con */
+  #dash-TradeHubs .th-procon-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  #dash-TradeHubs .th-procon {
+    background: #ffffff;
+    border: 1px solid #ffffff;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    border-radius: 14px;
+    padding: 16px;
+    font-size: 12px;
+    color: #475569;
+    line-height: 2;
+  }
+  #dash-TradeHubs .th-procon-title {
+    font-size: 12px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  #dash-TradeHubs .th-procon.pro .th-procon-title { color: #059669; }
+  #dash-TradeHubs .th-procon.con .th-procon-title { color: #dc2626; }
+  #dash-TradeHubs .th-procon-item {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    padding: 3px 0;
+  }
+  #dash-TradeHubs .th-procon-item .dot { flex-shrink: 0; font-weight: 800; }
+  #dash-TradeHubs .th-procon.pro .dot { color: #10b981; }
+  #dash-TradeHubs .th-procon.con .dot { color: #ef4444; }
+
+  /* strategy box */
+  #dash-TradeHubs .th-strategy {
+    background: linear-gradient(135deg, rgba(59,130,246,0.05), rgba(139,92,246,0.05));
+    border: 1px solid #ffffff;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 16px;
+  }
+  #dash-TradeHubs .th-strategy-title {
+    font-size: 13px;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  #dash-TradeHubs .th-strategy-text {
+    font-size: 12px;
+    color: #475569;
+    line-height: 2;
+  }
+  #dash-TradeHubs .th-strategy-text strong { font-weight: 800; }
+
+  @media (max-width: 700px) {
+    #dash-TradeHubs .th-procon-grid { grid-template-columns: 1fr; }
+  }
+
+  /* score table for overall comparison */
+  #dash-TradeHubs .th-table-wrap {
+    background: #ffffff;
+    border: 1px solid #ffffff;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    overflow-x: auto;
+  }
+  #dash-TradeHubs .th-table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 640px; }
+  #dash-TradeHubs .th-table th {
+    background: #ffffff;
+    border-bottom: 2px solid #ffffff;
+    box-shadow: inset 0 -2px 0 rgba(59,130,246,0.15);
+    color: #1e293b;
+    font-weight: 800;
+    padding: 12px 14px;
+    text-align: right;
+    white-space: nowrap;
+  }
+  #dash-TradeHubs .th-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid #ffffff;
+    color: #334155;
+    white-space: nowrap;
+  }
+  #dash-TradeHubs .th-table tr:last-child td { border-bottom: none; }
+  #dash-TradeHubs .th-table tr:hover td { background: #f8fafc; }
+
+  #dash-TradeHubs .th-score-bar {
+    display: inline-block;
+    width: 60px;
+    height: 6px;
+    background: #f1f5f9;
+    border-radius: 3px;
+    overflow: hidden;
+    vertical-align: middle;
+    margin-left: 6px;
+  }
+  #dash-TradeHubs .th-score-fill { height: 100%; border-radius: 3px; }
+
+  /* source note */
+  #dash-TradeHubs .th-source {
+    font-size: 11px;
+    color: #94a3b8;
+    border-top: 1px solid #ffffff;
+    padding-top: 10px;
+    margin-top: 4px;
+    margin-bottom: 24px;
+    line-height: 1.9;
+  }
+</style>
+
+
+<!-- ========== 3) محتوای صفحه ========== -->
+<!-- ========== صفحه هفتم: هاب های تجاری ========== -->
+<div id="dash-TradeHubs" class="dash-section">
+
+  <div class="th-hero">
+    <div class="th-hero-title">🌐 هاب‌های تجاری توسعه دفاتر بین‌المللی</div>
+    <div class="th-hero-sub">مقایسه جامع ۵ کشور و ۱۷ شهر هدف بر اساس لجستیک، کمپلاینس، ریسک OFAC و ثبات ارزی — منابع: OFAC · PwC · Chambers&amp;Partners · World Bank · CPEC · OPAZ · مرکز ملی سرمایه‌گذاری عراق — ژوئن ۲۰۲۶</div>
+  </div>
+
+  <!-- جدول مقایسه کلی -->
+  <div class="th-section-title">📊 جدول مقایسه کلی کشورها</div>
+  <div class="th-table-wrap">
+    <table class="th-table">
+      <thead>
+        <tr>
+          <th>کشور</th>
+          <th>شهرهای کلیدی</th>
+          <th>لجستیک</th>
+          <th>کمپلاینس</th>
+          <th>ریسک OFAC</th>
+          <th>ثبات ارزی</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>🇴🇲 عمان</td>
+          <td>مسقط · صلاله · صحار</td>
+          <td><span class="th-score-bar"><span class="th-score-fill" style="width:82%;background:#10b981"></span></span> ۸.۲</td>
+          <td><span class="th-score-bar"><span class="th-score-fill" style="width:70%;background:#f59e0b"></span></span> ۷.۰</td>
+          <td><span class="th-risk th-risk-mid">متوسط</span></td>
+          <td><span class="th-score-bar"><span class="th-score-fill" style="width:90%;background:#10b981"></span></span> ۹.۰</td>
+        </tr>
+        <tr>
+          <td>🇵🇰 پاکستان</td>
+          <td>گوادر · کراچی</td>
+          <td><span class="th-score-bar"><span class="th-score-fill" style="width:72%;background:#10b981"></span></span> ۷.۲</td>
+          <td><span class="th-score-bar"><span class="th-score-fill" style="width:55%;background:#f59e0b"></span></span> ۵.۵</td>
+          <td><span class="th-risk th-risk-mid">متوسط</span></td>
+          <td><span class="th-score-bar"><span class="th-score-fill" style="width:30%;background:#ef4444"></span></span> ۳.۰</td>
+        </tr>
+        <tr>
+          <td>🇮🇶 عراق</td>
+          <td>بصره · بغداد</td>
+          <td><span class="th-score-bar"><span class="th-score-fill" style="width:65%;background:#f59e0b"></span></span> ۶.۵</td>
+          <td><span class="th-score-bar"><span class="th-score-fill" style="width:40%;background:#ef4444"></span></span> ۴.۰</td>
+          <td><span class="th-risk th-risk-critical">بسیار بالا</span></td>
+          <td><span class="th-score-bar"><span class="th-score-fill" style="width:55%;background:#f59e0b"></span></span> ۵.۵</td>
+        </tr>
+        <tr>
+          <td>🇹🇷 ترکیه</td>
+          <td>استانبول · مرسین · آنکارا · گازی‌آنتپ</td>
+          <td><span class="th-score-bar"><span class="th-score-fill" style="width:88%;background:#10b981"></span></span> ۸.۸</td>
+          <td><span class="th-score-bar"><span class="th-score-fill" style="width:75%;background:#10b981"></span></span> ۷.۵</td>
+          <td><span class="th-risk th-risk-mid">متوسط-بالا</span></td>
+          <td><span class="th-score-bar"><span class="th-score-fill" style="width:40%;background:#ef4444"></span></span> ۴.۰</td>
+        </tr>
+        <tr>
+          <td>🇨🇳 چین</td>
+          <td>شانگهای · یی‌وو · چینگدائو · گوانژو · سنزن · شاندونگ</td>
+          <td><span class="th-score-bar"><span class="th-score-fill" style="width:95%;background:#10b981"></span></span> ۹.۵</td>
+          <td><span class="th-score-bar"><span class="th-score-fill" style="width:70%;background:#f59e0b"></span></span> ۷.۰</td>
+          <td><span class="th-risk th-risk-high">بالا</span></td>
+          <td><span class="th-score-bar"><span class="th-score-fill" style="width:78%;background:#10b981"></span></span> ۷.۸</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- تب‌های کشور -->
+  <div class="th-section-title">🏙️ جزئیات هاب‌های تجاری به تفکیک کشور و شهر</div>
+  <div class="th-country-tabs">
+    <button class="th-country-tab active" onclick="th_showCountry('oman')">🇴🇲 عمان</button>
+    <button class="th-country-tab" onclick="th_showCountry('pakistan')">🇵🇰 پاکستان</button>
+    <button class="th-country-tab" onclick="th_showCountry('iraq')">🇮🇶 عراق</button>
+    <button class="th-country-tab" onclick="th_showCountry('turkey')">🇹🇷 ترکیه</button>
+    <button class="th-country-tab" onclick="th_showCountry('china')">🇨🇳 چین</button>
+  </div>
+
+  <!-- =========================================================
+       عمان
+       ========================================================= -->
+  <div class="th-country-panel active" id="th-country-oman">
+    <div class="th-alert">⚠️ <strong>هشدار جاری (ژوئن ۲۰۲۶):</strong> از زمان حملات نظامی آمریکا-اسرائیل به ایران (فوریه ۲۰۲۶)، وضعیت سیاسی منطقه متشنج است. عمان سیاست بی‌طرفی دارد اما برخی افراد و نهادهای عمانی توسط OFAC در ارتباط با قاچاق نفت ایران تحریم شده‌اند. بانک مصعت و برخی بانک‌های ایرانی تحریم‌شده همچنان در عمان فعالند — باید دقت بسیاری در انتخاب شریک بانکی داشت.</div>
+
+    <div class="th-city-tabs">
+      <button class="th-city-tab active" onclick="th_showCity('oman','muscat')">مسقط</button>
+      <button class="th-city-tab" onclick="th_showCity('oman','salalah')">صلاله</button>
+      <button class="th-city-tab" onclick="th_showCity('oman','sohar')">صحار</button>
+    </div>
+
+    <!-- مسقط -->
+    <div class="th-city-panel active" id="th-oman-muscat">
+      <div class="th-grid-4">
+        <div class="th-card">
+          <div class="th-card-title">💰 هزینه‌های ثبت (منبع: OPAZ/Incorpyfy 2026)</div>
+          <div class="th-row"><span class="th-row-label">ثبت شرکت (LLC)</span><span class="th-row-val">OMR 810–2,510 (~$2,100–$6,500)</span></div>
+          <div class="th-row"><span class="th-row-label">فری‌زون KOM (تک)</span><span class="th-row-val">$2,000/سال (فلکسی‌دسک)</span></div>
+          <div class="th-row"><span class="th-row-label">دفتر اختصاصی KOM</span><span class="th-row-val">$4,500+/سال</span></div>
+          <div class="th-row"><span class="th-row-label">اجاره دفتر (متوسط)</span><span class="th-row-val">$1,500–$4,500/ماه</span></div>
+          <div class="th-row"><span class="th-row-label">مالیات شرکتی</span><span class="th-row-val">۱۵٪ (فری‌زون: معافیت)</span></div>
+          <div class="th-row"><span class="th-row-label">عمانیزاسیون</span><span class="th-row-val">۳۰–۴۰٪ (شرط اشتغال محلی)</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🚢 موقعیت لجستیک</div>
+          <div class="th-row"><span class="th-row-label">دسترسی دریایی</span><span class="th-row-val">تنگه هرمز (۳۰ کیلومتری)</span></div>
+          <div class="th-row"><span class="th-row-label">بندر نزدیک</span><span class="th-row-val">بندر مسقط + بندر صحار</span></div>
+          <div class="th-row"><span class="th-row-label">کوریدور</span><span class="th-row-val">مسیر هند-خاورمیانه-اروپا</span></div>
+          <div class="th-row"><span class="th-row-label">فرودگاه</span><span class="th-row-val">بین‌المللی مسقط (MCT)</span></div>
+          <div class="th-row"><span class="th-row-label">ظرفیت بندری</span><span class="th-row-val">صحار: رشد سریع جهانی</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🏦 بانکداری و کمپلاینس</div>
+          <div class="th-row"><span class="th-row-label">بانک‌های بین‌المللی</span><span class="th-row-val">HSBC، Standard Chartered، BNP</span></div>
+          <div class="th-row"><span class="th-row-label">افتتاح حساب شرکتی</span><span class="th-row-val">۲–۶ هفته (KYC سخت)</span></div>
+          <div class="th-row"><span class="th-row-label">ارز</span><span class="th-row-val">ریال عمانی (پگ دلار)</span></div>
+          <div class="th-row"><span class="th-row-label">کمپلاینس AML/CFT</span><span class="th-row-val">متوسط-بالا (FATF ناظر)</span></div>
+          <div class="th-row"><span class="th-row-label">ریسک OFAC</span><span class="th-row-val"><span class="th-risk th-risk-mid">متوسط</span> (احتیاط لازم)</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">👥 منابع انسانی</div>
+          <div class="th-row"><span class="th-row-label">حقوق مدیر میانی</span><span class="th-row-val">$1,500–$3,500/ماه</span></div>
+          <div class="th-row"><span class="th-row-label">کارمند اداری</span><span class="th-row-val">$800–$1,500/ماه</span></div>
+          <div class="th-row"><span class="th-row-label">فارسی‌زبان بومی</span><span class="th-row-val">محدود (جامعه ایرانی کوچک)</span></div>
+          <div class="th-row"><span class="th-row-label">انگلیسی‌زبان</span><span class="th-row-val">گسترده در بخش تجاری</span></div>
+          <div class="th-row"><span class="th-row-label">ویزای کاری</span><span class="th-row-val">۴–۸ هفته (با سپانسر)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- صلاله -->
+    <div class="th-city-panel" id="th-oman-salalah">
+      <div class="th-grid-4">
+        <div class="th-card">
+          <div class="th-card-title">💰 هزینه‌های ثبت (منبع: Salalah Free Zone Authority)</div>
+          <div class="th-row"><span class="th-row-label">لایسنس فری‌زون</span><span class="th-row-val">$2,000–$5,000/سال</span></div>
+          <div class="th-row"><span class="th-row-label">اجاره دفتر</span><span class="th-row-val">$800–$2,500/ماه</span></div>
+          <div class="th-row"><span class="th-row-label">مالیات</span><span class="th-row-val">معافیت در فری‌زون</span></div>
+          <div class="th-row"><span class="th-row-label">مالکیت خارجی</span><span class="th-row-val">۱۰۰٪ در فری‌زون</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🚢 موقعیت لجستیک</div>
+          <div class="th-row"><span class="th-row-label">بندر صلاله</span><span class="th-row-val">دروازه دریای عرب</span></div>
+          <div class="th-row"><span class="th-row-label">ظرفیت</span><span class="th-row-val">۲۶ میلیارد دلار گردش</span></div>
+          <div class="th-row"><span class="th-row-label">کوریدور</span><span class="th-row-val">مسیر آفریقا-آسیا-اروپا</span></div>
+          <div class="th-row"><span class="th-row-label">صنایع هدف</span><span class="th-row-val">لجستیک، کشاورزی، صادرات</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🏦 بانک و کمپلاینس</div>
+          <div class="th-row"><span class="th-row-label">وضعیت</span><span class="th-row-val">مشابه مسقط با زیرساخت کمتر</span></div>
+          <div class="th-row"><span class="th-row-label">ریسک OFAC</span><span class="th-row-val"><span class="th-risk th-risk-mid">متوسط</span></span></div>
+          <div class="th-row"><span class="th-row-label">مزیت</span><span class="th-row-val">دورتر از تهران — ریسک کمتر</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">👥 منابع انسانی</div>
+          <div class="th-row"><span class="th-row-label">حقوق مدیر</span><span class="th-row-val">$700–$2,000/ماه</span></div>
+          <div class="th-row"><span class="th-row-label">هزینه‌های کمتر از مسقط</span><span class="th-row-val">۲۰–۳۰٪</span></div>
+          <div class="th-row"><span class="th-row-label">انگلیسی</span><span class="th-row-val">متوسط</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- صحار -->
+    <div class="th-city-panel" id="th-oman-sohar">
+      <div class="th-grid-4">
+        <div class="th-card">
+          <div class="th-card-title">💰 هزینه‌های ثبت (منبع: Sohar Port &amp; Freezone)</div>
+          <div class="th-row"><span class="th-row-label">لایسنس فری‌زون</span><span class="th-row-val">$2,500–$6,000/سال</span></div>
+          <div class="th-row"><span class="th-row-label">زمین صنعتی</span><span class="th-row-val">از ۲,۵۰۰ مترمربع</span></div>
+          <div class="th-row"><span class="th-row-label">مالیات</span><span class="th-row-val">معافیت صنعتی ۵ سال</span></div>
+          <div class="th-row"><span class="th-row-label">مالکیت</span><span class="th-row-val">۱۰۰٪ خارجی</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🚢 موقعیت لجستیک</div>
+          <div class="th-row"><span class="th-row-label">بندر صحار</span><span class="th-row-val">۲۰۰ کیلومتری شمال مسقط</span></div>
+          <div class="th-row"><span class="th-row-label">دسترسی</span><span class="th-row-val">امارات (۱ساعت) + ایران (۱۲۰کیلومتر دریایی)</span></div>
+          <div class="th-row"><span class="th-row-label">صنایع</span><span class="th-row-val">فلزات، مواد شیمیایی، لجستیک</span></div>
+          <div class="th-row"><span class="th-row-label">رشد</span><span class="th-row-val">سریع‌ترین فری‌زون عمان</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🏦 بانک و کمپلاینس</div>
+          <div class="th-row"><span class="th-row-label">بانک‌ها</span><span class="th-row-val">شعب بانک‌های عمانی + بین‌المللی</span></div>
+          <div class="th-row"><span class="th-row-label">ریسک OFAC</span><span class="th-row-val"><span class="th-risk th-risk-mid">متوسط</span></span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">👥 منابع انسانی</div>
+          <div class="th-row"><span class="th-row-label">حقوق کارمند صنعتی</span><span class="th-row-val">$600–$1,800/ماه</span></div>
+          <div class="th-row"><span class="th-row-label">انگلیسی</span><span class="th-row-val">متوسط تا خوب</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="th-source">📚 <strong>منابع:</strong> OPAZ عمان · Sohar Port &amp; Freezone · Salalah Free Zone Authority · Incorpyfy 2026 · OFAC</div>
+  </div>
+
+  <!-- =========================================================
+       پاکستان
+       ========================================================= -->
+  <div class="th-country-panel" id="th-country-pakistan">
+    <div class="th-alert">⚠️ <strong>هشدار ارزی:</strong> روپیه پاکستان طی ۳ سال گذشته بیش از ۵۰٪ کاهش ارزش داشته. نرخ تورم بالا و وضعیت IMF unstable است. اگر درآمد دلاری دارید مزیت است، اما ریسک ارزی برای شرکت محلی بالاست. همچنین دولت آمریکا در دسامبر ۲۰۲۴ شرکت‌های پاکستانی مرتبط با WMD را تحریم کرد.</div>
+
+    <div class="th-city-tabs">
+      <button class="th-city-tab active" onclick="th_showCity('pakistan','karachi')">کراچی</button>
+      <button class="th-city-tab" onclick="th_showCity('pakistan','gwadar')">گوادر</button>
+    </div>
+
+    <!-- کراچی -->
+    <div class="th-city-panel active" id="th-pakistan-karachi">
+      <div class="th-grid-4">
+        <div class="th-card">
+          <div class="th-card-title">💰 هزینه‌های ثبت (منبع: SECP Pakistan 2025)</div>
+          <div class="th-row"><span class="th-row-label">ثبت شرکت (SECP)</span><span class="th-row-val">PKR 30,000–150,000 (~$100–$530)</span></div>
+          <div class="th-row"><span class="th-row-label">اجاره دفتر (متوسط)</span><span class="th-row-val">$300–$900/ماه</span></div>
+          <div class="th-row"><span class="th-row-label">مالیات شرکتی</span><span class="th-row-val">۲۹٪ (برای شرکت خارجی)</span></div>
+          <div class="th-row"><span class="th-row-label">کوورکینگ</span><span class="th-row-val">از $135/ماه</span></div>
+          <div class="th-row"><span class="th-row-label">زمان ثبت</span><span class="th-row-val">۷–۱۴ روز کاری</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🚢 موقعیت لجستیک</div>
+          <div class="th-row"><span class="th-row-label">بندر کراچی</span><span class="th-row-val">بزرگترین بندر پاکستان</span></div>
+          <div class="th-row"><span class="th-row-label">دسترسی</span><span class="th-row-val">دریای عرب، خلیج فارس</span></div>
+          <div class="th-row"><span class="th-row-label">CPEC</span><span class="th-row-val">محور جنوبی CPEC</span></div>
+          <div class="th-row"><span class="th-row-label">فرودگاه</span><span class="th-row-val">بین‌المللی جناح (KHI)</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🏦 بانکداری</div>
+          <div class="th-row"><span class="th-row-label">بانک‌های بزرگ</span><span class="th-row-val">HBL، MCB، Meezan، Standard Ch.</span></div>
+          <div class="th-row"><span class="th-row-label">Correspondent banking</span><span class="th-row-val">محدودیت‌های جدی برای Iran-linked</span></div>
+          <div class="th-row"><span class="th-row-label">ریسک OFAC</span><span class="th-row-val"><span class="th-risk th-risk-mid">متوسط</span></span></div>
+          <div class="th-row"><span class="th-row-label">Swift access</span><span class="th-row-val">محدود برای ایران</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">👥 منابع انسانی</div>
+          <div class="th-row"><span class="th-row-label">حداقل حقوق (سندهی ۲۰۲۵)</span><span class="th-row-val">PKR 40,000/ماه (~$143)</span></div>
+          <div class="th-row"><span class="th-row-label">مدیر میانی</span><span class="th-row-val">PKR 88,700/ماه (~$317)</span></div>
+          <div class="th-row"><span class="th-row-label">فارسی‌زبان بومی</span><span class="th-row-val">قابل توجه (جامعه اردو نزدیک)</span></div>
+          <div class="th-row"><span class="th-row-label">انگلیسی</span><span class="th-row-val">گسترده در حرفه‌ای‌ها</span></div>
+          <div class="th-row"><span class="th-row-label">ویزای کاری</span><span class="th-row-val">۴–۶ هفته</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- گوادر -->
+    <div class="th-city-panel" id="th-pakistan-gwadar">
+      <div class="th-grid-4">
+        <div class="th-card">
+          <div class="th-card-title">💰 هزینه‌های ثبت (منبع: CPEC Authority / GDA 2025)</div>
+          <div class="th-row"><span class="th-row-label">ثبت در GFZ</span><span class="th-row-val">~$300–$1,000</span></div>
+          <div class="th-row"><span class="th-row-label">معافیت مالیاتی</span><span class="th-row-val">۲۳ سال تمام (income/sales/excise)</span></div>
+          <div class="th-row"><span class="th-row-label">اجاره دفتر</span><span class="th-row-val">$200–$600/ماه (بسیار پایین)</span></div>
+          <div class="th-row"><span class="th-row-label">زمین صنعتی</span><span class="th-row-val">ارزان (در حال توسعه)</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🚢 موقعیت لجستیک</div>
+          <div class="th-row"><span class="th-row-label">بندر عمق‌آب</span><span class="th-row-val">اتصال به چین از طریق CPEC</span></div>
+          <div class="th-row"><span class="th-row-label">مسافت تا چین</span><span class="th-row-val">۲,۷۰۰ کیلومتر (کاشغر)</span></div>
+          <div class="th-row"><span class="th-row-label">شرکت اپراتور</span><span class="th-row-val">COPHC چین (40 ساله)</span></div>
+          <div class="th-row"><span class="th-row-label">فرودگاه جدید</span><span class="th-row-val">بین‌المللی گوادر (افتتاح ۲۰۲۴)</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🏦 بانکداری</div>
+          <div class="th-row"><span class="th-row-label">بانک‌های موجود</span><span class="th-row-val">محدود (در حال توسعه)</span></div>
+          <div class="th-row"><span class="th-row-label">ریسک OFAC</span><span class="th-row-val"><span class="th-risk th-risk-mid">متوسط</span></span></div>
+          <div class="th-row"><span class="th-row-label">مشکل</span><span class="th-row-val">زیرساخت مالی ضعیف</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">👥 منابع انسانی</div>
+          <div class="th-row"><span class="th-row-label">حقوق کارمند</span><span class="th-row-val">$100–$400/ماه</span></div>
+          <div class="th-row"><span class="th-row-label">تخصص</span><span class="th-row-val">محدود (جمعیت کوچک)</span></div>
+          <div class="th-row"><span class="th-row-label">ثبات امنیتی</span><span class="th-row-val"><span class="th-risk th-risk-high">بلوچستان — ریسک امنیتی</span></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="th-procon-grid">
+      <div class="th-procon pro">
+        <div class="th-procon-title">✅ مزایا</div>
+        <div class="th-procon-item"><span class="dot">✓</span><span>هزینه‌های ثبت و نیروی کار بسیار پایین در کراچی</span></div>
+        <div class="th-procon-item"><span class="dot">✓</span><span>معافیت مالیاتی کامل ۲۳ ساله در منطقه آزاد گوادر</span></div>
+        <div class="th-procon-item"><span class="dot">✓</span><span>زمان ثبت سریع شرکت در کراچی (۷–۱۴ روز کاری)</span></div>
+        <div class="th-procon-item"><span class="dot">✓</span><span>جامعه فارسی‌زبان قابل توجه (نزدیکی زبان اردو)</span></div>
+        <div class="th-procon-item"><span class="dot">✓</span><span>گوادر: اتصال مستقیم به چین از طریق CPEC</span></div>
+      </div>
+      <div class="th-procon con">
+        <div class="th-procon-title">⚠️ معایب</div>
+        <div class="th-procon-item"><span class="dot">✗</span><span>ثبات ارزی بسیار پایین — کاهش بیش از ۵۰٪ روپیه طی ۳ سال</span></div>
+        <div class="th-procon-item"><span class="dot">✗</span><span>محدودیت‌های جدی SWIFT و correspondent banking برای Iran-linked</span></div>
+        <div class="th-procon-item"><span class="dot">✗</span><span>تحریم دسامبر ۲۰۲۴ علیه شرکت‌های پاکستانی مرتبط با WMD</span></div>
+        <div class="th-procon-item"><span class="dot">✗</span><span>ریسک امنیتی بالا در بلوچستان/گوادر</span></div>
+        <div class="th-procon-item"><span class="dot">✗</span><span>زیرساخت مالی بسیار ضعیف در گوادر</span></div>
+      </div>
+    </div>
+
+    <div class="th-source">📚 <strong>منابع:</strong> SECP Pakistan 2025 · CPEC Authority / GDA 2025 · OFAC دسامبر ۲۰۲۴</div>
+  </div>
+
+  <!-- =========================================================
+       عراق
+       ========================================================= -->
+  <div class="th-country-panel" id="th-country-iraq">
+    <div class="th-alert critical">🚨 <strong>هشدار بحرانی OFAC (ژوئن ۲۰۲۶):</strong> OFAC به طور فعال شبکه‌های اختلاط نفت ایرانی-عراقی را تحریم می‌کند. شرکت‌های عراقی که نفت ایران را با برچسب عراقی صادر می‌کنند هدف مستقیم هستند. بانک‌های عراقی که با ایران کار می‌کنند ریسک قطع SWIFT دارند. این جدی‌ترین محیط OFAC بین تمام ۵ کشور است.</div>
+
+    <div class="th-city-tabs">
+      <button class="th-city-tab active" onclick="th_showCity('iraq','basra')">بصره</button>
+      <button class="th-city-tab" onclick="th_showCity('iraq','baghdad')">بغداد</button>
+    </div>
+
+    <!-- بصره -->
+    <div class="th-city-panel active" id="th-iraq-basra">
+      <div class="th-grid-4">
+        <div class="th-card">
+          <div class="th-card-title">💰 هزینه‌های ثبت (منبع: NIC Iraq / baghdad.eregulations.org)</div>
+          <div class="th-row"><span class="th-row-label">ثبت شرکت</span><span class="th-row-val">$1,000–$3,000 (+ وکیل محلی)</span></div>
+          <div class="th-row"><span class="th-row-label">اجاره دفتر</span><span class="th-row-val">$500–$1,500/ماه</span></div>
+          <div class="th-row"><span class="th-row-label">لایسنس سرمایه‌گذاری NIC</span><span class="th-row-val">رایگان (One Stop Shop)</span></div>
+          <div class="th-row"><span class="th-row-label">مالیات (تریتوریال)</span><span class="th-row-val">۱۵–۳۵٪ (وابسته به قرارداد)</span></div>
+          <div class="th-row"><span class="th-row-label">زمان ثبت</span><span class="th-row-val">۴–۱۲ هفته (پیچیده)</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🚢 موقعیت لجستیک</div>
+          <div class="th-row"><span class="th-row-label">بندر ام‌القصر</span><span class="th-row-val">بزرگترین بندر عراق</span></div>
+          <div class="th-row"><span class="th-row-label">اتصال</span><span class="th-row-val">خلیج فارس مستقیم</span></div>
+          <div class="th-row"><span class="th-row-label">صنعت نفتی</span><span class="th-row-val">بزرگترین میدان‌های نفتی عراق</span></div>
+          <div class="th-row"><span class="th-row-label">کوریدور</span><span class="th-row-val">مسیر بصره-بغداد-ترکیه</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🏦 بانکداری</div>
+          <div class="th-row"><span class="th-row-label">وضعیت</span><span class="th-row-val">بانکداری ضعیف و سنتی</span></div>
+          <div class="th-row"><span class="th-row-label">بانک‌های بین‌المللی</span><span class="th-row-val">Arab Bank، Citibank (محدود)</span></div>
+          <div class="th-row"><span class="th-row-label">ریسک OFAC</span><span class="th-row-val"><span class="th-risk th-risk-critical">بسیار بالا</span></span></div>
+          <div class="th-row"><span class="th-row-label">مشکل اصلی</span><span class="th-row-val">شبکه‌های تحریم‌دور فراوان</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">👥 منابع انسانی</div>
+          <div class="th-row"><span class="th-row-label">حقوق متوسط</span><span class="th-row-val">$400–$1,200/ماه</span></div>
+          <div class="th-row"><span class="th-row-label">فارسی‌زبان</span><span class="th-row-val">زیاد (مرز ایران نزدیک)</span></div>
+          <div class="th-row"><span class="th-row-label">ریسک امنیتی</span><span class="th-row-val"><span class="th-risk th-risk-high">بالا</span></span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- بغداد -->
+    <div class="th-city-panel" id="th-iraq-baghdad">
+      <div class="th-grid-4">
+        <div class="th-card">
+          <div class="th-card-title">💰 هزینه‌های ثبت (منبع: PwC Iraq 2025 / Chambers &amp; Partners)</div>
+          <div class="th-row"><span class="th-row-label">ثبت شرکت خارجی</span><span class="th-row-val">$1,000–$3,000 (+ وکیل ۲,۰۰۰+)</span></div>
+          <div class="th-row"><span class="th-row-label">اجاره دفتر بغداد</span><span class="th-row-val">$600–$2,000/ماه</span></div>
+          <div class="th-row"><span class="th-row-label">الزام جدید (۲۰۲۴)</span><span class="th-row-val">دامنه .iq + صندوق پستی عراقی</span></div>
+          <div class="th-row"><span class="th-row-label">سپرده سرمایه</span><span class="th-row-val">در بانک عراقی الزامی</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🚢 موقعیت لجستیک</div>
+          <div class="th-row"><span class="th-row-label">پایتخت اقتصادی</span><span class="th-row-val">مرکز تجاری عراق</span></div>
+          <div class="th-row"><span class="th-row-label">اتصال منطقه‌ای</span><span class="th-row-val">ایران، اردن، ترکیه، کویت</span></div>
+          <div class="th-row"><span class="th-row-label">فرودگاه</span><span class="th-row-val">بین‌المللی بغداد (BGW)</span></div>
+          <div class="th-row"><span class="th-row-label">درآمد نفتی دولت</span><span class="th-row-val">بیش از ۹۰٪ از نفت</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🏦 بانکداری</div>
+          <div class="th-row"><span class="th-row-label">بانک Arab Bank Iraq</span><span class="th-row-val">محدود (۲ شعبه، $19M درآمد)</span></div>
+          <div class="th-row"><span class="th-row-label">نقدینگی دلار</span><span class="th-row-val">کنترل بانک مرکزی عراق</span></div>
+          <div class="th-row"><span class="th-row-label">ریسک OFAC</span><span class="th-row-val"><span class="th-risk th-risk-critical">بسیار بالا</span></span></div>
+          <div class="th-row"><span class="th-row-label">تجربه PwC</span><span class="th-row-val">یک دفتر بغداد، یک بصره</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">👥 منابع انسانی</div>
+          <div class="th-row"><span class="th-row-label">کارمند اداری</span><span class="th-row-val">$400–$1,500/ماه</span></div>
+          <div class="th-row"><span class="th-row-label">فارسی‌زبان</span><span class="th-row-val">زیاد</span></div>
+          <div class="th-row"><span class="th-row-label">انگلیسی</span><span class="th-row-val">متوسط (بهتر از بصره)</span></div>
+          <div class="th-row"><span class="th-row-label">ریسک امنیتی</span><span class="th-row-val"><span class="th-risk th-risk-high">متوسط-بالا</span></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="th-procon-grid">
+      <div class="th-procon pro">
+        <div class="th-procon-title">✅ مزایا</div>
+        <div class="th-procon-item"><span class="dot">✓</span><span>بازار بزرگ ۴۰ میلیون نفری با رشد مصرف بالا</span></div>
+        <div class="th-procon-item"><span class="dot">✓</span><span>درآمد نفتی دولت — فرصت قراردادهای دولتی</span></div>
+        <div class="th-procon-item"><span class="dot">✓</span><span>نیروی کار ارزان و فارسی‌زبان فراوان</span></div>
+        <div class="th-procon-item"><span class="dot">✓</span><span>مشوق‌های سرمایه‌گذاری NIC (معافیت مالیاتی)</span></div>
+        <div class="th-procon-item"><span class="dot">✓</span><span>بصره: دسترسی مستقیم به خلیج فارس</span></div>
+      </div>
+      <div class="th-procon con">
+        <div class="th-procon-title">⚠️ معایب</div>
+        <div class="th-procon-item"><span class="dot">✗</span><span>بالاترین ریسک OFAC در بین ۵ کشور</span></div>
+        <div class="th-procon-item"><span class="dot">✗</span><span>شبکه‌های اختلاط نفت ایران-عراق زیر ذره‌بین OFAC</span></div>
+        <div class="th-procon-item"><span class="dot">✗</span><span>فساد ساختاری بالا — رتبه پایین در Transparency International</span></div>
+        <div class="th-procon-item"><span class="dot">✗</span><span>الزام ثبت دامنه .iq و صندوق پستی عراقی (۲۰۲۴) — موانع اداری</span></div>
+        <div class="th-procon-item"><span class="dot">✗</span><span>زیرساخت مالی بسیار ضعیف</span></div>
+        <div class="th-procon-item"><span class="dot">✗</span><span>ریسک امنیتی و بی‌ثباتی سیاسی</span></div>
+      </div>
+    </div>
+
+    <div class="th-strategy">
+      <div class="th-strategy-title">🎯 توصیه استراتژیک عراق</div>
+      <div class="th-strategy-text"><strong style="color:#ef4444">احتیاط بسیار زیاد لازم است.</strong> عراق فقط در صورتی توصیه می‌شود که کسب‌وکار مستقیماً با بازار عراقی مرتبط باشد (نه به عنوان پل ارتباطی). هرگونه تراکنش که بوی ایران بدهد، OFAC را فعال می‌کند. <strong style="color:#f59e0b">اگر باید وارد شوید:</strong> از وکیل بین‌المللی متخصص OFAC (نه فقط عراقی) حتماً استفاده کنید. بغداد از بصره برای شرکت‌های خدماتی ترجیح دارد.</div>
+    </div>
+
+    <div class="th-source">📚 <strong>منابع:</strong> PwC "Doing Business in Iraq 2025" · Chambers &amp; Partners Iraq Law Guide 2024 · NIC Iraq (investpromo.gov.iq) · baghdad.eregulations.org · OFAC July 2025 (Salim Ahmed Said network) · Muayad &amp; Associates</div>
+  </div>
+
+  <!-- =========================================================
+       ترکیه
+       ========================================================= -->
+  <div class="th-country-panel" id="th-country-turkey">
+    <div class="th-alert">⚠️ <strong>توجه OFAC (اکتبر ۲۰۲۵):</strong> OFAC شبکه‌های ترکیه‌ای مرتبط با تهیه تجهیزات دفاعی ایران و IRGC را تحریم کرده. ترکیه در لیست اصلی تحریم نیست اما شرکت‌های ترکی که با ایران کار می‌کنند در معرض ریسک ثانویه هستند. از همکاری با ساراف‌های استانبول (صرافی‌های مرتبط با ایران) پرهیز کنید.</div>
+
+    <div class="th-city-tabs">
+      <button class="th-city-tab active" onclick="th_showCity('turkey','istanbul')">استانبول</button>
+      <button class="th-city-tab" onclick="th_showCity('turkey','mersin')">مرسین</button>
+      <button class="th-city-tab" onclick="th_showCity('turkey','ankara')">آنکارا</button>
+      <button class="th-city-tab" onclick="th_showCity('turkey','gaziantep')">گازی‌آنتپ</button>
+    </div>
+
+    <!-- استانبول -->
+    <div class="th-city-panel active" id="th-turkey-istanbul">
+      <div class="th-grid-4">
+        <div class="th-card">
+          <div class="th-card-title">💰 هزینه‌های ثبت (منبع: MERSIS / Celikel CPA 2026)</div>
+          <div class="th-row"><span class="th-row-label">ثبت LLC (turnkey)</span><span class="th-row-val">$492–$1,500 (از TL 13,000)</span></div>
+          <div class="th-row"><span class="th-row-label">دفتر مجازی استانبول</span><span class="th-row-val">TL 2,000–6,000/ماه (~$55–$170)</span></div>
+          <div class="th-row"><span class="th-row-label">اجاره دفتر واقعی</span><span class="th-row-val">$800–$3,000/ماه</span></div>
+          <div class="th-row"><span class="th-row-label">مالیات شرکتی</span><span class="th-row-val">۲۵٪</span></div>
+          <div class="th-row"><span class="th-row-label">زمان ثبت</span><span class="th-row-val">۵–۱۰ روز کاری</span></div>
+          <div class="th-row"><span class="th-row-label">حسابداری ماهانه</span><span class="th-row-val">~$115/ماه (حداقل)</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🚢 موقعیت لجستیک</div>
+          <div class="th-row"><span class="th-row-label">تنگه بسفر</span><span class="th-row-val">اتصال دریای سیاه + مدیترانه</span></div>
+          <div class="th-row"><span class="th-row-label">بندر آمبارلی</span><span class="th-row-val">بزرگترین بندر کانتینری ترکیه</span></div>
+          <div class="th-row"><span class="th-row-label">کوریدور</span><span class="th-row-val">مسیر میانی (Middle Corridor)</span></div>
+          <div class="th-row"><span class="th-row-label">دسترسی</span><span class="th-row-val">۳ قاره، اروپا-آسیا-آفریقا</span></div>
+          <div class="th-row"><span class="th-row-label">بزرگراه</span><span class="th-row-val">O-3, TEM (اروپا)</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🏦 بانکداری</div>
+          <div class="th-row"><span class="th-row-label">بانک‌های بزرگ</span><span class="th-row-val">İşbank، Garanti، Yapı Kredi، HSBC</span></div>
+          <div class="th-row"><span class="th-row-label">۸۰+ معاهده مالیاتی</span><span class="th-row-val">جلوگیری از مالیات مضاعف</span></div>
+          <div class="th-row"><span class="th-row-label">افتتاح حساب</span><span class="th-row-val">۱–۳ هفته</span></div>
+          <div class="th-row"><span class="th-row-label">ریسک OFAC</span><span class="th-row-val"><span class="th-risk th-risk-mid">متوسط</span> (بدون ارتباط ایران)</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">👥 منابع انسانی</div>
+          <div class="th-row"><span class="th-row-label">حقوق مدیر میانی</span><span class="th-row-val">$600–$1,800/ماه</span></div>
+          <div class="th-row"><span class="th-row-label">کارمند اداری</span><span class="th-row-val">$400–$800/ماه</span></div>
+          <div class="th-row"><span class="th-row-label">فارسی‌زبان</span><span class="th-row-val">متوسط (جامعه ایرانی بزرگ)</span></div>
+          <div class="th-row"><span class="th-row-label">انگلیسی</span><span class="th-row-val">خوب در حرفه‌ای‌ها</span></div>
+          <div class="th-row"><span class="th-row-label">ویزا کاری</span><span class="th-row-val">۴–۸ هفته</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- مرسین -->
+    <div class="th-city-panel" id="th-turkey-mersin">
+      <div class="th-grid-4">
+        <div class="th-card">
+          <div class="th-card-title">💰 هزینه‌های ثبت</div>
+          <div class="th-row"><span class="th-row-label">ثبت LLC (turnkey)</span><span class="th-row-val">$400–$1,200</span></div>
+          <div class="th-row"><span class="th-row-label">اجاره دفتر</span><span class="th-row-val">$400–$1,200/ماه (ارزان‌تر از استانبول)</span></div>
+          <div class="th-row"><span class="th-row-label">مالیات</span><span class="th-row-val">۲۵٪ (مانند سراسر ترکیه)</span></div>
+          <div class="th-row"><span class="th-row-label">منطقه آزاد مرسین</span><span class="th-row-val">معافیت‌های صادراتی خاص</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🚢 موقعیت لجستیک</div>
+          <div class="th-row"><span class="th-row-label">بندر مرسین</span><span class="th-row-val">دروازه مدیترانه ترکیه</span></div>
+          <div class="th-row"><span class="th-row-label">اتصال</span><span class="th-row-val">سوریه، لبنان، مصر، اروپا</span></div>
+          <div class="th-row"><span class="th-row-label">منطقه آزاد</span><span class="th-row-val">MESBAŞ — صنعتی-صادراتی</span></div>
+          <div class="th-row"><span class="th-row-label">فاصله از گازی‌آنتپ</span><span class="th-row-val">۱۹۰ کیلومتر (کریدور عراق)</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🏦 بانکداری و ریسک</div>
+          <div class="th-row"><span class="th-row-label">ریسک OFAC</span><span class="th-row-val"><span class="th-risk th-risk-mid">متوسط</span></span></div>
+          <div class="th-row"><span class="th-row-label">مزیت</span><span class="th-row-val">کمتر در ذره‌بین نسبت به استانبول</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">👥 منابع انسانی</div>
+          <div class="th-row"><span class="th-row-label">هزینه نیروی کار</span><span class="th-row-val">۱۵–۲۵٪ کمتر از استانبول</span></div>
+          <div class="th-row"><span class="th-row-label">جامعه عرب‌زبان</span><span class="th-row-val">قوی (نزدیک به سوریه)</span></div>
+          <div class="th-row"><span class="th-row-label">فارسی‌زبان</span><span class="th-row-val">کمتر از استانبول</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- آنکارا -->
+    <div class="th-city-panel" id="th-turkey-ankara">
+      <div class="th-grid-4">
+        <div class="th-card">
+          <div class="th-card-title">💰 هزینه‌های ثبت</div>
+          <div class="th-row"><span class="th-row-label">ثبت LLC</span><span class="th-row-val">$450–$1,300</span></div>
+          <div class="th-row"><span class="th-row-label">اجاره دفتر</span><span class="th-row-val">$500–$1,500/ماه</span></div>
+          <div class="th-row"><span class="th-row-label">مزیت پایتخت</span><span class="th-row-val">دسترسی به وزارتخانه‌ها</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🎯 مزیت اصلی</div>
+          <div class="th-row"><span class="th-row-label">دیپلماسی</span><span class="th-row-val">مناسب برای lobbying و B2G</span></div>
+          <div class="th-row"><span class="th-row-label">SASAD</span><span class="th-row-val">صنعت دفاعی ترکیه</span></div>
+          <div class="th-row"><span class="th-row-label">KOSGEB</span><span class="th-row-val">مشوق‌های دولتی SME</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">ℹ️ ویژگی‌ها</div>
+          <div class="th-row"><span class="th-row-label">لجستیک</span><span class="th-row-val">ضعیف‌تر از استانبول و مرسین</span></div>
+          <div class="th-row"><span class="th-row-label">بهترین کاربرد</span><span class="th-row-val">دفتر نمایندگی دولتی</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">👥 منابع انسانی</div>
+          <div class="th-row"><span class="th-row-label">تحصیل‌کرده‌های دانشگاه</span><span class="th-row-val">زیاد (مرکز آموزشی)</span></div>
+          <div class="th-row"><span class="th-row-label">هزینه</span><span class="th-row-val">کمتر از استانبول</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- گازی‌آنتپ -->
+    <div class="th-city-panel" id="th-turkey-gaziantep">
+      <div class="th-grid-4">
+        <div class="th-card">
+          <div class="th-card-title">💰 هزینه‌های ثبت</div>
+          <div class="th-row"><span class="th-row-label">ثبت LLC</span><span class="th-row-val">$400–$1,000 (ارزان‌ترین)</span></div>
+          <div class="th-row"><span class="th-row-label">اجاره دفتر</span><span class="th-row-val">$300–$900/ماه</span></div>
+          <div class="th-row"><span class="th-row-label">OSB (صنعتی)</span><span class="th-row-val">زمین ارزان با مشوق</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🚢 موقعیت لجستیک</div>
+          <div class="th-row"><span class="th-row-label">مسیر</span><span class="th-row-val">ترکیه-سوریه-عراق-خلیج</span></div>
+          <div class="th-row"><span class="th-row-label">فاصله از حلب</span><span class="th-row-val">۹۰ کیلومتر</span></div>
+          <div class="th-row"><span class="th-row-label">دسترسی</span><span class="th-row-val">بازار ۱۰۰M عربی</span></div>
+          <div class="th-row"><span class="th-row-label">صنایع</span><span class="th-row-val">نساجی، غذا، صنعت</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">ℹ️ ویژگی‌ها</div>
+          <div class="th-row"><span class="th-row-label">جمعیت مهاجر سوری</span><span class="th-row-val">زیاد — نیروی کار ارزان</span></div>
+          <div class="th-row"><span class="th-row-label">عرب/فارسی‌زبان</span><span class="th-row-val">جامعه عربی بزرگ</span></div>
+          <div class="th-row"><span class="th-row-label">ریسک منطقه‌ای</span><span class="th-row-val"><span class="th-risk th-risk-mid">نزدیک به مناطق بحران</span></span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">👥 منابع انسانی</div>
+          <div class="th-row"><span class="th-row-label">هزینه</span><span class="th-row-val">ارزان‌ترین در ترکیه</span></div>
+          <div class="th-row"><span class="th-row-label">زبان</span><span class="th-row-val">ترکی + عربی (مسلط)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="th-procon-grid">
+      <div class="th-procon pro">
+        <div class="th-procon-title">✅ مزایا</div>
+        <div class="th-procon-item"><span class="dot">✓</span><span>سریع‌ترین و ارزان‌ترین ثبت شرکت بین ۵ کشور ($492)</span></div>
+        <div class="th-procon-item"><span class="dot">✓</span><span>اتصال به ۳ قاره — بهترین موقعیت جغرافیایی</span></div>
+        <div class="th-procon-item"><span class="dot">✓</span><span>بیش از ۸۰ معاهده مالیاتی دوجانبه</span></div>
+        <div class="th-procon-item"><span class="dot">✓</span><span>۱۰۰٪ مالکیت خارجی بدون نیاز به شریک محلی</span></div>
+        <div class="th-procon-item"><span class="dot">✓</span><span>جامعه ایرانی بزرگ در استانبول (فارسی‌زبان)</span></div>
+        <div class="th-procon-item"><span class="dot">✓</span><span>Middle Corridor: آلترناتیو مسیر روسیه</span></div>
+        <div class="th-procon-item"><span class="dot">✓</span><span>سیستم MERSIS: ثبت دیجیتال بدون حضور فیزیکی</span></div>
+      </div>
+      <div class="th-procon con">
+        <div class="th-procon-title">⚠️ معایب</div>
+        <div class="th-procon-item"><span class="dot">✗</span><span>بحران لیر — کاهش ارزش شدید تاریخی</span></div>
+        <div class="th-procon-item"><span class="dot">✗</span><span>تورم بالا (رسمی ۶۵٪+ در ۲۰۲۴)</span></div>
+        <div class="th-procon-item"><span class="dot">✗</span><span>OFAC: شرکت‌های ترکی مرتبط با ایران تحریم‌شده (اکتبر ۲۰۲۵)</span></div>
+        <div class="th-procon-item"><span class="dot">✗</span><span>تنش‌های سیاسی داخلی</span></div>
+        <div class="th-procon-item"><span class="dot">✗</span><span>ریسک سیاسی منطقه‌ای (کردستان، سوریه)</span></div>
+      </div>
+    </div>
+
+    <div class="th-strategy">
+      <div class="th-strategy-title">🎯 توصیه استراتژیک ترکیه</div>
+      <div class="th-strategy-text"><strong style="color:#3b82f6">بهترین گزینه اول</strong> برای هدکوارتر منطقه‌ای — استانبول برای شرکت‌های تجاری-مالی، مرسین برای شرکت‌های لجستیک-بندری. <strong style="color:#f59e0b">راه‌حل ریسک ارزی:</strong> تمام قراردادها و فروش را دلاری/یورویی کنید، هزینه‌های محلی به لیر. <strong style="color:#ef4444">خط قرمز OFAC:</strong> از هیچ ساراف یا بانک ترکی مرتبط با ایران استفاده نکنید.</div>
+    </div>
+
+    <div class="th-source">📚 <strong>منابع:</strong> Celikel CPA Istanbul 2026 · MERSIS Turkey · evrenozmen.com.tr (Jan 2026) · OFAC Oct 2025 (MODAFL network) · Steptoe Sanctions Update 2025 · Invest in Turkey (invest.gov.tr)</div>
+  </div>
+
+  <!-- =========================================================
+       چین
+       ========================================================= -->
+  <div class="th-country-panel" id="th-country-china">
+    <div class="th-alert purple">⚠️ <strong>هشدار ژئوپلیتیک:</strong> آمریکا شرکت‌های چینی مرتبط با ایران را در سال ۲۰۲۵ تحریم کرده است. تعرفه‌های تجاری آمریکا-چین در حال تشدید است. اگر شرکت شما با بازار آمریکایی یا بانک‌های آمریکایی کار می‌کند، ریسک compliance چین جدی است. با این حال برای تجارت آسیایی-ایرانی، چین همچنان عملیاتی‌ترین بازار است.</div>
+
+    <div class="th-city-tabs">
+      <button class="th-city-tab active" onclick="th_showCity('china','shanghai')">شانگهای</button>
+      <button class="th-city-tab" onclick="th_showCity('china','yiwu')">یی‌وو</button>
+      <button class="th-city-tab" onclick="th_showCity('china','qingdao')">چینگدائو</button>
+      <button class="th-city-tab" onclick="th_showCity('china','guangzhou')">گوانژو</button>
+      <button class="th-city-tab" onclick="th_showCity('china','shenzhen')">سنزن</button>
+      <button class="th-city-tab" onclick="th_showCity('china','shandong')">شاندونگ</button>
+    </div>
+
+    <!-- شانگهای -->
+    <div class="th-city-panel active" id="th-china-shanghai">
+      <div class="th-grid-4">
+        <div class="th-card">
+          <div class="th-card-title">💰 هزینه‌های ثبت WFOE (منبع: MSA Advisory / SAMR 2026)</div>
+          <div class="th-row"><span class="th-row-label">WFOE استاندارد</span><span class="th-row-val">$5,000–$10,000 (all-in)</span></div>
+          <div class="th-row"><span class="th-row-label">سرمایه ثبتی پیشنهادی</span><span class="th-row-val">RMB 100,000–500,000</span></div>
+          <div class="th-row"><span class="th-row-label">اجاره دفتر</span><span class="th-row-val">$2,000–$8,000/ماه</span></div>
+          <div class="th-row"><span class="th-row-label">مالیات شرکتی</span><span class="th-row-val">۲۵٪ (FTZ Lingang: ۱۵٪)</span></div>
+          <div class="th-row"><span class="th-row-label">VAT (از ژانویه ۲۰۲۶)</span><span class="th-row-val">قانون جدید VAT اجرایی</span></div>
+          <div class="th-row"><span class="th-row-label">زمان ثبت</span><span class="th-row-val">۳–۸ هفته</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🚢 موقعیت لجستیک</div>
+          <div class="th-row"><span class="th-row-label">بندر شانگهای</span><span class="th-row-val">بزرگترین بندر کانتینری جهان</span></div>
+          <div class="th-row"><span class="th-row-label">گردش سالانه</span><span class="th-row-val">+۴۷ میلیون TEU</span></div>
+          <div class="th-row"><span class="th-row-label">فرودگاه</span><span class="th-row-val">پودونگ + هونگچیائو</span></div>
+          <div class="th-row"><span class="th-row-label">FTZ لینگانگ</span><span class="th-row-val">مزایای ویژه واردات-صادرات</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🏦 بانکداری</div>
+          <div class="th-row"><span class="th-row-label">بانک‌های بین‌المللی</span><span class="th-row-val">HSBC، Citi، DBS، Standard Ch.</span></div>
+          <div class="th-row"><span class="th-row-label">افتتاح حساب</span><span class="th-row-val">۴–۸ هفته (KYC سخت)</span></div>
+          <div class="th-row"><span class="th-row-label">SAFE ارز خارجی</span><span class="th-row-val">نیاز به ثبت انتقال ارز</span></div>
+          <div class="th-row"><span class="th-row-label">ریسک OFAC</span><span class="th-row-val"><span class="th-risk th-risk-high">بالا</span> (وابسته به فعالیت)</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">👥 منابع انسانی</div>
+          <div class="th-row"><span class="th-row-label">مدیر میانی</span><span class="th-row-val">$1,200–$3,500/ماه</span></div>
+          <div class="th-row"><span class="th-row-label">کارمند اداری</span><span class="th-row-val">$700–$1,500/ماه</span></div>
+          <div class="th-row"><span class="th-row-label">فارسی‌زبان</span><span class="th-row-val">محدود (جامعه ایرانی کوچک)</span></div>
+          <div class="th-row"><span class="th-row-label">انگلیسی</span><span class="th-row-val">خوب در شانگهای</span></div>
+          <div class="th-row"><span class="th-row-label">ویزا</span><span class="th-row-val">M/Z visa (تجاری) ممکن</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- یی‌وو -->
+    <div class="th-city-panel" id="th-china-yiwu">
+      <div class="th-grid-4">
+        <div class="th-card">
+          <div class="th-card-title">💰 هزینه‌های ثبت (منبع: Asomerit Consulting 2026)</div>
+          <div class="th-row"><span class="th-row-label">WFOE یی‌وو</span><span class="th-row-val">$2,300–$5,000</span></div>
+          <div class="th-row"><span class="th-row-label">اجاره دفتر</span><span class="th-row-val">$600–$1,800/ماه</span></div>
+          <div class="th-row"><span class="th-row-label">مالیات</span><span class="th-row-val">۲۵٪ (صادراتی: VAT refund 13%)</span></div>
+          <div class="th-row"><span class="th-row-label">بازار بین‌المللی</span><span class="th-row-val">یی‌وو — بزرگترین بازار کوچک دنیا</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🚢 موقعیت لجستیک</div>
+          <div class="th-row"><span class="th-row-label">قطار مستقیم</span><span class="th-row-val">یی‌وو-تهران (BRI)</span></div>
+          <div class="th-row"><span class="th-row-label">مسافت قطار</span><span class="th-row-val">~۱۴ روز تا اروپا</span></div>
+          <div class="th-row"><span class="th-row-label">بندر نزدیک</span><span class="th-row-val">نینگبو (۱.۵ ساعت)</span></div>
+          <div class="th-row"><span class="th-row-label">مزیت خاص</span><span class="th-row-val">بهترین برای واردات مستقیم</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">⭐ مزیت کلیدی</div>
+          <div class="th-row"><span class="th-row-label">VAT refund صادراتی</span><span class="th-row-val">۱۳٪ برگشت مالیات</span></div>
+          <div class="th-row"><span class="th-row-label">جامعه عربی-فارسی</span><span class="th-row-val">زیاد (شهر تجار بین‌الملل)</span></div>
+          <div class="th-row"><span class="th-row-label">ریسک OFAC</span><span class="th-row-val"><span class="th-risk th-risk-high">بالا</span> اما قابل مدیریت</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">👥 منابع انسانی</div>
+          <div class="th-row"><span class="th-row-label">هزینه نیروی کار</span><span class="th-row-val">۳۰–۴۰٪ کمتر از شانگهای</span></div>
+          <div class="th-row"><span class="th-row-label">مترجم فارسی-چینی</span><span class="th-row-val">فراوان</span></div>
+          <div class="th-row"><span class="th-row-label">تجار ایرانی</span><span class="th-row-val">جامعه مستقر</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- چینگدائو -->
+    <div class="th-city-panel" id="th-china-qingdao">
+      <div class="th-grid-4">
+        <div class="th-card">
+          <div class="th-card-title">💰 هزینه‌های ثبت</div>
+          <div class="th-row"><span class="th-row-label">WFOE چینگدائو</span><span class="th-row-val">$2,300–$5,000</span></div>
+          <div class="th-row"><span class="th-row-label">اجاره دفتر</span><span class="th-row-val">$700–$2,000/ماه</span></div>
+          <div class="th-row"><span class="th-row-label">منطقه آزاد</span><span class="th-row-val">QBFTZ — معافیت‌های گمرکی</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🚢 موقعیت لجستیک</div>
+          <div class="th-row"><span class="th-row-label">بندر چینگدائو</span><span class="th-row-val">پنجمین بندر بزرگ جهان</span></div>
+          <div class="th-row"><span class="th-row-label">کوریدور</span><span class="th-row-val">شمال چین - کره - ژاپن</span></div>
+          <div class="th-row"><span class="th-row-label">ویژگی</span><span class="th-row-val">صنایع غذایی + پتروشیمی قوی</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">📊 مزیت‌های خاص</div>
+          <div class="th-row"><span class="th-row-label">صنعت</span><span class="th-row-val">مناسب برای صادرات مواد غذایی</span></div>
+          <div class="th-row"><span class="th-row-label">زیرساخت</span><span class="th-row-val">مدرن، tier-2 city</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">👥 منابع انسانی</div>
+          <div class="th-row"><span class="th-row-label">هزینه نیروی کار</span><span class="th-row-val">۲۰–۳۰٪ کمتر از شانگهای</span></div>
+          <div class="th-row"><span class="th-row-label">تخصص</span><span class="th-row-val">صنعتی-دریایی-فناوری</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- گوانژو -->
+    <div class="th-city-panel" id="th-china-guangzhou">
+      <div class="th-grid-4">
+        <div class="th-card">
+          <div class="th-card-title">💰 هزینه‌های ثبت</div>
+          <div class="th-row"><span class="th-row-label">WFOE گوانژو</span><span class="th-row-val">$2,300–$5,500</span></div>
+          <div class="th-row"><span class="th-row-label">اجاره دفتر</span><span class="th-row-val">$800–$2,500/ماه</span></div>
+          <div class="th-row"><span class="th-row-label">Nansha FTZ</span><span class="th-row-val">مالیات ۱۵٪</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🚢 موقعیت لجستیک</div>
+          <div class="th-row"><span class="th-row-label">بندر گوانژو</span><span class="th-row-val">هشتمین بندر بزرگ جهان</span></div>
+          <div class="th-row"><span class="th-row-label">نزدیکی</span><span class="th-row-val">هنگ‌کنگ (۱۳۰ کیلومتر)</span></div>
+          <div class="th-row"><span class="th-row-label">صنایع</span><span class="th-row-val">الکترونیک، تجارت، تولید</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">⭐ نمایشگاه کانتون</div>
+          <div class="th-row"><span class="th-row-label">Canton Fair</span><span class="th-row-val">بزرگترین نمایشگاه تجاری آسیا</span></div>
+          <div class="th-row"><span class="th-row-label">تجار خاورمیانه</span><span class="th-row-val">حضور قوی دائمی</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">👥 منابع انسانی</div>
+          <div class="th-row"><span class="th-row-label">هزینه</span><span class="th-row-val">مشابه شانگهای</span></div>
+          <div class="th-row"><span class="th-row-label">جامعه خاورمیانه</span><span class="th-row-val">متوسط</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- سنزن -->
+    <div class="th-city-panel" id="th-china-shenzhen">
+      <div class="th-grid-4">
+        <div class="th-card">
+          <div class="th-card-title">💰 هزینه‌های ثبت</div>
+          <div class="th-row"><span class="th-row-label">WFOE سنزن</span><span class="th-row-val">$2,300–$5,000</span></div>
+          <div class="th-row"><span class="th-row-label">اجاره دفتر</span><span class="th-row-val">$1,000–$3,500/ماه</span></div>
+          <div class="th-row"><span class="th-row-label">Qianhai FTZ</span><span class="th-row-val">مالیات ۱۵٪ — صرفه‌جویی بالا</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🚢 موقعیت لجستیک</div>
+          <div class="th-row"><span class="th-row-label">بندر یانتیان</span><span class="th-row-val">مسیر مستقیم به خاورمیانه</span></div>
+          <div class="th-row"><span class="th-row-label">تکنولوژی</span><span class="th-row-val">سیلیکون‌ولی چین</span></div>
+          <div class="th-row"><span class="th-row-label">هنگ‌کنگ</span><span class="th-row-val">۳۰ دقیقه (پل Pearl River)</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">⭐ بهترین برای</div>
+          <div class="th-row"><span class="th-row-label">فناوری + الکترونیک</span><span class="th-row-val">بهترین در چین</span></div>
+          <div class="th-row"><span class="th-row-label">استارتاپ</span><span class="th-row-val">اکوسیستم قوی</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">👥 منابع انسانی</div>
+          <div class="th-row"><span class="th-row-label">هزینه</span><span class="th-row-val">بالا (پس از شانگهای)</span></div>
+          <div class="th-row"><span class="th-row-label">کیفیت</span><span class="th-row-val">بالاترین در چین</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- شاندونگ -->
+    <div class="th-city-panel" id="th-china-shandong">
+      <div class="th-grid-4">
+        <div class="th-card">
+          <div class="th-card-title">💰 هزینه‌های ثبت</div>
+          <div class="th-row"><span class="th-row-label">WFOE شاندونگ (جینان/ینتای)</span><span class="th-row-val">$2,000–$4,500</span></div>
+          <div class="th-row"><span class="th-row-label">اجاره دفتر</span><span class="th-row-val">$500–$1,500/ماه</span></div>
+          <div class="th-row"><span class="th-row-label">مشوق‌های استانی</span><span class="th-row-val">معافیت‌های صنعتی متعدد</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">🚢 موقعیت لجستیک</div>
+          <div class="th-row"><span class="th-row-label">صنعت</span><span class="th-row-val">بزرگترین استان صنعتی چین</span></div>
+          <div class="th-row"><span class="th-row-label">بنادر</span><span class="th-row-val">قینگدائو + ینتای + ریژائو</span></div>
+          <div class="th-row"><span class="th-row-label">صنایع کلیدی</span><span class="th-row-val">پتروشیمی، فولاد، ماشین‌آلات</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">⭐ ویژگی</div>
+          <div class="th-row"><span class="th-row-label">شیندا</span><span class="th-row-val">قطب پتروشیمی چین</span></div>
+          <div class="th-row"><span class="th-row-label">ریفاینری‌های teapot</span><span class="th-row-val">⚠ OFAC هشدار داده (آوریل ۲۰۲۶)</span></div>
+        </div>
+        <div class="th-card">
+          <div class="th-card-title">⚠️ هشدار خاص</div>
+          <div class="th-row"><span class="th-row-label">OFAC آوریل ۲۰۲۶</span><span class="th-row-val">هشدار ویژه برای ریفاینری‌های teapot شاندونگ در ارتباط با نفت ایران</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="th-procon-grid">
+      <div class="th-procon pro">
+        <div class="th-procon-title">✅ مزایا</div>
+        <div class="th-procon-item"><span class="dot">✓</span><span>بهترین زنجیره تأمین در دنیا — هر چیزی ارزان‌تر تولید می‌شود</span></div>
+        <div class="th-procon-item"><span class="dot">✓</span><span>یی‌وو: قطار مستقیم به ایران/ترکیه (BRI)</span></div>
+        <div class="th-procon-item"><span class="dot">✓</span><span>فارسی‌زبان فراوان در یی‌وو و گوانژو</span></div>
+        <div class="th-procon-item"><span class="dot">✓</span><span>FTZ‌ها: ۱۵٪ مالیات (نسبت به ۲۵٪ عادی)</span></div>
+        <div class="th-procon-item"><span class="dot">✓</span><span>یوان ثابت‌تر از لیر و روپیه</span></div>
+        <div class="th-procon-item"><span class="dot">✓</span><span>VAT refund 13% برای صادرات</span></div>
+      </div>
+      <div class="th-procon con">
+        <div class="th-procon-title">⚠️ معایب</div>
+        <div class="th-procon-item"><span class="dot">✗</span><span>بالاترین ریسک OFAC ثانویه (چین + ایران = هدف اصلی)</span></div>
+        <div class="th-procon-item"><span class="dot">✗</span><span>بانک‌های چینی مرتبط با ایران تحریم‌شده (۲۰۲۵)</span></div>
+        <div class="th-procon-item"><span class="dot">✗</span><span>شاندونگ teapot refineries: هشدار مستقیم OFAC (آوریل ۲۰۲۶)</span></div>
+        <div class="th-procon-item"><span class="dot">✗</span><span>تنش تجاری آمریکا-چین — تعرفه‌های سنگین</span></div>
+        <div class="th-procon-item"><span class="dot">✗</span><span>افتتاح حساب بانکی بسیار سخت برای خارجی‌ها</span></div>
+        <div class="th-procon-item"><span class="dot">✗</span><span>کنترل ارز خارجی SAFE — انتقال سود پیچیده</span></div>
+      </div>
+    </div>
+
+    <div class="th-strategy">
+      <div class="th-strategy-title">🎯 توصیه استراتژیک چین</div>
+      <div class="th-strategy-text"><strong style="color:#3b82f6">بهترین گزینه برای زنجیره تأمین:</strong> یی‌وو (واردات مستقیم + فارسی‌زبان + BRI) یا چینگدائو (لجستیک صنعتی). <strong style="color:#f59e0b">راه‌حل ریسک OFAC:</strong> از بانک‌های بین‌المللی (HSBC، Standard Chartered) نه بانک‌های دولتی چینی استفاده کنید. <strong style="color:#ef4444">خط قرمز مطلق:</strong> هیچ ارتباطی با teapot refineries شاندونگ نداشته باشید (OFAC آوریل ۲۰۲۶ مستقیم این را هدف گرفته).</div>
+    </div>
+
+    <div class="th-source">📚 <strong>منابع:</strong> MSA Advisory WFOE Cost 2026 (msadvisory.com) · Asomerit Consulting Yiwu 2026 · SAMR China (samr.gov.cn) · GSXT Business Registry · FDI China 2025 (fdichina.com) · OFAC Alert Apr 28, 2026 (Teapot Refineries) · Dezan Shira &amp; Associates China Briefing</div>
+  </div>
+
+</div>
+
+
+<!-- ========== اسکریپت‌های مخصوص این صفحه ========== -->
+<script>
+  function th_showCountry(country) {
+    document.querySelectorAll('#dash-TradeHubs .th-country-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('#dash-TradeHubs .th-country-tab').forEach(b => b.classList.remove('active'));
+    document.getElementById('th-country-' + country).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  function th_showCity(country, city) {
+    document.querySelectorAll('#th-country-' + country + ' .th-city-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('#th-country-' + country + ' .th-city-tab').forEach(b => b.classList.remove('active'));
+    document.getElementById('th-' + country + '-' + city).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+
 <!-- ========== صفحه پنجم: منابع ========== -->
 <div id="dash-investment" class="dash-section">
   <div class="investment-section">
