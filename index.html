@@ -877,7 +877,7 @@
     <button class="nav-btn" onclick="showDash('carec')">کریدورهای BRI</button>
     <button class="nav-btn" onclick="showDash('ahvaz')">مقصد:اهواز</button>
     <button class="nav-btn" onclick="showDash('portcompare')">مقایسه بنادر مهم</button>
-    <button class="nav-btn" onclick="showDash('border')">نقاط مرزی مهم</button>
+    <button class="nav-btn" onclick="showDash('border')">تجارت خارجی</button>
     <button class="nav-btn" onclick="showDash('shipping')">کشتیرانی</button>
    <button class="nav-btn" onclick="showDash('TradeHubs')">هاب‌های تجاری</button>
     <button class="nav-btn " onclick="showDash('suggestions')">پیشنهادات</button>
@@ -940,7 +940,7 @@
       <div class="roadmap-card" style="background:#f8fafd;border:1px solid #eef2f9;border-radius:16px;padding:14px 16px;">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
           <span style="background:#85580B20;color:#854F0B;font-size:11px;font-weight:800;width:22px;height:22px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;">۵</span>
-          <span style="font-size:12px;font-weight:800;color:#0f3b5c;">نقاط مرزی مهم</span>
+          <span style="font-size:12px;font-weight:800;color:#0f3b5c;">تجارت خارجی</span>
         </div>
         <p style="font-size:11px;color:#5b7693;line-height:1.8;margin:0;">جریان صادرات/واردات ایران، کالاهای اصلی هر مسیر، بنادر جنوبی و شمالی، و گذرگاه‌های مرزی با ظرفیت و هزینه.</p>
       </div>
@@ -995,10 +995,10 @@
       allowfullscreen>
     </iframe>
     <div class="map-footer-note">
-      <span><span class="legend-dot" style="background:#E24B4A;"></span> مسیرهای پرریسک (تنگه هرمز)</span>
-      <span><span class="legend-dot" style="background:#1D9E75;"></span> کریدورهای امن</span>
-      <span><span class="legend-dot" style="background:#185FA5;"></span> بنادر استراتژیک & هاب‌های لجستیکی</span>
-      <span><span class="legend-dot" style="background:#F5A623;"></span> نقاط ترانزیت کلیدی (ریلی/فری)</span>
+      <span><span class="legend-dot" style="background:#E24B4A;"></span> کریدور شمالی — Trans-Siberian (Trans-Siberian / Northern)</span>
+      <span><span class="legend-dot" style="background:#1D9E75;"></span> کریدور میانی — TITR (Trans-Caspian / Middle Corridor)</span>
+      <span><span class="legend-dot" style="background:#185FA5;"></span> راه ابریشم آبی (Maritime Silk Road)</span>
+      <span><span class="legend-dot" style="background:#F5A623;"></span> راه ابریشم قطبی — NSR (Polar Silk Road / Northern Sea Route)</span>
     </div>
     <div style="background:#fff8ed;border-top:1px solid #fbe8cf;padding:12px 24px;font-size:11.5px;color:#9a6a2c;line-height:1.9;text-align:center;">
       💡 این داشبورد برای اهداف تحقیقاتی است. داده‌های عملیاتی، تعرفه‌های دقیق و شرایط گمرکی باید از اپراتورهای لجستیکی معتبر دریافت شوند. کلیک روی هر نقطه از نقشه، اطلاعات تکمیلی کریدور مربوطه را نشان می‌دهد.
@@ -1985,7 +1985,7 @@ function switchShippingTab(index) {
 }
 </script>
  
-<!-- ========== صفحه چهارم: نقاط مرزی مهم ========== -->
+<!-- ========== صفحه چهارم: تجارت خارجی ========== -->
 <div id="dash-border" class="dash-section">
   <div class="border-points">
     <style>
@@ -2587,7 +2587,7 @@ function switchShippingTab(index) {
       <button class="nav-btn" onclick="switchSuggestionsTab('s-china')">دفتر چین</button>
       <button class="nav-btn" onclick="switchSuggestionsTab('s-altdubai')">جایگزین امارات</button>
       <button class="nav-btn" onclick="switchSuggestionsTab('s-corridors')">کریدورها</button>
-      <button class="nav-btn" onclick="switchSuggestionsTab('s-rahabard')">راهبردها</button>
+      <button class="nav-btn" onclick="switchSuggestionsTab('s-rahabard')">راهبردهای پیشنهادی </button>
     </div>
 
     <div class="content">
@@ -3100,7 +3100,7 @@ function switchShippingTab(index) {
         </div>
       </div>
 
-      <!-- ===== TAB 7: راهبردها ===== -->
+      <!-- ===== TAB 7: راهبردهای پیشنهادی ===== -->
       <div id="suggestions-s-rahabard" class="tab-content">
         <div class="section-title">راهبردهای اجرایی — ۱۰ اقدام کلیدی</div>
 
@@ -3194,7 +3194,7 @@ function switchShippingTab(index) {
           <div class="strat-box" onclick="toggleStratBox('sb5')">
             <div class="sb-header">
               <div class="sb-num">۵</div>
-              <div class="sb-title">مبادله کالا به کالا — تجهیزات صنعتی، کشاورزی و غیره </div>
+              <div class="sb-title">تامین مالی از طریق مبادله کالا به کالا — تجهیزات صنعتی، کشاورزی و غیره </div>
               <div class="sb-arrow" id="sb5-arrow">🔻</div>
             </div>
             <div class="sb-short">راه‌حل اصلی برای محدودیت بانکی — تجهیزات و کالا به جای پول</div>
@@ -3278,7 +3278,7 @@ function switchShippingTab(index) {
           <div class="strat-box" onclick="toggleStratBox('sb9')">
             <div class="sb-header">
               <div class="sb-num">۹</div>
-              <div class="sb-title">پیشنهاد جدید </div>
+              <div class="sb-title">تقویت بازوی بازرگانی داخلی و خارجی </div>
               <div class="sb-arrow" id="sb9-arrow">🔻</div>
             </div>
             <div class="sb-short">زیر پیشنهاد جدید </div>
@@ -3989,9 +3989,24 @@ const portsDataPro = [
   { id:'gwadar', name:'گوادر', country:'پاکستان', region:'pakistan', score:42, scoreClass:'sr-red-pro', fatf:'ریسک CPEC', fatfClass:'fatf-grey-pro', capacity:'۱۱,۰۰۰ TEU آوریل ۲۰۲۶', draft:'12.5m', mainTraders:'چین (CPEC) · افغانستان · آسیای مرکزی', goods:['ترانزیت ایران‌بند','محموله افغانستان','مواد CPEC','نفت','محصولات معدنی'], docs:['Bill of Lading','GPA Clearance','FBR Transit Declaration (SRO 691/2026)','Certificate of Origin','CPEC Transit Permit','Customs Act 1969'], risks:['ریسک تحریم اول – کریدور ایران از ۲۵ آوریل ۲۰۲۶','تهدیدات امنیتی بلوچستان','عملیات بنادر چین (COPHC)','فشار آمریکا بر کانال‌های مالی'], facilities:['۴ اسکله فعال (۵۰ تا ۲۰۳۰)','منطقه آزاد ۲,۲۹۲ هکتار','Gwadar Eastbay Expressway','فرودگاه بین‌المللی جدید','برق ۳۰۰ MW'], note:'تعرفه‌ها ۴۰درصد کاهش یافت (مه ۲۰۲۶). کریدور Gwadar–Gabd به ایران تقریبا۸۹ km.' }
 ];
 
+// داده‌های مسیرهای زمینی با افزودن فیلتر regionRoute
 const routesPro = [
-  { title:'مسیر زمینی صلاله ← خصب (اکسلیو مسندم)', path:['صلاله','Route 47/31','مسقط','E11 شمالی','دبی (عبور)','E11 / RAK','Al Darah Border','خصب / مسندم'], facts:[{l:'مسافت هوایی',v:'تقریبا۱,۰۴۰ km'},{l:'مسافت جاده',v:'تقریبا۱,۳۵۰ km'},{l:'زمان تقریبی',v:'۱۴–۱۶ ساعت'},{l:'وضعیت جاده',v:'آسفالت کامل'},{l:'مرز عبوری',v:'Al Darah (RAK–Musandam)'},{l:'نوع کارگو',v:'محدود به سبک'}], risks:[{level:'high', text:'مستقیم از صلاله به خصب مسیر زمینی یکپارچه ندارد – مسندم اکسلیو جداگانه از بدنه اصلی عمان است و از خاک امارات عبور لازم است'},{level:'high', text:'جاده A13 خصب–تیبات (49km) باریک و کوهستانی است – برای کامیون سنگین غیرمناسب'},{level:'med', text:'کارگو تجاری سنگین در این مسیر بسیار محدود و غیراقتصادی است'},{level:'med', text:'نیاز به ویزای عبور امارات + مجوزهای دوگانه عمانی'},{level:'low', text:'برای سفر سبک و پیک لجستیک گزینه‌ای ممکن اما پرهزینه'}], note:'🚨️ گزینه عملی‌تر: صلاله → مسقط → سوهار → کارگو دریایی (فیدر) به خصب. مسیر زمینی مستقیم برای کارگو سنگین توصیه نمی‌شود.' },
-  { title:'مسیر زمینی کراچی ← گوادر (N10 / مکران ساحلی)', path:['کراچی','Lyari / Zero Point','N10 ساحلی','اورمارا','پسنی','Eastbay Expressway','گوادر'], facts:[{l:'مسافت N10',v:'تقریبا۶۸۳ km'},{l:'زمان LTV',v:'۶–۷ ساعت'},{l:'زمان کامیون',v:'۸–۱۲ ساعت'},{l:'عرض جاده',v:'۳۰ فوت (۲ خطه)'},{l:'بالاترین نقطه',v:'۳۲۳m (Buzi Pass)'},{l:'موبایل در مسیر',v:'بسیار محدود'}], risks:[{level:'high', text:'ریسک امنیتی بلوچستان – جاده از مناطق حساس می‌گذرد، حضور گروه‌های مسلح تأیید شده در سال‌های اخیر'},{level:'high', text:'ریسک تحریم – SRO 691/2026: هر کارگو ایران‌بند از این مسیر به OFAC Screening نیاز دارد'},{level:'high', text:'جاده دوخطه برای ترافیک سنگین بندری کافی نیست – موتوروی تا ۲۰۳۰ آماده نمی‌شود'},{level:'med', text:'بدون شهر بزرگ در مسیر – تنها اورمارا (شهر کوچک ساحلی)'},{level:'med', text:'هوا: بیابانی شدید، طوفان شن، گرمای تابستانی ۴۵+°C'},{level:'low', text:'گزینه آبی بهینه: فیدر دریایی کراچی–گوادر، صرفه‌جویی تقریبا$180,000 در هزینه حمل'}], note:'گزینه بهینه فعلی: فیدر دریایی از کراچی به گوادر (۵۳۳km دریایی). سپس Gwadar–Gabd تقریبا89km به مرز ایران. زمان کل ایران: ۲–۳ ساعت از گوادر در مقابل ۱۶–۱۸ ساعت از کراچی.' }
+  { 
+    title:'مسیر زمینی صلاله ← خصب (اکسلیو مسندم)', 
+    regionRoute:'oman', // فقط در تب عمان نمایش داده شود
+    path:['صلاله','Route 47/31','مسقط','E11 شمالی','دبی (عبور)','E11 / RAK','Al Darah Border','خصب / مسندم'], 
+    facts:[{l:'مسافت هوایی',v:'تقریبا۱,۰۴۰ km'},{l:'مسافت جاده',v:'تقریبا۱,۳۵۰ km'},{l:'زمان تقریبی',v:'۱۴–۱۶ ساعت'},{l:'وضعیت جاده',v:'آسفالت کامل'},{l:'مرز عبوری',v:'Al Darah (RAK–Musandam)'},{l:'نوع کارگو',v:'محدود به سبک'}], 
+    risks:[{level:'high', text:'مستقیم از صلاله به خصب مسیر زمینی یکپارچه ندارد – مسندم اکسلیو جداگانه از بدنه اصلی عمان است و از خاک امارات عبور لازم است'},{level:'high', text:'جاده A13 خصب–تیبات (49km) باریک و کوهستانی است – برای کامیون سنگین غیرمناسب'},{level:'med', text:'کارگو تجاری سنگین در این مسیر بسیار محدود و غیراقتصادی است'},{level:'med', text:'نیاز به ویزای عبور امارات + مجوزهای دوگانه عمانی'},{level:'low', text:'برای سفر سبک و پیک لجستیک گزینه‌ای ممکن اما پرهزینه'}], 
+    note:'🚨️ گزینه عملی‌تر: صلاله → مسقط → سوهار → کارگو دریایی (فیدر) به خصب. مسیر زمینی مستقیم برای کارگو سنگین توصیه نمی‌شود.' 
+  },
+  { 
+    title:'مسیر زمینی کراچی ← گوادر (N10 / مکران ساحلی)', 
+    regionRoute:'pakistan', // فقط در تب پاکستان نمایش داده شود
+    path:['کراچی','Lyari / Zero Point','N10 ساحلی','اورمارا','پسنی','Eastbay Expressway','گوادر'], 
+    facts:[{l:'مسافت N10',v:'تقریبا۶۸۳ km'},{l:'زمان LTV',v:'۶–۷ ساعت'},{l:'زمان کامیون',v:'۸–۱۲ ساعت'},{l:'عرض جاده',v:'۳۰ فوت (۲ خطه)'},{l:'بالاترین نقطه',v:'۳۲۳m (Buzi Pass)'},{l:'موبایل در مسیر',v:'بسیار محدود'}], 
+    risks:[{level:'high', text:'ریسک امنیتی بلوچستان – جاده از مناطق حساس می‌گذرد، حضور گروه‌های مسلح تأیید شده در سال‌های اخیر'},{level:'high', text:'ریسک تحریم – SRO 691/2026: هر کارگو ایران‌بند از این مسیر به OFAC Screening نیاز دارد'},{level:'high', text:'جاده دوخطه برای ترافیک سنگین بندری کافی نیست – موتوروی تا ۲۰۳۰ آماده نمی‌شود'},{level:'med', text:'بدون شهر بزرگ در مسیر – تنها اورمارا (شهر کوچک ساحلی)'},{level:'med', text:'هوا: بیابانی شدید، طوفان شن، گرمای تابستانی ۴۵+°C'},{level:'low', text:'گزینه آبی بهینه: فیدر دریایی کراچی–گوادر، صرفه‌جویی تقریبا$180,000 در هزینه حمل'}], 
+    note:'گزینه بهینه فعلی: فیدر دریایی از کراچی به گوادر (۵۳۳km دریایی). سپس Gwadar–Gabd تقریبا89km به مرز ایران. زمان کل ایران: ۲–۳ ساعت از گوادر در مقابل ۱۶–۱۸ ساعت از کراچی.' 
+  }
 ];
 
 let activeFilterPro = 'all';
@@ -4007,6 +4022,7 @@ function filterPortsPro(filter) {
     }
   });
   renderPortsGridPro();
+  renderRoutesPro(); // هر بار که فیلتر عوض شد، مسیرها نیز بازآوری می‌شوند
 }
 
 function renderPortsGridPro() {
@@ -4078,7 +4094,20 @@ function selectPortPro(id) {
 function renderRoutesPro() {
   const container = document.getElementById('routesGridPro');
   if (!container) return;
-  container.innerHTML = routesPro.map(r => {
+  
+  // فیلتر کردن مسیرها بر اساس تب فعال
+  let filteredRoutes = routesPro;
+  if (activeFilterPro !== 'all') {
+    filteredRoutes = routesPro.filter(route => route.regionRoute === activeFilterPro);
+  }
+  
+  // اگر مسیری برای فیلتر فعلی وجود نداشت، پیام نمایش داده شود
+  if (filteredRoutes.length === 0) {
+    container.innerHTML = `<div style="text-align:center;padding:40px;background:#f8fafc;border-radius:14px;color:#64748b;">مسیر زمینی برای این منطقه تعریف نشده است.</div>`;
+    return;
+  }
+  
+  container.innerHTML = filteredRoutes.map(r => {
     const pathHtml = r.path.map((n,i)=>i<r.path.length-1?`<span class="route-node-pro" style="background:#ffffff;border:1px solid #cbd5e1;border-radius:6px;padding:4px 12px;font-size:12px;color:#334155">${n}</span><span class="route-arrow-pro" style="color:#64748b;font-size:12px">←</span>`:`<span class="route-node-pro" style="background:#ffffff;border:1px solid #cbd5e1;border-radius:6px;padding:4px 12px;font-size:12px;color:#334155">${n}</span>`).join('');
     const factsHtml = r.facts.map(f=>`<div class="rf-pro" style="background:#f8fafc;border-radius:8px;padding:10px 12px"><div class="rf-label-pro" style="font-size:10px;color:#64748b;margin-bottom:3px">${f.l}</div><div class="rf-val-pro" style="font-size:13px;font-weight:600;color:#0f172a">${f.v}</div></div>`).join('');
     const risksHtml = r.risks.map(ri=>`<div class="risk-item-pro" style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:#334155;line-height:1.5"><div class="risk-dot-pro" style="width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:4px;background:${ri.level==='high'?'#ef4444':(ri.level==='med'?'#f59e0b':'#22c55e')}"></div><div>${ri.text}</div></div>`).join('');
@@ -4105,9 +4134,9 @@ document.querySelectorAll('.filter-btn-pro').forEach(btn => {
 // راه‌اندازی اولیه
 renderPortsGridPro();
 renderRoutesPro();
+</script>
 
-
-// ======================== داده‌های صفحه نقاط مرزی مهم  ========================
+// ======================== داده‌های صفحه تجارت خارجی  ========================
 const countriesData = {
   china: { name: 'چین', capital: 'پکن', population: '۱.۴ میلیارد', keyPorts: 'شانگهای، نینگبو، شنژن', role: 'مبدأ اصلی صادرات، تولید ۳۰درصد کالاهای جهانی', corridor: 'راه ابریشم - مبدأ' },
   iran: { name: 'ایران', capital: 'تهران', population: '۸۵ میلیون', keyPorts: 'بندرعباس، امام خمینی، انزلی', role: 'مرکز ترانزیت شمال-جنوب و شرق-غرب', corridor: 'INSTC, TITR' },
