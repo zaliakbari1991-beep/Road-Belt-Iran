@@ -1027,6 +1027,18 @@
 
 
 <!-- ========== صفحه دوم: کریدورهای بین‌المللی ========== -->
+ <div id="dash-carec" class="dash-section">
+  <div class="corridors-tab-bar">
+    <button class="corridors-tab-btn active" onclick="switchCorridorsTab('analysis')">📈🔍 تحلیل کریدورهای کلی چین به اروپا</button>
+    <button class="corridors-tab-btn" onclick="switchCorridorsTab('comparison')">🆚 جداول مقایسه جامع کریدورهای اصلی </button>
+  </div>
+  
+  <div id="corridors-tab-analysis" class="corridors-tab-pane active">
+    <div class="legend-row-new">
+      <div class="leg-item-new"><div class="leg-dot-new" style="background:#639922"></div>ریسک پایین</div>
+      <div class="leg-item-new"><div class="leg-dot-new" style="background:#EF9F27"></div>ریسک متوسط</div>
+      <div class="leg-item-new"><div class="leg-dot-new" style="background:#E24B4A"></div>ریسک بالا</div>
+    </div>
 <!-- CORRIDOR 1: Trans-Siberian -->
     <div class="corridor-card-new" id="c1">
       <div class="corridor-header-new" onclick="toggleCorridorNew('c1')">
