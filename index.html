@@ -2125,16 +2125,6 @@
     <p style="font-size:10px;color:var(--text-dim,#999);line-height:1.6">برای اهداف تحقیقاتی. آخرین به‌روزرسانی: ژوئن ۲۰۲۶ | منابع: UTLC ERA، ERAI، Jamestown، Energy Intelligence، CSIS، INSS، Kazakhstan MoT، Corporate Knights</p>
   </div>
 </div>
-
-<script>
-function cmpTab(id, btn) {
-  document.querySelectorAll('.cmp-pane').forEach(function(p){ p.classList.remove('cmp-active'); });
-  document.querySelectorAll('.cmp-tab-btn').forEach(function(b){ b.classList.remove('cmp-active'); });
-  document.getElementById(id).classList.add('cmp-active');
-  btn.classList.add('cmp-active');
-}
-
-</script> 
 </div>
    
 
@@ -7270,6 +7260,12 @@ function switchCorridorsTab(tabName) {
   if (window.event && window.event.target) {
     window.event.target.classList.add('active');
   }
+ function cmpTab(id, btn) {
+  document.querySelectorAll('.cmp-pane').forEach(function(p){ p.classList.remove('cmp-active'); });
+  document.querySelectorAll('.cmp-tab-btn').forEach(function(b){ b.classList.remove('cmp-active'); });
+  document.getElementById(id).classList.add('cmp-active');
+  btn.classList.add('cmp-active');
+}
 }
 
 // ======================== توابع صفحه مقایسه ========================
