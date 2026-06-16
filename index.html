@@ -1771,6 +1771,9 @@
     </div>
   </div>
 
+ <!-- ══════════════════════════════════════════════════ -->
+  <!--  TAB 2 — comparison                               -->
+  <!-- ══════════════════════════════════════════════════ -->
   <div id="corridors-tab-comparison" class="corridors-tab-pane">
     <div class="wrap-new">
       <div class="top-new">
@@ -1782,133 +1785,205 @@
         <div class="li-new"><div class="ld-new" style="background:#EF9F27"></div>ریسک متوسط</div>
         <div class="li-new"><div class="ld-new" style="background:#E24B4A"></div>ریسک بالا</div>
       </div>
-
-      <div class="section-card-new">
-        <div class="sec-header-new">
-          <h2>۱ — زیرساخت، مسیر و زمان ترانزیت</h2>
-          <span class="ref-inline-new">منابع: UTLC ERA، ERAI، Kazakhstan MoT، ADY، WITA، TITR Assoc. 2024-2026</span>
-        </div>
-        <div class="tbl-wrap-new">
-          <table>
-            <thead>
-              <tr><th>ویژگی</th><th>ترانس‌سیبری<br><span style="font-weight:400;font-size:10px;">(Northern/TSR)</span></th><th>راه ابریشم آبی<br><span style="font-weight:400;font-size:10px;">(Maritime)</span></th><th>کریدور میانی<br><span style="font-weight:400;font-size:10px;">(TITR)</span></th><th>کریدور شمالی قطبی<br><span style="font-weight:400;font-size:10px;">(Polar/NSR)</span></th></tr>
-            </thead>
-            <tbody>
-              <tr><td>نوع</td><td><span class="badge-new b-rail-new">ریلی</span></td><td><span class="badge-new b-sea-new">دریایی</span></td><td><span class="badge-new b-multi-new">چندوجهی</span></td><td><span class="badge-new b-arc-new">دریایی قطبی</span></td></tr>
-              <tr><td>طول مسیر</td><td>~۹,۲۰۰ کیلومتر</td><td>~۲۱,۰۰۰ کم (Suez)<br>~۲۸,۰۰۰ کم (Cape)</td><td>~۸,۷۰۰ کیلومتر</td><td>~۱۴,۰۰۰ کیلومتر<br><span class="note-new">۷,۰۰۰km کوتاه‌تر از Suez</span></td></tr>
-              <tr><td>زمان ترانزیت ۲۰۲۵</td><td>۱۵–۲۲ روز</td><td>۲۸–۳۵ روز (Suez)<br>۴۰–۵۰ روز (Cape)</td><td>۱۸–۲۵ روز<br><span class="note-new">هدف: ۱۴–۱۵ روز</span></td><td>۱۸–۲۰ روز<br><span class="note-new">فقط فصل تابستان-پاییز</span></td></tr>
-              <!-- ✅ CORRECTED: TSR = 380,434 TEU China-EU-China / 745,900 TEU total Eurasian (not 500-650K with -9.8%) -->
-              <!-- ✅ CORRECTED: TITR = 4.5M tons / ~55,000 TEU; capacity = 6M tons/100,000 TEU -->
-              <tr><td>حجم واقعی ۲۰۲۴</td><td>۳۸۰,۴۳۴ TEU (China-EU)<br>۷۴۵,۹۰۰ TEU (کل اوراسیا)<br><span class="note-new">کاهش ۱۴٪ در ۲۰۲۵ (ERAI)</span></td><td>۱۳.۵–۱۴ میلیون TEU<br><span class="note-new">(China-Europe, 2024)</span></td><td>۴.۵ میلیون تن / ~۵۵,۰۰۰ TEU<br><span class="note-new">رشد ۶۳٪ نسبت به ۲۰۲۳ | ظرفیت: ۶M تن/۱۰۰K TEU</span></td><td><span class="badge-new b-na-new">تجاری اولیه</span><br><span class="note-new">۱۵ کشتی / ۴۰۰K تن در فصل ۲۰۲۵</span></td></tr>
-            </tbody>
-          </table>
+      <div class="cmp-tab-nav">
+        <button class="cmp-tab-btn active" onclick="showCmpTab('cmp1',this)">۱ — زیرساخت و زمان</button>
+        <button class="cmp-tab-btn" onclick="showCmpTab('cmp2',this)">۲ — هزینه‌ها</button>
+        <button class="cmp-tab-btn" onclick="showCmpTab('cmp3',this)">۳ — ریسک و بیمه</button>
+        <button class="cmp-tab-btn" onclick="showCmpTab('cmp4',this)">۴ — بار و گمرک</button>
+        <button class="cmp-tab-btn" onclick="showCmpTab('cmp5',this)">۵ — استراتژی BRI</button>
+        <button class="cmp-tab-btn" onclick="showCmpTab('cmp6',this)">۶ — خلاصه کلی</button>
+      </div>
+ 
+      <div id="cmp1" class="cmp-pane active">
+        <div class="section-card-new">
+          <div class="sec-header-new"><h2>۱ — زیرساخت، مسیر و زمان ترانزیت</h2><span class="ref-inline-new">منابع: UTLC ERA، ERAI، Kazakhstan MoT، ADY 2024-2026</span></div>
+          <div class="tbl-wrap-new">
+            <table>
+              <thead><tr><th>ویژگی</th><th>ترانس‌سیبری</th><th>راه ابریشم آبی</th><th>کریدور میانی (TITR)</th><th>کریدور قطبی (NSR)</th></tr></thead>
+              <tbody>
+                <tr><td>نوع</td><td><span class="badge-new b-rail-new">ریلی</span></td><td><span class="badge-new b-sea-new">دریایی</span></td><td><span class="badge-new b-multi-new">چندوجهی</span></td><td><span class="badge-new b-arc-new">دریایی قطبی</span></td></tr>
+                <tr><td>طول مسیر</td><td>~۹,۲۰۰ کم</td><td>~۲۱,۰۰۰ کم (Suez)<br>~۲۸,۰۰۰ کم (Cape)</td><td>~۸,۷۰۰ کم</td><td>~۱۴,۰۰۰ کم<span class="note-new">۷,۰۰۰km کوتاه‌تر از Suez</span></td></tr>
+                <tr><td>زمان ترانزیت</td><td>۱۵–۲۲ روز</td><td>۲۸–۳۵ روز (Suez)<br>۴۰–۵۰ روز (Cape)</td><td>۱۸–۲۵ روز<span class="note-new">هدف: ۱۴–۱۵ روز</span></td><td>۱۸–۲۰ روز<span class="note-new">فقط تابستان-پاییز</span></td></tr>
+                <tr><td>حجم ۲۰۲۴</td><td>۳۸۰K TEU (China-EU)<br>۷۴۶K TEU (کل اوراسیا)<span class="note-new">کاهش ۱۴٪ در ۲۰۲۵</span></td><td>۱۳.۵–۱۴ میلیون TEU</td><td>۴.۵M تن / ~۵۵K TEU<span class="note-new">رشد ۶۳٪ نسبت به ۲۰۲۳</span></td><td><span class="badge-new b-na-new">تجاری اولیه</span><span class="note-new">۱۵ کشتی / ۴۰۰K تن فصل ۲۰۲۵</span></td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-
-      <div class="section-card-new">
-        <div class="sec-header-new">
-          <h2>۲ — هزینه‌ها: حمل، گمرک، تأخیر و اداری</h2>
-          <span class="ref-inline-new">منابع: ERA Index، SeaRates، index1520، Arta Rail، Valdai Club 2024-2025</span>
-        </div>
-        <div class="tbl-wrap-new">
-          <table>
-            <thead><tr><th>نوع هزینه</th><th>ترانس‌سیبری</th><th>راه ابریشم آبی</th><th>کریدور میانی (TITR)</th><th>راه ابریشم قطبی</th></tr></thead>
-            <tbody>
-              <tr><td>هزینه حمل (FEU)</td><td>~$۳,۲۴۰<br><span class="note-new">ERA Index میانگین ۲۰۲۴</span></td><td>$۱,۵۰۰–۷,۹۶۱<br><span class="note-new">Drewry WCI; بحران Suez ۲۰۲۴</span></td><td>$۵,۰۰۰–۷,۰۰۰ (چین→ترکیه)<br><span class="note-new">+$۱,۰۰۰–۲,۰۰۰ تا اروپا</span></td><td>بالا — در حال تعریف<br><span class="note-new">+هزینه یخ‌شکن $۵۰K–۲۰۰K/سفر</span></td></tr>
-              <tr><td>هزینه تغییر گیج</td><td>$۸۰–۲۰۰/TEU (هر نقطه)</td><td>ندارد</td><td>$۸۰–۲۰۰/TEU (هر نقطه)</td><td>ندارد</td></tr>
-              <tr><td>هزینه بیمه اضافی</td><td>۰.۵–۲٪ ارزش بار<br><span class="note-new">ریسک تحریم + مصادره</span></td><td>+۲–۵٪ Hull<br><span class="note-new">پریمیوم جنگی دریای سرخ</span></td><td>+۰.۲–۰.۵٪<br><span class="note-new">پایین‌ترین پریمیوم بین ریلی</span></td><td>+۲–۵٪ Hull<br><span class="note-new">ریسک یخ + قطبی</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="section-card-new">
-        <div class="sec-header-new">
-          <h2>۳ — ریسک‌ها: امنیتی، ژئوپلیتیک، بیمه و مسیرهای پشتیبان</h2>
-          <span class="ref-inline-new">منابع: Jamestown، CSIS، INSS، Energy Intelligence، GEODIS 2024-2026</span>
-        </div>
-        <div class="tbl-wrap-new">
-          <table>
-            <thead><tr><th>ویژگی ریسک</th><th>ترانس‌سیبری</th><th>راه ابریشم آبی</th><th>کریدور میانی (TITR)</th><th>راه ابریشم قطبی</th></tr></thead>
-            <tbody>
-              <tr><td>سطح ریسک کلی</td><td><div class="risk-row-new"><div class="rdot-new r-hi-new"></div>بسیار بالا</div></td><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط</div></td><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط-پایین</div></td><td><div class="risk-row-new"><div class="rdot-new r-hi-new"></div>بسیار بالا</div></td></tr>
-              <tr><td>ریسک تحریم</td><td><span class="badge-new b-danger-new">بسیار بالا</span><br><span class="note-new">EU/US/UK تحریم کامل</span></td><td><span class="badge-new b-ok-new">پایین (Suez)</span><br><span class="badge-new b-warn-new">متوسط (Cape/Red Sea)</span></td><td><span class="badge-new b-ok-new">نزدیک به صفر</span><br><span class="note-new">روسیه و بلاروس را دور می‌زند</span></td><td><span class="badge-new b-danger-new">بالا</span><br><span class="note-new">کنترل روسی (Rosatom)</span></td></tr>
-              <tr><td>سطح بیمه‌پذیری</td><td><span class="badge-new b-danger-new">Lloyd's خارج شده</span><br><span class="note-new">فقط بیمه چینی/روسی</span></td><td><span class="badge-new b-ok-new">کامل</span><br><span class="note-new">+پریمیوم جنگی Suez</span></td><td><span class="badge-new b-ok-new">در دسترس</span><br><span class="note-new">پیچیده‌تر برای بخش خزر</span></td><td><span class="badge-new b-danger-new">محدود</span><br><span class="note-new">MSC، Maersk خودداری کرده‌اند</span></td></tr>
-            </tbody>
-          </table>
+ 
+      <div id="cmp2" class="cmp-pane">
+        <div class="section-card-new">
+          <div class="sec-header-new"><h2>۲ — هزینه‌ها: حمل، گمرک، تأخیر و اداری</h2><span class="ref-inline-new">منابع: ERA Index، SeaRates، index1520، Drewry 2024-2025</span></div>
+          <div class="tbl-wrap-new">
+            <table>
+              <thead><tr><th>نوع هزینه</th><th>ترانس‌سیبری</th><th>راه ابریشم آبی</th><th>کریدور میانی (TITR)</th><th>راه ابریشم قطبی</th></tr></thead>
+              <tbody>
+                <tr><td>هزینه حمل (FEU)</td><td>~$۳,۲۴۰<span class="note-new">ERA Index میانگین ۲۰۲۴</span></td><td>$۱,۵۰۰–۷,۹۶۱<span class="note-new">Drewry WCI; بحران Suez ۲۰۲۴</span></td><td>$۵,۰۰۰–۷,۰۰۰ (چین→ترکیه)<span class="note-new">+$۱,۰۰۰–۲,۰۰۰ تا اروپا</span></td><td>بالا — در حال تعریف<span class="note-new">+هزینه یخ‌شکن $۵۰K–۲۰۰K/سفر</span></td></tr>
+                <tr><td>هزینه تغییر گیج</td><td>$۸۰–۲۰۰/TEU (هر نقطه)</td><td>ندارد</td><td>$۸۰–۲۰۰/TEU (هر نقطه)</td><td>ندارد</td></tr>
+                <tr><td>هزینه بیمه اضافی</td><td>۰.۵–۲٪ ارزش بار<span class="note-new">ریسک تحریم + مصادره</span></td><td>+۲–۵٪ Hull<span class="note-new">پریمیوم جنگی دریای سرخ</span></td><td>+۰.۲–۰.۵٪<span class="note-new">پایین‌ترین پریمیوم بین ریلی</span></td><td>+۲–۵٪ Hull<span class="note-new">ریسک یخ + قطبی</span></td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-
-      <div class="section-card-new">
-        <div class="sec-header-new">
-          <h2>۴ — بار، داکیومنت‌ها، انطباق گمرکی و مجوزها</h2>
-          <span class="ref-inline-new">منابع: INSTC.org، ADY، WCO، IMO، WTO 2024-2025</span>
-        </div>
-        <div class="tbl-wrap-new">
-          <table>
-            <thead><tr><th>ویژگی</th><th>ترانس‌سیبری</th><th>راه ابریشم آبی</th><th>کریدور میانی (TITR)</th><th>راه ابریشم قطبی</th></tr></thead>
-            <tbody>
-              <tr><td>توان بار حجیم (OOG)</td><td><span class="badge-new b-warn-new">محدود</span><br><span class="note-new">نیاز به مجوز ویژه RZD</span></td><td><span class="badge-new b-ok-new">کامل</span><br><span class="note-new">Flat Rack، Open Top، Platform</span></td><td><span class="badge-new b-warn-new">پیچیده در بخش خزر</span><br><span class="note-new">ریل: ممکن</span></td><td><span class="badge-new b-ok-new">مناسب</span><br><span class="note-new">بار سنگین: روی عرشه</span></td></tr>
-              <tr><td>ریسک انطباق تحریم</td><td><span class="badge-new b-danger-new">بسیار بالا</span><br><span class="note-new">OFAC/EU Secondary Sanctions</span></td><td><span class="badge-new b-ok-new">پایین (مسیرهای عادی)</span></td><td><span class="badge-new b-ok-new">پایین</span><br><span class="note-new">بدون تحریم فعلی</span></td><td><span class="badge-new b-danger-new">بالا</span><br><span class="note-new">تحریم‌های روسیه</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="section-card-new">
-        <div class="sec-header-new">
-          <h2>۵ — استراتژی BRI تا ۲۰۳۰ و سرمایه‌گذاری‌های کلیدی</h2>
-          <span class="ref-inline-new">منابع: Griffith/GFDC BRI Report 2025، World Bank، EBRD</span>
-        </div>
-        <div class="bri-grid-new">
-          <div class="bri-card-new"><div class="bri-label-new">تعامل کل BRI در ۲۰۲۵</div><div class="bri-val-new">$۲۱۳.۵ میلیارد</div><div class="bri-sub-new">رشد ۱۹٪ نسبت به ۲۰۲۴ (۳۵۰ قرارداد)</div></div>
-          <div class="bri-card-new"><div class="bri-label-new">قراردادهای ساخت ۲۰۲۵</div><div class="bri-val-new">$۱۲۸.۴ میلیارد</div><div class="bri-sub-new">رشد ۸۱٪ نسبت به ۲۰۲۴</div></div>
-          <div class="bri-card-new"><div class="bri-label-new">سرمایه‌گذاری مستقیم ۲۰۲۵</div><div class="bri-val-new">$۸۵.۲ میلیارد</div><div class="bri-sub-new">رشد ۶۲٪ نسبت به ۲۰۲۴</div></div>
-          <div class="bri-card-new"><div class="bri-label-new">هدف TITR تا ۲۰۲۷</div><div class="bri-val-new">۱۰ میلیون تن</div><div class="bri-sub-new">از ۴.۵ میلیون تن در ۲۰۲۴ (Kazakhstan MoT)</div></div>
-        </div>
-        <div class="tbl-wrap-new">
-          <table>
-            <thead><tr><th>پروژه / ابتکار</th><th>وضعیت ۲۰۲۵–۲۰۲۶</th><th>سرمایه‌گذاری</th><th>اثر بر کریدور</th></tr></thead>
-            <tbody>
-              <!-- ✅ CORRECTED: 29 tunnels; Kyrgyz section 304 km -->
-              <tr><td>CKU (چین-قرقیزستان-ازبکستان)</td><td><span class="badge-new b-warn-new">در حال ساخت</span><br><span class="note-new">۲۹ تونل + ۵۰ پل | هدف: ۲۰۳۰</span></td><td>$۴.۷ میلیارد</td><td>کوتاه‌کردن ~۷ روز ترانزیت</td></tr>
-              <!-- ✅ CONFIRMED: BTK Georgian section = 184 km -->
-              <tr><td>ارتقاء BTK گرجستان</td><td><span class="badge-new b-ok-new">تکمیل شده (مه ۲۰۲۴)</span></td><td>$۲۵۰ میلیون (آذربایجان)</td><td>ظرفیت از ۱ میلیون تن به ۵ میلیون تن | بخش ۱۸۴ کم گرجستان</td></tr>
-              <tr><td>رشت–آستارا ریل (ایران، INSTC)</td><td><span class="badge-new b-warn-new">در مرحله قرارداد ۲۰۲۵</span><br><span class="note-new">تأمین مالی $۱.۷ میلیارد توسط روسیه</span></td><td>$۱.۷ میلیارد (روسیه)</td><td>تکمیل حلقه مفقوده غربی INSTC | پیش‌بینی ۲۰۲۸</td></tr>
-            </tbody>
-          </table>
+ 
+      <div id="cmp3" class="cmp-pane">
+        <div class="section-card-new">
+          <div class="sec-header-new"><h2>۳ — ریسک‌ها: امنیتی، ژئوپلیتیک، بیمه</h2><span class="ref-inline-new">منابع: Jamestown، CSIS، INSS، Energy Intelligence 2024-2026</span></div>
+          <div class="tbl-wrap-new">
+            <table>
+              <thead><tr><th>ویژگی ریسک</th><th>ترانس‌سیبری</th><th>راه ابریشم آبی</th><th>کریدور میانی (TITR)</th><th>راه ابریشم قطبی</th></tr></thead>
+              <tbody>
+                <tr><td>سطح ریسک کلی</td><td><div class="risk-row-new"><div class="rdot-new r-hi-new"></div>بسیار بالا</div></td><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط</div></td><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط-پایین</div></td><td><div class="risk-row-new"><div class="rdot-new r-hi-new"></div>بسیار بالا</div></td></tr>
+                <tr><td>ریسک تحریم</td><td><span class="badge-new b-danger-new">بسیار بالا</span><span class="note-new">EU/US/UK تحریم کامل</span></td><td><span class="badge-new b-ok-new">پایین (Suez)</span></td><td><span class="badge-new b-ok-new">نزدیک به صفر</span><span class="note-new">روسیه و بلاروس را دور می‌زند</span></td><td><span class="badge-new b-danger-new">بالا</span><span class="note-new">کنترل روسی (Rosatom)</span></td></tr>
+                <tr><td>سطح بیمه‌پذیری</td><td><span class="badge-new b-danger-new">Lloyd's خارج شده</span><span class="note-new">فقط بیمه چینی/روسی</span></td><td><span class="badge-new b-ok-new">کامل</span><span class="note-new">+پریمیوم جنگی Suez</span></td><td><span class="badge-new b-ok-new">در دسترس</span></td><td><span class="badge-new b-danger-new">محدود</span><span class="note-new">MSC، Maersk خودداری کرده‌اند</span></td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-
-      <div class="section-card-new">
-        <div class="sec-header-new">
-          <h2>۶ — خلاصه مقایسه‌ای تمام کریدورها</h2>
-          <span class="ref-inline-new">داده‌های ۲۰۲۴–۲۰۲۶ (تصحیح‌شده)</span>
-        </div>
-        <div class="tbl-wrap-new">
-          <table>
-            <thead><tr><th>کریدور</th><th>نوع</th><th>TEU / حجم ۲۰۲۴</th><th>زمان ترانزیت</th><th>ریسک</th><th>وضعیت</th></tr></thead>
-            <tbody>
-              <!-- ✅ CORRECTED: TSR volume -->
-              <tr><td>Trans-Siberian</td><td><span class="badge-new b-rail-new">ریلی</span></td><td>۳۸۰K TEU (China-EU)<br>۷۴۶K TEU (کل اوراسیا)</td><td>۱۵–۲۲ روز</td><td><div class="risk-row-new"><div class="rdot-new r-hi-new"></div>بسیار بالا</div></td><td><span class="badge-new b-danger-new">تحت تحریم</span></td></tr>
-              <tr><td>Maritime Silk Road</td><td><span class="badge-new b-sea-new">دریایی</span></td><td>۱۳.۵–۱۴ میلیون TEU</td><td>۲۸–۵۰ روز</td><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط</div></td><td><span class="badge-new b-ok-new">عملیاتی</span></td></tr>
-              <!-- ✅ CORRECTED: TITR volume = 4.5M tons / ~55K TEU; capacity 100K TEU -->
-              <tr><td>TITR</td><td><span class="badge-new b-multi-new">چندوجهی</span></td><td>~۵۵,۰۰۰ TEU / ۴.۵M تن</td><td>۱۸–۲۵ روز</td><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط-پایین</div></td><td><span class="badge-new b-ok-new">در حال رشد</span></td></tr>
-              <tr><td>BTK</td><td><span class="badge-new b-rail-new">ریلی</span></td><td>بخشی از TITR | ظرفیت ۵M تن</td><td>جزء TITR (~۱۵ روز)</td><td><div class="risk-row-new"><div class="rdot-new r-lo-new"></div>پایین</div></td><td><span class="badge-new b-ok-new">ارتقاء مه ۲۰۲۴</span></td></tr>
-              <!-- ✅ CONFIRMED: INSTC 26.9M tons -->
-              <tr><td>INSTC</td><td><span class="badge-new b-multi-new">چندوجهی</span></td><td>۲۶.۹ میلیون تن</td><td>۱۸–۳۰ روز</td><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط-بالا</div></td><td><span class="badge-new b-warn-new">در حال توسعه</span></td></tr>
-              <!-- ✅ CORRECTED: 15 ships / 400K tons in full 2025 season -->
-              <tr><td>Polar Silk Road</td><td><span class="badge-new b-arc-new">قطبی</span></td><td>۱۵ کشتی / ~۴۰۰K تن (فصل ۲۰۲۵)</td><td>۱۸–۲۰ روز (تابستان-پاییز)</td><td><div class="risk-row-new"><div class="rdot-new r-hi-new"></div>بسیار بالا</div></td><td><span class="badge-new b-warn-new">محدود به فصل</span></td></tr>
-            </tbody>
-          </table>
+ 
+      <div id="cmp4" class="cmp-pane">
+        <div class="section-card-new">
+          <div class="sec-header-new"><h2>۴ — بار، انطباق گمرکی و مجوزها</h2><span class="ref-inline-new">منابع: ADY، WCO، IMO، WTO 2024-2025</span></div>
+          <div class="tbl-wrap-new">
+            <table>
+              <thead><tr><th>ویژگی</th><th>ترانس‌سیبری</th><th>راه ابریشم آبی</th><th>کریدور میانی (TITR)</th><th>راه ابریشم قطبی</th></tr></thead>
+              <tbody>
+                <tr><td>توان بار حجیم (OOG)</td><td><span class="badge-new b-warn-new">محدود</span><span class="note-new">نیاز به مجوز ویژه RZD</span></td><td><span class="badge-new b-ok-new">کامل</span><span class="note-new">Flat Rack، Open Top، Platform</span></td><td><span class="badge-new b-warn-new">پیچیده در بخش خزر</span></td><td><span class="badge-new b-ok-new">مناسب</span><span class="note-new">بار سنگین: روی عرشه</span></td></tr>
+                <tr><td>ریسک انطباق تحریم</td><td><span class="badge-new b-danger-new">بسیار بالا</span><span class="note-new">OFAC/EU Secondary Sanctions</span></td><td><span class="badge-new b-ok-new">پایین (مسیرهای عادی)</span></td><td><span class="badge-new b-ok-new">پایین</span></td><td><span class="badge-new b-danger-new">بالا</span></td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-
+ 
+      <div id="cmp5" class="cmp-pane">
+        <div class="section-card-new">
+          <div class="sec-header-new"><h2>۵ — استراتژی BRI تا ۲۰۳۰ و سرمایه‌گذاری‌های کلیدی</h2><span class="ref-inline-new">منابع: Griffith/GFDC BRI Report 2025، World Bank، EBRD</span></div>
+          <div class="bri-grid-new">
+            <div class="bri-card-new"><div class="bri-label-new">تعامل کل BRI در ۲۰۲۵</div><div class="bri-val-new">$۲۱۳.۵ میلیارد</div><div class="bri-sub-new">رشد ۱۹٪ نسبت به ۲۰۲۴ (۳۵۰ قرارداد)</div></div>
+            <div class="bri-card-new"><div class="bri-label-new">قراردادهای ساخت ۲۰۲۵</div><div class="bri-val-new">$۱۲۸.۴ میلیارد</div><div class="bri-sub-new">رشد ۸۱٪ نسبت به ۲۰۲۴</div></div>
+            <div class="bri-card-new"><div class="bri-label-new">سرمایه‌گذاری مستقیم ۲۰۲۵</div><div class="bri-val-new">$۸۵.۲ میلیارد</div><div class="bri-sub-new">رشد ۶۲٪ نسبت به ۲۰۲۴</div></div>
+            <div class="bri-card-new"><div class="bri-label-new">هدف TITR تا ۲۰۲۷</div><div class="bri-val-new">۱۰ میلیون تن</div><div class="bri-sub-new">از ۴.۵ میلیون تن در ۲۰۲۴</div></div>
+          </div>
+          <div class="tbl-wrap-new">
+            <table>
+              <thead><tr><th>پروژه / ابتکار</th><th>وضعیت ۲۰۲۵–۲۰۲۶</th><th>سرمایه‌گذاری</th><th>اثر بر کریدور</th></tr></thead>
+              <tbody>
+                <tr><td>CKU</td><td><span class="badge-new b-warn-new">در حال ساخت</span><span class="note-new">۲۹ تونل + ۵۰ پل | هدف: ۲۰۳۰</span></td><td>$۴.۷ میلیارد</td><td>کوتاه‌کردن ~۷ روز ترانزیت</td></tr>
+                <tr><td>ارتقاء BTK گرجستان</td><td><span class="badge-new b-ok-new">تکمیل شده (مه ۲۰۲۴)</span></td><td>$۲۵۰ میلیون (آذربایجان)</td><td>ظرفیت ۱M → ۵M تن</td></tr>
+                <tr><td>رشت–آستارا ریل (INSTC)</td><td><span class="badge-new b-warn-new">در مرحله قرارداد ۲۰۲۵</span></td><td>$۱.۷ میلیارد (روسیه)</td><td>تکمیل حلقه مفقوده غربی INSTC | پیش‌بینی ۲۰۲۸</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+ 
+      <div id="cmp6" class="cmp-pane">
+        <div class="section-card-new">
+          <div class="sec-header-new"><h2>۶ — خلاصه مقایسه‌ای تمام کریدورها</h2><span class="ref-inline-new">داده‌های ۲۰۲۴–۲۰۲۶ (تصحیح‌شده)</span></div>
+          <div class="tbl-wrap-new">
+            <table>
+              <thead><tr><th>کریدور</th><th>نوع</th><th>TEU / حجم ۲۰۲۴</th><th>زمان ترانزیت</th><th>ریسک</th><th>وضعیت</th></tr></thead>
+              <tbody>
+                <tr><td>Trans-Siberian</td><td><span class="badge-new b-rail-new">ریلی</span></td><td>۳۸۰K TEU (China-EU)<br>۷۴۶K TEU (کل)</td><td>۱۵–۲۲ روز</td><td><div class="risk-row-new"><div class="rdot-new r-hi-new"></div>بسیار بالا</div></td><td><span class="badge-new b-danger-new">تحت تحریم</span></td></tr>
+                <tr><td>Maritime Silk Road</td><td><span class="badge-new b-sea-new">دریایی</span></td><td>۱۳.۵–۱۴ میلیون TEU</td><td>۲۸–۵۰ روز</td><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط</div></td><td><span class="badge-new b-ok-new">عملیاتی</span></td></tr>
+                <tr><td>TITR</td><td><span class="badge-new b-multi-new">چندوجهی</span></td><td>~۵۵K TEU / ۴.۵M تن</td><td>۱۸–۲۵ روز</td><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط-پایین</div></td><td><span class="badge-new b-ok-new">در حال رشد</span></td></tr>
+                <tr><td>BTK</td><td><span class="badge-new b-rail-new">ریلی</span></td><td>بخشی از TITR | ظرفیت ۵M تن</td><td>~۱۵ روز</td><td><div class="risk-row-new"><div class="rdot-new r-lo-new"></div>پایین</div></td><td><span class="badge-new b-ok-new">ارتقاء مه ۲۰۲۴</span></td></tr>
+                <tr><td>INSTC</td><td><span class="badge-new b-multi-new">چندوجهی</span></td><td>۲۶.۹ میلیون تن</td><td>۱۸–۳۰ روز</td><td><div class="risk-row-new"><div class="rdot-new r-me-new"></div>متوسط-بالا</div></td><td><span class="badge-new b-warn-new">در حال توسعه</span></td></tr>
+                <tr><td>Polar Silk Road</td><td><span class="badge-new b-arc-new">قطبی</span></td><td>۱۵ کشتی / ~۴۰۰K تن (فصل ۲۰۲۵)</td><td>۱۸–۲۰ روز (تابستان-پاییز)</td><td><div class="risk-row-new"><div class="rdot-new r-hi-new"></div>بسیار بالا</div></td><td><span class="badge-new b-warn-new">محدود به فصل</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+ 
       <div style="margin-top:1.5rem;padding:12px 0;border-top:0.5px solid var(--border);">
-        <p style="font-size:11px;color:var(--text-dim);">📢 این داشبورد برای اهداف تحقیقاتی است. داده‌های عملیاتی، تعرفه‌های دقیق، و شرایط گمرکی باید از اپراتورهای لجستیکی معتبر دریافت شوند. آخرین به‌روزرسانی و تصحیح داده‌ها: ژوئن ۲۰۲۶ | منابع: UTLC ERA، ERAI، Jamestown، Energy Intelligence، CSIS، INSS، Kazakhstan MoT، Corporate Knights</p>
+        <p style="font-size:11px;color:var(--text-dim);">📢 این داشبورد برای اهداف تحقیقاتی است. آخرین به‌روزرسانی: ژوئن ۲۰۲۶ | منابع: UTLC ERA، ERAI، Jamestown، Energy Intelligence، CSIS، INSS، Kazakhstan MoT، Corporate Knights</p>
       </div>
     </div>
   </div>
+</div>
+ 
+<script>
+/* ══════════════════════════════════════════
+   MAIN TAB SWITCHER (analysis / comparison)
+══════════════════════════════════════════ */
+function switchCorridorsTab(tab) {
+  document.querySelectorAll('.corridors-tab-pane').forEach(function(p) {
+    p.classList.remove('active');
+  });
+  document.querySelectorAll('.corridors-tab-btn').forEach(function(b) {
+    b.classList.remove('active');
+  });
+  document.getElementById('corridors-tab-' + tab).classList.add('active');
+  // activate correct button
+  document.querySelectorAll('.corridors-tab-btn').forEach(function(b) {
+    if ((tab === 'analysis' && b.textContent.indexOf('تحلیل') !== -1) ||
+        (tab === 'comparison' && b.textContent.indexOf('مقایسه') !== -1)) {
+      b.classList.add('active');
+    }
+  });
+}
+ 
+/* ══════════════════════════════════════════
+   CORRIDOR ACCORDION TOGGLE
+══════════════════════════════════════════ */
+function toggleCorridorNew(id) {
+  var body  = document.getElementById(id + '-body');
+  var chev  = document.getElementById(id + '-chev');
+  if (!body) return;
+  var isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  if (chev) chev.classList.toggle('open', !isOpen);
+}
+ 
+/* ══════════════════════════════════════════
+   INNER TAB SWITCHER
+══════════════════════════════════════════ */
+function switchTabNew(corridorId, tabKey) {
+  // Find the corridor body container
+  var body = document.getElementById(corridorId + '-body');
+  if (!body) return;
+ 
+  // Hide all tab-content-new inside this corridor body
+  body.querySelectorAll('.tab-content-new').forEach(function(c) {
+    c.classList.remove('active');
+  });
+ 
+  // Deactivate all tab buttons inside this corridor body
+  body.querySelectorAll('.tab-new').forEach(function(t) {
+    t.classList.remove('active');
+  });
+ 
+  // Show the requested tab content
+  var target = document.getElementById(corridorId + '-' + tabKey);
+  if (target) target.classList.add('active');
+ 
+  // Activate the clicked tab button (find by matching onclick attribute)
+  body.querySelectorAll('.tab-new').forEach(function(t) {
+    var onclick = t.getAttribute('onclick') || '';
+    if (onclick.indexOf("'" + tabKey + "'") !== -1) {
+      t.classList.add('active');
+    }
+  });
+}
+ 
+/* ══════════════════════════════════════════
+   COMPARISON PANE SWITCHER
+══════════════════════════════════════════ */
+function showCmpTab(id, btn) {
+  document.querySelectorAll('.cmp-pane').forEach(function(p) {
+    p.classList.remove('active');
+  });
+  document.querySelectorAll('.cmp-tab-btn').forEach(function(b) {
+    b.classList.remove('active');
+  });
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
  
 <!-- ========== صفحه سوم: کشتیرانی  ========== -->
   <style>
