@@ -1128,101 +1128,100 @@
       </div>
     </div>
 
-    <!-- CORRIDOR 2: TITR -->
-    
-<h2 class="sr-only">کریدور میانی TITR و زیرمسیر باکو-تفلیس-قارص</h2>
- 
-<div class="outer-card" id="oc-titr">
-  <div class="outer-header" onclick="toggleOuter('titr')">
-    <div class="risk-dot dot-med"></div>
-    <span class="badge badge-multi">چندوجهی</span>
-    <h2>کریدور میانی — TITR <span style="font-size:11px;font-weight:400;color:var(--color-text-secondary)">(Trans-Caspian / Middle Corridor)</span></h2>
-    <i class="ti ti-chevron-down chev" id="titr-chev" aria-hidden="true"></i>
+   
+Corridor c2 c3 merged · HTML
+<!-- CORRIDOR 2: TITR + BTK (merged) -->
+<div class="corridor-card-new" id="c2">
+  <div class="corridor-header-new" onclick="toggleCorridorNew('c2')">
+    <div class="risk-dot-new risk-med-new"></div>
+    <span class="transport-badge-new badge-multi-new">چندوجهی</span>
+    <div style="flex:1"><h3 style="font-size:14px;font-weight:500;">کریدور میانی — TITR <span style="font-size:11px;color:var(--text-muted);">(Trans-Caspian / Middle Corridor)</span></h3></div>
+    <i class="chevron-new" id="c2-chev" aria-hidden="true">🔻</i>
   </div>
- 
-  <div class="corridor-body" id="titr-body">
- 
-    <div class="tab-bar" id="titr-tabs">
-      <div class="tab active" onclick="switchTab('titr','infra')">زیرساخت</div>
-      <div class="tab" onclick="switchTab('titr','cost')">هزینه‌ها</div>
-      <div class="tab" onclick="switchTab('titr','risk')">ریسک و امنیت</div>
-      <div class="tab" onclick="switchTab('titr','cargo')">بار و ظرفیت</div>
-      <div class="tab" onclick="switchTab('titr','ref')">منابع</div>
+  <div class="corridor-body-new" id="c2-body">
+    <div class="tab-bar-new">
+      <div class="tab-new active" onclick="switchTabNew('c2','infra')">زیرساخت</div>
+      <div class="tab-new" onclick="switchTabNew('c2','cost')">هزینه‌ها</div>
+      <div class="tab-new" onclick="switchTabNew('c2','risk')">ریسک و امنیت</div>
+      <div class="tab-new" onclick="switchTabNew('c2','cargo')">بار و ظرفیت</div>
+      <div class="tab-new" onclick="switchTabNew('c2','ref')">منابع</div>
     </div>
  
-    <div class="tc active" id="titr-infra">
-      <div class="sec-title">مسیر کامل ریلی از چین به اروپا</div>
-      <div class="route-wrap">
-        <span class="rs rs-rail">چین (کاشغر/اورومچی)</span>
-        <span class="ra">←</span>
-        <span class="rs rs-break">تغییر گیج ۱۴۳۵ ← ۱۵۲۰ mm</span>
-        <span class="ra">←</span>
-        <span class="rs rs-rail">قزاقستان</span>
-        <span class="ra">←</span>
-        <span class="rs rs-sea">فری‌بات دریای خزر (آکتاو/کوریک ← باکو)</span>
-        <span class="ra">←</span>
-        <span class="rs rs-rail">BTK: باکو ← تفلیس ← قارص</span>
-        <span class="ra">←</span>
-        <span class="rs rs-break">تغییر گیج قارص</span>
-        <span class="ra">←</span>
-        <span class="rs rs-rail">ترکیه ← اروپا</span>
+    <div class="tab-content-new active" id="c2-infra">
+      <div class="section-title-new">مسیر کامل ریلی از چین به اروپا</div>
+      <div class="route-steps-new">
+        <span class="route-step-new rail-s">چین (کاشغر/اورومچی)</span>
+        <span class="route-arrow-new">←</span>
+        <span class="route-step-new break-s">تغییر گیج ریل از ۱۴۳۵ به ۱۵۲۰ میلی‌متر</span>
+        <span class="route-arrow-new">←</span>
+        <span class="route-step-new rail-s">قزاقستان</span>
+        <span class="route-arrow-new">←</span>
+        <span class="route-step-new sea-s">فری‌بات دریای خزر از آکتاو یا کوریک به باکو</span>
+        <span class="route-arrow-new">←</span>
+        <span class="route-step-new rail-s">BTK: مسیر باکو به تفلیس به قارص</span>
+        <span class="route-arrow-new">←</span>
+        <span class="route-step-new break-s">تغییر گیج قبل از قارص به سمت استانبول</span>
+        <span class="route-arrow-new">←</span>
+        <span class="route-step-new rail-s">ترکیه به اروپا</span>
       </div>
-      <div class="info-grid">
-        <div class="metric"><div class="metric-label">طول کل مسیر</div><div class="metric-val">~۸٬۷۰۰ کیلومتر</div><div class="metric-note">چین تا اروپای مرکزی</div></div>
-        <div class="metric"><div class="metric-label">زمان ترانزیت</div><div class="metric-val">۱۸–۲۵ روز</div><div class="metric-note">هدف ۱۴–۱۸ روز تا ۲۰۲۵</div></div>
-        <div class="metric"><div class="metric-label">ظرفیت واقعی ۲۰۲۴</div><div class="metric-val">۴.۴۷ میلیون تن</div><div class="metric-note">۳۸۱ هزار TEU — ۷.۸٪ سهم ریلی</div></div>
-        <div class="metric"><div class="metric-label">فری‌بات دریای خزر</div><div class="metric-val">۳–۵ روز</div><div class="metric-note">تأخیر رایج: صف انتظار</div></div>
+      <div class="info-grid-new">
+        <div class="metric-card-new"><div class="metric-label-new">طول کل مسیر</div><div class="metric-value-new">در حدود ۸,۷۰۰ کیلومتر</div><div class="metric-note-new">چین تا اروپای مرکزی</div></div>
+        <div class="metric-card-new"><div class="metric-label-new">زمان ترانزیت</div><div class="metric-value-new">۱۸–۲۵ روز</div><div class="metric-note-new">هدف ۱۴–۱۸ روز تا ۲۰۲۵</div></div>
+        <div class="metric-card-new"><div class="metric-label-new">ظرفیت واقعی ۲۰۲۴</div><div class="metric-value-new">۴.۴۷ میلیون تن</div><div class="metric-note-new">۳۸۱ هزار TEU (۷.۸درصد سهم ریلی)</div></div>
+        <div class="metric-card-new"><div class="metric-label-new">فری‌بات دریای خزر</div><div class="metric-value-new">۳–۵ روز</div><div class="metric-note-new">تأخیر رایج: صف انتظار</div></div>
       </div>
-      <div class="alert alert-ok">در مه ۲۰۲۴، بخش گرجستان BTK کاملاً بازسازی شد. ظرفیت از ۱ به ۵ میلیون تن رسید.</div>
+      <div class="alert-ok-new alert-box-new">📢 در مه ۲۰۲۴، بخش گرجستان BTK کاملاً بازسازی شد. ظرفیت از ۱ به ۵ میلیون تن رسید.</div>
  
-      <div class="connector-line">
-        <div class="connector-dot"></div>
-        <span>بخش کلیدی BTK در داخل این کریدور — جزئیات بیشتر در زیر</span>
-        <i class="ti ti-arrow-down" aria-hidden="true" style="margin-right:auto;font-size:13px"></i>
+      <!-- BTK sub-corridor connector -->
+      <div style="display:flex;align-items:center;gap:8px;margin:16px 0 8px;padding:9px 12px;border-radius:8px;background:var(--bg-subtle, rgba(0,0,0,0.03));border:1px dashed var(--border-muted, rgba(0,0,0,0.12));font-size:12px;color:var(--text-muted);">
+        <span style="width:8px;height:8px;border-radius:50%;background:#3B6D11;flex-shrink:0;display:inline-block;"></span>
+        <span>بخش کلیدی این کریدور — باکو–تفلیس–قارص (BTK)</span>
+        <span style="margin-right:auto;">▾</span>
       </div>
  
-      <div class="sub-card" id="btk-card">
-        <div class="sub-header" onclick="toggleSub('btk')">
-          <div class="risk-dot dot-low"></div>
-          <span class="badge badge-rail">ریلی</span>
-          <h3>باکو – تفلیس – قارص <span style="font-size:11px;font-weight:400;color:var(--color-text-secondary)">(BTK)</span></h3>
-          <i class="ti ti-chevron-down sub-chev" id="btk-chev" aria-hidden="true"></i>
+      <!-- BTK nested card -->
+      <div style="border:1px solid var(--border-muted, rgba(0,0,0,0.1));border-radius:10px;overflow:hidden;margin-bottom:4px;">
+        <div class="corridor-header-new" style="background:var(--bg-subtle, rgba(0,0,0,0.02));padding:10px 14px;" onclick="toggleCorridorNew('c3')">
+          <div class="risk-dot-new risk-low-new"></div>
+          <span class="transport-badge-new badge-rail-new">ریلی</span>
+          <div style="flex:1"><h3 style="font-size:13px;font-weight:500;margin:0;">باکو–تفلیس–قارص <span style="font-size:11px;color:var(--text-muted);font-weight:400;">(BTK)</span></h3></div>
+          <i class="chevron-new" id="c3-chev" aria-hidden="true">🔻</i>
         </div>
-        <div class="sub-body" id="btk-body">
-          <div class="tab-bar" id="btk-tabs">
-            <div class="tab active" onclick="switchTab('btk','infra')">زیرساخت</div>
-            <div class="tab" onclick="switchTab('btk','cost')">هزینه‌ها</div>
-            <div class="tab" onclick="switchTab('btk','risk')">ریسک</div>
-            <div class="tab" onclick="switchTab('btk','ref')">منابع</div>
+        <div class="corridor-body-new" id="c3-body" style="padding:0 14px 14px;">
+          <div class="tab-bar-new">
+            <div class="tab-new active" onclick="switchTabNew('c3','infra')">زیرساخت</div>
+            <div class="tab-new" onclick="switchTabNew('c3','cost')">هزینه‌ها</div>
+            <div class="tab-new" onclick="switchTabNew('c3','risk')">ریسک</div>
+            <div class="tab-new" onclick="switchTabNew('c3','ref')">منابع</div>
           </div>
-          <div class="tc active" id="btk-infra">
-            <div class="route-wrap">
-              <span class="rs rs-rail">باکو (آذربایجان)</span>
-              <span class="ra">←</span>
-              <span class="rs rs-rail">تفلیس (گرجستان)</span>
-              <span class="ra">←</span>
-              <span class="rs rs-break">تغییر گیج: ۱۵۲۰ ← ۱۴۳۵ mm</span>
-              <span class="ra">←</span>
-              <span class="rs rs-rail">قارص (ترکیه)</span>
+          <div class="tab-content-new active" id="c3-infra">
+            <div class="route-steps-new">
+              <span class="route-step-new rail-s">باکو (آذربایجان)</span>
+              <span class="route-arrow-new">←</span>
+              <span class="route-step-new rail-s">تفلیس (گرجستان)</span>
+              <span class="route-arrow-new">←</span>
+              <span class="route-step-new break-s">تغییر گیج قارص از ۱۵۲۰ به ۱۴۳۵</span>
+              <span class="route-arrow-new">←</span>
+              <span class="route-step-new rail-s">قارص (ترکیه)</span>
             </div>
-            <div class="info-grid">
-              <div class="metric"><div class="metric-label">طول خط</div><div class="metric-val">۸۲۶ کیلومتر</div><div class="metric-note">بیش از ۵۰۰ کیلومتر در داخل آذربایجان</div></div>
-              <div class="metric"><div class="metric-label">ظرفیت پس از ارتقاء</div><div class="metric-val">۵ میلیون تن/سال</div><div class="metric-note">پس از بازسازی مه ۲۰۲۴</div></div>
-              <div class="metric"><div class="metric-label">هدف ظرفیت ۲۰۳۴</div><div class="metric-val">۱۷ میلیون تن</div><div class="metric-note">بر اساس اظهارات مقامات ترکیه</div></div>
+            <div class="info-grid-new">
+              <div class="metric-card-new"><div class="metric-label-new">طول خط</div><div class="metric-value-new">۸۲۶ کیلومتر</div><div class="metric-note-new">بیش از پانصد کیلومتر در داخل آذربایجان</div></div>
+              <div class="metric-card-new"><div class="metric-label-new">ظرفیت پس از ارتقاء</div><div class="metric-value-new">۵ میلیون تن در سال</div><div class="metric-note-new">پس از بازسازی مه ۲۰۲۴</div></div>
+              <div class="metric-card-new"><div class="metric-label-new">هدف ظرفیت ۲۰۳۴</div><div class="metric-value-new">۱۷ میلیون تن</div><div class="metric-note-new">بر اساس اظهارات مقامات ترکیه</div></div>
             </div>
-            <div class="alert alert-ok">بخش گرجستان: ۵ مرحله بازسازی کامل — سرمایه‌گذاری ۲۵۰ میلیون دلاری آذربایجان.</div>
+            <div class="alert-ok-new alert-box-new">📢 بخش گرجستان: ۵ مرحله بازسازی کامل انجام شد. سرمایه‌گذاری ۲۵۰ میلیون دلاری آذربایجان.</div>
           </div>
-          <div class="tc" id="btk-cost">
-            <div class="info-grid">
-              <div class="metric"><div class="metric-label">تعرفه BTK به ازای تن</div><div class="metric-val">رقابتی</div><div class="metric-note">MoU آذربایجان–ترکیه–گرجستان اکتبر ۲۰۲۵</div></div>
-              <div class="metric"><div class="metric-label">تعویض بوگی قارص</div><div class="metric-val">۸۰–۱۵۰ دلار/واگن</div><div class="metric-note">از ۱۵۲۰ به ۱۴۳۵ میلی‌متر</div></div>
+          <div class="tab-content-new" id="c3-cost">
+            <div class="info-grid-new">
+              <div class="metric-card-new"><div class="metric-label-new">تعرفه BTK به ازای تن</div><div class="metric-value-new">رقابتی</div><div class="metric-note-new">MoU آذربایجان-ترکیه-گرجستان اکتبر ۲۰۲۵</div></div>
+              <div class="metric-card-new"><div class="metric-label-new">تعویض بوگی قارص</div><div class="metric-value-new">۸۰ تا ۱۵۰ دلار به ازای هر واگن</div><div class="metric-note-new">از ۱۵۲۰ به ۱۴۳۵ میلیمتر</div></div>
             </div>
           </div>
-          <div class="tc" id="btk-risk">
-            <div class="alert alert-ok">ریسک پایین — مسیر سیاسی مطمئن، بدون تحریم، کریدور استراتژیک EU/BRI.</div>
+          <div class="tab-content-new" id="c3-risk">
+            <div class="alert-ok-new alert-box-new">🌱 ریسک پایین — مسیر سیاسی مطمئن، بدون تحریم، کریدور استراتژیک EU/BRI.</div>
           </div>
-          <div class="tc" id="btk-ref">
-            <div class="ref-box">
+          <div class="tab-content-new" id="c3-ref">
+            <div class="ref-box-new">
               <p>• <a href="#" target="_blank">Caspian News — "BTK Railway Expansion Completed" (May 2024)</a></p>
               <p>• <a href="#" target="_blank">ADY (Azerbaijan Railways) — BTK Official Project Page (2024)</a></p>
             </div>
@@ -1231,43 +1230,44 @@
       </div>
     </div>
  
-    <div class="tc" id="titr-cost">
-      <div class="info-grid">
-        <div class="metric"><div class="metric-label">هزینه حمل TEU (چین–ترکیه)</div><div class="metric-val">۵٬۰۰۰–۷٬۰۰۰ دلار</div><div class="metric-note">SeaRates 2024</div></div>
-        <div class="metric"><div class="metric-label">هزینه فری‌بات خزر</div><div class="metric-val">۳۰۰–۶۰۰ دلار/TEU</div><div class="metric-note">بسته به اپراتور</div></div>
-        <div class="metric"><div class="metric-label">هزینه گمرک اداری</div><div class="metric-val">۲۰۰–۵۰۰ دلار/محموله</div><div class="metric-note">۵ کشور مستقل</div></div>
+    <div class="tab-content-new" id="c2-cost">
+      <div class="info-grid-new">
+        <div class="metric-card-new"><div class="metric-label-new">هزینه حمل TEU (چین-ترکیه)</div><div class="metric-value-new">از ۵ هزار دلار تا ۷ هزار دلار</div><div class="metric-note-new">SeaRates 2024</div></div>
+        <div class="metric-card-new"><div class="metric-label-new">هزینه فری‌بات خزر</div><div class="metric-value-new">از ۳۰۰ دلار تا ۶۰۰ دلار/TEU</div><div class="metric-note-new">بسته به اپراتور</div></div>
+        <div class="metric-card-new"><div class="metric-label-new">هزینه گمرک اداری</div><div class="metric-value-new">دویست تا پانصد دلار آمریکا برای هر محموله</div><div class="metric-note-new">۵ کشور مستقل</div></div>
       </div>
     </div>
  
-    <div class="tc" id="titr-risk">
-      <div class="alert alert-ok">کم‌ریسک‌ترین مسیر ترانس‌اوراسیایی برای شرکت‌های غربی در ۲۰۲۴–۲۰۲۵ — از قلمرو روسیه عبور نمی‌کند.</div>
-      <div class="tag-row">
-        <span class="tag tag-warn">ریسک تأخیر فری‌بات خزر</span>
-        <span class="tag tag-warn">وابستگی به ۵ دولت مستقل</span>
-        <span class="tag tag-ok">بدون تحریم فعلی</span>
+    <div class="tab-content-new" id="c2-risk">
+      <div class="alert-ok-new alert-box-new">🌟 کم‌ریسک‌ترین مسیر ترانس‌اوراسیایی برای شرکت‌های غربی در ۲۰۲۴–۲۰۲۵ — از قلمرو روسیه عبور نمی‌کند.</div>
+      <div class="tag-row-new">
+        <span class="tag-new warn">ریسک تأخیر فری‌بات خزر</span>
+        <span class="tag-new warn">وابستگی به ۵ دولت مستقل</span>
+        <span class="tag-new ok">بدون تحریم فعلی</span>
       </div>
     </div>
  
-    <div class="tc" id="titr-cargo">
-      <div class="info-grid">
-        <div class="metric"><div class="metric-label">حجم ۲۰۲۴</div><div class="metric-val">۴.۴۷ میلیون تن</div><div class="metric-note">رشد ۱۴ برابری بار چینی</div></div>
-        <div class="metric"><div class="metric-label">TEU چینی ۲۰۲۴</div><div class="metric-val">+۲۷٬۰۰۰ TEU</div><div class="metric-note">رشد ۲۵ برابری نسبت به ۲۰۲۳</div></div>
+    <div class="tab-content-new" id="c2-cargo">
+      <div class="info-grid-new">
+        <div class="metric-card-new"><div class="metric-label-new">حجم ۲۰۲۴</div><div class="metric-value-new">۴.۴۷ میلیون تن</div><div class="metric-note-new">رشد ۱۴ برابری بار چینی</div></div>
+        <div class="metric-card-new"><div class="metric-label-new">TEU چینی ۲۰۲۴</div><div class="metric-value-new">حجم یا ظرفیتی بیش از ۲۷ هزار کانتینر بیست فوتی</div><div class="metric-note-new">رشد ۲۵ برابری نسبت به ۲۰۲۳</div></div>
       </div>
-      <div class="sec-title">انواع بار مناسب</div>
-      <div class="tag-row">
-        <span class="tag">الکترونیک و نیمه‌هادی</span>
-        <span class="tag">خودرو و قطعات</span>
-        <span class="tag">ماشین‌آلات صنعتی</span>
+      <div class="section-title-new">انواع بار مناسب</div>
+      <div class="tag-row-new">
+        <span class="tag-new">الکترونیک و نیمه‌هادی</span>
+        <span class="tag-new">خودرو و قطعات</span>
+        <span class="tag-new">ماشین‌آلات صنعتی</span>
       </div>
     </div>
  
-    <div class="tc" id="titr-ref">
-      <div class="ref-box">
+    <div class="tab-content-new" id="c2-ref">
+      <div class="ref-box-new">
         <p>• <a href="#" target="_blank">EY Kazakhstan — "Trans-Caspian International Transport Route" (Oct 2024)</a></p>
         <p>• <a href="#" target="_blank">CEBRI Journal — "Middle Corridor" (2025)</a></p>
         <p>• <a href="#" target="_blank">World Bank — "Middle Trade and Transport Corridor" (Nov 2023)</a></p>
       </div>
     </div>
+ 
   </div>
 </div>
 
