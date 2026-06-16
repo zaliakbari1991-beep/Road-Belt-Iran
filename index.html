@@ -6990,56 +6990,81 @@ function toggleAllAhvaz() {
 }
 
 // ======================== توابع صفحه کریدورها ========================
+/* ══════════════════════════════════════════
+   MAIN TAB SWITCHER (analysis / comparison)
+══════════════════════════════════════════ */
+function switchCorridorsTab(tab) {
+  document.querySelectorAll('.corridors-tab-pane').forEach(function(p) {
+    p.classList.remove('active');
+  });
+  document.querySelectorAll('.corridors-tab-btn').forEach(function(b) {
+    b.classList.remove('active');
+  });
+  document.getElementById('corridors-tab-' + tab).classList.add('active');
+  // activate correct button
+  document.querySelectorAll('.corridors-tab-btn').forEach(function(b) {
+    if ((tab === 'analysis' && b.textContent.indexOf('تحلیل') !== -1) ||
+        (tab === 'comparison' && b.textContent.indexOf('مقایسه') !== -1)) {
+      b.classList.add('active');
+    }
+  });
+}
+ 
+/* ══════════════════════════════════════════
+   CORRIDOR ACCORDION TOGGLE
+══════════════════════════════════════════ */
 function toggleCorridorNew(id) {
-  const body = document.getElementById(id + '-body');
-  const chev = document.getElementById(id + '-chev');
-  if (body) {
-    if (body.classList.contains('open')) {
-      body.classList.remove('open');
-      if (chev) chev.classList.remove('open');
-    } else {
-      body.classList.add('open');
-      if (chev) chev.classList.add('open');
-    }
-  }
-}
-
-function switchTabNew(corridorId, tabName) {
-  const body = document.getElementById(corridorId + '-body');
+  var body  = document.getElementById(id + '-body');
+  var chev  = document.getElementById(id + '-chev');
   if (!body) return;
-  const contents = body.querySelectorAll('.tab-content-new');
-  for (let i = 0; i < contents.length; i++) {
-    if (contents[i].id === corridorId + '-' + tabName) {
-      contents[i].classList.add('active');
-    } else {
-      contents[i].classList.remove('active');
-    }
-  }
-  const tabs = body.querySelectorAll('.tab-new');
-  for (let i = 0; i < tabs.length; i++) {
-    const onclickAttr = tabs[i].getAttribute('onclick');
-    if (onclickAttr && onclickAttr.indexOf("'" + tabName + "'") !== -1) {
-      tabs[i].classList.add('active');
-    } else {
-      tabs[i].classList.remove('active');
-    }
-  }
+  var isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  if (chev) chev.classList.toggle('open', !isOpen);
 }
-
-function switchCorridorsTab(tabName) {
-  const panes = document.querySelectorAll('.corridors-tab-pane');
-  for (let i = 0; i < panes.length; i++) {
-    panes[i].classList.remove('active');
-  }
-  const btns = document.querySelectorAll('.corridors-tab-btn');
-  for (let i = 0; i < btns.length; i++) {
-    btns[i].classList.remove('active');
-  }
-  const activePane = document.getElementById('corridors-tab-' + tabName);
-  if (activePane) activePane.classList.add('active');
-  if (window.event && window.event.target) {
-    window.event.target.classList.add('active');
-  }
+ 
+/* ══════════════════════════════════════════
+   INNER TAB SWITCHER
+══════════════════════════════════════════ */
+function switchTabNew(corridorId, tabKey) {
+  // Find the corridor body container
+  var body = document.getElementById(corridorId + '-body');
+  if (!body) return;
+ 
+  // Hide all tab-content-new inside this corridor body
+  body.querySelectorAll('.tab-content-new').forEach(function(c) {
+    c.classList.remove('active');
+  });
+ 
+  // Deactivate all tab buttons inside this corridor body
+  body.querySelectorAll('.tab-new').forEach(function(t) {
+    t.classList.remove('active');
+  });
+ 
+  // Show the requested tab content
+  var target = document.getElementById(corridorId + '-' + tabKey);
+  if (target) target.classList.add('active');
+ 
+  // Activate the clicked tab button (find by matching onclick attribute)
+  body.querySelectorAll('.tab-new').forEach(function(t) {
+    var onclick = t.getAttribute('onclick') || '';
+    if (onclick.indexOf("'" + tabKey + "'") !== -1) {
+      t.classList.add('active');
+    }
+  });
+}
+ 
+/* ══════════════════════════════════════════
+   COMPARISON PANE SWITCHER
+══════════════════════════════════════════ */
+function showCmpTab(id, btn) {
+  document.querySelectorAll('.cmp-pane').forEach(function(p) {
+    p.classList.remove('active');
+  });
+  document.querySelectorAll('.cmp-tab-btn').forEach(function(b) {
+    b.classList.remove('active');
+  });
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
 }
  
 // توابع تب کشتیرانی جدید
