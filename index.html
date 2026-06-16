@@ -7210,6 +7210,8 @@ function toggleAllAhvaz() {
 }
 
 // ======================== توابع صفحه کریدورها ========================
+
+// تابع ۱: باز و بسته کردن کریدورها
 function toggleCorridorNew(id) {
   const body = document.getElementById(id + '-body');
   const chev = document.getElementById(id + '-chev');
@@ -7224,6 +7226,7 @@ function toggleCorridorNew(id) {
   }
 }
 
+// تابع ۲: تغییر تب در هر کریدور
 function switchTabNew(corridorId, tabName) {
   const body = document.getElementById(corridorId + '-body');
   if (!body) return;
@@ -7246,28 +7249,42 @@ function switchTabNew(corridorId, tabName) {
   }
 }
 
+// تابع ۳: تغییر تب اصلی کریدورها (analysis / comparison)
 function switchCorridorsTab(tabName) {
+  // مخفی کردن همه پنل‌ها
   const panes = document.querySelectorAll('.corridors-tab-pane');
   for (let i = 0; i < panes.length; i++) {
     panes[i].classList.remove('active');
   }
+  
+  // حذف active از همه دکمه‌ها
   const btns = document.querySelectorAll('.corridors-tab-btn');
   for (let i = 0; i < btns.length; i++) {
     btns[i].classList.remove('active');
   }
+  
+  // نمایش پنل مورد نظر
   const activePane = document.getElementById('corridors-tab-' + tabName);
   if (activePane) activePane.classList.add('active');
+  
+  // فعال کردن دکمه کلیک شده
   if (window.event && window.event.target) {
     window.event.target.classList.add('active');
   }
- function cmpTab(id, btn) {
-  document.querySelectorAll('.cmp-pane').forEach(function(p){ p.classList.remove('cmp-active'); });
-  document.querySelectorAll('.cmp-tab-btn').forEach(function(b){ b.classList.remove('cmp-active'); });
+}  // ✅ اینجا تابع switchCorridorsTab تمام می‌شود
+
+// تابع ۴: تغییر تب‌های جدول مقایسه (کاملاً جدا از تابع قبلی)
+function cmpTab(id, btn) {
+  document.querySelectorAll('.cmp-pane').forEach(function(p){ 
+    p.classList.remove('cmp-active'); 
+  });
+  document.querySelectorAll('.cmp-tab-btn').forEach(function(b){ 
+    b.classList.remove('cmp-active'); 
+  });
   document.getElementById(id).classList.add('cmp-active');
   btn.classList.add('cmp-active');
 }
-}
-
+ 
 // ======================== توابع صفحه مقایسه ========================
 function showCmpTab(id, btn) {
   // مخفی کردن همه پنل‌های مقایسه
