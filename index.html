@@ -1555,32 +1555,33 @@
     </div>
   </div>
  
-  <!-- ══════════════════════════════════════════════════ -->
-  <!--  TAB 2 — comparison                               -->
-  <!-- ══════════════════════════════════════════════════ -->
-  <div id="corridors-tab-comparison" class="corridors-tab-pane">
-    <div class="wrap-new">
-      <div class="top-new">
-        <h1>جدول مقایسه جامع کریدورهای ابریشم</h1>
-        <span class="src-badge-new">داده‌های تأیید‌شده ۲۰۲۴–۲۰۲۶</span>
+<!-- ══════════════════════════════════════════════════ -->
+<!--  TAB 2 — comparison (Accordion Version)          -->
+<!-- ══════════════════════════════════════════════════ -->
+<div id="corridors-tab-comparison" class="corridors-tab-pane">
+  <div class="wrap-new">
+    <div class="top-new">
+      <h1>جدول مقایسه جامع کریدورهای ابریشم</h1>
+      <span class="src-badge-new">داده‌های تأیید‌شده ۲۰۲۴–۲۰۲۶</span>
+    </div>
+    <div class="legend-new">
+      <div class="li-new"><div class="ld-new" style="background:#639922"></div>ریسک پایین</div>
+      <div class="li-new"><div class="ld-new" style="background:#EF9F27"></div>ریسک متوسط</div>
+      <div class="li-new"><div class="ld-new" style="background:#E24B4A"></div>ریسک بالا</div>
+    </div>
+
+    <!-- ===== ACCORDION 1: زیرساخت و زمان ===== -->
+    <div class="accordion-new" id="cmp-accordion-1">
+      <div class="accordion-header-new" onclick="toggleCmpAccordion('cmp-accordion-1')">
+        <span class="accordion-title-new">۱ — زیرساخت، مسیر و زمان ترانزیت</span>
+        <span class="accordion-chevron-new" id="cmp-accordion-1-chev">▾</span>
       </div>
-      <div class="legend-new">
-        <div class="li-new"><div class="ld-new" style="background:#639922"></div>ریسک پایین</div>
-        <div class="li-new"><div class="ld-new" style="background:#EF9F27"></div>ریسک متوسط</div>
-        <div class="li-new"><div class="ld-new" style="background:#E24B4A"></div>ریسک بالا</div>
-      </div>
-      <div class="cmp-tab-nav">
-        <button class="cmp-tab-btn active" onclick="showCmpTab('cmp1',this)">۱ — زیرساخت و زمان</button>
-        <button class="cmp-tab-btn" onclick="showCmpTab('cmp2',this)">۲ — هزینه‌ها</button>
-        <button class="cmp-tab-btn" onclick="showCmpTab('cmp3',this)">۳ — ریسک و بیمه</button>
-        <button class="cmp-tab-btn" onclick="showCmpTab('cmp4',this)">۴ — بار و گمرک</button>
-        <button class="cmp-tab-btn" onclick="showCmpTab('cmp5',this)">۵ — استراتژی BRI</button>
-        <button class="cmp-tab-btn" onclick="showCmpTab('cmp6',this)">۶ — خلاصه کلی</button>
-      </div>
- 
-      <div id="cmp1" class="cmp-pane active">
+      <div class="accordion-body-new" id="cmp-accordion-1-body">
         <div class="section-card-new">
-          <div class="sec-header-new"><h2>۱ — زیرساخت، مسیر و زمان ترانزیت</h2><span class="ref-inline-new">منابع: UTLC ERA، ERAI، Kazakhstan MoT، ADY 2024-2026</span></div>
+          <div class="sec-header-new">
+            <h2>۱ — زیرساخت، مسیر و زمان ترانزیت</h2>
+            <span class="ref-inline-new">منابع: UTLC ERA، ERAI، Kazakhstan MoT، ADY 2024-2026</span>
+          </div>
           <div class="tbl-wrap-new">
             <table>
               <thead><tr><th>ویژگی</th><th>ترانس‌سیبری</th><th>راه ابریشم آبی</th><th>کریدور میانی (TITR)</th><th>کریدور قطبی (NSR)</th></tr></thead>
@@ -1594,10 +1595,20 @@
           </div>
         </div>
       </div>
- 
-      <div id="cmp2" class="cmp-pane">
+    </div>
+
+    <!-- ===== ACCORDION 2: هزینه‌ها ===== -->
+    <div class="accordion-new" id="cmp-accordion-2">
+      <div class="accordion-header-new" onclick="toggleCmpAccordion('cmp-accordion-2')">
+        <span class="accordion-title-new">۲ — هزینه‌ها: حمل، گمرک، تأخیر و اداری</span>
+        <span class="accordion-chevron-new" id="cmp-accordion-2-chev">▾</span>
+      </div>
+      <div class="accordion-body-new" id="cmp-accordion-2-body">
         <div class="section-card-new">
-          <div class="sec-header-new"><h2>۲ — هزینه‌ها: حمل، گمرک، تأخیر و اداری</h2><span class="ref-inline-new">منابع: ERA Index، SeaRates، index1520، Drewry 2024-2025</span></div>
+          <div class="sec-header-new">
+            <h2>۲ — هزینه‌ها: حمل، گمرک، تأخیر و اداری</h2>
+            <span class="ref-inline-new">منابع: ERA Index، SeaRates، index1520، Drewry 2024-2025</span>
+          </div>
           <div class="tbl-wrap-new">
             <table>
               <thead><tr><th>نوع هزینه</th><th>ترانس‌سیبری</th><th>راه ابریشم آبی</th><th>کریدور میانی (TITR)</th><th>راه ابریشم قطبی</th></tr></thead>
@@ -1610,10 +1621,20 @@
           </div>
         </div>
       </div>
- 
-      <div id="cmp3" class="cmp-pane">
+    </div>
+
+    <!-- ===== ACCORDION 3: ریسک‌ها ===== -->
+    <div class="accordion-new" id="cmp-accordion-3">
+      <div class="accordion-header-new" onclick="toggleCmpAccordion('cmp-accordion-3')">
+        <span class="accordion-title-new">۳ — ریسک‌ها: امنیتی، ژئوپلیتیک، بیمه</span>
+        <span class="accordion-chevron-new" id="cmp-accordion-3-chev">▾</span>
+      </div>
+      <div class="accordion-body-new" id="cmp-accordion-3-body">
         <div class="section-card-new">
-          <div class="sec-header-new"><h2>۳ — ریسک‌ها: امنیتی، ژئوپلیتیک، بیمه</h2><span class="ref-inline-new">منابع: Jamestown، CSIS، INSS، Energy Intelligence 2024-2026</span></div>
+          <div class="sec-header-new">
+            <h2>۳ — ریسک‌ها: امنیتی، ژئوپلیتیک، بیمه</h2>
+            <span class="ref-inline-new">منابع: Jamestown، CSIS، INSS، Energy Intelligence 2024-2026</span>
+          </div>
           <div class="tbl-wrap-new">
             <table>
               <thead><tr><th>ویژگی ریسک</th><th>ترانس‌سیبری</th><th>راه ابریشم آبی</th><th>کریدور میانی (TITR)</th><th>راه ابریشم قطبی</th></tr></thead>
@@ -1626,10 +1647,20 @@
           </div>
         </div>
       </div>
- 
-      <div id="cmp4" class="cmp-pane">
+    </div>
+
+    <!-- ===== ACCORDION 4: بار و گمرک ===== -->
+    <div class="accordion-new" id="cmp-accordion-4">
+      <div class="accordion-header-new" onclick="toggleCmpAccordion('cmp-accordion-4')">
+        <span class="accordion-title-new">۴ — بار، انطباق گمرکی و مجوزها</span>
+        <span class="accordion-chevron-new" id="cmp-accordion-4-chev">▾</span>
+      </div>
+      <div class="accordion-body-new" id="cmp-accordion-4-body">
         <div class="section-card-new">
-          <div class="sec-header-new"><h2>۴ — بار، انطباق گمرکی و مجوزها</h2><span class="ref-inline-new">منابع: ADY، WCO، IMO، WTO 2024-2025</span></div>
+          <div class="sec-header-new">
+            <h2>۴ — بار، انطباق گمرکی و مجوزها</h2>
+            <span class="ref-inline-new">منابع: ADY، WCO، IMO، WTO 2024-2025</span>
+          </div>
           <div class="tbl-wrap-new">
             <table>
               <thead><tr><th>ویژگی</th><th>ترانس‌سیبری</th><th>راه ابریشم آبی</th><th>کریدور میانی (TITR)</th><th>راه ابریشم قطبی</th></tr></thead>
@@ -1641,10 +1672,20 @@
           </div>
         </div>
       </div>
- 
-      <div id="cmp5" class="cmp-pane">
+    </div>
+
+    <!-- ===== ACCORDION 5: استراتژی BRI ===== -->
+    <div class="accordion-new" id="cmp-accordion-5">
+      <div class="accordion-header-new" onclick="toggleCmpAccordion('cmp-accordion-5')">
+        <span class="accordion-title-new">۵ — استراتژی BRI تا ۲۰۳۰ و سرمایه‌گذاری‌های کلیدی</span>
+        <span class="accordion-chevron-new" id="cmp-accordion-5-chev">▾</span>
+      </div>
+      <div class="accordion-body-new" id="cmp-accordion-5-body">
         <div class="section-card-new">
-          <div class="sec-header-new"><h2>۵ — استراتژی BRI تا ۲۰۳۰ و سرمایه‌گذاری‌های کلیدی</h2><span class="ref-inline-new">منابع: Griffith/GFDC BRI Report 2025، World Bank، EBRD</span></div>
+          <div class="sec-header-new">
+            <h2>۵ — استراتژی BRI تا ۲۰۳۰ و سرمایه‌گذاری‌های کلیدی</h2>
+            <span class="ref-inline-new">منابع: Griffith/GFDC BRI Report 2025، World Bank، EBRD</span>
+          </div>
           <div class="bri-grid-new">
             <div class="bri-card-new"><div class="bri-label-new">تعامل کل BRI در ۲۰۲۵</div><div class="bri-val-new">$۲۱۳.۵ میلیارد</div><div class="bri-sub-new">رشد ۱۹٪ نسبت به ۲۰۲۴ (۳۵۰ قرارداد)</div></div>
             <div class="bri-card-new"><div class="bri-label-new">قراردادهای ساخت ۲۰۲۵</div><div class="bri-val-new">$۱۲۸.۴ میلیارد</div><div class="bri-sub-new">رشد ۸۱٪ نسبت به ۲۰۲۴</div></div>
@@ -1663,10 +1704,20 @@
           </div>
         </div>
       </div>
- 
-      <div id="cmp6" class="cmp-pane">
+    </div>
+
+    <!-- ===== ACCORDION 6: خلاصه کلی ===== -->
+    <div class="accordion-new" id="cmp-accordion-6">
+      <div class="accordion-header-new" onclick="toggleCmpAccordion('cmp-accordion-6')">
+        <span class="accordion-title-new">۶ — خلاصه مقایسه‌ای تمام کریدورها</span>
+        <span class="accordion-chevron-new" id="cmp-accordion-6-chev">▾</span>
+      </div>
+      <div class="accordion-body-new" id="cmp-accordion-6-body">
         <div class="section-card-new">
-          <div class="sec-header-new"><h2>۶ — خلاصه مقایسه‌ای تمام کریدورها</h2><span class="ref-inline-new">داده‌های ۲۰۲۴–۲۰۲۶ (تصحیح‌شده)</span></div>
+          <div class="sec-header-new">
+            <h2>۶ — خلاصه مقایسه‌ای تمام کریدورها</h2>
+            <span class="ref-inline-new">داده‌های ۲۰۲۴–۲۰۲۶ (تصحیح‌شده)</span>
+          </div>
           <div class="tbl-wrap-new">
             <table>
               <thead><tr><th>کریدور</th><th>نوع</th><th>TEU / حجم ۲۰۲۴</th><th>زمان ترانزیت</th><th>ریسک</th><th>وضعیت</th></tr></thead>
@@ -1682,92 +1733,89 @@
           </div>
         </div>
       </div>
- 
-      <div style="margin-top:1.5rem;padding:12px 0;border-top:0.5px solid var(--border);">
-        <p style="font-size:11px;color:var(--text-dim);">📢 این داشبورد برای اهداف تحقیقاتی است. آخرین به‌روزرسانی: ژوئن ۲۰۲۶ | منابع: UTLC ERA، ERAI، Jamestown، Energy Intelligence، CSIS، INSS، Kazakhstan MoT، Corporate Knights</p>
-      </div>
+    </div>
+
+    <div style="margin-top:1.5rem;padding:12px 0;border-top:0.5px solid var(--border);">
+      <p style="font-size:11px;color:var(--text-dim);">📢 این داشبورد برای اهداف تحقیقاتی است. آخرین به‌روزرسانی: ژوئن ۲۰۲۶ | منابع: UTLC ERA، ERAI، Jamestown، Energy Intelligence، CSIS، INSS، Kazakhstan MoT، Corporate Knights</p>
     </div>
   </div>
 </div>
- 
-<script>
-/* ══════════════════════════════════════════
-   MAIN TAB SWITCHER (analysis / comparison)
+
+ /* ══════════════════════════════════════════
+   COMPARISON ACCORDION TOGGLE
 ══════════════════════════════════════════ */
-function switchCorridorsTab(tab) {
-  document.querySelectorAll('.corridors-tab-pane').forEach(function(p) {
-    p.classList.remove('active');
-  });
-  document.querySelectorAll('.corridors-tab-btn').forEach(function(b) {
-    b.classList.remove('active');
-  });
-  document.getElementById('corridors-tab-' + tab).classList.add('active');
-  // activate correct button
-  document.querySelectorAll('.corridors-tab-btn').forEach(function(b) {
-    if ((tab === 'analysis' && b.textContent.indexOf('تحلیل') !== -1) ||
-        (tab === 'comparison' && b.textContent.indexOf('مقایسه') !== -1)) {
-      b.classList.add('active');
+function toggleCmpAccordion(accordionId) {
+  var body = document.getElementById(accordionId + '-body');
+  var chev = document.getElementById(accordionId + '-chev');
+  if (!body) return;
+
+  // بستن سایر کرکره‌ها (اختیاری - برای باز بودن فقط یکی)
+  // اگر می‌خواهید فقط یکی باز باشد، این بخش را فعال کنید
+  /*
+  document.querySelectorAll('#corridors-tab-comparison .accordion-body-new').forEach(function(b) {
+    if (b.id !== accordionId + '-body') {
+      b.classList.remove('open');
+      var otherChev = document.getElementById(b.id.replace('-body', '-chev'));
+      if (otherChev) otherChev.classList.remove('open');
     }
   });
-}
- 
-/* ══════════════════════════════════════════
-   CORRIDOR ACCORDION TOGGLE
-══════════════════════════════════════════ */
-function toggleCorridorNew(id) {
-  var body  = document.getElementById(id + '-body');
-  var chev  = document.getElementById(id + '-chev');
-  if (!body) return;
+  */
+
+  // باز/بسته کردن کرکره فعلی
   var isOpen = body.classList.contains('open');
   body.classList.toggle('open', !isOpen);
   if (chev) chev.classList.toggle('open', !isOpen);
 }
- 
-/* ══════════════════════════════════════════
-   INNER TAB SWITCHER
-══════════════════════════════════════════ */
-function switchTabNew(corridorId, tabKey) {
-  // Find the corridor body container
-  var body = document.getElementById(corridorId + '-body');
-  if (!body) return;
- 
-  // Hide all tab-content-new inside this corridor body
-  body.querySelectorAll('.tab-content-new').forEach(function(c) {
-    c.classList.remove('active');
-  });
- 
-  // Deactivate all tab buttons inside this corridor body
-  body.querySelectorAll('.tab-new').forEach(function(t) {
-    t.classList.remove('active');
-  });
- 
-  // Show the requested tab content
-  var target = document.getElementById(corridorId + '-' + tabKey);
-  if (target) target.classList.add('active');
- 
-  // Activate the clicked tab button (find by matching onclick attribute)
-  body.querySelectorAll('.tab-new').forEach(function(t) {
-    var onclick = t.getAttribute('onclick') || '';
-    if (onclick.indexOf("'" + tabKey + "'") !== -1) {
-      t.classList.add('active');
-    }
-  });
+ .accordion-new {
+  margin-bottom: 8px;
+  border: 1px solid var(--border, #e0e0e0);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-card, #ffffff);
 }
- 
-/* ══════════════════════════════════════════
-   COMPARISON PANE SWITCHER
-══════════════════════════════════════════ */
-function showCmpTab(id, btn) {
-  document.querySelectorAll('.cmp-pane').forEach(function(p) {
-    p.classList.remove('active');
-  });
-  document.querySelectorAll('.cmp-tab-btn').forEach(function(b) {
-    b.classList.remove('active');
-  });
-  document.getElementById(id).classList.add('active');
-  btn.classList.add('active');
+
+.accordion-header-new {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  cursor: pointer;
+  background: var(--bg-header, #f7f9fc);
+  transition: background 0.2s;
+  font-weight: 600;
+  font-size: 15px;
+  user-select: none;
 }
-</script>
+
+.accordion-header-new:hover {
+  background: var(--bg-header-hover, #eef2f7);
+}
+
+.accordion-title-new {
+  flex: 1;
+}
+
+.accordion-chevron-new {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+  margin-right: 10px;
+}
+
+.accordion-chevron-new.open {
+  transform: rotate(180deg);
+}
+
+.accordion-body-new {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+  padding: 0 18px;
+}
+
+.accordion-body-new.open {
+  max-height: 3000px; /* مقدار بزرگ برای باز شدن کامل محتوا */
+  padding: 18px;
+}
  
 <!-- ========== صفحه سوم: کشتیرانی  ========== -->
   <style>
